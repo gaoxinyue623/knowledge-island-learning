@@ -1,0 +1,4 @@
+.dev-ui__intro,
+.dev-ui__section {
+  container-type: inline-size;
+}

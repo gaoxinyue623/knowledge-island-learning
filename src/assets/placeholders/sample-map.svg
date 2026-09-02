@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="示例地图占位">
+  <rect width="320" height="180" rx="24" fill="#eaf0ff"/>
+  <path d="M30 130c50-70 90-38 128-72s86-23 132 7" fill="none" stroke="#4c7cf0" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="48" cy="112" r="12" fill="#75c7b7"/>
+  <circle cx="174" cy="70" r="12" fill="#e98962"/>
+  <circle cx="276" cy="70" r="12" fill="#6bb98b"/>
+</svg>

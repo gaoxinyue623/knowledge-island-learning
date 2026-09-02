@@ -1,0 +1,73 @@
+:root {
+  --color-primary: #4c7cf0;
+  --color-primary-soft: #eaf0ff;
+  --color-subject-chinese: #e98962;
+  --color-subject-chinese-soft: #fff0ea;
+  --color-subject-math: #4f9ddf;
+  --color-subject-math-soft: #eaf6ff;
+  --color-subject-english: #6bb98b;
+  --color-subject-english-soft: #edfaf2;
+  --color-character-base: #75c7b7;
+  --color-character-shadow: #4f9c96;
+  --color-character-highlight: #ddf7ef;
+  --color-character-ink: #294456;
+  --color-success: #42af78;
+  --color-success-soft: #e9f8ef;
+  --color-warning: #d99a36;
+  --color-warning-soft: #fff6e2;
+  --color-error: #d97872;
+  --color-error-soft: #fff0ef;
+  --color-info: #579fc0;
+  --color-locked: #9ba8b8;
+  --color-locked-soft: #f0f3f7;
+  --color-background: #f5f8fc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f9;
+  --color-text-primary: #24334b;
+  --color-text-secondary: #63728a;
+  --color-text-tertiary: #8c99aa;
+  --color-text-inverse: #ffffff;
+  --color-border: #dce5f0;
+  --color-border-strong: #bbc9d9;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  --shadow-sm: 0 2px 8px rgb(36 51 75 / 6%);
+  --shadow-md: 0 8px 24px rgb(36 51 75 / 10%);
+  --shadow-lg: 0 16px 40px rgb(36 51 75 / 14%);
+  --shadow-float: 0 12px 28px rgb(76 124 240 / 18%);
+  --shadow-reward: 0 10px 28px rgb(217 154 54 / 18%);
+
+  --motion-fast: 160ms;
+  --motion-normal: 280ms;
+  --motion-slow: 420ms;
+  --motion-reward: 800ms;
+  --motion-reward-max: 1600ms;
+  --ease-standard: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.2, 0.9, 0.3, 1.15);
+  --ease-reward: cubic-bezier(0.2, 0.8, 0.25, 1);
+
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-dock: 20;
+  --z-popover: 30;
+  --z-drawer: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+}

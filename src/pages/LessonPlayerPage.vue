@@ -1,0 +1,404 @@
+<script setup lang="ts">
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+import AppButton from '@/components/common/AppButton.vue'
+import AppEmptyState from '@/components/common/AppEmptyState.vue'
+import AppErrorState from '@/components/common/AppErrorState.vue'
+import AppIcon from '@/components/common/AppIcon.vue'
+import AppLoading from '@/components/common/AppLoading.vue'
+import AppProgress from '@/components/common/AppProgress.vue'
+import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
+import AppShell from '@/layouts/AppShell.vue'
+import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
+import { useStudentStore } from '@/stores/studentStore'
+import type { LessonLaunchContext, LessonPlayerDataset, LessonPlayerDemoState } from '@/types'
+
+const route = useRoute()
+const router = useRouter()
+const lessonPlayerStore = useLessonPlayerStore()
+const studentStore = useStudentStore()
+const invalidContextMessage = ref<string | null>(null)
+
+const isDevRoute = computed(() => route.path.startsWith('/dev/lesson-player'))
+const dataset = computed<LessonPlayerDataset>(() => {
+  if (!isDevRoute.value) return 'profile'
+  const requested = route.query.dataset
+  if (requested === 'golden' || requested === 'demo' || requested === 'profile') return requested
+  return 'demo'
+})
+const demoState = computed<LessonPlayerDemoState>(() => {
+  const requested = route.query.state
+  const states: LessonPlayerDemoState[] = [
+    'full',
+    'empty',
+    'error',
+    'not_available',
+    'sample',
+    'unverified',
+    'completed',
+    'resume',
+  ]
+  return isDevRoute.value &&
+    typeof requested === 'string' &&
+    states.includes(requested as LessonPlayerDemoState)
+    ? (requested as LessonPlayerDemoState)
+    : 'full'
+})
+const returnPath = computed(() =>
+  route.query.returnTo === '/dev/learning-map' ||
+  (isDevRoute.value && typeof route.query.returnTo !== 'string')
+    ? '/dev/learning-map'
+    : '/learning-map',
+)
+const mapNodeId = computed(() =>
+  typeof route.query.mapNodeId === 'string' ? route.query.mapNodeId : undefined,
+)
+const context = computed<LessonLaunchContext | null>(() => {
+  const query = route.query
+  const values = {
+    textbookId: query.textbookId,
+    unitId: query.unitId,
+    lessonId: query.lessonId,
+    knowledgePointId: query.knowledgePointId,
+  }
+  if (
+    Object.values(values).every(
+      (value): value is string => typeof value === 'string' && value !== '',
+    )
+  ) {
+    return values as LessonLaunchContext
+  }
+  if (isDevRoute.value) {
+    return {
+      textbookId: 'DEMO_TEXTBOOK_MATH_G3_S1',
+      unitId: 'DEMO_UNIT_01',
+      lessonId: 'DEMO_LESSON_1_1',
+      knowledgePointId: 'DEMO_KP_01',
+    }
+  }
+  return null
+})
+
+const viewModel = computed(() => lessonPlayerStore.viewModel)
+const currentStep = computed(() => viewModel.value?.steps[lessonPlayerStore.currentStepIndex])
+const progressLabel = computed(() =>
+  viewModel.value
+    ? `${lessonPlayerStore.currentStepIndex + 1} / ${viewModel.value.steps.length}`
+    : '—',
+)
+const canShowContent = computed(
+  () => Boolean(viewModel.value) && ['ready', 'completed'].includes(lessonPlayerStore.status),
+)
+const demoStateOptions: Array<{ value: LessonPlayerDemoState; label: string }> = [
+  { value: 'full', label: '完整课程' },
+  { value: 'resume', label: '恢复中' },
+  { value: 'completed', label: '已完成' },
+  { value: 'empty', label: '空内容' },
+  { value: 'not_available', label: '暂未开放' },
+  { value: 'error', label: '加载失败' },
+  { value: 'sample', label: 'Sample' },
+  { value: 'unverified', label: 'Unverified' },
+]
+
+async function loadLesson() {
+  invalidContextMessage.value = null
+  if (!context.value) {
+    invalidContextMessage.value = '请从知识地图进入一个有效的知识点。'
+    return
+  }
+  await lessonPlayerStore.loadLesson(context.value, {
+    dataset: dataset.value,
+    studentId: studentStore.profile?.id ?? 'local-profile',
+    demoState: demoState.value,
+  })
+}
+
+function returnToMap() {
+  const focus = mapNodeId.value
+  void router.push({
+    path: returnPath.value,
+    ...(focus ? { query: { focusNodeId: focus } } : {}),
+  })
+}
+
+function goToStep(index: number) {
+  if (isDevRoute.value || index <= lessonPlayerStore.currentStepIndex) {
+    lessonPlayerStore.goToStep(index)
+  }
+}
+
+function nextStep() {
+  if (lessonPlayerStore.isLastStep) {
+    void finishLesson()
+    return
+  }
+  lessonPlayerStore.goNext()
+}
+
+async function finishLesson() {
+  await lessonPlayerStore.completeLesson()
+}
+
+function selectDemoState(nextState: LessonPlayerDemoState) {
+  void router.push({
+    path: '/dev/lesson-player',
+    query: { ...route.query, state: nextState },
+  })
+}
+
+async function completeDemoSession() {
+  if (!viewModel.value) return
+  viewModel.value.steps.forEach((_, index) => {
+    lessonPlayerStore.goToStep(index)
+    lessonPlayerStore.completeStep(index)
+  })
+  await lessonPlayerStore.completeLesson()
+}
+
+function resetDemoSession() {
+  lessonPlayerStore.resetDemoSession()
+}
+
+async function clearDemoStorage() {
+  lessonPlayerStore.clearStoredSessions()
+  await loadLesson()
+}
+
+function previousStep() {
+  lessonPlayerStore.goPrevious()
+}
+
+onMounted(() => void loadLesson())
+watch(
+  () => route.fullPath,
+  () => void loadLesson(),
+)
+</script>
+
+<template>
+  <AppShell :show-bottom-nav="false" context="专注学习" class="lesson-player-shell">
+    <div class="lesson-player-page content-container">
+      <div class="lesson-player">
+        <header class="lesson-player__header">
+          <div class="lesson-player__header-copy">
+            <RouterLink class="lesson-player__back" :to="returnPath" @click.prevent="returnToMap">
+              <AppIcon name="arrow-left" :size="18" decorative />
+              返回知识地图
+            </RouterLink>
+            <p class="curriculum-eyebrow">LessonPlayer · 学习步骤</p>
+            <h1>{{ viewModel?.lesson.title || '正在准备这一节学习' }}</h1>
+            <p v-if="viewModel">知识点：{{ viewModel.knowledgePoint.name }}</p>
+          </div>
+          <div v-if="viewModel" class="lesson-player__header-context" aria-label="课程来源状态">
+            <span
+              v-if="viewModel.flags.isDemo"
+              class="lesson-player__badge lesson-player__badge--sample"
+            >
+              开发样本
+            </span>
+            <span
+              v-else-if="viewModel.flags.isSample"
+              class="lesson-player__badge lesson-player__badge--sample"
+            >
+              示例内容
+            </span>
+            <span
+              v-if="viewModel.flags.isUnverified"
+              class="lesson-player__badge lesson-player__badge--warning"
+            >
+              未审核学习内容
+            </span>
+          </div>
+        </header>
+
+        <section
+          v-if="isDevRoute"
+          class="lesson-player__state-panel"
+          aria-labelledby="lesson-state-title"
+        >
+          <div>
+            <p class="curriculum-eyebrow">DEVELOPMENT ONLY · PHASE 8</p>
+            <h2 id="lesson-state-title">LessonPlayer 状态 Showcase</h2>
+            <p>用于检查加载、内容可用性、恢复和完成状态；不会创建正式学习记录。</p>
+          </div>
+          <div class="lesson-player__state-actions">
+            <AppButton
+              v-for="option in demoStateOptions"
+              :key="option.value"
+              size="sm"
+              :variant="demoState === option.value ? 'primary' : 'secondary'"
+              @click="selectDemoState(option.value)"
+            >
+              {{ option.label }}
+            </AppButton>
+          </div>
+          <div class="lesson-player__state-actions">
+            <AppButton size="sm" variant="soft" @click="resetDemoSession">重置本节会话</AppButton>
+            <AppButton size="sm" variant="soft" @click="completeDemoSession"
+              >完成当前会话</AppButton
+            >
+            <AppButton size="sm" variant="ghost" @click="clearDemoStorage">清理会话存储</AppButton>
+          </div>
+        </section>
+
+        <AppLoading v-if="lessonPlayerStore.loading" label="正在准备学习内容" />
+        <AppErrorState
+          v-else-if="invalidContextMessage || lessonPlayerStore.status === 'error'"
+          title="学习上下文暂时无法打开"
+          :description="
+            invalidContextMessage || lessonPlayerStore.error || '请从知识地图重新进入。'
+          "
+          action-label="重新读取"
+          @retry="loadLesson"
+        />
+        <AppButton
+          v-if="invalidContextMessage || lessonPlayerStore.status === 'error'"
+          variant="ghost"
+          icon-left="arrow-left"
+          @click="returnToMap"
+        >
+          返回知识地图
+        </AppButton>
+        <AppEmptyState
+          v-else-if="lessonPlayerStore.status === 'not_available'"
+          title="该学习内容暂未开放"
+          description="课程内容还需要完成审核，暂时不能进入学习步骤。"
+          action-label="返回知识地图"
+          @action="returnToMap"
+        />
+        <AppEmptyState
+          v-else-if="lessonPlayerStore.status === 'empty'"
+          title="课程内容正在准备中"
+          description="这个知识点已经在地图上，但学习内容还没有准备好。"
+          action-label="返回知识地图"
+          @action="returnToMap"
+        />
+        <template v-else-if="canShowContent && viewModel">
+          <div
+            v-if="viewModel.flags.isDemo"
+            class="lesson-player__notice lesson-player__notice--sample"
+            role="status"
+          >
+            <AppIcon name="info" :size="20" decorative />
+            <div>
+              <strong>开发样本</strong
+              ><span>这节内容只用于验证 LessonPlayer 流程，不代表正式教材正文。</span>
+            </div>
+          </div>
+          <div
+            v-else-if="viewModel.flags.isUnverified"
+            class="lesson-player__notice lesson-player__notice--warning"
+            role="status"
+          >
+            <AppIcon name="alert-circle" :size="20" decorative />
+            <div>
+              <strong>未审核学习内容</strong
+              ><span>当前内容只用于开发验证，正式环境需通过审核后开放。</span>
+            </div>
+          </div>
+
+          <section class="lesson-player__goals" aria-labelledby="lesson-goals-title">
+            <div>
+              <p class="curriculum-eyebrow">Learning Goal</p>
+              <h2 id="lesson-goals-title">今天的学习目标</h2>
+            </div>
+            <ul>
+              <li v-for="goal in viewModel.learningGoals" :key="goal">{{ goal }}</li>
+              <li v-if="!viewModel.learningGoals.length">先跟着步骤观察和理解这一节内容。</li>
+            </ul>
+          </section>
+
+          <section class="lesson-player__progress-card" aria-labelledby="lesson-progress-title">
+            <div class="lesson-player__progress-meta">
+              <h2 id="lesson-progress-title">学习步骤</h2>
+              <strong>{{ progressLabel }}</strong>
+            </div>
+            <AppProgress
+              :value="viewModel.session.progress"
+              label="学习步骤进度"
+              :show-value="false"
+              state="normal"
+            />
+            <nav class="lesson-player__steps" aria-label="学习步骤导航">
+              <button
+                v-for="(step, index) in viewModel.steps"
+                :key="step.id"
+                class="lesson-player__step-button"
+                :class="{
+                  'lesson-player__step-button--current':
+                    index === lessonPlayerStore.currentStepIndex,
+                  'lesson-player__step-button--done': step.isCompleted,
+                }"
+                type="button"
+                :disabled="index > lessonPlayerStore.currentStepIndex && !isDevRoute"
+                :aria-current="index === lessonPlayerStore.currentStepIndex ? 'step' : undefined"
+                @click="goToStep(index)"
+              >
+                <span class="lesson-player__step-number">{{ index + 1 }}</span>
+                <span>{{ step.title || step.type }}</span>
+              </button>
+            </nav>
+          </section>
+
+          <section class="lesson-player__content-card" aria-labelledby="lesson-content-title">
+            <header class="lesson-player__content-header">
+              <div>
+                <p class="curriculum-eyebrow">{{ currentStep?.type || '学习内容' }}</p>
+                <h2 id="lesson-content-title">{{ currentStep?.title || '跟着步骤看一看' }}</h2>
+              </div>
+              <p v-if="currentStep?.estimatedSeconds">大约 {{ currentStep.estimatedSeconds }} 秒</p>
+            </header>
+            <LessonContentRenderer
+              :blocks="currentStep?.contentBlocks || []"
+              :show-diagnostics="isDevRoute"
+            />
+          </section>
+
+          <section
+            v-if="lessonPlayerStore.status === 'completed'"
+            class="lesson-player__completion"
+            aria-labelledby="lesson-completion-title"
+          >
+            <AppIcon name="check-circle" :size="42" color="var(--color-success)" decorative />
+            <h2 id="lesson-completion-title">这一节学习完成了</h2>
+            <p>你已经走完本次学习步骤。完成学习不等于掌握度，下一步可以回到地图继续探索。</p>
+            <div class="lesson-player__completion-actions">
+              <AppButton size="lg" icon-left="map" @click="returnToMap">返回知识地图</AppButton>
+              <AppButton
+                v-if="isDevRoute"
+                variant="secondary"
+                @click="lessonPlayerStore.resetDemoSession()"
+              >
+                重置本节会话
+              </AppButton>
+            </div>
+          </section>
+
+          <footer v-else class="lesson-player__navigation" aria-label="学习步骤操作">
+            <AppButton
+              variant="secondary"
+              icon-left="arrow-left"
+              :disabled="!lessonPlayerStore.canGoPrevious"
+              @click="previousStep"
+            >
+              上一步
+            </AppButton>
+            <AppButton icon-right="arrow-right" @click="nextStep">
+              {{ lessonPlayerStore.isLastStep ? '完成这次学习' : '下一步' }}
+            </AppButton>
+          </footer>
+
+          <details
+            v-if="isDevRoute && (viewModel.diagnostics.length || lessonPlayerStore.warning)"
+            class="lesson-player__diagnostics"
+          >
+            <summary>开发诊断</summary>
+            <p v-if="lessonPlayerStore.warning">{{ lessonPlayerStore.warning }}</p>
+            <p v-for="diagnostic in viewModel.diagnostics" :key="diagnostic">{{ diagnostic }}</p>
+          </details>
+        </template>
+      </div>
+    </div>
+  </AppShell>
+</template>

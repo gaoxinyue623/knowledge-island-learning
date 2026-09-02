@@ -1,0 +1,80 @@
+{
+  "success": true,
+  "imported": {
+    "textbooks": 1,
+    "units": 1,
+    "lessons": 3,
+    "knowledgePoints": 4,
+    "lessonKnowledgePoints": 6,
+    "knowledgeRelations": 3
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "MANUAL_REVIEW_REQUIRED",
+      "severity": "warning",
+      "message": "导入包当前为 UNVERIFIED，正式发布前必须完成人工审核并进入 REVIEWED。",
+      "entityType": "textbook",
+      "entityId": "GOLDEN_MATH_PEP_G3_S1_TEXTBOOK",
+      "field": "verificationStatus"
+    }
+  ],
+  "report": {
+    "schemaVersion": 1,
+    "textbookId": "GOLDEN_MATH_PEP_G3_S1_TEXTBOOK",
+    "textbookIdentityKey": "PRI-MAT-PEP-G3-S1-UNKNOWN",
+    "generatedAt": "2026-09-02T00:00:00+08:00",
+    "summary": {
+      "errorCount": 0,
+      "warningCount": 1,
+      "infoCount": 0
+    },
+    "completeness": {
+      "textbook": true,
+      "units": {
+        "total": 1,
+        "valid": 1
+      },
+      "lessons": {
+        "total": 3,
+        "valid": 3
+      },
+      "knowledgePoints": {
+        "total": 4,
+        "valid": 4
+      },
+      "mappings": {
+        "total": 6,
+        "valid": 6
+      },
+      "relations": {
+        "total": 3,
+        "valid": 3
+      }
+    },
+    "verificationStatus": "UNVERIFIED",
+    "issues": [
+      {
+        "code": "MANUAL_REVIEW_REQUIRED",
+        "severity": "warning",
+        "message": "导入包当前为 UNVERIFIED，正式发布前必须完成人工审核并进入 REVIEWED。",
+        "entityType": "textbook",
+        "entityId": "GOLDEN_MATH_PEP_G3_S1_TEXTBOOK",
+        "field": "verificationStatus"
+      }
+    ],
+    "pendingManualReview": [
+      {
+        "code": "MANUAL_REVIEW_REQUIRED",
+        "severity": "warning",
+        "message": "导入包当前为 UNVERIFIED，正式发布前必须完成人工审核并进入 REVIEWED。",
+        "entityType": "textbook",
+        "entityId": "GOLDEN_MATH_PEP_G3_S1_TEXTBOOK",
+        "field": "verificationStatus"
+      }
+    ],
+    "samplePollution": "PASS",
+    "knowledgeDag": "PASS",
+    "finalResult": "REQUIRES_MANUAL_REVIEW"
+  }
+}

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="96" viewBox="0 0 160 96" role="img" aria-label="示例题目占位">
+  <rect width="160" height="96" rx="16" fill="#fff6e2"/>
+  <path d="M48 30h64M48 48h44M48 66h30" stroke="#d99a36" stroke-width="8" stroke-linecap="round"/>
+</svg>
