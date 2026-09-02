@@ -1,9 +1,11 @@
-import type { Id, QuestionType } from '@/types'
+import type { Id, QuestionKnowledgePoint, QuestionType } from '@/types'
 
 import { questionSchema } from './schemas'
 
 export interface QuestionValidationReferences {
   knowledgePointIds?: ReadonlySet<Id>
+  questionIds?: ReadonlySet<Id>
+  questionKnowledgePoints?: readonly QuestionKnowledgePoint[]
   sourceIds?: ReadonlySet<Id>
   mediaAssetIds?: ReadonlySet<Id>
 }
@@ -24,6 +26,7 @@ const expectedAnswerRule: Record<QuestionType, string> = {
   typing: 'ACCEPTED_TEXT',
   listening: 'LISTENING_RESPONSE',
   calculation: 'NUMERIC',
+  shortAnswer: 'MANUAL_REVIEW',
   reading: 'READING_SUB_QUESTIONS',
   sentenceOrdering: 'ORDERED_TOKENS',
   speaking: 'SPEAKING_RUBRIC',
@@ -52,8 +55,15 @@ export function validateQuestion(
     )
   }
 
-  if (references.knowledgePointIds && !references.knowledgePointIds.has(parsed.knowledgePointId)) {
+  if (
+    references.knowledgePointIds &&
+    parsed.knowledgePointId &&
+    !references.knowledgePointIds.has(parsed.knowledgePointId)
+  ) {
     issues.push(`knowledgePointId: 未找到 ${parsed.knowledgePointId}`)
+  }
+  if (references.questionIds && !references.questionIds.has(parsed.id)) {
+    issues.push(`questionId: 未找到 ${parsed.id}`)
   }
   if (references.sourceIds && !references.sourceIds.has(parsed.sourceId)) {
     issues.push(`sourceId: 未找到 ${parsed.sourceId}`)
@@ -63,6 +73,16 @@ export function validateQuestion(
     ...parsed.media.map((media) => media.mediaAssetId),
     ...(parsed.options ?? []).flatMap((option) =>
       (option.media ?? []).map((media) => media.mediaAssetId),
+    ),
+    ...parsed.stem.flatMap((block) => (block.mediaAssetId ? [block.mediaAssetId] : [])),
+    ...parsed.hints.flatMap((hint) =>
+      hint.content.flatMap((block) => (block.mediaAssetId ? [block.mediaAssetId] : [])),
+    ),
+    ...parsed.explanation.summary.flatMap((block) =>
+      block.mediaAssetId ? [block.mediaAssetId] : [],
+    ),
+    ...parsed.explanation.steps.flatMap((step) =>
+      step.flatMap((block) => (block.mediaAssetId ? [block.mediaAssetId] : [])),
     ),
   ]
   if (references.mediaAssetIds) {
@@ -79,13 +99,69 @@ export function validateQuestion(
     }
   }
 
+  const options = parsed.options ?? []
+  const optionIds = new Set(options.map((option) => option.id))
+  const optionKeys = new Set(options.map((option) => option.optionKey))
+  if (optionIds.size !== options.length) issues.push('options.id: 不能重复')
+  if (optionKeys.size !== options.length) issues.push('options.optionKey: 不能重复')
+
+  if (['singleChoice', 'multipleChoice'].includes(parsed.questionType) && options.length < 2) {
+    issues.push(`${parsed.questionType}: 至少需要两个选项`)
+  }
+
   if (parsed.questionType === 'singleChoice') {
-    const optionKeys = new Set((parsed.options ?? []).map((option) => option.optionKey))
     if (
       parsed.answerRule.ruleType === 'SINGLE_OPTION' &&
       !optionKeys.has(parsed.answerRule.correctOptionKey)
     ) {
       issues.push('answerRule.correctOptionKey: 必须引用已有选项')
+    }
+  }
+
+  if (parsed.questionType === 'multipleChoice') {
+    if (parsed.answerRule.ruleType === 'MULTIPLE_OPTIONS') {
+      const answerKeys = new Set(parsed.answerRule.correctOptionKeys)
+      if (answerKeys.size !== parsed.answerRule.correctOptionKeys.length) {
+        issues.push('answerRule.correctOptionKeys: 不能重复')
+      }
+      if (answerKeys.size === 0 || [...answerKeys].some((key) => !optionKeys.has(key))) {
+        issues.push('answerRule.correctOptionKeys: 必须引用已有选项')
+      }
+    }
+  }
+
+  if (parsed.questionType === 'fillBlank' && parsed.answerRule.ruleType === 'TEXT_BLANKS') {
+    if (parsed.answerRule.blanks.length === 0) {
+      issues.push('answerRule.blanks: 至少需要一个空')
+    }
+    const blankIds = new Set(parsed.answerRule.blanks.map((blank) => blank.blankId))
+    if (blankIds.size !== parsed.answerRule.blanks.length) {
+      issues.push('answerRule.blanks.blankId: 不能重复')
+    }
+    parsed.answerRule.blanks.forEach((blank) => {
+      if (blank.acceptedAnswers.every((answer) => answer.trim() === '')) {
+        issues.push(`answerRule.blanks.${blank.blankId}: 至少需要一个非空答案`)
+      }
+    })
+  }
+
+  if (parsed.questionType === 'calculation' && parsed.answerRule.ruleType === 'NUMERIC') {
+    const numericValue = Number(parsed.answerRule.value)
+    if (!Number.isFinite(numericValue)) issues.push('answerRule.value: 必须是有效数字')
+    if (
+      parsed.answerRule.tolerance !== undefined &&
+      !Number.isFinite(parsed.answerRule.tolerance)
+    ) {
+      issues.push('answerRule.tolerance: 必须是有效数字')
+    }
+  }
+
+  if (references.questionKnowledgePoints) {
+    const mappings = references.questionKnowledgePoints.filter(
+      (mapping) => mapping.questionId === parsed.id,
+    )
+    if (mappings.length === 0) {
+      issues.push('QuestionKnowledgePoint: 至少需要一条知识点关系')
     }
   }
 

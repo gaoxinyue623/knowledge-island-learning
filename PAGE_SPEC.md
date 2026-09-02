@@ -1,13 +1,13 @@
 # 知识岛｜PHASE 3 页面规格
 
-> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap 与 PHASE 8 LessonPlayer 已实现并验证，其余页面仍以设计规格为准。
+> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 已实现并验证，其余页面仍以设计规格为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
 | 所属阶段 | PHASE 3：UI / UX + 游戏视觉系统 + 多端响应式设计 |
-| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap / 开发地图与 PHASE 8 LessonPlayer / 开发学习页已实现并验证，其余页面仍未实现 |
+| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine / Assessment 已实现并验证，其余页面仍未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md` |
 | 相关设计文档 | `DESIGN_SYSTEM.md`、`RESPONSIVE_DESIGN.md`、`QUESTION_UI.md`、`UI_FLOW.md`、`ONBOARDING_DESIGN.md` |
 | 页面数据原则 | 课程配置和教材信息只读取数据层；UI 不猜测地区、出版社或教材版本 |
@@ -78,7 +78,7 @@ TextbookVersion：回答“使用哪套课本？”
 | `Home` | 找到今日学习入口 | 继续学习 | 已完成配置后默认入口 |
 | `LearningMap` | 选择下一个地图节点 | 开始 / 继续关卡 | Home 或学科入口 |
 | `Lesson` | 学习当前知识重点 | 继续 / 我会了 | MapNode |
-| `Question` | 完成题目互动 | 提交 / 下一题 | Lesson / Practice |
+| `Question` / `Assessment` | 完成固定题目集合 | 提交 / 下一题 / 完成本次练习 | Lesson / Practice |
 | `Result` | 理解结果并决定下一步 | 继续下一关 | Question 完成 |
 | `DailyTasks` | 完成当日任务组合 | 开始任务 | Home / 导航 |
 | `WrongBook` | 找到需要复习的内容 | 重新挑战 | 导航 / 复习提醒 |
@@ -383,9 +383,27 @@ TextbookVersion：回答“使用哪套课本？”
 
 **组件**：`QuestionShell`、`QuestionHeader`、`QuestionProgress`、`QuestionRenderer`、`QuestionHint`、`AnswerFeedback`、`AppButton`。
 
-**状态**：`loading`、`normal`、`selected`、`disabled`、`submitting`、`correct`、`wrong`、`hint`、`offline`、`error`、`focus`。
+**状态**：`loading`、`normal`、`selected`、`disabled`、`submitting`、`correct`、`wrong`、`manual_review_required`、`hint`、`empty`、`not_available`、`error`、`completed`、`focus`。
 
-**数据边界**：渲染器只依据 `QUESTION_SCHEMA.md` 的 `questionType`、`ContentBlock[]` 和 `QuestionAnswerRule` 展示与收集作答；不修改正确答案、不推断 normalization、不计算教材归属。具体题型见 `QUESTION_UI.md`。
+**数据边界**：渲染器只依据 `QUESTION_SCHEMA.md` 的 `questionType`、`ContentBlock[]` 和 `QuestionAnswerRule` 展示与收集作答；不修改正确答案、不推断 normalization、不计算教材归属。具体题型见 `QUESTION_UI.md`，运行时 Assessment 事实见 `QUESTION_ENGINE.md`。
+
+### 4.4.1 Assessment / QuestionEnginePage
+
+**目标**：在一次固定 Assessment 中完成六类已支持题型，并让学生看懂本次作答结果。
+
+**信息优先级**：返回课程、题目来源状态、题号 / 进度、结构化题干、作答区、反馈 / 解析、提交与下一步。
+
+**主 CTA**：未提交时为“提交答案”；已提交后为“下一题”或“完成本次练习”。
+
+**次 CTA**：上一题、返回课程；开发路由额外提供状态 Showcase 和会话清理。
+
+**状态**：`loading`、`ready`、`resume`、`empty`、`not_available`、`invalid_context`、`unsupported_question`、`error`、`completed`、`sample`、`unverified`。
+
+**数据边界**：页面只接收显式 `AssessmentLaunchContext` 和 `QuestionEngineViewModel`；题目顺序来自 `AssessmentDefinition.questionIds`，题目关系来自 `QuestionKnowledgePoint`，不随机抽题、不猜教材、不触发掌握度或奖励。
+
+**响应式**：Desktop 使用居中练习卡片，Tablet 保持可触控题目区，Mobile 使用单列题干 / 输入区和底部固定操作区；375、390、430、768、1024、1440 视口均不得横向溢出。
+
+**跳转**：LessonPlayer Practice → `/assessment`（正式）或 `/dev/question-engine`（开发）；完成后携带 `assessmentCompleted=true`、`focusStep=summary` 返回 LessonPlayer。
 
 ### 4.5 Result
 
@@ -599,13 +617,13 @@ Profile → 我的学习设置
 7. 所有页面具备 Desktop、Tablet、Mobile 设计差异和 Focus / 触控规则。
 8. 页面使用统一 `QuestionShell`、`AppButton`、`AppCard`、`AppIcon` 和状态表达。
 9. 教材相关页面只展示数据层返回的信息，不自行拼接或猜测教材事实。
-10. 未进入 PHASE 7～8 范围的页面规格仍停留在设计阶段；LearningMap 与 LessonPlayer 的工程实现状态分别见 `LEARNING_MAP.md` 与 `LESSON_PLAYER.md`。
+10. 未进入 PHASE 7～9 范围的页面规格仍停留在设计阶段；LearningMap、LessonPlayer 与 Question Engine 的工程实现状态分别见 `LEARNING_MAP.md`、`LESSON_PLAYER.md` 与 `QUESTION_ENGINE.md`。
 
 ## 9. PHASE 7 LearningMap 实现映射
 
 `LearningMap` 设计规格已由 `/learning-map` 和 `/dev/learning-map` 的地图壳实现：`MapHeader`、`LearningProgressBar`、`KnowledgeIslandMap`、`UnitIsland`、`LessonRegion`、`KnowledgeNode`、`MapConnection`、`MapLegend` 和 `NodeDetailPanel`。正式页面读取 `StudentCurriculumProfile` 对应教材，开发页面可切换 Golden Curriculum / Map Demo Fixture。
 
-实现保持本文件的设计边界：地图标题区分游戏世界主题与教材事实；节点详情不展示教材正文；完成度不称为掌握度；教材信息只来自数据层；节点是可访问的 `button`，锁定原因可解释。PHASE 7 的地图入口现在携带显式 `LessonLaunchContext` 进入 PHASE 8 LessonPlayer；地图完成度和 Lesson completion 仍不等于掌握度。
+实现保持本文件的设计边界：地图标题区分游戏世界主题与教材事实；节点详情不展示教材正文；完成度不称为掌握度；教材信息只来自数据层；节点是可访问的 `button`，锁定原因可解释。PHASE 7 的地图入口携带显式 `LessonLaunchContext` 进入 PHASE 8 LessonPlayer；Practice 再携带显式 `AssessmentLaunchContext` 进入 PHASE 9 Question Engine，地图完成度、Lesson completion 和 Assessment 分数仍不等于掌握度。
 
 ## 10. PHASE 8 LessonPlayer 页面实现映射
 
@@ -629,3 +647,18 @@ Profile → 我的学习设置
 ### 10.3 响应式与无障碍
 
 Desktop 使用中央学习卡片与步骤导航，Tablet 保持大触控目标，Mobile 使用单列内容和底部操作区；375、390、430、768、1024、1440 视口均需保持无横向溢出。步骤导航使用真实按钮和 `aria-current`，媒体失败有文本回退，装饰图标不承担语义，过渡遵守 `prefers-reduced-motion`。
+
+## 11. PHASE 9 Question Engine 页面实现映射
+
+### 11.1 `/assessment` 与 `/dev/question-engine`
+
+| 页面契约 | 实现事实 |
+| --- | --- |
+| 目标 | 完成固定 Assessment 并查看本次结果 |
+| 主 CTA | 提交答案 → 下一题 / 完成本次练习 |
+| 次 CTA | 上一题、返回课程；开发页提供状态 Showcase |
+| 数据边界 | 只消费 `QuestionEngineViewModel`，不直接扫描 Curriculum；题目与知识点关系由 Adapter 提供 |
+| 结果 | 展示答对、答错、待人工判断和自动评分正确率；简答不进入自动评分分母 |
+| 回链 | 完成后返回 LessonPlayer Summary；不写入 Mastery、KnowledgeEnergy、WrongBook 或 Reward |
+
+页面使用真实 radio / checkbox / text input / textarea，提交后禁用当前题控件并显示 `role="status"` 反馈；结果统计为 `role="region"`，题目导航使用 `aria-current="step"`。开发页显式标记 SAMPLE / UNVERIFIED，异常、空态和未开放状态使用儿童可理解文案。

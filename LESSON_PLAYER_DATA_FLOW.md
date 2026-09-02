@@ -65,6 +65,22 @@ flowchart TD
 
 开发地图使用 `/dev/lesson-player` 和 `returnTo=/dev/learning-map`。完成或退出不依赖浏览器后退来猜测来源；页面按显式 `returnTo` 与 `mapNodeId` 返回原地图节点。
 
-## 5. PHASE 8 边界
+## 5. Practice → Assessment 接入
 
-LessonPlayer 数据流在完成后停止于地图进度回链。它不继续流向 Question Engine、答案提交、MasteryEvent、KnowledgeEnergy、WrongBook 或 Reward。
+Practice 步骤不嵌入题目数据。Question Engine 可用性由数据层根据当前 `LessonLaunchContext` 与 `QuestionKnowledgePoint` 关系检查；可用时，`PracticeBlock` 只发出 `start-assessment`，页面将完整上下文转换为：
+
+```ts
+interface AssessmentLaunchContext {
+  textbookId: string;
+  unitId: string;
+  lessonId: string;
+  knowledgePointId: string;
+  source: "lesson_practice" | "dev";
+}
+```
+
+Question Engine 完成后以 `assessmentCompleted=true` 和 `focusStep=summary` 返回 LessonPlayer。LessonPlayer 展示回链摘要并继续原有 LessonSession；Assessment 分数不写入地图完成度、课程事实或掌握度。
+
+## 6. PHASE 8 / 9 边界
+
+LessonPlayer 仍不拥有 Question Repository、答案提交或判题逻辑；这些责任属于独立 Question Engine。Question Engine 的结果只描述本次练习，不继续流向 `MasteryEvent`、`KnowledgeEnergy`、`WrongBook` 或 `Reward`。`masteryScore` 仍只受既定七种 `MasteryEvent` 影响，时间流逝由 `KnowledgeEnergy` 独立处理。

@@ -1,13 +1,13 @@
 # 知识岛课程知识体系
 
-> 本文档定义课程领域结构与关系规则，并记录 PHASE 6 的导入 / 核验边界、PHASE 7 的地图投影边界和 PHASE 8 的 LessonPlayer 消费边界。它不包含已核验的教材目录，也不代表课程内容已经发布。
+> 本文档定义课程领域结构与关系规则，并记录 PHASE 6 的导入 / 核验边界、PHASE 7 的地图投影边界、PHASE 8 的 LessonPlayer 消费边界和 PHASE 9 的题目关系消费边界。它不包含已核验的教材目录，也不代表课程内容已经发布。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow（继承 PHASE 2.2、PHASE 6 与 PHASE 7） |
-| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework 和 Curriculum → LearningMap 适配边界已实现并验证；真实教材仍未核验 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8） |
+| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界和 QuestionKnowledgePoint 关系消费边界已实现并验证；真实教材仍未核验 |
 | 上游事实源 | 项目根目录 `PRODUCT.md` |
 | 下游消费者 | `DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md`、后续课程数据与前端服务 |
 | 权威维护者 | 内容负责人 / 教研负责人（待确定） |
@@ -29,6 +29,7 @@ Grade
             ↔ KnowledgePoint
               → CourseContent
                 → Question
+                  ↕ QuestionKnowledgePoint
 ```
 
 其中 `Lesson` 与 `KnowledgePoint` 是多对多关系，不把 `lessonId` 作为知识点的唯一归属。学生端的学习地图是课程结构的体验投影，不是教材事实的替代品。
@@ -79,7 +80,8 @@ Region
 | 课次 `Lesson` | 单元内的课次、课文或教学段落 | 单元 |
 | 知识点 `KnowledgePoint` | 可独立教学、练习、掌握和复习的最小学习对象 | 知识点库 |
 | 课程内容 `CourseContent` | 围绕知识点的讲解、示例、拓展、复习或挑战说明 | 内容版本 |
-| 题目 `Question` | 由统一题型协议描述的可评测任务 | 题目版本 |
+| 题目 `Question` | 由统一题型协议描述的可评测任务 | 题目版本；知识点关系由 `QuestionKnowledgePoint` 提供 |
+| 题目知识点关系 `QuestionKnowledgePoint` | 题目覆盖的主 / 次知识点关系 | 题目关系记录与独立核验 |
 | 学生课程档案 `StudentCurriculumProfile` | 学生选择的地区、年级、学期和三科教材版本 | 学生选择事实 |
 | 课程范围 | 内容适用的教材、学科、年级、学期、单元或课次 | 关系表 / 快照 |
 
@@ -297,7 +299,7 @@ interface GradeScope {
 5. `LessonKnowledgePointRelation` 决定课次与知识点的多对多关联。
 6. `KnowledgePrerequisite` 决定知识点之间的前置关系。
 7. `CourseContent.knowledgePointId` 决定内容的主要学习归属；教材范围由内容的版本范围与来源共同确认。
-8. `Question.knowledgePointId` 决定题目的主要知识归属；题目教材放置关系由题目课程范围关系或已核验的内容上下文确认。
+8. `QuestionKnowledgePoint` 的 `PRIMARY` 关系决定题目在目标上下文中的主要知识归属；`Question.knowledgePointId` 只作旧数据兼容，题目教材放置关系由题目课程范围关系或已核验的内容上下文确认。
 
 ### 7.2 查询快照
 
@@ -411,7 +413,7 @@ src/data/
 - 已明确地图节点可以关联多个知识点、内容和题目。
 - 已明确权威关系和查询快照的区别。
 - 已明确教材版本迁移不覆盖旧数据。
-- 当前未建立真实教材目录、课文正文或题目；代码已建立三科 `SAMPLE_*` 课程骨架，仍只能用于开发和测试。
+- 当前未建立真实教材目录、课文正文或生产题库；代码已建立三科 `SAMPLE_*` 课程骨架，以及独立的六题 Question Engine Demo，仍只能用于开发和测试。
 
 ## 11. 待确认事项
 
@@ -459,7 +461,7 @@ PHASE 7 的 LearningMap 是课程事实的展示投影，不是新的课程层�
 - 前置关系按稳定 KnowledgePoint ID 计算，支持跨 Lesson / Unit 关系；缺失关系引用记录诊断并忽略，不让整个页面白屏。
 - `LearningMapStore` 只拥有地图选择、定位、加载和演示进度；教材、地区和三科版本仍由 Curriculum / Student Curriculum 域维护。
 
-PHASE 7 已完成地图适配、视觉壳、基础解锁、演示进度、响应式和质量验证。PHASE 8 已在地图节点与 LessonPlayer 之间接入稳定 `LessonLaunchContext`、结构化学习内容、可恢复 LessonSession 和完成回链；不进入 Question Engine 或正式学习记录实现。
+PHASE 7 已完成地图适配、视觉壳、基础解锁、演示进度、响应式和质量验证。PHASE 8 已在地图节点与 LessonPlayer 之间接入稳定 `LessonLaunchContext`、结构化学习内容、可恢复 LessonSession 和完成回链；PHASE 9 再通过独立 `AssessmentLaunchContext` 接入题目引擎，不改变课程主链。
 
 ## 15. PHASE 8 LessonPlayer 消费边界
 
@@ -467,4 +469,10 @@ LessonPlayer 读取既有的 `Textbook → Unit → Lesson → LessonKnowledgePo
 
 正式 LessonPlayer 必须同时满足课程事实与 LearningContent 的生产审核门槛；课程结构已 `REVIEWED` 但学习内容未 `REVIEWED` 时仍不可读。开发页可以在显式配置下使用 SAMPLE / UNVERIFIED Demo Fixture，但不能改变课程核验状态或冒充真实教材正文。
 
-PHASE 8 的 Lesson completion 只更新独立地图演示完成度，不等于 KnowledgePoint 掌握，不触发 `MasteryEvent`、`KnowledgeEnergy`、Reward 或 Question 逻辑。具体步骤、内容块、会话和验证记录见 `LESSON_PLAYER.md`、`LESSON_CONTENT.md` 和 `LESSON_SESSION.md`。
+PHASE 8 的 Lesson completion 只更新独立地图演示完成度，不等于 KnowledgePoint 掌握，不触发 `MasteryEvent`、`KnowledgeEnergy`、Reward 或 Question 逻辑。PHASE 9 的 Practice 入口只发出显式 `AssessmentLaunchContext`，Question Engine 返回的分数不回写课程或掌握度。具体步骤、内容块、会话和验证记录见 `LESSON_PLAYER.md`、`LESSON_CONTENT.md`、`LESSON_SESSION.md` 和 `QUESTION_ENGINE.md`。
+
+## 16. PHASE 9 Question 关系消费边界
+
+题目属于课程内容的可评测资源，但题目与知识点不是简单的一对一嵌套字段。`QuestionKnowledgePoint` 是题目的权威关系表；每道题至少有一个关系，且在发布前必须有且仅有一个 `PRIMARY`，可有多个 `SECONDARY`。关系来源、状态和核验独立于 Question 本体，题目引擎只在显式目标 `knowledgePointId` 上读取匹配关系。
+
+PHASE 9 Demo 只提供六道原创 SAMPLE 题和七条题目-知识点关系，用于验证固定 Assessment、结构化题型、确定性判题、提交锁定和会话恢复。它不构成三科真实教材题库，不改变课程教材、Lesson 或知识点事实，也不产生 `MasteryEvent`、`KnowledgeEnergy` 或奖励记录。

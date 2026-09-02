@@ -1,0 +1,83 @@
+# 知识岛｜Question Engine 实现说明
+
+> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment、判题和 LessonPlayer 接入。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md` 或 `CONTENT_REVIEW.md`。
+
+## 文档状态
+
+| 项目 | 内容 |
+| --- | --- |
+| 当前阶段 | PHASE 9.4：Question Engine / Assessment |
+| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门和 LessonPlayer 回链已实现 |
+| 正式入口 | `/assessment`；需要显式 `AssessmentLaunchContext` |
+| 开发入口 | `/dev/question-engine`、`/dev/question-engine/states` |
+| 题目数据 | 6 道原创 Demo SAMPLE 题；不代表真实教材内容 |
+
+## 1. 目标与边界
+
+Question Engine 负责把一组确定的 `Question` 转成可交互的题目界面，保存草稿、提交结果和恢复位置。它不负责课程事实、教材推断、掌握度、遗忘、奖励或自适应出题。
+
+```text
+LessonPlayer Practice
+  ↓
+AssessmentLaunchContext
+  ↓
+QuestionEngineStore
+  ↓
+QuestionEngineAdapter
+  ↓
+QuestionRepository + QuestionSessionStorage
+  ↓
+QuestionEngineViewModel
+  ↓
+QuestionRenderer
+  ↓
+Answer Validator
+  ↓
+QuestionAttemptResult / AssessmentResultSummary
+```
+
+题目与知识点通过 `QuestionKnowledgePoint` 关系读取；旧 `Question.knowledgePointId` 只保留为迁移兼容字段。`AssessmentDefinition.questionIds` 是固定顺序，PHASE 9 不随机抽题、不按实时难度调整题目，也不调用模型猜测教材版本。
+
+## 2. 已实现题型
+
+| 题型 | 输入 | 结果 |
+| --- | --- | --- |
+| `singleChoice` | 单选 radio | 与正确选项键精确匹配 |
+| `multipleChoice` | 多选 checkbox | 正确集合精确匹配，顺序不影响结果 |
+| `trueFalse` | 布尔 radio | 与布尔答案严格匹配 |
+| `fillBlank` | 一个或多个文本输入 | 按每个空位的接受答案和规范化规则匹配 |
+| `calculation` | 文本计算结果输入 | 精确数值或题目声明的容差匹配 |
+| `shortAnswer` | 多行文本输入 | 提交后标记 `manual_review_required`，不自动评分 |
+
+题干、选项、提示、解析和媒体继续使用结构化 `ContentBlock[]` / `mediaAssetId`。QuestionRenderer 使用注册表选择题型组件；未知题型不会导致页面白屏，而是显示可理解的不可用状态。
+
+## 3. 交互与结果
+
+学生可以在当前题目保存草稿；未完成输入时不能提交。提交后答案、结果和输入控件锁定，页面显示正确 / 错误 / 待人工判断、参考答案和结构化解析。只有当前题目已提交后才能进入下一题；全部题目提交后才能完成 Assessment。
+
+结果页展示答对、答错、待人工判断和自动评分正确率。简答题的 `maxScore = 0`，不会进入自动评分分母；没有可评分题目时正确率显示为 `—`。
+
+## 4. 审核闸门与数据集
+
+正式题目必须同时满足题目生命周期、`verificationStatus`、来源、`QuestionKnowledgePoint` 关系、答案规则、题目版本和媒体资源审核条件。`Question` 本体已核验不代表其知识点关系或媒体已经核验。
+
+开发路由可显式查看 `SAMPLE` / `UNVERIFIED`、空内容、暂未开放、加载错误、恢复和已完成状态，并显示来源警示。Demo 题目全部为原创、虚构、`isSample: true`、`needsVerification: true`，不会进入正式题目集合。
+
+## 5. 与学习行为域的隔离
+
+PHASE 9 的 `QuestionAttemptResult` 只描述本次作答。它不会创建或更新 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 仍只受七种 `MasteryEvent` 影响，不因日期流逝自动下降；遗忘和复习提醒仍由 `KnowledgeEnergy` 独立处理。
+
+## 6. 主要实现文件
+
+- `src/types/question-engine.ts`：Assessment、Session、Attempt、ViewModel 和结果类型。
+- `src/services/question-engine/questionRepository.ts`：固定题目与关系读取边界。
+- `src/services/question-engine/questionEngineAdapter.ts`：上下文校验、审核闸门和 ViewModel 适配。
+- `src/services/question-engine/answerValidator.ts`：纯确定性答案校验。
+- `src/services/question-engine/questionSessionStorage.ts`：版本化、安全的本地会话存储。
+- `src/stores/questionEngineStore.ts`：草稿、提交、导航、完成和恢复状态。
+- `src/components/question-engine/`：六类题型、内容、媒体、反馈和未知题型组件。
+- `src/pages/QuestionEnginePage.vue`：正式与开发入口。
+
+## 7. 当前限制与后续边界
+
+当前只实现 PHASE 9 明确的六类题型和本地 Demo；拖拽、匹配、排序、听力、阅读、口语等题型仍为协议或后续接口。简答需要人工审核，当前没有审核工作台。正式题库、真实教材关联、题目推荐、自适应难度、AI 出题、AI 评分、掌握度、知识能量、错题本和奖励均留待后续阶段。

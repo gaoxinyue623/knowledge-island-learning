@@ -1,15 +1,15 @@
 # 知识岛｜Question UI 题型交互规格
 
-> 本文档定义统一 `QuestionShell`、题干内容、媒体、选项、提示、反馈、键盘 / 触控和 13 类题型的学生端交互。它对应 `QUESTION_SCHEMA.md`，只描述 UI 设计，不实现 QuestionRenderer、评分或页面。
+> 本文档定义统一 `QuestionShell`、题干内容、媒体、选项、提示、反馈、键盘 / 触控和题型的学生端交互。PHASE 9 已将六类题型落到 `QuestionRenderer` 与 Assessment 页面；其余题型仍是设计规格。它对应 `QUESTION_SCHEMA.md`，不替代判题与审核规则。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 3：UI / UX + 游戏视觉系统 + 多端响应式设计 |
-| 状态 | 仅设计；未实现 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 3 视觉与交互设计） |
+| 状态 | 六类题型、提交锁定、反馈、结构化内容、媒体回退和响应式交互已实现并验证；其余题型仍为设计 |
 | 上游事实源 | `QUESTION_SCHEMA.md`、`DATA_MODEL.md`、`PRODUCT.md` |
-| 下游消费者 | `PAGE_SPEC.md`、`UI_FLOW.md`、后续 `QuestionRenderer` 与题目服务 |
+| 下游消费者 | `PAGE_SPEC.md`、`UI_FLOW.md`、`QUESTION_ENGINE.md` 与题目服务 |
 | 题型范围 | 12 类 MVP / 后续题型 + `speaking` 接口占位 |
 | 评分边界 | UI 不改答案、不推断 normalization、不计算教材归属 |
 
@@ -382,3 +382,8 @@ Desktop                         Tablet                         Mobile
 7. `speaking` 仅为接口占位，MVP 不录音、不上传、不自动评分。
 8. 题目媒体具备 `MediaAsset` 的来源、版权、版本和无障碍信息。
 
+## 7. PHASE 9 工程实现映射
+
+PHASE 9 实现了本文件中六类题型的核心交互：统一 `QuestionRenderer` 注册表、结构化题干与媒体、radio / checkbox / 文本输入、提交锁定、`AnswerFeedback`、解析展示和可恢复 `QuestionSession`。正式页面为 `/assessment`，开发页面 `/dev/question-engine` 提供完整、恢复、完成、空、错误、未开放、Sample 和 Unverified 状态 Showcase。
+
+题型组件只发出 `QuestionAnswerDraft`，判题由独立确定性 Validator 完成。PHASE 9 不实现拖拽、匹配、排序、听力、阅读、口语的运行时题型，不实现 AI 评分、掌握度、知识能量、错题本或奖励。

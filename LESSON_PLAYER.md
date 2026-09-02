@@ -1,13 +1,13 @@
 # 知识岛｜LessonPlayer 实现说明
 
-> 本文档记录 PHASE 8.1～8.4 的 LessonPlayer / Knowledge Learning Flow 工程事实、边界和验证入口。它补充 `PRODUCT.md`、`DATA_MODEL.md` 与 `CONTENT_REVIEW.md`，不替代课程事实、题目协议或内容审核规则。
+> 本文档记录 PHASE 8.1～8.4 的 LessonPlayer / Knowledge Learning Flow，以及 PHASE 9.4 的 Practice → Assessment 接入事实、边界和验证入口。它补充 `PRODUCT.md`、`DATA_MODEL.md` 与 `CONTENT_REVIEW.md`，不替代课程事实、题目协议或内容审核规则。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow |
-| 状态 | LessonPlayer、内容块渲染、会话恢复、完成回链和开发 Showcase 已实现；完成后停止 |
+| 当前阶段 | PHASE 9.4：Question Engine / Assessment |
+| 状态 | LessonPlayer、内容块渲染、会话恢复、Practice 可用性检查、Assessment 入口、完成回链和开发 Showcase 已实现并验证 |
 | 正式入口 | `/lesson` |
 | 开发入口 | `/dev/lesson-player`、`/dev/lesson-player/states` |
 | 主要代码 | `src/types/lesson-player.ts`、`src/services/lesson-player/`、`src/stores/lessonPlayerStore.ts`、`src/components/lesson-player/`、`src/pages/LessonPlayerPage.vue` |
@@ -33,7 +33,7 @@ LearningMapCompletionService
 返回 LearningMap 并 focusNodeId
 ```
 
-LessonPlayer 的目标是让学生围绕一个 KnowledgePoint 走完一段短学习步骤。它负责“看懂、互动、继续和完成”，不负责题目作答、评分或掌握度计算。
+LessonPlayer 的目标是让学生围绕一个 KnowledgePoint 走完一段短学习步骤，并在 Practice 步骤把显式上下文交给 Question Engine。它负责“看懂、互动、继续和完成”，不拥有题目作答、评分或掌握度计算；Assessment 完成后只接收摘要并回到课程。
 
 ## 2. 领域边界
 
@@ -68,7 +68,7 @@ Textbook → Unit → Lesson → LessonKnowledgePoint → KnowledgePoint
 
 ### 2.3 LessonStep
 
-最小导航单位是 `LessonStep`，类型为 `intro`、`concept`、`explanation`、`example`、`media`、`interactive`、`practice` 或 `summary`。步骤通过 `contentBlockIds` 引用结构化内容块；`practice` 在本阶段只是 Practice Placeholder，不是题目。
+最小导航单位是 `LessonStep`，类型为 `intro`、`concept`、`explanation`、`example`、`media`、`interactive`、`practice` 或 `summary`。步骤通过 `contentBlockIds` 引用结构化内容块；`practice` 的说明与提示仍属于 LessonPlayer，`开始练习` CTA 只发出 `AssessmentLaunchContext`，不把题目嵌入课程内容。
 
 ## 3. 审核与数据集
 
@@ -95,6 +95,8 @@ Demo Lesson 使用原创、虚构、通用内容，不复制教材正文、练�
 - `not_available`：内容或审核状态不允许正式读取。
 - `error`：上下文、仓储或读取发生错误，提供重试和返回地图。
 
+Practice 入口会先通过 Question Engine Adapter 检查当前上下文是否有可读题目；检查中显示准备状态，题目为空或审核未通过时显示可理解的准备中 / 暂未开放状态，不由页面猜测教材或题型。
+
 内容卡显示学习目标、步骤序号、当前内容块、上一步 / 下一步和完成操作。完成文案明确说明“完成学习不等于掌握度”。
 
 ## 5. Store、持久化与地图回链
@@ -107,14 +109,32 @@ Demo Lesson 使用原创、虚构、通用内容，不复制教材正文、练�
 
 步骤导航是可聚焦的真实按钮，当前步骤使用 `aria-current="step"`；媒体使用显式尺寸、替代文本和失败回退；装饰图标不承载唯一语义。Desktop 使用居中学习卡片，Tablet 保持大触控目标，Mobile 使用单列内容和底部操作区；样式覆盖 375、390、430、768、1024 和 1440 视口，并遵守 `prefers-reduced-motion`。
 
-## 7. 明确不在 PHASE 8
+## 7. PHASE 9 接入边界
 
-本阶段不实现 `Question Engine`、正式答题、自动判题、题目随机抽取 / 推荐 / 难度算法、`QuestionSession`、答案提交、正确 / 错误引擎、`MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、Coins、Achievement、Streak、Parent Dashboard、AI Tutor 或正式考试系统。
+LessonPlayer 使用显式的 `AssessmentLaunchContext` 进入 `/assessment` 或开发 `/dev/question-engine`：
 
-`PracticeBlock` 只用于展示非评分内容或观察互动；Lesson completion 只表示本次会话走完步骤，不写入掌握度、错题或奖励记录。
+```text
+Practice
+  ↓ start-assessment
+AssessmentLaunchContext
+  ↓
+Question Engine
+  ↓
+AssessmentResultSummary
+  ↓ assessmentCompleted=true
+LessonPlayer Summary / LearningMap
+```
 
-## 8. PHASE 8 验证记录
+返回的结果只用于本次练习摘要和课程回链。Question Engine 的题目关系、会话、判题和审核闸门见 `QUESTION_ENGINE.md`；LessonPlayer 不直接读取 Question Repository，也不修改 `Question`、`MasteryEvent` 或地图事实。
 
-截至 2026-09-02，`npm install`、`npm run type-check`、`npm run lint`、`npm run format:check`、`npm run test:run` 和 `npm run build` 均通过；测试为 6 个文件、60 项，既有 PHASE 7 测试未删除。`npm run curriculum:review` 保持预期结论 `REQUIRES_MANUAL_REVIEW`，没有擅自把 Golden Framework 提升为已审核数据。
+## 8. 明确不在 PHASE 8 / 9
 
-浏览器已检查 `/`、`/learning-map`、`/lesson` 的正式入口保护，以及 `/dev/learning-map` → Node Detail → `/dev/lesson-player` → 完成 → 地图焦点恢复的闭环。开发页的 full、resume、completed、empty、not_available、error、sample、unverified 状态均可显示；LessonPlayer 在 `375`、`390`、`430`、`768`、`1024` 和 `1440` 视口无横向溢出，当前步骤、首步禁用上一步、标题、进度语义和 Reduced Motion 规则均已检查。最终浏览器 `error` / `warning` 日志为空。
+PHASE 8 不实现 Question Engine；PHASE 9 只实现六类题型的固定 Demo Assessment、确定性判题、人工审核简答标记和会话恢复。两个阶段都不实现题目随机抽取 / 推荐 / 难度算法、`MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、Coins、Achievement、Streak、Parent Dashboard、AI Tutor、AI Question Generation、AI Grading 或正式考试系统。
+
+`PracticeBlock` 仍只展示非评分内容或观察互动；它的 Assessment CTA 由数据层可用性控制。Assessment completion 只表示本组题目已提交，不写入掌握度、错题或奖励记录；Lesson completion 只表示本次课程步骤走完。
+
+## 9. PHASE 8 / 9 验证记录
+
+截至 2026-09-02，PHASE 9 目标验证包含 `npm install`、`npm run type-check`、`npm run lint`、`npm run format:check`、`npm run test:run`、`npm run build` 和 `npm run curriculum:review`；测试保留既有 PHASE 7 / 8 覆盖，并新增 Question Engine 领域、渲染、判题、存储和 Store 测试。`curriculum:review` 仍保持 `REQUIRES_MANUAL_REVIEW`，没有擅自把 Golden Framework 或题目 Demo 提升为已审核数据。
+
+浏览器已检查 `/`、`/learning-map`、`/lesson` 的正式入口保护，以及 `/dev/learning-map` → Node Detail → `/dev/lesson-player` → Practice → `/dev/question-engine` → 完成 → LessonPlayer → 地图焦点恢复的闭环。开发页的 full、resume、completed、empty、not_available、error、sample、unverified 状态均可显示；LessonPlayer 与 Question Engine 在 `375`、`390`、`430`、`768`、`1024` 和 `1440` 视口无横向溢出，当前步骤、题目进度、提交锁定、结果 region、标题、进度语义和 Reduced Motion 规则均已检查。最终浏览器 `error` / `warning` 日志为空。

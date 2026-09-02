@@ -1,13 +1,13 @@
 # 知识岛｜UI Flow 交互流程
 
-> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap 与 PHASE 8 的 LessonPlayer 流程已落到工程，Question / Result 等后续流程仍是设计规格。
+> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer 与 PHASE 9 的 Question Engine 流程已落到工程，其余成长与复习流程仍是设计规格。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow（继承 PHASE 3 交互设计） |
-| 状态 | PHASE 7 地图与 PHASE 8 LessonPlayer 流程已实现并验证；Question Engine 和正式答题仍未实现 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 3 交互设计） |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 流程已实现并验证；Mastery / KnowledgeEnergy 等学习算法仍未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`PAGE_SPEC.md` |
 | 数据解析 | `resolveAvailableTextbooks(regionId, gradeId, semesterId)`，确定性读取 |
 | 保存事实 | 三科选择写入 `StudentCurriculumProfile`，不使用单一教材字段 |
@@ -94,20 +94,18 @@ flowchart TD
     N -->|locked| N1[显示解锁条件]
     L --> L1[学习目标 + 内容步骤]
     L1 --> L2[Concept / Explanation / Example]
-    L2 --> L3[Interactive Demo / Practice Placeholder]
-    L3 --> L4[Summary]
+    L2 --> L3[Interactive Demo / Practice]
+    L3 -->|开始练习| Q[AssessmentLaunchContext]
+    Q --> QE[QuestionEnginePage]
+    QE --> Q1{确定性判题}
+    Q1 -->|正确 / 错误| Q2[AnswerFeedback + Explanation]
+    Q1 -->|简答| Q3[manual_review_required]
+    Q2 --> Q4[下一题 / 完成本次练习]
+    Q3 --> Q4
+    Q4 -->|全部提交| R[AssessmentResultSummary]
+    R -->|返回| L4[LessonPlayer Summary]
     L4 --> L5[完成 LessonSession]
     L5 --> M[返回 LearningMap 并更新地图演示进度]
-    L5 -. 后续阶段 .-> Q[QuestionShell]
-    Q --> Q1{作答结果}
-    Q1 -->|正确| Q2[AnswerFeedback]
-    Q1 -->|错误| Q3[保留题目 + Hint]
-    Q3 -->|再次尝试| Q
-    Q3 -->|连续错误| Q4[Explanation / Review]
-    Q2 --> R[Result]
-    R -->|达标| U[解锁下一节点]
-    R -->|部分掌握| V[巩固练习]
-    R -->|需要复习| W[WrongBook / Review Node]
 ```
 
 学科卡允许显示小型教材版本标签，但教材信息不能压过“继续学习”；地图顶部同时区分游戏主题和真实教材上下文。
@@ -127,7 +125,7 @@ flowchart LR
     W3 --> B[WrongBook Record]
 ```
 
-错误不跳题、不进入 `Game Over`。错误事件、错题记录和掌握度事件由学习行为域记录，Question UI 只展示返回结果。
+错误不跳题、不进入 `Game Over`。PHASE 9 只保存 `QuestionAttemptResult`；错题记录、掌握度事件和复习安排不由 Question Engine 生成。
 
 ## 6. Flow E：复习与知识能量
 
@@ -263,7 +261,7 @@ flowchart LR
 6. 修改数学教材只更新数学，语文和英语保持不变。
 7. 移动端地区逐级选择、教材卡片和版本选择可以单手完成。
 8. 流程没有传统 Cascader 滥用、地区 / 出版社混淆或 UI 自行猜教材。
-9. 学习闭环仍能在短路径内进入第一次互动，错误、复习、奖励和返回可恢复。
+9. 学习闭环仍能在短路径内进入第一次互动，题目错误、结果和返回可恢复；掌握度、复习、奖励等后续域不被隐式触发。
 
 ## 15. PHASE 7 LearningMap Flow 实现状态
 
@@ -303,4 +301,24 @@ Lesson completion
 LearningMapProgressStorage → 返回地图并 focusNodeId
 ```
 
-正式入口只允许通过课程与 LearningContent 审核闸门的内容；开发入口提供 Demo、Sample、Unverified、空、错误、未开放、恢复和完成状态 Showcase。PHASE 8 的 Practice 不提交答案、不判题、不写入 MasteryEvent；Lesson completion 不等于掌握度。
+正式入口只允许通过课程、LearningContent 与 Question 审核闸门的内容；开发入口提供 Demo、Sample、Unverified、空、错误、未开放、恢复和完成状态 Showcase。PHASE 8 的 Practice 内容本身不提交答案；PHASE 9 的 Assessment 通过独立 Question Engine 提交和判题，但不写入 `MasteryEvent`；Lesson completion 与 Assessment completion 都不等于掌握度。
+
+## 17. PHASE 9 Question Engine Flow 实现状态
+
+```text
+LessonPlayer Practice
+  ↓ start-assessment
+AssessmentLaunchContext
+  ↓
+/assessment 或 /dev/question-engine
+  ↓
+QuestionEngineStore → QuestionEngineAdapter
+  ↓
+固定 Assessment → QuestionRenderer → Answer Validator
+  ↓
+QuestionAttemptResult → AssessmentResultSummary
+  ↓ assessmentCompleted=true + focusStep=summary
+LessonPlayer Summary → LearningMap
+```
+
+已验证单选、多选、判断、填空、计算和简答六类题型；提交后输入锁定，简答保留人工审核状态。Session 使用独立版本化存储，页面不随机抽题、不猜教材、不修改 MasteryScore、KnowledgeEnergy、WrongBook 或 Reward。

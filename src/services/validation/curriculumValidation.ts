@@ -123,6 +123,7 @@ export function validateCurriculumData(
     lessonById: new Map(data.lessons.map((lesson) => [lesson.id, lesson])),
   }
   const knowledgePointIds = new Set(data.knowledgePoints.map((knowledgePoint) => knowledgePoint.id))
+  const questionIds = new Set(data.questions.map((question) => question.id))
   const sourceIds = new Set(data.sources.map((source) => source.id))
   const mediaAssetIds = new Set(data.mediaAssets.map((asset) => asset.id))
 
@@ -214,6 +215,32 @@ export function validateCurriculumData(
   )
   errors.push(...graphReport.errors.map((error) => `KnowledgePrerequisite: ${error}`))
 
+  const questionKnowledgePointPairs = new Set<string>()
+  const primaryQuestionIds = new Set<string>()
+  for (const mapping of data.questionKnowledgePoints) {
+    collectSampleGuard(errors, `QuestionKnowledgePoint ${mapping.id}`, mapping)
+    if (!questionIds.has(mapping.questionId)) {
+      errors.push(`QuestionKnowledgePoint ${mapping.id}: questionId 不存在`)
+    }
+    if (!knowledgePointIds.has(mapping.knowledgePointId)) {
+      errors.push(`QuestionKnowledgePoint ${mapping.id}: knowledgePointId 不存在`)
+    }
+    if (!sourceIds.has(mapping.sourceId)) {
+      errors.push(`QuestionKnowledgePoint ${mapping.id}: sourceId 不存在`)
+    }
+    const pair = `${mapping.questionId}::${mapping.knowledgePointId}`
+    if (questionKnowledgePointPairs.has(pair)) {
+      errors.push(`QuestionKnowledgePoint ${mapping.id}: 题目与知识点关系重复`)
+    }
+    questionKnowledgePointPairs.add(pair)
+    if (mapping.isPrimary) {
+      if (primaryQuestionIds.has(mapping.questionId)) {
+        errors.push(`QuestionKnowledgePoint ${mapping.questionId}: PRIMARY 关系不能重复`)
+      }
+      primaryQuestionIds.add(mapping.questionId)
+    }
+  }
+
   for (const content of data.courseContents) {
     collectSampleGuard(errors, `CourseContent ${content.id}`, content)
     if (!knowledgePointIds.has(content.knowledgePointId)) {
@@ -243,8 +270,18 @@ export function validateCurriculumData(
 
   for (const question of data.questions) {
     collectSampleGuard(errors, `Question ${question.id}`, question)
+    if (!data.questionKnowledgePoints.some((mapping) => mapping.questionId === question.id)) {
+      errors.push(
+        `Question ${question.id}: 必须通过 QuestionKnowledgePoint 关系关联 KnowledgePoint`,
+      )
+    }
+    if (!primaryQuestionIds.has(question.id)) {
+      errors.push(`Question ${question.id}: 必须有一条 PRIMARY QuestionKnowledgePoint 关系`)
+    }
     const questionReport = validateQuestion(question, {
       knowledgePointIds,
+      questionIds,
+      questionKnowledgePoints: data.questionKnowledgePoints,
       sourceIds,
       mediaAssetIds,
     })

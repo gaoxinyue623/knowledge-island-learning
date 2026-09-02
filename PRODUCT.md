@@ -8,13 +8,13 @@
 | --- | --- |
 | 产品名称 | 知识岛（暂定） |
 | 产品定位 | 课本同步 + 游戏闯关 + 课外拓展的小学语数英学习平台 |
-| 当前阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow 验证与质量收尾 |
-| 文档状态 | 产品事实源；PHASE 7.1～7.4 与 PHASE 8.1～8.4 已实现并验证，Golden Sample Framework 与 Demo Lesson 仍受未核验 / SAMPLE 闸门保护；Question Engine 与正式学习算法未实现 |
+| 当前阶段 | PHASE 9.4：Question Engine / Assessment 闭环验证与质量收尾 |
+| 文档状态 | 产品事实源；PHASE 7、PHASE 8 与 PHASE 9.1～9.4 已实现并验证，Golden Sample Framework、Demo Lesson 与 Demo Questions 仍受未核验 / SAMPLE 闸门保护；正式学习算法未实现 |
 | 版本 | 0.1 |
 | 日期 | 2026-09-02 |
 | 当前事实源 | 用户提供的产品总 Prompt、PHASE 2.1 / 2.2 数据与课程文档、PHASE 3 / 3.1 设计文档，以及 PHASE 4 工程基础 |
 | 产品负责人 | 待确定 |
-| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、内容块渲染、会话持久化和地图完成联动已创建并完成本阶段验证；正式答题与学习算法仍待后续阶段 |
+| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复和地图回链已创建并完成本阶段验证；MasteryScore、KnowledgeEnergy 与其他学习算法仍待后续阶段 |
 
 ---
 
@@ -365,7 +365,7 @@ StudentCurriculumProfile
 
 题目使用统一的 Question Engine 渲染。题型差异应由 `questionType` 和题目数据驱动，而不是为每种题型创建一套互不共享的页面。
 
-每道题必须至少关联以下维度：
+每道题必须至少关联以下维度；题目与知识点的权威关系由 `QuestionKnowledgePoint` 提供，题目上的同名字段只能作为兼容快照：
 
 | 维度 | 约束 |
 | --- | --- |
@@ -375,7 +375,7 @@ StudentCurriculumProfile
 | 教材版本 | `textbookVersion` 或 `textbookVersionId` |
 | 单元 | `unit` 或 `unitId` |
 | 课次 | `lesson` 或 `lessonId` |
-| 知识点 | `knowledgePointId` |
+| 知识点 | `QuestionKnowledgePoint` 的 `PRIMARY` / `SECONDARY` 关系；旧 `knowledgePointId` 仅作迁移兼容 |
 | 难度 | `difficulty` |
 | 题型 | `questionType` |
 
@@ -392,7 +392,7 @@ StudentCurriculumProfile
 | `textbookVersionId` | 教材版本标识 |
 | `unitId` | 单元标识 |
 | `lessonId` | 课次标识 |
-| `knowledgePointId` | 知识点标识 |
+| `QuestionKnowledgePoint` | 题目与知识点的主 / 次关系；旧 `knowledgePointId` 仅作兼容快照 |
 | `questionType` | 统一题型枚举 |
 | `stem` | 题干或操作指令 |
 | `media` | 图片、音频或动画资源引用 |
@@ -412,7 +412,7 @@ StudentCurriculumProfile
 
 `singleChoice`、`multipleChoice`、`fillBlank`、`trueFalse`、`dragDrop`、`matching`、`sorting`、`typing`、`listening`、`speaking`、`calculation`、`reading`、`sentenceOrdering`。
 
-其中 `speaking` 需要额外的语音能力与隐私设计，首个 MVP 只保留产品接口位置，不默认承诺接入语音识别。
+其中 `speaking` 需要额外的语音能力与隐私设计，首个 MVP 只保留产品接口位置，不默认承诺接入语音识别。PHASE 9 仅实现 `singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer` 六类题型。
 
 ### 8.4 学科小游戏与能力绑定
 
@@ -574,7 +574,10 @@ StudentCurriculumProfile
 | `Lesson` | 课次标识、名称、顺序、单元关联 | 连接教材内容与知识点 |
 | `KnowledgePoint` | 知识点标识、名称、能力描述、前置知识点 | 作为练习、掌握度和复习的最小学习单位 |
 | `CourseContent` | 内容标识、知识点关联、正文 / 媒体、内容类型、来源、审核状态 | 保存讲解、示例、拓展与复习内容 |
-| `Question` | 题目字段、题型、答案规则、解析、知识点与教材维度 | 供统一题目引擎使用 |
+| `Question` | 题目字段、题型、答案规则、解析与查询快照 | 供统一题目引擎使用；知识点权威关系由 `QuestionKnowledgePoint` 管理 |
+| `QuestionKnowledgePoint` | 题目、知识点、主 / 次关系、顺序、来源和核验状态 | 表达一题多知识点，供题目引擎确定目标知识点 |
+| `AssessmentDefinition` | Assessment 标识、目标知识点、固定题目 ID 顺序、模式 | 定义一次可重复读取的练习集合 |
+| `QuestionSession` / `QuestionAttempt` | 学生、Assessment、草稿、提交状态、结果、题目版本 | 保存一次练习的可恢复作答过程 |
 | `StudentCurriculumProfile` | 学生、地区、年级、学期、三科教材版本、确认时间、来源 | 保存学生当前选课结果，三科版本分别维护 |
 | `LearningMap` | 地图标识、年级、学期、学科、单元、主题配置 | 组织学生端学习路径 |
 | `MapNode` | 节点类型、顺序、前置节点、关联内容、解锁规则 | 保存地图上的体验节点 |
@@ -589,7 +592,7 @@ StudentCurriculumProfile
 
 ### 12.3 关系约束
 
-1. `Question` 必须关联一个明确的 `knowledgePointId`。
+1. `Question` 必须至少存在一个有效的 `QuestionKnowledgePoint` 关系，并有且仅有一个目标上下文中的 `PRIMARY` 关系；旧 `knowledgePointId` 仅为迁移兼容字段。
 2. `Question` 必须携带年级、学期、学科和教材版本维度；不能只依赖 `unitId` 推断。
 3. `CourseContent` 必须明确 `contentType`、`status`、`source` 和 `needsVerification`。
 4. `Unit`、`Lesson` 和 `KnowledgePoint` 必须属于同一个已确认的教材版本或明确标记为拓展内容。
@@ -801,12 +804,12 @@ src/
 
 ### 后续课程与工程输入
 
-在确认上述关键项后，下一阶段应输出课程与数据设计：
+在确认上述关键项后，真实课程与生产题库录入前仍应输出并核验：
 
 - 三年级上册三科的教材版本元数据。
 - 每科一个单元的 3～5 个知识点清单。
 - 知识点与教学关、练习关、挑战关的映射。
-- Question Engine 的正式字段类型与题型数据样例。
+- 真实题库的题型数据样例、答案规则与 `QuestionKnowledgePoint` 关系。
 - 内容审核状态、来源和版本的可执行数据约束。
 - MVP 地图节点、解锁规则与学习进度状态表。
 
@@ -1034,4 +1037,47 @@ PHASE 8 不实现 `Question Engine`、正式答题、自动判题、题目抽取
 
 已验证 LessonPlayer 的上下文校验、步骤导航、稳定会话、恢复与完成、内容块渲染、媒体失败回退、审核状态、地图回链、响应式视口、键盘可访问性和 Reduced Motion。文档与验证记录见 `LESSON_PLAYER.md`、`LESSON_PLAYER_DATA_FLOW.md`、`LESSON_CONTENT.md` 与 `LESSON_SESSION.md`。
 
-PHASE 8 已完成并停止，不进入 PHASE 9。
+PHASE 8 的停止点已经完成；PHASE 9 在其后作为独立题目与 Assessment 阶段执行。
+
+## 26. PHASE 9 Question Engine / Assessment
+
+PHASE 9.1～9.4 已完成并验证。它把 LessonPlayer 的 Practice 入口接入一个独立、固定、可恢复的练习闭环：
+
+```text
+LessonPlayer Practice
+  ↓
+AssessmentLaunchContext
+  ↓
+QuestionEngineStore
+  ↓
+QuestionEngineAdapter
+  ↓
+QuestionRepository + QuestionSessionStorage
+  ↓
+QuestionEngineViewModel
+  ↓
+QuestionRenderer
+  ↓
+确定性 Answer Validator
+  ↓
+QuestionAttemptResult / AssessmentResultSummary
+  ↓
+返回 LessonPlayer
+```
+
+### 26.1 已实现范围
+
+- Question 通过 `QuestionKnowledgePoint` 关系关联知识点；`QuestionBase.stem`、`QuestionOption.content`、提示、解析和媒体继续使用结构化 `ContentBlock[]` / `mediaAssetId`。
+- 支持 `singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer` 六类题型；Demo Assessment 使用六道原创 SAMPLE 题并保持固定顺序，不随机抽题、不按难度动态改题。
+- `QuestionSession` 独立保存草稿、提交状态、`QuestionAttempt`、题目版本和结果；本地存储可恢复，损坏或孤儿数据安全清理 / 归一化。
+- 判题是纯确定性规则：选择题精确匹配、多选集合无序匹配、填空按题目规则规范化、计算题支持精确值 / 容差；简答题只标记 `manual_review_required`，不做 AI 评分。
+- LessonPlayer 只负责发出显式 `AssessmentLaunchContext`、接收完成回链和展示练习摘要；Assessment 分数不会写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。
+- 正式入口继续执行独立 Question 审核闸门；SAMPLE / UNVERIFIED 只能在开发路由显式展示，并带有来源状态警示。
+
+### 26.2 本阶段明确不实现
+
+PHASE 9 不实现 `MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、AI Question Generation、AI Grading、题目随机抽取、难度自适应或正式考试系统。PHASE 9 完成后停止，不进入 PHASE 10。
+
+### 26.3 验收与停止点
+
+已验证六类题型输入、提交锁定、结果反馈、结构化内容与媒体回退、Session 恢复、错误 / 空态 / 未开放 / Sample / Unverified Showcase、LessonPlayer → Assessment → LessonPlayer → LearningMap 闭环、键盘与语义化无障碍、Reduced Motion 和 `375`、`390`、`430`、`768`、`1024`、`1440` 视口。实现与测试记录见 `QUESTION_ENGINE.md`、`QUESTION_SESSION.md`、`QUESTION_VALIDATION.md`、`ASSESSMENT.md`、`LESSON_PLAYER.md` 和 `ARCHITECTURE.md`。

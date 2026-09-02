@@ -7,6 +7,8 @@ export interface CurriculumAccessPolicy {
    * accidentally make unreviewed lesson content readable. */
   allowSampleLearningContent?: boolean
   allowUnreviewedLearningContent?: boolean
+  allowSampleQuestions?: boolean
+  allowUnreviewedQuestions?: boolean
 }
 
 type ViteEnvironment = {
@@ -15,6 +17,8 @@ type ViteEnvironment = {
   VITE_ALLOW_UNREVIEWED_CURRICULUM?: string
   VITE_ALLOW_SAMPLE_LEARNING_CONTENT?: string
   VITE_ALLOW_UNREVIEWED_LEARNING_CONTENT?: string
+  VITE_ALLOW_SAMPLE_QUESTIONS?: string
+  VITE_ALLOW_UNREVIEWED_QUESTIONS?: string
 }
 
 const viteEnvironment = (import.meta as ImportMeta & { env?: ViteEnvironment }).env
@@ -35,6 +39,10 @@ export const curriculumAccessConfig: CurriculumAccessPolicy = {
   allowUnreviewedLearningContent:
     viteEnvironment?.PROD !== true &&
     viteEnvironment?.VITE_ALLOW_UNREVIEWED_LEARNING_CONTENT !== 'false',
+  allowSampleQuestions:
+    viteEnvironment?.PROD !== true && viteEnvironment?.VITE_ALLOW_SAMPLE_QUESTIONS !== 'false',
+  allowUnreviewedQuestions:
+    viteEnvironment?.PROD !== true && viteEnvironment?.VITE_ALLOW_UNREVIEWED_QUESTIONS !== 'false',
 }
 
 export function getRecordVerificationStatus(record: {
@@ -87,6 +95,31 @@ export function isLearningContentRecordReadable(
   if (verificationStatus === 'SAMPLE') return policy.allowSampleLearningContent === true
   if (verificationStatus === 'UNVERIFIED' || verificationStatus === 'VERIFIED') {
     return policy.allowUnreviewedLearningContent === true
+  }
+  return false
+}
+
+/**
+ * Questions have an independent guard. A reviewed curriculum does not make
+ * an unreviewed question readable by accident.
+ */
+export function isQuestionRecordReadable(
+  record: {
+    isSample?: boolean
+    needsVerification?: boolean
+    verificationStatus?: VerificationStatus
+    status?: string
+  },
+  policy: CurriculumAccessPolicy = curriculumAccessConfig,
+): boolean {
+  if (record.status === 'ARCHIVED') return false
+  const verificationStatus = getRecordVerificationStatus(record)
+  if (verificationStatus === 'REVIEWED') return true
+  if (verificationStatus === 'SAMPLE') {
+    return policy.allowSampleQuestions ?? policy.allowSampleCurriculum
+  }
+  if (verificationStatus === 'UNVERIFIED' || verificationStatus === 'VERIFIED') {
+    return policy.allowUnreviewedQuestions ?? policy.allowUnreviewedCurriculum
   }
   return false
 }

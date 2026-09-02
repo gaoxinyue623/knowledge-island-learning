@@ -78,3 +78,5 @@ Demo Lesson 的内容是虚构、通用、原创的，不复制教材课文、�
 ## 7. 内容渲染器
 
 `LessonContentRenderer` 使用显式组件注册表映射内容类型：`IntroBlock`、`ConceptBlock`、`ExplanationBlock`、`ExampleBlock`、`MediaBlock`、`InteractiveBlock`、`PracticeBlock`、`SummaryBlock` 和 `UnknownContentBlock`。组件只消费 `LessonContentBlockViewModel`，不读取原始 Curriculum 数组。
+
+`PracticeBlock` 仍只渲染非评分的思考提示；如果 Question Engine Adapter 确认存在可用 Assessment，它显示“开始练习”并发出 `AssessmentLaunchContext`，不在内容块中保存题目或答案。返回 LessonPlayer 后，摘要和完成状态由独立 Question Engine / LessonPlayer 页面处理。

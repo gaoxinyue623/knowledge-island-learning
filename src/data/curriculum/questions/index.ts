@@ -1,6 +1,6 @@
-import type { ContentBlock, QuestionOption, QuestionType } from '@/types'
+import type { ContentBlock, QuestionKnowledgePoint, QuestionOption, QuestionType } from '@/types'
 
-import type { SampleQuestion } from '../types'
+import type { SampleQuestion, SampleRecord } from '../types'
 
 const sampleStem: ContentBlock[] = [
   {
@@ -116,4 +116,59 @@ export const sampleQuestions: SampleQuestion[] = [
 
 export const questionById: ReadonlyMap<string, SampleQuestion> = new Map(
   sampleQuestions.map((question) => [question.id, question]),
+)
+
+const questionKnowledgePoint = (
+  id: string,
+  questionId: string,
+  knowledgePointId: string,
+  relationType: QuestionKnowledgePoint['relationType'] = 'PRIMARY',
+  order = 1,
+): SampleRecord<QuestionKnowledgePoint> => ({
+  id,
+  questionId,
+  knowledgePointId,
+  relationType,
+  order,
+  isPrimary: relationType === 'PRIMARY',
+  sourceId: 'SAMPLE_SOURCE_UNVERIFIED',
+  status: 'DRAFT',
+  needsVerification: true,
+  isSample: true,
+  verificationStatus: 'SAMPLE',
+})
+
+export const sampleQuestionKnowledgePoints: SampleRecord<QuestionKnowledgePoint>[] = [
+  questionKnowledgePoint(
+    'SAMPLE_QUESTION_KP_SINGLE',
+    'SAMPLE_QUESTION_SINGLE_CHOICE',
+    'SAMPLE_MATH_KP_01',
+  ),
+  questionKnowledgePoint(
+    'SAMPLE_QUESTION_KP_DRAG',
+    'SAMPLE_QUESTION_DRAG_DROP',
+    'SAMPLE_MATH_KP_02',
+  ),
+  questionKnowledgePoint(
+    'SAMPLE_QUESTION_KP_CALCULATION',
+    'SAMPLE_QUESTION_CALCULATION',
+    'SAMPLE_MATH_KP_03',
+  ),
+  questionKnowledgePoint(
+    'SAMPLE_QUESTION_KP_READING',
+    'SAMPLE_QUESTION_READING',
+    'SAMPLE_CHINESE_KP_01',
+  ),
+]
+
+export const questionKnowledgePointsByQuestionId: ReadonlyMap<
+  string,
+  SampleRecord<QuestionKnowledgePoint>[]
+> = new Map(
+  [...new Set(sampleQuestionKnowledgePoints.map((mapping) => mapping.questionId))].map(
+    (questionId) => [
+      questionId,
+      sampleQuestionKnowledgePoints.filter((mapping) => mapping.questionId === questionId),
+    ],
+  ),
 )

@@ -1,4 +1,4 @@
-import type { ContentSource, Id, QuestionAnswerRule, QuestionBase, QuestionOption } from '@/types'
+import type { ContentSource, Question, QuestionKnowledgePoint } from '@/types'
 
 /**
  * SAMPLE records are deliberately richer than the domain interfaces so the
@@ -16,15 +16,12 @@ export type SampleContentSource = ContentSource & {
   verificationStatus: 'SAMPLE'
 }
 
-export interface SampleQuestion extends QuestionBase {
-  answerRule: QuestionAnswerRule
-  options?: QuestionOption[]
-  draggableItems?: Array<{ itemKey: string; label: string }>
-  targets?: Array<{ targetKey: string; label: string }>
-  subQuestionIds?: Id[]
+export interface SampleQuestion extends Question {
   isSample: true
   verificationStatus: 'SAMPLE'
 }
+
+export type SampleQuestionKnowledgePoint = SampleRecord<QuestionKnowledgePoint>
 
 export interface SampleRecordStatus {
   isSample: boolean

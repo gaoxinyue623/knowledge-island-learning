@@ -1,6 +1,7 @@
 import { demoLearningMapSource } from '@/data/learning-map/demo'
 import { goldenMathPepG3S1Package } from '@/data/curriculum/verified/math/pep/g3-s1'
-import { curriculumService, type CurriculumService } from '@/services'
+import { curriculumService } from '@/services/runtime'
+import type { CurriculumService } from '@/services/contracts'
 import type { Id, LearningMapCurriculumSource, LearningMapDataset } from '@/types'
 
 import { buildLearningMapSourceFromImportPackage } from './curriculumSource'

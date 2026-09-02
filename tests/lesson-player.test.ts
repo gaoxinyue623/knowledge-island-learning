@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { demoLessonPlayerSource } from '@/data/lesson-player/demo'
 import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
 import MediaRenderer from '@/components/lesson-player/MediaRenderer.vue'
+import PracticeBlock from '@/components/lesson-player/PracticeBlock.vue'
 import {
   buildLessonPlayerViewModel,
   createLessonSession,
@@ -235,6 +236,34 @@ describe('Lesson content renderer', () => {
 
     expect(wrapper.text()).toContain('这一步的内容正在准备中')
     expect(wrapper.text()).toContain('Unsupported Content Block')
+  })
+
+  it('exposes the assessment entry only when the question engine reports availability', async () => {
+    const practiceBlock = buildLessonPlayerViewModel(
+      demoLessonPlayerSource,
+      createLessonSession(context),
+    )
+      .steps.flatMap((step) => step.contentBlocks)
+      .find((block) => block.type === 'practice')
+
+    expect(practiceBlock).toBeDefined()
+    if (!practiceBlock) return
+
+    const wrapper = mount(PracticeBlock, {
+      props: { block: practiceBlock, assessmentAvailable: true },
+    })
+    const assessmentButton = wrapper
+      .findAll('button')
+      .find((button) => button.text().includes('开始练习'))
+    expect(assessmentButton).toBeDefined()
+    await assessmentButton?.trigger('click')
+    expect(wrapper.emitted('start-assessment')).toHaveLength(1)
+
+    const unavailable = mount(PracticeBlock, {
+      props: { block: practiceBlock, assessmentAvailable: false },
+    })
+    expect(unavailable.text()).toContain('练习内容正在准备中')
+    expect(unavailable.text()).not.toContain('开始练习')
   })
 
   it('falls back when a media URL fails instead of blanking the page', async () => {

@@ -1,0 +1,485 @@
+<script setup lang="ts">
+import { computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+import AppButton from '@/components/common/AppButton.vue'
+import AppEmptyState from '@/components/common/AppEmptyState.vue'
+import AppErrorState from '@/components/common/AppErrorState.vue'
+import AppIcon from '@/components/common/AppIcon.vue'
+import AppLoading from '@/components/common/AppLoading.vue'
+import AppProgress from '@/components/common/AppProgress.vue'
+import QuestionRenderer from '@/components/question-engine/QuestionRenderer.vue'
+import AppShell from '@/layouts/AppShell.vue'
+import { correctAnswerDraft } from '@/services/question-engine'
+import { useQuestionEngineStore } from '@/stores/questionEngineStore'
+import { useStudentStore } from '@/stores/studentStore'
+import type {
+  AssessmentLaunchContext,
+  QuestionAnswerDraft,
+  QuestionEngineDataset,
+  QuestionEngineDemoState,
+} from '@/types'
+
+const route = useRoute()
+const router = useRouter()
+const questionEngineStore = useQuestionEngineStore()
+const studentStore = useStudentStore()
+
+const isDevRoute = computed(() => route.path.startsWith('/dev/question-engine'))
+const dataset = computed<QuestionEngineDataset>(() => {
+  if (!isDevRoute.value) return 'profile'
+  const requested = route.query.dataset
+  if (requested === 'demo' || requested === 'profile' || requested === 'golden') return requested
+  return 'demo'
+})
+
+const demoState = computed<QuestionEngineDemoState>(() => {
+  const requested = route.query.state
+  const states: QuestionEngineDemoState[] = [
+    'full',
+    'empty',
+    'error',
+    'not_available',
+    'sample',
+    'unverified',
+    'completed',
+    'resume',
+  ]
+  return isDevRoute.value &&
+    typeof requested === 'string' &&
+    states.includes(requested as QuestionEngineDemoState)
+    ? (requested as QuestionEngineDemoState)
+    : 'full'
+})
+
+const context = computed<AssessmentLaunchContext | null>(() => {
+  const query = route.query
+  const textbookId = query.textbookId
+  const unitId = query.unitId
+  const lessonId = query.lessonId
+  const knowledgePointId = query.knowledgePointId
+  if (
+    typeof textbookId === 'string' &&
+    textbookId.length > 0 &&
+    typeof unitId === 'string' &&
+    unitId.length > 0 &&
+    typeof lessonId === 'string' &&
+    lessonId.length > 0 &&
+    typeof knowledgePointId === 'string' &&
+    knowledgePointId.length > 0
+  ) {
+    return {
+      textbookId,
+      unitId,
+      lessonId,
+      knowledgePointId,
+      source: query.source === 'lesson_practice' ? 'lesson_practice' : 'dev',
+    }
+  }
+  if (isDevRoute.value) {
+    return {
+      textbookId: 'DEMO_TEXTBOOK_MATH_G3_S1',
+      unitId: 'DEMO_UNIT_01',
+      lessonId: 'DEMO_LESSON_1_1',
+      knowledgePointId: 'DEMO_KP_01',
+      source: 'dev',
+    }
+  }
+  return null
+})
+
+const returnPath = computed(() =>
+  route.query.returnTo === '/dev/lesson-player' ||
+  (isDevRoute.value && typeof route.query.returnTo !== 'string')
+    ? '/dev/lesson-player'
+    : '/lesson',
+)
+const lessonReturnPath = computed(() =>
+  route.query.lessonReturnTo === '/dev/learning-map' ? '/dev/learning-map' : '/learning-map',
+)
+const mapNodeId = computed(() =>
+  typeof route.query.mapNodeId === 'string' ? route.query.mapNodeId : undefined,
+)
+
+const viewModel = computed(() => questionEngineStore.viewModel)
+const currentQuestion = computed(() => questionEngineStore.currentQuestion)
+const progressLabel = computed(() => {
+  if (!viewModel.value) return '—'
+  return `${viewModel.value.session.currentQuestionIndex + 1} / ${viewModel.value.session.totalQuestions}`
+})
+
+const demoStateOptions: Array<{ value: QuestionEngineDemoState; label: string }> = [
+  { value: 'full', label: '完整练习' },
+  { value: 'resume', label: '恢复中' },
+  { value: 'completed', label: '已完成' },
+  { value: 'empty', label: '空内容' },
+  { value: 'not_available', label: '暂未开放' },
+  { value: 'error', label: '加载失败' },
+  { value: 'sample', label: 'Sample' },
+  { value: 'unverified', label: 'Unverified' },
+]
+
+async function loadAssessment() {
+  if (!context.value) return
+  await questionEngineStore.loadAssessment(context.value, {
+    dataset: dataset.value,
+    demoState: demoState.value,
+    studentId: studentStore.profile?.id ?? 'local-profile',
+  })
+}
+
+function returnToLesson(completed = false) {
+  const launchContext = context.value
+  if (!launchContext) {
+    void router.push(returnPath.value)
+    return
+  }
+  void router.push({
+    path: returnPath.value,
+    query: {
+      textbookId: launchContext.textbookId,
+      unitId: launchContext.unitId,
+      lessonId: launchContext.lessonId,
+      knowledgePointId: launchContext.knowledgePointId,
+      ...(dataset.value === 'demo' ? { dataset: 'demo' } : {}),
+      ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
+      returnTo: lessonReturnPath.value,
+      ...(completed ? { assessmentCompleted: 'true', focusStep: 'summary' } : {}),
+    },
+  })
+}
+
+function selectDemoState(nextState: QuestionEngineDemoState) {
+  void router.push({
+    path: '/dev/question-engine',
+    query: { ...route.query, state: nextState },
+  })
+}
+
+async function updateDraft(draft: QuestionAnswerDraft) {
+  await questionEngineStore.setAnswerDraft(draft)
+}
+
+async function submitAnswer() {
+  await questionEngineStore.submitAnswer()
+}
+
+async function nextQuestion() {
+  if (questionEngineStore.canGoNext) await questionEngineStore.goNext()
+  else if (questionEngineStore.canComplete) await questionEngineStore.completeAssessment()
+}
+
+async function previousQuestion() {
+  await questionEngineStore.goPrevious()
+}
+
+function answerForCurrentQuestion(mode: 'correct' | 'incorrect'): QuestionAnswerDraft | null {
+  const question = questionEngineStore.questions[questionEngineStore.currentQuestionIndex]
+  if (!question) return null
+  if (mode === 'correct') return correctAnswerDraft(question)
+  switch (question.questionType) {
+    case 'singleChoice':
+      return {
+        type: 'singleChoice',
+        ...(question.options?.[1] ? { optionId: question.options[1].id } : {}),
+      }
+    case 'multipleChoice':
+      return {
+        type: 'multipleChoice',
+        optionIds: question.options?.slice(0, 1).map((option) => option.id) ?? [],
+      }
+    case 'trueFalse':
+      return { type: 'trueFalse', value: false }
+    case 'fillBlank':
+      return { type: 'fillBlank', values: ['0'] }
+    case 'calculation':
+      return { type: 'calculation', value: '0' }
+    case 'shortAnswer':
+      return { type: 'shortAnswer', value: '我先写下一个示例回答。' }
+    default:
+      return null
+  }
+}
+
+async function submitDemoAnswer(mode: 'correct' | 'incorrect') {
+  const draft = answerForCurrentQuestion(mode)
+  if (!draft) return
+  await questionEngineStore.setAnswerDraft(draft)
+  await questionEngineStore.submitAnswer()
+}
+
+async function completeDemoAssessment() {
+  if (!questionEngineStore.questions.length) return
+  await questionEngineStore.resetDemoAssessment()
+  for (let index = 0; index < questionEngineStore.questions.length; index += 1) {
+    const question = questionEngineStore.questions[index]
+    await questionEngineStore.setAnswerDraft(correctAnswerDraft(question))
+    await questionEngineStore.submitAnswer()
+    if (index < questionEngineStore.questions.length - 1) await questionEngineStore.goNext()
+  }
+  await questionEngineStore.completeAssessment()
+}
+
+async function clearDemoStorage() {
+  questionEngineStore.clearStoredSessions()
+  await loadAssessment()
+}
+
+async function resetDemoAssessment() {
+  await questionEngineStore.resetDemoAssessment()
+}
+
+onMounted(() => void loadAssessment())
+watch(
+  () => route.fullPath,
+  () => void loadAssessment(),
+)
+</script>
+
+<template>
+  <AppShell :show-bottom-nav="false" context="专注练习" class="question-engine-shell">
+    <div class="question-engine-page content-container">
+      <div class="question-engine">
+        <header class="question-engine__header">
+          <div class="question-engine__header-copy">
+            <RouterLink
+              class="question-engine__back"
+              :to="returnPath"
+              @click.prevent="returnToLesson()"
+            >
+              <AppIcon name="arrow-left" :size="18" decorative />
+              返回课程
+            </RouterLink>
+            <p class="curriculum-eyebrow">Question Engine · Assessment</p>
+            <h1>{{ viewModel?.definition.id || '准备一组练习' }}</h1>
+            <p v-if="viewModel">完成一次练习，看看自己对这一步的理解。</p>
+          </div>
+          <div v-if="viewModel" class="question-engine__header-status" aria-label="题目来源状态">
+            <span v-if="viewModel.flags.isDemo" class="question-engine__badge">开发样本</span>
+            <span v-else-if="viewModel.flags.isSample" class="question-engine__badge"
+              >示例题目</span
+            >
+            <span
+              v-if="viewModel.flags.isUnverified"
+              class="question-engine__badge question-engine__badge--warning"
+            >
+              未审核题目
+            </span>
+          </div>
+        </header>
+
+        <section
+          v-if="isDevRoute"
+          class="question-engine__state-panel"
+          aria-labelledby="question-state-title"
+        >
+          <div>
+            <p class="curriculum-eyebrow">DEVELOPMENT ONLY · PHASE 9</p>
+            <h2 id="question-state-title">Question Engine 状态 Showcase</h2>
+            <p>用于检查六类题型、恢复、反馈和错误状态；不会创建正式掌握度或奖励记录。</p>
+          </div>
+          <div class="question-engine__state-actions">
+            <AppButton
+              v-for="option in demoStateOptions"
+              :key="option.value"
+              size="sm"
+              :variant="demoState === option.value ? 'primary' : 'secondary'"
+              @click="selectDemoState(option.value)"
+            >
+              {{ option.label }}
+            </AppButton>
+          </div>
+          <div class="question-engine__state-actions">
+            <AppButton size="sm" variant="soft" @click="resetDemoAssessment">重置练习</AppButton>
+            <AppButton size="sm" variant="soft" @click="submitDemoAnswer('incorrect')"
+              >提交错误示例</AppButton
+            >
+            <AppButton size="sm" variant="soft" @click="submitDemoAnswer('correct')"
+              >提交正确示例</AppButton
+            >
+            <AppButton size="sm" variant="soft" @click="completeDemoAssessment"
+              >完成示例练习</AppButton
+            >
+            <AppButton size="sm" variant="ghost" @click="clearDemoStorage">清理会话存储</AppButton>
+          </div>
+        </section>
+
+        <AppLoading v-if="questionEngineStore.loading" label="正在准备练习" />
+        <AppErrorState
+          v-else-if="
+            questionEngineStore.status === 'error' ||
+            questionEngineStore.status === 'invalid_context'
+          "
+          title="练习暂时无法打开"
+          :description="questionEngineStore.error || '请从课程中的练习入口重新进入。'"
+          action-label="重新读取"
+          @retry="loadAssessment"
+        />
+        <AppButton
+          v-if="
+            questionEngineStore.status === 'error' ||
+            questionEngineStore.status === 'invalid_context'
+          "
+          variant="ghost"
+          icon-left="arrow-left"
+          @click="returnToLesson()"
+        >
+          返回课程
+        </AppButton>
+        <AppEmptyState
+          v-else-if="questionEngineStore.status === 'not_available'"
+          title="练习暂未开放"
+          description="题目还需要完成审核，暂时不能进入本次练习。"
+          action-label="返回课程"
+          @action="returnToLesson()"
+        />
+        <AppEmptyState
+          v-else-if="
+            questionEngineStore.status === 'empty' ||
+            questionEngineStore.status === 'unsupported_question'
+          "
+          title="练习内容正在准备中"
+          description="这个知识点还没有可用的练习题，请先继续学习内容。"
+          action-label="返回课程"
+          @action="returnToLesson()"
+        />
+        <template v-else-if="viewModel">
+          <div
+            v-if="viewModel.flags.isDemo || viewModel.flags.isUnverified"
+            class="question-engine__notice"
+            role="status"
+          >
+            <AppIcon name="info" :size="20" decorative />
+            <div>
+              <strong>{{ viewModel.flags.isDemo ? '开发样本' : '未审核题目' }}</strong>
+              <span>本组题目只用于验证答题流程，不代表已发布的教材习题。</span>
+            </div>
+          </div>
+
+          <section class="question-engine__progress-card" aria-labelledby="question-progress-title">
+            <div class="question-engine__progress-meta">
+              <h2 id="question-progress-title">本次练习进度</h2>
+              <strong>{{ progressLabel }}</strong>
+            </div>
+            <AppProgress
+              :value="viewModel.session.progress"
+              label="练习完成进度"
+              :show-value="false"
+              state="normal"
+            />
+            <nav class="question-engine__question-nav" aria-label="题目导航">
+              <button
+                v-for="(_, index) in viewModel.definition.questionIds"
+                :key="viewModel.definition.questionIds[index]"
+                type="button"
+                class="question-engine__question-number"
+                :class="{
+                  'question-engine__question-number--current':
+                    index === viewModel.session.currentQuestionIndex,
+                  'question-engine__question-number--answered':
+                    index < viewModel.session.answeredCount,
+                }"
+                :aria-current="
+                  index === viewModel.session.currentQuestionIndex ? 'step' : undefined
+                "
+                :disabled="
+                  index !== viewModel.session.currentQuestionIndex &&
+                  index >= viewModel.session.answeredCount
+                "
+                @click="questionEngineStore.goToQuestion(index)"
+              >
+                {{ index + 1 }}
+              </button>
+            </nav>
+          </section>
+
+          <section
+            v-if="questionEngineStore.status !== 'completed' && currentQuestion"
+            class="question-engine__question-card"
+          >
+            <QuestionRenderer
+              :question="currentQuestion"
+              :show-diagnostics="isDevRoute"
+              @update-draft="updateDraft"
+            />
+          </section>
+
+          <section
+            v-if="questionEngineStore.status === 'completed' && viewModel.resultSummary"
+            class="question-engine__completion"
+            aria-labelledby="assessment-completion-title"
+          >
+            <AppIcon name="check-circle" :size="44" color="var(--color-success)" decorative />
+            <h2 id="assessment-completion-title">本次练习完成</h2>
+            <p>这次结果只描述本组题目的作答情况，不代表知识掌握度。</p>
+            <div class="question-engine__result-grid" role="region" aria-label="本次练习结果">
+              <div class="question-engine__result-item">
+                <strong>{{ viewModel.resultSummary.correctCount }}</strong
+                ><span>答对</span>
+              </div>
+              <div class="question-engine__result-item">
+                <strong>{{ viewModel.resultSummary.incorrectCount }}</strong
+                ><span>答错</span>
+              </div>
+              <div class="question-engine__result-item">
+                <strong>{{ viewModel.resultSummary.manualReviewCount }}</strong
+                ><span>待人工判断</span>
+              </div>
+              <div class="question-engine__result-item">
+                <strong>{{
+                  viewModel.resultSummary.percentage === null
+                    ? '—'
+                    : `${viewModel.resultSummary.percentage}%`
+                }}</strong
+                ><span>本次自动评分正确率</span>
+              </div>
+            </div>
+            <div class="question-engine__completion-actions">
+              <AppButton size="lg" icon-left="book-open" @click="returnToLesson(true)"
+                >返回课程</AppButton
+              >
+              <AppButton v-if="isDevRoute" variant="secondary" @click="resetDemoAssessment"
+                >再看一次示例</AppButton
+              >
+            </div>
+          </section>
+
+          <footer
+            v-if="questionEngineStore.status !== 'completed' && currentQuestion"
+            class="question-engine__navigation"
+            aria-label="练习操作"
+          >
+            <AppButton
+              variant="secondary"
+              icon-left="arrow-left"
+              :disabled="!questionEngineStore.canGoPrevious"
+              @click="previousQuestion"
+            >
+              上一题
+            </AppButton>
+            <AppButton
+              v-if="!questionEngineStore.isCurrentSubmitted"
+              :disabled="!questionEngineStore.canSubmit"
+              icon-right="check"
+              @click="submitAnswer"
+            >
+              提交答案
+            </AppButton>
+            <AppButton v-else icon-right="arrow-right" @click="nextQuestion">
+              {{ questionEngineStore.canGoNext ? '下一题' : '完成本次练习' }}
+            </AppButton>
+          </footer>
+
+          <details
+            v-if="isDevRoute && (viewModel.diagnostics.length || questionEngineStore.warning)"
+            class="question-engine__diagnostics"
+          >
+            <summary>开发诊断</summary>
+            <p v-if="questionEngineStore.warning">{{ questionEngineStore.warning }}</p>
+            <p v-for="diagnostic in viewModel.diagnostics" :key="diagnostic">{{ diagnostic }}</p>
+          </details>
+        </template>
+      </div>
+    </div>
+  </AppShell>
+</template>

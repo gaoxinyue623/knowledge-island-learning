@@ -6,8 +6,8 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow（继承 PHASE 2.1、PHASE 6 与 PHASE 7） |
-| 状态 | 题目协议、结构化内容、媒体引用、SAMPLE 夹具和验证基础已实现；PHASE 8 仍未实现 QuestionRenderer、Question Engine 或正式作答 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.1、PHASE 6～8） |
+| 状态 | 题目协议、结构化内容、媒体引用、QuestionKnowledgePoint、SAMPLE Demo、QuestionRenderer、确定性判题和可恢复 Assessment 已实现并验证；真实教材题库仍未核验 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | 下游消费者 | 后续题目编辑器、QuestionRenderer、练习服务、内容审核流程 |
 | MVP 范围 | `speaking` 只定义接口，不进入 MVP 实现 |
@@ -17,7 +17,7 @@
 
 ## 1. 协议原则
 
-1. `Question.knowledgePointId` 是题目的主要学习归属。
+1. `QuestionKnowledgePoint` 是题目知识点关系的权威来源；一个题目可以有多个关系，但每个题目必须有且仅有一个 `PRIMARY`。旧 `Question.knowledgePointId` 仅为迁移兼容字段。
 2. `gradeId`、`semesterId`、`subjectId` 和 `textbookVersionId` 可以作为查询快照，但不能覆盖权威关系。
 3. 答案必须使用结构化 `QuestionAnswerRule`，禁止固定为 `answer: string`。
 4. 题型由 `questionType` 区分，QuestionRenderer 根据类型和数据渲染。
@@ -49,7 +49,8 @@ type QuestionType =
   | "calculation"
   | "reading"
   | "sentenceOrdering"
-  | "speaking";
+  | "speaking"
+  | "shortAnswer";
 
 type Difficulty = "FOUNDATION" | "STANDARD" | "ADVANCED";
 
@@ -77,7 +78,8 @@ interface QuestionBase {
   id: Id;
   questionType: QuestionType;
   stem: ContentBlock[];
-  knowledgePointId: Id;
+  // 旧数据兼容字段；新引擎必须读取 QuestionKnowledgePoint 关系
+  knowledgePointId?: Id;
   difficulty: Difficulty;
   contentType: ContentType;
   sourceId: Id;
@@ -94,6 +96,7 @@ interface QuestionBase {
   textbookVersionId?: Id;
   snapshotAt?: string;
   snapshotSource?: string;
+  questionVersion?: number;
 
   hints: QuestionHint[];
   explanation: QuestionExplanation;
@@ -127,6 +130,19 @@ interface QuestionExplanation {
   summary: ContentBlock[];
   steps: ContentBlock[][];
   misconceptionTags?: string[];
+}
+
+interface QuestionKnowledgePoint {
+  id: Id;
+  questionId: Id;
+  knowledgePointId: Id;
+  relationType: "PRIMARY" | "SECONDARY";
+  order: number;
+  isPrimary: boolean;
+  sourceId: Id;
+  status: "DRAFT" | "ACTIVE" | "ARCHIVED";
+  needsVerification: boolean;
+  verificationStatus?: "SAMPLE" | "UNVERIFIED" | "VERIFIED" | "REVIEWED" | "REJECTED";
 }
 
 interface MediaAsset {
@@ -210,6 +226,10 @@ interface CalculationAnswerRule {
   tolerance?: number;
 }
 
+interface ShortAnswerAnswerRule {
+  ruleType: "MANUAL_REVIEW";
+}
+
 interface ReadingAnswerRule {
   ruleType: "READING_SUB_QUESTIONS";
   subQuestionIds: Id[];
@@ -238,6 +258,7 @@ type QuestionAnswerRule =
   | TypingAnswerRule
   | ListeningAnswerRule
   | CalculationAnswerRule
+  | ShortAnswerAnswerRule
   | ReadingAnswerRule
   | SentenceOrderingAnswerRule
   | SpeakingAnswerRule;
@@ -677,7 +698,33 @@ JSON 演示：
 }
 ```
 
-### 3.11 reading
+### 3.11 shortAnswer
+
+简答题在 PHASE 9 只负责收集结构化文本并进入人工审核，不做 AI 自动评分。答案规则明确标记为 `MANUAL_REVIEW`，提交后锁定输入，结果为 `manual_review_required`，不计入自动评分分母。
+
+```ts
+interface ShortAnswerQuestion extends QuestionBase {
+  questionType: "shortAnswer";
+  answerRule: ShortAnswerAnswerRule;
+}
+```
+
+JSON 演示：
+
+```json
+{
+  "id": "DEMO_QUESTION_SHORT_ANSWER",
+  "questionType": "shortAnswer",
+  "stem": [{ "type": "TEXT", "text": "请用一句话说说你的观察。" }],
+  "sourceId": "QUESTION_DEMO_SOURCE",
+  "status": "DRAFT",
+  "needsVerification": true,
+  "isSample": true,
+  "answerRule": { "ruleType": "MANUAL_REVIEW" }
+}
+```
+
+### 3.12 reading
 
 阅读题把材料与子题分开。阅读材料本身必须有独立来源与审核状态，子题通过 `subQuestionIds` 或嵌入式协议引用它。
 
@@ -721,7 +768,7 @@ JSON 演示：
 }
 ```
 
-### 3.12 sentenceOrdering
+### 3.13 sentenceOrdering
 
 句子排序题使用带键的 token，答案为明确的 token 顺序。标点可以作为 token，也可以作为结构化展示规则，但不能依赖前端字符串拼接猜测。
 
@@ -764,7 +811,7 @@ JSON 演示：
 }
 ```
 
-### 3.13 speaking（仅接口，暂不进入 MVP）
+### 3.14 speaking（仅接口，暂不进入 MVP）
 
 口语题只保留未来接口定义。MVP 不实现自动语音识别、自动评分或录音上传；如果进入后续阶段，必须另行完成隐私、监护人授权、音频保留和评分准确性设计。
 
@@ -819,7 +866,7 @@ JSON 协议演示（不代表 MVP 功能）：
 
 ### 4.1 通用校验
 
-- `id`、`questionType`、`stem`、`knowledgePointId`、`difficulty`、`contentType`、`sourceId`、`status` 和 `needsVerification` 必须存在。
+- `id`、`questionType`、`stem`、`difficulty`、`contentType`、`sourceId`、`status` 和 `needsVerification` 必须存在；每个题目还必须有可解析的 `QuestionKnowledgePoint` 关系和唯一 `PRIMARY`。
 - `estimatedSeconds` 必须是正数；过短或过长的值进入内容审核提示，不在渲染器中静默修正。
 - 题型字段必须与 `questionType` 匹配，不能出现单选题携带排序答案规则的情况。
 - 选择、匹配、拖拽和排序的答案键必须存在于当前题目的选项或项目中。
@@ -850,7 +897,7 @@ JSON 协议演示（不代表 MVP 功能）：
 
 题目上的年级、学期、学科和教材版本是查询快照。快照校验流程：
 
-1. 根据 `knowledgePointId` 和题目教材范围关系读取权威上下文。
+1. 根据 `QuestionKnowledgePoint` 的 `PRIMARY` 关系和题目教材范围关系读取权威上下文；不能只读旧 `knowledgePointId`。
 2. 生成或比较 `gradeId`、`semesterId`、`subjectId` 和 `textbookVersionId`。
 3. 若快照不一致，标记内容待修复，不自动发布。
 4. 版本切换不覆盖原题；复用题目时新增课程范围关系或内容版本。
@@ -859,11 +906,12 @@ JSON 协议演示（不代表 MVP 功能）：
 
 ## 5. 题目提交结果边界
 
-题目协议只负责描述题目与答案规则；作答记录、掌握度事件和错题记录属于学习行为域。后续工程不得把学生答案直接写回 Question：
+题目协议只负责描述题目与答案规则；`QuestionSession`、`QuestionAttempt` 和 Assessment 结果属于学习行为域。后续工程不得把学生答案直接写回 Question：
 
-- 学生作答应生成独立的作答事件。
-- 正确、提示后正确、错误、复习正确、复习错误和挑战正确等结果映射为 `MasteryEvent`。
-- 错题记录保存 `questionId`、知识点、错误次数和复习状态。
+- 学生作答保存在独立 `QuestionAttempt`，提交后保留 `questionVersion`。
+- PHASE 9 的 Validator 只生成 `QuestionAttemptResult`；它不生成 `MasteryEvent`、`WrongQuestion` 或奖励。
+- `shortAnswer` 只返回 `manual_review_required`，不进行 AI 自动评分。
+- 未来若将作答结果映射为 `MasteryEvent`，必须由后续学习行为服务按事件规则完成，不能由 Question Engine 隐式触发。
 - 重新编辑题目时，历史作答仍指向历史版本，不被新正文覆盖。
 
 ---
@@ -883,7 +931,7 @@ JSON 协议演示（不代表 MVP 功能）：
 PHASE 5 在 `src/data/curriculum/questions/` 提供少量 `SAMPLE_*` 的 `singleChoice`、`dragDrop`、`calculation` 和 `reading` 夹具，全部带 `isSample: true`、`needsVerification: true`、`verificationStatus: SAMPLE`，状态为 `DRAFT`，不包含真实教材内容或答案事实。`validateQuestion` 会校验：
 
 - `questionType` 与 `answerRule.ruleType` 是否匹配。
-- `knowledgePointId`、`sourceId` 和所有 `mediaAssetId` 是否可解析。
+- `QuestionKnowledgePoint`、`sourceId` 和所有 `mediaAssetId` 是否可解析；旧 `knowledgePointId` 不得成为唯一关系。
 - `stem`、选项、提示和解析是否使用合法 `ContentBlock[]`。
 - 选择、拖拽、阅读子题等题型字段和引用是否完整。
 - 示例记录是否违反 `status != PUBLISHED` 的发布闸门。
@@ -894,14 +942,22 @@ PHASE 5 在 `src/data/curriculum/questions/` 提供少量 `SAMPLE_*` 的 `single
 
 题目仍使用 `ContentBlock[]`，`QuestionOption.content`、`QuestionHint.content`、`QuestionExplanation.summary / steps` 和题目媒体都不收窄为 string 或真实 URI。题目事实的来源与核验可通过 `sourceReferenceIds` / `SourceReference` 追踪；`verificationStatus` 与题目 `status` 分开，`PUBLISHED` 是学生端发布状态，`REVIEWED` 只是事实核验状态。
 
-`SAMPLE_*` 题目只能存在于明确的 SAMPLE 命名空间，不能进入 VERIFIED / REVIEWED 数据集。PHASE 6 没有实现 Question Engine、真实作答、评分、Mastery 或 KnowledgeEnergy 运行逻辑。
+`SAMPLE_*` 题目只能存在于明确的 SAMPLE 命名空间，不能进入 VERIFIED / REVIEWED 数据集。PHASE 6 没有实现 Question Engine、真实作答、评分、Mastery 或 KnowledgeEnergy 运行逻辑；这些边界由 PHASE 9 另行实现。
 
 ## 9. PHASE 7 使用边界
 
-PHASE 7 的 LearningMap 只读取课程层的 `KnowledgePoint` 与关系来生成地图节点，不生成或填充 `Question`、`ContentBlock`、答案规则或题库。地图节点详情不展示题目正文和答案；题目协议继续保留给后续 LessonPlayer / Question Engine 阶段，`ContentBlock[]` 与 `MediaAsset` 引用契约不得因地图实现而简化。
+PHASE 7 的 LearningMap 只读取课程层的 `KnowledgePoint` 与关系来生成地图节点，不生成或填充 `Question`、`ContentBlock`、答案规则或题库。地图节点详情不展示题目正文和答案；题目协议继续由后续 LessonPlayer / Question Engine 消费，`ContentBlock[]` 与 `MediaAsset` 引用契约不得因地图实现而简化。
 
 ## 10. PHASE 8 使用边界
 
-PHASE 8 的 LessonPlayer 只消费 `CourseContent` / `LearningContent` 的 `ContentBlock[]`，并将 `practice` 作为非评分内容占位。它不创建 `QuestionSession`，不读取或提交 `QuestionAnswerRule`，不自动判题，也不生成正确 / 错误结果、`MasteryEvent`、`MasteryScore`、`KnowledgeEnergy` 或 `WrongBook` 记录。
+PHASE 8 的 LessonPlayer 只消费 `CourseContent` / `LearningContent` 的 `ContentBlock[]`，并将 `practice` 作为非评分内容占位；PHASE 9 通过独立入口接入 Assessment，不把题目事实或判题责任放回 LessonPlayer。
 
-`QuestionBase.stem`、`QuestionOption.content`、`QuestionHint.content`、`QuestionExplanation.summary / steps` 和 `QuestionMedia` 继续保持本文件定义的结构化协议，等待后续 Question Engine 阶段接入。
+`QuestionBase.stem`、`QuestionOption.content`、`QuestionHint.content`、`QuestionExplanation.summary / steps` 和 `QuestionMedia` 继续保持本文件定义的结构化协议；题干与选项不收窄为 string，媒体不保存真实 URI。
+
+## 11. PHASE 9 Question Engine 使用边界
+
+PHASE 9 已实现六类题型的开发态 Assessment：`singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer`。`AssessmentDefinition.questionIds` 提供固定顺序，`QuestionEngineAdapter` 只读取有效的 `QuestionKnowledgePoint` 关系和集中审核闸门，不随机抽题、不进行自适应难度调整、不调用模型猜测教材或知识点。
+
+`QuestionRenderer` 根据 `QuestionViewModel` 渲染结构化题干、选项、题目媒体、草稿、提交状态和解析。`QuestionSessionStorage` 使用独立版本化载荷保存会话；`QuestionAttemptResult` 只描述本次作答，自动评分只统计可评分题目，简答题保留人工审核状态。完整运行流和会话约束见 `QUESTION_ENGINE.md`、`QUESTION_ENGINE_DATA_FLOW.md`、`QUESTION_SESSION.md`、`QUESTION_VALIDATION.md` 与 `ASSESSMENT.md`。
+
+Question Engine 不写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 仍只受七种掌握事件影响且不做时间衰减；遗忘和复习提醒仍由 `KnowledgeEnergy` 独立处理。

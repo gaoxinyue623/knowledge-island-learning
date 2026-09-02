@@ -1,13 +1,13 @@
 # 知识岛 MVP 课程占位结构
 
-> 本文档定义三年级上册语文、数学、英语的 MVP 课程骨架及地区教材选择占位结构，并记录 PHASE 6 导入 / 核验、PHASE 7 LearningMap 与 PHASE 8 LessonPlayer 消费边界。当前没有可靠教材来源，因此本文不提供真实地区、出版社、单元名、课文、教材正文、例题或题目答案；所有记录均为演示占位，不能进入学生端发布集合。
+> 本文档定义三年级上册语文、数学、英语的 MVP 课程骨架及地区教材选择占位结构，并记录 PHASE 6 导入 / 核验、PHASE 7 LearningMap、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 消费边界。当前没有可靠教材来源，因此本文不提供真实地区、出版社、单元名、课文、教材正文、例题或生产题目答案；所有课程记录均为演示占位，不能进入学生端发布集合。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow（继承 PHASE 2.2、PHASE 6 与 PHASE 7） |
-| 状态 | 占位结构、导入验证边界、Golden Sample Framework 和地图消费边界已实现并验证；真实课程仍未核验 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8） |
+| 状态 | 占位结构、导入验证边界、Golden Sample Framework、地图 / LessonPlayer 消费边界和独立 Question Engine Demo 已实现并验证；真实课程仍未核验 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | MVP 范围 | 三年级上册；语文、数学、英语；每科 1 个单元 |
 | 课程内容状态 | 未建立真实教材内容 |
@@ -312,7 +312,7 @@ SAMPLE_*_KP_04
 
 ## 8. 内容与题目槽位
 
-当前只定义槽位，不生成内容：
+当前课程文件只定义真实内容槽位，不生成生产内容。PHASE 9 另有独立的六题原创 Demo Assessment，用于验证题目引擎，不属于本 MVP 教材题库：
 
 | 知识点 | 教学关内容 | 练习关内容 / 题目 | 挑战关内容 / 题目 |
 | --- | --- | --- | --- |
@@ -329,7 +329,7 @@ isSample: true
 
 若内容槽位需要图片、音频、视频、动画或 SVG，只能通过 `mediaAssetId` 引用 `MediaAsset`。占位课程不创建真实媒体地址；媒体来源、版权和版本在 `MediaAsset` 中独立核验。
 
-`QUESTION_SCHEMA.md` 中的 JSON 仅用于协议演示，不能直接作为本 MVP 的教材题库。真实题目必须在教材版本、知识点和来源确认后单独录入并审核。
+`QUESTION_SCHEMA.md` 中的 JSON 和 `src/data/question-engine/demo/` 中的题目仅用于协议 / UI / 判题流程演示，不能直接作为本 MVP 的教材题库。真实题目必须在教材版本、知识点、课程目标和来源确认后单独录入并审核。
 
 ---
 
@@ -422,4 +422,10 @@ PHASE 7 只消费本文件定义的课程骨架关系，不新增真实教材内
 
 PHASE 8 允许使用独立原创 Demo Lesson Fixture 验证 `Intro → Concept → Explanation → Example → Media → Interactive → Practice Placeholder → Summary` 步骤和会话恢复。该 Fixture 全部为 `SAMPLE`，不属于本文件的真实 MVP 教材事实集合，也不代表任何地区、出版社或教材正文。
 
-LessonPlayer 的 `Practice Placeholder` 只展示非评分互动，不生成题目、答案、判题结果或学习掌握记录。正式课程内容录入前仍需完成三科教材版本、MVP 真实单元、知识点、课程目标、教材来源、版权、内容审核和教材核验；生产入口只允许审核通过的课程与学习内容。
+LessonPlayer 的 `Practice Placeholder` 在 PHASE 9 通过显式上下文进入独立 Question Engine；LessonPlayer 不拥有题目、答案或判题。正式课程内容 / 题目录入前仍需完成三科教材版本、MVP 真实单元、知识点、课程目标、教材来源、版权、内容审核和教材核验；生产入口只允许审核通过的课程、学习内容和题目。
+
+## 16. PHASE 9 Question Engine Demo 边界
+
+`src/data/question-engine/demo/` 提供 6 道原创 SAMPLE 题，覆盖 `singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer`，并提供 7 条 `QuestionKnowledgePoint` 关系。题目使用固定 Assessment 顺序，支持草稿恢复、提交锁定、确定性判题和结果汇总；所有记录仍为 `isSample: true`、`needsVerification: true`，不代表任何地区、出版社或真实教材。
+
+Question Engine Demo 不改变本文件的真实课程骨架，不产生 `MasteryEvent`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。真实题库仍需在待确认事项完成后独立录入、审核和发布。

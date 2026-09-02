@@ -1,17 +1,17 @@
 # 知识岛课程与学习数据模型
 
-> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图与 PHASE 8 LessonPlayer 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表和 `LESSON_PLAYER.md` 为准。
+> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`LESSON_PLAYER.md` 和 `QUESTION_ENGINE.md` 为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow（继承 PHASE 2.2、PHASE 6 与 PHASE 7 数据契约） |
-| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取和会话模型已实现并验证 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8 数据契约） |
+| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession 和 Question Engine 运行模型已实现并验证 |
 | 上游事实源 | `PRODUCT.md`；课程层级规则见 `CURRICULUM.md` |
 | 下游消费者 | 题目协议、内容审核、MVP 课程占位数据、后续 API / 数据库设计 |
 | 权威维护者 | 数据 / 教研负责人（待确定） |
-| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map` 和 `src/services/lesson-player` 已实现；真实课程数据仍未核验 |
+| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player` 和 `src/services/question-engine` 已实现；真实课程数据仍未核验 |
 
 ---
 
@@ -315,7 +315,7 @@ interface ContentBlock {
 | `id` | ID | 是 | 权威 | 题目稳定标识 |
 | `questionType` | enum | 是 | 权威 | 题型协议名称 |
 | `stem` | `ContentBlock[]` | 是 | 版本化 | 结构化题干或操作指令 |
-| `knowledgePointId` | ID | 是 | 权威 | 主要知识归属 |
+| `knowledgePointId` | ID | 否 | 迁移兼容 | 旧的单知识点字段；题目引擎以 `QuestionKnowledgePoint` 关系为权威 |
 | `difficulty` | enum | 是 | 权威 | 题目难度 |
 | `contentType` | enum | 是 | 权威 | 课本、拓展、复习或挑战 |
 | `sourceId` | ID | 是 | 引用 | 题目来源 |
@@ -330,12 +330,32 @@ interface ContentBlock {
 | `textbookVersionId` | ID | 否 | 快照 | 查询快照；严格教材放置由范围关系确认 |
 | `snapshotAt` | datetime | 否 | 记录 | 快照生成时间 |
 | `snapshotSource` | string | 否 | 记录 | 快照来源版本或计算批次 |
+| `questionVersion` | integer | 否 | 版本 | 题目内容版本；作答记录必须保留当时看到的版本 |
 | `isSample` | boolean | 是 | 权威 | 是否仅为协议演示或测试夹具 |
 | `verificationStatus` | enum | 否 | 权威 | 题目事实核验阶段；与 `status` 不同 |
 
 题目答案必须使用 `QuestionAnswerRule` 等结构化规则，不允许把答案固定为 `answer: string`。题型结构详见 `QUESTION_SCHEMA.md`。
 
-### 3.3 QuestionOption
+### 3.3 QuestionKnowledgePoint
+
+`QuestionKnowledgePoint` 是题目与知识点的权威多对多关系。一道题可以覆盖多个知识点，但在一个 Assessment 目标上下文中必须能解析到对应关系；`Question.knowledgePointId` 只为旧数据迁移和查询兼容保留，不能作为新引擎的唯一归属事实。
+
+| 字段 | 类型 | 必填 | 权威性 | 说明 |
+| --- | --- | --- | --- | --- |
+| `id` | ID | 是 | 权威 | 关系标识 |
+| `questionId` | ID | 是 | 引用 | 题目 |
+| `knowledgePointId` | ID | 是 | 引用 | 知识点 |
+| `relationType` | enum | 是 | 权威 | `PRIMARY`、`SECONDARY` |
+| `order` | integer | 是 | 配置 | 同一题的知识点关系顺序 |
+| `isPrimary` | boolean | 是 | 派生 / 校验 | 是否为题目主关系；每题最多一个主关系 |
+| `sourceId` | ID | 是 | 引用 | 关系来源 |
+| `status` | enum | 是 | 权威 | `DRAFT`、`ACTIVE`、`ARCHIVED` |
+| `needsVerification` | boolean | 是 | 权威 | 关系是否待核验 |
+| `verificationStatus` | enum | 否 | 权威 | 关系事实核验阶段 |
+
+新建关系必须有且仅有一个 `PRIMARY` 关系；一个题目可以有多个 `SECONDARY` 关系。关系本身的来源与审核独立于 Question 本体审核。
+
+### 3.4 QuestionOption
 
 | 字段 | 类型 | 必填 | 权威性 | 说明 |
 | --- | --- | --- | --- | --- |
@@ -347,7 +367,7 @@ interface ContentBlock {
 | `sortOrder` | integer | 是 | 权威 | 展示或可操作顺序 |
 | `status` | enum | 是 | 权威 | `DRAFT`、`ACTIVE`、`ARCHIVED` |
 
-### 3.4 ContentSource
+### 3.5 ContentSource
 
 | 字段 | 类型 | 必填 | 权威性 | 说明 |
 | --- | --- | --- | --- | --- |
@@ -367,7 +387,7 @@ interface ContentBlock {
 
 来源不能填写“AI 知道”。`AI_GENERATED` 只能表示内容生成方式，不表示教材事实来源或版权已解决。
 
-### 3.5 ContentReviewRecord
+### 3.6 ContentReviewRecord
 
 | 字段 | 类型 | 必填 | 权威性 | 说明 |
 | --- | --- | --- | --- | --- |
@@ -381,7 +401,7 @@ interface ContentBlock {
 | `reviewedAt` | datetime | 是 | 记录 | 审核时间 |
 | `notes` | string | 否 | 记录 | 审核备注 |
 
-### 3.6 ContentVersion
+### 3.7 ContentVersion
 
 | 字段 | 类型 | 必填 | 权威性 | 说明 |
 | --- | --- | --- | --- | --- |
@@ -399,7 +419,7 @@ interface ContentBlock {
 
 `ContentVersion` 的 `resourceId` 是受约束的多态引用。实现时必须通过 `resourceType`、存在性校验和唯一约束保证它不会指向错误类型；已发布版本禁止直接覆盖。
 
-### 3.7 MediaAsset
+### 3.8 MediaAsset
 
 `MediaAsset` 是图片、音频、视频、动画和 SVG 等媒体资源的统一事实源。课程内容、题目和角色只能引用 `mediaAssetId`，不能在各自实体中保存真实 URI、版权说明或媒体版本的副本。
 
@@ -436,7 +456,7 @@ interface MediaAssetRef {
 
 `url` 可以由 `storageKey` 和访问策略生成；如果地址失效，应更新访问投影或创建新版本，不在 `QuestionMedia` 或 `CourseContent.media` 中复制真实 URI。媒体版本变更必须保留原版本的来源、版权和引用关系。
 
-### 3.8 QuestionMedia
+### 3.9 QuestionMedia
 
 `QuestionMedia` 是题目与 `MediaAsset` 的引用关系，不保存真实 URI：
 
@@ -447,7 +467,7 @@ interface MediaAssetRef {
 | `usageType` | enum | 是 | `STEM`、`OPTION`、`HINT`、`EXPLANATION`、`AUDIO_PROMPT`、`PASSAGE`、`REFERENCE` |
 | `order` | integer | 是 | 同一用途下的展示顺序 |
 
-### 3.9 CourseContentMediaRelation
+### 3.10 CourseContentMediaRelation
 
 课程内容使用 `CourseContentMediaRelation` 保存媒体引用，`CourseContent.media` 只作为 API 读取投影：
 
@@ -460,7 +480,7 @@ interface MediaAssetRef {
 
 `MediaAsset.sourceId`、`copyrightStatus`、`license` 和 `version` 是图片、音频、动画、视频和 SVG 资源的追踪入口。角色资源未来也使用同一实体，不能在角色模型中另建一份未审核的媒体 URL 字段。
 
-### 3.10 PHASE 6 来源与核验元数据
+### 3.11 PHASE 6 来源与核验元数据
 
 PHASE 6 新增的 `SourceReference` 是课程事实来源的统一引用，不与现有 `ContentSource` 的内容来源 / 版权模型混为一谈。导入数据优先保存 `sourceReferenceIds`；需要多实体、多角色关联时使用 `EntitySourceReference`，不在每个实体内复制来源对象。
 
@@ -511,7 +531,7 @@ interface ProvenanceMetadata {
 
 `SAMPLE` 是开发占位状态，不能转换为 `VERIFIED` 或 `REVIEWED`；生产课程解析只允许 `REVIEWED`。`status` 仍只表达实体生命周期：结构实体使用 `DRAFT / ACTIVE / ARCHIVED`，内容实体使用自己的内容审核与发布状态，不能用 `REVIEWED` 代替 `PUBLISHED`。
 
-### 3.11 TextbookIdentity 与导入包
+### 3.12 TextbookIdentity 与导入包
 
 教材身份由 `TextbookIdentity` 的阶段、学科、年级、学期、出版社编码和可选版次信息组成。`buildTextbookIdentityKey` 生成稳定 key，例如 `PRI-MAT-PEP-G3-S1-2024`；缺少年份时使用 `PRI-MAT-PEP-G3-S1-UNKNOWN`。ISBN 可以辅助核对，但不是唯一身份键。`CurriculumImportPackage` 统一携带 textbook、units、lessons、knowledgePoints、lessonKnowledgePoints、knowledgeRelations、sources 和导入元数据。
 
@@ -842,6 +862,52 @@ MVP 采用固定间隔，不使用机器学习：
 
 错题记录只能从作答事件生成；复习不得删除历史错误，`mastered` 只是当前复习状态。
 
+### 5.7 AssessmentDefinition
+
+`AssessmentDefinition` 定义一次练习的固定题目集合。PHASE 9 的练习不按随机数、实时难度或模型推荐抽取题目；`questionIds` 的顺序就是学生看到的顺序。
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `id` | ID | 是 | Assessment 稳定标识 |
+| `knowledgePointId` | ID | 是 | 本次练习目标知识点 |
+| `questionIds` | ID[] | 是 | 固定且有序的题目 ID 集合 |
+| `mode` | enum | 是 | 当前为 `practice` |
+
+启动练习时使用完整 `AssessmentLaunchContext`：`textbookId`、`unitId`、`lessonId`、`knowledgePointId` 和 `source`。Context 必须由 LessonPlayer 或受控开发入口显式提供，不能从页面标题或题目名称猜测。
+
+### 5.8 QuestionSession 与 QuestionAttempt
+
+`QuestionSession` 是一次 Assessment 的可恢复作答容器，不是课程事实，也不替代 `LessonSession`。`QuestionAttempt` 保存每道题当前草稿或最终提交结果；提交后答案和结果锁定。
+
+```ts
+interface QuestionSession {
+  id: Id;
+  assessmentId: Id;
+  textbookId: Id;
+  unitId: Id;
+  lessonId: Id;
+  knowledgePointId: Id;
+  questionIds: Id[];
+  currentQuestionIndex: number;
+  status: "not_started" | "in_progress" | "completed";
+  attempts: QuestionAttempt[];
+  startedAt?: datetime;
+  updatedAt?: datetime;
+  completedAt?: datetime;
+}
+
+interface QuestionAttempt {
+  questionId: Id;
+  answer: structured draft;
+  submitted: boolean;
+  result?: "correct" | "incorrect" | "manual_review_required";
+  questionVersion?: integer;
+  submittedAt?: datetime;
+}
+```
+
+会话 ID 由学生、Assessment 和完整课程上下文确定性生成；本地载荷使用 `knowledge-island.question-sessions` 与 `{ schemaVersion: 1, sessions }`。损坏 JSON 会安全清理，孤儿题目尝试会在读取时忽略，题目版本保留在尝试记录中以支持历史解释。Assessment 分数只描述本次作答，不自动创建 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。
+
 ---
 
 ## 6. 权威字段与查询快照
@@ -850,7 +916,7 @@ MVP 采用固定间隔，不使用机器学习：
 
 | 信息 | 权威来源 | `Question` 上的字段 |
 | --- | --- | --- |
-| 主要学习归属 | `KnowledgePoint` | `knowledgePointId`，权威引用 |
+| 主要学习归属 | `QuestionKnowledgePoint` 的 `PRIMARY` / `SECONDARY` 关系 | `knowledgePointId` 仅为迁移兼容 / 查询快照 |
 | 教材版本放置 | `QuestionCurriculumPlacement` | `textbookVersionId` 在该关系中权威；Question 上同名字段为快照 |
 | 单元 / 课次放置 | `QuestionCurriculumPlacement` | `unitId` / `lessonId` 在关系中权威；若存于 Question 则为快照 |
 | 学科 | `KnowledgePoint.subjectId` + 课程范围 | `subjectId` 为快照 |
@@ -861,7 +927,7 @@ MVP 采用固定间隔，不使用机器学习：
 
 快照的规则：
 
-1. 快照必须可由权威关系重新生成。
+1. 快照必须可由权威关系重新生成；题目目标知识点必须由 `QuestionKnowledgePoint` 关系读取。
 2. 快照必须带 `snapshotAt` 与 `snapshotSource`。
 3. 权威关系修改后，快照进入待刷新状态；不一致时阻止发布或提示数据修复。
 4. 查询可以使用快照，审核、迁移、详情和冲突解决必须回到权威关系。
@@ -870,7 +936,8 @@ MVP 采用固定间隔，不使用机器学习：
 
 题目可能被多个教材版本、多个课次或多个地图节点复用。把全部关系直接写成 Question 的单值字段，会在版本切换、跨课次复用和内容迁移时产生覆盖与不一致。因此：
 
-- `knowledgePointId` 作为题目的主要知识归属。
+- `QuestionKnowledgePoint` 作为题目的知识点关系；一个题目必须有且仅有一个 `PRIMARY`，可以有多个 `SECONDARY`。
+- `Question.knowledgePointId` 只为旧数据迁移和兼容查询保留，新引擎不得把它当成唯一事实。
 - 教材放置使用可多条记录的范围关系。
 - 年级、学期、学科和教材版本快照只为查询服务。
 - 地图放置由 `MapNodeQuestionRelation` 管理。
@@ -923,7 +990,8 @@ erDiagram
     UNIT ||--o{ COURSE_CONTENT_CURRICULUM_PLACEMENT : groups
     LESSON ||--o{ COURSE_CONTENT_CURRICULUM_PLACEMENT : contextualizes
 
-    KNOWLEDGE_POINT ||--o{ QUESTION : owns
+    QUESTION ||--o{ QUESTION_KNOWLEDGE_POINT : maps
+    KNOWLEDGE_POINT ||--o{ QUESTION_KNOWLEDGE_POINT : covers
     CONTENT_SOURCE ||--o{ QUESTION : supports
     QUESTION ||--o{ QUESTION_OPTION : offers
     QUESTION ||--o{ QUESTION_MEDIA : uses
@@ -953,6 +1021,13 @@ erDiagram
     TEXTBOOK_VERSION ||--o{ STUDENT_CURRICULUM_PROFILE : chinese_choice
     TEXTBOOK_VERSION ||--o{ STUDENT_CURRICULUM_PROFILE : math_choice
     TEXTBOOK_VERSION ||--o{ STUDENT_CURRICULUM_PROFILE : english_choice
+
+    ASSESSMENT_DEFINITION ||--o{ ASSESSMENT_QUESTION : orders
+    QUESTION ||--o{ ASSESSMENT_QUESTION : included_in
+    STUDENT ||--o{ QUESTION_SESSION : owns
+    ASSESSMENT_DEFINITION ||--o{ QUESTION_SESSION : instantiates
+    QUESTION_SESSION ||--o{ QUESTION_ATTEMPT : records
+    QUESTION ||--o{ QUESTION_ATTEMPT : answered
 ```
 
 ### 7.1 环依赖控制
@@ -974,8 +1049,8 @@ erDiagram
 2. `LessonKnowledgePointRelation` 不存在错误的一对一假设，且主关系已核验。
 3. 知识树与前置关系无环。
 4. `TEXTBOOK` 内容和题目具备可核验来源与教材范围。
-5. `Question.knowledgePointId` 存在，题型数据符合 `QUESTION_SCHEMA.md`。
-6. `Question` 的查询快照可由权威关系重建，且没有未解释冲突。
+5. 每个 `Question` 至少有一个有效的 `QuestionKnowledgePoint` 关系，并有且仅有一个 `PRIMARY`；题型数据符合 `QUESTION_SCHEMA.md`。
+6. `Question` 的查询快照可由权威关系重建，且没有未解释冲突；旧 `knowledgePointId` 不得成为唯一依据。
 7. 课程内容和题目引用的每个 `MediaAsset` 均存在，来源、版权和版本状态可追踪。
 8. 地图节点的三类关系指向有效的已发布内容或题目。
 9. `completionRule`、`perfectRule` 和 `rewardConfig` 均为配置，不依赖页面魔法数字。
@@ -1133,4 +1208,32 @@ LessonPlayer 复用现有 `ContentBlock` 作为原子结构，并以带稳定 ID
 
 LessonPlayer 完成只代表本次 `LessonSession` 的必需步骤已走完。它通过独立 `LearningMapCompletionService` 把稳定上下文映射到地图演示进度，服务不直接依赖 `learningMapStore`；完成不产生 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、Reward 或 WrongBook 记录。
 
-PHASE 8 已完成并停止；`Question`、正式答题、自动判题、MasteryScore、KnowledgeEnergy 和其他后续学习行为仍不在本阶段运行模型内。
+PHASE 8 已完成并停止；LessonPlayer 的 Practice 已在 PHASE 9 接入独立 Question Engine，但 LessonPlayer 仍不拥有题目事实、判题或学习算法。
+
+## 14. PHASE 9 Question Engine 运行模型
+
+PHASE 9 的运行对象属于 Assessment / 学习行为域，不改变课程主链：
+
+```text
+LessonPlayer Practice
+  ↓ AssessmentLaunchContext
+QuestionEngineStore
+  ↓
+QuestionEngineAdapter
+  ↓
+QuestionRepository + QuestionSessionStorage
+  ↓
+QuestionEngineViewModel
+  ↓
+QuestionRenderer
+  ↓
+Answer Validator → QuestionAttemptResult → AssessmentResultSummary
+  ↓
+返回 LessonPlayer / 地图回链
+```
+
+`AssessmentDefinition.questionIds` 提供固定顺序；PHASE 9 Demo 使用六道原创 SAMPLE 题，支持 `singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer`。Question Engine 只读取 `QuestionKnowledgePoint` 关系确定目标知识点，不用旧 `Question.knowledgePointId` 猜测归属。
+
+`QuestionSession` 独立保存草稿、提交锁定、题目版本和结果，分数 / 正确率只描述本次 Assessment。`shortAnswer` 返回 `manual_review_required`，不进行 AI 评分；任何 `QuestionAttemptResult` 都不会自动写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 仍只受七种 `MasteryEvent` 影响，时间流逝只由 `KnowledgeEnergy` 处理。
+
+PHASE 9 的正式题目读取继续服从独立的 Question 审核闸门；SAMPLE / UNVERIFIED 只在开发入口显式展示。第 5 组章节为学生学习行为，第 6 组章节为权威字段与查询快照，编号不重复。

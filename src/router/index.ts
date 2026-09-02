@@ -6,6 +6,7 @@ import DevUi from '@/pages/DevUi.vue'
 import HomePlaceholderPage from '@/pages/HomePlaceholderPage.vue'
 import LearningMapPage from '@/pages/LearningMapPage.vue'
 import LessonPlayerPage from '@/pages/LessonPlayerPage.vue'
+import QuestionEnginePage from '@/pages/QuestionEnginePage.vue'
 import CharacterSetupPage from '@/pages/onboarding/CharacterSetupPage.vue'
 import GradeSelectPage from '@/pages/onboarding/GradeSelectPage.vue'
 import OnboardingWelcomePage from '@/pages/onboarding/OnboardingWelcomePage.vue'
@@ -80,6 +81,17 @@ const routes: RouteRecordRaw[] = [
     component: LessonPlayerPage,
     meta: {
       title: '学习课程',
+      requiresOnboarding: true,
+      studentOnly: true,
+      hideBottomNav: true,
+      immersiveMode: true,
+    },
+  },
+  {
+    path: '/assessment',
+    component: QuestionEnginePage,
+    meta: {
+      title: '本次练习',
       requiresOnboarding: true,
       studentOnly: true,
       hideBottomNav: true,
@@ -166,6 +178,16 @@ const routes: RouteRecordRaw[] = [
     path: '/dev/lesson-player/states',
     component: LessonPlayerPage,
     meta: { title: 'LessonPlayer State Showcase', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/question-engine',
+    component: QuestionEnginePage,
+    meta: { title: 'Question Engine Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/question-engine/states',
+    component: QuestionEnginePage,
+    meta: { title: 'Question Engine State Showcase', devOnly: true, hideBottomNav: true },
   },
 ]
 

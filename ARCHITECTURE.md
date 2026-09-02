@@ -1,13 +1,13 @@
-# 知识岛｜工程架构与 PHASE 8 边界
+# 知识岛｜工程架构与 PHASE 9 边界
 
-> 本文档记录当前 Vue 3 工程的模块边界和 PHASE 7～8 实现。它不是数据库架构或部署方案；课程事实、审核状态和题目协议仍分别以 `DATA_MODEL.md`、`CONTENT_REVIEW.md` 和 `QUESTION_SCHEMA.md` 为准。
+> 本文档记录当前 Vue 3 工程的模块边界和 PHASE 7～9 实现。它不是数据库架构或部署方案；课程事实、审核状态和题目协议仍分别以 `DATA_MODEL.md`、`CONTENT_REVIEW.md` 和 `QUESTION_SCHEMA.md` 为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow |
-| 状态 | PHASE 7 地图与 PHASE 8 LessonPlayer 已实现并验证；PHASE 8 完成后停止 |
+| 当前阶段 | PHASE 9.4：Question Engine / Assessment |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 已实现并验证；PHASE 9 完成后停止 |
 | 技术栈 | Vue 3、TypeScript strict、Vite、Pinia、Vue Router、Vitest |
 | 生产原则 | 生产课程数据只允许 `verificationStatus = REVIEWED` |
 | 开发原则 | SAMPLE / UNVERIFIED 只在显式开发数据集显示，并必须有警示 |
@@ -27,16 +27,20 @@ src/
 │  ├─ adapters/mock/curriculumMockAdapter.ts
 │  └─ learning-map/                     # source、adapter、layout、unlock、storage、repository
 │  └─ lesson-player/                    # content、adapter、repository、session、地图完成接口
+│  └─ question-engine/                  # repository、adapter、validator、session storage
 ├─ stores/
 │  ├─ curriculumStore.ts                 # 地区 / 年级 / 学期 / 三科教材 / profile
 │  └─ learningMapStore.ts                # 地图 source、选择、聚焦、演示进度
 │  └─ lessonPlayerStore.ts               # 学习上下文、ViewModel、会话和步骤状态
+│  └─ questionEngineStore.ts             # Assessment、题目草稿、提交和结果状态
 ├─ components/learning-map/              # 地图视觉壳与可访问交互
 ├─ components/lesson-player/             # 内容块渲染与媒体回退
+├─ components/question-engine/            # 六类题型渲染、媒体与反馈
 ├─ pages/
 │  ├─ LearningMapPage.vue                # 正式 /learning-map
 │  ├─ DevLearningMapPage.vue             # 开发数据集与状态 Showcase
-│  └─ LessonPlayerPage.vue               # 正式 /lesson 与开发 /dev/lesson-player
+│  ├─ LessonPlayerPage.vue               # 正式 /lesson 与开发 /dev/lesson-player
+│  └─ QuestionEnginePage.vue             # 正式 /assessment 与开发 /dev/question-engine
 └─ styles/                               # 地图与学习步骤场景、状态和响应式样式
 ```
 
@@ -52,6 +56,9 @@ src/
 | LessonPlayer Repository / Adapter | 校验 `LessonLaunchContext`，读取课程内容并生成 LessonPlayer ViewModel | 猜教材、绕过内容审核、拼接题目或掌握度 |
 | LessonPlayer Store | 学习会话、步骤导航、恢复、完成和独立会话存储 | Question Engine、作答评分、Mastery、Reward |
 | LessonPlayer Completion Service | 通过稳定上下文把已完成学习映射到地图进度 | 直接依赖或修改 `learningMapStore` |
+| Question Repository / Adapter | 依据显式 `AssessmentLaunchContext` 读取固定题目集合、关系和审核状态 | 随机抽题、猜教材、模型推荐、写入掌握度 |
+| Question Engine Store | 题目草稿、提交锁定、QuestionSession、恢复和 Assessment 结果 | 修改 Question 本体、Mastery、KnowledgeEnergy、WrongBook、Reward |
+| Question Renderer / Validator | 渲染结构化题目并按数据规则确定性判题 | `v-html`、AI 判题、隐式部分分或隐式学习事件 |
 | LearningMap Components | 呈现地图、连接线、状态、详情面板和可访问交互 | 读取原始 Curriculum 数组、推断课程事实 |
 | LessonPlayer Components | 呈现 ViewModel 内容块、媒体 fallback 和非评分互动 | `v-html`、答案提交、自动判题 |
 | Router / Pages | 入口保护、数据集选择和状态展示 | 绕过生产访问策略 |
@@ -78,6 +85,15 @@ flowchart TD
     LVM --> LUI[LessonPlayerPage / Content Renderer]
     LPS -->|explicit completion service| LCS[LearningMapCompletionService]
     LCS -->|map progress storage| LMS
+    LPS -->|start-assessment + explicit context| QES[QuestionEngineStore]
+    QES --> QEA[QuestionEngineAdapter]
+    QEA --> QR[QuestionRepository]
+    QEA --> QSS[(QuestionSessionStorage)]
+    QEA --> QVM[QuestionEngineViewModel]
+    QVM --> QUI[QuestionRenderer]
+    QUI --> QV[Deterministic Answer Validator]
+    QV --> QAR[QuestionAttemptResult / AssessmentResultSummary]
+    QAR -->|assessmentCompleted| LUI
 ```
 
 正式地图只走 `profile` 数据集，开发页才可以切换 `golden` / `demo`。`LearningMapViewModel` 是地图页面唯一输入；`LessonPlayerViewModel` 是学习页面唯一输入。两个 ViewModel 把课程事实、地图展示状态和学习会话分开，避免页面重复做关系查询。
@@ -126,8 +142,24 @@ flowchart TD
 
 没有 profile 时正式入口由路由保护回到 Onboarding；没有可用 source 时页面进入 `not_available` / `empty` 等可恢复状态。Golden 不作为正式回退。
 
-## 7. 质量边界
+## 7. PHASE 9 Question Engine 模块
+
+### 7.1 领域与读取
+
+`QuestionEngineAdapter` 接受显式 `AssessmentLaunchContext`，先校验课程上下文，再通过 `QuestionRepository` 读取 `AssessmentDefinition.questionIds` 和 `QuestionKnowledgePoint` 关系。Demo Assessment 是固定六题顺序；正式数据继续服从 Question 独立审核闸门。页面不根据地区、标题或题面猜测教材与知识点。
+
+### 7.2 会话与判题
+
+`questionEngineStore` 通过独立 `questionSessionStorage` 保存草稿、提交状态、结果、题目版本和当前位置。`QuestionRenderer` 只消费 `QuestionViewModel`；`answerValidator` 负责选择、多选、判断、填空、计算和简答的确定性结果。提交后输入锁定，简答题标记人工审核，不自动产生 `MasteryEvent`。
+
+### 7.3 明确隔离
+
+Assessment 结果只返回 Question Engine 与 LessonPlayer；不写入 `KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 不做时间衰减，遗忘 / 复习提醒仍由 `KnowledgeEnergy` 独立负责。
+
+## 8. 质量边界
 
 PHASE 7 已覆盖适配器、布局、解锁、存储、空态 / unsupported、Sample / Unverified 标识、组件可访问性、Reduced Motion、响应式和浏览器冒烟。PHASE 8 继续覆盖 LessonPlayer 领域、会话存储、内容块渲染、状态 Showcase、地图回链、响应式与浏览器冒烟。测试和验证结果见 `LEARNING_MAP.md`、`LEARNING_MAP_VISUAL.md`、`LESSON_PLAYER.md` 和 `LESSON_SESSION.md`。
 
-PHASE 8 已完成并停止。当前不创建 Question Engine、正式作答、自动判题、MasteryScore、KnowledgeEnergy、WrongBook、Reward 或 Parent Dashboard 运行逻辑；不得进入 PHASE 9。
+PHASE 9 已覆盖 Question Domain、固定 Assessment、六类题型渲染、确定性判题、草稿与结果恢复、生产题目闸门、LessonPlayer 回链、Sample / Unverified 状态、响应式、键盘可访问性、结果语义和 Reduced Motion。验证记录见 `QUESTION_ENGINE.md`、`QUESTION_SESSION.md`、`QUESTION_VALIDATION.md`、`ASSESSMENT.md` 与 `LESSON_PLAYER.md`。
+
+PHASE 9 已完成并停止。当前不实现 `MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、WrongBook、Reward、AI Question Generation、AI Grading 或 PHASE 10 能力。

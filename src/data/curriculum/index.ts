@@ -12,7 +12,12 @@ import {
 import { regionById, sampleRegions } from './regions'
 import { sampleKnowledgePrerequisites, sampleLessonKnowledgePointRelations } from './relations'
 import { sampleSemesters, semesterById } from './semesters'
-import { sampleQuestions } from './questions'
+import {
+  questionById,
+  questionKnowledgePointsByQuestionId,
+  sampleQuestionKnowledgePoints,
+  sampleQuestions,
+} from './questions'
 import { sampleSource, sampleSources, sourceById } from './sources'
 import { sampleSubjects, subjectByCode, subjectById } from './subjects'
 import { sampleTextbooks, textbookById } from './textbooks'
@@ -33,6 +38,7 @@ export const curriculumData = {
   knowledgePrerequisites: sampleKnowledgePrerequisites,
   courseContents: sampleCourseContents,
   questions: sampleQuestions,
+  questionKnowledgePoints: sampleQuestionKnowledgePoints,
   mediaAssets: sampleMediaAssets,
   learningMaps: sampleLearningMaps,
   mapNodes: sampleMapNodes,
@@ -51,6 +57,8 @@ export const curriculumIndexes = {
   lessonById,
   knowledgePointById,
   courseContentById,
+  questionById,
+  questionKnowledgePointsByQuestionId,
   mediaAssetById,
   sourceById,
   regionTextbookRelationsByRegionId,

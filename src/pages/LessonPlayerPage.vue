@@ -10,6 +10,7 @@ import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
 import AppShell from '@/layouts/AppShell.vue'
+import { questionEngineAdapter } from '@/services/question-engine'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
 import { useStudentStore } from '@/stores/studentStore'
 import type { LessonLaunchContext, LessonPlayerDataset, LessonPlayerDemoState } from '@/types'
@@ -19,6 +20,7 @@ const router = useRouter()
 const lessonPlayerStore = useLessonPlayerStore()
 const studentStore = useStudentStore()
 const invalidContextMessage = ref<string | null>(null)
+const practiceAvailable = ref<boolean | null>(null)
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/lesson-player'))
 const dataset = computed<LessonPlayerDataset>(() => {
@@ -82,6 +84,7 @@ const context = computed<LessonLaunchContext | null>(() => {
 
 const viewModel = computed(() => lessonPlayerStore.viewModel)
 const currentStep = computed(() => viewModel.value?.steps[lessonPlayerStore.currentStepIndex])
+const isPracticeStep = computed(() => currentStep.value?.type === 'practice')
 const progressLabel = computed(() =>
   viewModel.value
     ? `${lessonPlayerStore.currentStepIndex + 1} / ${viewModel.value.steps.length}`
@@ -107,11 +110,48 @@ async function loadLesson() {
     invalidContextMessage.value = '请从知识地图进入一个有效的知识点。'
     return
   }
+  practiceAvailable.value = null
   await lessonPlayerStore.loadLesson(context.value, {
     dataset: dataset.value,
     studentId: studentStore.profile?.id ?? 'local-profile',
     demoState: demoState.value,
   })
+  applyAssessmentCompletion()
+  await checkPracticeAvailability()
+}
+
+async function checkPracticeAvailability() {
+  if (!context.value || !isPracticeStep.value) {
+    practiceAvailable.value = null
+    return
+  }
+  try {
+    practiceAvailable.value = await questionEngineAdapter.getAssessmentAvailability(
+      {
+        ...context.value,
+        source: isDevRoute.value ? 'dev' : 'lesson_practice',
+      },
+      {
+        dataset: dataset.value,
+        demoState: 'full',
+        studentId: studentStore.profile?.id ?? 'local-profile',
+      },
+    )
+  } catch {
+    practiceAvailable.value = false
+  }
+}
+
+function applyAssessmentCompletion() {
+  if (route.query.assessmentCompleted !== 'true' || !viewModel.value) return
+  const practiceIndex = viewModel.value.steps.findIndex((step) => step.type === 'practice')
+  if (practiceIndex < 0) return
+  lessonPlayerStore.goToStep(practiceIndex)
+  lessonPlayerStore.completeStep(practiceIndex)
+  const summaryIndex = viewModel.value.steps.findIndex(
+    (step, index) => index > practiceIndex && step.type === 'summary',
+  )
+  if (summaryIndex >= 0) lessonPlayerStore.goToStep(summaryIndex)
 }
 
 function returnToMap() {
@@ -134,6 +174,24 @@ function nextStep() {
     return
   }
   lessonPlayerStore.goNext()
+}
+
+function startAssessment() {
+  if (!context.value || !isPracticeStep.value || practiceAvailable.value !== true) return
+  void router.push({
+    path: isDevRoute.value ? '/dev/question-engine' : '/assessment',
+    query: {
+      textbookId: context.value.textbookId,
+      unitId: context.value.unitId,
+      lessonId: context.value.lessonId,
+      knowledgePointId: context.value.knowledgePointId,
+      source: isDevRoute.value ? 'dev' : 'lesson_practice',
+      ...(isDevRoute.value ? { dataset: 'demo' } : {}),
+      returnTo: isDevRoute.value ? '/dev/lesson-player' : '/lesson',
+      lessonReturnTo: returnPath.value,
+      ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
+    },
+  })
 }
 
 async function finishLesson() {
@@ -173,6 +231,10 @@ onMounted(() => void loadLesson())
 watch(
   () => route.fullPath,
   () => void loadLesson(),
+)
+watch(
+  () => currentStep.value?.id,
+  () => void checkPracticeAvailability(),
 )
 </script>
 
@@ -352,6 +414,8 @@ watch(
             <LessonContentRenderer
               :blocks="currentStep?.contentBlocks || []"
               :show-diagnostics="isDevRoute"
+              :practice-available="practiceAvailable"
+              @start-assessment="startAssessment"
             />
           </section>
 

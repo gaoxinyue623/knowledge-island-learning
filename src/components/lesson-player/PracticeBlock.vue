@@ -9,9 +9,11 @@ import LessonBlockShell from './LessonBlockShell.vue'
 
 interface Props {
   block: LessonContentBlockViewModel
+  assessmentAvailable?: boolean | null
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<{ 'start-assessment': [] }>()
 const showHint = ref(false)
 </script>
 
@@ -29,6 +31,19 @@ const showHint = ref(false)
       <p v-if="showHint" class="lesson-practice__hint" role="status">
         {{ props.block.interaction?.revealText || '先说出你的观察方法，再检查每一步是否连得上。' }}
       </p>
+    </div>
+    <div class="lesson-practice__assessment">
+      <AppButton
+        v-if="props.assessmentAvailable === true"
+        icon-right="arrow-right"
+        @click="emit('start-assessment')"
+      >
+        开始练习
+      </AppButton>
+      <p v-else-if="props.assessmentAvailable === false" class="lesson-practice__assessment-copy">
+        练习内容正在准备中，请先继续阅读这一节内容。
+      </p>
+      <p v-else class="lesson-practice__assessment-copy" role="status">正在检查可用练习……</p>
     </div>
   </LessonBlockShell>
 </template>

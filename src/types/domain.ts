@@ -270,6 +270,7 @@ export type QuestionType =
   | 'typing'
   | 'listening'
   | 'calculation'
+  | 'shortAnswer'
   | 'reading'
   | 'sentenceOrdering'
   | 'speaking'
@@ -311,7 +312,12 @@ export interface QuestionBase {
   id: Id
   questionType: QuestionType
   stem: ContentBlock[]
-  knowledgePointId: Id
+  /**
+   * Legacy compatibility field. New consumers must resolve the
+   * QuestionKnowledgePoint relation instead of treating one question as
+   * belonging to one knowledge point.
+   */
+  knowledgePointId?: Id
   difficulty: DifficultyLevel
   contentType: QuestionContentType
   sourceId: Id
@@ -326,6 +332,7 @@ export interface QuestionBase {
   textbookVersionId?: Id
   snapshotAt?: string
   snapshotSource?: string
+  questionVersion?: number
   hints: QuestionHint[]
   explanation: QuestionExplanation
   isSample: boolean
@@ -409,6 +416,10 @@ export interface SpeakingAnswerRule {
   rubric: string[]
 }
 
+export interface ShortAnswerAnswerRule {
+  ruleType: 'MANUAL_REVIEW'
+}
+
 export type QuestionAnswerRule =
   | SingleChoiceAnswerRule
   | MultipleChoiceAnswerRule
@@ -422,7 +433,35 @@ export type QuestionAnswerRule =
   | CalculationAnswerRule
   | ReadingAnswerRule
   | SentenceOrderingAnswerRule
+  | ShortAnswerAnswerRule
   | SpeakingAnswerRule
+
+export interface Question extends QuestionBase {
+  answerRule: QuestionAnswerRule
+  options?: QuestionOption[]
+  draggableItems?: Array<{ itemKey: string; label: string }>
+  targets?: Array<{ targetKey: string; label: string }>
+  subQuestionIds?: Id[]
+}
+
+export type QuestionKnowledgePointRelationType = 'PRIMARY' | 'SECONDARY'
+
+/**
+ * A question can cover more than one knowledge point. This relation is the
+ * authoritative association consumed by Question Engine.
+ */
+export interface QuestionKnowledgePoint {
+  id: Id
+  questionId: Id
+  knowledgePointId: Id
+  relationType: QuestionKnowledgePointRelationType
+  order: number
+  isPrimary: boolean
+  sourceId: Id
+  status: StructuralStatus
+  needsVerification: boolean
+  verificationStatus?: VerificationStatus
+}
 
 export interface LearningMap {
   id: Id

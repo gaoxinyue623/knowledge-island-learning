@@ -13,6 +13,7 @@ import './styles/dev-ui.css'
 import './styles/curriculum.css'
 import './styles/learning-map.css'
 import './styles/lesson-player.css'
+import './styles/question-engine.css'
 
 const app = createApp(App)
 

@@ -16,9 +16,14 @@ import UnknownContentBlock from './UnknownContentBlock.vue'
 interface Props {
   blocks: LessonContentBlockViewModel[]
   showDiagnostics?: boolean
+  practiceAvailable?: boolean | null
 }
 
-const props = withDefaults(defineProps<Props>(), { showDiagnostics: false })
+const props = withDefaults(defineProps<Props>(), {
+  showDiagnostics: false,
+  practiceAvailable: null,
+})
+const emit = defineEmits<{ 'start-assessment': [] }>()
 
 const componentByType: Record<string, Component> = {
   intro: IntroBlock,
@@ -45,7 +50,13 @@ const sortedBlocks = computed(() =>
 <template>
   <div class="lesson-content-renderer" aria-live="polite">
     <template v-for="block in sortedBlocks" :key="block.id">
-      <component :is="componentFor(block)" v-if="componentFor(block)" :block="block" />
+      <PracticeBlock
+        v-if="block.type === 'practice'"
+        :block="block"
+        :assessment-available="props.practiceAvailable"
+        @start-assessment="emit('start-assessment')"
+      />
+      <component :is="componentFor(block)" v-else-if="componentFor(block)" :block="block" />
       <UnknownContentBlock v-else :type="block.type" :show-diagnostics="props.showDiagnostics" />
     </template>
     <p v-if="!sortedBlocks.length" class="lesson-content-renderer__empty">

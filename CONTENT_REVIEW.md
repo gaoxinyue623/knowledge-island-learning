@@ -6,8 +6,8 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow（继承 PHASE 2.2、PHASE 6 与 PHASE 7） |
-| 状态 | 生命周期矩阵、来源策略、课程核验状态机、SAMPLE 闸门、自动 Review Report、地图读取保护和 LessonPlayer 内容闸门已实现；真实审核后台未实现 |
+| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8） |
+| 状态 | 生命周期矩阵、来源策略、课程核验状态机、SAMPLE 闸门、自动 Review Report、地图读取保护、LessonPlayer 内容闸门和 Question 独立审核闸门已实现；真实审核后台未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | 下游消费者 | 内容录入、教研审核、课程发布、题目服务、版本迁移 |
 | 内容质量负责人 | 教研 / 内容负责人（待确定） |
@@ -45,6 +45,7 @@ ContentSource
 9. 所有引用的 `MediaAsset` 均存在、版本明确、状态为 `ACTIVE`，并且来源、版权和授权字段已核验。
 10. 若内容属于地区教材同步范围，相关 `RegionTextbookRelation` 必须存在、处于有效日期内、`status = ACTIVE` 且 `needsVerification = false`；教材版本已核验不能替代地区关系核验。
 11. `TextbookVersion.publisherId` 指向已存在且满足核验要求的 `Publisher`，不能使用内嵌出版社字符串替代。
+12. `Question` 的 `QuestionKnowledgePoint` 关系必须有来源、状态和核验记录；每题必须有且仅有一个 `PRIMARY`，不能只依赖旧 `knowledgePointId`。
 
 ---
 
@@ -111,6 +112,7 @@ ContentSource
 | `Unit` | 结构生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 单元结构是否可被课程路径使用；事实核验另由 `verificationStatus` 表达 |
 | `Lesson` | 结构生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 课次结构是否可被课程路径使用；事实核验另由 `verificationStatus` 表达 |
 | `KnowledgePoint` | 结构生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 知识点结构是否可被内容和题目引用；事实核验另由 `verificationStatus` 表达 |
+| `QuestionKnowledgePoint` | 结构关系生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 题目与知识点的关系是否可被题目引擎读取；关系事实单独核验 |
 | `MediaAsset` | 资源生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 媒体资源是否可被内容引用；版权由 `copyrightStatus`、授权和 `verificationStatus` 共同约束 |
 | `MapNode` | 结构生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 地图节点配置是否可被学习路径使用；事实核验另由 `verificationStatus` 表达 |
 | `LearningMap` | 结构生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 地图配置是否可被节点引用；事实核验另由 `verificationStatus` 表达 |
@@ -221,10 +223,12 @@ DRAFT ───────────────→ AI_GENERATED
 通用检查：
 
 - 内容是否关联正确的知识点。
+- 题目是否通过 `QuestionKnowledgePoint` 关系关联目标知识点，是否存在唯一 `PRIMARY`；关系来源、状态和核验是否独立完整。
 - 字段是否完整，题型与答案规则是否匹配。
 - 来源是否可追溯，版权状态是否明确。
 - 文案是否适合目标年级，反馈是否鼓励且可理解。
 - 媒体是否通过 `mediaAssetId` 引用、资源是否存在且版本明确，并有文字替代或文字稿。
+- 简答题是否明确标记为人工审核，不得把开放答案伪装成自动评分题。
 
 教材同步检查：
 
@@ -417,3 +421,23 @@ PHASE 8 的 `LessonPlayerRepository` 集中执行该闸门，页面不得自行�
 媒体仍由独立 `MediaAsset` 引用；读取前必须保留 `sourceId`、`copyrightStatus`、`license`、`status`、`version` 和 `needsVerification` 等审核信息。媒体加载失败只能显示回退提示，不能把缺失媒体伪装成已发布内容。
 
 PHASE 8 已实现的是读取保护与开发验证，不等于真实审核后台、人工审核工作台或发布流水线已经完成。正式内容录入前仍需补齐教材来源、版权证据、内容审核和教材核验。
+
+## 14. PHASE 9 Question Engine 审核边界
+
+PHASE 9 新增的 Question 读取闸门与 CourseContent 闸门独立执行：
+
+```text
+Question.status / verificationStatus / sourceId
+        +
+QuestionKnowledgePoint 关系与核验
+        +
+题型结构、答案规则、题目版本和 MediaAsset 引用
+        ↓
+Question Engine 可读取
+```
+
+生产题目必须满足 `status = PUBLISHED`、`needsVerification = false`、来源存在、题目版本可解释、关系至少有一个有效 `PRIMARY`，且所有关键媒体满足 `MediaAsset` 的状态、版权和来源门槛。题目本体已核验不能替代知识点关系或媒体的独立核验。
+
+开发路由可在显式配置下展示 `SAMPLE` / `UNVERIFIED` 题目，但必须显示“开发样本”或“未审核题目”警示；开发夹具不能进入正式题目集合，也不能被题目引擎自动升级为 `REVIEWED` 或 `PUBLISHED`。
+
+PHASE 9 的 Validator 只产生 `QuestionAttemptResult`，简答题返回 `manual_review_required`。它不写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。题目审核仍需人工确认答案、解析、目标年级、教材范围、版权和适龄性。

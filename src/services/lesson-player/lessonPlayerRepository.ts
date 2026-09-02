@@ -1,11 +1,7 @@
 import { demoLessonPlayerSource } from '@/data/lesson-player/demo'
 import { goldenMathPepG3S1Package } from '@/data/curriculum/verified/math/pep/g3-s1'
-import {
-  contentService,
-  curriculumService,
-  type ContentService,
-  type CurriculumService,
-} from '@/services'
+import { contentService, curriculumService } from '@/services/runtime'
+import type { ContentService, CurriculumService } from '@/services/contracts'
 import {
   curriculumAccessConfig,
   isLearningContentRecordReadable,
