@@ -613,6 +613,16 @@
   font-weight: 900;
 }
 
+.knowledge-node__mastery {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--color-primary);
+  font-size: 10px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .unit-island__badge {
   position: absolute;
   right: var(--space-4);
@@ -811,6 +821,38 @@
 .node-detail-panel__facts dd {
   margin: 0;
   font-weight: 800;
+}
+
+.node-detail-panel__mastery {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid rgb(76 124 240 / 20%);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+}
+
+.node-detail-panel__mastery-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.node-detail-panel__mastery-heading h3 {
+  font-size: 16px;
+}
+
+.node-detail-panel__mastery-heading strong {
+  color: var(--color-primary);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.node-detail-panel__mastery p,
+.node-detail-panel__mastery small {
+  color: var(--color-text-secondary);
+  font-size: 13px;
 }
 
 .node-detail-panel__prerequisites {

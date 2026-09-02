@@ -16,6 +16,7 @@ import type {
   LearningMapLoadState,
   LearningMapProgressRecord,
   LearningMapViewModel,
+  MasteryRecord,
 } from '@/types'
 
 export interface LearningMapStoreOptions {
@@ -27,6 +28,7 @@ export interface LearningMapLoadOptions {
   dataset?: LearningMapDataset
   textbookId?: Id
   isReadOnly?: boolean
+  masteryRecords?: readonly MasteryRecord[]
 }
 
 export const useLearningMapStore = defineStore('learningMap', () => {
@@ -39,6 +41,7 @@ export const useLearningMapStore = defineStore('learningMap', () => {
   const selectedNodeId = ref<Id | null>(null)
   const focusedNodeId = ref<Id | null>(null)
   const mapProgress = ref<LearningMapProgressRecord[]>([])
+  const masteryRecords = ref<readonly MasteryRecord[] | undefined>(undefined)
   const status = ref<LearningMapLoadState>('loading')
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -64,6 +67,7 @@ export const useLearningMapStore = defineStore('learningMap', () => {
     viewModel.value = buildLearningMapViewModel(source, mapProgress.value, {
       dataset: dataset.value,
       isReadOnly: readOnly.value,
+      ...(masteryRecords.value ? { masteryRecords: masteryRecords.value } : {}),
     })
     if (!selectedNodeId.value || !findNode(viewModel.value, selectedNodeId.value)) {
       selectedNodeId.value = null
@@ -86,6 +90,7 @@ export const useLearningMapStore = defineStore('learningMap', () => {
     error.value = null
     dataset.value = loadOptions.dataset ?? 'profile'
     readOnly.value = loadOptions.isReadOnly ?? false
+    masteryRecords.value = loadOptions.masteryRecords
     try {
       const source = await repository.getMapSource({
         dataset: dataset.value,
@@ -200,6 +205,7 @@ export const useLearningMapStore = defineStore('learningMap', () => {
     selectedNodeId,
     focusedNodeId,
     mapProgress,
+    masteryRecords,
     status,
     loading,
     error,

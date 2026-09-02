@@ -1,13 +1,13 @@
 # 知识岛｜LessonPlayer 实现说明
 
-> 本文档记录 PHASE 8.1～8.4 的 LessonPlayer / Knowledge Learning Flow，以及 PHASE 9.4 的 Practice → Assessment 接入事实、边界和验证入口。它补充 `PRODUCT.md`、`DATA_MODEL.md` 与 `CONTENT_REVIEW.md`，不替代课程事实、题目协议或内容审核规则。
+> 本文档记录 PHASE 8.1～8.4 的 LessonPlayer / Knowledge Learning Flow、PHASE 9.4 的 Practice → Assessment 接入事实，以及 PHASE 10 的掌握度后处理边界。它补充 `PRODUCT.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md` 与 `MASTERY.md`，不替代课程事实、题目协议或内容审核规则。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 9.4：Question Engine / Assessment |
-| 状态 | LessonPlayer、内容块渲染、会话恢复、Practice 可用性检查、Assessment 入口、完成回链和开发 Showcase 已实现并验证 |
+| 当前阶段 | PHASE 10.4：Mastery Model（LessonPlayer 作为上游） |
+| 状态 | LessonPlayer、内容块渲染、会话恢复、Practice 可用性检查、Assessment 入口、完成回链、开发 Showcase 和完成 Session 后的掌握度后处理边界已实现并验证 |
 | 正式入口 | `/lesson` |
 | 开发入口 | `/dev/lesson-player`、`/dev/lesson-player/states` |
 | 主要代码 | `src/types/lesson-player.ts`、`src/services/lesson-player/`、`src/stores/lessonPlayerStore.ts`、`src/components/lesson-player/`、`src/pages/LessonPlayerPage.vue` |
@@ -125,16 +125,16 @@ AssessmentResultSummary
 LessonPlayer Summary / LearningMap
 ```
 
-返回的结果只用于本次练习摘要和课程回链。Question Engine 的题目关系、会话、判题和审核闸门见 `QUESTION_ENGINE.md`；LessonPlayer 不直接读取 Question Repository，也不修改 `Question`、`MasteryEvent` 或地图事实。
+返回的结果只用于本次练习摘要和课程回链。Question Engine 的题目关系、会话、判题和审核闸门见 `QUESTION_ENGINE.md`；LessonPlayer 不直接读取 Question Repository，也不修改 `Question`、`MasteryEvent`、`MasteryRecord` 或地图事实。完成 Session 后的掌握度处理由页面显式调用独立 `MasteryProcessingService`。
 
-## 8. 明确不在 PHASE 8 / 9
+## 8. 明确不在 PHASE 8 / 9；PHASE 10 仍不扩展课程完成
 
-PHASE 8 不实现 Question Engine；PHASE 9 只实现六类题型的固定 Demo Assessment、确定性判题、人工审核简答标记和会话恢复。两个阶段都不实现题目随机抽取 / 推荐 / 难度算法、`MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、Coins、Achievement、Streak、Parent Dashboard、AI Tutor、AI Question Generation、AI Grading 或正式考试系统。
+PHASE 8 不实现 Question Engine；PHASE 9 只实现六类题型的固定 Demo Assessment、确定性判题、人工审核简答标记和会话恢复。PHASE 10 只在完成 QuestionSession 后独立派生 LearningEvidence / MasteryRecord，不把掌握度写回 LessonSession，也不阻止 Lesson completion。各阶段都不实现题目随机抽取 / 推荐 / 难度算法、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、Coins、Achievement、Streak、Parent Dashboard、AI Tutor、AI Question Generation、AI Grading 或正式考试系统。
 
-`PracticeBlock` 仍只展示非评分内容或观察互动；它的 Assessment CTA 由数据层可用性控制。Assessment completion 只表示本组题目已提交，不写入掌握度、错题或奖励记录；Lesson completion 只表示本次课程步骤走完。
+`PracticeBlock` 仍只展示非评分内容或观察互动；它的 Assessment CTA 由数据层可用性控制。Assessment completion 只表示本组题目已提交；完成 Session 后的掌握度处理不修改题目答案、Lesson completion、地图解锁、错题或奖励记录。
 
 ## 9. PHASE 8 / 9 验证记录
 
-截至 2026-09-02，PHASE 9 目标验证包含 `npm install`、`npm run type-check`、`npm run lint`、`npm run format:check`、`npm run test:run`、`npm run build` 和 `npm run curriculum:review`；测试保留既有 PHASE 7 / 8 覆盖，并新增 Question Engine 领域、渲染、判题、存储和 Store 测试。`curriculum:review` 仍保持 `REQUIRES_MANUAL_REVIEW`，没有擅自把 Golden Framework 或题目 Demo 提升为已审核数据。
+截至 2026-09-02，PHASE 10 目标验证包含 `npm install`、`npm run type-check`、`npm run lint`、`npm run format:check`、`npm run test:run`、`npm run build` 和 `npm run curriculum:review`；测试保留既有 PHASE 7 / 8 / 9 覆盖，并新增 Mastery 领域、证据抽取、确定性重算、存储和后处理测试。`curriculum:review` 仍保持 `REQUIRES_MANUAL_REVIEW`，没有擅自把 Golden Framework、题目 Demo 或 Mastery Demo 提升为已审核数据。
 
-浏览器已检查 `/`、`/learning-map`、`/lesson` 的正式入口保护，以及 `/dev/learning-map` → Node Detail → `/dev/lesson-player` → Practice → `/dev/question-engine` → 完成 → LessonPlayer → 地图焦点恢复的闭环。开发页的 full、resume、completed、empty、not_available、error、sample、unverified 状态均可显示；LessonPlayer 与 Question Engine 在 `375`、`390`、`430`、`768`、`1024` 和 `1440` 视口无横向溢出，当前步骤、题目进度、提交锁定、结果 region、标题、进度语义和 Reduced Motion 规则均已检查。最终浏览器 `error` / `warning` 日志为空。
+浏览器已检查 `/`、`/learning-map`、`/lesson` 的正式入口保护，以及 `/dev/learning-map` → Node Detail → `/dev/lesson-player` → Practice → `/dev/question-engine` → 完成 → LessonPlayer → 地图焦点恢复的闭环。开发页的 full、resume、completed、empty、not_available、error、sample、unverified 状态均可显示；LessonPlayer、Question Engine 和 `/dev/mastery` 在 `375`、`390`、`430`、`768`、`1024` 和 `1440` 视口无横向溢出，当前步骤、题目进度、提交锁定、结果 region、掌握状态、标题、进度语义和 Reduced Motion 规则均已检查。最终浏览器 `error` / `warning` 日志为空。

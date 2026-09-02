@@ -1,13 +1,13 @@
 # 知识岛内容来源、审核与版本机制
 
-> 本文档定义课程内容、题目、教材版本和媒体资源的来源追踪、人工审核、版本发布及归档规则，并约束 LearningMap 的数据读取边界。它是流程设计，不代表已有审核后台或发布服务已经实现。
+> 本文档定义课程内容、题目、教材版本和媒体资源的来源追踪、人工审核、版本发布及归档规则，并约束 LearningMap 与 PHASE 10 Mastery 的数据读取边界。它是流程设计，不代表已有审核后台或发布服务已经实现。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8） |
-| 状态 | 生命周期矩阵、来源策略、课程核验状态机、SAMPLE 闸门、自动 Review Report、地图读取保护、LessonPlayer 内容闸门和 Question 独立审核闸门已实现；真实审核后台未实现 |
+| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9） |
+| 状态 | 生命周期矩阵、来源策略、课程核验状态机、SAMPLE 闸门、自动 Review Report、地图读取保护、LessonPlayer 内容闸门、Question 独立审核闸门和 Mastery 生产证据闸门已实现；真实审核后台未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | 下游消费者 | 内容录入、教研审核、课程发布、题目服务、版本迁移 |
 | 内容质量负责人 | 教研 / 内容负责人（待确定） |
@@ -118,6 +118,8 @@ ContentSource
 | `LearningMap` | 结构生命周期 | `DRAFT`、`ACTIVE`、`ARCHIVED` | 地图配置是否可被节点引用；事实核验另由 `verificationStatus` 表达 |
 | `CourseContent` | 内容审核生命周期 | `DRAFT`、`AI_GENERATED`、`REVIEWED`、`VERIFIED`、`PUBLISHED`、`REJECTED`、`ARCHIVED` | 内容版本是否通过审核并可供学生端读取 |
 | `Question` | 内容审核生命周期 | `DRAFT`、`AI_GENERATED`、`REVIEWED`、`VERIFIED`、`PUBLISHED`、`REJECTED`、`ARCHIVED` | 题目版本是否通过审核并可供题目引擎读取 |
+| `LearningEvidence` | 学习行为事实 | 不使用内容审核生命周期 | 由已完成 QuestionSession 的有效作答派生；保存题目 / 关系来源核验状态，不可被内容审核状态替代 |
+| `MasteryRecord` | 学习行为读取模型 | 不使用内容审核生命周期 | 由 LearningEvidence 确定性重算；`algorithmVersion`、证据统计和来源状态表达可解释性 |
 
 矩阵规则：
 
@@ -127,6 +129,7 @@ ContentSource
 - `RegionTextbookRelation` 不使用 `PUBLISHED`；`ACTIVE` 只表示该地区教材映射可被解析器读取，不表示课程内容对学生发布。
 - `StudentCurriculumProfile` 是学生的选课事实，不属于内容审核状态族；`confirmedAt` 和 `source` 表达是否完成选择及选择来源。
 - `ContentReviewRecord` 是审核事实记录，不使用上述资源生命周期状态；它通过 `reviewStatus` 记录 `REVIEWED`、`VERIFIED` 或 `REJECTED`。
+- `LearningEvidence` 和 `MasteryRecord` 不使用 `ACTIVE` 或 `PUBLISHED`；它们不是可发布内容，也不接受 `ContentReviewRecord` 代替行为证据或算法版本。
 - `needsVerification`、`copyrightStatus` 和生命周期状态分别表达核验、版权和可用性，不能互相替代。
 
 ### 3.1.1 VerificationStatus
@@ -441,3 +444,23 @@ Question Engine 可读取
 开发路由可在显式配置下展示 `SAMPLE` / `UNVERIFIED` 题目，但必须显示“开发样本”或“未审核题目”警示；开发夹具不能进入正式题目集合，也不能被题目引擎自动升级为 `REVIEWED` 或 `PUBLISHED`。
 
 PHASE 9 的 Validator 只产生 `QuestionAttemptResult`，简答题返回 `manual_review_required`。它不写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。题目审核仍需人工确认答案、解析、目标年级、教材范围、版权和适龄性。
+
+## 15. PHASE 10 Mastery 证据审核边界
+
+PHASE 10 不把 `LearningEvidence` 或 `MasteryRecord` 当成待发布内容。它们是学习行为事实与读取模型，但每条证据仍保留题目和 `QuestionKnowledgePoint` 的来源核验状态：
+
+```text
+Question + QuestionKnowledgePoint
+        ↓（集中访问闸门）
+completed QuestionSession / valid QuestionAttempt
+        ↓
+LearningEvidence
+        ↓
+MasteryRecord（algorithmVersion）
+```
+
+- 生产证据要求 Question 与 QuestionKnowledgePoint 关系同时满足生产读取条件；题目本体已核验不能替代关系本身的来源、状态和核验。
+- SAMPLE / UNVERIFIED 数据只允许在显式开发配置中使用，必须保存 `isSample` / `evidenceSourceStatus`，并在 `/dev/mastery` 明确展示。它们不能混入正式用户的生产掌握度数据。
+- 未提交题、未完成 Session、缺少题目或关系、重复 / 孤儿尝试以及 `manual_review_required` 只记录 diagnostic，不生成 `correct` / `incorrect` 证据。
+- `masteryScore` 只表示已有证据；PHASE 10 不实现时间衰减、KnowledgeEnergy、Review Scheduling、Spaced Repetition 或任何内容发布状态的自动升级。
+- `MasteryRecord` 不使用 `DRAFT`、`ACTIVE` 或 `PUBLISHED`；其算法版本和证据来源状态不能由 `ContentReviewRecord` 代填。

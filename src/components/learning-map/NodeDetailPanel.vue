@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import AppButton from '@/components/common/AppButton.vue'
 import AppIcon from '@/components/common/AppIcon.vue'
-import type { KnowledgeMapNode, LearningNodeStatus } from '@/types'
+import type {
+  KnowledgeLearningState,
+  KnowledgeMapNode,
+  KnowledgeMasteryViewModel,
+  LearningNodeStatus,
+} from '@/types'
 
 interface Props {
   open: boolean
@@ -12,6 +17,7 @@ interface Props {
   isSample?: boolean
   isUnverified?: boolean
   isReadOnly?: boolean
+  mastery?: KnowledgeMasteryViewModel
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -21,6 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
   isSample: false,
   isUnverified: false,
   isReadOnly: false,
+  mastery: undefined,
 })
 
 const emit = defineEmits<{
@@ -36,6 +43,13 @@ const statusLabels: Record<LearningNodeStatus, string> = {
   completed: '已完成',
   mastered: '已完成强化（演示状态）',
   perfect: '完成状态（演示状态）',
+}
+
+const masteryLabels: Record<KnowledgeLearningState, string> = {
+  not_started: '还没开始',
+  learning: '正在掌握',
+  weak: '需要巩固',
+  mastered: '已经掌握',
 }
 </script>
 
@@ -93,6 +107,24 @@ const statusLabels: Record<LearningNodeStatus, string> = {
               <dd>{{ Math.round(props.node.progress) }}%</dd>
             </div>
           </dl>
+          <section
+            v-if="props.mastery"
+            class="node-detail-panel__mastery"
+            aria-labelledby="node-mastery-title"
+          >
+            <div class="node-detail-panel__mastery-heading">
+              <div>
+                <p class="curriculum-eyebrow">Learning evidence</p>
+                <h3 id="node-mastery-title">知识掌握</h3>
+              </div>
+              <strong>{{ Math.round(props.mastery.score) }}%</strong>
+            </div>
+            <p>
+              {{ masteryLabels[props.mastery.state] }} · 基于
+              {{ props.mastery.evidenceCount }} 条作答证据
+            </p>
+            <small v-if="props.mastery.isSampleDerived">开发样本掌握度，不代表正式学习记录。</small>
+          </section>
           <section v-if="props.prerequisiteTitles.length" class="node-detail-panel__prerequisites">
             <h3>前置知识</h3>
             <ul>

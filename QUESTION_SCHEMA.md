@@ -6,8 +6,8 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.1、PHASE 6～8） |
-| 状态 | 题目协议、结构化内容、媒体引用、QuestionKnowledgePoint、SAMPLE Demo、QuestionRenderer、确定性判题和可恢复 Assessment 已实现并验证；真实教材题库仍未核验 |
+| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.1、PHASE 6～9） |
+| 状态 | 题目协议、结构化内容、媒体引用、QuestionKnowledgePoint、SAMPLE Demo、QuestionRenderer、确定性判题、可恢复 Assessment 和掌握度证据输入已实现并验证；真实教材题库仍未核验 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | 下游消费者 | 后续题目编辑器、QuestionRenderer、练习服务、内容审核流程 |
 | MVP 范围 | `speaking` 只定义接口，不进入 MVP 实现 |
@@ -132,11 +132,40 @@ interface QuestionExplanation {
   misconceptionTags?: string[];
 }
 
+interface QuestionDragDropItem {
+  itemKey: string;
+  content: ContentBlock[];
+}
+
+interface QuestionDragDropTarget {
+  targetKey: string;
+  content: ContentBlock[];
+}
+
+interface QuestionMatchingItem {
+  key: string;
+  content: ContentBlock[];
+}
+
+interface QuestionSortingItem {
+  itemKey: string;
+  content: ContentBlock[];
+}
+
+// Sentence tokens intentionally remain a stable plain-text structure.
+interface QuestionSentenceToken {
+  tokenKey: string;
+  text: string;
+  sortOrder: number;
+}
+
 interface QuestionKnowledgePoint {
   id: Id;
   questionId: Id;
   knowledgePointId: Id;
   relationType: "PRIMARY" | "SECONDARY";
+  // Normalized contribution weight; all mappings for one question sum to 1.
+  weight: number;
   order: number;
   isPrimary: boolean;
   sourceId: Id;
@@ -452,8 +481,8 @@ JSON 演示：
 ```ts
 interface DragDropQuestion extends QuestionBase {
   questionType: "dragDrop";
-  draggableItems: Array<{ itemKey: string; content: ContentBlock[] }>;
-  targets: Array<{ targetKey: string; label: string }>;
+  draggableItems: QuestionDragDropItem[];
+  targets: QuestionDragDropTarget[];
   answerRule: DragDropAnswerRule;
 }
 ```
@@ -482,7 +511,7 @@ JSON 演示：
   "explanation": { "summary": [{ "type": "TEXT", "text": "协议演示。" }], "steps": [[{ "type": "TEXT", "text": "示例步骤" }]] },
   "isSample": true,
   "draggableItems": [{ "itemKey": "item-1", "content": [{ "type": "TEXT", "text": "占位项" }] }],
-  "targets": [{ "targetKey": "target-1", "label": "占位目标" }],
+  "targets": [{ "targetKey": "target-1", "content": [{ "type": "TEXT", "text": "占位目标" }] }],
   "answerRule": { "ruleType": "PLACEMENT", "placements": [{ "itemKey": "item-1", "targetKey": "target-1" }] }
 }
 ```
@@ -494,8 +523,8 @@ JSON 演示：
 ```ts
 interface MatchingQuestion extends QuestionBase {
   questionType: "matching";
-  leftItems: Array<{ key: string; content: ContentBlock[] }>;
-  rightItems: Array<{ key: string; content: ContentBlock[] }>;
+  leftItems: QuestionMatchingItem[];
+  rightItems: QuestionMatchingItem[];
   answerRule: MatchingAnswerRule;
 }
 ```
@@ -536,7 +565,7 @@ JSON 演示：
 ```ts
 interface SortingQuestion extends QuestionBase {
   questionType: "sorting";
-  items: Array<{ itemKey: string; content: ContentBlock[] }>;
+  items: QuestionSortingItem[];
   answerRule: SortingAnswerRule;
 }
 ```
@@ -775,7 +804,7 @@ JSON 演示：
 ```ts
 interface SentenceOrderingQuestion extends QuestionBase {
   questionType: "sentenceOrdering";
-  tokens: Array<{ tokenKey: string; text: string; sortOrder: number }>;
+  tokens: QuestionSentenceToken[];
   answerRule: SentenceOrderingAnswerRule;
 }
 ```
@@ -911,7 +940,7 @@ JSON 协议演示（不代表 MVP 功能）：
 - 学生作答保存在独立 `QuestionAttempt`，提交后保留 `questionVersion`。
 - PHASE 9 的 Validator 只生成 `QuestionAttemptResult`；它不生成 `MasteryEvent`、`WrongQuestion` 或奖励。
 - `shortAnswer` 只返回 `manual_review_required`，不进行 AI 自动评分。
-- 未来若将作答结果映射为 `MasteryEvent`，必须由后续学习行为服务按事件规则完成，不能由 Question Engine 隐式触发。
+- PHASE 10 的作答结果由独立 `MasteryProcessingService` 映射为 `LearningEvidence`，不能由 Question Engine 隐式写入掌握度；`MasteryEvent` 只作为兼容事件模型保留。
 - 重新编辑题目时，历史作答仍指向历史版本，不被新正文覆盖。
 
 ---
@@ -960,4 +989,14 @@ PHASE 9 已实现六类题型的开发态 Assessment：`singleChoice`、`multipl
 
 `QuestionRenderer` 根据 `QuestionViewModel` 渲染结构化题干、选项、题目媒体、草稿、提交状态和解析。`QuestionSessionStorage` 使用独立版本化载荷保存会话；`QuestionAttemptResult` 只描述本次作答，自动评分只统计可评分题目，简答题保留人工审核状态。完整运行流和会话约束见 `QUESTION_ENGINE.md`、`QUESTION_ENGINE_DATA_FLOW.md`、`QUESTION_SESSION.md`、`QUESTION_VALIDATION.md` 与 `ASSESSMENT.md`。
 
-Question Engine 不写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 仍只受七种掌握事件影响且不做时间衰减；遗忘和复习提醒仍由 `KnowledgeEnergy` 独立处理。
+Question Engine 不直接写入 `MasteryEvent`、`MasteryRecord`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。完成 Session 后由独立 `MasteryProcessingService` 读取 `QuestionAttempt`，按 `QuestionKnowledgePoint.weight` 派生 `LearningEvidence`；`manual_review_required` 不产生掌握度证据。`masteryScore` 不做时间衰减，KnowledgeEnergy 仍是未实现的独立复习信号域。
+
+## 12. PHASE 10 掌握度输入边界
+
+PHASE 10 复用本协议中的题目、题目知识点关系和题目难度，不修改题目协议的内容事实：
+
+- `QuestionKnowledgePoint.weight` 必填，满足 `0 < weight <= 1`，同题全部关系权重总和约等于 `1`。
+- `FOUNDATION`、`STANDARD`、`ADVANCED` 在证据层分别归一化为 `1`、`3`、`5`；难度只是证据权重输入，不是掌握度分数。
+- 一个已完成 Session 中的一个 QuestionAttempt 可以按多条关系生成多条 LearningEvidence。
+- 只有 `correct` / `incorrect` 的已提交结果可以进入掌握度；`manual_review_required`、未提交题、未完成 Session、孤儿题目和缺失关系只生成诊断。
+- SAMPLE / UNVERIFIED 题目只在显式开发入口使用，并在证据 / 掌握度记录中保留来源状态；生产掌握度要求题目和关系均通过集中审核闸门。

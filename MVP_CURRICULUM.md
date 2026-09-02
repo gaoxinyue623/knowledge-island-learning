@@ -1,13 +1,13 @@
 # 知识岛 MVP 课程占位结构
 
-> 本文档定义三年级上册语文、数学、英语的 MVP 课程骨架及地区教材选择占位结构，并记录 PHASE 6 导入 / 核验、PHASE 7 LearningMap、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 消费边界。当前没有可靠教材来源，因此本文不提供真实地区、出版社、单元名、课文、教材正文、例题或生产题目答案；所有课程记录均为演示占位，不能进入学生端发布集合。
+> 本文档定义三年级上册语文、数学、英语的 MVP 课程骨架及地区教材选择占位结构，并记录 PHASE 6 导入 / 核验、PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 消费边界。当前没有可靠教材来源，因此本文不提供真实地区、出版社、单元名、课文、教材正文、例题或生产题目答案；所有课程记录均为演示占位，不能进入学生端发布集合。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8） |
-| 状态 | 占位结构、导入验证边界、Golden Sample Framework、地图 / LessonPlayer 消费边界和独立 Question Engine Demo 已实现并验证；真实课程仍未核验 |
+| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9） |
+| 状态 | 占位结构、导入验证边界、Golden Sample Framework、地图 / LessonPlayer / Question Engine 消费边界、LearningEvidence 与 Mastery Demo 边界已实现并验证；真实课程仍未核验 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | MVP 范围 | 三年级上册；语文、数学、英语；每科 1 个单元 |
 | 课程内容状态 | 未建立真实教材内容 |
@@ -428,4 +428,14 @@ LessonPlayer 的 `Practice Placeholder` 在 PHASE 9 通过显式上下文进入�
 
 `src/data/question-engine/demo/` 提供 6 道原创 SAMPLE 题，覆盖 `singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer`，并提供 7 条 `QuestionKnowledgePoint` 关系。题目使用固定 Assessment 顺序，支持草稿恢复、提交锁定、确定性判题和结果汇总；所有记录仍为 `isSample: true`、`needsVerification: true`，不代表任何地区、出版社或真实教材。
 
-Question Engine Demo 不改变本文件的真实课程骨架，不产生 `MasteryEvent`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。真实题库仍需在待确认事项完成后独立录入、审核和发布。
+Question Engine Demo 不改变本文件的真实课程骨架。PHASE 10 可在显式开发入口消费其完成 QuestionSession，产生带 SAMPLE 标识的 `LearningEvidence` 和 `MasteryRecord` Showcase；它们不代表真实教材学习证据。真实题库仍需在待确认事项完成后独立录入、审核和发布。
+
+## 17. PHASE 10 Mastery 占位边界
+
+PHASE 10 不扩充课程骨架、不凭掌握度生成知识点、不把 Lesson / Map completion 作为学习证据。Mastery 只消费 Question Engine 已产生的、可判定的 `QuestionAttempt`：
+
+- 只有完成的 `QuestionSession`、已提交题目和 `correct` / `incorrect` 结果才可派生证据。
+- `manual_review_required`、未提交题、孤儿题目和缺少 `QuestionKnowledgePoint` 关系只产生 diagnostic。
+- `QuestionKnowledgePoint.weight` 必须满足 `0 < weight <= 1`，同题关系权重总和约等于 `1`；多知识点题目分别为每个知识点产生证据。
+- SAMPLE / UNVERIFIED 证据只能在开发流程使用并显式显示，不得混入正式课程或生产掌握度。
+- `masteryScore` 表示已有证据，不做时间衰减；`KnowledgeEnergy`、复习排程、错题本、奖励和自适应路径不属于本阶段。

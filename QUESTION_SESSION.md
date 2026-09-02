@@ -63,4 +63,4 @@ completed
 
 `QuestionAttemptResult` 只属于当前 Assessment，包含 `correct`、`incorrect` 或 `manual_review_required`、`score`、`maxScore` 和可选反馈。结果汇总只统计当前 Assessment 的有效 Attempt；简答题不进入自动评分分母。
 
-Session 完成或恢复不会自动写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。
+Session 完成或恢复不会由 QuestionSession Store 自动写入 `MasteryEvent`、`MasteryRecord`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。完成后由页面显式调用 `MasteryProcessingService`，从已提交且可判定的 Attempt 派生 `LearningEvidence` 并重算 MasteryRecord；处理失败不回滚已完成 Session。

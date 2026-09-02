@@ -1,13 +1,13 @@
 # 知识岛｜PHASE 3 页面规格
 
-> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 已实现并验证，其余页面仍以设计规格为准。
+> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 展示已实现并验证，其余页面仍以设计规格为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 3：UI / UX + 游戏视觉系统 + 多端响应式设计 |
-| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine / Assessment 已实现并验证，其余页面仍未实现 |
+| 所属阶段 | PHASE 10.4：Mastery 展示验证（继承 PHASE 3 页面规格） |
+| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine / Assessment 与 PHASE 10 Mastery 结果展示已实现并验证，其他目标页面仍按设计状态管理 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md` |
 | 相关设计文档 | `DESIGN_SYSTEM.md`、`RESPONSIVE_DESIGN.md`、`QUESTION_UI.md`、`UI_FLOW.md`、`ONBOARDING_DESIGN.md` |
 | 页面数据原则 | 课程配置和教材信息只读取数据层；UI 不猜测地区、出版社或教材版本 |
@@ -659,6 +659,26 @@ Desktop 使用中央学习卡片与步骤导航，Tablet 保持大触控目标�
 | 次 CTA | 上一题、返回课程；开发页提供状态 Showcase |
 | 数据边界 | 只消费 `QuestionEngineViewModel`，不直接扫描 Curriculum；题目与知识点关系由 Adapter 提供 |
 | 结果 | 展示答对、答错、待人工判断和自动评分正确率；简答不进入自动评分分母 |
-| 回链 | 完成后返回 LessonPlayer Summary；不写入 Mastery、KnowledgeEnergy、WrongBook 或 Reward |
+| 回链 | 完成后返回 LessonPlayer Summary；由独立 Service 可更新 MasteryRecord，但不写入 KnowledgeEnergy、WrongBook 或 Reward |
 
 页面使用真实 radio / checkbox / text input / textarea，提交后禁用当前题控件并显示 `role="status"` 反馈；结果统计为 `role="region"`，题目导航使用 `aria-current="step"`。开发页显式标记 SAMPLE / UNVERIFIED，异常、空态和未开放状态使用儿童可理解文案。
+
+## 12. PHASE 10 Mastery 页面与展示映射
+
+### 12.1 `/dev/mastery`
+
+| 页面契约 | 实现事实 |
+| --- | --- |
+| 目标 | 查看 LearningEvidence、MasteryRecord 和确定性重算结果 |
+| 信息优先级 | 知识点、掌握状态 / 分数、置信度、证据数量、来源状态、算法版本 |
+| 主 CTA | 从证据重算（仅对当前开发档案） |
+| 次 CTA | 读取已保存记录、重置开发样本、清理当前学生 |
+| 状态 | `not_started`、`weak`、`learning`、`mastered`、高分低置信度、混合来源、空、存储 warning |
+| 数据边界 | 只消费 Mastery Store / Showcase；不创建课程、题目、地图完成度或奖励记录 |
+| 响应式 | Desktop 双栏；Tablet 保持大触控目标；Mobile 单列，证据列表可纵向阅读 |
+
+### 12.2 地图节点掌握度辅助显示
+
+Node Detail 可以显示“知识掌握”状态、分数和证据数，但必须与“地图学习进度 / 完成度”分组。掌握度不改变节点 `locked / available / learning / completed`、前置解锁或地图进度；`perfect` 不由掌握度推导。儿童端优先使用“正在掌握 / 需要巩固 / 已掌握”等文字与图标，不强制展示 confidence 的内部含义。
+
+Mastery 展示使用 `aria-label`、可见状态文字、`focus-visible` 和进度语义；状态不能只依赖颜色。进度过渡遵守 `prefers-reduced-motion`，不使用金币、XP、宝箱或成就弹窗表达掌握度。

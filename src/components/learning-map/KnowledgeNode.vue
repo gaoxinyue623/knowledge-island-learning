@@ -2,7 +2,12 @@
 import { computed } from 'vue'
 
 import AppIcon from '@/components/common/AppIcon.vue'
-import type { IconName, KnowledgeMapNode, LearningNodeStatus } from '@/types'
+import type {
+  IconName,
+  KnowledgeLearningState,
+  KnowledgeMapNode,
+  LearningNodeStatus,
+} from '@/types'
 
 interface Props {
   node: KnowledgeMapNode
@@ -33,9 +38,24 @@ const statusIcons: Record<LearningNodeStatus, IconName> = {
   perfect: 'star',
 }
 
+const masteryLabels: Record<KnowledgeLearningState, string> = {
+  not_started: '还没开始',
+  learning: '正在掌握',
+  weak: '需要巩固',
+  mastered: '已经掌握',
+}
+
+const masteryStateLabel = computed(() =>
+  props.node.mastery ? masteryLabels[props.node.mastery.state] : '',
+)
+
 const ariaLabel = computed(
   () =>
-    `${props.node.title}，${statusLabels[props.node.status]}，完成度 ${Math.round(props.node.progress)}%`,
+    `${props.node.title}，${statusLabels[props.node.status]}，完成度 ${Math.round(props.node.progress)}%${
+      props.node.mastery
+        ? `，${masteryStateLabel.value}，掌握度 ${Math.round(props.node.mastery.score)}%`
+        : ''
+    }`,
 )
 </script>
 
@@ -59,6 +79,9 @@ const ariaLabel = computed(
     <span class="knowledge-node__state">{{ statusLabels[props.node.status] }}</span>
     <span v-if="props.node.progress > 0" class="knowledge-node__progress">
       {{ Math.round(props.node.progress) }}%
+    </span>
+    <span v-if="props.node.mastery" class="knowledge-node__mastery">
+      {{ masteryStateLabel }} · {{ Math.round(props.node.mastery.score) }}%
     </span>
   </button>
 </template>

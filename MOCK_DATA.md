@@ -4,8 +4,8 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4（继承 PHASE 5～8 Mock 基线） |
-| 状态 | 已实现并通过本地校验；包含地图、LessonPlayer 与 Question Engine 开发夹具，不代表真实课程数据 |
+| 所属阶段 | PHASE 10.4（继承 PHASE 5～9 Mock 基线） |
+| 状态 | 已实现并通过本地校验；包含地图、LessonPlayer、Question Engine 与 Mastery 开发夹具，不代表真实课程数据 |
 | 唯一事实源 | `PRODUCT.md`、`DATA_MODEL.md`、`CURRICULUM.md`、`MVP_CURRICULUM.md` |
 | 数据入口 | `src/data/curriculum/index.ts` |
 
@@ -86,7 +86,7 @@ Map Demo Fixture 位于 `src/data/learning-map/demo/`，所有教材 / 单元 / 
 
 `src/data/lesson-player/demo/` 提供 1 个虚构知识点的 8 步 LessonPlayer Fixture：Intro、Concept、Explanation、Example、Media、Interactive、Practice Placeholder 和 Summary。内容为原创通用文本，所有内容块标记 `isSample: true`、`verificationStatus: SAMPLE`；媒体只引用现有 SAMPLE `MediaAsset`，不代表任何真实教材或版权已清理。
 
-LessonPlayer 开发页只用于验证步骤、内容块、会话恢复、完成回链和状态 Showcase。PHASE 8 的 Practice Placeholder 不生成 Question；PHASE 9 的 Assessment 入口使用下方独立 Demo 数据，Lesson completion 和 Assessment completion 都不生成 Mastery、KnowledgeEnergy、WrongBook 或 Reward。
+LessonPlayer 开发页只用于验证步骤、内容块、会话恢复、完成回链和状态 Showcase。PHASE 8 的 Practice Placeholder 不生成 Question；PHASE 9 的 Assessment 入口使用下方独立 Demo 数据。PHASE 10 可以在显式开发流程中消费完成 Session，生成带 SAMPLE 标识的 Mastery Demo；Lesson completion 不生成掌握度，任何 Demo 也不代表真实课程或正式学生证据。
 
 ## 7. PHASE 9 Question Engine Demo
 
@@ -97,4 +97,8 @@ LessonPlayer 开发页只用于验证步骤、内容块、会话恢复、完成�
 | Demo Assessment | 1 组固定练习、6 道原创题 | 覆盖单选、多选、判断、填空、计算、简答 | 不可用，全部为 SAMPLE |
 | QuestionKnowledgePoint | 7 条关系 | 验证 1 个 PRIMARY 与 1 个 SECONDARY 覆盖关系 | 不可用，必须人工核验 |
 
-题目固定顺序为 `singleChoice → multipleChoice → trueFalse → fillBlank → calculation → shortAnswer`。题目、答案规则、解析和媒体仍使用结构化协议；简答只返回人工审核状态。Demo 不代表任何真实教材或地区出版社，不生成 `MasteryEvent`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。
+题目固定顺序为 `singleChoice → multipleChoice → trueFalse → fillBlank → calculation → shortAnswer`。题目、答案规则、解析和媒体仍使用结构化协议；简答只返回人工审核状态。Demo 不代表任何真实教材或地区出版社，不直接生成 `MasteryEvent`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`；完成 Session 的掌握度处理必须通过独立 `MasteryProcessingService`，并保留 SAMPLE 来源标识。
+
+## 8. PHASE 10 Mastery Demo
+
+`src/data/mastery/demo/` 提供 `not_started`、`weak`、`learning`、`mastered`、高分低置信度和混合来源等状态夹具。它们只用于 `/dev/mastery` 和自动化测试，不能写入真实教材数据或绕过 Question / QuestionKnowledgePoint 审核闸门。开发样本掌握度必须可重置，正式生产读取不会自动加载这些夹具。

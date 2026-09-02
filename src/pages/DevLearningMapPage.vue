@@ -12,11 +12,13 @@ import LearningProgressBar from '@/components/learning-map/LearningProgressBar.v
 import MapHeader from '@/components/learning-map/MapHeader.vue'
 import NodeDetailPanel from '@/components/learning-map/NodeDetailPanel.vue'
 import { useLearningMapStore } from '@/stores/learningMapStore'
+import { useMasteryStore } from '@/stores/masteryStore'
 import type { Id, KnowledgeMapNode, LearningMapDataset, LearningNodeStatus } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
 const learningMapStore = useLearningMapStore()
+const masteryStore = useMasteryStore()
 const dataset = ref<Exclude<LearningMapDataset, 'profile'>>(
   route.path.endsWith('/states') ? 'demo' : 'demo',
 )
@@ -63,7 +65,11 @@ const stateSamples = computed<KnowledgeMapNode[]>(() => {
 
 async function loadDataset() {
   error.value = null
-  const loaded = await learningMapStore.loadMap({ dataset: dataset.value })
+  await masteryStore.load('local-profile')
+  const loaded = await learningMapStore.loadMap({
+    dataset: dataset.value,
+    masteryRecords: masteryStore.records,
+  })
   if (!loaded && learningMapStore.status === 'error') {
     error.value = learningMapStore.error ?? '开发地图暂时无法加载'
   }
@@ -216,6 +222,7 @@ onMounted(() => void loadDataset())
           :is-sample="selectedNode?.isSample || dataset === 'demo'"
           :is-unverified="viewModel.flags.isUnverified"
           :is-read-only="viewModel.flags.isReadOnly"
+          :mastery="selectedNode?.mastery"
           @close="closeNodeDetail"
           @start="startSelectedNode"
           @complete="completeSelectedNode"

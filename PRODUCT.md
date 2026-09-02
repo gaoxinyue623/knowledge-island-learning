@@ -8,13 +8,13 @@
 | --- | --- |
 | 产品名称 | 知识岛（暂定） |
 | 产品定位 | 课本同步 + 游戏闯关 + 课外拓展的小学语数英学习平台 |
-| 当前阶段 | PHASE 9.4：Question Engine / Assessment 闭环验证与质量收尾 |
-| 文档状态 | 产品事实源；PHASE 7、PHASE 8 与 PHASE 9.1～9.4 已实现并验证，Golden Sample Framework、Demo Lesson 与 Demo Questions 仍受未核验 / SAMPLE 闸门保护；正式学习算法未实现 |
+| 当前阶段 | PHASE 10.4：Mastery Model / Knowledge Learning State 验证与质量收尾 |
+| 文档状态 | 产品事实源；PHASE 7、PHASE 8、PHASE 9.1～9.4 与 PHASE 10.1～10.4 已实现并验证，Golden Sample Framework、Demo Lesson、Demo Questions 与 Demo Mastery 仍受未核验 / SAMPLE 闸门保护 |
 | 版本 | 0.1 |
 | 日期 | 2026-09-02 |
 | 当前事实源 | 用户提供的产品总 Prompt、PHASE 2.1 / 2.2 数据与课程文档、PHASE 3 / 3.1 设计文档，以及 PHASE 4 工程基础 |
 | 产品负责人 | 待确定 |
-| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复和地图回链已创建并完成本阶段验证；MasteryScore、KnowledgeEnergy 与其他学习算法仍待后续阶段 |
+| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine 和独立掌握度存储已创建并完成本阶段验证；KnowledgeEnergy 与其他自适应 / 复习算法仍未实现 |
 
 ---
 
@@ -791,8 +791,8 @@ src/
 3. MVP 选择的具体单元、课次和知识点清单。
 4. 内容审核者、教材负责人和发布负责人的具体身份。
 5. 学生登录、家长绑定、监护人授权和隐私策略。
-6. `masteryScore` 的计算规则、完美通关条件和关卡达标线。
-7. 知识能量的衰减周期、提醒阈值和复习恢复规则。
+6. 地图的完美通关条件和关卡达标线；PHASE 10 的 `MasteryEngine` 已固定为带 `algorithmVersion` 的 `MASTERY_V1`，后续变更必须版本化。
+7. 知识能量的衰减周期、提醒阈值和复习恢复规则；`KnowledgeEnergy` 不属于 PHASE 10 运行范围。
 8. 音频、图片、动画和教材原文的版权与存储来源。
 9. 是否在 MVP 中加入听力题，以及是否保留口语题接口。
 10. 角色、宠物与奖励的视觉资产制作方式和资源版权。
@@ -1076,8 +1076,49 @@ QuestionAttemptResult / AssessmentResultSummary
 
 ### 26.2 本阶段明确不实现
 
-PHASE 9 不实现 `MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、AI Question Generation、AI Grading、题目随机抽取、难度自适应或正式考试系统。PHASE 9 完成后停止，不进入 PHASE 10。
+PHASE 9 当时不实现 `MasteryScore`、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、AI Question Generation、AI Grading、题目随机抽取、难度自适应或正式考试系统。PHASE 9 的停止点已在后续明确授权后进入 PHASE 10；本节不改变 PHASE 9 的历史边界。
 
 ### 26.3 验收与停止点
 
 已验证六类题型输入、提交锁定、结果反馈、结构化内容与媒体回退、Session 恢复、错误 / 空态 / 未开放 / Sample / Unverified Showcase、LessonPlayer → Assessment → LessonPlayer → LearningMap 闭环、键盘与语义化无障碍、Reduced Motion 和 `375`、`390`、`430`、`768`、`1024`、`1440` 视口。实现与测试记录见 `QUESTION_ENGINE.md`、`QUESTION_SESSION.md`、`QUESTION_VALIDATION.md`、`ASSESSMENT.md`、`LESSON_PLAYER.md` 和 `ARCHITECTURE.md`。
+
+## 27. PHASE 10 Mastery Model / Knowledge Learning State
+
+PHASE 10.1～10.4 已完成并停止。它只把已完成 QuestionSession 中的可判定作答转成可追溯的 `LearningEvidence`，再通过确定性 `MasteryEngine` 重算独立 `MasteryRecord`：
+
+```text
+QuestionSession completed
+  ↓
+MasteryProcessingService
+  ↓
+LearningEvidence extraction
+  ↓
+MasteryRepository / evidence storage
+  ↓
+Deterministic MasteryEngine
+  ↓
+MasteryRecord
+  ↓
+MasteryStore / optional map and node-detail presentation
+```
+
+### 27.1 已实现与已验证
+
+- `masteryScore` 只表示当前已有学习证据；删除时间型 `recentDecay`，日期流逝、遗忘与复习提醒不修改该分数。
+- 保留 `MasteryEvent` 七种事件模型作为兼容契约；PHASE 10 的实际输入链来自 `QuestionAttempt`、`Question`、`QuestionKnowledgePoint` 和难度，不由 Lesson / Map / Assessment completion 直接产生。
+- 题目知识点权重必须满足 `0 < weight <= 1`，同题关系权重总和约等于 `1`；一道题可以为多个知识点分别产生证据。
+- `manual_review_required`、未提交题、未完成 Session、孤儿题目和缺少映射只产生诊断，不产生正确 / 错误掌握证据。
+- `MasteryRecord` 按 `studentProfileId + knowledgePointId` 隔离，保存 `masteryScore`、`confidence`、`state`、证据统计、`algorithmVersion` 和 SAMPLE / 来源状态。
+- 解析、聚合、重算、存储和重复 Session 处理均为确定性、幂等流程；`masteryStorage` 与 Question / Lesson / Map 存储独立。
+- 地图继续独立维护完成度、节点状态、前置解锁和主题；掌握度仅作为可选展示投影，不改变地图主链。
+- `/dev/mastery` 提供 `not_started`、`weak`、`learning`、`mastered`、低置信度高分和混合来源的开发 Showcase，并明确 SAMPLE / UNVERIFIED 警示。
+
+### 27.2 明确不在 PHASE 10
+
+PHASE 10 不实现 Adaptive Learning、按掌握度自适应选题或难度、AI 生成 / 判题、WrongBook、Review Scheduling、Spaced Repetition、KnowledgeEnergy、Reward / Coins / XP / Achievement / Streak / Leaderboard、家长 / 教师看板、AI Tutor、个性化学习路径或 ML / Bayesian 模型。`perfect` 和 `review` 不是本阶段的正式 `KnowledgeLearningState`。
+
+`masteryScore = 92` 与未来 `knowledgeEnergy = 30` 的解释应为“曾经掌握很好，但需要复习”，而不是“掌握能力自动下降”。KnowledgeEnergy 仍属于后续独立设计域。
+
+### 27.3 PHASE 10 停止条件
+
+PHASE 10 已完成并停止；不进入 PHASE 11。后续阶段若要扩展掌握度或复习能力，必须先基于本阶段的 `algorithmVersion`、证据保留和存储迁移边界提出新的明确需求。

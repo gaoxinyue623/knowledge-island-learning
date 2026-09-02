@@ -31,4 +31,4 @@ Validator 不执行任意表达式，不把分数、单位或自然语言猜成�
 
 ## 6. 学习算法隔离
 
-Validator 不生成 `MasteryEvent`。未来若将结果映射为 `FIRST_CORRECT`、`CORRECT`、`WRONG` 等事件，应由独立学习行为服务完成，并遵循 `masteryScore` 只受七种事件影响、不做时间衰减的规则；复习时间信号由 `KnowledgeEnergy` 独立处理。
+Validator 不生成 `MasteryEvent` 或 `MasteryRecord`。PHASE 10 由独立 `MasteryProcessingService` 读取 Validator 产生的 `QuestionAttemptResult`，只将可判定的 `correct` / `incorrect` 结果派生为 `LearningEvidence`；`manual_review_required` 不进入证据。`masteryScore` 不做时间衰减；复习时间信号 `KnowledgeEnergy` 仍是后续独立领域。

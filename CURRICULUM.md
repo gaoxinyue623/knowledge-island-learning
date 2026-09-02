@@ -1,13 +1,13 @@
 # 知识岛课程知识体系
 
-> 本文档定义课程领域结构与关系规则，并记录 PHASE 6 的导入 / 核验边界、PHASE 7 的地图投影边界、PHASE 8 的 LessonPlayer 消费边界和 PHASE 9 的题目关系消费边界。它不包含已核验的教材目录，也不代表课程内容已经发布。
+> 本文档定义课程领域结构与关系规则，并记录 PHASE 6 的导入 / 核验边界、PHASE 7 的地图投影边界、PHASE 8 的 LessonPlayer 消费边界、PHASE 9 的题目关系消费边界和 PHASE 10 的掌握度证据边界。它不包含已核验的教材目录，也不代表课程内容已经发布。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8） |
-| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界和 QuestionKnowledgePoint 关系消费边界已实现并验证；真实教材仍未核验 |
+| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9） |
+| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界、QuestionKnowledgePoint 关系消费边界和 Mastery 证据输入边界已实现并验证；真实教材仍未核验 |
 | 上游事实源 | 项目根目录 `PRODUCT.md` |
 | 下游消费者 | `DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md`、后续课程数据与前端服务 |
 | 权威维护者 | 内容负责人 / 教研负责人（待确定） |
@@ -475,4 +475,22 @@ PHASE 8 的 Lesson completion 只更新独立地图演示完成度，不等于 K
 
 题目属于课程内容的可评测资源，但题目与知识点不是简单的一对一嵌套字段。`QuestionKnowledgePoint` 是题目的权威关系表；每道题至少有一个关系，且在发布前必须有且仅有一个 `PRIMARY`，可有多个 `SECONDARY`。关系来源、状态和核验独立于 Question 本体，题目引擎只在显式目标 `knowledgePointId` 上读取匹配关系。
 
-PHASE 9 Demo 只提供六道原创 SAMPLE 题和七条题目-知识点关系，用于验证固定 Assessment、结构化题型、确定性判题、提交锁定和会话恢复。它不构成三科真实教材题库，不改变课程教材、Lesson 或知识点事实，也不产生 `MasteryEvent`、`KnowledgeEnergy` 或奖励记录。
+PHASE 9 Demo 只提供六道原创 SAMPLE 题和七条题目-知识点关系，用于验证固定 Assessment、结构化题型、确定性判题、提交锁定和会话恢复。它不构成三科真实教材题库，不改变课程教材、Lesson 或知识点事实。PHASE 10 可在显式开发流程中消费其 QuestionAttempt，产生带 SAMPLE 标记的 LearningEvidence；这不代表真实教材证据。
+
+## 17. PHASE 10 Mastery 证据消费边界
+
+PHASE 10 只消费课程域提供的题目事实、知识点关系、关系权重、题目难度和来源核验状态；它不改变课程层级，也不把 Lesson / Map completion 当作掌握度证据：
+
+```text
+Question + QuestionKnowledgePoint + QuestionAttempt
+  ↓（仅限 completed QuestionSession）
+LearningEvidence
+  ↓
+MasteryRecord（按 studentProfileId + knowledgePointId）
+```
+
+- 每个 `QuestionKnowledgePoint.weight` 必须满足 `0 < weight <= 1`；同一题关系权重总和约等于 `1`。一道题覆盖多个知识点时，一次作答为每个关系生成独立证据。
+- 题目 `difficulty` 仍是 `FOUNDATION / STANDARD / ADVANCED`，在证据层归一化为 `1 / 3 / 5`，只作为权重输入，不等于掌握度。
+- 只有已提交且结果为 `correct` / `incorrect` 的作答进入证据；未完成 Session、未提交题、孤儿题目、缺失映射和 `manual_review_required` 只记录诊断。
+- 题目和关系必须通过集中访问闸门才能进入生产掌握度；SAMPLE / UNVERIFIED 只能在开发页显式展示并保留来源标记。
+- `MasteryRecord` 的 `masteryScore` 表示已有学习证据，不做时间衰减；`KnowledgeEnergy`、复习排程、错题本、奖励和自适应路径不属于当前课程域实现。

@@ -1,13 +1,13 @@
 # 知识岛｜Question Engine 实现说明
 
-> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment、判题和 LessonPlayer 接入。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md` 或 `CONTENT_REVIEW.md`。
+> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment 和 LessonPlayer 接入，以及 PHASE 10 的掌握度后处理边界。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md` 或 `MASTERY.md`。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 9.4：Question Engine / Assessment |
-| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门和 LessonPlayer 回链已实现 |
+| 当前阶段 | PHASE 10.4：Mastery Model（Question Engine 作为上游） |
+| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门、LessonPlayer 回链和完成 Session 的掌握度后处理已实现；Question Engine 仍不直接拥有掌握度 |
 | 正式入口 | `/assessment`；需要显式 `AssessmentLaunchContext` |
 | 开发入口 | `/dev/question-engine`、`/dev/question-engine/states` |
 | 题目数据 | 6 道原创 Demo SAMPLE 题；不代表真实教材内容 |
@@ -65,7 +65,7 @@ QuestionAttemptResult / AssessmentResultSummary
 
 ## 5. 与学习行为域的隔离
 
-PHASE 9 的 `QuestionAttemptResult` 只描述本次作答。它不会创建或更新 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 仍只受七种 `MasteryEvent` 影响，不因日期流逝自动下降；遗忘和复习提醒仍由 `KnowledgeEnergy` 独立处理。
+`QuestionAttemptResult` 只描述本次作答。Question Engine 不直接创建或更新 `MasteryEvent`、`MasteryRecord`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`；完成 Session 后，页面显式调用独立 `MasteryProcessingService`，由它读取 Attempt 并派生 LearningEvidence / MasteryRecord。`masteryScore` 不因日期流逝自动下降；KnowledgeEnergy 仍是未实现的独立复习信号域。
 
 ## 6. 主要实现文件
 
@@ -80,4 +80,8 @@ PHASE 9 的 `QuestionAttemptResult` 只描述本次作答。它不会创建或�
 
 ## 7. 当前限制与后续边界
 
-当前只实现 PHASE 9 明确的六类题型和本地 Demo；拖拽、匹配、排序、听力、阅读、口语等题型仍为协议或后续接口。简答需要人工审核，当前没有审核工作台。正式题库、真实教材关联、题目推荐、自适应难度、AI 出题、AI 评分、掌握度、知识能量、错题本和奖励均留待后续阶段。
+当前运行时实现 PHASE 9 明确的六类题型和本地 Demo；拖拽、匹配、排序、听力、阅读、口语等题型仍为协议或后续接口。简答需要人工审核，当前没有审核工作台。正式题库、真实教材关联、题目推荐、自适应难度、AI 出题、AI 评分、知识能量、错题本和奖励仍留待后续阶段；Mastery 已由 PHASE 10 的独立服务接入。
+
+## 8. PHASE 10 后处理边界
+
+已完成的 `QuestionSession` 通过 `MasteryProcessingService` 进入 `LearningEvidence` → `MasteryEngine` → `MasteryRecord`。未提交题、未完成 Session、孤儿题目、缺少关系和 `manual_review_required` 只产生诊断。掌握度处理失败不回滚已完成的 Assessment，也不修改 QuestionAttempt；生产证据仍要求 Question 与 QuestionKnowledgePoint 关系通过审核闸门，SAMPLE / UNVERIFIED 只在开发入口显式使用。

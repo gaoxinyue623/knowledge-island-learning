@@ -1,4 +1,5 @@
 import type { Id, SubjectCode, VerificationStatus } from './domain'
+import type { KnowledgeMasteryViewModel } from './mastery'
 
 export type LearningNodeStatus =
   'locked' | 'available' | 'learning' | 'completed' | 'mastered' | 'perfect'
@@ -119,6 +120,8 @@ export interface KnowledgeMapNode {
   role?: LearningMapLessonKnowledgeRole
   weight?: number
   sort: number
+  /** Completion state and mastery state are intentionally separate. */
+  mastery?: KnowledgeMasteryViewModel
 }
 
 export interface LessonMapSection {

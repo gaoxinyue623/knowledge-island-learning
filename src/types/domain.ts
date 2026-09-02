@@ -308,6 +308,33 @@ export interface QuestionExplanation {
   misconceptionTags?: string[]
 }
 
+export interface QuestionDragDropItem {
+  itemKey: string
+  content: ContentBlock[]
+}
+
+export interface QuestionDragDropTarget {
+  targetKey: string
+  content: ContentBlock[]
+}
+
+export interface QuestionMatchingItem {
+  key: string
+  content: ContentBlock[]
+}
+
+export interface QuestionSortingItem {
+  itemKey: string
+  content: ContentBlock[]
+}
+
+/** Sentence tokens intentionally remain a stable, plain-text structure. */
+export interface QuestionSentenceToken {
+  tokenKey: string
+  text: string
+  sortOrder: number
+}
+
 export interface QuestionBase {
   id: Id
   questionType: QuestionType
@@ -439,8 +466,12 @@ export type QuestionAnswerRule =
 export interface Question extends QuestionBase {
   answerRule: QuestionAnswerRule
   options?: QuestionOption[]
-  draggableItems?: Array<{ itemKey: string; label: string }>
-  targets?: Array<{ targetKey: string; label: string }>
+  draggableItems?: QuestionDragDropItem[]
+  targets?: QuestionDragDropTarget[]
+  leftItems?: QuestionMatchingItem[]
+  rightItems?: QuestionMatchingItem[]
+  items?: QuestionSortingItem[]
+  tokens?: QuestionSentenceToken[]
   subQuestionIds?: Id[]
 }
 
@@ -455,11 +486,14 @@ export interface QuestionKnowledgePoint {
   questionId: Id
   knowledgePointId: Id
   relationType: QuestionKnowledgePointRelationType
+  /** Normalized contribution weight; all mappings for one question sum to 1. */
+  weight: number
   order: number
   isPrimary: boolean
   sourceId: Id
   status: StructuralStatus
   needsVerification: boolean
+  isSample?: boolean
   verificationStatus?: VerificationStatus
 }
 
@@ -543,6 +577,28 @@ export type MasteryEventType =
   | 'REVIEW_WRONG'
   | 'CHALLENGE_CORRECT'
 
+/**
+ * Legacy event contract retained for compatibility with the PHASE 2 data
+ * model. PHASE 10 derives LearningEvidence from QuestionAttempt instead of
+ * writing these events; no time-based mutation is attached to this model.
+ */
+export interface MasteryEvent {
+  id: Id
+  studentId: Id
+  knowledgePointId: Id
+  questionId?: Id
+  mapNodeId?: Id
+  eventType: MasteryEventType
+  attemptId: Id
+  hintCount: number
+  occurredAt: string
+  metadata?: Record<string, unknown>
+}
+
+/**
+ * Legacy read model retained for migration compatibility. New PHASE 10
+ * consumers use MasteryRecord from mastery.ts.
+ */
 export interface KnowledgeMastery {
   id: Id
   studentId: Id

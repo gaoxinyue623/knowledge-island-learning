@@ -14,6 +14,7 @@ import './styles/curriculum.css'
 import './styles/learning-map.css'
 import './styles/lesson-player.css'
 import './styles/question-engine.css'
+import './styles/mastery.css'
 
 const app = createApp(App)
 

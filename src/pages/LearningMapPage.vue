@@ -14,12 +14,14 @@ import NodeDetailPanel from '@/components/learning-map/NodeDetailPanel.vue'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { findLearningMapNode, useLearningMapStore } from '@/stores/learningMapStore'
+import { useMasteryStore } from '@/stores/masteryStore'
 import type { Id, KnowledgeMapNode, LearningMapViewModel } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
 const curriculumStore = useCurriculumStore()
 const learningMapStore = useLearningMapStore()
+const masteryStore = useMasteryStore()
 const notice = ref<{
   type: 'success' | 'info' | 'warning'
   title: string
@@ -62,7 +64,12 @@ function findCurrentModelNode(model: LearningMapViewModel | null): KnowledgeMapN
 async function loadMap() {
   const textbookId = profile.value?.mathTextbookVersionId
   if (!textbookId) return
-  const loaded = await learningMapStore.loadMap({ dataset: 'profile', textbookId })
+  await masteryStore.load(profile.value?.studentId ?? 'local-profile')
+  const loaded = await learningMapStore.loadMap({
+    dataset: 'profile',
+    textbookId,
+    masteryRecords: masteryStore.records,
+  })
   const focusNodeId = typeof route.query.focusNodeId === 'string' ? route.query.focusNodeId : null
   if (loaded && focusNodeId) learningMapStore.focusNode(focusNodeId)
 }
@@ -196,6 +203,7 @@ onMounted(() => void loadMap())
           :is-sample="selectedNode?.isSample || viewModel.flags.isDemo"
           :is-unverified="viewModel.flags.isUnverified"
           :is-read-only="viewModel.flags.isReadOnly"
+          :mastery="selectedNode?.mastery"
           @close="closeNodeDetail"
           @start="startSelectedNode"
           @complete="completeSelectedNode"

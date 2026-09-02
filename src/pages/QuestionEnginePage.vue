@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -11,7 +11,9 @@ import AppProgress from '@/components/common/AppProgress.vue'
 import QuestionRenderer from '@/components/question-engine/QuestionRenderer.vue'
 import AppShell from '@/layouts/AppShell.vue'
 import { correctAnswerDraft } from '@/services/question-engine'
+import { masteryService } from '@/services/mastery'
 import { useQuestionEngineStore } from '@/stores/questionEngineStore'
+import { useMasteryStore } from '@/stores/masteryStore'
 import { useStudentStore } from '@/stores/studentStore'
 import type {
   AssessmentLaunchContext,
@@ -23,6 +25,7 @@ import type {
 const route = useRoute()
 const router = useRouter()
 const questionEngineStore = useQuestionEngineStore()
+const masteryStore = useMasteryStore()
 const studentStore = useStudentStore()
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/question-engine'))
@@ -103,6 +106,8 @@ const mapNodeId = computed(() =>
 
 const viewModel = computed(() => questionEngineStore.viewModel)
 const currentQuestion = computed(() => questionEngineStore.currentQuestion)
+const masteryProcessingStatus = ref<'idle' | 'processing' | 'updated' | 'error'>('idle')
+const masteryProcessingMessage = ref<string | null>(null)
 const progressLabel = computed(() => {
   if (!viewModel.value) return '—'
   return `${viewModel.value.session.currentQuestionIndex + 1} / ${viewModel.value.session.totalQuestions}`
@@ -121,11 +126,37 @@ const demoStateOptions: Array<{ value: QuestionEngineDemoState; label: string }>
 
 async function loadAssessment() {
   if (!context.value) return
+  masteryProcessingStatus.value = 'idle'
+  masteryProcessingMessage.value = null
   await questionEngineStore.loadAssessment(context.value, {
     dataset: dataset.value,
     demoState: demoState.value,
     studentId: studentStore.profile?.id ?? 'local-profile',
   })
+  if (questionEngineStore.session?.status === 'completed') await processCompletedSession()
+}
+
+async function processCompletedSession(): Promise<void> {
+  const session = questionEngineStore.session
+  if (!session) return
+  masteryProcessingStatus.value = 'processing'
+  masteryProcessingMessage.value = null
+  try {
+    const result = await masteryService.processCompletedQuestionSession(
+      studentStore.profile?.id ?? 'local-profile',
+      session,
+      { dataset: dataset.value },
+    )
+    await masteryStore.load(studentStore.profile?.id ?? 'local-profile')
+    masteryProcessingStatus.value = 'updated'
+    masteryProcessingMessage.value = result.appendedEvidence.length
+      ? `已根据 ${result.appendedEvidence.length} 条作答证据更新知识掌握。`
+      : '这次练习的掌握度记录已经更新过。'
+  } catch (caught) {
+    masteryProcessingStatus.value = 'error'
+    masteryProcessingMessage.value =
+      caught instanceof Error ? caught.message : '掌握度暂时未更新，但本次练习仍已完成。'
+  }
 }
 
 function returnToLesson(completed = false) {
@@ -166,7 +197,10 @@ async function submitAnswer() {
 
 async function nextQuestion() {
   if (questionEngineStore.canGoNext) await questionEngineStore.goNext()
-  else if (questionEngineStore.canComplete) await questionEngineStore.completeAssessment()
+  else if (questionEngineStore.canComplete) {
+    const completed = await questionEngineStore.completeAssessment()
+    if (completed) await processCompletedSession()
+  }
 }
 
 async function previousQuestion() {
@@ -218,6 +252,7 @@ async function completeDemoAssessment() {
     if (index < questionEngineStore.questions.length - 1) await questionEngineStore.goNext()
   }
   await questionEngineStore.completeAssessment()
+  await processCompletedSession()
 }
 
 async function clearDemoStorage() {
@@ -411,7 +446,21 @@ watch(
           >
             <AppIcon name="check-circle" :size="44" color="var(--color-success)" decorative />
             <h2 id="assessment-completion-title">本次练习完成</h2>
-            <p>这次结果只描述本组题目的作答情况，不代表知识掌握度。</p>
+            <p>这次结果描述本组题目的作答情况；掌握度会由作答证据单独计算。</p>
+            <div
+              v-if="masteryProcessingStatus !== 'idle'"
+              class="question-engine__mastery-status"
+              :class="`question-engine__mastery-status--${masteryProcessingStatus}`"
+              role="status"
+            >
+              <AppIcon
+                :name="masteryProcessingStatus === 'error' ? 'alert-circle' : 'sparkles'"
+                :size="20"
+                decorative
+              />
+              <span v-if="masteryProcessingStatus === 'processing'">正在整理本次作答证据……</span>
+              <span v-else>{{ masteryProcessingMessage }}</span>
+            </div>
             <div class="question-engine__result-grid" role="region" aria-label="本次练习结果">
               <div class="question-engine__result-item">
                 <strong>{{ viewModel.resultSummary.correctCount }}</strong

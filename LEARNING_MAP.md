@@ -1,13 +1,13 @@
 # 知识岛｜LearningMap 领域与实现说明
 
-> 本文档记录 PHASE 7.1～7.4 的 LearningMap 实现事实、边界和 PHASE 8 LessonPlayer 回链验证结果。它描述地图展示层，不替代 `CURRICULUM.md`、`DATA_MODEL.md` 的课程事实，也不代表题目或正式学习算法已经实现。
+> 本文档记录 PHASE 7.1～7.4 的 LearningMap 实现事实、PHASE 8 LessonPlayer / PHASE 9 Question Engine 回链，以及 PHASE 10 掌握度展示边界。它描述地图展示层，不替代 `CURRICULUM.md`、`DATA_MODEL.md` 和 `MASTERY.md` 的课程与学习事实。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 8.4：LessonPlayer / Knowledge Learning Flow 验证与质量收尾 |
-| 状态 | PHASE 7 地图与 PHASE 8 LessonPlayer 回链已实现并验证；完成后停止，不进入 PHASE 9 |
+| 当前阶段 | PHASE 10.4：Mastery Model 集成后的地图展示验证 |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 回链与 PHASE 10 掌握度辅助展示已实现并验证；PHASE 10 完成后停止 |
 | 正式入口 | `/learning-map` |
 | 开发入口 | `/dev/learning-map`、`/dev/learning-map/states` |
 | 主要模块 | `src/services/learning-map/`、`src/stores/learningMapStore.ts`、`src/components/learning-map/` |
@@ -44,7 +44,7 @@ Knowledge Island 是课程事实在学生学习体验中的地图投影。它帮
 | `mastered` | 开发 fixture 的完成状态 | 仅展示，不由分数推导 |
 | `perfect` | 开发 fixture 的完成状态 | 仅展示，不由分数推导 |
 
-`mastered` 和 `perfect` 不是 `MasteryScore` 输出。PHASE 7 不实现掌握度算法、答题评分或 KnowledgeEnergy；地图的“完成度”也不能称为“掌握率”。
+`mastered` 在 PHASE 10 的掌握度 ViewModel 中可以表示 KnowledgeLearningState；地图自身的 `perfect` 仍只是 Presentation fixture。地图的“完成度”不能称为“掌握率”，掌握度也不反向修改地图状态。
 
 ## 3. 解锁规则
 
@@ -75,7 +75,7 @@ interface LearningMapProgressRecord {
 }
 ```
 
-它只表示地图演示完成度，不替代 `StudentProgress`、`MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy` 或未来 `QuestionAttempt`。
+它只表示地图演示完成度，不替代 `StudentProgress`、`MasteryEvent`、`LearningEvidence`、`MasteryRecord`、`KnowledgeEnergy` 或 `QuestionAttempt`。地图进度存储与掌握度存储保持独立。
 
 - KnowledgePoint 完成度 = 已完成节点 / 节点总数。
 - Lesson 完成度 = 已完成 KnowledgePoint 节点 / 该 Lesson 节点总数。
@@ -121,12 +121,14 @@ interface LearningMapProgressStoragePayload {
 - 开发地图上的“开始学习”携带 `textbookId`、`unitId`、`lessonId`、`knowledgePointId` 和 `mapNodeId`，不由页面猜测课程关系。
 - LessonPlayer 完成步骤后调用独立 `LearningMapCompletionService`，服务写入版本化地图进度并返回原节点；不直接操作 `learningMapStore`。
 - 地图完成度仍只表示地图节点完成，不是学习掌握度；Lesson completion 不产生 `MasteryEvent` 或 `KnowledgeEnergy`。
+- PHASE 10 可以把 `MasteryRecord` 转成可选的节点掌握度展示投影，展示分数、状态、证据数量和 SAMPLE / 来源提示；该投影不参与地图完成、节点 `status` 或前置解锁。
+- `masteryScore` 不使用时间衰减；KnowledgeEnergy、复习排程和 Spaced Repetition 不在当前地图实现范围。
 - 正式地图使用 `StudentCurriculumProfile.mathTextbookVersionId`；语文、数学、英语的选课事实仍由 Curriculum / Profile 域分别维护。
 
 ## 7. PHASE 8 回链与当前限制
 
-PHASE 8 已将开发地图节点接入 LessonPlayer：地图 → `LessonLaunchContext` → LessonPlayer 步骤 → 独立会话 → 完成服务 → 地图进度。正式 `/lesson` 仍执行 profile 与内容审核保护；开发 `/dev/lesson-player` 使用独立 Demo Lesson Fixture，并明确显示 SAMPLE / UNVERIFIED 状态。
+PHASE 8 已将开发地图节点接入 LessonPlayer：地图 → `LessonLaunchContext` → LessonPlayer 步骤 → 独立会话 → 完成服务 → 地图进度。PHASE 9 再通过 `AssessmentLaunchContext` 接入 Question Engine；PHASE 10 的完成 Session 由独立 `MasteryProcessingService` 处理，地图仅读取掌握度展示投影。正式 `/lesson` 仍执行 profile 与内容审核保护；开发 `/dev/lesson-player` 使用独立 Demo Lesson Fixture，并明确显示 SAMPLE / UNVERIFIED 状态。
 
-当前已实现结构化内容步骤、媒体回退、非评分互动、会话恢复和完成状态；仍没有 Question Engine、正式答题、自动判题、MasteryScore、KnowledgeEnergy、奖励、错题本、家长中心、真实题库或正式课程生成。
+当前已实现结构化内容步骤、媒体回退、非评分互动、会话恢复和完成状态；Question Engine、正式答题、自动判题、LearningEvidence、MasteryScore 和 MasteryRecord 已由后续阶段接入。仍没有 KnowledgeEnergy、复习排程、奖励、错题本、家长中心、真实题库或正式课程生成。
 
-PHASE 8 已完成并停止；PHASE 9 未开始。
+PHASE 10 已完成并停止；掌握度不参与地图解锁，不进入 PHASE 11。

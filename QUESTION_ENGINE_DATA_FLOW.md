@@ -17,6 +17,10 @@ flowchart TD
     V --> AR[QuestionAttemptResult]
     AR --> SUM[AssessmentResultSummary]
     SUM --> BACK[LessonPlayer summary / map return]
+    AR --> MP[MasteryProcessingService（completed session 后显式调用）]
+    MP --> E[LearningEvidence]
+    E --> ME[Deterministic MasteryEngine]
+    ME --> MR[MasteryRecord / MasteryStorage]
 ```
 
 正式和开发页面都必须先有完整的 `AssessmentLaunchContext`：`textbookId`、`unitId`、`lessonId`、`knowledgePointId` 和 `source`。正式入口只接收课程显式传入的上下文；开发入口可以使用固定 Demo Context，但不能从地区名称、标题或题干猜测关系。
@@ -42,17 +46,23 @@ flowchart TD
 
 全部题目提交后，Store 生成 `AssessmentResultSummary`。页面通过 `assessmentCompleted=true`、`focusStep=summary` 返回 LessonPlayer，LessonPlayer 只展示摘要并继续原有 LessonSession；需要回地图时仍使用显式的 `returnTo` 和 `mapNodeId`。
 
-结果不会继续流向课程事实或学习算法：
+Question Engine 本身不继续写入课程事实或学习算法；完成 Session 后，页面可以显式触发独立掌握度后处理：
 
 ```text
 QuestionAttemptResult
   └─> AssessmentResultSummary
         └─> LessonPlayer summary
 
-不会 ──> MasteryEvent / KnowledgeMastery / KnowledgeEnergy
+QuestionAttemptResult
+  └─> MasteryProcessingService
+        └─> LearningEvidence → MasteryEngine → MasteryRecord
+
+不会由 Question Engine 直接写入 ──> MasteryEvent / MasteryRecord / KnowledgeEnergy
 不会 ──> WrongQuestion / Reward / Adaptive selection
 ```
 
 ## 5. 错误与恢复
 
 `INVALID_CONTEXT`、`QUESTION_EMPTY`、`QUESTION_NOT_AVAILABLE`、`UNSUPPORTED_QUESTION` 和 Repository 错误都进入清晰的页面状态，不显示 `404`、`Null`、`Undefined` 或原始异常。Session 存储损坏时安全清理并从空白会话开始；孤儿 Attempt 在归一化时忽略并保留诊断。
+
+掌握度后处理失败时保留已完成的 QuestionSession 和 Assessment 结果，页面显示“学习状态暂未更新”并允许后续重试；它不会修改 Attempt、Question 或地图完成度。

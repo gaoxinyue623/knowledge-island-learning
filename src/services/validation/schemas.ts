@@ -136,6 +136,32 @@ const questionExplanationSchema = z.object({
   misconceptionTags: z.array(z.string()).optional(),
 })
 
+const questionDragDropItemSchema = z.object({
+  itemKey: z.string().min(1),
+  content: z.array(contentBlockSchema).min(1),
+})
+
+const questionDragDropTargetSchema = z.object({
+  targetKey: z.string().min(1),
+  content: z.array(contentBlockSchema).min(1),
+})
+
+const questionMatchingItemSchema = z.object({
+  key: z.string().min(1),
+  content: z.array(contentBlockSchema).min(1),
+})
+
+const questionSortingItemSchema = z.object({
+  itemKey: z.string().min(1),
+  content: z.array(contentBlockSchema).min(1),
+})
+
+const questionSentenceTokenSchema = z.object({
+  tokenKey: z.string().min(1),
+  text: z.string().min(1),
+  sortOrder: z.number().int().nonnegative(),
+})
+
 export const questionSchema = z.object({
   id: z.string().min(1),
   questionType: z.enum([
@@ -183,10 +209,12 @@ export const questionSchema = z.object({
   explanation: questionExplanationSchema,
   answerRule: questionAnswerRuleSchema,
   options: z.array(questionOptionSchema).optional(),
-  draggableItems: z
-    .array(z.object({ itemKey: z.string().min(1), label: z.string().min(1) }))
-    .optional(),
-  targets: z.array(z.object({ targetKey: z.string().min(1), label: z.string().min(1) })).optional(),
+  draggableItems: z.array(questionDragDropItemSchema).optional(),
+  targets: z.array(questionDragDropTargetSchema).optional(),
+  leftItems: z.array(questionMatchingItemSchema).optional(),
+  rightItems: z.array(questionMatchingItemSchema).optional(),
+  items: z.array(questionSortingItemSchema).optional(),
+  tokens: z.array(questionSentenceTokenSchema).optional(),
   subQuestionIds: z.array(z.string().min(1)).optional(),
   isSample: z.boolean(),
   verificationStatus: z

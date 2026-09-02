@@ -72,12 +72,24 @@ export const sampleQuestions: SampleQuestion[] = [
   {
     ...baseQuestion('SAMPLE_QUESTION_DRAG_DROP', 'dragDrop', 'SAMPLE_MATH_KP_02'),
     draggableItems: [
-      { itemKey: 'ITEM_A', label: '示例拖拽项 A' },
-      { itemKey: 'ITEM_B', label: '示例拖拽项 B' },
+      {
+        itemKey: 'ITEM_A',
+        content: [{ type: 'TEXT', text: '示例拖拽项 A' }],
+      },
+      {
+        itemKey: 'ITEM_B',
+        content: [{ type: 'TEXT', text: '示例拖拽项 B' }],
+      },
     ],
     targets: [
-      { targetKey: 'TARGET_A', label: '示例目标 A' },
-      { targetKey: 'TARGET_B', label: '示例目标 B' },
+      {
+        targetKey: 'TARGET_A',
+        content: [{ type: 'TEXT', text: '示例目标 A' }],
+      },
+      {
+        targetKey: 'TARGET_B',
+        content: [{ type: 'TEXT', text: '示例目标 B' }],
+      },
     ],
     answerRule: {
       ruleType: 'PLACEMENT',
@@ -124,11 +136,13 @@ const questionKnowledgePoint = (
   knowledgePointId: string,
   relationType: QuestionKnowledgePoint['relationType'] = 'PRIMARY',
   order = 1,
+  weight = 1,
 ): SampleRecord<QuestionKnowledgePoint> => ({
   id,
   questionId,
   knowledgePointId,
   relationType,
+  weight,
   order,
   isPrimary: relationType === 'PRIMARY',
   sourceId: 'SAMPLE_SOURCE_UNVERIFIED',

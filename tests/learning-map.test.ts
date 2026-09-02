@@ -12,6 +12,7 @@ import {
   flattenKnowledgeNodes,
   resolveNodeStates,
 } from '@/services/learning-map'
+import { buildMasteryRecord } from '@/services/mastery'
 import type { LearningMapProgressRecord, LearningMapViewModel } from '@/types'
 import { useLearningMapStore } from '@/stores/learningMapStore'
 
@@ -89,6 +90,61 @@ describe('LearningMap curriculum adapter', () => {
     expect(next.islands[0]?.lessons[0]?.progress).toBe(100)
     expect(next.islands[0]?.progress).toBe(50)
     expect(next.progress).toEqual({ completedNodes: 3, totalNodes: 18, percentage: 17 })
+  })
+
+  it('attaches mastery as a separate knowledge view without changing map completion or unlock state', () => {
+    const initial = buildLearningMapViewModel(demoLearningMapSource, [], {
+      masteryRecords: [
+        buildMasteryRecord({
+          studentProfileId: 'student-a',
+          knowledgePointId: 'DEMO_KP_01',
+          evidence: [
+            {
+              id: 'map-mastery-1',
+              type: 'question_attempt',
+              studentProfileId: 'student-a',
+              knowledgePointId: 'DEMO_KP_01',
+              source: { questionId: 'map-question-1' },
+              outcome: 'correct',
+              questionDifficulty: 3,
+              knowledgeWeight: 1,
+              evidenceWeight: 1,
+              occurredAt: '2026-09-01T00:00:00.000Z',
+            },
+            {
+              id: 'map-mastery-2',
+              type: 'question_attempt',
+              studentProfileId: 'student-a',
+              knowledgePointId: 'DEMO_KP_01',
+              source: { questionId: 'map-question-2' },
+              outcome: 'correct',
+              questionDifficulty: 3,
+              knowledgeWeight: 1,
+              evidenceWeight: 1,
+              occurredAt: '2026-09-01T00:00:01.000Z',
+            },
+            {
+              id: 'map-mastery-3',
+              type: 'question_attempt',
+              studentProfileId: 'student-a',
+              knowledgePointId: 'DEMO_KP_01',
+              source: { questionId: 'map-question-3' },
+              outcome: 'correct',
+              questionDifficulty: 3,
+              knowledgeWeight: 1,
+              evidenceWeight: 1,
+              occurredAt: '2026-09-01T00:00:02.000Z',
+            },
+          ],
+        }),
+      ],
+    })
+    const nodes = nodesOf(initial)
+    expect(nodes[0]?.mastery?.state).toBe('mastered')
+    expect(nodes[0]?.mastery?.score).toBe(100)
+    expect(nodes[0]?.status).toBe('available')
+    expect(nodes[1]?.status).toBe('locked')
+    expect(initial.progress).toEqual({ completedNodes: 0, totalNodes: 18, percentage: 0 })
   })
 
   it('keeps layout positions stable for the same curriculum', () => {

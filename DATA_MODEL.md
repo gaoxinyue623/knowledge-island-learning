@@ -1,17 +1,17 @@
 # 知识岛课程与学习数据模型
 
-> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`LESSON_PLAYER.md` 和 `QUESTION_ENGINE.md` 为准。
+> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`QUESTION_SCHEMA.md` 和 `MASTERY.md` 为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 2.2、PHASE 6～8 数据契约） |
-| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession 和 Question Engine 运行模型已实现并验证 |
+| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9 数据契约） |
+| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession、LearningEvidence、MasteryRecord 和确定性 Mastery Engine 已实现并验证 |
 | 上游事实源 | `PRODUCT.md`；课程层级规则见 `CURRICULUM.md` |
 | 下游消费者 | 题目协议、内容审核、MVP 课程占位数据、后续 API / 数据库设计 |
 | 权威维护者 | 数据 / 教研负责人（待确定） |
-| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player` 和 `src/services/question-engine` 已实现；真实课程数据仍未核验 |
+| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player`、`src/services/question-engine` 和 `src/services/mastery` 已实现；真实课程数据仍未核验 |
 
 ---
 
@@ -324,6 +324,11 @@ interface ContentBlock {
 | `estimatedSeconds` | integer | 是 | 配置 | 预计作答秒数 |
 | `tags` | string[] | 否 | 权威 | 检索与分析标签 |
 | `media` | `QuestionMedia[]` | 否 | 引用 / 版本化 | 只保存 `mediaAssetId`、用途和顺序 |
+| `options` | `QuestionOption[]` | 否 | 版本化 | 选项内容使用 `ContentBlock[]` |
+| `draggableItems` / `targets` | structured[] | 否 | 版本化 | 拖拽项和目标均使用 `content: ContentBlock[]` |
+| `leftItems` / `rightItems` | structured[] | 否 | 版本化 | 匹配项均使用 `content: ContentBlock[]` |
+| `items` | structured[] | 否 | 版本化 | 排序项使用 `content: ContentBlock[]` |
+| `tokens` | structured[] | 否 | 版本化 | 句子 token 保持 `tokenKey`、`text`、`sortOrder` 纯文字结构 |
 | `gradeId` | ID | 否 | 快照 | 从权威课程范围生成的查询快照 |
 | `semesterId` | ID | 否 | 快照 | 查询快照 |
 | `subjectId` | ID | 否 | 快照 | 查询快照；主学科仍由知识点确认 |
@@ -346,6 +351,7 @@ interface ContentBlock {
 | `questionId` | ID | 是 | 引用 | 题目 |
 | `knowledgePointId` | ID | 是 | 引用 | 知识点 |
 | `relationType` | enum | 是 | 权威 | `PRIMARY`、`SECONDARY` |
+| `weight` | number | 是 | 配置 / 校验 | `0 < weight <= 1`；同一题全部关系权重总和约等于 `1` |
 | `order` | integer | 是 | 配置 | 同一题的知识点关系顺序 |
 | `isPrimary` | boolean | 是 | 派生 / 校验 | 是否为题目主关系；每题最多一个主关系 |
 | `sourceId` | ID | 是 | 引用 | 关系来源 |
@@ -760,92 +766,90 @@ PHASE 5 的 Mock Adapter 以显式的本地 SAMPLE 模式读取 `DRAFT`、`needs
 - 复习关答对记为 `REVIEW_CORRECT`。
 - 挑战关答对记为 `CHALLENGE_CORRECT`。
 
-### 5.4 KnowledgeMastery
+### 5.4 LearningEvidence
+
+`LearningEvidence` 是 PHASE 10 掌握度的原始、可追溯证据。当前唯一正式证据类型是已完成 `QuestionSession` 中，关联到已提交且可判定为 `correct` 或 `incorrect` 的 `QuestionAttempt`。`LessonSession`、`MapNode` 完成和 `Assessment` 完成本身都不是直接证据。
 
 | 字段 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
-| `id` | ID | 是 | 掌握度记录标识 |
-| `studentId` | ID | 是 | 学生 |
+| `id` | ID | 是 | 由 `studentProfileId + questionSessionId + questionId + knowledgePointId` 稳定生成，不能使用随机数 |
+| `type` | enum | 是 | 当前为 `question_attempt` |
+| `studentProfileId` | ID | 是 | 学习档案隔离边界 |
+| `knowledgePointId` | ID | 是 | 被该证据测量的知识点 |
+| `source.questionId` | ID | 是 | 题目来源 |
+| `source.questionAttemptId` | ID | 否 | 稳定的题目作答标识 |
+| `source.assessmentId` / `questionSessionId` | ID | 否 | Assessment / Session 来源 |
+| `outcome` | enum | 是 | `correct` 或 `incorrect` |
+| `questionDifficulty` | integer | 是 | 归一化难度；现有 `FOUNDATION / STANDARD / ADVANCED` 对应 `1 / 3 / 5` |
+| `knowledgeWeight` | number | 是 | 题目到该知识点的关系权重；`0 < weight <= 1` |
+| `evidenceWeight` | number | 是 | `knowledgeWeight × difficultyWeight` |
+| `occurredAt` | datetime | 是 | 提交发生时间 |
+| `metadata` | object | 否 | 来源核验状态、`isSample` 和题目版本等溯源信息 |
+
+一条题目作答可以通过多条 `QuestionKnowledgePoint` 关系生成多条证据；每条证据独立进入对应知识点。`manual_review_required` 不产生正确或错误证据，只记录 diagnostic。
+
+### 5.5 MasteryRecord
+
+`MasteryRecord` 是由证据重算得到的知识点读取模型，不是单次加减分事件。它与题目会话、地图进度和课程内容分开存储：
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `studentProfileId` | ID | 是 | 学生学习档案；禁止跨档案聚合 |
 | `knowledgePointId` | ID | 是 | 知识点 |
-| `masteryScore` | integer | 是 | 0～100 的当前掌握度 |
-| `totalAttempts` | integer | 是 | 累计有效尝试数 |
-| `correctCount` | integer | 是 | 累计正确数 |
-| `firstCorrectCount` | integer | 是 | 首次正确次数 |
-| `hintCount` | integer | 是 | 使用提示次数 |
-| `wrongCount` | integer | 是 | 累计错误数 |
-| `algorithmVersion` | string | 是 | 计算该分数使用的算法版本，如 `MVP_V1` |
-| `lastLearnedAt` | datetime | 否 | 最近一次学习时间 |
-| `updatedAt` | datetime | 是 | 记录更新时间 |
+| `masteryScore` | number | 是 | `0～100`；表示当前已有学习证据，不随时间自动下降 |
+| `confidence` | number | 是 | `0～1`；表示证据充分程度，不是学生心理自信 |
+| `state` | enum | 是 | `not_started`、`learning`、`weak`、`mastered` |
+| `evidenceCount` | integer | 是 | 有效证据条数 |
+| `correctEvidenceCount` / `incorrectEvidenceCount` | integer | 是 | 有效正确 / 错误证据数 |
+| `lastEvidenceAt` | datetime | 否 | 最近证据时间；只用于展示，不参与时间衰减 |
+| `updatedAt` | datetime | 是 | 读取模型更新时间 |
+| `version` | integer | 是 | 记录版本 |
+| `algorithmVersion` | string | 是 | 当前为集中策略版本 `MASTERY_V1` |
+| `isSampleDerived` | boolean | 是 | 是否由 SAMPLE / 开发数据产生 |
+| `evidenceSourceStatus` | enum | 是 | `NONE`、`SAMPLE`、`UNVERIFIED`、`VERIFIED`、`REVIEWED`、`MIXED` |
 
-#### MVP v1 掌握度算法
+#### PHASE 10 确定性算法
 
-`masteryScore` 只表示学生当前已经产生的学习证据，不表示遗忘速度。MVP 使用事件增量和封顶 / 保底，不使用复杂 AI 模型。初始 `masteryScore = 0`，每次只因一条有效 `MasteryEvent` 更新：
+`masteryScore` 的唯一输入是 `LearningEvidence`。证据按稳定 ID 排序后计算，避免数组顺序影响结果：
 
 ```text
-newScore = clamp(oldScore + eventDelta, 0, 100)
-algorithmVersion = "MVP_V1"
+difficultyWeight = {
+  1: 0.8,
+  2: 0.9,
+  3: 1.0,
+  4: 1.1,
+  5: 1.2
+}
+
+evidenceWeight = knowledgeWeight × difficultyWeight
+outcomeValue(correct) = 1
+outcomeValue(incorrect) = 0
+
+masteryScore = clamp(
+  sum(outcomeValue × evidenceWeight) / sum(evidenceWeight) × 100,
+  0,
+  100
+)
+confidence = clamp(sum(evidenceWeight) / 5, 0, 1)
 ```
 
-事件增量：
-
-| `eventType` | 增量 | 设计理由 |
-| --- | ---: | --- |
-| `FIRST_CORRECT` | +12 | 首次独立正确，证据较强 |
-| `CORRECT` | +8 | 普通正确，持续积累 |
-| `CORRECT_AFTER_HINT` | +4 | 在提示帮助下完成，保留学习价值但降低权重 |
-| `WRONG` | -8 | 暴露当前理解问题 |
-| `REVIEW_CORRECT` | +10 | 复习后重新掌握 |
-| `REVIEW_WRONG` | -6 | 复习仍未掌握 |
-| `CHALLENGE_CORRECT` | +14 | 综合迁移正确，证据较强 |
+第一版集中策略为：`weakThreshold = 40`、`masteredThreshold = 80`、`minimumEvidenceForMastery = 3`、`minimumConfidenceForMastery = 0.5`。状态规则为：无证据是 `not_started`；有证据且分数低于 40 是 `weak`；达到 80 分但证据数或置信度不足仍是 `learning`；同时达到 80 分、至少 3 条证据和 0.5 置信度才是 `mastered`。
 
 算法约束：
 
-1. `masteryScore` 只允许受以下七种 `MasteryEvent.eventType` 影响：`FIRST_CORRECT`、`CORRECT`、`CORRECT_AFTER_HINT`、`WRONG`、`REVIEW_CORRECT`、`REVIEW_WRONG`、`CHALLENGE_CORRECT`。
-2. `hintCount`、`wrongCount`、首次正确次数和最近学习时间由事件累计或更新，不能由页面显示值反推；其中 `lastLearnedAt` 不参与分数衰减。
-3. 同一 `attemptId` 只能生成一次有效掌握事件。
-4. 日期流逝、长时间未学习和遗忘提醒不得直接修改 `masteryScore`，统一由 `KnowledgeEnergy` 处理。
-5. `masteryScore` 只用于推荐基础、进阶、挑战或复习，不直接惩罚或永久锁定学生。
-6. 分数区间继续沿用 `PRODUCT.md`：0～40 需要加强、40～70 基本掌握、70～90 掌握良好、90～100 熟练。
-7. 未来如替换算法，保留原事件记录和算法版本，不重写历史行为。
+1. 本阶段保留 `MasteryEvent` 事件模型及七种事件枚举：`FIRST_CORRECT`、`CORRECT`、`CORRECT_AFTER_HINT`、`WRONG`、`REVIEW_CORRECT`、`REVIEW_WRONG`、`CHALLENGE_CORRECT`；PHASE 10 的 Question Engine 集成不直接写入该旧事件模型，而是从 `QuestionAttempt` 派生 `LearningEvidence`。
+2. `masteryScore` 不读取当前时间、最近学习时间、复习间隔、连续天数或奖励状态；不存在 `recentDecay`。日期流逝和复习提醒属于未来独立的 `KnowledgeEnergy` 域，不在 PHASE 10 实现，也不能修改 `masteryScore`。
+3. 证据重放是幂等的；同一稳定证据 ID 不重复计数。历史证据保留，算法变更通过 `algorithmVersion` 区分并支持重算。
+4. `perfect` 仍只是地图 / Presentation 状态，不写入 `MasteryRecord`；本阶段不加入 `review`、Review Scheduling 或 Spaced Repetition 状态。
+5. SAMPLE / UNVERIFIED 证据只允许在显式开发流程使用，并在记录中保留来源状态；生产流程要求 Question 与 QuestionKnowledgePoint 关系均满足集中审核闸门。
 
-解释示例：如果 `masteryScore = 92`、`knowledgeEnergy = 30`，应解释为“曾经掌握很好，但到了复习时间”，不能解释为“掌握能力因为没有学习而自动下降”。
+示例：`masteryScore = 92`、未来 `knowledgeEnergy = 30` 的含义是“曾经掌握很好，但需要复习”，不是“掌握能力自动下降”。
 
-### 5.5 KnowledgeEnergy
+### 5.6 KnowledgeEnergy（后续阶段）
 
-知识能量与 `masteryScore` 分离。掌握度回答“学生学会了多少”，知识能量回答“多久没有复习、是否应该安排复习”。知识能量的衰减不会回写或扣减 `masteryScore`。
+`KnowledgeEnergy` 仍是独立的后续复习信号模型，用于表达“多久没有复习、是否需要提醒”。PHASE 10 不创建、更新或读取它，不实现时间衰减、复习排程或 Spaced Repetition；未来它不得回写或扣减 `MasteryRecord.masteryScore`。历史设计中如出现能量字段，只能作为待定产品设计保留，不能视为当前运行能力。
 
-| 字段 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| `id` | ID | 是 | 能量记录标识 |
-| `studentId` | ID | 是 | 学生 |
-| `knowledgePointId` | ID | 是 | 知识点 |
-| `energy` | integer | 是 | 0～100；产品层称为 `knowledgeEnergy` |
-| `lastReviewAt` | datetime | 否 | 最近一次复习时间 |
-| `nextReviewAt` | datetime | 否 | 下一次建议复习时间 |
-| `decayStage` | integer | 是 | 0～5，表示逾期衰减阶段 |
-| `reviewIntervalStage` | integer | 是 | 0～5，表示当前复习间隔阶段 |
-| `updatedAt` | datetime | 是 | 更新时间 |
-
-MVP 采用固定间隔，不使用机器学习：
-
-| `reviewIntervalStage` | 下一次复习间隔 |
-| ---: | ---: |
-| 0 | 1 天 |
-| 1 | 3 天 |
-| 2 | 7 天 |
-| 3 | 14 天 |
-| 4 或 5 | 30 天 |
-
-规则：
-
-- 首次完成有效学习后，能量从 0 提升到 80，间隔阶段为 0，设置 1 天后复习。
-- `REVIEW_CORRECT`：能量增加 20（封顶 100），间隔阶段加 1，按新阶段设置 `nextReviewAt`。
-- `REVIEW_WRONG`：能量减少 20（保底 0），间隔阶段减 1（保底 0），下一次复习安排在 1 天后。
-- 读取或定时更新时，按已逾期的间隔数增加 `decayStage`，每个阶段扣 10 能量，最多扣至 0；不需要为每个自然日写一条事件。
-- 上述能量扣减只修改 `KnowledgeEnergy.energy` 与 `decayStage`，绝不修改 `KnowledgeMastery.masteryScore`。
-- 能量下降只产生复习提醒，不造成惩罚性锁关。
-
-### 5.6 WrongQuestion
+### 5.7 WrongQuestion
 
 | 字段 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
@@ -862,7 +866,7 @@ MVP 采用固定间隔，不使用机器学习：
 
 错题记录只能从作答事件生成；复习不得删除历史错误，`mastered` 只是当前复习状态。
 
-### 5.7 AssessmentDefinition
+### 5.8 AssessmentDefinition
 
 `AssessmentDefinition` 定义一次练习的固定题目集合。PHASE 9 的练习不按随机数、实时难度或模型推荐抽取题目；`questionIds` 的顺序就是学生看到的顺序。
 
@@ -875,7 +879,7 @@ MVP 采用固定间隔，不使用机器学习：
 
 启动练习时使用完整 `AssessmentLaunchContext`：`textbookId`、`unitId`、`lessonId`、`knowledgePointId` 和 `source`。Context 必须由 LessonPlayer 或受控开发入口显式提供，不能从页面标题或题目名称猜测。
 
-### 5.8 QuestionSession 与 QuestionAttempt
+### 5.9 QuestionSession 与 QuestionAttempt
 
 `QuestionSession` 是一次 Assessment 的可恢复作答容器，不是课程事实，也不替代 `LessonSession`。`QuestionAttempt` 保存每道题当前草稿或最终提交结果；提交后答案和结果锁定。
 
@@ -906,7 +910,7 @@ interface QuestionAttempt {
 }
 ```
 
-会话 ID 由学生、Assessment 和完整课程上下文确定性生成；本地载荷使用 `knowledge-island.question-sessions` 与 `{ schemaVersion: 1, sessions }`。损坏 JSON 会安全清理，孤儿题目尝试会在读取时忽略，题目版本保留在尝试记录中以支持历史解释。Assessment 分数只描述本次作答，不自动创建 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。
+会话 ID 由学生、Assessment 和完整课程上下文确定性生成；本地载荷使用 `knowledge-island.question-sessions` 与 `{ schemaVersion: 1, sessions }`。损坏 JSON 会安全清理，孤儿题目尝试会在读取时忽略，题目版本保留在尝试记录中以支持历史解释。Assessment 分数只描述本次作答；Session 完成后必须由显式 `MasteryProcessingService` 读取 `QuestionAttempt` 并派生 `LearningEvidence`，再重算独立的 `MasteryRecord`。Question Store 不直接写入 Mastery Store；处理失败不能把已完成 Assessment 改回未完成。
 
 ---
 
@@ -1028,6 +1032,13 @@ erDiagram
     ASSESSMENT_DEFINITION ||--o{ QUESTION_SESSION : instantiates
     QUESTION_SESSION ||--o{ QUESTION_ATTEMPT : records
     QUESTION ||--o{ QUESTION_ATTEMPT : answered
+    QUESTION_ATTEMPT ||--o{ LEARNING_EVIDENCE : produces
+    QUESTION_SESSION ||--o{ LEARNING_EVIDENCE : scopes
+    QUESTION ||--o{ LEARNING_EVIDENCE : sources
+    KNOWLEDGE_POINT ||--o{ LEARNING_EVIDENCE : measures
+    STUDENT_CURRICULUM_PROFILE ||--o{ LEARNING_EVIDENCE : owns
+    STUDENT_CURRICULUM_PROFILE ||--o{ MASTERY_RECORD : owns
+    KNOWLEDGE_POINT ||--o{ MASTERY_RECORD : summarizes
 ```
 
 ### 7.1 环依赖控制
@@ -1038,6 +1049,8 @@ erDiagram
 - `KnowledgePoint` 的父子关系和前置关系只允许无环图。
 - `MapNode.prerequisiteNodeIds` 也必须通过有向无环校验；不通过校验的地图不能激活。
 - `ContentVersion` 只保存版本链，审核记录指向具体版本，不将审核结果写回历史正文。
+- `LearningEvidence` 和 `MasteryRecord` 是学习行为域；它们不反向连接或修改 `LearningMap` 的完成度、节点解锁或课程主链。
+- `MasteryRecord` 只由 `LearningEvidence` 确定性重算；地图和节点详情只能读取可选掌握度展示投影。
 
 ---
 
@@ -1049,6 +1062,9 @@ erDiagram
 2. `LessonKnowledgePointRelation` 不存在错误的一对一假设，且主关系已核验。
 3. 知识树与前置关系无环。
 4. `TEXTBOOK` 内容和题目具备可核验来源与教材范围。
+5. 每道题的 `QuestionKnowledgePoint.weight` 均满足 `0 < weight <= 1`，且同题关系权重总和约等于 `1`。
+6. 正式掌握度只接受已完成 Session 中可判定的题目作答；`manual_review_required`、未提交题、孤儿题目和缺失关系只生成诊断，不产生证据。
+7. `masteryScore` 和 `confidence` 分别限制在 `0～100` 与 `0～1`；算法版本必须持久化，重放结果必须与证据顺序无关。
 5. 每个 `Question` 至少有一个有效的 `QuestionKnowledgePoint` 关系，并有且仅有一个 `PRIMARY`；题型数据符合 `QUESTION_SCHEMA.md`。
 6. `Question` 的查询快照可由权威关系重建，且没有未解释冲突；旧 `knowledgePointId` 不得成为唯一依据。
 7. 课程内容和题目引用的每个 `MediaAsset` 均存在，来源、版权和版本状态可追踪。
@@ -1128,11 +1144,11 @@ interface LearningMapProgressRecord {
 }
 ```
 
-它不替代 `StudentProgress`、`MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy` 或未来的 `QuestionAttempt`。`learningMapStore` 通过版本化存储载荷按 `textbookId` 隔离记录；记录指向不存在的节点时只产生诊断并忽略。
+它不替代 `StudentProgress`、`MasteryEvent`、`LearningEvidence`、`MasteryRecord`、`KnowledgeEnergy` 或 `QuestionAttempt`。`learningMapStore` 通过版本化存储载荷按 `textbookId` 隔离记录；记录指向不存在的节点时只产生诊断并忽略。
 
 ### 12.4 PHASE 7 状态边界
 
-地图 `locked`、`available`、`learning`、`completed` 表达地图路径状态。`mastered` 与 `perfect` 只允许作为 demo / fixture 状态存在，禁止从 `masteryScore`、作答分数或日期流逝推导。地图完成度只计算已完成节点数 / 节点总数；它不是掌握率。
+地图 `locked`、`available`、`learning`、`completed` 表达地图路径状态；地图 `perfect` 仍只允许作为 demo / fixture 状态存在。PHASE 10 的 `MasteryRecord.state = mastered` 属于独立知识状态，不写入地图 status，也不参与解锁。禁止从日期流逝推导掌握度；地图完成度只计算已完成节点数 / 节点总数，它不是掌握率。
 
 - `src/services/curriculum/` 提供 `CurriculumImportPackageSchema`、`importCurriculumPackage`、`TextbookIdentity` key 生成、完整性 / DAG / 来源 / SAMPLE 污染检查和 `CurriculumReviewRecord` 状态迁移。
 - `src/data/curriculum/sample/` 是现有开发夹具的显式命名空间；`src/data/curriculum/verified/math/pep/g3-s1/` 只保存一个 `UNVERIFIED` Golden Sample Framework，不包含真实教材目录。
@@ -1234,6 +1250,24 @@ Answer Validator → QuestionAttemptResult → AssessmentResultSummary
 
 `AssessmentDefinition.questionIds` 提供固定顺序；PHASE 9 Demo 使用六道原创 SAMPLE 题，支持 `singleChoice`、`multipleChoice`、`trueFalse`、`fillBlank`、`calculation` 和 `shortAnswer`。Question Engine 只读取 `QuestionKnowledgePoint` 关系确定目标知识点，不用旧 `Question.knowledgePointId` 猜测归属。
 
-`QuestionSession` 独立保存草稿、提交锁定、题目版本和结果，分数 / 正确率只描述本次 Assessment。`shortAnswer` 返回 `manual_review_required`，不进行 AI 评分；任何 `QuestionAttemptResult` 都不会自动写入 `MasteryEvent`、`KnowledgeMastery`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。`masteryScore` 仍只受七种 `MasteryEvent` 影响，时间流逝只由 `KnowledgeEnergy` 处理。
+`QuestionSession` 独立保存草稿、提交锁定、题目版本和结果，分数 / 正确率只描述本次 Assessment。`shortAnswer` 返回 `manual_review_required`，不进行 AI 评分；Question Engine 不直接写入 `MasteryEvent`、`MasteryRecord`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`。完成 Session 后由显式 `MasteryProcessingService` 派生 `LearningEvidence` 并重算 `MasteryRecord`；`masteryScore` 不做时间衰减。
 
 PHASE 9 的正式题目读取继续服从独立的 Question 审核闸门；SAMPLE / UNVERIFIED 只在开发入口显式展示。第 5 组章节为学生学习行为，第 6 组章节为权威字段与查询快照，编号不重复。
+
+## 15. PHASE 10 Mastery 数据模型边界
+
+PHASE 10 新增 `LearningEvidence` 和 `MasteryRecord`，但不改变课程主链：
+
+```text
+QuestionSession（completed）
+  → QuestionAttempt（submitted + determinable result）
+  → LearningEvidence
+  → MasteryRecord（studentProfileId + knowledgePointId）
+```
+
+- `masteryScore` 的唯一输入是 LearningEvidence 的结果、QuestionKnowledgePoint 权重和题目难度权重；不使用 `recentDecay`、日期、旧分数、地图完成或 Lesson completion。
+- 现有七种 `MasteryEvent` 枚举继续保留为兼容事件模型，但 PHASE 10 的 Question 集成不直接写事件；证据由 QuestionAttempt 通过显式 Service 派生。
+- `QuestionKnowledgePoint.weight` 为必填 `0 < weight <= 1`，同题权重总和约等于 `1`；多知识点题目会产生多条 Evidence。
+- `manual_review_required`、未提交题、未完成 Session、孤儿 Question / KnowledgePoint 和非法权重均不得参与正式重算，只产生 diagnostic。
+- `MasteryRecord` 不属于 `DRAFT / ACTIVE / PUBLISHED` 内容生命周期；记录必须保存 `algorithmVersion`，存储 schemaVersion 当前为 `1`，重建必须确定性且幂等。
+- `LearningMap` 可读取掌握度 ViewModel 用于辅助显示，但不能将 `mastered` 当作地图完成、`perfect` 或解锁条件；`KnowledgeEnergy`、Review Scheduling、Spaced Repetition、WrongBook、Reward 和 Adaptive Learning 不在本阶段。

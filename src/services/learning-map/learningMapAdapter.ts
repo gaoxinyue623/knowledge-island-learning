@@ -7,6 +7,7 @@ import type {
   LearningMapProgressRecord,
   LearningMapViewModel,
   LessonMapSection,
+  MasteryRecord,
   UnitIsland,
 } from '@/types'
 
@@ -19,6 +20,7 @@ import {
   isCompletedNodeStatus,
 } from './learningMapProgress'
 import { findCurrentNodeId, resolveNodeStates } from './learningMapUnlock'
+import { toKnowledgeMasteryViewModel } from '@/services/mastery/masteryEngine'
 
 function mapNodeId(textbookId: Id, mappingId: Id): Id {
   return `learning-map:${textbookId}:knowledge:${mappingId}`
@@ -203,6 +205,19 @@ function applyNodeStates(
   }
 }
 
+function attachMastery(islands: UnitIsland[], records: readonly MasteryRecord[] | undefined): void {
+  if (!records) return
+  const recordsByKnowledgePointId = new Map(
+    records.map((record) => [record.knowledgePointId, record]),
+  )
+  for (const node of flattenKnowledgeNodes(islands)) {
+    node.mastery = toKnowledgeMasteryViewModel(
+      node.knowledgePointId,
+      recordsByKnowledgePointId.get(node.knowledgePointId),
+    )
+  }
+}
+
 function containerStatus(statuses: Array<KnowledgeMapNode['status']>): KnowledgeMapNode['status'] {
   if (statuses.length === 0) return 'locked'
   if (statuses.every((status) => isCompletedNodeStatus(status))) {
@@ -268,6 +283,7 @@ function refreshConnectionStates(
 export interface BuildLearningMapOptions {
   dataset?: LearningMapViewModel['dataset']
   isReadOnly?: boolean
+  masteryRecords?: readonly MasteryRecord[]
 }
 
 export function buildLearningMapViewModel(
@@ -292,6 +308,7 @@ export function buildLearningMapViewModel(
     }
   }
   applyNodeStates(layout.islands, progressRecords)
+  attachMastery(layout.islands, options.masteryRecords)
   const connections = buildConnections(source, nodes)
   refreshConnectionStates(connections, nodes)
   const allNodes = flattenKnowledgeNodes(layout.islands)

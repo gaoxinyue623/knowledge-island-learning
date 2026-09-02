@@ -217,6 +217,7 @@ export function validateCurriculumData(
 
   const questionKnowledgePointPairs = new Set<string>()
   const primaryQuestionIds = new Set<string>()
+  const questionKnowledgePointWeights = new Map<string, number>()
   for (const mapping of data.questionKnowledgePoints) {
     collectSampleGuard(errors, `QuestionKnowledgePoint ${mapping.id}`, mapping)
     if (!questionIds.has(mapping.questionId)) {
@@ -228,6 +229,13 @@ export function validateCurriculumData(
     if (!sourceIds.has(mapping.sourceId)) {
       errors.push(`QuestionKnowledgePoint ${mapping.id}: sourceId 不存在`)
     }
+    if (!Number.isFinite(mapping.weight) || mapping.weight <= 0 || mapping.weight > 1) {
+      errors.push(`QuestionKnowledgePoint ${mapping.id}: weight 必须满足 0 < weight <= 1`)
+    }
+    questionKnowledgePointWeights.set(
+      mapping.questionId,
+      (questionKnowledgePointWeights.get(mapping.questionId) ?? 0) + mapping.weight,
+    )
     const pair = `${mapping.questionId}::${mapping.knowledgePointId}`
     if (questionKnowledgePointPairs.has(pair)) {
       errors.push(`QuestionKnowledgePoint ${mapping.id}: 题目与知识点关系重复`)
@@ -238,6 +246,12 @@ export function validateCurriculumData(
         errors.push(`QuestionKnowledgePoint ${mapping.questionId}: PRIMARY 关系不能重复`)
       }
       primaryQuestionIds.add(mapping.questionId)
+    }
+  }
+
+  for (const [questionId, weight] of questionKnowledgePointWeights) {
+    if (Math.abs(weight - 1) > 0.001) {
+      errors.push(`QuestionKnowledgePoint ${questionId}: 同题关系 weight 总和必须约等于 1`)
     }
   }
 

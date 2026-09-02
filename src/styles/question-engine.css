@@ -22,6 +22,23 @@
   box-shadow: var(--shadow-sm);
 }
 
+.question-engine__mastery-status {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.question-engine__mastery-status--error {
+  color: #79591b;
+  background: var(--color-warning-soft);
+}
+
 .question-engine__header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

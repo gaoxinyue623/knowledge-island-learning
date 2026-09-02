@@ -1,13 +1,13 @@
 # 知识岛｜UI Flow 交互流程
 
-> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer 与 PHASE 9 的 Question Engine 流程已落到工程，其余成长与复习流程仍是设计规格。
+> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer、PHASE 9 的 Question Engine 与 PHASE 10 的 Mastery 后处理流程已落到工程，其余成长与复习流程仍是设计规格。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 9.4：Question Engine / Assessment（继承 PHASE 3 交互设计） |
-| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer 与 PHASE 9 Question Engine 流程已实现并验证；Mastery / KnowledgeEnergy 等学习算法仍未实现 |
+| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 3 交互设计） |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 后处理 / 辅助展示已实现并验证；KnowledgeEnergy 等复习算法仍未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`PAGE_SPEC.md` |
 | 数据解析 | `resolveAvailableTextbooks(regionId, gradeId, semesterId)`，确定性读取 |
 | 保存事实 | 三科选择写入 `StudentCurriculumProfile`，不使用单一教材字段 |
@@ -103,6 +103,8 @@ flowchart TD
     Q2 --> Q4[下一题 / 完成本次练习]
     Q3 --> Q4
     Q4 -->|全部提交| R[AssessmentResultSummary]
+    R --> P[MasteryProcessingService]
+    P --> E[LearningEvidence → MasteryRecord]
     R -->|返回| L4[LessonPlayer Summary]
     L4 --> L5[完成 LessonSession]
     L5 --> M[返回 LearningMap 并更新地图演示进度]
@@ -125,7 +127,7 @@ flowchart LR
     W3 --> B[WrongBook Record]
 ```
 
-错误不跳题、不进入 `Game Over`。PHASE 9 只保存 `QuestionAttemptResult`；错题记录、掌握度事件和复习安排不由 Question Engine 生成。
+错误不跳题、不进入 `Game Over`。Question Engine 只保存 `QuestionAttemptResult`；完成 Session 后由独立 `MasteryProcessingService` 派生 `LearningEvidence` 和 `MasteryRecord`，错题记录、KnowledgeEnergy 和复习安排不由 Question Engine 生成。
 
 ## 6. Flow E：复习与知识能量
 
@@ -321,4 +323,22 @@ QuestionAttemptResult → AssessmentResultSummary
 LessonPlayer Summary → LearningMap
 ```
 
-已验证单选、多选、判断、填空、计算和简答六类题型；提交后输入锁定，简答保留人工审核状态。Session 使用独立版本化存储，页面不随机抽题、不猜教材、不修改 MasteryScore、KnowledgeEnergy、WrongBook 或 Reward。
+已验证单选、多选、判断、填空、计算和简答六类题型；提交后输入锁定，简答保留人工审核状态。Session 使用独立版本化存储，页面不随机抽题、不猜教材、不修改 QuestionAttempt、KnowledgeEnergy、WrongBook 或 Reward；完成后显式触发的 Mastery 后处理也不改变地图完成度或解锁。
+
+## 18. PHASE 10 Mastery Flow 实现状态
+
+```text
+QuestionSession = completed
+  ↓
+MasteryProcessingService
+  ↓
+LearningEvidence（按 QuestionKnowledgePoint.weight 拆分）
+  ↓
+MasteryEngine → MasteryRecord
+  ↓
+MasteryStore refresh
+  ↓
+Assessment Result / LearningMap Node Detail / /dev/mastery
+```
+
+掌握度页面使用“正在掌握 / 需要巩固 / 已掌握”等文字、图标和进度表达，不把 `masteryScore` 作为地图完成度，也不把日期流逝解释为能力下降。`manual_review_required`、未提交题、孤儿题目和缺少映射只显示 diagnostic。PHASE 10 不包含 Adaptive Learning、按掌握度选题、Review Scheduling、Spaced Repetition、KnowledgeEnergy、WrongBook 或 Reward。

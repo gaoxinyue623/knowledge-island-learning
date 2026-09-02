@@ -141,12 +141,14 @@ function relation(
   targetKnowledgePointId: string,
   relationType: QuestionKnowledgePoint['relationType'],
   order: number,
+  weight = relationType === 'PRIMARY' ? 1 : 0.3,
 ): SampleQuestionKnowledgePoint {
   return {
     id,
     questionId,
     knowledgePointId: targetKnowledgePointId,
     relationType,
+    weight,
     order,
     isPrimary: relationType === 'PRIMARY',
     sourceId,
@@ -162,8 +164,15 @@ export const demoQuestionKnowledgePoints: SampleQuestionKnowledgePoint[] = [
   relation('DEMO_QUESTION_KP_MULTIPLE', multipleChoiceId, knowledgePointId, 'PRIMARY', 1),
   relation('DEMO_QUESTION_KP_TRUE_FALSE', trueFalseId, knowledgePointId, 'PRIMARY', 1),
   relation('DEMO_QUESTION_KP_FILL_BLANK', fillBlankId, knowledgePointId, 'PRIMARY', 1),
-  relation('DEMO_QUESTION_KP_CALCULATION', calculationId, knowledgePointId, 'PRIMARY', 1),
-  relation('DEMO_QUESTION_KP_CALCULATION_SECONDARY', calculationId, 'DEMO_KP_02', 'SECONDARY', 2),
+  relation('DEMO_QUESTION_KP_CALCULATION', calculationId, knowledgePointId, 'PRIMARY', 1, 0.7),
+  relation(
+    'DEMO_QUESTION_KP_CALCULATION_SECONDARY',
+    calculationId,
+    'DEMO_KP_02',
+    'SECONDARY',
+    2,
+    0.3,
+  ),
   relation('DEMO_QUESTION_KP_SHORT_ANSWER', shortAnswerId, knowledgePointId, 'PRIMARY', 1),
 ]
 
