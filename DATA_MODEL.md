@@ -1,17 +1,17 @@
 # 知识岛课程与学习数据模型
 
-> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`QUESTION_SCHEMA.md` 和 `MASTERY.md` 为准。
+> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 与 PHASE 11 Strategy 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`QUESTION_SCHEMA.md`、`MASTERY.md` 和 `LEARNING_STRATEGY.md` 为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9 数据契约） |
-| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession、LearningEvidence、MasteryRecord 和确定性 Mastery Engine 已实现并验证 |
+| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 2.2、PHASE 6～10 数据契约） |
+| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession、LearningEvidence、MasteryRecord、确定性 Mastery Engine 和只读 Strategy 输出已实现并验证 |
 | 上游事实源 | `PRODUCT.md`；课程层级规则见 `CURRICULUM.md` |
 | 下游消费者 | 题目协议、内容审核、MVP 课程占位数据、后续 API / 数据库设计 |
 | 权威维护者 | 数据 / 教研负责人（待确定） |
-| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player`、`src/services/question-engine` 和 `src/services/mastery` 已实现；真实课程数据仍未核验 |
+| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player`、`src/services/question-engine`、`src/services/mastery` 和 `src/services/learning-strategy` 已实现；真实课程数据仍未核验 |
 
 ---
 
@@ -1271,3 +1271,15 @@ QuestionSession（completed）
 - `manual_review_required`、未提交题、未完成 Session、孤儿 Question / KnowledgePoint 和非法权重均不得参与正式重算，只产生 diagnostic。
 - `MasteryRecord` 不属于 `DRAFT / ACTIVE / PUBLISHED` 内容生命周期；记录必须保存 `algorithmVersion`，存储 schemaVersion 当前为 `1`，重建必须确定性且幂等。
 - `LearningMap` 可读取掌握度 ViewModel 用于辅助显示，但不能将 `mastered` 当作地图完成、`perfect` 或解锁条件；`KnowledgeEnergy`、Review Scheduling、Spaced Repetition、WrongBook、Reward 和 Adaptive Learning 不在本阶段。
+
+### 5.6 PHASE 11 LearningStrategy 读取模型
+
+PHASE 11 不新增或改写课程、题目、掌握度和地图事实，只建立只读的 `LearningRecommendation`、`ReviewRecommendation` 与 `NextKnowledgePoint` 输出。其输入是同一学生档案下的 `MasteryRecord[]`、当前教材上下文、已解析的 `StrategyMapNode[]`、`KnowledgeRelation[]` 和可选诊断证据。
+
+- `STRATEGY_V1` 是策略版本；`MASTERY_V1` 仍只表示掌握度算法版本。
+- Strategy 读取 `MasteryRecord.masteryScore`、`confidence`、`state`、`evidenceCount`，不从 `QuestionAttempt` 重新计算或覆盖这些字段。
+- `MapNode.status`、`MapNode.progress`、`LearningMapProgressRecord` 和 prerequisite 关系仍由地图 / 课程域负责；锁定节点不会因掌握度达标而自动解锁。
+- 生产策略拒绝 SAMPLE、UNVERIFIED、REJECTED 和样本派生来源；开发展示保留 `isSampleDerived` 与 `evidenceSourceStatus`。
+- Review 不是计划表，不添加 `nextReviewAt`、`scheduledAt`、`reviewInterval` 或 `decayScore`；本阶段不创建 KnowledgeEnergy、WrongBook 或 Reward。
+
+策略字段和输出协议的唯一技术定义见 `LEARNING_STRATEGY.md`；本节不建立第二套阈值或排序规则。

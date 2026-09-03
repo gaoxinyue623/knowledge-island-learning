@@ -1,13 +1,13 @@
-# 知识岛｜工程架构与 PHASE 10 边界
+# 知识岛｜工程架构与 PHASE 11 边界
 
-> 本文档记录当前 Vue 3 工程的模块边界和 PHASE 7～10 实现。它不是数据库架构或部署方案；课程事实、审核状态、题目协议和掌握度模型仍分别以 `DATA_MODEL.md`、`CONTENT_REVIEW.md`、`QUESTION_SCHEMA.md` 和 `MASTERY.md` 为准。
+> 本文档记录当前 Vue 3 工程的模块边界和 PHASE 7～11 实现。它不是数据库架构或部署方案；课程事实、审核状态、题目协议、掌握度模型和学习策略分别以 `DATA_MODEL.md`、`CONTENT_REVIEW.md`、`QUESTION_SCHEMA.md`、`MASTERY.md` 和 `LEARNING_STRATEGY.md` 为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 10.4：Mastery Model / Knowledge Learning State |
-| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 已实现并验证；PHASE 10 完成后停止 |
+| 当前阶段 | PHASE 11.4：Learning Strategy |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 与 PHASE 11 确定性策略已实现并验证；PHASE 11 完成后停止 |
 | 技术栈 | Vue 3、TypeScript strict、Vite、Pinia、Vue Router、Vitest |
 | 生产原则 | 生产课程数据只允许 `verificationStatus = REVIEWED` |
 | 开发原则 | SAMPLE / UNVERIFIED 只在显式开发数据集显示，并必须有警示 |
@@ -182,3 +182,27 @@ PHASE 10.1～10.4 已实现并停止。`LearningEvidence` 只从已完成 `Quest
 `MasteryEngine` 是无副作用的确定性聚合器：按知识点权重、难度权重和集中策略计算 `masteryScore`、`confidence` 与 `KnowledgeLearningState`，并持久化 `algorithmVersion`。它不读取时钟、最近学习时间、连续天数、地图完成、Lesson completion、奖励或任何模型输出。`masteryStorage` 使用独立的 schemaVersion 1 载荷，损坏 / 未知版本安全回退并保留 warning；重放与重复 Session 处理幂等。
 
 地图可读取掌握度 ViewModel 作为辅助展示，但地图完成度、节点 status、前置解锁和教材主链不受 Mastery 改写。PHASE 10 不实现 Adaptive Learning、按掌握度选题、Review Scheduling、Spaced Repetition、WrongBook、KnowledgeEnergy、Reward、AI Tutor、AI Grading 或个性化学习路径。实现与验证记录见 `MASTERY.md`、`MASTERY_MODEL.md`、`MASTERY_DATA_FLOW.md`、`LEARNING_EVIDENCE.md` 和 `MASTERY_STORAGE.md`。
+
+## 10. PHASE 11 Learning Strategy 模块
+
+PHASE 11 的运行链为：
+
+```text
+QuestionSession completed
+  ↓ MasteryProcessingService
+MasteryRecord refresh
+  ↓ LearningMapViewModel + existing map status
+LearningStrategyService（STRATEGY_V1）
+  ↓
+LearningRecommendation / ReviewRecommendation
+  ↓
+Home / Assessment completion / LearningMap / /dev/strategy
+```
+
+`StrategyEngine`、`ReviewStrategy` 和 `NextLearningResolver` 都是只读、确定性服务；`learningStrategyStore` 只保存推荐读取状态。它不拥有 `MasteryRecord` 或地图进度写权限，三个上游 Store 也不直接写它。
+
+策略使用已有 MasteryPolicy 阈值和已由地图服务解析的节点状态。它不重新发明 prerequisite 解锁，不把分数写回地图，不改变 `MapNode.status` / `progress`，也不把 `mastered` 自动解释为地图 `completed`。
+
+生产入口单独检查课程关系、地图节点、教材上下文和证据来源；SAMPLE / UNVERIFIED / REJECTED 只可在开发数据集显示并带警示。Review 是当前巩固建议，不是 Review Scheduling。AI Learning Path、Spaced Repetition、KnowledgeEnergy、WrongBook、Reward 和 PHASE 12 均不在本阶段。
+
+实现与验证记录见 `LEARNING_STRATEGY.md`、`REVIEW_STRATEGY.md`、`STRATEGY_DATA_FLOW.md` 和 `tests/learning-strategy.test.ts`。

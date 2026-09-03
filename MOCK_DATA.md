@@ -4,10 +4,10 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4（继承 PHASE 5～9 Mock 基线） |
-| 状态 | 已实现并通过本地校验；包含地图、LessonPlayer、Question Engine 与 Mastery 开发夹具，不代表真实课程数据 |
+| 所属阶段 | PHASE 11.4（继承 PHASE 5～10 Mock 基线） |
+| 状态 | 已实现并通过本地校验；包含地图、LessonPlayer、Question Engine、Mastery 与 Learning Strategy 开发夹具，不代表真实课程数据 |
 | 唯一事实源 | `PRODUCT.md`、`DATA_MODEL.md`、`CURRICULUM.md`、`MVP_CURRICULUM.md` |
-| 数据入口 | `src/data/curriculum/index.ts` |
+| 数据入口 | `src/data/curriculum/index.ts`、`src/data/learning-strategy/` |
 
 ## 1. 使用边界
 
@@ -102,3 +102,9 @@ LessonPlayer 开发页只用于验证步骤、内容块、会话恢复、完成�
 ## 8. PHASE 10 Mastery Demo
 
 `src/data/mastery/demo/` 提供 `not_started`、`weak`、`learning`、`mastered`、高分低置信度和混合来源等状态夹具。它们只用于 `/dev/mastery` 和自动化测试，不能写入真实教材数据或绕过 Question / QuestionKnowledgePoint 审核闸门。开发样本掌握度必须可重置，正式生产读取不会自动加载这些夹具。
+
+## 9. PHASE 11 Strategy Demo
+
+`src/data/learning-strategy/demo/` 提供 `SAMPLE_STRATEGY_WEAK`、`SAMPLE_STRATEGY_MASTERED`、`SAMPLE_STRATEGY_LOW_CONFIDENCE`、`SAMPLE_STRATEGY_IN_PROGRESS`、`SAMPLE_STRATEGY_LOCKED` 和 `SAMPLE_STRATEGY_NO_AVAILABLE`。所有夹具均为 `isSample: true`、`needsVerification: true`、`verificationStatus: SAMPLE`，只用于 `/dev/strategy` 与自动化测试，不代表真实学生记录。
+
+策略开发页另提供 `UNVERIFIED` 情境，用于确认来源警示和开发数据集边界。正式 profile 不自动加载 Strategy Demo；策略只读 MasteryRecord 与地图状态，不写入地图完成度、解锁、QuestionSession、WrongBook、KnowledgeEnergy 或 Reward。

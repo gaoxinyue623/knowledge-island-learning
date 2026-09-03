@@ -1,13 +1,13 @@
 # 知识岛｜PHASE 3 页面规格
 
-> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 展示已实现并验证，其余页面仍以设计规格为准。
+> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 展示与 PHASE 11 策略卡片已实现并验证，其余页面仍以设计规格为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4：Mastery 展示验证（继承 PHASE 3 页面规格） |
-| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine / Assessment 与 PHASE 10 Mastery 结果展示已实现并验证，其他目标页面仍按设计状态管理 |
+| 所属阶段 | PHASE 11.4：Learning Strategy 展示验证（继承 PHASE 3 页面规格） |
+| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine / Assessment、PHASE 10 Mastery 结果展示与 PHASE 11 Home / completion / map / dev strategy 卡片已实现并验证，其他目标页面仍按设计状态管理 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md` |
 | 相关设计文档 | `DESIGN_SYSTEM.md`、`RESPONSIVE_DESIGN.md`、`QUESTION_UI.md`、`UI_FLOW.md`、`ONBOARDING_DESIGN.md` |
 | 页面数据原则 | 课程配置和教材信息只读取数据层；UI 不猜测地区、出版社或教材版本 |

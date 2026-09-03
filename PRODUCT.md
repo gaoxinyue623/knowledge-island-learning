@@ -8,13 +8,13 @@
 | --- | --- |
 | 产品名称 | 知识岛（暂定） |
 | 产品定位 | 课本同步 + 游戏闯关 + 课外拓展的小学语数英学习平台 |
-| 当前阶段 | PHASE 10.4：Mastery Model / Knowledge Learning State 验证与质量收尾 |
-| 文档状态 | 产品事实源；PHASE 7、PHASE 8、PHASE 9.1～9.4 与 PHASE 10.1～10.4 已实现并验证，Golden Sample Framework、Demo Lesson、Demo Questions 与 Demo Mastery 仍受未核验 / SAMPLE 闸门保护 |
+| 当前阶段 | PHASE 11.4：Learning Strategy 验证与质量收尾 |
+| 文档状态 | 产品事实源；PHASE 7、PHASE 8、PHASE 9.1～9.4、PHASE 10.1～10.4 与 PHASE 11.1～11.4 已实现并验证，Golden Sample Framework、Demo Lesson、Demo Questions、Demo Mastery 与 Demo Strategy 仍受未核验 / SAMPLE 闸门保护 |
 | 版本 | 0.1 |
-| 日期 | 2026-09-02 |
+| 日期 | 2026-09-03 |
 | 当前事实源 | 用户提供的产品总 Prompt、PHASE 2.1 / 2.2 数据与课程文档、PHASE 3 / 3.1 设计文档，以及 PHASE 4 工程基础 |
 | 产品负责人 | 待确定 |
-| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine 和独立掌握度存储已创建并完成本阶段验证；KnowledgeEnergy 与其他自适应 / 复习算法仍未实现 |
+| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine、独立掌握度存储和只读 Learning Strategy 已创建并完成本阶段验证；AI Learning Path、KnowledgeEnergy、复习排程与其他自适应算法仍未实现 |
 
 ---
 
@@ -1121,4 +1121,15 @@ PHASE 10 不实现 Adaptive Learning、按掌握度自适应选题或难度、AI
 
 ### 27.3 PHASE 10 停止条件
 
-PHASE 10 已完成并停止；不进入 PHASE 11。后续阶段若要扩展掌握度或复习能力，必须先基于本阶段的 `algorithmVersion`、证据保留和存储迁移边界提出新的明确需求。
+PHASE 10 已完成并停止；PHASE 11 作为独立的只读策略阶段执行，不改变本阶段的掌握度事实、算法版本或存储边界。
+
+## 28. PHASE 11 Learning Strategy
+
+PHASE 11.1～11.4 已实现并验证。它使用 `MasteryRecord`、已审核的课程 / 地图关系和已有地图状态，生成当前学习动作：继续当前知识点、建议巩固、补充证据、进入下一知识点或安全空状态。策略版本独立为 `STRATEGY_V1`，不与 `MASTERY_V1` 混用。
+
+- Home、Assessment 完成页和 LearningMap 只展示轻量 `LearningRecommendationCard`；`/dev/strategy` 展示固定 SAMPLE / UNVERIFIED 情境。
+- Strategy 不修改 `MasteryRecord`、`LearningEvidence`、`QuestionSession`、地图完成度、节点解锁或前置关系；`locked` 节点不能成为下一知识点。
+- 生产 `profile` 遇到 `SAMPLE`、`UNVERIFIED`、`REJECTED` 或样本派生来源时返回安全空状态；开发数据保留警示，不代表正式建议。
+- Review 仅表示当前巩固动作，不是复习日程；不读取当前时间、复习间隔、记忆衰减、KnowledgeEnergy、奖励或连续学习状态。
+
+PHASE 11 已完成并停止，不进入 PHASE 12。实现与策略事实见 `LEARNING_STRATEGY.md`、`REVIEW_STRATEGY.md` 和 `STRATEGY_DATA_FLOW.md`。

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import DevCurriculum from '@/pages/DevCurriculum.vue'
 import DevLearningMapPage from '@/pages/DevLearningMapPage.vue'
 import DevMasteryPage from '@/pages/DevMasteryPage.vue'
+import DevStrategyPage from '@/pages/DevStrategyPage.vue'
 import DevUi from '@/pages/DevUi.vue'
 import HomePlaceholderPage from '@/pages/HomePlaceholderPage.vue'
 import LearningMapPage from '@/pages/LearningMapPage.vue'
@@ -194,6 +195,11 @@ const routes: RouteRecordRaw[] = [
     path: '/dev/mastery',
     component: DevMasteryPage,
     meta: { title: 'Mastery Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/strategy',
+    component: DevStrategyPage,
+    meta: { title: 'Learning Strategy Debug View', devOnly: true, hideBottomNav: true },
   },
 ]
 

@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 所属阶段 | PHASE 10.3～10.4 |
-| 状态 | QuestionSession 后处理、显式 Service 调用、错误隔离、Store 边界、地图展示投影和回归测试已实现并验证 |
+| 状态 | QuestionSession 后处理、显式 Service 调用、错误隔离、Store 边界、地图展示投影和回归测试已实现并验证；PHASE 11 策略只读消费刷新后的 MasteryRecord |
 | 实现入口 | `src/services/mastery/masteryService.ts`、`src/pages/QuestionEnginePage.vue` |
 
 ## 1. 主流程
@@ -64,3 +64,19 @@ MasteryRecord 和 LearningEvidence 都按 `studentProfileId` 隔离，并以稳�
 ## 6. 明确不在本阶段
 
 本数据流不包含 Adaptive Learning、按掌握度选题 / 调难度、Review Scheduling、Spaced Repetition、KnowledgeEnergy、WrongBook、奖励、AI Tutor、AI Grading 或个性化学习路径。
+
+## 7. PHASE 11 下游读取
+
+掌握度处理成功后，页面编排层可以把刷新后的 `MasteryRecord[]` 与当前 `LearningMapViewModel` 传给 `LearningStrategyService`：
+
+```text
+MasteryRecord refresh
+        +
+LearningMapViewModel（已有 status / progress / unlock 结果）
+        ↓
+LearningStrategyService（STRATEGY_V1）
+        ↓
+LearningRecommendation
+```
+
+策略只读消费，不回写 MasteryRecord、地图进度或 QuestionSession。处理失败时 Assessment 保持 completed，但不生成基于未知掌握度的强推荐。Review 是当前巩固动作，不是复习日程；具体协议见 `LEARNING_STRATEGY.md` 和 `STRATEGY_DATA_FLOW.md`。

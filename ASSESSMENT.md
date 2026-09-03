@@ -1,5 +1,7 @@
 # 知识岛｜Assessment 设计与实现边界
 
+> PHASE 11 只在 Assessment 完成且掌握度刷新成功后读取 `LearningRecommendation`；它不改变 `QuestionSession`、题目集合或本次 Assessment 的完成语义。策略详情见 `LEARNING_STRATEGY.md`。
+
 ## 1. AssessmentDefinition
 
 Assessment 是一次固定题目集合，不是题库随机抽样器。PHASE 10 在完成后增加独立的掌握度后处理，但不改变 Assessment 本身的完成语义：
@@ -69,3 +71,9 @@ PHASE 9 / 10 不包含：
 PHASE 10 保留 `MasteryEvent` 七种事件枚举作为兼容契约，但实际掌握度输入由 `LearningEvidence` 派生；不实现 Adaptive Learning、按掌握度自适应选题、AI Grading、AI Tutor、个性化学习路径或 ML / Bayesian 模型。
 
 Assessment 结果只描述当前题目集合的作答证据。正式题库上线前必须完成教材版本、知识点、来源、版权、题目审核、关系核验和媒体审核。
+
+## 6. PHASE 11 完成后策略提示
+
+完成的 `QuestionSession` 仍先经过 `MasteryProcessingService`。只有掌握度刷新成功、当前课程地图和关系通过策略来源闸门时，Assessment 完成页才读取 `LearningRecommendation`。策略卡片可以告诉学生继续当前知识点、巩固、补充证据或进入下一步，但不生成任务日期、复习时间、能量、错题本或奖励。
+
+如果 Mastery 后处理失败，Assessment 仍保持 `completed`，页面显示可恢复诊断，策略不根据未知数据推断推荐。`QuestionEngineStore`、`MasteryStore` 和 `LearningMapStore` 不直接写 StrategyStore。

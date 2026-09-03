@@ -1,13 +1,13 @@
 # 知识岛课程知识体系
 
-> 本文档定义课程领域结构与关系规则，并记录 PHASE 6 的导入 / 核验边界、PHASE 7 的地图投影边界、PHASE 8 的 LessonPlayer 消费边界、PHASE 9 的题目关系消费边界和 PHASE 10 的掌握度证据边界。它不包含已核验的教材目录，也不代表课程内容已经发布。
+> 本文档定义课程领域结构与关系规则，并记录 PHASE 6 的导入 / 核验边界、PHASE 7 的地图投影边界、PHASE 8 的 LessonPlayer 消费边界、PHASE 9 的题目关系消费边界、PHASE 10 的掌握度证据边界和 PHASE 11 的策略关系读取边界。它不包含已核验的教材目录，也不代表课程内容已经发布。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9） |
-| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界、QuestionKnowledgePoint 关系消费边界和 Mastery 证据输入边界已实现并验证；真实教材仍未核验 |
+| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 2.2、PHASE 6～10） |
+| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界、QuestionKnowledgePoint 关系消费边界、Mastery 证据输入边界和 Strategy 关系读取边界已实现并验证；真实教材仍未核验 |
 | 上游事实源 | 项目根目录 `PRODUCT.md` |
 | 下游消费者 | `DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md`、后续课程数据与前端服务 |
 | 权威维护者 | 内容负责人 / 教研负责人（待确定） |
@@ -494,3 +494,9 @@ MasteryRecord（按 studentProfileId + knowledgePointId）
 - 只有已提交且结果为 `correct` / `incorrect` 的作答进入证据；未完成 Session、未提交题、孤儿题目、缺失映射和 `manual_review_required` 只记录诊断。
 - 题目和关系必须通过集中访问闸门才能进入生产掌握度；SAMPLE / UNVERIFIED 只能在开发页显式展示并保留来源标记。
 - `MasteryRecord` 的 `masteryScore` 表示已有学习证据，不做时间衰减；`KnowledgeEnergy`、复习排程、错题本、奖励和自适应路径不属于当前课程域实现。
+
+## 18. PHASE 11 Strategy 关系消费边界
+
+PHASE 11 只读取已经通过当前课程 / 地图闸门的 `KnowledgeRelation`，不新增第二套课程关系，也不从页面标题或数组位置推断前置条件。`LearningMapCurriculumKnowledgeRelation` 可以通过 adapter 进入策略层，但 Curriculum 关系和地图展示关系仍分别保留各自事实边界。
+
+策略使用地图服务已经解析的 `locked / available / learning / completed / mastered / perfect` 状态；它不能自动解锁知识点、改变 prerequisite 关系或生成课程内容。缺少有效节点 / 关系时只返回安全空状态与 diagnostic。生产遇到 SAMPLE、UNVERIFIED、REJECTED 来源不生成正式策略建议，开发夹具保留来源警示。

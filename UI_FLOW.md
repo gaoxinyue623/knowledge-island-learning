@@ -1,13 +1,13 @@
 # 知识岛｜UI Flow 交互流程
 
-> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer、PHASE 9 的 Question Engine 与 PHASE 10 的 Mastery 后处理流程已落到工程，其余成长与复习流程仍是设计规格。
+> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer、PHASE 9 的 Question Engine、PHASE 10 的 Mastery 后处理和 PHASE 11 的确定性策略提示已落到工程，其余成长与复习流程仍是设计规格。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 3 交互设计） |
-| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 后处理 / 辅助展示已实现并验证；KnowledgeEnergy 等复习算法仍未实现 |
+| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 3 交互设计） |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 后处理 / 辅助展示与 PHASE 11 策略卡片已实现并验证；KnowledgeEnergy 等复习算法仍未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`PAGE_SPEC.md` |
 | 数据解析 | `resolveAvailableTextbooks(regionId, gradeId, semesterId)`，确定性读取 |
 | 保存事实 | 三科选择写入 `StudentCurriculumProfile`，不使用单一教材字段 |
@@ -342,3 +342,17 @@ Assessment Result / LearningMap Node Detail / /dev/mastery
 ```
 
 掌握度页面使用“正在掌握 / 需要巩固 / 已掌握”等文字、图标和进度表达，不把 `masteryScore` 作为地图完成度，也不把日期流逝解释为能力下降。`manual_review_required`、未提交题、孤儿题目和缺少映射只显示 diagnostic。PHASE 10 不包含 Adaptive Learning、按掌握度选题、Review Scheduling、Spaced Repetition、KnowledgeEnergy、WrongBook 或 Reward。
+
+## 8. PHASE 11 策略提示流
+
+```text
+Assessment completed
+  ↓
+Mastery refresh success?
+  ├─ no  → 保持 completed + 可恢复诊断，不生成未知推荐
+  └─ yes → LearningStrategyService（STRATEGY_V1）
+              ↓
+        Home / completion / LearningMap 轻量卡片
+```
+
+卡片只表达当前学习动作；Review 不是日程，锁定节点不被自动解锁。`/dev/strategy` 提供弱掌握、高分低置信度、正在掌握、已掌握、前置锁定、无可用节点、SAMPLE 与 UNVERIFIED Showcase。PHASE 11 已完成并停止，不进入 PHASE 12。

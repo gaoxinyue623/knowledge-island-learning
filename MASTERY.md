@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 所属阶段 | PHASE 10.4：Verification / Migration / Regression |
-| 状态 | LearningEvidence、MasteryRecord、确定性 MasteryEngine、独立存储、QuestionSession 后处理、地图 / 节点详情展示和 `/dev/mastery` 已实现并验证 |
+| 状态 | LearningEvidence、MasteryRecord、确定性 MasteryEngine、独立存储、QuestionSession 后处理、地图 / 节点详情展示和 `/dev/mastery` 已实现并验证；PHASE 11 只读消费本领域输出 |
 | 上游事实源 | `PRODUCT.md`、`DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`ASSESSMENT.md` |
 | 实现入口 | `src/services/mastery/`、`src/stores/masteryStore.ts`、`src/pages/DevMasteryPage.vue` |
 | 当前数据 | Demo / SAMPLE 证据仅用于开发展示；真实教材题库和生产证据不存在 |
@@ -74,4 +74,8 @@ MasteryRecord
 
 ## 6. 验收结论
 
-PHASE 10.1～10.4 已完成并停止：掌握度输入可追溯、算法可重放、存储独立、重复处理幂等、损坏载荷安全回退、SAMPLE 来源可见，且 Question / Lesson / Map / Curriculum 的责任边界保持独立。PHASE 11 不在本阶段范围内。
+PHASE 10.1～10.4 已完成并停止：掌握度输入可追溯、算法可重放、存储独立、重复处理幂等、损坏载荷安全回退、SAMPLE 来源可见，且 Question / Lesson / Map / Curriculum 的责任边界保持独立。PHASE 11 只读消费本页定义的 `MasteryRecord`，不改变 Mastery 领域。
+
+## 7. PHASE 11 下游边界
+
+`LearningStrategyService` 使用 `MasteryRecord` 作为权威输入，按独立的 `STRATEGY_V1` 规则决定当前巩固、补充证据或下一知识点。Strategy 不重新计算 `masteryScore`，不修改记录，不读取时间衰减、KnowledgeEnergy、复习排程、错题本或奖励。详见 `LEARNING_STRATEGY.md`。

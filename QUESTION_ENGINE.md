@@ -1,13 +1,13 @@
 # 知识岛｜Question Engine 实现说明
 
-> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment 和 LessonPlayer 接入，以及 PHASE 10 的掌握度后处理边界。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md` 或 `MASTERY.md`。
+> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment 和 LessonPlayer 接入，以及 PHASE 10 掌握度后处理和 PHASE 11 策略消费边界。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md`、`MASTERY.md` 或 `LEARNING_STRATEGY.md`。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 10.4：Mastery Model（Question Engine 作为上游） |
-| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门、LessonPlayer 回链和完成 Session 的掌握度后处理已实现；Question Engine 仍不直接拥有掌握度 |
+| 当前阶段 | PHASE 11.4：Learning Strategy（Question Engine 作为上游） |
+| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门、LessonPlayer 回链、完成 Session 的掌握度后处理和完成页策略提示已实现；Question Engine 仍不直接拥有掌握度或策略 |
 | 正式入口 | `/assessment`；需要显式 `AssessmentLaunchContext` |
 | 开发入口 | `/dev/question-engine`、`/dev/question-engine/states` |
 | 题目数据 | 6 道原创 Demo SAMPLE 题；不代表真实教材内容 |
@@ -85,3 +85,9 @@ QuestionAttemptResult / AssessmentResultSummary
 ## 8. PHASE 10 后处理边界
 
 已完成的 `QuestionSession` 通过 `MasteryProcessingService` 进入 `LearningEvidence` → `MasteryEngine` → `MasteryRecord`。未提交题、未完成 Session、孤儿题目、缺少关系和 `manual_review_required` 只产生诊断。掌握度处理失败不回滚已完成的 Assessment，也不修改 QuestionAttempt；生产证据仍要求 Question 与 QuestionKnowledgePoint 关系通过审核闸门，SAMPLE / UNVERIFIED 只在开发入口显式使用。
+
+## 9. PHASE 11 策略消费
+
+当 Assessment 完成且 Mastery 刷新成功时，页面可以把当前 `LearningMapViewModel`、`MasteryRecord[]` 和已有证据交给 `LearningStrategyService`。完成页只展示“继续学习 / 建议巩固 / 补充证据 / 下一步”等当前动作，不改变 QuestionSession、题目集合或答题结果。Mastery 后处理失败时不生成强策略建议。
+
+Question Engine 不直接写 StrategyStore；Strategy 也不重新计算 `masteryScore`、调题目难度、改变题目集合、创建错题本或复习日程。详细策略协议见 `LEARNING_STRATEGY.md`。

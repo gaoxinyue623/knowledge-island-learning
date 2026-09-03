@@ -1,13 +1,13 @@
 # 知识岛｜LearningMap 领域与实现说明
 
-> 本文档记录 PHASE 7.1～7.4 的 LearningMap 实现事实、PHASE 8 LessonPlayer / PHASE 9 Question Engine 回链，以及 PHASE 10 掌握度展示边界。它描述地图展示层，不替代 `CURRICULUM.md`、`DATA_MODEL.md` 和 `MASTERY.md` 的课程与学习事实。
+> 本文档记录 PHASE 7.1～7.4 的 LearningMap 实现事实、PHASE 8 LessonPlayer / PHASE 9 Question Engine 回链、PHASE 10 掌握度展示边界，以及 PHASE 11 策略辅助展示。它描述地图展示层，不替代 `CURRICULUM.md`、`DATA_MODEL.md`、`MASTERY.md` 和 `LEARNING_STRATEGY.md` 的课程与学习事实。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 10.4：Mastery Model 集成后的地图展示验证 |
-| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 回链与 PHASE 10 掌握度辅助展示已实现并验证；PHASE 10 完成后停止 |
+| 当前阶段 | PHASE 11.4：确定性策略辅助展示验证 |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 回链、PHASE 10 掌握度辅助展示与 PHASE 11 策略提示已实现并验证；PHASE 11 完成后停止 |
 | 正式入口 | `/learning-map` |
 | 开发入口 | `/dev/learning-map`、`/dev/learning-map/states` |
 | 主要模块 | `src/services/learning-map/`、`src/stores/learningMapStore.ts`、`src/components/learning-map/` |
@@ -131,4 +131,12 @@ PHASE 8 已将开发地图节点接入 LessonPlayer：地图 → `LessonLaunchCo
 
 当前已实现结构化内容步骤、媒体回退、非评分互动、会话恢复和完成状态；Question Engine、正式答题、自动判题、LearningEvidence、MasteryScore 和 MasteryRecord 已由后续阶段接入。仍没有 KnowledgeEnergy、复习排程、奖励、错题本、家长中心、真实题库或正式课程生成。
 
-PHASE 10 已完成并停止；掌握度不参与地图解锁，不进入 PHASE 11。
+## 8. PHASE 11 策略辅助展示
+
+PHASE 11 的 `LearningStrategyService` 可以读取当前 `LearningMapViewModel` 的节点状态、完成度和已解析 connection，结合 `MasteryRecord` 生成轻量提示。它不改变地图标题、主题、完成度、`locked / available / learning / completed / mastered / perfect` 状态、前置关系或进度存储。
+
+- `LearningRecommendationCard` 只聚焦一个当前动作；CTA 只定位到已有节点，不执行解锁。
+- `locked` 节点不会成为 `NextKnowledgePoint`；掌握度 `mastered` 不等于地图 `completed`，地图 `completed` 也不等于掌握度 `mastered`。
+- 正式 profile 需通过课程关系、教材上下文、地图节点和来源闸门；开发 `demo` / `golden` 只显示带警示的结果。
+
+PHASE 11 已完成并停止；策略是地图的只读辅助投影，不进入 PHASE 12。规则与数据流见 `LEARNING_STRATEGY.md`、`STRATEGY_DATA_FLOW.md`。

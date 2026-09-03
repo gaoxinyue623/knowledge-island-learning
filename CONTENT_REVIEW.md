@@ -1,13 +1,13 @@
 # 知识岛内容来源、审核与版本机制
 
-> 本文档定义课程内容、题目、教材版本和媒体资源的来源追踪、人工审核、版本发布及归档规则，并约束 LearningMap 与 PHASE 10 Mastery 的数据读取边界。它是流程设计，不代表已有审核后台或发布服务已经实现。
+> 本文档定义课程内容、题目、教材版本和媒体资源的来源追踪、人工审核、版本发布及归档规则，并约束 LearningMap、PHASE 10 Mastery 与 PHASE 11 Learning Strategy 的数据读取边界。它是流程设计，不代表已有审核后台或发布服务已经实现。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9） |
-| 状态 | 生命周期矩阵、来源策略、课程核验状态机、SAMPLE 闸门、自动 Review Report、地图读取保护、LessonPlayer 内容闸门、Question 独立审核闸门和 Mastery 生产证据闸门已实现；真实审核后台未实现 |
+| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 2.2、PHASE 6～10） |
+| 状态 | 生命周期矩阵、来源策略、课程核验状态机、SAMPLE 闸门、自动 Review Report、地图读取保护、LessonPlayer 内容闸门、Question 独立审核闸门、Mastery 生产证据闸门和 Strategy 生产来源闸门已实现；真实审核后台未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | 下游消费者 | 内容录入、教研审核、课程发布、题目服务、版本迁移 |
 | 内容质量负责人 | 教研 / 内容负责人（待确定） |
@@ -464,3 +464,9 @@ MasteryRecord（algorithmVersion）
 - 未提交题、未完成 Session、缺少题目或关系、重复 / 孤儿尝试以及 `manual_review_required` 只记录 diagnostic，不生成 `correct` / `incorrect` 证据。
 - `masteryScore` 只表示已有证据；PHASE 10 不实现时间衰减、KnowledgeEnergy、Review Scheduling、Spaced Repetition 或任何内容发布状态的自动升级。
 - `MasteryRecord` 不使用 `DRAFT`、`ACTIVE` 或 `PUBLISHED`；其算法版本和证据来源状态不能由 `ContentReviewRecord` 代填。
+
+## 16. PHASE 11 Strategy 生产闸门
+
+策略虽然是学习行为的读取投影，仍必须独立检查课程关系、地图节点、当前教材上下文和掌握度 / 证据来源。生产 `profile` 遇到 `SAMPLE`、`UNVERIFIED`、`REJECTED` 或样本派生记录时返回安全空状态，并保留 `SOURCE_NOT_ALLOWED` diagnostic；开发 `demo` / `golden` 可以显示结果，但必须有“开发样本 / 来源未审核”警示。
+
+Strategy 不会把 MasteryRecord 重新发布、修改或升级，也不会把地图 `completed` 变成掌握度 `mastered`。Review 只表示当前可执行的巩固动作，不是复习排程；AI Learning Path、WrongBook、Spaced Repetition、Review Scheduling、KnowledgeEnergy 和 Reward 不属于本阶段。

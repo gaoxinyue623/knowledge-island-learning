@@ -1,13 +1,13 @@
 # 知识岛 MVP 课程占位结构
 
-> 本文档定义三年级上册语文、数学、英语的 MVP 课程骨架及地区教材选择占位结构，并记录 PHASE 6 导入 / 核验、PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine 与 PHASE 10 Mastery 消费边界。当前没有可靠教材来源，因此本文不提供真实地区、出版社、单元名、课文、教材正文、例题或生产题目答案；所有课程记录均为演示占位，不能进入学生端发布集合。
+> 本文档定义三年级上册语文、数学、英语的 MVP 课程骨架及地区教材选择占位结构，并记录 PHASE 6 导入 / 核验、PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 与 PHASE 11 Learning Strategy 消费边界。当前没有可靠教材来源，因此本文不提供真实地区、出版社、单元名、课文、教材正文、例题或生产题目答案；所有课程记录均为演示占位，不能进入学生端发布集合。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 10.4：Mastery Model（继承 PHASE 2.2、PHASE 6～9） |
-| 状态 | 占位结构、导入验证边界、Golden Sample Framework、地图 / LessonPlayer / Question Engine 消费边界、LearningEvidence 与 Mastery Demo 边界已实现并验证；真实课程仍未核验 |
+| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 2.2、PHASE 6～10） |
+| 状态 | 占位结构、导入验证边界、Golden Sample Framework、地图 / LessonPlayer / Question Engine 消费边界、LearningEvidence、Mastery Demo 与 Strategy Demo 边界已实现并验证；真实课程仍未核验 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md` |
 | MVP 范围 | 三年级上册；语文、数学、英语；每科 1 个单元 |
 | 课程内容状态 | 未建立真实教材内容 |
@@ -439,3 +439,9 @@ PHASE 10 不扩充课程骨架、不凭掌握度生成知识点、不把 Lesson 
 - `QuestionKnowledgePoint.weight` 必须满足 `0 < weight <= 1`，同题关系权重总和约等于 `1`；多知识点题目分别为每个知识点产生证据。
 - SAMPLE / UNVERIFIED 证据只能在开发流程使用并显式显示，不得混入正式课程或生产掌握度。
 - `masteryScore` 表示已有证据，不做时间衰减；`KnowledgeEnergy`、复习排程、错题本、奖励和自适应路径不属于本阶段。
+
+## 18. PHASE 11 Strategy 占位边界
+
+`src/data/learning-strategy/demo/` 的固定夹具只用于验证确定性策略规则，不扩充本 MVP 的真实课程骨架。Strategy 可以读取当前数学教材的地图节点、课程关系和 `MasteryRecord`，但不会凭掌握度创建知识点、改变地图解锁或把占位数据升级为真实教材事实。
+
+正式 profile 不能自动加载 SAMPLE / UNVERIFIED 策略上下文；开发 `/dev/strategy` 必须显示来源警示。真实课程、教材版本、知识点关系、题目和学习内容仍需完成来源、版权与人工审核后才能进入正式链路。

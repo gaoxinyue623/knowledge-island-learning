@@ -7,6 +7,7 @@ import AppEmptyState from '@/components/common/AppEmptyState.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppToast from '@/components/common/AppToast.vue'
+import LearningRecommendationCard from '@/components/learning-strategy/LearningRecommendationCard.vue'
 import KnowledgeIslandMap from '@/components/learning-map/KnowledgeIslandMap.vue'
 import LearningProgressBar from '@/components/learning-map/LearningProgressBar.vue'
 import MapHeader from '@/components/learning-map/MapHeader.vue'
@@ -15,6 +16,7 @@ import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { findLearningMapNode, useLearningMapStore } from '@/stores/learningMapStore'
 import { useMasteryStore } from '@/stores/masteryStore'
+import { useLearningStrategyStore } from '@/stores/learningStrategyStore'
 import type { Id, KnowledgeMapNode, LearningMapViewModel } from '@/types'
 
 const router = useRouter()
@@ -22,6 +24,7 @@ const route = useRoute()
 const curriculumStore = useCurriculumStore()
 const learningMapStore = useLearningMapStore()
 const masteryStore = useMasteryStore()
+const learningStrategyStore = useLearningStrategyStore()
 const notice = ref<{
   type: 'success' | 'info' | 'warning'
   title: string
@@ -29,6 +32,7 @@ const notice = ref<{
 } | null>(null)
 
 const viewModel = computed(() => learningMapStore.viewModel)
+const strategyRecommendation = computed(() => learningStrategyStore.recommendation)
 const profile = computed(() => curriculumStore.curriculumProfile)
 const selectedNode = computed(() => learningMapStore.selectedNode)
 const selectedContext = computed(() => {
@@ -62,6 +66,7 @@ function findCurrentModelNode(model: LearningMapViewModel | null): KnowledgeMapN
 }
 
 async function loadMap() {
+  learningStrategyStore.clear()
   const textbookId = profile.value?.mathTextbookVersionId
   if (!textbookId) return
   await masteryStore.load(profile.value?.studentId ?? 'local-profile')
@@ -70,6 +75,16 @@ async function loadMap() {
     textbookId,
     masteryRecords: masteryStore.records,
   })
+  if (loaded) {
+    await learningStrategyStore.resolveForMap(loaded, {
+      studentProfileId: profile.value?.studentId ?? 'local-profile',
+      masteryRecords: masteryStore.records,
+      learningEvidence: masteryStore.evidence,
+      learningMapProgress: learningMapStore.mapProgress,
+      currentMapNodeId: loaded.currentNodeId,
+      dataset: 'profile',
+    })
+  }
   const focusNodeId = typeof route.query.focusNodeId === 'string' ? route.query.focusNodeId : null
   if (loaded && focusNodeId) learningMapStore.focusNode(focusNodeId)
 }
@@ -113,6 +128,17 @@ function completeSelectedNode() {
 
 function closeNodeDetail() {
   learningMapStore.selectedNodeId = null
+}
+
+function focusStrategyRecommendation() {
+  const nodeId = strategyRecommendation.value?.nextKnowledgePoint?.mapNodeId
+  if (!nodeId || !learningMapStore.focusNode(nodeId)) return
+  const node = findLearningMapNode(viewModel.value as LearningMapViewModel, nodeId)
+  notice.value = {
+    type: 'info',
+    title: '已经定位到学习建议',
+    message: node?.title,
+  }
 }
 
 onMounted(() => void loadMap())
@@ -180,6 +206,12 @@ onMounted(() => void loadMap())
         >
           未审核数据：当前内容仅用于开发验证，不代表已发布的正式课程。
         </div>
+        <LearningRecommendationCard
+          v-if="strategyRecommendation"
+          :recommendation="strategyRecommendation"
+          compact
+          @action="focusStrategyRecommendation"
+        />
         <KnowledgeIslandMap
           :view-model="viewModel"
           :selected-node-id="learningMapStore.selectedNodeId"

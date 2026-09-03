@@ -8,12 +8,15 @@ import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppIcon from '@/components/common/AppIcon.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
+import LearningRecommendationCard from '@/components/learning-strategy/LearningRecommendationCard.vue'
 import QuestionRenderer from '@/components/question-engine/QuestionRenderer.vue'
 import AppShell from '@/layouts/AppShell.vue'
 import { correctAnswerDraft } from '@/services/question-engine'
 import { masteryService } from '@/services/mastery'
 import { useQuestionEngineStore } from '@/stores/questionEngineStore'
 import { useMasteryStore } from '@/stores/masteryStore'
+import { useLearningMapStore } from '@/stores/learningMapStore'
+import { useLearningStrategyStore } from '@/stores/learningStrategyStore'
 import { useStudentStore } from '@/stores/studentStore'
 import type {
   AssessmentLaunchContext,
@@ -26,6 +29,8 @@ const route = useRoute()
 const router = useRouter()
 const questionEngineStore = useQuestionEngineStore()
 const masteryStore = useMasteryStore()
+const learningMapStore = useLearningMapStore()
+const learningStrategyStore = useLearningStrategyStore()
 const studentStore = useStudentStore()
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/question-engine'))
@@ -106,6 +111,7 @@ const mapNodeId = computed(() =>
 
 const viewModel = computed(() => questionEngineStore.viewModel)
 const currentQuestion = computed(() => questionEngineStore.currentQuestion)
+const strategyRecommendation = computed(() => learningStrategyStore.recommendation)
 const masteryProcessingStatus = ref<'idle' | 'processing' | 'updated' | 'error'>('idle')
 const masteryProcessingMessage = ref<string | null>(null)
 const progressLabel = computed(() => {
@@ -128,6 +134,7 @@ async function loadAssessment() {
   if (!context.value) return
   masteryProcessingStatus.value = 'idle'
   masteryProcessingMessage.value = null
+  learningStrategyStore.clear()
   await questionEngineStore.loadAssessment(context.value, {
     dataset: dataset.value,
     demoState: demoState.value,
@@ -147,12 +154,30 @@ async function processCompletedSession(): Promise<void> {
       session,
       { dataset: dataset.value },
     )
-    await masteryStore.load(studentStore.profile?.id ?? 'local-profile')
+    const studentProfileId = studentStore.profile?.id ?? 'local-profile'
+    await masteryStore.load(studentProfileId)
+    const map = await learningMapStore.loadMap({
+      dataset: dataset.value,
+      textbookId: session.textbookId,
+      masteryRecords: masteryStore.records,
+      isReadOnly: dataset.value !== 'profile',
+    })
+    if (map) {
+      await learningStrategyStore.resolveForMap(map, {
+        studentProfileId,
+        masteryRecords: masteryStore.records,
+        learningEvidence: masteryStore.evidence,
+        currentMapNodeId: mapNodeId.value ?? map.currentNodeId,
+        currentKnowledgePointId: session.knowledgePointId,
+        dataset: dataset.value,
+      })
+    }
     masteryProcessingStatus.value = 'updated'
     masteryProcessingMessage.value = result.appendedEvidence.length
       ? `已根据 ${result.appendedEvidence.length} 条作答证据更新知识掌握。`
       : '这次练习的掌握度记录已经更新过。'
   } catch (caught) {
+    learningStrategyStore.clear()
     masteryProcessingStatus.value = 'error'
     masteryProcessingMessage.value =
       caught instanceof Error ? caught.message : '掌握度暂时未更新，但本次练习仍已完成。'
@@ -461,6 +486,12 @@ watch(
               <span v-if="masteryProcessingStatus === 'processing'">正在整理本次作答证据……</span>
               <span v-else>{{ masteryProcessingMessage }}</span>
             </div>
+            <LearningRecommendationCard
+              v-if="strategyRecommendation"
+              :recommendation="strategyRecommendation"
+              compact
+              @action="returnToLesson(true)"
+            />
             <div class="question-engine__result-grid" role="region" aria-label="本次练习结果">
               <div class="question-engine__result-item">
                 <strong>{{ viewModel.resultSummary.correctCount }}</strong
