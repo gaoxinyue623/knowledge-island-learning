@@ -16,6 +16,11 @@ import {
   learningMapCompletionService,
   type LearningMapCompletionService,
 } from '@/services/learning-map'
+import {
+  learningHistoryService,
+  type LearningHistoryServiceContract,
+} from '@/services/learning-history'
+import { rewardService, type RewardServiceContract } from '@/services/reward'
 import type {
   Id,
   LessonLaunchContext,
@@ -25,18 +30,23 @@ import type {
   LessonPlayerStatus,
   LessonPlayerViewModel,
   LessonSession,
+  RewardEvent,
 } from '@/types'
 
 export interface LessonPlayerStoreDependencies {
   repository: LessonPlayerRepository
   sessionStorage: LessonSessionStorage
   mapCompletionService: LearningMapCompletionService
+  historyService: LearningHistoryServiceContract
+  rewardService: RewardServiceContract
 }
 
 const defaultDependencies: LessonPlayerStoreDependencies = {
   repository: lessonPlayerRepository,
   sessionStorage: lessonSessionStorage,
   mapCompletionService: learningMapCompletionService,
+  historyService: learningHistoryService,
+  rewardService,
 }
 
 let dependencies: LessonPlayerStoreDependencies = defaultDependencies
@@ -77,6 +87,7 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
   const dataset = ref<LessonPlayerDataset>('profile')
   const studentId = ref<Id>('local-profile')
   const warning = ref<string | null>(null)
+  const lastRewardEvent = ref<RewardEvent | null>(null)
 
   const currentStep = computed(() => viewModel.value?.steps[currentStepIndex.value])
   const totalSteps = computed(() => viewModel.value?.steps.length ?? 0)
@@ -96,6 +107,47 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
    * ready ViewModel rather than assembling several repositories itself.
    */
   const source = ref<import('@/types').LessonPlayerSource | null>(null)
+
+  function historyOptions() {
+    const verificationStatus =
+      source.value?.verificationStatus ?? source.value?.contentVerificationStatus
+    return {
+      isSampleDerived: dataset.value === 'demo' || source.value?.isSample === true,
+      ...(verificationStatus ? { verificationStatus } : {}),
+    }
+  }
+
+  function projectHistory(nextSession: LessonSession): void {
+    try {
+      dependencies.historyService.recordLessonSession(
+        studentId.value,
+        nextSession,
+        historyOptions(),
+      )
+      warning.value =
+        dependencies.sessionStorage.getLastWarning() ?? dependencies.historyService.getLastWarning()
+    } catch {
+      warning.value = '学习记录暂时未能保存，本次学习仍可继续。'
+    }
+  }
+
+  function projectReward(nextSession: LessonSession): void {
+    if (nextSession.status !== 'completed') return
+    try {
+      const result = dependencies.rewardService.processLearningFact(
+        studentId.value,
+        { type: 'lesson_completed', session: nextSession },
+        { dataset: dataset.value, ...historyOptions() },
+      )
+      lastRewardEvent.value = result.event
+      warning.value =
+        dependencies.sessionStorage.getLastWarning() ??
+        dependencies.rewardService.getLastWarning() ??
+        dependencies.historyService.getLastWarning()
+    } catch {
+      warning.value = '成长反馈暂时未能保存，本次学习仍可继续。'
+    }
+  }
 
   function rebuildViewModel(): void {
     if (!source.value || !session.value) return
@@ -195,6 +247,8 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
       currentStepIndex.value = nextSession.currentStepIndex
       status.value = nextSession.status === 'completed' ? 'completed' : 'ready'
       rebuildViewModel()
+      if (nextSession.status !== 'not_started') projectHistory(nextSession)
+      if (nextSession.status === 'completed') projectReward(nextSession)
       warning.value = dependencies.sessionStorage.getLastWarning()
       return viewModel.value
     } catch (caught) {
@@ -211,12 +265,14 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     if (!active || status.value === 'completed' || status.value === 'error') return false
     if (active.status === 'in_progress') return true
     const now = new Date().toISOString()
-    updateSession({
+    const nextSession = {
       ...active,
       status: 'in_progress',
       startedAt: active.startedAt ?? now,
       updatedAt: now,
-    })
+    } satisfies LessonSession
+    updateSession(nextSession)
+    projectHistory(nextSession)
     status.value = 'ready'
     return true
   }
@@ -317,6 +373,8 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     persistSession(completed)
     status.value = 'completed'
     rebuildViewModel()
+    projectHistory(completed)
+    projectReward(completed)
     if (context.value) {
       await dependencies.mapCompletionService.markKnowledgePointCompleted(context.value, {
         dataset: dataset.value,
@@ -357,6 +415,7 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     loading,
     error,
     warning,
+    lastRewardEvent,
     dataset,
     loadLesson,
     startSession,

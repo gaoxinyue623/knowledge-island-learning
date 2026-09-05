@@ -7,7 +7,8 @@
 | Question → Mastery → Strategy 主链 | 已实现 |
 | Home / Assessment / LearningMap 展示接入 | 已实现 |
 | `/dev/strategy` Showcase | 已实现 |
-| 浏览器多视口与完整工程命令 | 待本阶段最终校验完成后更新 |
+| Review Queue projection | 已实现；只读消费 `LearningRecommendation` |
+| 浏览器多视口与完整工程命令 | 已验证：36 个路由 × 视口组合；工程命令全部通过 |
 
 ## 1. 运行数据流
 
@@ -49,4 +50,4 @@ Home / Assessment completion / LearningMap auxiliary hint
 - LearningMap：显示轻量辅助卡片，CTA 只聚焦已有节点，不改变解锁和完成度。
 - `/dev/strategy`：使用固定 SAMPLE 与 UNVERIFIED 夹具检查规则、警示、诊断和响应式布局。
 
-PHASE 11 只实现 deterministic strategy；Review 是当前巩固建议，不是复习排程；不实现 AI Learning Path、WrongBook、Spaced Repetition、Review Scheduling、KnowledgeEnergy、Reward，也不进入 PHASE 12。
+PHASE 11 只实现 deterministic strategy；Review 是当前巩固建议，不是复习排程。PHASE 12 可以把该输出投影到独立 Review Queue，但不改变 Strategy 规则，也不实现 AI Learning Path、Spaced Repetition、Review Scheduling、KnowledgeEnergy 或 Reward。

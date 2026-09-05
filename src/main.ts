@@ -16,6 +16,14 @@ import './styles/lesson-player.css'
 import './styles/question-engine.css'
 import './styles/mastery.css'
 import './styles/learning-strategy.css'
+import './styles/phase12.css'
+import './styles/phase13.css'
+import './styles/phase14.css'
+import './styles/phase15.css'
+import './styles/content-expansion.css'
+import './styles/knowledge-point-detail.css'
+import './styles/adventure.css'
+import './styles/reading-quest.css'
 
 const app = createApp(App)
 

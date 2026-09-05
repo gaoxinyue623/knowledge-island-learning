@@ -55,6 +55,8 @@ export interface Region {
 
 export interface Publisher {
   id: Id
+  /** Stable catalog code when an authoritative source provides one. */
+  code?: string
   name: string
   shortName?: string
   officialName: string
@@ -131,6 +133,7 @@ export interface Unit {
   textbookVersionId: Id
   code: string
   title: string
+  subtitle?: string
   sortOrder: number
   sceneKey?: string
   status: StructuralStatus

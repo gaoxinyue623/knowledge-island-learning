@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 
+import { sampleCurriculumData } from '@/data/curriculum/sample'
 import { demoLearningMapSource } from '@/data/learning-map/demo'
 import { goldenMathPepG3S1Package } from '@/data/curriculum/verified/math/pep/g3-s1'
 import { MockCurriculumService } from '@/services/adapters/mock/curriculumMockAdapter'
@@ -15,6 +16,7 @@ import {
 import { buildMasteryRecord } from '@/services/mastery'
 import type { LearningMapProgressRecord, LearningMapViewModel } from '@/types'
 import { useLearningMapStore } from '@/stores/learningMapStore'
+import { LEARNING_MAP_LAYOUT } from '@/services/learning-map/learningMapLayout'
 
 function nodesOf(viewModel: LearningMapViewModel) {
   return flattenKnowledgeNodes(viewModel.islands)
@@ -157,6 +159,39 @@ describe('LearningMap curriculum adapter', () => {
     )
   })
 
+  it('keeps game-map lesson cards in separate logical lanes', () => {
+    const viewModel = buildLearningMapViewModel(demoLearningMapSource)
+
+    for (const island of viewModel.islands) {
+      for (let index = 0; index < island.lessons.length; index += 1) {
+        const lesson = island.lessons[index]
+        if (!lesson) continue
+
+        for (const nextLesson of island.lessons.slice(index + 1)) {
+          const overlapsHorizontally =
+            lesson.position.x < nextLesson.position.x + LEARNING_MAP_LAYOUT.lessonWidth &&
+            lesson.position.x + LEARNING_MAP_LAYOUT.lessonWidth > nextLesson.position.x
+          const overlapsVertically =
+            lesson.position.y < nextLesson.position.y + LEARNING_MAP_LAYOUT.lessonHeight &&
+            lesson.position.y + LEARNING_MAP_LAYOUT.lessonHeight > nextLesson.position.y
+
+          expect(overlapsHorizontally && overlapsVertically).toBe(false)
+        }
+
+        for (const node of lesson.nodes) {
+          expect(node.position.x).toBeGreaterThanOrEqual(lesson.position.x)
+          expect(node.position.x).toBeLessThanOrEqual(
+            lesson.position.x + LEARNING_MAP_LAYOUT.lessonWidth,
+          )
+          expect(node.position.y).toBeGreaterThanOrEqual(lesson.position.y)
+          expect(node.position.y).toBeLessThanOrEqual(
+            lesson.position.y + LEARNING_MAP_LAYOUT.lessonHeight,
+          )
+        }
+      }
+    }
+  })
+
   it('returns a usable empty view model when there are no curriculum units', () => {
     const viewModel = buildLearningMapViewModel({
       ...demoLearningMapSource,
@@ -257,6 +292,7 @@ describe('LearningMap progress rules and storage', () => {
 
   it('blocks SAMPLE curriculum from the production access policy', async () => {
     const productionService = new MockCurriculumService({
+      data: sampleCurriculumData,
       accessPolicy: {
         allowSampleCurriculum: false,
         allowUnreviewedCurriculum: false,

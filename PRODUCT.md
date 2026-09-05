@@ -8,13 +8,13 @@
 | --- | --- |
 | 产品名称 | 知识岛（暂定） |
 | 产品定位 | 课本同步 + 游戏闯关 + 课外拓展的小学语数英学习平台 |
-| 当前阶段 | PHASE 11.4：Learning Strategy 验证与质量收尾 |
-| 文档状态 | 产品事实源；PHASE 7、PHASE 8、PHASE 9.1～9.4、PHASE 10.1～10.4 与 PHASE 11.1～11.4 已实现并验证，Golden Sample Framework、Demo Lesson、Demo Questions、Demo Mastery 与 Demo Strategy 仍受未核验 / SAMPLE 闸门保护 |
+| 当前阶段 | PHASE 16.4：MVP Release Gate / Final Verification |
+| 文档状态 | 产品事实源；PHASE 7～15 与 PHASE 16 工程门禁已实现，Parent Dashboard 是只读报告层；当前没有可发布的真实 Curriculum Scope 条目，Golden Sample Framework、Demo Lesson、Demo Questions、Demo Mastery、Demo Strategy、PHASE 12～15 Demo records 仍受未核验 / SAMPLE 闸门保护 |
 | 版本 | 0.1 |
 | 日期 | 2026-09-03 |
 | 当前事实源 | 用户提供的产品总 Prompt、PHASE 2.1 / 2.2 数据与课程文档、PHASE 3 / 3.1 设计文档，以及 PHASE 4 工程基础 |
 | 产品负责人 | 待确定 |
-| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine、独立掌握度存储和只读 Learning Strategy 已创建并完成本阶段验证；AI Learning Path、KnowledgeEnergy、复习排程与其他自适应算法仍未实现 |
+| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine、只读 Learning Strategy、Learning History、WrongBook、Review Queue、Reward / Growth / Achievement、Home / Daily Plan 本地投影、只读 ParentReport / Parent Dashboard、PHASE 16 生产 Scope / Source Manifest / production index / readiness validator / release gate 已创建；当前发布决定为 `NOT_READY`，AI Learning Path、复习排程与其他自适应算法仍未实现 |
 
 ---
 
@@ -1132,4 +1132,79 @@ PHASE 11.1～11.4 已实现并验证。它使用 `MasteryRecord`、已审核的�
 - 生产 `profile` 遇到 `SAMPLE`、`UNVERIFIED`、`REJECTED` 或样本派生来源时返回安全空状态；开发数据保留警示，不代表正式建议。
 - Review 仅表示当前巩固动作，不是复习日程；不读取当前时间、复习间隔、记忆衰减、KnowledgeEnergy、奖励或连续学习状态。
 
-PHASE 11 已完成并停止，不进入 PHASE 12。实现与策略事实见 `LEARNING_STRATEGY.md`、`REVIEW_STRATEGY.md` 和 `STRATEGY_DATA_FLOW.md`。
+PHASE 11 已完成并停止；PHASE 12 在不改变 Strategy 规则的前提下接入 History、WrongBook 和 Review Queue。实现与策略事实见 `LEARNING_STRATEGY.md`、`REVIEW_STRATEGY.md`、`STRATEGY_DATA_FLOW.md` 和 `PHASE12.md`。
+
+## 29. PHASE 13 Reward / KnowledgeEnergy / Achievement Growth
+
+PHASE 13 已完成并停止。孩子完成课程、练习、主动巩固、错题解决，或首次达到 mastered 状态后，系统会生成确定性的 `RewardEvent`，再聚合为 KnowledgeEnergy、Growth progress 和 Achievement progress。它回答“完成学习以后获得了什么成长反馈”，不回答“下一步学什么”。
+
+- Reward 只读取完成学习事实；打开页面、浏览 History / WrongBook、点击、刷新和开始学习不产生奖励。
+- `REWARD_V1` 只发放 KnowledgeEnergy：课程 10、练习 5、掌握知识点 15、巩固 8、解决错题 6；不按正确率制造惩罚。
+- KnowledgeEnergy 只能从 RewardEvent 重建，第一版不消费；Growth 使用 `GROWTH_V1` 阈值 `0 / 50 / 120 / 220 / 350`，不参与课程解锁或掌握度计算。
+- `ACHIEVEMENT_V1` 只包含完成学习 / 练习、掌握知识点、完成巩固、解决错题和累计能量等固定里程碑，不包含 Streak、签到、连胜、时间段或随机条件。
+- 正式 `/achievements` 过滤 SAMPLE；`/dev/reward` 使用固定 SAMPLE 夹具并显示来源警示。Reward、Growth、Achievement 不修改 Mastery、Strategy、LearningMap、Review Queue、WrongBook 或 QuestionEngine。
+
+实现和停止点见 `PHASE13.md`、`REWARD_DATA_FLOW.md`、`GROWTH_DATA_FLOW.md` 和 `ACHIEVEMENT_DATA_FLOW.md`。PHASE 13 完成后进入 PHASE 14；PHASE 14 完成后进入当前 PHASE 15。
+
+## 30. PHASE 14 Home Productization / Daily Learning Loop
+
+PHASE 14 把已有学习事实汇聚成孩子打开应用后能立即理解的首页：先看到“今天学什么”，再通过 1～3 个 Daily Plan 任务进入 Continue、Review、Reinforce、Wrong Question 或 Next Learning。任务完成后回到 Home，首页从各自领域事实刷新状态、今日进度和成长反馈。
+
+- Home 是 Application / Product Aggregation Layer，不拥有 Curriculum、LearningMap、Mastery、Strategy、WrongBook、Review Queue、Reward 或 Achievement 事实。
+- Daily Plan 使用 `DAILY_PLAN_V1`，默认最多 3 项；任务选择、优先级、KnowledgePoint 去重和 snapshot identity 是确定性的，不创建第二套 Strategy。
+- Lesson、Assessment、WrongBook 和 Review Queue 的 CTA 都带显式上下文 / focus query；Home 不把点击本身当成完成，也不覆盖原始 Session / Attempt。
+- `/home` 是正式首页，`/tasks` 是今日学习入口，`/dev/home` 是固定样本 Showcase。正式首页过滤 SAMPLE / UNVERIFIED / REJECTED，开发首页保留来源提示。
+- Home、Daily Plan 和既有领域存储保持独立；Daily Plan 损坏时安全回退并提示，不影响课程、作答、掌握度或成长事实。
+
+PHASE 14 的页面与数据流实现见 `PHASE14.md`、`DAILY_PLAN_DATA_FLOW.md` 和 `HOME_DATA_FLOW.md`。本阶段完成后进入当前 PHASE 15；历史阶段文档 `PHASE14.md` 保留当时的验收记录。
+
+## 31. PHASE 15 Parent Dashboard / Learning Report
+
+PHASE 15 在孩子端闭环之上增加家长侧只读报告。`ParentReportService` 从 LearningHistory、MasteryRecord、`STRATEGY_V1` 读取结果、WrongBook、Review Queue、Daily Plan、Reward / Growth 和 Achievement 聚合出 `PARENT_REPORT_V1`，再由 `ParentReportStore` 提供筛选状态和 `ParentDashboardPage` 呈现。
+
+家长报告回答“最近学了什么、哪些知识需要继续巩固、错题和复习情况如何、有哪些已发生的成长反馈”，不回答“应该怎样改变孩子的学习”。它不拥有也不写入 Mastery、Strategy、Daily Plan、WrongBook、Review Queue、Reward、Achievement、Question 或 Curriculum 事实；报告读取不会产生新的 History、Evidence、Attempt 或完成事件。
+
+- 正式入口为 `/parent`，开发 Showcase 为 `/dev/parent-dashboard`；开发页的 Full / Empty / Sample / Unverified / Weak-heavy / No WrongBook / No Review / Error / Partial 场景只用于验证页面状态。
+- 支持最近 7 天、最近 30 天和全部记录，以及学科筛选。日期范围使用用户本地日历，报告 ID 按 Profile、范围和 `PARENT_REPORT_V1` 确定性生成。
+- 报告显示掌握状态分布和具体知识点掌握度，不生成语文学科 / 数学学科综合分，不伪造学习时长，不把成长等级解释成学习质量，也不做成绩、能力或升学预测。
+- 正式入口过滤 SAMPLE / UNVERIFIED / REJECTED 与样本派生事实；开发数据显式显示来源提示。开发完整报告使用内存夹具，不通过打开家长页写入孩子端事实存储。
+- 本地只持久化报告范围和学科筛选偏好，载荷使用 schemaVersion 1、Zod 校验和损坏回退；不新增账号、云端、外部追踪、导出、分享、AI 总结或同龄比较。
+
+实现与数据流见 `PHASE15.md`、`PARENT_REPORT.md`、`PARENT_DASHBOARD.md`、`PARENT_REPORT_DATA_FLOW.md` 和 `REPORT_PRIVACY.md`。PHASE 15.4 完成后停止，不进入 PHASE 16。
+
+## 32. PHASE 16 Real Curriculum Data / Production Readiness / MVP Release
+
+PHASE 16 是当前 MVP 主线的最终阶段，目标是让“可运行”与“可发布”有清晰边界。产品正式范围由 `MVP Curriculum Scope` 显式定义，不因为仓库里存在 SAMPLE fixtures 就扩大范围。
+
+- 当前 Scope 目标为深圳小学 2026—2027 学年；已登记 1 条候选调查项，正式 `RELEASED` 条目为 0。
+- Golden 三年级数学上册 PEP framework 仍为 `UNVERIFIED`；没有可靠当前选用关系、原书版次/版权证据和人工审核记录时，不进入生产。
+- 正式 Curriculum 只允许 `REVIEWED + ACTIVE`，正式 Lesson Content / Question 只允许 `REVIEWED + PUBLISHED`，来源和版权必须独立通过。
+- Onboarding 只读取已发布 Scope；没有已发布教材时显示安全的不可用/空状态，不向生产用户展示候选教材再让其进入死路。
+- SAMPLE、UNVERIFIED、VERIFIED 和候选数据继续用于开发、导入、差异检测和回归，但不计入正式覆盖和发布数量。
+
+PHASE 16 不改变 `MASTERY_V1`、`STRATEGY_V1`、`DAILY_PLAN_V1` 或 `PARENT_REPORT_V1`，不新增 AI 生成/审核、复习排程、账号、云同步、Teacher Dashboard、商业化或社交功能。当前 Release Decision 为 `NOT_READY`；阻断项和人工后续工作见 `MVP_RELEASE_REPORT.md`。PHASE 16 完成后停止，不进入 PHASE 17。
+
+## 33. CONTENT SYSTEM EXPANSION 01 Experience Layer
+
+CONTENT SYSTEM EXPANSION 01 为 KnowledgePoint 增加可验证的体验层：学习内容、互动活动、受约束练习模板、拓展活动和挑战。它是内容系统扩展，不是新的课程层级，也不把活动配置写回 Textbook、Unit、Lesson 或 KnowledgePoint。
+
+已实现：
+
+- 12 类 InteractiveActivity registry，其中 `drag_match`、`drag_classify`、`sort_order`、`number_line`、`select_region`、`simulation` 首批可用，其余类型安全占位。
+- 触摸 / 鼠标 Pointer Events、按钮和键盘替代、明确文字反馈、响应式和 Reduced Motion。
+- G1 Math 的 8 类确定性 ExerciseTemplate，以及 `GENERATED_FROM_VERIFIED_TEMPLATE` Question adapter。
+- PracticeSet 的基础 / 巩固 / 应用模式，独立 ExtensionActivity、Challenge 和 KnowledgePoint Hub。
+- 4 个 G1 Math Golden 知识点夹具：每个有 2 个 LearningContent blocks、2 个活动、3 组练习、1 个拓展和 1 个挑战。
+
+当前 Golden 内容全部为 `SAMPLE + UNVERIFIED`，只在 `/dev/activity-engine` 和 `/dev/content-expansion` 显式展示；正式 profile 不读取。互动完成不等于掌握度，模板生成不等于正式答题，Practice 也不自动修改地图解锁、Mastery、Strategy、Daily Plan、Reward 或 ParentReport。
+
+本阶段明确不进入 Grade 2 或 PHASE 17，也不修改：
+
+```text
+MASTERY_V1: NO
+STRATEGY_V1: NO
+DAILY_PLAN_V1: NO
+PHASE 17: NO
+```
+
+扩展契约、Golden 清单和审核前置条件见 `CONTENT_SYSTEM_EXPANSION_01.md`、`INTERACTIVE_ACTIVITY_ENGINE.md`、`EXERCISE_TEMPLATE_ENGINE.md`、`PRACTICE_SYSTEM.md` 和 `GOLDEN_CONTENT_G1_MATH.md`。

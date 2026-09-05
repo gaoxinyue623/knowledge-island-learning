@@ -14,8 +14,15 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:run": "vitest run",
-    "curriculum:review": "tsx scripts/curriculum-review.ts",
-    "curriculum:validate": "npm run curriculum:review"
+    "curriculum:batch": "tsx --tsconfig tsconfig.app.json scripts/curriculum-batch.ts batch-01",
+    "curriculum:import": "tsx --tsconfig tsconfig.app.json scripts/curriculum-batch.ts import",
+    "curriculum:review": "tsx --tsconfig tsconfig.app.json scripts/curriculum-review.ts",
+    "curriculum:data-review": "tsx --tsconfig tsconfig.app.json scripts/curriculum-data-review.ts",
+    "curriculum:content:fetch": "tsx --tsconfig tsconfig.app.json scripts/curriculum-content-fetch.ts",
+    "curriculum:content:discover": "tsx --tsconfig tsconfig.app.json scripts/curriculum-content-discover.ts",
+    "curriculum:content:import-pdf": "tsx --tsconfig tsconfig.app.json scripts/curriculum-content-import-pdf.ts",
+    "curriculum:validate": "npm run curriculum:review",
+    "release:check": "tsx --tsconfig tsconfig.app.json scripts/mvp-release.ts"
   },
   "dependencies": {
     "lucide-vue-next": "^0.468.0",

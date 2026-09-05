@@ -8,6 +8,7 @@ import AppIcon from '@/components/common/AppIcon.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import KnowledgeNode from '@/components/learning-map/KnowledgeNode.vue'
 import NodeDetailPanel from '@/components/learning-map/NodeDetailPanel.vue'
+import KnowledgeChallengeCard from '@/components/knowledge-point/KnowledgeChallengeCard.vue'
 
 describe('AppButton', () => {
   it('renders a primary button with an accessible loading state', () => {
@@ -122,5 +123,29 @@ describe('LearningMap components', () => {
     await error.get('button').trigger('click')
     expect(error.attributes('role')).toBe('alert')
     expect(error.emitted('retry')).toHaveLength(1)
+  })
+})
+
+describe('Knowledge point detail components', () => {
+  it('lets a learner write and submit a non-scoring knowledge challenge', async () => {
+    const wrapper = mount(KnowledgeChallengeCard, {
+      props: {
+        challengeId: 'knowledge-point-1:challenge',
+        title: '说说你的发现',
+        prompt: '说说你是怎样找到答案的。',
+        hint: '先说出你的观察方法。',
+      },
+    })
+
+    const submit = wrapper.get('.app-button--primary')
+    expect(submit.attributes('disabled')).toBeDefined()
+
+    await wrapper.get('textarea').setValue('我先观察，再比较。')
+    expect(submit.attributes('disabled')).toBeUndefined()
+    await submit.trigger('click')
+
+    expect(wrapper.text()).toContain('挑战完成')
+    expect(wrapper.text()).toContain('不改变掌握度')
+    expect(wrapper.get('[role="status"]').text()).toContain('挑战完成')
   })
 })

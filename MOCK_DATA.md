@@ -4,10 +4,10 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 11.4（继承 PHASE 5～10 Mock 基线） |
-| 状态 | 已实现并通过本地校验；包含地图、LessonPlayer、Question Engine、Mastery 与 Learning Strategy 开发夹具，不代表真实课程数据 |
+| 所属阶段 | PHASE 13.4（继承 PHASE 5～12 Mock 基线） |
+| 状态 | 已实现并通过本地校验；包含地图、LessonPlayer、Question Engine、Mastery、Learning Strategy、Learning History、WrongBook、Review Queue 与 Reward / Growth / Achievement 开发夹具，不代表真实课程数据 |
 | 唯一事实源 | `PRODUCT.md`、`DATA_MODEL.md`、`CURRICULUM.md`、`MVP_CURRICULUM.md` |
-| 数据入口 | `src/data/curriculum/index.ts`、`src/data/learning-strategy/` |
+| 数据入口 | `src/data/curriculum/index.ts`、`src/data/learning-strategy/`、`src/data/learning-history/`、`src/data/wrong-book/`、`src/data/review-queue/` |
 
 ## 1. 使用边界
 
@@ -97,7 +97,7 @@ LessonPlayer 开发页只用于验证步骤、内容块、会话恢复、完成�
 | Demo Assessment | 1 组固定练习、6 道原创题 | 覆盖单选、多选、判断、填空、计算、简答 | 不可用，全部为 SAMPLE |
 | QuestionKnowledgePoint | 7 条关系 | 验证 1 个 PRIMARY 与 1 个 SECONDARY 覆盖关系 | 不可用，必须人工核验 |
 
-题目固定顺序为 `singleChoice → multipleChoice → trueFalse → fillBlank → calculation → shortAnswer`。题目、答案规则、解析和媒体仍使用结构化协议；简答只返回人工审核状态。Demo 不代表任何真实教材或地区出版社，不直接生成 `MasteryEvent`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`；完成 Session 的掌握度处理必须通过独立 `MasteryProcessingService`，并保留 SAMPLE 来源标识。
+题目固定顺序为 `singleChoice → multipleChoice → trueFalse → fillBlank → calculation → shortAnswer`。题目、答案规则、解析和媒体仍使用结构化协议；简答只返回人工审核状态。Demo 不代表任何真实教材或地区出版社，不直接生成 `MasteryEvent`、`WrongQuestion` 或正式 Reward / Energy；完成 Session 的掌握度处理与开发 SAMPLE Reward 观察必须分别通过独立 Service，并保留 SAMPLE 来源标识。
 
 ## 8. PHASE 10 Mastery Demo
 
@@ -108,3 +108,13 @@ LessonPlayer 开发页只用于验证步骤、内容块、会话恢复、完成�
 `src/data/learning-strategy/demo/` 提供 `SAMPLE_STRATEGY_WEAK`、`SAMPLE_STRATEGY_MASTERED`、`SAMPLE_STRATEGY_LOW_CONFIDENCE`、`SAMPLE_STRATEGY_IN_PROGRESS`、`SAMPLE_STRATEGY_LOCKED` 和 `SAMPLE_STRATEGY_NO_AVAILABLE`。所有夹具均为 `isSample: true`、`needsVerification: true`、`verificationStatus: SAMPLE`，只用于 `/dev/strategy` 与自动化测试，不代表真实学生记录。
 
 策略开发页另提供 `UNVERIFIED` 情境，用于确认来源警示和开发数据集边界。正式 profile 不自动加载 Strategy Demo；策略只读 MasteryRecord 与地图状态，不写入地图完成度、解锁、QuestionSession、WrongBook、KnowledgeEnergy 或 Reward。
+
+## 10. PHASE 12 学习行为 Demo
+
+`src/data/learning-history/` 提供固定的完成课程 / 完成练习 History 夹具；`src/data/wrong-book/` 提供由固定 QuestionSession 派生的 SAMPLE 错题；`src/data/review-queue/` 提供由 `STRATEGY_V1` recommendation 派生的 SAMPLE Queue。它们只用于开发与测试，正式页面默认过滤 `isSampleDerived = true`，不会改变 Curriculum Review 的 `REQUIRES_MANUAL_REVIEW` 结果。
+
+## 11. PHASE 13 Reward / Growth Demo
+
+`src/data/reward/demo/phase13DemoRewardFacts.ts` 提供固定的 5 次课程完成、1 次练习完成、1 次掌握 transition、1 次巩固完成和 1 次错题解决事实。开发 `/dev/reward` 通过 `RewardProjectionService` 投影这些 SAMPLE facts，产生可重建的 RewardEvent、KnowledgeEnergy、Growth level 和 Achievement progress；所有 ID 与时间均固定，不使用随机奖励。
+
+正式 `/achievements` 只读取当前 profile 的非 SAMPLE RewardEvent 和事实，不加载这些夹具。开发样本可以单独清理，不影响正式学习记录；Reward 不生成地图解锁、Mastery、Strategy 或课程数据。

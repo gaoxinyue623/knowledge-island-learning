@@ -1,5 +1,7 @@
 import type { VerificationStatus } from '@/types'
 
+import { productionConfig } from '../../config/production'
+
 export interface CurriculumAccessPolicy {
   allowSampleCurriculum: boolean
   allowUnreviewedCurriculum: boolean
@@ -11,38 +13,18 @@ export interface CurriculumAccessPolicy {
   allowUnreviewedQuestions?: boolean
 }
 
-type ViteEnvironment = {
-  PROD?: boolean
-  VITE_ALLOW_SAMPLE_CURRICULUM?: string
-  VITE_ALLOW_UNREVIEWED_CURRICULUM?: string
-  VITE_ALLOW_SAMPLE_LEARNING_CONTENT?: string
-  VITE_ALLOW_UNREVIEWED_LEARNING_CONTENT?: string
-  VITE_ALLOW_SAMPLE_QUESTIONS?: string
-  VITE_ALLOW_UNREVIEWED_QUESTIONS?: string
-}
-
-const viteEnvironment = (import.meta as ImportMeta & { env?: ViteEnvironment }).env
-
 /**
  * SAMPLE data is useful to the local UI, while production resolution is
  * intentionally review-gated. Both switches live here so consumers do not
  * make independent environment checks.
  */
 export const curriculumAccessConfig: CurriculumAccessPolicy = {
-  allowSampleCurriculum:
-    viteEnvironment?.PROD !== true && viteEnvironment?.VITE_ALLOW_SAMPLE_CURRICULUM !== 'false',
-  allowUnreviewedCurriculum:
-    viteEnvironment?.PROD !== true && viteEnvironment?.VITE_ALLOW_UNREVIEWED_CURRICULUM === 'true',
-  allowSampleLearningContent:
-    viteEnvironment?.PROD !== true &&
-    viteEnvironment?.VITE_ALLOW_SAMPLE_LEARNING_CONTENT !== 'false',
-  allowUnreviewedLearningContent:
-    viteEnvironment?.PROD !== true &&
-    viteEnvironment?.VITE_ALLOW_UNREVIEWED_LEARNING_CONTENT !== 'false',
-  allowSampleQuestions:
-    viteEnvironment?.PROD !== true && viteEnvironment?.VITE_ALLOW_SAMPLE_QUESTIONS !== 'false',
-  allowUnreviewedQuestions:
-    viteEnvironment?.PROD !== true && viteEnvironment?.VITE_ALLOW_UNREVIEWED_QUESTIONS !== 'false',
+  allowSampleCurriculum: productionConfig.allowSampleCurriculum,
+  allowUnreviewedCurriculum: productionConfig.allowUnreviewedCurriculum,
+  allowSampleLearningContent: productionConfig.allowSampleLearningContent,
+  allowUnreviewedLearningContent: productionConfig.allowUnreviewedLearningContent,
+  allowSampleQuestions: productionConfig.allowSampleQuestions,
+  allowUnreviewedQuestions: productionConfig.allowUnreviewedQuestions,
 }
 
 export function getRecordVerificationStatus(record: {
@@ -67,7 +49,9 @@ export function isCurriculumRecordReadable(
 ): boolean {
   if (record.status === 'ARCHIVED') return false
   const verificationStatus = getRecordVerificationStatus(record)
-  if (verificationStatus === 'REVIEWED') return true
+  if (verificationStatus === 'REVIEWED') {
+    return record.status === undefined || record.status === 'ACTIVE'
+  }
   if (verificationStatus === 'SAMPLE') return policy.allowSampleCurriculum
   if (verificationStatus === 'UNVERIFIED' || verificationStatus === 'VERIFIED') {
     return policy.allowUnreviewedCurriculum
@@ -91,7 +75,7 @@ export function isLearningContentRecordReadable(
 ): boolean {
   if (record.status === 'ARCHIVED') return false
   const verificationStatus = getRecordVerificationStatus(record)
-  if (verificationStatus === 'REVIEWED') return true
+  if (verificationStatus === 'REVIEWED') return record.status === 'PUBLISHED'
   if (verificationStatus === 'SAMPLE') return policy.allowSampleLearningContent === true
   if (verificationStatus === 'UNVERIFIED' || verificationStatus === 'VERIFIED') {
     return policy.allowUnreviewedLearningContent === true
@@ -114,7 +98,7 @@ export function isQuestionRecordReadable(
 ): boolean {
   if (record.status === 'ARCHIVED') return false
   const verificationStatus = getRecordVerificationStatus(record)
-  if (verificationStatus === 'REVIEWED') return true
+  if (verificationStatus === 'REVIEWED') return record.status === 'PUBLISHED'
   if (verificationStatus === 'SAMPLE') {
     return policy.allowSampleQuestions ?? policy.allowSampleCurriculum
   }

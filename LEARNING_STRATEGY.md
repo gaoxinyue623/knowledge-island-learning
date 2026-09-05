@@ -7,10 +7,12 @@
 | 项目 | 状态 |
 | --- | --- |
 | PHASE 11.1～11.4 | 已实现 |
+| PHASE 12 ReviewQueue 下游投影边界 | 已实现；不改变 Strategy 规则 |
+| PHASE 13 Reward / Growth / Achievement 下游反馈 | 已实现；只读消费完成事实，不改变 Strategy 规则 |
 | 确定性规则、来源闸门、档案隔离 | 已实现 |
 | 自动化测试 | 已验证：`tests/learning-strategy.test.ts` |
-| 浏览器视口验证 | 待本阶段最终工程校验完成后更新 |
-| AI Learning Path、复习排程、KnowledgeEnergy、WrongBook、Reward | 不在范围内 |
+| 浏览器视口验证 | 已验证：36 个路由 × 视口组合，无横向溢出与控制台错误 |
+| AI Learning Path、复习排程、WrongBook 规则、Reward 规则 | 不在 Strategy 范围内；PHASE 12 建立独立 Queue，PHASE 13 建立独立反馈投影 |
 
 ## 1. 目标与边界
 
@@ -86,4 +88,8 @@ Review 输出为 `ReviewRecommendation[]`，下一知识点输出为 `NextKnowle
 - `src/components/learning-strategy/`：首页、Assessment、地图和开发页共用的推荐卡片。
 - `src/pages/DevStrategyPage.vue`：`/dev/strategy` 固定夹具验证页。
 
-本阶段停止在确定性策略层，不进入 PHASE 12。
+本阶段停止在确定性策略层，不在 Strategy 内扩展错题本或复习排程；PHASE 12 通过独立 Projection Service 只读消费本页输出。
+
+## 7. PHASE 13 下游反馈边界
+
+PHASE 13 的 Reward / Growth / Achievement 只读取已完成学习事实和已保存的 Review / WrongBook 状态。它们不会读取 Strategy 去改变 priority，也不会把 Achievement、Growth level 或 KnowledgeEnergy 写回 Strategy、Mastery 或 LearningMap。Review Queue 的完成反馈由独立 Reward projection 处理；Strategy 规则与 `STRATEGY_V1` 不变。

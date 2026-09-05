@@ -1,13 +1,13 @@
 # 知识岛｜PHASE 3 页面规格
 
-> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 展示与 PHASE 11 策略卡片已实现并验证，其余页面仍以设计规格为准。
+> 本文档是 Vue 3 工程的 UI / UX 页面设计依据。它定义页面目标、用户、信息层级、布局、CTA、组件、状态、响应式和跳转关系；其中 PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 展示、PHASE 11 策略卡片、PHASE 12 History / WrongBook / Review Queue 页面、PHASE 13 Reward / Growth 页面与 PHASE 14 Home / Daily Plan 页面已实现，其余页面仍以设计规格为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 11.4：Learning Strategy 展示验证（继承 PHASE 3 页面规格） |
-| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine / Assessment、PHASE 10 Mastery 结果展示与 PHASE 11 Home / completion / map / dev strategy 卡片已实现并验证，其他目标页面仍按设计状态管理 |
+| 所属阶段 | PHASE 14.4：Home / Daily Plan 验证（继承 PHASE 3 页面规格） |
+| 状态 | PHASE 3 设计基线；PHASE 7 LearningMap、PHASE 8 LessonPlayer、PHASE 9 Question Engine / Assessment、PHASE 10 Mastery 结果展示、PHASE 11 策略卡片、PHASE 12 三个回顾页面、PHASE 13 成长反馈页面与 PHASE 14 Home / Daily Plan 页面已实现，其他目标页面仍按设计状态管理 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md` |
 | 相关设计文档 | `DESIGN_SYSTEM.md`、`RESPONSIVE_DESIGN.md`、`QUESTION_UI.md`、`UI_FLOW.md`、`ONBOARDING_DESIGN.md` |
 | 页面数据原则 | 课程配置和教材信息只读取数据层；UI 不猜测地区、出版社或教材版本 |
@@ -682,3 +682,38 @@ Desktop 使用中央学习卡片与步骤导航，Tablet 保持大触控目标�
 Node Detail 可以显示“知识掌握”状态、分数和证据数，但必须与“地图学习进度 / 完成度”分组。掌握度不改变节点 `locked / available / learning / completed`、前置解锁或地图进度；`perfect` 不由掌握度推导。儿童端优先使用“正在掌握 / 需要巩固 / 已掌握”等文字与图标，不强制展示 confidence 的内部含义。
 
 Mastery 展示使用 `aria-label`、可见状态文字、`focus-visible` 和进度语义；状态不能只依赖颜色。进度过渡遵守 `prefers-reduced-motion`，不使用金币、XP、宝箱或成就弹窗表达掌握度。
+
+## 13. PHASE 13 Reward / Growth 页面
+
+### 13.1 `/achievements` 与 `/dev/reward`
+
+| 页面契约 | 实现事实 |
+| --- | --- |
+| 目标 | 回看已完成学习带来的 KnowledgeEnergy、Growth 和 Achievement |
+| 信息优先级 | 累计能量、成长等级 / 进度、里程碑进度、Reward history |
+| 主 CTA | 正式页面可从底部导航或地图入口进入；开发页重新读取 / 清理样本 |
+| 数据边界 | 正式页只显示正式 RewardEvent；开发页显式显示固定 SAMPLE |
+| 禁止 | 不展示 coin、currency、shop、inventory、随机奖励、streak 或 leaderboard |
+| 状态 | loading、empty、storage warning、sample provenance、locked / unlocked |
+| 响应式 | Desktop 多区块；Tablet 保持可读卡片；Mobile 单列，事件奖励值不溢出 |
+
+Growth 等级只用于反馈，不改变课程解锁、地图完成度、题目难度、Mastery 或 Strategy。Achievement 条件只读取完成学习、掌握、巩固、解决错题和 KnowledgeEnergy；没有页面访问统计、连续天数或时段条件。
+
+## 14. PHASE 14 Home / Daily Plan 页面
+
+### 14.1 `/home`、`/tasks` 与 `/dev/home`
+
+| 页面契约 | 实现事实 |
+| --- | --- |
+| 目标 | 让学生打开产品后立即知道今天要学什么，并从 1～3 个任务进入学习闭环 |
+| 信息优先级 | Greeting / 来源、今日进度、Daily Plan、Continue、三科摘要、最近学习、Growth / Achievement、快捷入口 |
+| 主 CTA | Daily Plan 当前任务：继续学习、巩固、错题重练或开始新知识 |
+| 数据边界 | 只消费 `HomeViewModel`；页面不直接读取 localStorage，不重算 Mastery / Strategy |
+| 任务类型 | `continue_learning`、`review`、`reinforce`、`wrong_question`、`next_learning` |
+| 状态 | loading、error、empty、warning、pending、completed、unavailable、sample / unverified |
+| 跳转 | Lesson / Assessment 使用显式 launch context；WrongBook / ReviewQueue 使用 focus query；完成后通过 `returnTo` 回到 Home |
+| 响应式 | Desktop 分区卡片；Tablet 保持可读间距；Mobile 单列回流，375～1440 宽度无横向溢出 |
+
+Home 的 `今日进度`是可用任务完成比例，不是掌握度。当天 Daily Plan 首次生成后保持 task identity、顺序和数量；刷新只同步上游事实对应的状态、进度和 CTA 可用性。正式首页过滤 SAMPLE / UNVERIFIED / REJECTED，开发首页明确展示固定样本来源。
+
+首页使用 `AppShell`、`AppButton`、`AppIcon`、`AppProgress`、`AppLoading`、`AppEmptyState` 和 `AppErrorState`。任务操作使用真实按钮和可见 Focus 状态，状态不只依赖颜色；减少动态效果时遵守 `prefers-reduced-motion`。详细页面与数据流见 `PHASE14.md`、`DAILY_PLAN_DATA_FLOW.md` 和 `HOME_DATA_FLOW.md`。

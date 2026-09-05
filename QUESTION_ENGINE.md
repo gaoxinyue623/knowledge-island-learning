@@ -1,13 +1,13 @@
 # 知识岛｜Question Engine 实现说明
 
-> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment 和 LessonPlayer 接入，以及 PHASE 10 掌握度后处理和 PHASE 11 策略消费边界。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md`、`MASTERY.md` 或 `LEARNING_STRATEGY.md`。
+> 本文档记录 PHASE 9.1～9.4 已实现的题目引擎、Assessment 和 LessonPlayer 接入，以及 PHASE 10 掌握度后处理、PHASE 11 策略消费、PHASE 12 History / WrongBook 投影和 PHASE 13 Reward 观察边界。它不把 Demo 题目当作真实教材题库，也不替代 `QUESTION_SCHEMA.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md`、`MASTERY.md`、`LEARNING_STRATEGY.md` 或 `PHASE13.md`。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 11.4：Learning Strategy（Question Engine 作为上游） |
-| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门、LessonPlayer 回链、完成 Session 的掌握度后处理和完成页策略提示已实现；Question Engine 仍不直接拥有掌握度或策略 |
+| 当前阶段 | PHASE 13.4：Reward 投影（Question Engine 作为上游） |
+| 状态 | 六类题型、固定 Assessment、确定性判题、反馈、会话恢复、审核闸门、LessonPlayer 回链、完成 Session 的掌握度后处理、完成页策略提示、学习历史、错题投影和独立 Reward 观察已实现；Question Engine 仍不拥有掌握度、Strategy、WrongBook 或 Reward 事实 |
 | 正式入口 | `/assessment`；需要显式 `AssessmentLaunchContext` |
 | 开发入口 | `/dev/question-engine`、`/dev/question-engine/states` |
 | 题目数据 | 6 道原创 Demo SAMPLE 题；不代表真实教材内容 |
@@ -65,7 +65,7 @@ QuestionAttemptResult / AssessmentResultSummary
 
 ## 5. 与学习行为域的隔离
 
-`QuestionAttemptResult` 只描述本次作答。Question Engine 不直接创建或更新 `MasteryEvent`、`MasteryRecord`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`；完成 Session 后，页面显式调用独立 `MasteryProcessingService`，由它读取 Attempt 并派生 LearningEvidence / MasteryRecord。`masteryScore` 不因日期流逝自动下降；KnowledgeEnergy 仍是未实现的独立复习信号域。
+`QuestionAttemptResult` 只描述本次作答。Question Engine 不直接创建或更新 `MasteryEvent`、`MasteryRecord`、`KnowledgeEnergy`、`WrongQuestion` 或 `Reward`；完成 Session 后，页面显式调用独立 `MasteryProcessingService`，并可由独立 `RewardService` 观察 completed Session。`masteryScore` 不因日期流逝自动下降；KnowledgeEnergy 是 PHASE 13 的独立累计反馈读模型。
 
 ## 6. 主要实现文件
 
@@ -80,7 +80,7 @@ QuestionAttemptResult / AssessmentResultSummary
 
 ## 7. 当前限制与后续边界
 
-当前运行时实现 PHASE 9 明确的六类题型和本地 Demo；拖拽、匹配、排序、听力、阅读、口语等题型仍为协议或后续接口。简答需要人工审核，当前没有审核工作台。正式题库、真实教材关联、题目推荐、自适应难度、AI 出题、AI 评分、知识能量、错题本和奖励仍留待后续阶段；Mastery 已由 PHASE 10 的独立服务接入。
+当前运行时实现 PHASE 9 明确的六类题型和本地 Demo；拖拽、匹配、排序、听力、阅读、口语等题型仍为协议或后续接口。简答需要人工审核，当前没有审核工作台。正式题库、真实教材关联、题目推荐、自适应难度、AI 出题、AI 评分仍留待后续阶段；Mastery、PHASE 12 History / WrongBook 投影和 PHASE 13 独立 Reward / Growth / Achievement 观察层已经接入。
 
 ## 8. PHASE 10 后处理边界
 
@@ -91,3 +91,31 @@ QuestionAttemptResult / AssessmentResultSummary
 当 Assessment 完成且 Mastery 刷新成功时，页面可以把当前 `LearningMapViewModel`、`MasteryRecord[]` 和已有证据交给 `LearningStrategyService`。完成页只展示“继续学习 / 建议巩固 / 补充证据 / 下一步”等当前动作，不改变 QuestionSession、题目集合或答题结果。Mastery 后处理失败时不生成强策略建议。
 
 Question Engine 不直接写 StrategyStore；Strategy 也不重新计算 `masteryScore`、调题目难度、改变题目集合、创建错题本或复习日程。详细策略协议见 `LEARNING_STRATEGY.md`。
+
+## 10. PHASE 12 学习行为投影
+
+PHASE 12 保留 Question Engine 的事实边界：`QuestionSession` / `QuestionAttempt` 仍由本 Store 和 `questionSessionStorage` 管理。提交后的 Attempt 由独立 `WrongBookProjectionService` 读取；只有 submitted 且确定性结果为 `incorrect` 的当前支持题目才进入 WrongBook。History 只保存 `assessment_started` / `assessment_completed` 及完成摘要，不复制完整 Attempt。
+
+错题重练使用 `AssessmentLaunchContext.source = 'wrong_book'`，通过稳定 `sessionScope` 生成新的 QuestionSession ID；原 Session 和 Attempt 不被覆盖。完成后的新 Session 仍通过原有显式 Mastery 后处理链处理，WrongBook 的 resolved 状态由独立投影更新。Question Engine 不拥有 WrongBook、Review Queue、复习排程或奖励规则。详细边界见 `PHASE12.md` 和 `WRONG_BOOK_DATA_FLOW.md`。
+
+## 11. PHASE 13 Reward 观察边界
+
+Question Engine 完成的 `QuestionSession` 可以作为 `assessment_completed` 的只读来源，由独立 `RewardService` 投影固定的 `REWARD_V1` 反馈；Question Engine 仍不拥有 RewardEvent，也不根据正确率修改奖励。Assessment 完成页会同时显示本次结果、Mastery 后处理状态和独立的 KnowledgeEnergy 反馈。
+
+在 Mastery 后处理前，页面保存旧的 `MasteryRecord`，只有非 mastered → mastered 的状态 transition 才投影 `knowledge_mastered`。重复 Session、重复 Mastery rebuild 和刷新由 RewardEvent deterministic ID 去重。开发 SAMPLE 只进入开发成长反馈，不进入正式 Reward / Energy。完整链路见 `REWARD_DATA_FLOW.md` 和 `PHASE13.md`。
+
+## 12. CONTENT SYSTEM EXPANSION 01 Generated Question Boundary
+
+`ExerciseTemplate` 是受约束的内容生成层，不是 Question Engine 的第二实现。它通过 `GeneratedQuestionAdapter` 把 `ExerciseInstance` 转成现有 `Question`，再由已有的 `QuestionRepository`、`QuestionSession`、`QuestionAttempt` 和 Validator 负责正式作答：
+
+```text
+PracticeSet → ExerciseTemplate → ExerciseInstance
+                                  ↓
+                         GeneratedQuestionAdapter
+                                  ↓
+                   QuestionSession / QuestionAttempt
+```
+
+实例 ID 使用 `templateId + seed + index`，来源 marker 为 `GENERATED_FROM_VERIFIED_TEMPLATE`。相同种子得到相同序列；生成器不使用无种子随机数。当前支持 G1 Math 的 `addition_range`、`subtraction_range`、`compare_numbers`、`missing_number`、`number_order`、`picture_count`、`word_problem_simple` 和 `equation_match`。
+
+生成或完成 InteractiveActivity 不会自动创建 `QuestionAttempt`。只有显式构建的新 QuestionSession 并完成正式提交，才可能进入既有 Mastery / History / WrongBook 投影；生成题本身不改变 `MASTERY_V1`、`STRATEGY_V1` 或 `DAILY_PLAN_V1`。生产生成入口还要求模板 `REVIEWED` 且 `isSample=false`，当前 Golden 模板仍被独立门禁拦截。

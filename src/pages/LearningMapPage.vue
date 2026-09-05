@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -11,13 +11,14 @@ import LearningRecommendationCard from '@/components/learning-strategy/LearningR
 import KnowledgeIslandMap from '@/components/learning-map/KnowledgeIslandMap.vue'
 import LearningProgressBar from '@/components/learning-map/LearningProgressBar.vue'
 import MapHeader from '@/components/learning-map/MapHeader.vue'
-import NodeDetailPanel from '@/components/learning-map/NodeDetailPanel.vue'
+import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { findLearningMapNode, useLearningMapStore } from '@/stores/learningMapStore'
 import { useMasteryStore } from '@/stores/masteryStore'
 import { useLearningStrategyStore } from '@/stores/learningStrategyStore'
-import type { Id, KnowledgeMapNode, LearningMapViewModel } from '@/types'
+import { useReviewQueueStore } from '@/stores/reviewQueueStore'
+import type { Id, KnowledgeMapNode, LearningMapViewModel, SubjectCode } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
@@ -25,6 +26,7 @@ const curriculumStore = useCurriculumStore()
 const learningMapStore = useLearningMapStore()
 const masteryStore = useMasteryStore()
 const learningStrategyStore = useLearningStrategyStore()
+const reviewQueueStore = useReviewQueueStore()
 const notice = ref<{
   type: 'success' | 'info' | 'warning'
   title: string
@@ -32,27 +34,26 @@ const notice = ref<{
 } | null>(null)
 
 const viewModel = computed(() => learningMapStore.viewModel)
+const isFormalPilot = computed(() => isPilotTextbook(viewModel.value?.textbook.id))
 const strategyRecommendation = computed(() => learningStrategyStore.recommendation)
 const profile = computed(() => curriculumStore.curriculumProfile)
-const selectedNode = computed(() => learningMapStore.selectedNode)
-const selectedContext = computed(() => {
-  const node = selectedNode.value
-  const model = viewModel.value
-  if (!node || !model) return { lessonTitle: undefined, unitTitle: undefined, prerequisites: [] }
-  const island = model.islands.find((candidate) => candidate.unitId === node.unitId)
-  const lesson = island?.lessons.find((candidate) => candidate.lessonId === node.lessonId)
-  const allNodes = model.islands.flatMap((candidate) =>
-    candidate.lessons.flatMap((lessonSection) => lessonSection.nodes),
-  )
-  const prerequisites = node.prerequisites
-    .map(
-      (knowledgePointId) =>
-        allNodes.find((candidate) => candidate.knowledgePointId === knowledgePointId)?.title,
-    )
-    .filter((title): title is string => Boolean(title))
-  return { lessonTitle: lesson?.title, unitTitle: island?.title, prerequisites }
+const requestedSubject = computed<SubjectCode>(() => {
+  const requested = String(route.query.subject ?? '').toUpperCase()
+  if (requested === 'CHINESE' || requested === 'MATH' || requested === 'ENGLISH') {
+    return requested
+  }
+  if (profile.value?.mathTextbookVersionId) return 'MATH'
+  if (profile.value?.chineseTextbookVersionId) return 'CHINESE'
+  return 'ENGLISH'
 })
-
+const selectedTextbookId = computed(() => {
+  if (!profile.value) return null
+  return {
+    CHINESE: profile.value.chineseTextbookVersionId,
+    MATH: profile.value.mathTextbookVersionId,
+    ENGLISH: profile.value.englishTextbookVersionId,
+  }[requestedSubject.value]
+})
 const contextLabel = computed(() => {
   const model = viewModel.value
   return model
@@ -67,7 +68,7 @@ function findCurrentModelNode(model: LearningMapViewModel | null): KnowledgeMapN
 
 async function loadMap() {
   learningStrategyStore.clear()
-  const textbookId = profile.value?.mathTextbookVersionId
+  const textbookId = selectedTextbookId.value
   if (!textbookId) return
   await masteryStore.load(profile.value?.studentId ?? 'local-profile')
   const loaded = await learningMapStore.loadMap({
@@ -76,7 +77,7 @@ async function loadMap() {
     masteryRecords: masteryStore.records,
   })
   if (loaded) {
-    await learningStrategyStore.resolveForMap(loaded, {
+    const resolved = await learningStrategyStore.resolveForMap(loaded, {
       studentProfileId: profile.value?.studentId ?? 'local-profile',
       masteryRecords: masteryStore.records,
       learningEvidence: masteryStore.evidence,
@@ -84,13 +85,37 @@ async function loadMap() {
       currentMapNodeId: loaded.currentNodeId,
       dataset: 'profile',
     })
+    if (resolved) {
+      reviewQueueStore.project(resolved, {
+        profileId: profile.value?.studentId ?? 'local-profile',
+        textbookId: loaded.textbook.id,
+        dataset: 'profile',
+      })
+    }
   }
   const focusNodeId = typeof route.query.focusNodeId === 'string' ? route.query.focusNodeId : null
   if (loaded && focusNodeId) learningMapStore.focusNode(focusNodeId)
 }
 
-function selectNode(nodeId: Id) {
-  learningMapStore.selectNode(nodeId)
+function openNodeDetail(nodeId: Id) {
+  const model = viewModel.value
+  if (!model || !learningMapStore.selectNode(nodeId)) return
+  const node = learningMapStore.selectedNode
+  if (!node) return
+  void router.push({
+    path: `/knowledge-point/${encodeURIComponent(node.knowledgePointId)}`,
+    query: {
+      textbookId: model.textbook.id,
+      unitId: node.unitId,
+      lessonId: node.lessonId,
+      knowledgePointId: node.knowledgePointId,
+      dataset: 'profile',
+      mapNodeId: node.id,
+      nodeStatus: node.status,
+      nodeProgress: String(node.progress),
+      returnTo: '/learning-map',
+    },
+  })
 }
 
 function focusCurrentNode() {
@@ -102,32 +127,6 @@ function focusCurrentNode() {
     title: '已经定位到下一步',
     message: node.title,
   }
-}
-
-function startSelectedNode() {
-  const node = selectedNode.value
-  const model = viewModel.value
-  if (!node || !model) return
-  void router.push({
-    path: '/lesson',
-    query: {
-      textbookId: model.textbook.id,
-      unitId: node.unitId,
-      lessonId: node.lessonId,
-      knowledgePointId: node.knowledgePointId,
-      dataset: 'profile',
-      mapNodeId: node.id,
-      returnTo: '/learning-map',
-    },
-  })
-}
-
-function completeSelectedNode() {
-  startSelectedNode()
-}
-
-function closeNodeDetail() {
-  learningMapStore.selectedNodeId = null
 }
 
 function focusStrategyRecommendation() {
@@ -142,6 +141,10 @@ function focusStrategyRecommendation() {
 }
 
 onMounted(() => void loadMap())
+watch(
+  () => [route.query.subject, profile.value?.studentId, selectedTextbookId.value],
+  () => void loadMap(),
+)
 </script>
 
 <template>
@@ -155,9 +158,9 @@ onMounted(() => void loadMap())
         @retry="loadMap"
       />
       <AppEmptyState
-        v-else-if="learningMapStore.status === 'not_available' || !profile?.mathTextbookVersionId"
+        v-else-if="learningMapStore.status === 'not_available' || !selectedTextbookId"
         title="课程内容正在准备中"
-        description="当前学习设置还没有可开放的数学地图，请先确认教材版本，或等待课程完成审核。"
+        description="当前学科还没有可开放的知识地图，请先确认教材版本，或等待课程完成审核。"
         action-label="查看学习设置"
         @action="router.push('/curriculum-settings')"
       />
@@ -169,7 +172,7 @@ onMounted(() => void loadMap())
         @action="router.push('/home')"
       />
       <template v-else-if="viewModel">
-        <MapHeader :view-model="viewModel" />
+        <MapHeader :view-model="viewModel" :show-unverified="!isFormalPilot" />
         <section class="learning-map-overview" aria-label="地图进度概览">
           <div class="learning-map-overview__copy">
             <p class="curriculum-eyebrow">继续学习</p>
@@ -195,12 +198,20 @@ onMounted(() => void loadMap())
           >
             继续探索
           </AppButton>
+          <AppButton
+            class="learning-map-overview__growth-cta"
+            variant="secondary"
+            icon-left="sparkles"
+            @click="router.push('/achievements')"
+          >
+            查看成长反馈
+          </AppButton>
         </section>
         <div v-if="viewModel.flags.isDemo" class="map-notice map-notice--sample" role="status">
           开发样本：多岛数据只用于验证地图布局与状态，不代表真实教材结构。
         </div>
         <div
-          v-else-if="viewModel.flags.isUnverified"
+          v-else-if="viewModel.flags.isUnverified && !isFormalPilot"
           class="map-notice map-notice--warning"
           role="status"
         >
@@ -215,7 +226,7 @@ onMounted(() => void loadMap())
         <KnowledgeIslandMap
           :view-model="viewModel"
           :selected-node-id="learningMapStore.selectedNodeId"
-          @select-node="selectNode"
+          @select-node="openNodeDetail"
         />
         <details v-if="viewModel.diagnostics.length" class="learning-map-diagnostics">
           <summary>开发诊断：{{ viewModel.diagnostics.length }} 条提示</summary>
@@ -226,20 +237,6 @@ onMounted(() => void loadMap())
             {{ diagnostic.message }}
           </p>
         </details>
-        <NodeDetailPanel
-          :open="Boolean(selectedNode)"
-          :node="selectedNode"
-          :lesson-title="selectedContext.lessonTitle"
-          :unit-title="selectedContext.unitTitle"
-          :prerequisite-titles="selectedContext.prerequisites"
-          :is-sample="selectedNode?.isSample || viewModel.flags.isDemo"
-          :is-unverified="viewModel.flags.isUnverified"
-          :is-read-only="viewModel.flags.isReadOnly"
-          :mastery="selectedNode?.mastery"
-          @close="closeNodeDetail"
-          @start="startSelectedNode"
-          @complete="completeSelectedNode"
-        />
         <AppToast
           :open="Boolean(notice)"
           :type="notice?.type"

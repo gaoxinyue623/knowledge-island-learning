@@ -249,6 +249,7 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 1.6;
+  white-space: pre-wrap;
 }
 
 .lesson-block__paragraph {
@@ -469,6 +470,19 @@
 .lesson-player__completion p {
   max-width: 560px;
   color: var(--color-text-secondary);
+}
+
+.lesson-player__reward-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 560px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid rgb(76 124 240 / 24%);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  font-weight: 800;
 }
 
 .lesson-player__completion-actions {

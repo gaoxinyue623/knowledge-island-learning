@@ -4,39 +4,40 @@ import { computed, onMounted, ref } from 'vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppShell from '@/layouts/AppShell.vue'
-import { curriculumData } from '@/data/curriculum'
-import { curriculumService } from '@/services'
+import { sampleCurriculumData } from '@/data/curriculum/sample'
+import { MockCurriculumService } from '@/services/adapters/mock/curriculumMockAdapter'
 import { validateCurriculumData } from '@/services/validation'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 
 const curriculumStore = useCurriculumStore()
+const devCurriculumService = new MockCurriculumService({ data: sampleCurriculumData })
 const loading = ref(true)
 const error = ref<string | null>(null)
-const validation = validateCurriculumData()
+const validation = validateCurriculumData(sampleCurriculumData)
 const regionBResolution = ref<Awaited<
-  ReturnType<typeof curriculumService.resolveAvailableTextbooks>
+  ReturnType<typeof devCurriculumService.resolveAvailableTextbooks>
 > | null>(null)
 const dataSections: Array<{ label: string; value: unknown }> = [
-  { label: 'Regions', value: curriculumData.regions },
-  { label: 'Publishers', value: curriculumData.publishers },
-  { label: 'Textbooks', value: curriculumData.textbooks },
-  { label: 'RegionTextbookRelations', value: curriculumData.regionTextbookRelations },
-  { label: 'Units', value: curriculumData.units },
-  { label: 'Lessons', value: curriculumData.lessons },
-  { label: 'KnowledgePoints', value: curriculumData.knowledgePoints },
+  { label: 'Regions', value: sampleCurriculumData.regions },
+  { label: 'Publishers', value: sampleCurriculumData.publishers },
+  { label: 'Textbooks', value: sampleCurriculumData.textbooks },
+  { label: 'RegionTextbookRelations', value: sampleCurriculumData.regionTextbookRelations },
+  { label: 'Units', value: sampleCurriculumData.units },
+  { label: 'Lessons', value: sampleCurriculumData.lessons },
+  { label: 'KnowledgePoints', value: sampleCurriculumData.knowledgePoints },
 ]
 
 const counts = computed(() => [
-  ['地区', curriculumData.regions.length],
-  ['出版社', curriculumData.publishers.length],
-  ['教材版本', curriculumData.textbooks.length],
-  ['地区教材关系', curriculumData.regionTextbookRelations.length],
-  ['单元', curriculumData.units.length],
-  ['课次', curriculumData.lessons.length],
-  ['知识点', curriculumData.knowledgePoints.length],
-  ['课程内容', curriculumData.courseContents.length],
-  ['题目', curriculumData.questions.length],
-  ['媒体', curriculumData.mediaAssets.length],
+  ['地区', sampleCurriculumData.regions.length],
+  ['出版社', sampleCurriculumData.publishers.length],
+  ['教材版本', sampleCurriculumData.textbooks.length],
+  ['地区教材关系', sampleCurriculumData.regionTextbookRelations.length],
+  ['单元', sampleCurriculumData.units.length],
+  ['课次', sampleCurriculumData.lessons.length],
+  ['知识点', sampleCurriculumData.knowledgePoints.length],
+  ['课程内容', sampleCurriculumData.courseContents.length],
+  ['题目', sampleCurriculumData.questions.length],
+  ['媒体', sampleCurriculumData.mediaAssets.length],
 ])
 
 function json(value: unknown) {
@@ -47,7 +48,7 @@ async function loadDevData() {
   loading.value = true
   error.value = null
   try {
-    regionBResolution.value = await curriculumService.resolveAvailableTextbooks({
+    regionBResolution.value = await devCurriculumService.resolveAvailableTextbooks({
       regionId: 'SAMPLE_REGION_B',
       gradeId: 'SAMPLE_GRADE_3',
       semesterId: 'SAMPLE_SEMESTER_UPPER',

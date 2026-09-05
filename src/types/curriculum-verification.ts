@@ -1,5 +1,36 @@
 import type { DifficultyLevel, VerificationStatus } from './domain'
 
+/** Public evidence categories are separate from SourceReference.type. */
+export type CurriculumEvidenceType =
+  | 'TEXTBOOK_EXISTENCE'
+  | 'TEXTBOOK_IDENTITY'
+  | 'TEXTBOOK_CATALOG'
+  | 'LOCAL_EDUCATION_RESOURCE'
+  | 'REGIONAL_SELECTION'
+  | 'NATIONAL_CATALOG'
+  | 'CURRICULUM_STANDARD'
+  | 'PHYSICAL_BOOK'
+
+export const curriculumEvidenceTypes: readonly CurriculumEvidenceType[] = [
+  'TEXTBOOK_EXISTENCE',
+  'TEXTBOOK_IDENTITY',
+  'TEXTBOOK_CATALOG',
+  'LOCAL_EDUCATION_RESOURCE',
+  'REGIONAL_SELECTION',
+  'NATIONAL_CATALOG',
+  'CURRICULUM_STANDARD',
+  'PHYSICAL_BOOK',
+]
+
+export type CurriculumEvidenceDiagnosticCode =
+  'EDITION_MISMATCH_WARNING' | 'EDITION_DIFFERENCE' | 'EDITION_VARIANT_CONFLICT'
+
+export const curriculumEvidenceDiagnosticCodes: readonly CurriculumEvidenceDiagnosticCode[] = [
+  'EDITION_MISMATCH_WARNING',
+  'EDITION_DIFFERENCE',
+  'EDITION_VARIANT_CONFLICT',
+]
+
 export type CurriculumSourceType =
   | 'official_platform'
   | 'publisher'
@@ -23,6 +54,8 @@ export interface SourceReference {
   verifiedAt?: string
   verifiedBy?: string
   note?: string
+  evidenceTypes?: CurriculumEvidenceType[]
+  diagnosticCodes?: CurriculumEvidenceDiagnosticCode[]
 }
 
 export type EntitySourceReferenceType =

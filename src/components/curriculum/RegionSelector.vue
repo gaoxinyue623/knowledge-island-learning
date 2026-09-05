@@ -26,7 +26,7 @@ const filteredRegions = computed(() => {
 <template>
   <div class="curriculum-selector">
     <label class="curriculum-search">
-      <span class="sr-only">搜索示例地区</span>
+      <span class="sr-only">搜索地区</span>
       <AppIcon name="search" :size="20" decorative />
       <input v-model="query" type="search" placeholder="搜索地区" />
     </label>

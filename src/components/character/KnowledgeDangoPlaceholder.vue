@@ -30,6 +30,8 @@ const props = withDefaults(defineProps<Props>(), {
       <span class="dango-placeholder__foot dango-placeholder__foot--left" aria-hidden="true" />
       <span class="dango-placeholder__foot dango-placeholder__foot--right" aria-hidden="true" />
       <span class="dango-placeholder__face" aria-hidden="true">
+        <span class="dango-placeholder__cheek dango-placeholder__cheek--left" />
+        <span class="dango-placeholder__cheek dango-placeholder__cheek--right" />
         <span class="dango-placeholder__eye dango-placeholder__eye--left" />
         <span class="dango-placeholder__eye dango-placeholder__eye--right" />
         <span class="dango-placeholder__mouth" />

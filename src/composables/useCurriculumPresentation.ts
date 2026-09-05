@@ -30,7 +30,7 @@ export async function getCurriculumPresentation(
 
   const textbookValues = displays as Array<TextbookDisplay | null>
   return {
-    regionName: regions.find((region) => region.id === profile.regionId)?.name ?? '示例地区未找到',
+    regionName: regions.find((region) => region.id === profile.regionId)?.name ?? '地区待确认',
     gradeName: grades.find((grade) => grade.id === profile.gradeId)?.name ?? '年级待确认',
     semesterName:
       semesters.find((semester) => semester.id === profile.semesterId)?.name ?? '学期待确认',

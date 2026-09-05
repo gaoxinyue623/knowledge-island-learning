@@ -10,7 +10,6 @@ import KnowledgeIslandMap from '@/components/learning-map/KnowledgeIslandMap.vue
 import KnowledgeNode from '@/components/learning-map/KnowledgeNode.vue'
 import LearningProgressBar from '@/components/learning-map/LearningProgressBar.vue'
 import MapHeader from '@/components/learning-map/MapHeader.vue'
-import NodeDetailPanel from '@/components/learning-map/NodeDetailPanel.vue'
 import { useLearningMapStore } from '@/stores/learningMapStore'
 import { useMasteryStore } from '@/stores/masteryStore'
 import type { Id, KnowledgeMapNode, LearningMapDataset, LearningNodeStatus } from '@/types'
@@ -26,19 +25,6 @@ const showStates = ref(route.path.endsWith('/states'))
 const error = ref<string | null>(null)
 
 const viewModel = computed(() => learningMapStore.viewModel)
-const selectedNode = computed(() => learningMapStore.selectedNode)
-const selectedContext = computed(() => {
-  const node = selectedNode.value
-  const model = viewModel.value
-  if (!node || !model) return { lessonTitle: undefined, unitTitle: undefined, prerequisites: [] }
-  const island = model.islands.find((candidate) => candidate.unitId === node.unitId)
-  const lesson = island?.lessons.find((candidate) => candidate.lessonId === node.lessonId)
-  return {
-    lessonTitle: lesson?.title,
-    unitTitle: island?.title,
-    prerequisites: node.prerequisites.map((id) => `知识点 ${id}`),
-  }
-})
 
 const stateSamples = computed<KnowledgeMapNode[]>(() => {
   const base = viewModel.value?.islands[0]?.lessons[0]?.nodes[0]
@@ -77,8 +63,25 @@ async function loadDataset() {
   if (loaded && focusNodeId) learningMapStore.focusNode(focusNodeId)
 }
 
-function selectNode(nodeId: Id) {
-  learningMapStore.selectNode(nodeId)
+function openNodeDetail(nodeId: Id) {
+  const model = viewModel.value
+  if (!model || !learningMapStore.selectNode(nodeId)) return
+  const node = learningMapStore.selectedNode
+  if (!node) return
+  void router.push({
+    path: `/dev/knowledge-point/${encodeURIComponent(node.knowledgePointId)}`,
+    query: {
+      textbookId: model.textbook.id,
+      unitId: node.unitId,
+      lessonId: node.lessonId,
+      knowledgePointId: node.knowledgePointId,
+      dataset: dataset.value,
+      mapNodeId: node.id,
+      nodeStatus: node.status,
+      nodeProgress: String(node.progress),
+      returnTo: '/dev/learning-map',
+    },
+  })
 }
 
 function resetProgress() {
@@ -87,32 +90,6 @@ function resetProgress() {
 
 function toggleStates() {
   showStates.value = !showStates.value
-}
-
-function closeNodeDetail() {
-  learningMapStore.selectedNodeId = null
-}
-
-function startSelectedNode() {
-  const node = selectedNode.value
-  const model = viewModel.value
-  if (!node || !model) return
-  void router.push({
-    path: '/dev/lesson-player',
-    query: {
-      textbookId: model.textbook.id,
-      unitId: node.unitId,
-      lessonId: node.lessonId,
-      knowledgePointId: node.knowledgePointId,
-      dataset: 'demo',
-      mapNodeId: node.id,
-      returnTo: '/dev/learning-map',
-    },
-  })
-}
-
-function completeSelectedNode() {
-  startSelectedNode()
 }
 
 watch(dataset, () => void loadDataset())
@@ -188,7 +165,7 @@ onMounted(() => void loadDataset())
         <KnowledgeIslandMap
           :view-model="viewModel"
           :selected-node-id="learningMapStore.selectedNodeId"
-          @select-node="selectNode"
+          @select-node="openNodeDetail"
         />
         <section
           v-if="showStates"
@@ -213,20 +190,6 @@ onMounted(() => void loadDataset())
             {{ diagnostic.message }}
           </p>
         </details>
-        <NodeDetailPanel
-          :open="Boolean(selectedNode)"
-          :node="selectedNode"
-          :lesson-title="selectedContext.lessonTitle"
-          :unit-title="selectedContext.unitTitle"
-          :prerequisite-titles="selectedContext.prerequisites"
-          :is-sample="selectedNode?.isSample || dataset === 'demo'"
-          :is-unverified="viewModel.flags.isUnverified"
-          :is-read-only="viewModel.flags.isReadOnly"
-          :mastery="selectedNode?.mastery"
-          @close="closeNodeDetail"
-          @start="startSelectedNode"
-          @complete="completeSelectedNode"
-        />
       </template>
     </div>
   </AppShell>

@@ -79,3 +79,13 @@ PHASE 10.1～10.4 已完成并停止：掌握度输入可追溯、算法可重�
 ## 7. PHASE 11 下游边界
 
 `LearningStrategyService` 使用 `MasteryRecord` 作为权威输入，按独立的 `STRATEGY_V1` 规则决定当前巩固、补充证据或下一知识点。Strategy 不重新计算 `masteryScore`，不修改记录，不读取时间衰减、KnowledgeEnergy、复习排程、错题本或奖励。详见 `LEARNING_STRATEGY.md`。
+
+## 8. PHASE 12 下游边界
+
+PHASE 12 的 Review Queue 只读取 `LearningRecommendation.reviewRecommendations`，把 `REINFORCE` / `GATHER_MORE_EVIDENCE` 建立为可主动处理的 Queue item。它不把 Queue 状态写回 `MasteryRecord`，也不改变 `MASTERY_V1` 的分数、置信度、证据计数或算法版本。WrongBook 只读取 QuestionAttempt 的确定性错误结果；它与 MasteryRecord 分离。详见 `PHASE12.md` 和 `REVIEW_QUEUE_DATA_FLOW.md`。
+
+## 9. PHASE 13 下游边界
+
+PHASE 13 只读取 Mastery transition：只有 `previous.state !== 'mastered'` 且 `next.state = 'mastered'` 时，独立 `RewardProjectionService` 才可以生成一次 `knowledge_mastered` RewardEvent。它不改变 `MASTERY_V1`、MasteryRecord、LearningEvidence、Strategy 或地图状态；重复 rebuild 由 RewardEvent 稳定 ID 去重。
+
+MasteryScore、confidence、evidenceCount 与 KnowledgeEnergy 是不同读模型。Mastery 算法不读取奖励，Reward 也不把奖励写回掌握度。SAMPLE / UNVERIFIED 掌握记录只在开发数据集进入成长反馈，并保留 provenance。

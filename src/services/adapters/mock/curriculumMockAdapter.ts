@@ -18,8 +18,10 @@ import type {
   Lesson,
   LessonKnowledgePointRelation,
   LearningMapCurriculumSource,
+  KnowledgePrerequisite,
   Publisher,
   Region,
+  RegionTextbookRelation,
   ResolveAvailableTextbooksInput,
   ResolveAvailableTextbooksOutput,
   Semester,
@@ -41,12 +43,12 @@ export interface MockCurriculumData {
   subjects: Subject[]
   publishers: Publisher[]
   textbooks: TextbookVersion[]
-  regionTextbookRelations: typeof curriculumData.regionTextbookRelations
-  units: typeof curriculumData.units
-  lessons: typeof curriculumData.lessons
-  knowledgePoints: typeof curriculumData.knowledgePoints
-  lessonKnowledgePointRelations: typeof curriculumData.lessonKnowledgePointRelations
-  knowledgePrerequisites: typeof curriculumData.knowledgePrerequisites
+  regionTextbookRelations: RegionTextbookRelation[]
+  units: Unit[]
+  lessons: Lesson[]
+  knowledgePoints: KnowledgePoint[]
+  lessonKnowledgePointRelations: LessonKnowledgePointRelation[]
+  knowledgePrerequisites: KnowledgePrerequisite[]
 }
 
 export interface MockCurriculumServiceOptions {
@@ -57,10 +59,10 @@ export interface MockCurriculumServiceOptions {
   data?: Partial<MockCurriculumData>
 }
 
-const SUBJECT_ID_BY_KEY = {
-  chinese: 'SAMPLE_SUBJECT_CHINESE',
-  math: 'SAMPLE_SUBJECT_MATH',
-  english: 'SAMPLE_SUBJECT_ENGLISH',
+const FALLBACK_SUBJECT_ID_BY_CODE = {
+  CHINESE: 'SUBJECT_CHINESE',
+  MATH: 'SUBJECT_MATH',
+  ENGLISH: 'SUBJECT_ENGLISH',
 } as const
 
 const USAGE_PRIORITY = {
@@ -324,10 +326,13 @@ export class MockCurriculumService implements CurriculumService {
   ): Promise<ResolveAvailableTextbooksOutput> {
     return this.run(() => {
       this.lastResolutionAnomalies = []
+      const subjectId = (subjectCode: keyof typeof FALLBACK_SUBJECT_ID_BY_CODE): Id =>
+        this.data.subjects.find((subject) => subject.code === subjectCode)?.id ??
+        FALLBACK_SUBJECT_ID_BY_CODE[subjectCode]
       return {
-        chinese: this.getResolution(input, SUBJECT_ID_BY_KEY.chinese, '语文'),
-        math: this.getResolution(input, SUBJECT_ID_BY_KEY.math, '数学'),
-        english: this.getResolution(input, SUBJECT_ID_BY_KEY.english, '英语'),
+        chinese: this.getResolution(input, subjectId('CHINESE'), '语文'),
+        math: this.getResolution(input, subjectId('MATH'), '数学'),
+        english: this.getResolution(input, subjectId('ENGLISH'), '英语'),
       }
     })
   }

@@ -1,22 +1,12 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-import DevCurriculum from '@/pages/DevCurriculum.vue'
-import DevLearningMapPage from '@/pages/DevLearningMapPage.vue'
-import DevMasteryPage from '@/pages/DevMasteryPage.vue'
-import DevStrategyPage from '@/pages/DevStrategyPage.vue'
-import DevUi from '@/pages/DevUi.vue'
-import HomePlaceholderPage from '@/pages/HomePlaceholderPage.vue'
-import LearningMapPage from '@/pages/LearningMapPage.vue'
-import LessonPlayerPage from '@/pages/LessonPlayerPage.vue'
-import QuestionEnginePage from '@/pages/QuestionEnginePage.vue'
 import CharacterSetupPage from '@/pages/onboarding/CharacterSetupPage.vue'
 import GradeSelectPage from '@/pages/onboarding/GradeSelectPage.vue'
 import OnboardingWelcomePage from '@/pages/onboarding/OnboardingWelcomePage.vue'
 import RegionSelectPage from '@/pages/onboarding/RegionSelectPage.vue'
 import TextbookConfirmPage from '@/pages/onboarding/TextbookConfirmPage.vue'
-import CurriculumSettingsPage from '@/pages/curriculum/CurriculumSettingsPage.vue'
-import TextbookSubjectSelectPage from '@/pages/curriculum/TextbookSubjectSelectPage.vue'
 import PagePlaceholder from '@/pages/PagePlaceholder.vue'
+import { productionConfig } from '@/config/production'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { pinia } from '@/stores/pinia'
 import { getOnboardingRedirect } from './guard'
@@ -25,6 +15,28 @@ const placeholder = (title: string, meta: RouteRecordRaw['meta'] = {}) => ({
   component: PagePlaceholder,
   meta: { title, ...meta },
 })
+
+// Keep the onboarding shell eager, but load product and developer surfaces on
+// demand so the first route does not pay for every feature bundle.
+const HomePage = () => import('@/pages/HomePage.vue')
+const LearningMapPage = () => import('@/pages/LearningMapPage.vue')
+const KnowledgePointDetailPage = () => import('@/pages/KnowledgePointDetailPage.vue')
+const LessonPlayerPage = () => import('@/pages/LessonPlayerPage.vue')
+const LearningHistoryPage = () => import('@/pages/LearningHistoryPage.vue')
+const ParentDashboardPage = () => import('@/pages/ParentDashboardPage.vue')
+const QuestionEnginePage = () => import('@/pages/QuestionEnginePage.vue')
+const ReviewQueuePage = () => import('@/pages/ReviewQueuePage.vue')
+const RewardPage = () => import('@/pages/RewardPage.vue')
+const WrongBookPage = () => import('@/pages/WrongBookPage.vue')
+const DevCurriculum = () => import('@/pages/DevCurriculum.vue')
+const DevLearningMapPage = () => import('@/pages/DevLearningMapPage.vue')
+const DevMasteryPage = () => import('@/pages/DevMasteryPage.vue')
+const DevStrategyPage = () => import('@/pages/DevStrategyPage.vue')
+const DevUi = () => import('@/pages/DevUi.vue')
+const DevActivityEnginePage = () => import('@/pages/DevActivityEnginePage.vue')
+const DevContentExpansionPage = () => import('@/pages/DevContentExpansionPage.vue')
+const CurriculumSettingsPage = () => import('@/pages/curriculum/CurriculumSettingsPage.vue')
+const TextbookSubjectSelectPage = () => import('@/pages/curriculum/TextbookSubjectSelectPage.vue')
 
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/onboarding' },
@@ -55,7 +67,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/home',
-    component: HomePlaceholderPage,
+    component: HomePage,
     meta: { title: '首页', requiresOnboarding: true, studentOnly: true },
   },
   {
@@ -72,6 +84,17 @@ const routes: RouteRecordRaw[] = [
     component: LessonPlayerPage,
     meta: {
       title: '学习课程',
+      requiresOnboarding: true,
+      studentOnly: true,
+      hideBottomNav: true,
+      immersiveMode: true,
+    },
+  },
+  {
+    path: '/knowledge-point/:knowledgePointId',
+    component: KnowledgePointDetailPage,
+    meta: {
+      title: '知识点详情',
       requiresOnboarding: true,
       studentOnly: true,
       hideBottomNav: true,
@@ -117,10 +140,25 @@ const routes: RouteRecordRaw[] = [
       hideBottomNav: true,
     }),
   },
-  { path: '/tasks', ...placeholder('DailyTasks', { requiresOnboarding: true, studentOnly: true }) },
+  {
+    path: '/tasks',
+    component: HomePage,
+    meta: { title: '今日学习', requiresOnboarding: true, studentOnly: true },
+  },
   {
     path: '/wrong-book',
-    ...placeholder('WrongBook', { requiresOnboarding: true, studentOnly: true }),
+    component: WrongBookPage,
+    meta: { title: '错题本', requiresOnboarding: true, studentOnly: true },
+  },
+  {
+    path: '/review-queue',
+    component: ReviewQueuePage,
+    meta: { title: '待巩固', requiresOnboarding: true, studentOnly: true },
+  },
+  {
+    path: '/history',
+    component: LearningHistoryPage,
+    meta: { title: '学习记录', requiresOnboarding: true, studentOnly: true },
   },
   { path: '/profile', ...placeholder('Profile', { requiresOnboarding: true, studentOnly: true }) },
   {
@@ -129,9 +167,14 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/achievements',
-    ...placeholder('Achievements', { requiresOnboarding: true, studentOnly: true }),
+    component: RewardPage,
+    meta: { title: '成长反馈', requiresOnboarding: true, studentOnly: true },
   },
-  { path: '/parent', ...placeholder('ParentDashboard', { parentOnly: true }) },
+  {
+    path: '/parent',
+    component: ParentDashboardPage,
+    meta: { title: '学习报告', parentOnly: true, hideBottomNav: true },
+  },
   {
     path: '/curriculum-settings',
     component: CurriculumSettingsPage,
@@ -157,6 +200,11 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '基础组件 Demo', devOnly: true, hideBottomNav: true },
   },
   {
+    path: '/dev/home',
+    component: HomePage,
+    meta: { title: 'Home Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
     path: '/dev/curriculum',
     component: DevCurriculum,
     meta: { title: '课程数据管线', devOnly: true, hideBottomNav: true },
@@ -177,9 +225,24 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'LessonPlayer Debug View', devOnly: true, hideBottomNav: true },
   },
   {
+    path: '/dev/knowledge-point/:knowledgePointId',
+    component: KnowledgePointDetailPage,
+    meta: { title: 'KnowledgePoint Detail Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
     path: '/dev/lesson-player/states',
     component: LessonPlayerPage,
     meta: { title: 'LessonPlayer State Showcase', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/activity-engine',
+    component: DevActivityEnginePage,
+    meta: { title: 'Interactive Activity Engine Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/content-expansion',
+    component: DevContentExpansionPage,
+    meta: { title: 'Content Expansion Debug View', devOnly: true, hideBottomNav: true },
   },
   {
     path: '/dev/question-engine',
@@ -192,6 +255,26 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'Question Engine State Showcase', devOnly: true, hideBottomNav: true },
   },
   {
+    path: '/dev/history',
+    component: LearningHistoryPage,
+    meta: { title: 'Learning History Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/wrong-book',
+    component: WrongBookPage,
+    meta: { title: 'WrongBook Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/review-queue',
+    component: ReviewQueuePage,
+    meta: { title: 'Review Queue Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/reward',
+    component: RewardPage,
+    meta: { title: 'Reward / Growth Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
     path: '/dev/mastery',
     component: DevMasteryPage,
     meta: { title: 'Mastery Debug View', devOnly: true, hideBottomNav: true },
@@ -200,6 +283,11 @@ const routes: RouteRecordRaw[] = [
     path: '/dev/strategy',
     component: DevStrategyPage,
     meta: { title: 'Learning Strategy Debug View', devOnly: true, hideBottomNav: true },
+  },
+  {
+    path: '/dev/parent-dashboard',
+    component: ParentDashboardPage,
+    meta: { title: 'Parent Dashboard Debug View', devOnly: true, hideBottomNav: true },
   },
 ]
 
@@ -210,7 +298,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  if (to.meta.devOnly && import.meta.env.PROD) {
+  if (to.meta.devOnly && !productionConfig.devRoutes) {
     return { path: '/' }
   }
 

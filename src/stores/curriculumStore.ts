@@ -1,7 +1,17 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
+import {
+  G1_PEP_CHINESE_GRADE_ID,
+  G1_PEP_CHINESE_GUANGDONG_REGION_ID,
+  G1_PEP_CHINESE_HUBEI_REGION_ID,
+  G1_SHENZHEN_ENGLISH_SEMESTER_ID,
+  G1_SHENZHEN_ENGLISH_S2_SEMESTER_ID,
+  G1_SHENZHEN_REGION_ID,
+} from '@/data/curriculum/grade-1'
+import { G2_PEP_CHINESE_GRADE_ID } from '@/data/curriculum/grade-2'
 import { curriculumService } from '@/services'
+import type { CurriculumService } from '@/services/contracts'
 import { curriculumProfileRepository } from '@/services/storage/curriculumProfileRepository'
 import type {
   Id,
@@ -12,6 +22,72 @@ import type {
 } from '@/types'
 
 const SUBJECT_CODES: SubjectCode[] = ['CHINESE', 'MATH', 'ENGLISH']
+// This pilot intentionally covers only the two user-requested regions for the
+// Grade 1 and Grade 2 PEP Chinese candidate datasets. The legacy three-subject contract is
+// kept only for explicitly supplied development/test profiles.
+const CHINESE_PILOT_REGION_IDS = new Set<Id>([
+  G1_PEP_CHINESE_GUANGDONG_REGION_ID,
+  G1_PEP_CHINESE_HUBEI_REGION_ID,
+])
+const CHINESE_PILOT_GRADE_IDS = new Set<Id>([G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID])
+const ENGLISH_PILOT_REGION_IDS = new Set<Id>([G1_SHENZHEN_REGION_ID])
+const ENGLISH_PILOT_GRADE_IDS = new Set<Id>([G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID])
+const ENGLISH_PILOT_SEMESTER_IDS = new Set<Id>([
+  G1_SHENZHEN_ENGLISH_SEMESTER_ID,
+  G1_SHENZHEN_ENGLISH_S2_SEMESTER_ID,
+])
+
+export interface CurriculumStoreDependencies {
+  curriculumService: CurriculumService
+}
+
+const defaultDependencies: CurriculumStoreDependencies = { curriculumService }
+let dependencies: CurriculumStoreDependencies = defaultDependencies
+
+function isLegacySampleProfile(profile: StudentCurriculumProfile): boolean {
+  return [
+    profile.studentId,
+    profile.regionId,
+    profile.gradeId,
+    profile.semesterId,
+    profile.chineseTextbookVersionId,
+    profile.mathTextbookVersionId,
+    profile.englishTextbookVersionId,
+  ].some((value) => value?.startsWith('SAMPLE_') === true)
+}
+
+function isEnglishPilotContext(
+  regionId: Id | null,
+  gradeId: Id | null,
+  semesterId: Id | null,
+): boolean {
+  return (
+    Boolean(regionId && ENGLISH_PILOT_REGION_IDS.has(regionId)) &&
+    Boolean(gradeId && ENGLISH_PILOT_GRADE_IDS.has(gradeId)) &&
+    Boolean(semesterId && ENGLISH_PILOT_SEMESTER_IDS.has(semesterId))
+  )
+}
+
+function isMathPilotContext(
+  regionId: Id | null,
+  gradeId: Id | null,
+  semesterId: Id | null,
+): boolean {
+  return (
+    regionId === G1_SHENZHEN_REGION_ID &&
+    gradeId === G2_PEP_CHINESE_GRADE_ID &&
+    semesterId === G1_SHENZHEN_ENGLISH_SEMESTER_ID
+  )
+}
+
+/** Test/dev seam; the application uses the runtime curriculum boundary. */
+export function configureCurriculumStore(overrides: Partial<CurriculumStoreDependencies>): void {
+  dependencies = { ...defaultDependencies, ...overrides }
+}
+
+export function resetCurriculumStoreDependencies(): void {
+  dependencies = defaultDependencies
+}
 
 type SubjectTextbookSelection = Record<SubjectCode, Id | null>
 type SubjectResolutionStatus = Record<SubjectCode, TextbookResolutionStatus>
@@ -29,7 +105,10 @@ const emptyResolutionStatus = (): SubjectResolutionStatus => ({
 })
 
 export const useCurriculumStore = defineStore('curriculum', () => {
-  const persistedProfile = curriculumProfileRepository.load()
+  const storedProfile = curriculumProfileRepository.load()
+  const persistedProfile =
+    storedProfile && !isLegacySampleProfile(storedProfile) ? storedProfile : null
+  if (storedProfile && !persistedProfile) curriculumProfileRepository.clear()
   const selectedRegionId = ref<Id | null>(persistedProfile?.regionId ?? null)
   const selectedGradeId = ref<Id | null>(persistedProfile?.gradeId ?? null)
   const selectedSemesterId = ref<Id | null>(persistedProfile?.semesterId ?? null)
@@ -48,15 +127,53 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   const loading = ref(false)
   const error = ref<string | null>(null)
 
+  const isChinesePilot = computed(
+    () =>
+      Boolean(selectedGradeId.value && CHINESE_PILOT_GRADE_IDS.has(selectedGradeId.value)) &&
+      Boolean(selectedRegionId.value && CHINESE_PILOT_REGION_IDS.has(selectedRegionId.value)),
+  )
+  const isEnglishPilot = computed(() =>
+    isEnglishPilotContext(selectedRegionId.value, selectedGradeId.value, selectedSemesterId.value),
+  )
+  const isCurriculumPilot = computed(() => isChinesePilot.value || isEnglishPilot.value)
+  const isMathPilot = computed(() =>
+    isMathPilotContext(selectedRegionId.value, selectedGradeId.value, selectedSemesterId.value),
+  )
+
+  function hasRequiredTextbooks(
+    selection: SubjectTextbookSelection,
+    regionId: Id | null,
+    gradeId: Id | null,
+    semesterId: Id | null,
+  ): boolean {
+    const isChinesePilotContext =
+      Boolean(gradeId && CHINESE_PILOT_GRADE_IDS.has(gradeId)) &&
+      Boolean(regionId && CHINESE_PILOT_REGION_IDS.has(regionId))
+    return isChinesePilotContext
+      ? Boolean(selection.CHINESE)
+      : isMathPilotContext(regionId, gradeId, semesterId)
+        ? Boolean(selection.MATH || selection.ENGLISH)
+        : isEnglishPilotContext(regionId, gradeId, semesterId)
+          ? Boolean(selection.ENGLISH)
+          : SUBJECT_CODES.every((subjectCode) => selection[subjectCode])
+  }
+
   const isComplete = computed(() => {
     const profile = curriculumProfile.value
     return Boolean(
       profile?.regionId &&
       profile.gradeId &&
       profile.semesterId &&
-      profile.chineseTextbookVersionId &&
-      profile.mathTextbookVersionId &&
-      profile.englishTextbookVersionId &&
+      hasRequiredTextbooks(
+        {
+          CHINESE: profile.chineseTextbookVersionId,
+          MATH: profile.mathTextbookVersionId,
+          ENGLISH: profile.englishTextbookVersionId,
+        },
+        profile.regionId,
+        profile.gradeId,
+        profile.semesterId,
+      ) &&
       profile.confirmedAt,
     )
   })
@@ -66,7 +183,12 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       selectedRegionId.value &&
       selectedGradeId.value &&
       selectedSemesterId.value &&
-      SUBJECT_CODES.every((subjectCode) => selectedTextbooks.value[subjectCode]),
+      hasRequiredTextbooks(
+        selectedTextbooks.value,
+        selectedRegionId.value,
+        selectedGradeId.value,
+        selectedSemesterId.value,
+      ),
     ),
   )
 
@@ -168,7 +290,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     loading.value = true
     error.value = null
     try {
-      const result = await curriculumService.resolveAvailableTextbooks({
+      const result = await dependencies.curriculumService.resolveAvailableTextbooks({
         regionId: selectedRegionId.value,
         gradeId: selectedGradeId.value,
         semesterId: selectedSemesterId.value,
@@ -230,7 +352,13 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       !selectedSemesterId.value ||
       !draftIsComplete.value
     ) {
-      error.value = '请先确认语文、数学和英语教材'
+      error.value = isChinesePilot.value
+        ? '请先确认语文教材'
+        : isMathPilot.value
+          ? '请先确认数学或英语教材'
+          : isEnglishPilot.value
+            ? '请先确认英语教材'
+            : '请先确认语文、数学和英语教材'
       return null
     }
 
@@ -248,7 +376,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       source: profileSource,
     }
     try {
-      const saved = await curriculumService.saveCurriculumProfile(profile)
+      const saved = await dependencies.curriculumService.saveCurriculumProfile(profile)
       setProfile(saved)
       return saved
     } catch (caught) {
@@ -263,7 +391,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     loading.value = true
     error.value = null
     try {
-      const profile = await curriculumService.getCurriculumProfile(studentId)
+      const profile = await dependencies.curriculumService.getCurriculumProfile(studentId)
       if (profile) setProfile(profile)
       else {
         curriculumProfile.value = null
@@ -304,6 +432,10 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     englishTextbookVersionId,
     confirmedAt,
     source,
+    isChinesePilot,
+    isEnglishPilot,
+    isMathPilot,
+    isCurriculumPilot,
     isComplete,
     draftIsComplete,
     setProfile,

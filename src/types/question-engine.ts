@@ -4,13 +4,14 @@ import type {
   Question,
   QuestionExplanation,
   QuestionHint,
+  QuestionKnowledgePoint,
   QuestionMedia,
   QuestionOption,
   QuestionType,
   VerificationStatus,
 } from './domain'
 
-export type AssessmentSource = 'lesson_practice' | 'dev'
+export type AssessmentSource = 'lesson_practice' | 'wrong_book' | 'dev'
 
 export interface AssessmentLaunchContext {
   textbookId: Id
@@ -169,6 +170,7 @@ export interface QuestionEngineViewModel {
 export interface QuestionEngineLoadResult {
   definition: AssessmentDefinition | null
   questions: Question[]
+  questionKnowledgePoints?: QuestionKnowledgePoint[]
   issue?: QuestionEngineLoadIssue
   message?: string
   flags?: QuestionEngineFlags
@@ -179,6 +181,12 @@ export interface QuestionEngineLoadOptions {
   dataset?: QuestionEngineDataset
   demoState?: QuestionEngineDemoState
   studentId?: Id
+  /** Optional stable discriminator for a new review session. */
+  sessionScope?: Id
+  /** Optional question to focus when launching a review session. */
+  initialQuestionId?: Id
+  /** Optional single-question scope used by a WrongBook retry session. */
+  reviewQuestionId?: Id
 }
 
 export interface QuestionEngineContextValidation {

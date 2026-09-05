@@ -9,11 +9,29 @@ import AppIcon from '@/components/common/AppIcon.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
+import KnowledgePointExperienceHub from '@/components/content-expansion/KnowledgePointExperienceHub.vue'
+import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { questionEngineAdapter } from '@/services/question-engine'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
 import { useStudentStore } from '@/stores/studentStore'
-import type { LessonLaunchContext, LessonPlayerDataset, LessonPlayerDemoState } from '@/types'
+import type {
+  LessonLaunchContext,
+  LessonPlayerDataset,
+  LessonPlayerDemoState,
+  LessonStepType,
+} from '@/types'
+
+const stepTypeLabels: Record<LessonStepType, string> = {
+  intro: '今天学什么',
+  concept: '认识新知识',
+  explanation: '一起想一想',
+  example: '看看小例子',
+  media: '看一看，听一听',
+  interactive: '动手试一试',
+  practice: '挑战小练习',
+  summary: '回顾新发现',
+}
 
 const route = useRoute()
 const router = useRouter()
@@ -47,12 +65,30 @@ const demoState = computed<LessonPlayerDemoState>(() => {
     ? (requested as LessonPlayerDemoState)
     : 'full'
 })
-const returnPath = computed(() =>
-  route.query.returnTo === '/dev/learning-map' ||
-  (isDevRoute.value && typeof route.query.returnTo !== 'string')
-    ? '/dev/learning-map'
-    : '/learning-map',
+const returnPath = computed(() => {
+  const requested = route.query.returnTo
+  const allowed = ['/home', '/tasks', '/dev/home', '/learning-map', '/dev/learning-map']
+  if (
+    typeof requested === 'string' &&
+    (allowed.includes(requested) || /^\/(?:dev\/)?knowledge-point\/[^/]+$/.test(requested))
+  ) {
+    return requested
+  }
+  return isDevRoute.value ? '/dev/learning-map' : '/learning-map'
+})
+const returnLabel = computed(() =>
+  ['/home', '/tasks', '/dev/home'].includes(returnPath.value)
+    ? '返回首页'
+    : returnPath.value.includes('/knowledge-point/')
+      ? '返回知识点详情'
+      : '返回知识地图',
 )
+const detailReturnPath = computed(() => {
+  const requested = route.query.detailReturnTo
+  const allowed = ['/home', '/tasks', '/dev/home', '/learning-map', '/dev/learning-map']
+  if (typeof requested === 'string' && allowed.includes(requested)) return requested
+  return isDevRoute.value ? '/dev/learning-map' : '/learning-map'
+})
 const mapNodeId = computed(() =>
   typeof route.query.mapNodeId === 'string' ? route.query.mapNodeId : undefined,
 )
@@ -83,6 +119,7 @@ const context = computed<LessonLaunchContext | null>(() => {
 })
 
 const viewModel = computed(() => lessonPlayerStore.viewModel)
+const isFormalPilot = computed(() => isPilotTextbook(context.value?.textbookId))
 const currentStep = computed(() => viewModel.value?.steps[lessonPlayerStore.currentStepIndex])
 const isPracticeStep = computed(() => currentStep.value?.type === 'practice')
 const progressLabel = computed(() =>
@@ -156,9 +193,44 @@ function applyAssessmentCompletion() {
 
 function returnToMap() {
   const focus = mapNodeId.value
+  if (returnPath.value.includes('/knowledge-point/') && context.value) {
+    void router.push({
+      path: returnPath.value,
+      query: {
+        ...context.value,
+        ...(dataset.value !== 'profile' ? { dataset: dataset.value } : {}),
+        ...(focus ? { mapNodeId: focus } : {}),
+        ...(typeof route.query.nodeStatus === 'string'
+          ? { nodeStatus: route.query.nodeStatus }
+          : {}),
+        ...(typeof route.query.nodeProgress === 'string'
+          ? { nodeProgress: route.query.nodeProgress }
+          : {}),
+        returnTo: detailReturnPath.value,
+      },
+    })
+    return
+  }
   void router.push({
     path: returnPath.value,
     ...(focus ? { query: { focusNodeId: focus } } : {}),
+  })
+}
+
+function openAfterReading(): void {
+  if (!context.value) return
+  void router.push({
+    path:
+      (isDevRoute.value ? '/dev/knowledge-point/' : '/knowledge-point/') +
+      context.value.knowledgePointId,
+    hash: '#knowledge-challenges',
+    query: {
+      ...context.value,
+      ...(isDevRoute.value ? { dataset: dataset.value } : {}),
+      ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
+      nodeStatus: 'completed',
+      returnTo: detailReturnPath.value,
+    },
   })
 }
 
@@ -246,9 +318,9 @@ watch(
           <div class="lesson-player__header-copy">
             <RouterLink class="lesson-player__back" :to="returnPath" @click.prevent="returnToMap">
               <AppIcon name="arrow-left" :size="18" decorative />
-              返回知识地图
+              {{ returnLabel }}
             </RouterLink>
-            <p class="curriculum-eyebrow">LessonPlayer · 学习步骤</p>
+            <p class="curriculum-eyebrow">跟着团子，一步一步学</p>
             <h1>{{ viewModel?.lesson.title || '正在准备这一节学习' }}</h1>
             <p v-if="viewModel">知识点：{{ viewModel.knowledgePoint.name }}</p>
           </div>
@@ -266,7 +338,7 @@ watch(
               示例内容
             </span>
             <span
-              v-if="viewModel.flags.isUnverified"
+              v-if="viewModel.flags.isUnverified && !isFormalPilot"
               class="lesson-player__badge lesson-player__badge--warning"
             >
               未审核学习内容
@@ -320,20 +392,20 @@ watch(
           icon-left="arrow-left"
           @click="returnToMap"
         >
-          返回知识地图
+          {{ returnLabel }}
         </AppButton>
         <AppEmptyState
           v-else-if="lessonPlayerStore.status === 'not_available'"
           title="该学习内容暂未开放"
           description="课程内容还需要完成审核，暂时不能进入学习步骤。"
-          action-label="返回知识地图"
+          :action-label="returnLabel"
           @action="returnToMap"
         />
         <AppEmptyState
           v-else-if="lessonPlayerStore.status === 'empty'"
           title="课程内容正在准备中"
           description="这个知识点已经在地图上，但学习内容还没有准备好。"
-          action-label="返回知识地图"
+          :action-label="returnLabel"
           @action="returnToMap"
         />
         <template v-else-if="canShowContent && viewModel">
@@ -349,7 +421,7 @@ watch(
             </div>
           </div>
           <div
-            v-else-if="viewModel.flags.isUnverified"
+            v-else-if="viewModel.flags.isUnverified && !isFormalPilot"
             class="lesson-player__notice lesson-player__notice--warning"
             role="status"
           >
@@ -362,7 +434,7 @@ watch(
 
           <section class="lesson-player__goals" aria-labelledby="lesson-goals-title">
             <div>
-              <p class="curriculum-eyebrow">Learning Goal</p>
+              <p class="curriculum-eyebrow">今天的新发现</p>
               <h2 id="lesson-goals-title">今天的学习目标</h2>
             </div>
             <ul>
@@ -398,7 +470,7 @@ watch(
                 @click="goToStep(index)"
               >
                 <span class="lesson-player__step-number">{{ index + 1 }}</span>
-                <span>{{ step.title || step.type }}</span>
+                <span>{{ step.title || stepTypeLabels[step.type] }}</span>
               </button>
             </nav>
           </section>
@@ -406,7 +478,9 @@ watch(
           <section class="lesson-player__content-card" aria-labelledby="lesson-content-title">
             <header class="lesson-player__content-header">
               <div>
-                <p class="curriculum-eyebrow">{{ currentStep?.type || '学习内容' }}</p>
+                <p class="curriculum-eyebrow">
+                  {{ currentStep ? stepTypeLabels[currentStep.type] : '学习内容' }}
+                </p>
                 <h2 id="lesson-content-title">{{ currentStep?.title || '跟着步骤看一看' }}</h2>
               </div>
               <p v-if="currentStep?.estimatedSeconds">大约 {{ currentStep.estimatedSeconds }} 秒</p>
@@ -419,6 +493,12 @@ watch(
             />
           </section>
 
+          <KnowledgePointExperienceHub
+            v-if="isDevRoute"
+            :knowledge-point-id="viewModel.knowledgePoint.id"
+            dataset="golden"
+          />
+
           <section
             v-if="lessonPlayerStore.status === 'completed'"
             class="lesson-player__completion"
@@ -426,9 +506,35 @@ watch(
           >
             <AppIcon name="check-circle" :size="42" color="var(--color-success)" decorative />
             <h2 id="lesson-completion-title">这一节学习完成了</h2>
-            <p>你已经走完本次学习步骤。完成学习不等于掌握度，下一步可以回到地图继续探索。</p>
+            <p>
+              {{
+                isFormalPilot
+                  ? '读完了，带着你的发现去做课后练习吧！也可以回到地图继续探索。'
+                  : '你已经走完本次学习步骤。完成学习不等于掌握度，下一步可以回到地图继续探索。'
+              }}
+            </p>
+            <div
+              v-if="lessonPlayerStore.lastRewardEvent"
+              class="lesson-player__reward-notice"
+              role="status"
+            >
+              <AppIcon name="sparkles" :size="20" decorative />
+              <span
+                >本次完成获得 {{ lessonPlayerStore.lastRewardEvent.reward.knowledgeEnergy }} 点
+                KnowledgeEnergy。</span
+              >
+            </div>
             <div class="lesson-player__completion-actions">
-              <AppButton size="lg" icon-left="map" @click="returnToMap">返回知识地图</AppButton>
+              <AppButton
+                v-if="isFormalPilot"
+                size="lg"
+                icon-right="arrow-right"
+                @click="openAfterReading"
+                >去做课后练习</AppButton
+              >
+              <AppButton size="lg" icon-left="map" @click="returnToMap">{{
+                returnLabel
+              }}</AppButton>
               <AppButton
                 v-if="isDevRoute"
                 variant="secondary"

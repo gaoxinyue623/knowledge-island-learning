@@ -1,13 +1,13 @@
 # 知识岛｜LessonPlayer 实现说明
 
-> 本文档记录 PHASE 8.1～8.4 的 LessonPlayer / Knowledge Learning Flow、PHASE 9.4 的 Practice → Assessment 接入事实，以及 PHASE 10 的掌握度后处理边界。它补充 `PRODUCT.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md` 与 `MASTERY.md`，不替代课程事实、题目协议或内容审核规则。
+> 本文档记录 PHASE 8.1～8.4 的 LessonPlayer / Knowledge Learning Flow、PHASE 9.4 的 Practice → Assessment 接入事实、PHASE 10 的掌握度后处理边界、PHASE 12 的 Learning History 投影和 PHASE 13 的完成反馈边界。它补充 `PRODUCT.md`、`DATA_MODEL.md`、`CONTENT_REVIEW.md`、`MASTERY.md` 与 `PHASE13.md`，不替代课程事实、题目协议或内容审核规则。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 10.4：Mastery Model（LessonPlayer 作为上游） |
-| 状态 | LessonPlayer、内容块渲染、会话恢复、Practice 可用性检查、Assessment 入口、完成回链、开发 Showcase 和完成 Session 后的掌握度后处理边界已实现并验证 |
+| 当前阶段 | PHASE 13.4：Product Integration（LessonPlayer 作为 History / Reward 上游） |
+| 状态 | LessonPlayer、内容块渲染、会话恢复、Practice 可用性检查、Assessment 入口、完成回链、开发 Showcase、完成 Session 后的掌握度后处理、Lesson History 投影和完成反馈已实现并验证 |
 | 正式入口 | `/lesson` |
 | 开发入口 | `/dev/lesson-player`、`/dev/lesson-player/states` |
 | 主要代码 | `src/types/lesson-player.ts`、`src/services/lesson-player/`、`src/stores/lessonPlayerStore.ts`、`src/components/lesson-player/`、`src/pages/LessonPlayerPage.vue` |
@@ -129,12 +129,38 @@ LessonPlayer Summary / LearningMap
 
 ## 8. 明确不在 PHASE 8 / 9；PHASE 10 仍不扩展课程完成
 
-PHASE 8 不实现 Question Engine；PHASE 9 只实现六类题型的固定 Demo Assessment、确定性判题、人工审核简答标记和会话恢复。PHASE 10 只在完成 QuestionSession 后独立派生 LearningEvidence / MasteryRecord，不把掌握度写回 LessonSession，也不阻止 Lesson completion。各阶段都不实现题目随机抽取 / 推荐 / 难度算法、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、WrongBook、Reward、Coins、Achievement、Streak、Parent Dashboard、AI Tutor、AI Question Generation、AI Grading 或正式考试系统。
+PHASE 8 不实现 Question Engine；PHASE 9 只实现六类题型的固定 Demo Assessment、确定性判题、人工审核简答标记和会话恢复。PHASE 10 只在完成 QuestionSession 后独立派生 LearningEvidence / MasteryRecord，不把掌握度写回 LessonSession，也不阻止 Lesson completion。各阶段都不实现题目随机抽取 / 推荐 / 难度算法、`KnowledgeEnergy`、Adaptive Learning、AI Learning Path、Reward、Coins、Achievement、Streak、Parent Dashboard、AI Tutor、AI Question Generation、AI Grading 或正式考试系统；PHASE 12 的 WrongBook / History 投影由独立服务接入，不改变上述 LessonPlayer 事实边界。
 
-`PracticeBlock` 仍只展示非评分内容或观察互动；它的 Assessment CTA 由数据层可用性控制。Assessment completion 只表示本组题目已提交；完成 Session 后的掌握度处理不修改题目答案、Lesson completion、地图解锁、错题或奖励记录。
+`PracticeBlock` 仍只展示非评分内容或观察互动；它的 Assessment CTA 由数据层可用性控制。Assessment completion 只表示本组题目已提交；完成 Session 后的掌握度处理不修改题目答案、Lesson completion、地图解锁或错题。PHASE 13 的独立 Reward projection 可以只读观察完成事实，但不回写 LessonPlayer。
 
 ## 9. PHASE 8 / 9 验证记录
 
 截至 2026-09-02，PHASE 10 目标验证包含 `npm install`、`npm run type-check`、`npm run lint`、`npm run format:check`、`npm run test:run`、`npm run build` 和 `npm run curriculum:review`；测试保留既有 PHASE 7 / 8 / 9 覆盖，并新增 Mastery 领域、证据抽取、确定性重算、存储和后处理测试。`curriculum:review` 仍保持 `REQUIRES_MANUAL_REVIEW`，没有擅自把 Golden Framework、题目 Demo 或 Mastery Demo 提升为已审核数据。
 
 浏览器已检查 `/`、`/learning-map`、`/lesson` 的正式入口保护，以及 `/dev/learning-map` → Node Detail → `/dev/lesson-player` → Practice → `/dev/question-engine` → 完成 → LessonPlayer → 地图焦点恢复的闭环。开发页的 full、resume、completed、empty、not_available、error、sample、unverified 状态均可显示；LessonPlayer、Question Engine 和 `/dev/mastery` 在 `375`、`390`、`430`、`768`、`1024` 和 `1440` 视口无横向溢出，当前步骤、题目进度、提交锁定、结果 region、掌握状态、标题、进度语义和 Reduced Motion 规则均已检查。最终浏览器 `error` / `warning` 日志为空。
+
+## 10. PHASE 12 Learning History 投影
+
+LessonPlayerStore 在会话开始 / 恢复和课程完成时，调用独立 `LearningHistoryService` 生成 `lesson_started` / `lesson_completed`。History 记录只保存稳定的 `LessonSession.id`、课程上下文、时间和来源状态，不把记录写进 `lessonSessionStorage`、地图完成度或 Mastery。重复加载 / 完成由 History deterministic ID 去重。
+
+Lesson completion 仍只表示课程步骤完成；它不会直接生成掌握度、错题或 Review Queue。具体存储和页面入口见 `LEARNING_HISTORY_DATA_FLOW.md` 与 `PHASE12.md`。
+
+## 11. PHASE 13 完成反馈
+
+LessonPlayer 完成的 Session 会被独立 `RewardService` 只读观察，并按 `REWARD_V1` 生成一次 `lesson_completed` RewardEvent；LessonPlayer Domain 不直接修改 Energy，也不因打开课程、开始课程或浏览步骤发奖。完成页显示固定 KnowledgeEnergy 反馈，同时保留“完成学习不等于掌握度”的边界。
+
+`lessonPlayerStore` 在载入已完成 Session 和完成当前 Session 时调用幂等 Reward projection。SAMPLE / UNVERIFIED 来源按数据集闸门处理，正式页面不把开发样本显示为正式成长。Reward 不改变 LessonSession、地图完成度、Mastery 或解锁。完整链路见 `REWARD_DATA_FLOW.md`。
+
+## 12. CONTENT SYSTEM EXPANSION 01 KnowledgePoint Hub
+
+LessonPlayer 仍负责课程步骤和 `LessonSession`。CONTENT SYSTEM EXPANSION 01 增加的 `LearningContent`、`InteractiveActivity`、`PracticeSet`、`ExtensionActivity` 和 `Challenge` 不直接塞入课程页面的长步骤列表，而是通过 `KnowledgePointExperienceHub.vue` 提供摘要和显式入口。
+
+```text
+LessonPlayer
+  └─ KnowledgePointExperienceHub
+       └─ /dev/content-expansion?knowledgePointId=...
+```
+
+Hub 只展示互动活动、练习集合和拓展挑战数量；它不把活动完成当成 Lesson completion，也不写 LessonSession、QuestionSession、Mastery、Strategy 或地图解锁。正式 profile 不自动读取当前 Golden Bundle，开发入口才会显示 `SAMPLE + UNVERIFIED` 内容。
+
+未来经人工审核的 PracticeSet 如需进入正式课程，仍应通过显式 `AssessmentLaunchContext` 进入 Question Engine；InteractiveActivity、ExtensionActivity 和 Challenge 继续保持非评分体验边界。

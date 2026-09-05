@@ -1,13 +1,13 @@
 # 知识岛｜UI Flow 交互流程
 
-> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer、PHASE 9 的 Question Engine、PHASE 10 的 Mastery 后处理和 PHASE 11 的确定性策略提示已落到工程，其余成长与复习流程仍是设计规格。
+> 本文档使用 Mermaid 描述页面与状态流。它是 UI 实现的导航依据；PHASE 7 的 LearningMap、PHASE 8 的 LessonPlayer、PHASE 9 的 Question Engine、PHASE 10 的 Mastery 后处理、PHASE 11 的确定性策略提示、PHASE 12 的 History / WrongBook / Review Queue、PHASE 13 的 Reward / Growth / Achievement 反馈和 PHASE 14 的 Home / Daily Plan 已落到工程；排程和 AI 复习能力仍不在实现范围内。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 3 交互设计） |
-| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 后处理 / 辅助展示与 PHASE 11 策略卡片已实现并验证；KnowledgeEnergy 等复习算法仍未实现 |
+| 所属阶段 | PHASE 14.4：Product Integration / Verification（继承 PHASE 3 交互设计） |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 后处理 / 辅助展示、PHASE 11 策略卡片、PHASE 12 三个回顾页面、PHASE 13 成长反馈页面与 PHASE 14 Home / Daily Plan 已实现；复习排程算法仍未实现 |
 | 上游事实源 | `PRODUCT.md`、`CURRICULUM.md`、`DATA_MODEL.md`、`PAGE_SPEC.md` |
 | 数据解析 | `resolveAvailableTextbooks(regionId, gradeId, semesterId)`，确定性读取 |
 | 保存事实 | 三科选择写入 `StudentCurriculumProfile`，不使用单一教材字段 |
@@ -355,4 +355,63 @@ Mastery refresh success?
         Home / completion / LearningMap 轻量卡片
 ```
 
-卡片只表达当前学习动作；Review 不是日程，锁定节点不被自动解锁。`/dev/strategy` 提供弱掌握、高分低置信度、正在掌握、已掌握、前置锁定、无可用节点、SAMPLE 与 UNVERIFIED Showcase。PHASE 11 已完成并停止，不进入 PHASE 12。
+卡片只表达当前学习动作；Review 不是日程，锁定节点不被自动解锁。`/dev/strategy` 提供弱掌握、高分低置信度、正在掌握、已掌握、前置锁定、无可用节点、SAMPLE 与 UNVERIFIED Showcase。PHASE 12 在此基础上把可回顾事实、确定性错误和当前巩固建议分别投影到 `/history`、`/wrong-book` 和 `/review-queue`，不引入复习排程。
+
+## 9. PHASE 12 回顾与巩固流
+
+```text
+LessonSession / QuestionSession
+        ↓
+Learning History（最近学习记录）
+
+QuestionAttempt submitted + incorrect
+        ↓
+WrongBook（错题聚合）
+        ↓ 用户主动再挑战
+新的 QuestionSession（source = wrong_book）
+
+MasteryRecord → STRATEGY_V1
+        ↓
+Review Queue（当前待巩固建议）
+```
+
+History、WrongBook 和 Review Queue 各自使用独立本地存储、档案 / 教材过滤和 SAMPLE 来源标记。History 不替代 Mastery，WrongBook 不直接改写 Mastery，Queue 不替代 Strategy，也不包含未来日期、间隔、通知或奖励。页面只监听真实学习会话和作答结果，不收集页面访问或点击分析。
+
+## 10. PHASE 13 成长反馈流
+
+```text
+Lesson completed / Assessment completed / Mastery transition
+Review completed / WrongBook resolved
+                         ↓
+                  RewardEvent
+                         ↓
+            KnowledgeEnergy + Growth
+                         ↓
+                 Achievement progress
+```
+
+正式学生可以从底部导航进入 `/achievements` 查看累计成长反馈；地图也提供同一入口。课程完成、练习完成、巩固完成和错题解决后显示轻量 `role="status"` 反馈。Reward 只观察完成事实，不奖励 App 打开、页面浏览、点击或开始学习；Growth 和 Achievement 不改变学习决策。
+
+## 11. PHASE 14 Home / Daily Learning Loop
+
+```mermaid
+flowchart TD
+    A[打开应用] --> B[Home / 今日学习]
+    B --> C[Daily Plan V1：1～3 个任务]
+    C -->|继续学习| L[LessonPlayer]
+    C -->|薄弱巩固 / 新知识| S[Strategy 已给出的学习 context]
+    C -->|主动巩固| R[Review Queue]
+    C -->|错题重练| W[WrongBook]
+    L --> Q[Question Engine / Lesson completion]
+    S --> Q
+    R --> R2[Review item completed]
+    W --> W2[新的 wrong-book QuestionSession]
+    Q --> F[既有领域事实刷新]
+    R2 --> F
+    W2 --> F
+    F --> H[返回 Home：任务状态 / 今日进度 / 成长反馈]
+```
+
+Home 是聚合入口，不在页面内重新计算 Strategy。每日任务顺序由 `DailyPlanPolicy` 确定，完成状态来自各自 Session、ReviewQueue 或 WrongBook 事实；CTA 点击本身不产生完成。首页刷新当天 snapshot 时保持任务 identity 和顺序，只同步状态、进度和可用性。
+
+正式 `/home` 与 `/tasks` 只读取当前 Profile 的合法教材；`/dev/home` 使用显式 demo 数据并显示来源提示。Home 的快捷入口可进入 `/history`、`/wrong-book`、`/review-queue`、`/learning-map` 和课程设置，但这些页面仍保有各自 Store / Repository 边界。详细交互与数据约束见 `PHASE14.md`、`DAILY_PLAN_DATA_FLOW.md` 和 `HOME_DATA_FLOW.md`。

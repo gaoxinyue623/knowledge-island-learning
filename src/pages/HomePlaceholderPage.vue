@@ -16,12 +16,14 @@ import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useLearningMapStore } from '@/stores/learningMapStore'
 import { useLearningStrategyStore } from '@/stores/learningStrategyStore'
 import { useMasteryStore } from '@/stores/masteryStore'
+import { useReviewQueueStore } from '@/stores/reviewQueueStore'
 
 const router = useRouter()
 const curriculumStore = useCurriculumStore()
 const learningMapStore = useLearningMapStore()
 const learningStrategyStore = useLearningStrategyStore()
 const masteryStore = useMasteryStore()
+const reviewQueueStore = useReviewQueueStore()
 const presentation = ref<CurriculumPresentation | null>(null)
 const error = ref<string | null>(null)
 
@@ -52,7 +54,7 @@ async function loadHome() {
       masteryRecords: masteryStore.records,
     })
     if (map) {
-      await learningStrategyStore.resolveForMap(map, {
+      const resolved = await learningStrategyStore.resolveForMap(map, {
         studentProfileId,
         masteryRecords: masteryStore.records,
         learningEvidence: masteryStore.evidence,
@@ -60,6 +62,13 @@ async function loadHome() {
         currentMapNodeId: map.currentNodeId,
         dataset: 'profile',
       })
+      if (resolved) {
+        reviewQueueStore.project(resolved, {
+          profileId: studentProfileId,
+          textbookId: map.textbook.id,
+          dataset: 'profile',
+        })
+      }
     }
   } catch (caught) {
     error.value = caught instanceof Error ? caught.message : '课程配置暂时无法读取'
@@ -121,6 +130,33 @@ onMounted(() => void loadHome())
               @click="$router.push('/curriculum-settings')"
             >
               打开我的学习设置
+            </AppButton>
+          </div>
+        </section>
+        <section class="curriculum-placeholder-panel" aria-labelledby="home-review-title">
+          <h2 id="home-review-title">回顾你的学习</h2>
+          <p>你可以随时查看学过什么、错过哪些题，以及当前值得主动巩固的内容。</p>
+          <div class="curriculum-actions">
+            <AppButton
+              variant="secondary"
+              icon-right="arrow-right"
+              @click="router.push('/history')"
+            >
+              学习记录
+            </AppButton>
+            <AppButton
+              variant="secondary"
+              icon-right="arrow-right"
+              @click="router.push('/wrong-book')"
+            >
+              错题本
+            </AppButton>
+            <AppButton
+              variant="secondary"
+              icon-right="arrow-right"
+              @click="router.push('/review-queue')"
+            >
+              待巩固列表
             </AppButton>
           </div>
         </section>

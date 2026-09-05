@@ -19,6 +19,23 @@ export const curriculumSourceTypeSchema = z.enum([
   'licensed',
 ])
 
+const curriculumEvidenceTypeSchema = z.enum([
+  'TEXTBOOK_EXISTENCE',
+  'TEXTBOOK_IDENTITY',
+  'TEXTBOOK_CATALOG',
+  'LOCAL_EDUCATION_RESOURCE',
+  'REGIONAL_SELECTION',
+  'NATIONAL_CATALOG',
+  'CURRICULUM_STANDARD',
+  'PHYSICAL_BOOK',
+])
+
+const curriculumEvidenceDiagnosticCodeSchema = z.enum([
+  'EDITION_MISMATCH_WARNING',
+  'EDITION_DIFFERENCE',
+  'EDITION_VARIANT_CONFLICT',
+])
+
 export const sourceReferenceSchema = z.object({
   id: nonEmptyString,
   type: curriculumSourceTypeSchema,
@@ -34,6 +51,8 @@ export const sourceReferenceSchema = z.object({
   verifiedAt: nonEmptyString.optional(),
   verifiedBy: nonEmptyString.optional(),
   note: nonEmptyString.optional(),
+  evidenceTypes: z.array(curriculumEvidenceTypeSchema).min(1).optional(),
+  diagnosticCodes: z.array(curriculumEvidenceDiagnosticCodeSchema).min(1).optional(),
 })
 
 export const SourceReferenceSchema = sourceReferenceSchema

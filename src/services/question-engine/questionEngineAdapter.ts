@@ -54,6 +54,7 @@ export interface QuestionEngineAssessment {
   context: AssessmentLaunchContext
   definition: AssessmentDefinition
   questions: Question[]
+  questionKnowledgePoints?: QuestionKnowledgePoint[]
   flags: QuestionEngineFlags
   diagnostics: string[]
 }
@@ -219,8 +220,9 @@ export function createQuestionSession(
   context: AssessmentLaunchContext,
   definition: AssessmentDefinition,
   studentId = 'local-profile',
+  sessionScope = 'default',
 ): QuestionSession {
-  const id = [
+  const idParts = [
     'question-session',
     studentId,
     definition.id,
@@ -228,9 +230,10 @@ export function createQuestionSession(
     context.unitId,
     context.lessonId,
     context.knowledgePointId,
-  ].join(':')
+  ]
+  if (sessionScope !== 'default') idParts.push(sessionScope)
   return {
-    id,
+    id: idParts.join(':'),
     assessmentId: definition.id,
     textbookId: context.textbookId,
     unitId: context.unitId,
@@ -425,6 +428,7 @@ export class QuestionEngineAdapter {
     const rawQuestions = await this.repository.getQuestionsByIds(definition.questionIds, dataset)
     const questionsById = new Map(rawQuestions.map((question) => [question.id, question]))
     const diagnostics: string[] = []
+    const questionKnowledgePoints: QuestionKnowledgePoint[] = []
     const orderedRawQuestions = definition.questionIds
       .map((questionId) => {
         if (!questionsById.has(questionId)) diagnostics.push(`QUESTION_ORPHAN: ${questionId}`)
@@ -439,6 +443,7 @@ export class QuestionEngineAdapter {
         diagnostics.push(`QUESTION_MAPPING_INVALID: ${question.id}`)
         continue
       }
+      questionKnowledgePoints.push(...mappings)
       mappedQuestions.push(question)
     }
 
@@ -495,6 +500,7 @@ export class QuestionEngineAdapter {
     return {
       definition: availableDefinition,
       questions: readableQuestions,
+      questionKnowledgePoints,
       flags,
       diagnostics,
     }

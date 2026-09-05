@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 
 import MapConnection from './MapConnection.vue'
 import MapLegend from './MapLegend.vue'
@@ -39,10 +40,13 @@ const renderedConnections = computed(() =>
 <template>
   <section class="knowledge-island-map" aria-labelledby="knowledge-island-map-title">
     <div class="knowledge-island-map__intro">
+      <span class="knowledge-island-map__guide" aria-hidden="true"
+        ><KnowledgeDangoPlaceholder size="sm" state="encourage"
+      /></span>
       <div>
-        <p class="curriculum-eyebrow">Knowledge Island</p>
+        <p class="curriculum-eyebrow">团子带路 · 一起发现新知识</p>
         <h2 id="knowledge-island-map-title">沿着知识路径探索</h2>
-        <p>每座岛是一组学习单元，每个节点代表一个知识点。完成前置知识，新的路径就会亮起来。</p>
+        <p>点一点亮起的关卡，开始探索吧！完成前面的知识，新的路径就会亮起来。</p>
       </div>
       <MapLegend />
     </div>

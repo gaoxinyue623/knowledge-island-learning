@@ -4,9 +4,10 @@ import type { LearningMapViewModel } from '@/types'
 
 interface Props {
   viewModel: LearningMapViewModel
+  showUnverified?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), { showUnverified: true })
 
 const subjectLabels = { CHINESE: '语文世界', MATH: '数学世界', ENGLISH: '英语世界' } as const
 const semesterLabels = { 1: '上册', 2: '下册' } as const
@@ -30,7 +31,10 @@ const semesterLabels = { 1: '上册', 2: '下册' } as const
       <span v-if="props.viewModel.flags.isDemo" class="map-badge map-badge--sample">
         开发样本
       </span>
-      <span v-if="props.viewModel.flags.isUnverified" class="map-badge map-badge--warning">
+      <span
+        v-if="props.showUnverified && props.viewModel.flags.isUnverified"
+        class="map-badge map-badge--warning"
+      >
         未审核数据
       </span>
       <RouterLink class="learning-map-header__settings" to="/curriculum-settings">

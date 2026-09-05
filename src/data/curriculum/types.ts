@@ -1,4 +1,52 @@
-import type { ContentSource, Question, QuestionKnowledgePoint } from '@/types'
+import type {
+  ContentSource,
+  CourseContent,
+  Grade,
+  KnowledgePoint,
+  KnowledgePrerequisite,
+  LearningMap,
+  Lesson,
+  LessonKnowledgePointRelation,
+  MapNode,
+  MediaAsset,
+  Publisher,
+  Question,
+  QuestionKnowledgePoint,
+  Region,
+  RegionTextbookRelation,
+  Semester,
+  Subject,
+  TextbookVersion,
+  Unit,
+} from '@/types'
+
+/**
+ * The curriculum data boundary used by runtime adapters.
+ *
+ * SAMPLE fixtures implement the same shape, but are kept in a separate
+ * explicitly named dataset so they cannot leak into the user-facing runtime.
+ */
+export interface CurriculumData {
+  grades: Grade[]
+  semesters: Semester[]
+  subjects: Subject[]
+  regions: Region[]
+  publishers: Publisher[]
+  textbooks: TextbookVersion[]
+  regionTextbookRelations: RegionTextbookRelation[]
+  units: Unit[]
+  lessons: Lesson[]
+  knowledgePoints: KnowledgePoint[]
+  lessonKnowledgePointRelations: LessonKnowledgePointRelation[]
+  knowledgePrerequisites: KnowledgePrerequisite[]
+  courseContents: CourseContent[]
+  questions: Question[]
+  questionKnowledgePoints: QuestionKnowledgePoint[]
+  mediaAssets: MediaAsset[]
+  learningMaps: LearningMap[]
+  mapNodes: MapNode[]
+  sources: ContentSource[]
+}
 
 /**
  * SAMPLE records are deliberately richer than the domain interfaces so the

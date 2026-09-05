@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppButton from './AppButton.vue'
-import AppIcon from './AppIcon.vue'
+import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 
 interface Props {
   title: string
@@ -20,7 +20,7 @@ const emit = defineEmits<{
 <template>
   <section class="app-empty-state" role="status">
     <div class="app-empty-state__icon" aria-hidden="true">
-      <AppIcon name="route" :size="40" decorative />
+      <KnowledgeDangoPlaceholder size="sm" state="encourage" />
     </div>
     <h2 class="app-empty-state__title">{{ title }}</h2>
     <p class="app-empty-state__description">{{ description }}</p>

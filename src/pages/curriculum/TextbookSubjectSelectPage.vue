@@ -9,6 +9,7 @@ import TextbookVersionSelector from '@/components/curriculum/TextbookVersionSele
 import CurriculumPageFrame from './CurriculumPageFrame.vue'
 import { curriculumService } from '@/services'
 import { useCurriculumStore } from '@/stores/curriculumStore'
+import { LOCAL_STUDENT_ID } from '@/stores/studentStore'
 import type { SubjectCode, TextbookDisplay } from '@/types'
 
 const router = useRouter()
@@ -88,7 +89,7 @@ async function loadOptions() {
 function saveSelection(textbookId: string) {
   if (!subjectCode.value) return
   if (curriculumStore.selectTextbook(subjectCode.value, textbookId)) {
-    void curriculumStore.confirmCurriculum('SAMPLE_STUDENT_01').then((profile) => {
+    void curriculumStore.confirmCurriculum(LOCAL_STUDENT_ID).then((profile) => {
       if (profile) router.push('/curriculum-settings')
     })
   }

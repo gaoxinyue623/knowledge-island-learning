@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppIcon from '@/components/common/AppIcon.vue'
+import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 import AppShell from '@/layouts/AppShell.vue'
 import OnboardingProgress from '@/components/curriculum/OnboardingProgress.vue'
 
@@ -29,7 +30,10 @@ const props = withDefaults(defineProps<Props>(), {
         {{ props.backLabel }}
       </RouterLink>
       <header class="curriculum-page__header">
-        <p class="curriculum-eyebrow">知识岛 · 学习配置</p>
+        <span class="curriculum-page__guide" aria-hidden="true">
+          <KnowledgeDangoPlaceholder size="sm" state="encourage" />
+        </span>
+        <p class="curriculum-eyebrow">准备好，开启知识岛之旅</p>
         <h1>{{ props.title }}</h1>
         <p>{{ props.description }}</p>
       </header>

@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
+import { sampleCurriculumData } from '@/data/curriculum/sample'
 import { goldenMathPepG3S1Package } from '@/data/curriculum/verified/math/pep/g3-s1'
 import {
   CurriculumImportPackageSchema,
   CurriculumReviewRecordSchema,
+  SourceReferenceSchema,
   importCurriculumPackage,
   isCurriculumRecordReadable,
   buildTextbookIdentityKey,
@@ -38,6 +40,25 @@ function copyGoldenPackage(): CurriculumImportPackage {
 }
 
 describe('curriculum import schema and identity', () => {
+  it('validates the public evidence categories and edition diagnostics', () => {
+    const source = {
+      id: 'PUBLIC_EVIDENCE_01',
+      type: 'publisher' as const,
+      title: '公开教材产品页',
+      sourceUrl: 'https://example.com/textbook',
+      evidenceTypes: ['TEXTBOOK_EXISTENCE', 'TEXTBOOK_IDENTITY'] as const,
+      diagnosticCodes: ['EDITION_MISMATCH_WARNING'] as const,
+    }
+    expect(SourceReferenceSchema.safeParse(source).success).toBe(true)
+    expect(
+      SourceReferenceSchema.safeParse({ ...source, evidenceTypes: ['UNKNOWN_TYPE'] }).success,
+    ).toBe(false)
+    expect(
+      SourceReferenceSchema.safeParse({ ...source, diagnosticCodes: ['UNKNOWN_DIAGNOSTIC'] })
+        .success,
+    ).toBe(false)
+  })
+
   it('accepts the complete Golden Sample Framework and preserves the unknown year', () => {
     expect(CurriculumImportPackageSchema.safeParse(goldenMathPepG3S1Package).success).toBe(true)
     expect(buildTextbookIdentityKey(goldenMathPepG3S1Package.textbook.identity)).toBe(
@@ -181,9 +202,11 @@ describe('verification state and curriculum access policy', () => {
 
   it('applies the access policy at the Mock Service boundary', async () => {
     const productionService = new MockCurriculumService({
+      data: sampleCurriculumData,
       accessPolicy: { allowSampleCurriculum: false, allowUnreviewedCurriculum: false },
     })
     const developmentService = new MockCurriculumService({
+      data: sampleCurriculumData,
       accessPolicy: { allowSampleCurriculum: true, allowUnreviewedCurriculum: false },
     })
 

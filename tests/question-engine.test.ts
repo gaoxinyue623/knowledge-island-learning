@@ -213,6 +213,28 @@ describe('questionEngineStore', () => {
     expect(store.currentQuestion?.result?.status).toBe('correct')
     expect(store.session?.attempts[0]?.result?.score).toBe(1)
   })
+
+  it('limits a WrongBook retry to the requested question in a new session', async () => {
+    setActivePinia(createPinia())
+    const storage = createQuestionSessionStorage(createMemoryStorage())
+    const adapter = new QuestionEngineAdapter({ questionRepository: new MockQuestionRepository() })
+    configureQuestionEngineStore({ adapter, sessionStorage: storage })
+    const store = useQuestionEngineStore()
+    const retryQuestionId = demoQuestions[4].id
+
+    await store.loadAssessment(demoAssessmentContext, {
+      dataset: 'demo',
+      studentId: 'student-wrong-book',
+      sessionScope: 'wrong-book:retry-1',
+      initialQuestionId: retryQuestionId,
+      reviewQuestionId: retryQuestionId,
+    })
+
+    expect(store.definition?.questionIds).toEqual([retryQuestionId])
+    expect(store.questions.map((question) => question.id)).toEqual([retryQuestionId])
+    expect(store.currentQuestion?.id).toBe(retryQuestionId)
+    expect(store.session?.questionIds).toEqual([retryQuestionId])
+  })
 })
 
 describe('QuestionRenderer', () => {

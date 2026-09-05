@@ -11,6 +11,12 @@ import {
 } from '@/services/question-engine'
 import type { QuestionEngineAssessment } from '@/services/question-engine/questionEngineAdapter'
 import {
+  learningHistoryService,
+  type LearningHistoryServiceContract,
+} from '@/services/learning-history'
+import { wrongBookProjectionService, type WrongBookProjectionService } from '@/services/wrong-book'
+import { rewardService, type RewardServiceContract } from '@/services/reward'
+import {
   normalizeQuestionSession,
   questionSessionStorage,
   type QuestionSessionStorage,
@@ -27,16 +33,23 @@ import type {
   QuestionEngineStatus,
   QuestionEngineViewModel,
   QuestionSession,
+  RewardEvent,
 } from '@/types'
 
 export interface QuestionEngineStoreDependencies {
   adapter: QuestionEngineAdapter
   sessionStorage: QuestionSessionStorage
+  historyService: LearningHistoryServiceContract
+  wrongBookProjectionService: WrongBookProjectionService
+  rewardService: RewardServiceContract
 }
 
 const defaultDependencies: QuestionEngineStoreDependencies = {
   adapter: questionEngineAdapter,
   sessionStorage: questionSessionStorage,
+  historyService: learningHistoryService,
+  wrongBookProjectionService,
+  rewardService,
 }
 
 let dependencies: QuestionEngineStoreDependencies = defaultDependencies
@@ -117,6 +130,75 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
   const warning = ref<string | null>(null)
   const dataset = ref<QuestionEngineDataset>('profile')
   const studentId = ref<Id>('local-profile')
+  const lastRewardEvent = ref<RewardEvent | null>(null)
+
+  function projectionOptions() {
+    const flags = assessment.value?.flags
+    const isSampleDerived = dataset.value === 'demo' || flags?.isSample === true
+    const verificationStatus = flags?.isUnverified
+      ? ('UNVERIFIED' as const)
+      : isSampleDerived
+        ? ('SAMPLE' as const)
+        : undefined
+    return {
+      isSampleDerived,
+      ...(verificationStatus ? { verificationStatus } : {}),
+    }
+  }
+
+  function projectHistory(nextSession: QuestionSession): void {
+    try {
+      dependencies.historyService.recordQuestionSession(
+        studentId.value,
+        nextSession,
+        projectionOptions(),
+      )
+      warning.value =
+        dependencies.sessionStorage.getLastWarning() ?? dependencies.historyService.getLastWarning()
+    } catch {
+      warning.value = '学习记录暂时未能保存，本次练习仍可继续。'
+    }
+  }
+
+  function projectWrongBook(nextSession: QuestionSession): void {
+    try {
+      const questionKnowledgePoints = new Map<Id, Id[]>()
+      for (const mapping of assessment.value?.questionKnowledgePoints ?? []) {
+        const knowledgePointIds = questionKnowledgePoints.get(mapping.questionId) ?? []
+        knowledgePointIds.push(mapping.knowledgePointId)
+        questionKnowledgePoints.set(mapping.questionId, knowledgePointIds)
+      }
+      dependencies.wrongBookProjectionService.projectQuestionSession(studentId.value, nextSession, {
+        dataset: dataset.value,
+        ...projectionOptions(),
+        textbookId: nextSession.textbookId,
+        unitId: nextSession.unitId,
+        lessonId: nextSession.lessonId,
+        supportedQuestionIds: new Set(questions.value.map((question) => question.id)),
+        questionKnowledgePoints,
+      })
+    } catch {
+      warning.value = '错题本暂时未能更新，本次练习仍可继续。'
+    }
+  }
+
+  function projectReward(nextSession: QuestionSession): void {
+    if (nextSession.status !== 'completed') return
+    try {
+      const result = dependencies.rewardService.processLearningFact(
+        studentId.value,
+        { type: 'assessment_completed', session: nextSession },
+        { dataset: dataset.value, ...projectionOptions() },
+      )
+      lastRewardEvent.value = result.event
+      warning.value =
+        dependencies.sessionStorage.getLastWarning() ??
+        dependencies.rewardService.getLastWarning() ??
+        dependencies.historyService.getLastWarning()
+    } catch {
+      warning.value = '成长反馈暂时未能保存，本次练习仍可继续。'
+    }
+  }
 
   const currentQuestion = computed(() => viewModel.value?.currentQuestion ?? null)
   const currentQuestionIndex = computed(() => viewModel.value?.session.currentQuestionIndex ?? 0)
@@ -212,30 +294,54 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
         status.value = 'empty'
         return null
       }
+      const reviewQuestion = options.reviewQuestionId
+        ? result.questions.find((question) => question.id === options.reviewQuestionId)
+        : undefined
+      if (options.reviewQuestionId && !reviewQuestion) {
+        status.value = 'unsupported_question'
+        error.value = '这道错题已经不在当前可用题目集合中。'
+        return null
+      }
+      const assessmentDefinition = reviewQuestion
+        ? { ...result.definition, questionIds: [reviewQuestion.id] }
+        : result.definition
+      const assessmentQuestions = reviewQuestion ? [reviewQuestion] : result.questions
       assessment.value = {
         context: launchContext,
-        definition: result.definition,
-        questions: result.questions,
+        definition: assessmentDefinition,
+        questions: assessmentQuestions,
+        questionKnowledgePoints: result.questionKnowledgePoints ?? [],
         flags: result.flags ?? { isSample: false, isUnverified: false, isDemo: false },
         diagnostics: result.diagnostics ?? [],
       }
-      definition.value = result.definition
-      questions.value = result.questions
-      const freshSession = createQuestionSession(launchContext, result.definition, studentId.value)
+      definition.value = assessmentDefinition
+      questions.value = assessmentQuestions
+      const freshSession = createQuestionSession(
+        launchContext,
+        assessmentDefinition,
+        studentId.value,
+        options.sessionScope,
+      )
       const persisted = dependencies.sessionStorage.get(freshSession.id)
       let nextSession = normalizeQuestionSession(
         persisted ?? freshSession,
-        result.definition.questionIds,
+        assessmentDefinition.questionIds,
       )
+      const initialQuestionIndex = options.initialQuestionId
+        ? assessmentDefinition.questionIds.indexOf(options.initialQuestionId)
+        : -1
+      if (!persisted && initialQuestionIndex >= 0) {
+        nextSession = { ...nextSession, currentQuestionIndex: initialQuestionIndex }
+      }
       if (
         dataset.value === 'demo' &&
         options.demoState === 'resume' &&
         nextSession.status === 'not_started'
       ) {
-        nextSession = buildShowcaseSession(nextSession, result.questions, 'resume')
+        nextSession = buildShowcaseSession(nextSession, assessmentQuestions, 'resume')
       }
       if (dataset.value === 'demo' && options.demoState === 'completed') {
-        nextSession = buildShowcaseSession(nextSession, result.questions, 'completed')
+        nextSession = buildShowcaseSession(nextSession, assessmentQuestions, 'completed')
       }
       if (!persisted || JSON.stringify(persisted) !== JSON.stringify(nextSession)) {
         persistSession(nextSession)
@@ -243,6 +349,11 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
       session.value = nextSession
       status.value = nextSession.status === 'completed' ? 'completed' : 'ready'
       await rebuildViewModel()
+      if (nextSession.status !== 'not_started') {
+        projectHistory(nextSession)
+        projectWrongBook(nextSession)
+      }
+      if (nextSession.status === 'completed') projectReward(nextSession)
       warning.value = dependencies.sessionStorage.getLastWarning()
       return viewModel.value
     } catch (caught) {
@@ -259,12 +370,14 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     if (!active || status.value === 'completed' || status.value === 'error') return false
     if (active.status === 'in_progress') return true
     const now = new Date().toISOString()
-    await updateSession({
+    const nextSession = {
       ...active,
       status: 'in_progress',
       startedAt: active.startedAt ?? now,
       updatedAt: now,
-    })
+    } satisfies QuestionSession
+    await updateSession(nextSession)
+    projectHistory(nextSession)
     status.value = 'ready'
     return true
   }
@@ -302,6 +415,7 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     }
     const nextSession = upsertAttempt(latest, attempt)
     await updateSession({ ...nextSession, updatedAt: new Date().toISOString() })
+    projectWrongBook(session.value ?? nextSession)
     return true
   }
 
@@ -328,6 +442,7 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     }
     const nextSession = upsertAttempt(latest, attempt)
     await updateSession({ ...nextSession, updatedAt: new Date().toISOString() })
+    projectWrongBook(session.value ?? nextSession)
     return true
   }
 
@@ -380,15 +495,19 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
   async function completeAssessment(): Promise<boolean> {
     if (!canComplete.value || !session.value || status.value === 'completed') return false
     const now = new Date().toISOString()
-    await updateSession({
+    const nextSession = {
       ...session.value,
       status: 'completed',
       currentQuestionIndex: Math.max(0, (definition.value?.questionIds.length ?? 1) - 1),
       updatedAt: now,
       completedAt: now,
-    })
+    } satisfies QuestionSession
+    await updateSession(nextSession)
     status.value = 'completed'
     await rebuildViewModel()
+    projectHistory(nextSession)
+    projectWrongBook(nextSession)
+    projectReward(nextSession)
     return true
   }
 
@@ -432,6 +551,7 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     error,
     warning,
     dataset,
+    lastRewardEvent,
     loadAssessment,
     startSession,
     resumeSession,

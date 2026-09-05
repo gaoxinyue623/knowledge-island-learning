@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { Region } from '@/types'
 
@@ -14,6 +16,14 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{ select: [region: Region] }>()
+
+const regionLabel = computed(() => {
+  if (props.region.code === 'CN-GD' || props.region.code === 'CN-HB') {
+    return '省级范围 · 人教版语文'
+  }
+  if (props.region.code === 'CN-GD-SZ') return '沪教版英语 · 北师大版二年级上册数学'
+  return props.region.level === 'PROVINCE' ? '省级学习范围' : '学习地区'
+})
 </script>
 
 <template>
@@ -28,7 +38,7 @@ const emit = defineEmits<{ select: [region: Region] }>()
     <span class="curriculum-choice__icon" aria-hidden="true"><AppIcon name="map-pin" /></span>
     <span class="curriculum-choice__content">
       <strong>{{ props.region.name }}</strong>
-      <small>{{ props.region.level === 'PROVINCE' ? '示例省级地区' : '示例地区' }}</small>
+      <small>{{ regionLabel }}</small>
     </span>
     <AppIcon name="chevron-right" :size="20" decorative />
   </button>

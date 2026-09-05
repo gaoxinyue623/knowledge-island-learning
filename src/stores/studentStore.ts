@@ -8,6 +8,9 @@ export interface StudentBasicProfile {
   displayName: string
 }
 
+/** Stable local identity used until account authentication is introduced. */
+export const LOCAL_STUDENT_ID = 'local-profile'
+
 export const useStudentStore = defineStore('student', () => {
   const profile = ref<StudentBasicProfile | null>(null)
   const characterId = ref<Id | null>(null)

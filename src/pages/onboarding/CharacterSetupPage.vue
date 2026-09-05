@@ -5,14 +5,14 @@ import AppButton from '@/components/common/AppButton.vue'
 import AppCard from '@/components/common/AppCard.vue'
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
-import { useStudentStore } from '@/stores/studentStore'
+import { LOCAL_STUDENT_ID, useStudentStore } from '@/stores/studentStore'
 
 const router = useRouter()
 const studentStore = useStudentStore()
 
 function enterHome() {
-  studentStore.setProfile({ id: 'SAMPLE_STUDENT_01', displayName: '小岛同学' })
-  studentStore.setCharacter('SAMPLE_CHARACTER_DEFAULT')
+  studentStore.setProfile({ id: LOCAL_STUDENT_ID, displayName: '小岛同学' })
+  studentStore.setCharacter('default-character')
   router.push('/home')
 }
 </script>

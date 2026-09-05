@@ -2,12 +2,10 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import AppButton from '@/components/common/AppButton.vue'
 import AppEmptyState from '@/components/common/AppEmptyState.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import RegionSelector from '@/components/curriculum/RegionSelector.vue'
-import UnsupportedRegionState from '@/components/curriculum/UnsupportedRegionState.vue'
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
 import { curriculumService } from '@/services'
 import { useCurriculumStore } from '@/stores/curriculumStore'
@@ -19,7 +17,6 @@ const curriculumStore = useCurriculumStore()
 const regions = ref<Region[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
-const unsupportedRegionSelected = ref(false)
 
 const hasRegions = computed(() => regions.value.length > 0)
 const isSettingsEdit = computed(() => route.query.from === 'settings')
@@ -28,7 +25,6 @@ const backTo = computed(() => (isSettingsEdit.value ? '/curriculum-settings' : '
 async function loadRegions() {
   loading.value = true
   error.value = null
-  unsupportedRegionSelected.value = false
   try {
     regions.value = await curriculumService.getRegions()
   } catch (caught) {
@@ -40,19 +36,10 @@ async function loadRegions() {
 
 function selectRegion(region: Region) {
   curriculumStore.selectRegion(region.id)
-  if (region.id === 'SAMPLE_REGION_C') {
-    unsupportedRegionSelected.value = true
-    return
-  }
   router.push({
     path: '/onboarding/grade',
     query: isSettingsEdit.value ? { from: 'settings' } : undefined,
   })
-}
-
-function changeRegion() {
-  unsupportedRegionSelected.value = false
-  curriculumStore.resetDraft()
 }
 
 onMounted(() => void loadRegions())
@@ -72,11 +59,10 @@ onMounted(() => void loadRegions())
       :description="error"
       @retry="loadRegions"
     />
-    <UnsupportedRegionState v-else-if="unsupportedRegionSelected" @change="changeRegion" />
     <AppEmptyState
       v-else-if="!hasRegions"
       title="还没有可选地区"
-      description="示例地区数据正在准备中，请稍后再试。"
+      description="地区数据正在准备中，请稍后再试。"
       action-label="重新加载"
       @action="loadRegions"
     />
@@ -86,13 +72,5 @@ onMounted(() => void loadRegions())
       :selected-region-id="curriculumStore.selectedRegionId"
       @select="selectRegion"
     />
-    <AppButton
-      v-if="unsupportedRegionSelected"
-      variant="ghost"
-      icon-left="arrow-left"
-      @click="changeRegion"
-    >
-      返回地区列表
-    </AppButton>
   </CurriculumPageFrame>
 </template>

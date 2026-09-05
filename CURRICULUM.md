@@ -6,8 +6,8 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 2.2、PHASE 6～10） |
-| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界、QuestionKnowledgePoint 关系消费边界、Mastery 证据输入边界和 Strategy 关系读取边界已实现并验证；真实教材仍未核验 |
+| 所属阶段 | PHASE 12.4：Product Integration（继承 PHASE 2.2、PHASE 6～11） |
+| 状态 | 课程关系、SAMPLE 解析管线、导入 Schema、完整性校验、Golden Sample Framework、Curriculum → LearningMap / LessonPlayer 适配边界、QuestionKnowledgePoint 关系消费边界、Mastery 证据输入边界、Strategy 关系读取边界和 PHASE 12 行为投影边界已实现并验证；真实教材仍未核验 |
 | 上游事实源 | 项目根目录 `PRODUCT.md` |
 | 下游消费者 | `DATA_MODEL.md`、`QUESTION_SCHEMA.md`、`CONTENT_REVIEW.md`、后续课程数据与前端服务 |
 | 权威维护者 | 内容负责人 / 教研负责人（待确定） |
@@ -500,3 +500,7 @@ MasteryRecord（按 studentProfileId + knowledgePointId）
 PHASE 11 只读取已经通过当前课程 / 地图闸门的 `KnowledgeRelation`，不新增第二套课程关系，也不从页面标题或数组位置推断前置条件。`LearningMapCurriculumKnowledgeRelation` 可以通过 adapter 进入策略层，但 Curriculum 关系和地图展示关系仍分别保留各自事实边界。
 
 策略使用地图服务已经解析的 `locked / available / learning / completed / mastered / perfect` 状态；它不能自动解锁知识点、改变 prerequisite 关系或生成课程内容。缺少有效节点 / 关系时只返回安全空状态与 diagnostic。生产遇到 SAMPLE、UNVERIFIED、REJECTED 来源不生成正式策略建议，开发夹具保留来源警示。
+
+## 19. PHASE 12 学习行为投影边界
+
+PHASE 12 不新增课程实体或第二套知识关系。`LearningHistoryRecord` 只保存 `LessonSession` / `QuestionSession` 的稳定来源 ID；`WrongQuestionRecord` 只保存 `QuestionAttempt` 的题目 ID、知识点关系和 Session 来源；`ReviewQueueItem` 只保存 `LearningRecommendation` 的当前建议快照。三者都不能回写课程、地图解锁、Mastery 或 Strategy 规则。详细实现见 `PHASE12.md`。

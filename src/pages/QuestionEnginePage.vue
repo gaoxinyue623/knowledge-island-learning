@@ -17,6 +17,9 @@ import { useQuestionEngineStore } from '@/stores/questionEngineStore'
 import { useMasteryStore } from '@/stores/masteryStore'
 import { useLearningMapStore } from '@/stores/learningMapStore'
 import { useLearningStrategyStore } from '@/stores/learningStrategyStore'
+import { useReviewQueueStore } from '@/stores/reviewQueueStore'
+import { useWrongBookStore } from '@/stores/wrongBookStore'
+import { useRewardStore } from '@/stores/rewardStore'
 import { useStudentStore } from '@/stores/studentStore'
 import type {
   AssessmentLaunchContext,
@@ -31,6 +34,9 @@ const questionEngineStore = useQuestionEngineStore()
 const masteryStore = useMasteryStore()
 const learningMapStore = useLearningMapStore()
 const learningStrategyStore = useLearningStrategyStore()
+const reviewQueueStore = useReviewQueueStore()
+const wrongBookStore = useWrongBookStore()
+const rewardStore = useRewardStore()
 const studentStore = useStudentStore()
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/question-engine'))
@@ -81,7 +87,12 @@ const context = computed<AssessmentLaunchContext | null>(() => {
       unitId,
       lessonId,
       knowledgePointId,
-      source: query.source === 'lesson_practice' ? 'lesson_practice' : 'dev',
+      source:
+        query.source === 'wrong_book'
+          ? 'wrong_book'
+          : query.source === 'lesson_practice' || !isDevRoute.value
+            ? 'lesson_practice'
+            : 'dev',
     }
   }
   if (isDevRoute.value) {
@@ -96,17 +107,43 @@ const context = computed<AssessmentLaunchContext | null>(() => {
   return null
 })
 
-const returnPath = computed(() =>
-  route.query.returnTo === '/dev/lesson-player' ||
-  (isDevRoute.value && typeof route.query.returnTo !== 'string')
-    ? '/dev/lesson-player'
-    : '/lesson',
+const returnPath = computed(() => {
+  if (context.value?.source === 'wrong_book') {
+    return isDevRoute.value ? '/dev/wrong-book' : '/wrong-book'
+  }
+  const requested = route.query.returnTo
+  const allowed = ['/home', '/tasks', '/dev/home', '/lesson', '/dev/lesson-player']
+  if (
+    typeof requested === 'string' &&
+    (allowed.includes(requested) || /^\/(?:dev\/)?knowledge-point\/[^/]+$/.test(requested))
+  ) {
+    return requested
+  }
+  return isDevRoute.value ? '/dev/lesson-player' : '/lesson'
+})
+const returnLabel = computed(() =>
+  context.value?.source === 'wrong_book'
+    ? '返回错题本'
+    : ['/home', '/tasks', '/dev/home'].includes(returnPath.value)
+      ? '返回首页'
+      : returnPath.value.includes('/knowledge-point/')
+        ? '返回知识点详情'
+        : '返回课程',
 )
-const lessonReturnPath = computed(() =>
-  route.query.lessonReturnTo === '/dev/learning-map' ? '/dev/learning-map' : '/learning-map',
-)
+const lessonReturnPath = computed(() => {
+  const requested = route.query.lessonReturnTo
+  const allowed = ['/home', '/tasks', '/dev/home', '/learning-map', '/dev/learning-map']
+  if (typeof requested === 'string' && allowed.includes(requested)) return requested
+  return isDevRoute.value ? '/dev/learning-map' : '/learning-map'
+})
 const mapNodeId = computed(() =>
   typeof route.query.mapNodeId === 'string' ? route.query.mapNodeId : undefined,
+)
+const retryQuestionId = computed(() =>
+  typeof route.query.retryQuestionId === 'string' ? route.query.retryQuestionId : undefined,
+)
+const sessionScope = computed(() =>
+  typeof route.query.sessionScope === 'string' ? route.query.sessionScope : undefined,
 )
 
 const viewModel = computed(() => questionEngineStore.viewModel)
@@ -114,6 +151,7 @@ const currentQuestion = computed(() => questionEngineStore.currentQuestion)
 const strategyRecommendation = computed(() => learningStrategyStore.recommendation)
 const masteryProcessingStatus = ref<'idle' | 'processing' | 'updated' | 'error'>('idle')
 const masteryProcessingMessage = ref<string | null>(null)
+const rewardMessage = ref<string | null>(null)
 const progressLabel = computed(() => {
   if (!viewModel.value) return '—'
   return `${viewModel.value.session.currentQuestionIndex + 1} / ${viewModel.value.session.totalQuestions}`
@@ -134,11 +172,15 @@ async function loadAssessment() {
   if (!context.value) return
   masteryProcessingStatus.value = 'idle'
   masteryProcessingMessage.value = null
+  rewardMessage.value = null
   learningStrategyStore.clear()
   await questionEngineStore.loadAssessment(context.value, {
     dataset: dataset.value,
     demoState: demoState.value,
     studentId: studentStore.profile?.id ?? 'local-profile',
+    ...(sessionScope.value ? { sessionScope: sessionScope.value } : {}),
+    ...(retryQuestionId.value ? { initialQuestionId: retryQuestionId.value } : {}),
+    ...(retryQuestionId.value ? { reviewQuestionId: retryQuestionId.value } : {}),
   })
   if (questionEngineStore.session?.status === 'completed') await processCompletedSession()
 }
@@ -146,16 +188,49 @@ async function loadAssessment() {
 async function processCompletedSession(): Promise<void> {
   const session = questionEngineStore.session
   if (!session) return
+  const studentProfileId = studentStore.profile?.id ?? 'local-profile'
+  await masteryStore.load(studentProfileId)
+  const previousMastery = new Map(
+    masteryStore.records.map((record) => [record.knowledgePointId, record]),
+  )
   masteryProcessingStatus.value = 'processing'
   masteryProcessingMessage.value = null
   try {
-    const result = await masteryService.processCompletedQuestionSession(
-      studentStore.profile?.id ?? 'local-profile',
-      session,
-      { dataset: dataset.value },
-    )
-    const studentProfileId = studentStore.profile?.id ?? 'local-profile'
+    const result = await masteryService.processCompletedQuestionSession(studentProfileId, session, {
+      dataset: dataset.value,
+    })
     await masteryStore.load(studentProfileId)
+    rewardStore.load(studentProfileId, { includeSample: dataset.value === 'demo' })
+    const completionRewards = [questionEngineStore.lastRewardEvent].filter(
+      (event): event is NonNullable<typeof event> => Boolean(event),
+    )
+    for (const nextRecord of result.records) {
+      const verificationStatus =
+        nextRecord.evidenceSourceStatus === 'SAMPLE'
+          ? ('SAMPLE' as const)
+          : nextRecord.evidenceSourceStatus === 'UNVERIFIED'
+            ? ('UNVERIFIED' as const)
+            : nextRecord.evidenceSourceStatus === 'VERIFIED'
+              ? ('VERIFIED' as const)
+              : nextRecord.evidenceSourceStatus === 'REVIEWED'
+                ? ('REVIEWED' as const)
+                : undefined
+      const reward = rewardStore.processLearningFact(
+        {
+          type: 'knowledge_mastered',
+          transition: {
+            previous: previousMastery.get(nextRecord.knowledgePointId),
+            next: nextRecord,
+          },
+        },
+        {
+          dataset: dataset.value,
+          isSampleDerived: dataset.value === 'demo' || nextRecord.isSampleDerived,
+          ...(verificationStatus ? { verificationStatus } : {}),
+        },
+      )
+      if (reward.event) completionRewards.push(reward.event)
+    }
     const map = await learningMapStore.loadMap({
       dataset: dataset.value,
       textbookId: session.textbookId,
@@ -163,7 +238,7 @@ async function processCompletedSession(): Promise<void> {
       isReadOnly: dataset.value !== 'profile',
     })
     if (map) {
-      await learningStrategyStore.resolveForMap(map, {
+      const resolved = await learningStrategyStore.resolveForMap(map, {
         studentProfileId,
         masteryRecords: masteryStore.records,
         learningEvidence: masteryStore.evidence,
@@ -171,7 +246,37 @@ async function processCompletedSession(): Promise<void> {
         currentKnowledgePointId: session.knowledgePointId,
         dataset: dataset.value,
       })
+      if (resolved) {
+        reviewQueueStore.project(resolved, {
+          profileId: studentProfileId,
+          textbookId: map.textbook.id,
+          dataset: dataset.value,
+          isSampleDerived: dataset.value === 'demo' || map.flags.isDemo,
+          ...(map.flags.isUnverified ? { verificationStatus: 'UNVERIFIED' as const } : {}),
+        })
+      }
     }
+    if (context.value?.source === 'wrong_book' && retryQuestionId.value) {
+      wrongBookStore.resolveRetry(
+        session,
+        retryQuestionId.value,
+        session.completedAt ?? new Date().toISOString(),
+        {
+          dataset: dataset.value,
+          isSampleDerived: dataset.value === 'demo',
+          ...(dataset.value === 'demo' ? { verificationStatus: 'SAMPLE' as const } : {}),
+          textbookId: session.textbookId,
+          unitId: session.unitId,
+          lessonId: session.lessonId,
+        },
+      )
+      if (wrongBookStore.lastRewardEvent) completionRewards.push(wrongBookStore.lastRewardEvent)
+    }
+    const energy = completionRewards.reduce(
+      (total, event) => total + event.reward.knowledgeEnergy,
+      0,
+    )
+    rewardMessage.value = energy > 0 ? `本次完成获得 ${energy} 点 KnowledgeEnergy。` : null
     masteryProcessingStatus.value = 'updated'
     masteryProcessingMessage.value = result.appendedEvidence.length
       ? `已根据 ${result.appendedEvidence.length} 条作答证据更新知识掌握。`
@@ -308,9 +413,9 @@ watch(
               @click.prevent="returnToLesson()"
             >
               <AppIcon name="arrow-left" :size="18" decorative />
-              返回课程
+              {{ returnLabel }}
             </RouterLink>
-            <p class="curriculum-eyebrow">Question Engine · Assessment</p>
+            <p class="curriculum-eyebrow">动动脑筋 · 练习时间</p>
             <h1>{{ viewModel?.definition.id || '准备一组练习' }}</h1>
             <p v-if="viewModel">完成一次练习，看看自己对这一步的理解。</p>
           </div>
@@ -336,7 +441,7 @@ watch(
           <div>
             <p class="curriculum-eyebrow">DEVELOPMENT ONLY · PHASE 9</p>
             <h2 id="question-state-title">Question Engine 状态 Showcase</h2>
-            <p>用于检查六类题型、恢复、反馈和错误状态；不会创建正式掌握度或奖励记录。</p>
+            <p>用于检查六类题型、恢复、反馈和错误状态；开发样本不会进入正式掌握度或成长反馈。</p>
           </div>
           <div class="question-engine__state-actions">
             <AppButton
@@ -384,13 +489,13 @@ watch(
           icon-left="arrow-left"
           @click="returnToLesson()"
         >
-          返回课程
+          {{ returnLabel }}
         </AppButton>
         <AppEmptyState
           v-else-if="questionEngineStore.status === 'not_available'"
           title="练习暂未开放"
           description="题目还需要完成审核，暂时不能进入本次练习。"
-          action-label="返回课程"
+          :action-label="returnLabel"
           @action="returnToLesson()"
         />
         <AppEmptyState
@@ -400,7 +505,7 @@ watch(
           "
           title="练习内容正在准备中"
           description="这个知识点还没有可用的练习题，请先继续学习内容。"
-          action-label="返回课程"
+          :action-label="returnLabel"
           @action="returnToLesson()"
         />
         <template v-else-if="viewModel">
@@ -472,6 +577,10 @@ watch(
             <AppIcon name="check-circle" :size="44" color="var(--color-success)" decorative />
             <h2 id="assessment-completion-title">本次练习完成</h2>
             <p>这次结果描述本组题目的作答情况；掌握度会由作答证据单独计算。</p>
+            <div v-if="rewardMessage" class="question-engine__reward-notice" role="status">
+              <AppIcon name="sparkles" :size="20" decorative />
+              <span>{{ rewardMessage }}</span>
+            </div>
             <div
               v-if="masteryProcessingStatus !== 'idle'"
               class="question-engine__mastery-status"
@@ -515,9 +624,9 @@ watch(
               </div>
             </div>
             <div class="question-engine__completion-actions">
-              <AppButton size="lg" icon-left="book-open" @click="returnToLesson(true)"
-                >返回课程</AppButton
-              >
+              <AppButton size="lg" icon-left="book-open" @click="returnToLesson(true)">{{
+                returnLabel
+              }}</AppButton>
               <AppButton v-if="isDevRoute" variant="secondary" @click="resetDemoAssessment"
                 >再看一次示例</AppButton
               >

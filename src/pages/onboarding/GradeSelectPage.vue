@@ -8,6 +8,7 @@ import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import GradeSelector from '@/components/curriculum/GradeSelector.vue'
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
+import { G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID } from '@/data/curriculum'
 import { curriculumService } from '@/services'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import type { Grade, Semester } from '@/types'
@@ -19,7 +20,7 @@ const grades = ref<Grade[]>([])
 const semesters = ref<Semester[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
-const supportedGradeIds = ['SAMPLE_GRADE_3']
+const supportedGradeIds = [G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID]
 const isSettingsEdit = computed(() => route.query.from === 'settings')
 const backTo = computed(() =>
   isSettingsEdit.value ? '/curriculum-settings' : '/onboarding/region',
@@ -42,9 +43,9 @@ async function loadOptions() {
     ])
     grades.value = loadedGrades
     semesters.value = loadedSemesters
-    if (!curriculumStore.selectedSemesterId) {
-      const upperSemester = loadedSemesters.find((semester) => semester.code === 'UPPER')
-      if (upperSemester) curriculumStore.selectSemester(upperSemester.id)
+    const upperSemester = loadedSemesters.find((semester) => semester.code === 'UPPER')
+    if (upperSemester && !curriculumStore.selectedSemesterId) {
+      curriculumStore.selectSemester(upperSemester.id)
     }
   } catch (caught) {
     error.value = caught instanceof Error ? caught.message : '年级暂时无法加载'
@@ -72,7 +73,7 @@ onMounted(() => void loadOptions())
 <template>
   <CurriculumPageFrame
     title="你现在几年级？"
-    description="选择一个年级。当前 MVP 先开放三年级，其他年级会逐步准备。"
+    description="选择一个年级。当前已接入一年级、二年级语文，深圳市一、二年级英语，以及深圳二年级上册北师大版数学。"
     :step="2"
     :back-to="backTo"
   >

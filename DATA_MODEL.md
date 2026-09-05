@@ -1,17 +1,17 @@
 # 知识岛课程与学习数据模型
 
-> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery 与 PHASE 11 Strategy 的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`QUESTION_SCHEMA.md`、`MASTERY.md` 和 `LEARNING_STRATEGY.md` 为准。
+> 本文档定义课程、内容与学习行为实体的字段、关系和数据边界，并记录 PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine、PHASE 10 Mastery、PHASE 11 Strategy、PHASE 12 学习行为投影、PHASE 13 成长反馈、PHASE 14 Home 读取模型和 PHASE 15 ParentReport 读取模型的隔离规则。它是数据模型设计，不是数据库迁移文件；实现状态以文档状态表、`QUESTION_SCHEMA.md`、`MASTERY.md`、`LEARNING_STRATEGY.md`、`PHASE12.md`、`PHASE13.md`、`PHASE14.md` 和 `PARENT_REPORT.md` 为准。
 
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
-| 所属阶段 | PHASE 11.4：Learning Strategy（继承 PHASE 2.2、PHASE 6～10 数据契约） |
-| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession、LearningEvidence、MasteryRecord、确定性 Mastery Engine 和只读 Strategy 输出已实现并验证 |
+| 所属阶段 | PHASE 15.4：Privacy / Responsive / Regression / Verification（继承 PHASE 2.2、PHASE 6～14 数据契约） |
+| 状态 | 数据契约、SAMPLE 管线、导入 Schema、来源追踪、完整性校验、Golden Framework、生产闸门、地图展示投影、LessonPlayer 内容读取、QuestionKnowledgePoint 关系、Assessment、QuestionSession、LearningEvidence、MasteryRecord、确定性 Mastery Engine、只读 Strategy 输出、LearningHistory、WrongBook、ReviewQueue、Reward / Growth / Achievement、Home / Daily Plan 与 ParentReport 读取边界已实现 |
 | 上游事实源 | `PRODUCT.md`；课程层级规则见 `CURRICULUM.md` |
 | 下游消费者 | 题目协议、内容审核、MVP 课程占位数据、后续 API / 数据库设计 |
 | 权威维护者 | 数据 / 教研负责人（待确定） |
-| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player`、`src/services/question-engine`、`src/services/mastery` 和 `src/services/learning-strategy` 已实现；真实课程数据仍未核验 |
+| 实现状态 | `src/types`、`src/data/curriculum`、`src/services/curriculum`、`curriculumService`、`curriculumStore`、档案仓储、校验器、`src/services/learning-map`、`src/services/lesson-player`、`src/services/question-engine`、`src/services/mastery`、`src/services/learning-strategy`、`src/services/learning-history`、`src/services/wrong-book`、`src/services/review-queue`、`src/services/reward`、`src/services/growth`、`src/services/achievement` 和 `src/services/home` 已实现；真实课程数据仍未核验 |
 
 ---
 
@@ -1283,3 +1283,125 @@ PHASE 11 不新增或改写课程、题目、掌握度和地图事实，只建�
 - Review 不是计划表，不添加 `nextReviewAt`、`scheduledAt`、`reviewInterval` 或 `decayScore`；本阶段不创建 KnowledgeEnergy、WrongBook 或 Reward。
 
 策略字段和输出协议的唯一技术定义见 `LEARNING_STRATEGY.md`；本节不建立第二套阈值或排序规则。
+
+## 5.7 PHASE 13 Reward / Growth / Achievement 读取模型
+
+PHASE 13 增加的是独立事实投影和反馈快照，不改变前述 Curriculum、LearningMap、LessonPlayer、QuestionEngine、Mastery 或 Strategy 的权威字段：
+
+```text
+LessonSession completed ───────┐
+QuestionSession completed ─────┤
+Mastery transition → mastered ─┤→ RewardEventRepository
+Review active → completed ─────┤          ↓
+WrongBook active → resolved ───┘  KnowledgeEnergy / Growth
+                                             ↓
+                                   AchievementProgress
+```
+
+`RewardEvent` 的事实身份为 `profileId + type + sourceId`，奖励载荷当前只有 `knowledgeEnergy`。`KnowledgeEnergyBalance.current` 等于从 RewardEvent 求和的 `totalEarned`，没有消费、货币或库存协议。`GrowthRecord` 使用 `GROWTH_V1` 固定阈值，只作为反馈等级和进度展示。
+
+Achievement 使用 `ACHIEVEMENT_V1` 的固定计数条件，只反馈已经发生的里程碑。Reward / Growth / Achievement 均不解锁地图节点、不写掌握度、不生成 Strategy、不改变题目难度或 Review priority。正式读取排除 SAMPLE，开发页明确标注 SAMPLE。详细字段和存储见 `PHASE13.md` 及三个数据流文档。
+
+## 5.8 PHASE 14 Home / Daily Plan 读取模型
+
+PHASE 14 不新增上游学习事实，而是增加独立的应用读取模型：
+
+```text
+Profile + Curriculum + Map + Sessions + Strategy
+History + WrongBook + ReviewQueue + Growth + Achievement
+                                ↓
+                         HomeService
+                                ↓
+                          HomeViewModel
+```
+
+`DailyLearningPlan` 使用 `DAILY_PLAN_V1`，保存 `profileId`、本地 `dateKey`、三科教材上下文、任务 snapshot、每日进度、状态和生成时间。`DailyLearningTask` 只允许 `continue_learning`、`review`、`reinforce`、`wrong_question`、`next_learning`，并通过 action 复用 Lesson / Assessment launch context。
+
+Daily Plan 是聚合读取结果，不是 Mastery 或 Strategy 的替代品。候选优先级、类别上限、KnowledgePoint 去重和当天 snapshot 冻结由 `DailyPlanPolicy` / `DailyPlanProjection` 管理；任务完成状态从 LessonSession、ReviewQueue、WrongBook 和 History 等既有事实解析，Home 不保存按钮点击作为唯一完成事实。
+
+计划使用独立 key `knowledge-island.daily-learning-plans` 和 `schemaVersion: 1`，Zod 校验失败时安全回退并提供 warning。`profileId`、教材上下文和 dataset 隔离；正式读取排除 SAMPLE / UNVERIFIED / REJECTED，开发 demo 只在显式路由展示样本来源。HomeViewModel 只作为页面读取快照，不改变 Curriculum、Map unlock、Question、Mastery、Strategy、Reward、Growth 或 Achievement。
+
+字段、投影、持久化与页面数据流见 `PHASE14.md`、`DAILY_PLAN_DATA_FLOW.md` 和 `HOME_DATA_FLOW.md`。
+
+## 5.9 PHASE 15 ParentReport 读取模型
+
+PHASE 15 增加家长侧派生读取模型，不增加新的学习事实实体：
+
+```text
+LearningHistory + QuestionSession summary
+MasteryRecord + STRATEGY_V1 read result
+WrongBook + ReviewQueue + DailyLearningPlan
+RewardEvent / Growth + AchievementUnlock
+                              ↓
+                       ParentReportService
+                              ↓
+                         ParentReport
+```
+
+`ParentReport` 使用版本 `PARENT_REPORT_V1`，包含 `profileId`、本地日期范围、Overview、SubjectProgressSummary、MasteryReportSummary、WeakKnowledgeSummary、WrongBookReportSummary、ReviewReportSummary、DailyPlanCompletionSummary、LearningActivitySummary、ParentGrowthSummary、ParentAchievementSummary、轻量 Trend、来源 flags 和 diagnostics。报告 ID 为：
+
+```text
+parent-report:<profileId>:<startDate>:<endDate>:PARENT_REPORT_V1
+```
+
+报告是派生结果，不是事实存储。它不复制题目正文、完整 `QuestionAttempt[]`、Mastery、Strategy、WrongBook 或 Review Queue；题目详情仍由题目仓储和孩子端页面负责。报告只保存（可选的）range / subject 偏好，偏好载荷使用独立 schemaVersion 1 和 Zod 校验，不建立 `parentMastery`、`parentWrongBook` 等第二套事实 Storage。
+
+### 5.9.1 聚合规则
+
+- Overview / Activity 只使用已发生的 History completed、Review completed、WrongBook resolved 和 Daily Plan completion；`lesson_started` / `assessment_started` 不计入完成数量。
+- Assessment 摘要沿用 LearningHistory 中已有的 `questionCount`、`correctCount`、`incorrectCount`、`manualReviewCount` 和 `assessmentPercentage`；该百分比不等于 `masteryScore`。
+- Mastery 只显示各 KnowledgePoint 当前已有的 `state` / `masteryScore` 和四档分布，不平均所有知识点生成综合分。
+- Weak Knowledge 只来自现有 `MasteryRecord.state = weak`、活动 Review Queue 或 `STRATEGY_V1` 的 review recommendation；排序使用已有 strategy priority，缺失时只是 presentation ordering，不新增阈值。
+- WrongBook 的 `activeCount`、`resolvedCount`、`repeatedWrongCount` 使用现有记录，重复出错只认 `wrongCount > 1`；题目正文不进入报告。
+- Daily Plan 只计算真实计划中的 completed / total，不称为学习质量；没有可靠 duration 时不显示学习时长。
+- Growth 与 Achievement 是 Profile 级反馈；成长等级不等于学习质量，Achievement 只显示已解锁里程碑，不形成压力列表。
+- Trend 只呈现实际日期的数据点，不用补零制造“完整趋势”，不预测未来成绩、掌握度或能力。
+
+正式报告按 Profile、教材上下文和来源闸门隔离 SAMPLE / UNVERIFIED / REJECTED；开发报告可显示样本或未审核内容，但必须设置 `isSampleDerived` / `containsUnverifiedContent` 并在页面提示。读取报告不得写入 Mastery、Strategy、Daily Plan、WrongBook、Review Queue、Reward、Achievement、History、Evidence 或 Attempt。
+
+详细实现见 `PARENT_REPORT.md` 和 `PARENT_REPORT_DATA_FLOW.md`。
+
+### 5.10 PHASE 16 Production Readiness / Release Model
+
+PHASE 16 不新增学习事实模型，而是为已有 Curriculum、Content 和 Question 增加发布前的显式范围与索引：
+
+```text
+CurriculumImportPackage + SourceReference + ManualReview
+                         ↓
+                 MvpCurriculumScope
+                         ↓
+          productionCurriculumIndex (allow-list)
+                         ↓
+           LessonPlayer / QuestionEngine runtime
+```
+
+`MvpCurriculumScopeEntry` 的 `CANDIDATE` 只代表调查目标；只有 `RELEASED` 条目可以作为生产上下文。进入 index 的课程实体必须是 `REVIEWED + ACTIVE`，正式 `CourseContent` / `Question` 必须是 `REVIEWED + PUBLISHED`，`QuestionKnowledgePoint` 和地区教材关系必须是 `REVIEWED + ACTIVE`。`SourceReference`、`ContentSource` 和 `MediaAsset` 还要通过 URL、人工核验、版权清理和媒体可用性检查。
+
+`ProductionReadinessDataset` 只是发布候选数据的输入；`ProductionReadinessValidator` 不会把 `UNVERIFIED`、`VERIFIED` 或 SAMPLE 推进为 `REVIEWED`。当前 `productionCurriculumData` 是有意为空的显式 allow-list，候选来源、Golden framework 和 Demo fixtures 不属于生产事实。
+
+PHASE 16 的 Coverage Report 是发布范围统计，不是全仓库 Demo 统计。`LearningHistory`、`WrongBook`、`ReviewQueue`、Reward、Growth、Achievement、DailyPlan 和 ParentReport 的 schemaVersion 1 Storage 保持独立，并通过 migration matrix 与 orphan recovery 安全回退；它们不被 production readiness 合并成新的学习算法。
+
+字段与门禁实现见 `src/types/production-readiness.ts`、`src/services/production-readiness/`、`MVP_CURRICULUM_SCOPE.md`、`PRODUCTION_READINESS.md` 和 `MVP_RELEASE_REPORT.md`。PHASE 16 完成后不进入 PHASE 17。
+
+## 6. CONTENT SYSTEM EXPANSION 01 数据模型
+
+内容扩展层是 KnowledgePoint 的外部体验关系，而不是 Curriculum 实体的嵌套字段：
+
+```text
+KnowledgePoint
+  ├─ LearningContent
+  ├─ InteractiveActivity
+  ├─ PracticeSet → ExerciseTemplate → ExerciseInstance
+  ├─ ExtensionActivity
+  └─ Challenge
+```
+
+`InteractiveActivity` 的身份是 `id`，业务锚点是 `knowledgePointId`；活动类型由 `activityType` 判别，配置由 typed discriminated union 约束。首版难度使用 `L1`～`L5`，不复用 `MasteryScore`。`SelectRegionConfig` 使用 normalized logical coordinates，`SimulationConfig` 使用固定 `templateKey + typed parameters`。
+
+`ActivityProgress` 由 `profileId + activityId` 唯一确定，使用独立的 `schemaVersion: 1` 载荷。它表示交互完成状态，不是 `LearningEvidence`、`MasteryRecord` 或地图完成状态。
+
+`ExerciseTemplate` 由 `templateType`、typed config、难度、审核状态和版本组成；`ExerciseInstance` 保存结构化 prompt、AnswerSpec、模板 / 种子 / 索引和知识点引用。生成实例不复制 Question 正文，也不直接保存 QuestionAttempt。需要正式答题时通过 `GeneratedQuestionAdapter` 进入既有 Question Engine。
+
+`PracticeSet` 只保存模式、模板引用、目标数量和难度范围；`ExtensionActivity` / `Challenge` 保存结构化开放内容。三者均不保存 Mastery 或 Strategy 字段，完成后也不自动写上游事实。
+
+扩展记录的生产条件统一为 `isSample=false` 且 `verificationStatus=REVIEWED`。当前 Golden G1 Math Bundle 仅存在于开发数据集，所有记录为 `SAMPLE + UNVERIFIED`；profile 查询必须返回空，不得因为课程或题目审核状态变化而自动放行。

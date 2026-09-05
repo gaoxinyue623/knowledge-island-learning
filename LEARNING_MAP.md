@@ -6,8 +6,8 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前阶段 | PHASE 11.4：确定性策略辅助展示验证 |
-| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 回链、PHASE 10 掌握度辅助展示与 PHASE 11 策略提示已实现并验证；PHASE 11 完成后停止 |
+| 当前阶段 | PHASE 12.4：Product Integration（LearningMap 作为上游） |
+| 状态 | PHASE 7 地图、PHASE 8 LessonPlayer、PHASE 9 Question Engine 回链、PHASE 10 掌握度辅助展示与 PHASE 11 策略提示已实现并验证；PHASE 12 通过独立 History / WrongBook / Review Queue 投影消费地图上下文，不改变地图事实 |
 | 正式入口 | `/learning-map` |
 | 开发入口 | `/dev/learning-map`、`/dev/learning-map/states` |
 | 主要模块 | `src/services/learning-map/`、`src/stores/learningMapStore.ts`、`src/components/learning-map/` |
@@ -129,7 +129,7 @@ interface LearningMapProgressStoragePayload {
 
 PHASE 8 已将开发地图节点接入 LessonPlayer：地图 → `LessonLaunchContext` → LessonPlayer 步骤 → 独立会话 → 完成服务 → 地图进度。PHASE 9 再通过 `AssessmentLaunchContext` 接入 Question Engine；PHASE 10 的完成 Session 由独立 `MasteryProcessingService` 处理，地图仅读取掌握度展示投影。正式 `/lesson` 仍执行 profile 与内容审核保护；开发 `/dev/lesson-player` 使用独立 Demo Lesson Fixture，并明确显示 SAMPLE / UNVERIFIED 状态。
 
-当前已实现结构化内容步骤、媒体回退、非评分互动、会话恢复和完成状态；Question Engine、正式答题、自动判题、LearningEvidence、MasteryScore 和 MasteryRecord 已由后续阶段接入。仍没有 KnowledgeEnergy、复习排程、奖励、错题本、家长中心、真实题库或正式课程生成。
+当前已实现结构化内容步骤、媒体回退、非评分互动、会话恢复和完成状态；Question Engine、正式答题、自动判题、LearningEvidence、MasteryScore 和 MasteryRecord 已由后续阶段接入。仍没有 KnowledgeEnergy、复习排程、奖励、家长中心、真实题库或正式课程生成；错题本、学习历史和待巩固入口由 PHASE 12 独立服务接入，不改变地图事实。
 
 ## 8. PHASE 11 策略辅助展示
 
@@ -139,4 +139,4 @@ PHASE 11 的 `LearningStrategyService` 可以读取当前 `LearningMapViewModel`
 - `locked` 节点不会成为 `NextKnowledgePoint`；掌握度 `mastered` 不等于地图 `completed`，地图 `completed` 也不等于掌握度 `mastered`。
 - 正式 profile 需通过课程关系、教材上下文、地图节点和来源闸门；开发 `demo` / `golden` 只显示带警示的结果。
 
-PHASE 11 已完成并停止；策略是地图的只读辅助投影，不进入 PHASE 12。规则与数据流见 `LEARNING_STRATEGY.md`、`STRATEGY_DATA_FLOW.md`。
+PHASE 11 已完成并停止；PHASE 12 只读取地图状态和节点关系，策略仍是地图的只读辅助投影，不由地图写入。规则与数据流见 `LEARNING_STRATEGY.md`、`STRATEGY_DATA_FLOW.md`。

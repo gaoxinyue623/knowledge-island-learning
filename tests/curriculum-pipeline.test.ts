@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 
 import { curriculumData } from '@/data/curriculum'
+import { sampleCurriculumData } from '@/data/curriculum/sample'
 import { sampleRegionTextbookRelations } from '@/data/curriculum/region-textbooks'
 import { sampleQuestions } from '@/data/curriculum/questions'
 import { MockCurriculumService } from '@/services/adapters/mock/curriculumMockAdapter'
@@ -17,7 +18,11 @@ import {
   validateSamplePublishGuard,
 } from '@/services/validation'
 import { getOnboardingRedirect } from '@/router/guard'
-import { useCurriculumStore } from '@/stores/curriculumStore'
+import {
+  configureCurriculumStore,
+  resetCurriculumStoreDependencies,
+  useCurriculumStore,
+} from '@/stores/curriculumStore'
 import type { KnowledgePrerequisite, StudentCurriculumProfile } from '@/types'
 
 function createMemoryStorage() {
@@ -41,9 +46,13 @@ const profile: StudentCurriculumProfile = {
   source: 'USER_CONFIRMED',
 }
 
+afterEach(() => {
+  resetCurriculumStoreDependencies()
+})
+
 describe('resolveAvailableTextbooks', () => {
   it('auto-resolves a subject with exactly one DEFAULT', async () => {
-    const service = new MockCurriculumService()
+    const service = new MockCurriculumService({ data: sampleCurriculumData })
     const result = await service.resolveAvailableTextbooks({
       regionId: 'SAMPLE_REGION_A',
       gradeId: 'SAMPLE_GRADE_3',
@@ -65,7 +74,10 @@ describe('resolveAvailableTextbooks', () => {
     }
     if (!duplicateDefault) throw new Error('fixture missing')
     const service = new MockCurriculumService({
-      data: { regionTextbookRelations: [...sampleRegionTextbookRelations, duplicateDefault] },
+      data: {
+        ...sampleCurriculumData,
+        regionTextbookRelations: [...sampleRegionTextbookRelations, duplicateDefault],
+      },
     })
 
     const result = await service.resolveAvailableTextbooks({
@@ -80,7 +92,7 @@ describe('resolveAvailableTextbooks', () => {
   })
 
   it('returns NOT_AVAILABLE when a region has no textbook relations', async () => {
-    const service = new MockCurriculumService()
+    const service = new MockCurriculumService({ data: sampleCurriculumData })
     const result = await service.resolveAvailableTextbooks({
       regionId: 'SAMPLE_REGION_C',
       gradeId: 'SAMPLE_GRADE_3',
@@ -93,7 +105,7 @@ describe('resolveAvailableTextbooks', () => {
   })
 
   it('keeps three subject selections independent', async () => {
-    const service = new MockCurriculumService()
+    const service = new MockCurriculumService({ data: sampleCurriculumData })
     const result = await service.resolveAvailableTextbooks({
       regionId: 'SAMPLE_REGION_A',
       gradeId: 'SAMPLE_GRADE_3',
@@ -110,6 +122,9 @@ describe('resolveAvailableTextbooks', () => {
 
   it('completes the minimum region-to-profile pipeline', async () => {
     curriculumProfileRepository.clear()
+    configureCurriculumStore({
+      curriculumService: new MockCurriculumService({ data: sampleCurriculumData }),
+    })
     setActivePinia(createPinia())
     const store = useCurriculumStore()
     store.selectRegion('SAMPLE_REGION_A')
@@ -133,6 +148,9 @@ describe('resolveAvailableTextbooks', () => {
 describe('curriculumStore and profile persistence', () => {
   it('changing math keeps the Chinese and English draft choices', async () => {
     curriculumProfileRepository.clear()
+    configureCurriculumStore({
+      curriculumService: new MockCurriculumService({ data: sampleCurriculumData }),
+    })
     setActivePinia(createPinia())
     const store = useCurriculumStore()
     store.selectRegion('SAMPLE_REGION_B')
@@ -207,33 +225,69 @@ describe('validation and route guard', () => {
     expect(validateSamplePublishGuard({ isSample: true, status: 'DRAFT' })).toEqual([])
   })
 
-  it('keeps every curriculum fixture sample-only and unverified', () => {
+  it('keeps the SAMPLE curriculum fixtures sample-only and unverified', () => {
     const records = [
-      ...curriculumData.regions,
-      ...curriculumData.publishers,
-      ...curriculumData.textbooks,
-      ...curriculumData.regionTextbookRelations,
-      ...curriculumData.units,
-      ...curriculumData.lessons,
-      ...curriculumData.knowledgePoints,
-      ...curriculumData.lessonKnowledgePointRelations,
-      ...curriculumData.knowledgePrerequisites,
-      ...curriculumData.courseContents,
-      ...curriculumData.questions,
-      ...curriculumData.mediaAssets,
-      ...curriculumData.learningMaps,
-      ...curriculumData.mapNodes,
+      ...sampleCurriculumData.regions,
+      ...sampleCurriculumData.publishers,
+      ...sampleCurriculumData.textbooks,
+      ...sampleCurriculumData.regionTextbookRelations,
+      ...sampleCurriculumData.units,
+      ...sampleCurriculumData.lessons,
+      ...sampleCurriculumData.knowledgePoints,
+      ...sampleCurriculumData.lessonKnowledgePointRelations,
+      ...sampleCurriculumData.knowledgePrerequisites,
+      ...sampleCurriculumData.courseContents,
+      ...sampleCurriculumData.questions,
+      ...sampleCurriculumData.mediaAssets,
+      ...sampleCurriculumData.learningMaps,
+      ...sampleCurriculumData.mapNodes,
     ]
 
-    for (const record of records) {
+    const sampleRecords = records.filter(
+      (record) => (record as { isSample?: boolean }).isSample === true,
+    )
+
+    expect(sampleRecords.length).toBeGreaterThan(0)
+    for (const record of sampleRecords) {
       expect((record as { isSample?: boolean }).isSample).toBe(true)
       expect((record as { needsVerification?: boolean }).needsVerification).toBe(true)
       expect((record as { status: string }).status).not.toBe('PUBLISHED')
     }
   })
 
+  it('keeps SAMPLE fixtures out of the current user-facing dataset', () => {
+    expect(curriculumData.regions.map((region) => region.name)).toEqual([
+      '广东省',
+      '湖北省',
+      '深圳市',
+    ])
+    expect(curriculumData.grades.map((grade) => grade.id)).toEqual(['GRADE_1', 'GRADE_2'])
+    expect(curriculumData.semesters.map((semester) => semester.id)).toEqual([
+      'SEMESTER_UPPER',
+      'SEMESTER_LOWER',
+    ])
+    expect(curriculumData.subjects.map((subject) => subject.id)).toEqual([
+      'SUBJECT_CHINESE',
+      'SUBJECT_MATH',
+      'SUBJECT_ENGLISH',
+    ])
+    expect(curriculumData.questions).toEqual([])
+    expect(curriculumData.mediaAssets).toEqual([])
+    expect(
+      [
+        ...curriculumData.regions,
+        ...curriculumData.publishers,
+        ...curriculumData.textbooks,
+        ...curriculumData.units,
+        ...curriculumData.lessons,
+        ...curriculumData.knowledgePoints,
+        ...curriculumData.courseContents,
+      ].some((record) => record.id.startsWith('SAMPLE_')),
+    ).toBe(false)
+  })
+
   it('accepts the complete SAMPLE curriculum fixture graph', () => {
-    const result = validateCurriculumData()
+    const result = validateCurriculumData(sampleCurriculumData)
     expect(result.valid).toBe(true)
     expect(result.errors).toEqual([])
   })

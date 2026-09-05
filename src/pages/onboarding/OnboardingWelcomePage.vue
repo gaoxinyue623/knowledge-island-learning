@@ -24,7 +24,7 @@ function startOnboarding() {
         <KnowledgeDangoPlaceholder state="encourage" size="lg" />
         <div class="onboarding-welcome__copy">
           <h2>准备好开始一段学习冒险了吗？</h2>
-          <p>只需要选择地区、年级和三科课本，之后就能从适合你的课程出发。</p>
+          <p>只需要选择地区、年级和当前开放的教材，之后就能从适合你的课程出发。</p>
           <div class="onboarding-welcome__steps" aria-label="配置步骤">
             <span><AppIcon name="map-pin" :size="18" decorative /> 地区</span>
             <span><AppIcon name="star" :size="18" decorative /> 年级</span>

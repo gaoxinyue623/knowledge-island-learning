@@ -88,6 +88,7 @@ export function buildLearningMapSourceFromDomain(
       id: unit.id,
       textbookId: unit.textbookVersionId,
       title: unit.title,
+      subtitle: unit.subtitle,
       sort: unit.sortOrder,
       ...sampleStatus(unit),
     })),
