@@ -410,10 +410,6 @@ h3 {
   background: var(--adventure-paper);
   box-shadow: var(--adventure-shadow);
 }
-.learning-map-header__main h1 {
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
 .learning-map-overview {
   border: 2px solid #d8e1be;
   background: #f0f4df;
@@ -735,7 +731,6 @@ h3 {
   border: 2px solid #fffdf0;
   border-radius: 20px;
 }
-.knowledge-detail__reading,
 .lesson-player__content-card {
   border-color: #e5dcc4;
   background: #fffef9;
@@ -802,21 +797,6 @@ h3 {
   border-radius: 16px;
   background: #fffef8;
   line-height: 1.8;
-}
-
-.knowledge-detail__reading {
-  position: relative;
-}
-
-.knowledge-detail__reading::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  right: 32px;
-  width: 22px;
-  height: 30px;
-  background: #dfa379;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
 }
 
 @keyframes dango-wave {

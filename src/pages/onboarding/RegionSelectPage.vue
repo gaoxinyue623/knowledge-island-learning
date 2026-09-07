@@ -48,7 +48,7 @@ onMounted(() => void loadRegions())
 <template>
   <CurriculumPageFrame
     title="你在哪里学习？"
-    description="选择所在地区，我们只用它来查找可用教材，不会把地区当成出版社。"
+    description="地区仅作为个人学习资料，不限制教材选择。下一步可以自主选择适合自己的课本。"
     :step="1"
     :back-to="backTo"
   >

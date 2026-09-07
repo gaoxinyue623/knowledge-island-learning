@@ -1,24 +1,37 @@
 <script setup lang="ts">
+import { computed, getCurrentInstance } from 'vue'
+import { characterOptions, useStudentStore } from '@/stores/studentStore'
+
 type DangoState = 'idle' | 'happy' | 'think' | 'encourage' | 'success'
 type DangoSize = 'sm' | 'avatar' | 'md' | 'lg'
 
 interface Props {
+  characterId?: string
   state?: DangoState
   size?: DangoSize
   label?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  characterId: undefined,
   state: 'idle',
   size: 'md',
   label: '知识团子',
 })
+const pinia = getCurrentInstance()?.appContext.config.globalProperties.$pinia
+const student = pinia ? useStudentStore(pinia) : null
+const outfit = computed(
+  () =>
+    characterOptions.find((item) => item.id === (props.characterId ?? student?.characterId)) ??
+    characterOptions[0],
+)
 </script>
 
 <template>
   <div
     class="dango-placeholder"
     :class="[`dango-placeholder--${props.size}`, `dango-placeholder--${props.state}`]"
+    :style="{ '--color-character-base': outfit.color, '--color-character-shadow': outfit.shadow }"
     role="img"
     :aria-label="props.label"
   >

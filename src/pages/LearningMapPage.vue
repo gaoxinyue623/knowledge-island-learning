@@ -7,6 +7,8 @@ import AppEmptyState from '@/components/common/AppEmptyState.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppToast from '@/components/common/AppToast.vue'
+import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
+import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import LearningRecommendationCard from '@/components/learning-strategy/LearningRecommendationCard.vue'
 import KnowledgeIslandMap from '@/components/learning-map/KnowledgeIslandMap.vue'
 import LearningProgressBar from '@/components/learning-map/LearningProgressBar.vue'
@@ -95,6 +97,7 @@ async function loadMap() {
   }
   const focusNodeId = typeof route.query.focusNodeId === 'string' ? route.query.focusNodeId : null
   if (loaded && focusNodeId) learningMapStore.focusNode(focusNodeId)
+  if (loaded && route.query.open === 'continue') focusCurrentNode()
 }
 
 function openNodeDetail(nodeId: Id) {
@@ -121,12 +124,7 @@ function openNodeDetail(nodeId: Id) {
 function focusCurrentNode() {
   const node = findCurrentModelNode(viewModel.value)
   if (!node) return
-  learningMapStore.focusNode(node.id)
-  notice.value = {
-    type: 'info',
-    title: '已经定位到下一步',
-    message: node.title,
-  }
+  if (node.status !== 'locked') openNodeDetail(node.id)
 }
 
 function focusStrategyRecommendation() {
@@ -150,6 +148,7 @@ watch(
 <template>
   <AppShell :show-bottom-nav="true" :context="contextLabel">
     <div class="learning-map-page content-container">
+      <ThinkingEntry compact />
       <AppLoading v-if="learningMapStore.loading" label="正在准备知识岛地图" />
       <AppErrorState
         v-else-if="learningMapStore.status === 'error'"
@@ -222,6 +221,11 @@ watch(
           :recommendation="strategyRecommendation"
           compact
           @action="focusStrategyRecommendation"
+        />
+        <ReadingEntry
+          v-if="requestedSubject !== 'MATH'"
+          compact
+          :language="requestedSubject === 'ENGLISH' ? 'english' : 'chinese'"
         />
         <KnowledgeIslandMap
           :view-model="viewModel"

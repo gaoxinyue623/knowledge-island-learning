@@ -7,6 +7,120 @@
   color: var(--quest-ink);
 }
 
+.quest-training {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+.quest-training__selector {
+  padding: 16px;
+  border: 2px solid #dbc995;
+  border-radius: 24px;
+  background: #fff9e8;
+}
+.quest-training__modes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.quest-training__modes button {
+  display: grid;
+  gap: 8px;
+  min-height: 88px;
+  padding: 14px;
+  color: #40534a;
+  background: #fffefa;
+  border: 2px solid #ddd9c8;
+  border-radius: 18px;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.quest-training__modes strong {
+  font-size: 18px;
+}
+.quest-training__modes span,
+.quest-training__help {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.quest-training__modes button[aria-pressed='true'] {
+  border-color: #398773;
+  background: #eaf6ed;
+  box-shadow: 0 4px 0 #9cbe9e;
+}
+.quest-training__modes button:focus-visible,
+.quest-training__round button:focus-visible {
+  outline: 3px solid #287865;
+  outline-offset: 3px;
+}
+.quest-training__round {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+}
+.quest-training__round p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.quest-training__round button {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #9eaf97;
+  border-radius: 12px;
+  color: #285b4a;
+  background: white;
+  cursor: pointer;
+}
+.quest-training__help {
+  color: #64705f;
+  margin: 12px 0 0;
+}
+.quest-training__bands {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 8px;
+}
+.quest-training__bands li {
+  display: grid;
+  gap: 6px;
+  padding: 14px 8px;
+  text-align: center;
+  background: #f3f1e9;
+  border: 2px solid #e0decd;
+  border-radius: 16px;
+  font-size: 14px;
+}
+.quest-training__bands li[aria-current='step'] {
+  background: #fff0bb;
+  border-color: #b49337;
+  color: #614915;
+}
+.quest-training__context {
+  margin-bottom: 20px;
+  padding: 18px;
+  background: #eff4fc;
+  border: 1px solid #cad5e5;
+  border-radius: 16px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.quest-training__context strong {
+  color: #355678;
+  font-size: 14px;
+}
+.quest-training__context p {
+  margin: 8px 0 0;
+  font-size: 18px;
+  white-space: pre-line;
+}
+
 .reading-quest__welcome {
   display: flex;
   align-items: center;
@@ -578,4 +692,33 @@
 .math-number-pad :focus-visible {
   outline: 3px solid #cc8b35;
   outline-offset: 3px;
+}
+.reading-quest__save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1rem;
+  font-size: 0.9rem;
+  color: #405d55;
+}
+.reading-quest__save-bar p {
+  margin: 0;
+  flex: 1 1 16rem;
+}
+.reading-quest__save-bar button {
+  min-height: 44px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #bfd2c5;
+  border-radius: 1rem;
+  background: #fffdf5;
+  color: #31574c;
+}
+.reading-quest__restart {
+  padding: 1rem;
+  margin-block: 1rem;
+  border: 1px solid #e5d2a7;
+  border-radius: 1rem;
+  background: #fff8e7;
 }

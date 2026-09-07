@@ -10,8 +10,9 @@ import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import InteractiveActivityRenderer from '@/components/interactive-activity/InteractiveActivityRenderer.vue'
 import KnowledgeChallengeCard from '@/components/knowledge-point/KnowledgeChallengeCard.vue'
-import ReadingQuest from '@/components/knowledge-point/ReadingQuest.vue'
-import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
+import QuestTraining from '@/components/knowledge-point/QuestTraining.vue'
+import LessonReadingPanel from '@/components/lesson-player/LessonReadingPanel.vue'
+import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import {
   isEnglishPilotTextbook,
   isMathPilotTextbook,
@@ -21,9 +22,11 @@ import AppShell from '@/layouts/AppShell.vue'
 import { contentExpansionRepository, practiceModeLabel } from '@/services/content-expansion'
 import { createReadingQuest, questReadingText } from '@/services/content-expansion/readingQuest'
 import { questionEngineAdapter } from '@/services/question-engine'
+import { lessonProgressPresentation } from '@/services/lesson-player/lessonProgressPresentation'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
 import { useMasteryStore } from '@/stores/masteryStore'
+import { usePreferencesStore } from '@/stores/preferencesStore'
 import { useStudentStore } from '@/stores/studentStore'
 import type {
   ActivityResult,
@@ -55,15 +58,6 @@ const DEFAULT_DEMO_CONTEXT: LessonLaunchContext = {
   knowledgePointId: 'DEMO_KP_01',
 }
 
-const NODE_STATUSES: readonly LearningNodeStatus[] = [
-  'locked',
-  'available',
-  'learning',
-  'completed',
-  'mastered',
-  'perfect',
-]
-
 const NODE_STATUS_LABELS: Record<LearningNodeStatus, string> = {
   locked: '尚未解锁',
   available: '可以开始',
@@ -86,6 +80,7 @@ const curriculumStore = useCurriculumStore()
 const lessonPlayerStore = useLessonPlayerStore()
 const masteryStore = useMasteryStore()
 const studentStore = useStudentStore()
+const preferencesStore = usePreferencesStore()
 
 const invalidContextMessage = ref<string | null>(null)
 const detailError = ref<string | null>(null)
@@ -160,19 +155,26 @@ const detailPath = computed(
     `${isDevRoute.value ? '/dev' : ''}/knowledge-point/${encodeURIComponent(knowledgePointId.value)}`,
 )
 
-const nodeStatus = computed<LearningNodeStatus>(() => {
-  const requested = queryString('nodeStatus')
-  return requested && NODE_STATUSES.includes(requested as LearningNodeStatus)
-    ? (requested as LearningNodeStatus)
-    : 'available'
-})
-
-const nodeProgress = computed(() => {
-  const requested = Number(queryString('nodeProgress'))
-  return Number.isFinite(requested) ? Math.min(100, Math.max(0, requested)) : 0
-})
-
 const viewModel = computed(() => lessonPlayerStore.viewModel)
+const lessonProgress = computed(() => {
+  const loaded = viewModel.value?.context
+  const matches =
+    context.value &&
+    loaded &&
+    ['textbookId', 'unitId', 'lessonId', 'knowledgePointId'].every(
+      (key) =>
+        loaded[key as keyof LessonLaunchContext] ===
+        context.value?.[key as keyof LessonLaunchContext],
+    ) &&
+    lessonPlayerStore.activeStudentId === profileId.value &&
+    lessonPlayerStore.dataset === dataset.value
+  return lessonProgressPresentation(
+    matches ? viewModel.value?.session : undefined,
+    queryString('nodeStatus') === 'locked',
+  )
+})
+const nodeStatus = computed(() => lessonProgress.value.status)
+const nodeProgress = computed(() => lessonProgress.value.progress)
 const isFormalPilot = computed(() => isPilotTextbook(context.value?.textbookId))
 const isEnglishSubject = computed(() => isEnglishPilotTextbook(context.value?.textbookId))
 const isMathSubject = computed(() => isMathPilotTextbook(context.value?.textbookId))
@@ -292,9 +294,9 @@ function sourceNotice(): string {
   if (viewModel.value?.flags.isSample) return '这是示例内容，只用于开发验证。'
   if (isFormalPilot.value) {
     if (isMathSubject.value)
-      return '已接入深圳地区北师大版二年级上册数学知识讲解与原创拓展练习。先理解方法，再动手闯关。'
+      return '已接入北师大版一年级上下册、二年级上册数学知识讲解与原创拓展练习。先理解方法，再动手闯关。'
     if (isEnglishSubject.value) {
-      return '已接入深圳地区沪教版英语课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
+      return '已接入沪教版英语课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
     }
     return '已接入人教版语文一、二年级课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
   }
@@ -430,7 +432,7 @@ watch(
 )
 onMounted(() => void loadDetail())
 watch(
-  () => route.fullPath,
+  () => [route.fullPath, profileId.value],
   () => void loadDetail(),
 )
 </script>
@@ -525,8 +527,8 @@ watch(
                 <span>{{ NODE_STATUS_LABELS[nodeStatus] }}</span>
                 <strong>{{ Math.round(nodeProgress) }}%</strong>
               </div>
-              <AppProgress :value="nodeProgress" label="地图完成度" />
-              <small>地图完成度只表示走过的学习节点。</small>
+              <AppProgress :value="nodeProgress" label="本课学习进度" />
+              <small>记录本课学习步骤的完成情况，不代表知识掌握度。</small>
             </div>
             <dl class="knowledge-detail__facts">
               <div>
@@ -575,8 +577,7 @@ watch(
               开始正式练习
             </AppButton>
             <a v-if="readingQuest" href="#knowledge-challenges" class="reading-quest__entry">
-              <AppIcon name="route" :size="18" decorative />开始课后闯关 ·
-              {{ readingQuest.stages.length }} 关
+              <AppIcon name="route" :size="18" decorative />开始课后闯关 · 基础 / 强化
             </a>
             <p
               v-if="practiceAvailable === false && !readingQuest"
@@ -605,21 +606,16 @@ watch(
             </ul>
           </section>
 
-          <section
-            id="knowledge-reading"
-            class="knowledge-detail__panel knowledge-detail__reading"
-            aria-labelledby="knowledge-reading-title"
+          <LessonReadingPanel
+            :key="`${profileId}:${knowledgePointId}`"
+            :blocks="contentBlocks"
+            :muted="preferencesStore.preferences.muted"
+            :subject="isMathSubject ? 'math' : isEnglishSubject ? 'english' : 'chinese'"
+            :show-diagnostics="isDevRoute"
+            :practice-available="practiceAvailable"
+            @start-assessment="openAssessment"
           >
-            <div class="knowledge-detail__section-heading">
-              <div>
-                <p class="curriculum-eyebrow">
-                  {{ isMathSubject ? '发现身边的数学' : '翻开今天的故事' }}
-                </p>
-                <h2 id="knowledge-reading-title">{{ isMathSubject ? '知识讲解' : '课文原文' }}</h2>
-              </div>
-              <span>{{ contentBlocks.length }} 段内容</span>
-            </div>
-            <p class="knowledge-detail__content-note">
+            <template #note>
               <template v-if="isFormalPilot">
                 <template v-if="isMathSubject">
                   根据本课知识提要学习方法，再用下面的原创闯关练习试一试。图示帮助理解，开放探究鼓励不同解法。
@@ -634,14 +630,8 @@ watch(
               <template v-else>
                 当前展示课程库已接入的学习文本、重点和活动提示；完整教材原文将在获得授权并完成审核后接入。
               </template>
-            </p>
-            <LessonContentRenderer
-              :blocks="contentBlocks"
-              :show-diagnostics="isDevRoute"
-              :practice-available="practiceAvailable"
-              @start-assessment="openAssessment"
-            />
-          </section>
+            </template>
+          </LessonReadingPanel>
 
           <section
             id="knowledge-challenges"
@@ -657,11 +647,20 @@ watch(
               </div>
               <span>{{
                 readingQuest
-                  ? readingQuest.stages.length + ' 个小关卡'
+                  ? '基础与强化 · 分层训练'
                   : challengeCards.length + activities.length + ' 项挑战'
               }}</span>
             </div>
-            <ReadingQuest v-if="readingQuest" :quest="readingQuest" :profile-id="profileId" />
+            <QuestTraining
+              v-if="readingQuest"
+              :key="profileId + ':' + readingQuest.id"
+              :quest="readingQuest"
+              :bundle="expansionBundle"
+              :title="viewModel?.lesson.title ?? ''"
+              :text="questReadingText(contentBlocks)"
+              :profile-id="profileId"
+              :muted="preferencesStore.preferences.muted"
+            />
             <p v-else class="knowledge-detail__section-intro">
               <template v-if="isFormalPilot">
                 <template v-if="isEnglishSubject">
@@ -766,6 +765,12 @@ watch(
               </article>
             </div>
           </section>
+
+          <ReadingEntry
+            v-if="!isMathSubject && !isDevRoute"
+            compact
+            :language="isEnglishSubject ? 'english' : 'chinese'"
+          />
 
           <RouterLink
             class="knowledge-detail__footer-back"

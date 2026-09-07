@@ -1,11 +1,14 @@
 import {
   candidateContentExpansionBundles,
   candidateG2ShenzhenMathUpperContentExpansionBundles,
+  candidateG1ShenzhenMathUpperContentExpansionBundles,
+  candidateG1ShenzhenMathLowerContentExpansionBundles,
   candidateG1ShenzhenEnglishContentExpansionBundles,
   candidateG1ShenzhenEnglishLowerContentExpansionBundles,
   candidateG2ShenzhenEnglishUpperContentExpansionBundles,
   candidateG2ChineseContentExpansionBundles,
   candidateG2ChineseLowerContentExpansionBundles,
+  candidateRevisedChineseLowerBundles,
   candidateLowerChineseContentExpansionBundles,
   goldenContentExpansionBundles,
 } from '@/data/content-expansion'
@@ -83,9 +86,12 @@ export class StaticContentExpansionRepository implements ContentExpansionReposit
     candidateBundles: readonly ContentExpansionBundle[] = [
       ...candidateContentExpansionBundles,
       ...candidateG2ShenzhenMathUpperContentExpansionBundles,
+      ...candidateG1ShenzhenMathUpperContentExpansionBundles,
+      ...candidateG1ShenzhenMathLowerContentExpansionBundles,
       ...candidateLowerChineseContentExpansionBundles,
       ...candidateG2ChineseContentExpansionBundles,
       ...candidateG2ChineseLowerContentExpansionBundles,
+      ...candidateRevisedChineseLowerBundles,
       ...candidateG1ShenzhenEnglishContentExpansionBundles,
       ...candidateG1ShenzhenEnglishLowerContentExpansionBundles,
       ...candidateG2ShenzhenEnglishUpperContentExpansionBundles,

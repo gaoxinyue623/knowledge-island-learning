@@ -193,17 +193,27 @@ function mapHistoryRecords(
         right.occurredAt.localeCompare(left.occurredAt) || left.id.localeCompare(right.id),
     )
     .slice(0, 6)
-    .map((record) => ({
-      id: record.id,
-      type: record.type,
-      title: historyTitle(record.type),
-      subject: subjectForTextbook(record.textbookId, maps),
-      textbookId: record.textbookId,
-      knowledgePointId: record.knowledgePointId,
-      occurredAt: record.occurredAt,
-      ...(record.summary ? { summary: { ...record.summary } } : {}),
-      isSample: record.provenance.isSampleDerived,
-    }))
+    .map((record) => {
+      const lesson = maps
+        .find((map) => map.textbookId === record.textbookId)
+        ?.source?.lessons.find(
+          (item) => item.id === record.lessonId && item.unitId === record.unitId,
+        )
+      return {
+        id: record.id,
+        type: record.type,
+        title:
+          lesson && !lesson.isSample && lesson.verificationStatus !== 'REJECTED'
+            ? `《${lesson.title}》 · ${historyTitle(record.type)}`
+            : historyTitle(record.type),
+        subject: subjectForTextbook(record.textbookId, maps),
+        textbookId: record.textbookId,
+        knowledgePointId: record.knowledgePointId,
+        occurredAt: record.occurredAt,
+        ...(record.summary ? { summary: { ...record.summary } } : {}),
+        isSample: record.provenance.isSampleDerived,
+      }
+    })
 }
 
 function filterHistory(
@@ -547,6 +557,15 @@ export class HomeService {
     addWarning(warnings, this.dependencies.reviewQueueService.getLastWarning())
 
     const history = filterHistory(rawHistory, textbookSet, dataset)
+    const participationHistory = rawHistory.filter(
+      (record) =>
+        record.profileId === profile.studentId &&
+        textbookSet.has(record.textbookId) &&
+        record.provenance.verificationStatus !== 'REJECTED' &&
+        (dataset === 'demo' ||
+          (!record.provenance.isSampleDerived &&
+            record.provenance.verificationStatus !== 'SAMPLE')),
+    )
     const wrongBook = filterWrongBook(rawWrongBook, textbookSet, dataset)
     const reviewQueue = filterReviewQueue(rawReviewQueue, textbookSet, dataset)
     const lessonSessions = this.dependencies.lessonSessionReader
@@ -662,6 +681,9 @@ export class HomeService {
           total: mapProgress.totalNodes,
           percentage: mapProgress.percentage,
         },
+        completedLearningSessions: participationHistory.filter(
+          (record) => record.textbookId === textbookId && record.type === 'lesson_completed',
+        ).length,
         ...(currentNode
           ? {
               currentLessonTitle: currentNode.lesson.title,
@@ -673,7 +695,7 @@ export class HomeService {
       }
     })
 
-    const recentLearning = mapHistoryRecords(history, maps)
+    const recentLearning = mapHistoryRecords(participationHistory, maps)
     const activeWrongCount = wrongBook.filter((record) => record.status === 'active').length
     const activeReviewCount = reviewQueue.filter((item) => item.status === 'active').length
     const mapSample = maps.some((map) => map.isSample)
@@ -712,7 +734,12 @@ export class HomeService {
       continueLearning: continueViewModel(dailyPlan, lessonSessions),
       subjects,
       recentLearning,
-      shortcuts: buildShortcuts(dataset, history.length, activeWrongCount, activeReviewCount),
+      shortcuts: buildShortcuts(
+        dataset,
+        participationHistory.length,
+        activeWrongCount,
+        activeReviewCount,
+      ),
       growth: summaryForGrowth(growthResult),
       ...(achievement ? { achievement } : {}),
       flags: {

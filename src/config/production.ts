@@ -29,7 +29,7 @@ export function resolveProductionConfig(input: {
     // development fixtures; they can never enable them in a production build.
     allowSampleCurriculum: !isProduction && flag(environment.VITE_ALLOW_SAMPLE_CURRICULUM, true),
     allowUnreviewedCurriculum:
-      !isProduction && flag(environment.VITE_ALLOW_UNREVIEWED_CURRICULUM, false),
+      !isProduction && flag(environment.VITE_ALLOW_UNREVIEWED_CURRICULUM, true),
     allowSampleLearningContent:
       !isProduction && flag(environment.VITE_ALLOW_SAMPLE_LEARNING_CONTENT, true),
     allowUnreviewedLearningContent:

@@ -1,13 +1,44 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { MathQuestVisual } from '@/types/reading-quest'
-defineProps<{ visual: MathQuestVisual }>()
+import { computed, ref } from 'vue'
+import type {
+  EarlyMathQuestVisual,
+  LowerMathQuestVisual,
+  MathQuestVisual,
+} from '@/types/reading-quest'
+import EarlyMathVisual from './EarlyMathVisual.vue'
+import LowerMathVisual from './LowerMathVisual.vue'
+const props = defineProps<{ visual: MathQuestVisual }>()
+const earlyVisual = computed((): EarlyMathQuestVisual | null => {
+  const visual = props.visual
+  return visual.type === 'counters' ||
+    visual.type === 'part-whole' ||
+    visual.type === 'queue' ||
+    visual.type === 'classification' ||
+    visual.type === 'classroom' ||
+    visual.type === 'solids'
+    ? visual
+    : null
+})
 const grouping = ref<'rows' | 'columns'>('rows')
+const lowerVisual = computed((): LowerMathQuestVisual | null => {
+  const v = props.visual
+  return v.type === 'ten-bridge' ||
+    v.type === 'abacus' ||
+    v.type === 'number-grid' ||
+    v.type === 'column-calculation' ||
+    v.type === 'plane-cards' ||
+    v.type === 'paper-change' ||
+    v.type === 'tangram'
+    ? v
+    : null
+})
 </script>
 
 <template>
   <figure class="math-visual">
-    <template v-if="visual.type === 'array'">
+    <EarlyMathVisual v-if="earlyVisual" :visual="earlyVisual" />
+    <LowerMathVisual v-else-if="lowerVisual" :visual="lowerVisual" />
+    <template v-else-if="visual.type === 'array'">
       <div class="math-visual__tools" aria-label="切换方阵观察方向">
         <button type="button" :aria-pressed="grouping === 'rows'" @click="grouping = 'rows'">
           横着分组

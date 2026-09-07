@@ -20,6 +20,10 @@ const placeholder = (title: string, meta: RouteRecordRaw['meta'] = {}) => ({
 // demand so the first route does not pay for every feature bundle.
 const HomePage = () => import('@/pages/HomePage.vue')
 const LearningMapPage = () => import('@/pages/LearningMapPage.vue')
+const ThinkingIslandsPage = () => import('@/pages/ThinkingIslandsPage.vue')
+const ThinkingMissionPage = () => import('@/pages/ThinkingMissionPage.vue')
+const ReadingIslandsPage = () => import('@/pages/ReadingIslandsPage.vue')
+const ReadingStoryPage = () => import('@/pages/ReadingStoryPage.vue')
 const KnowledgePointDetailPage = () => import('@/pages/KnowledgePointDetailPage.vue')
 const LessonPlayerPage = () => import('@/pages/LessonPlayerPage.vue')
 const LearningHistoryPage = () => import('@/pages/LearningHistoryPage.vue')
@@ -78,6 +82,31 @@ const routes: RouteRecordRaw[] = [
     path: '/learning-map',
     component: LearningMapPage,
     meta: { title: '知识岛地图', requiresOnboarding: true, studentOnly: true },
+  },
+  {
+    path: '/reading-islands',
+    component: ReadingIslandsPage,
+    meta: { title: '阅读群岛', studentOnly: true },
+  },
+  {
+    path: '/reading-islands/:storyId',
+    component: ReadingStoryPage,
+    meta: { title: '课外阅读', studentOnly: true, hideBottomNav: true, immersiveMode: true },
+  },
+  {
+    path: '/thinking-islands',
+    component: ThinkingIslandsPage,
+    meta: { title: '思维群岛', studentOnly: true },
+  },
+  {
+    path: '/thinking-islands/:islandId',
+    component: ThinkingIslandsPage,
+    meta: { title: '探索思维岛', studentOnly: true },
+  },
+  {
+    path: '/thinking-islands/:islandId/:missionId',
+    component: ThinkingMissionPage,
+    meta: { title: '思维训练', studentOnly: true, hideBottomNav: true, immersiveMode: true },
   },
   {
     path: '/lesson',
@@ -160,10 +189,15 @@ const routes: RouteRecordRaw[] = [
     component: LearningHistoryPage,
     meta: { title: '学习记录', requiresOnboarding: true, studentOnly: true },
   },
-  { path: '/profile', ...placeholder('Profile', { requiresOnboarding: true, studentOnly: true }) },
+  {
+    path: '/profile',
+    component: () => import('@/pages/ProfilePage.vue'),
+    meta: { title: '我的知识岛', requiresOnboarding: true, studentOnly: true },
+  },
   {
     path: '/character',
-    ...placeholder('Character', { requiresOnboarding: true, studentOnly: true }),
+    component: () => import('@/pages/CharacterPage.vue'),
+    meta: { title: '角色装扮', requiresOnboarding: true, studentOnly: true },
   },
   {
     path: '/achievements',
@@ -192,7 +226,8 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/settings',
-    ...placeholder('Settings', { requiresOnboarding: true, studentOnly: true }),
+    component: () => import('@/pages/SettingsPage.vue'),
+    meta: { title: '通用设置', requiresOnboarding: true, studentOnly: true },
   },
   {
     path: '/dev/ui',
@@ -294,7 +329,10 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior: () => ({ top: 0 }),
+  scrollBehavior: (to, from) => {
+    if (to.path === '/reading-islands' && from.path === '/reading-islands') return false
+    return { top: 0 }
+  },
 })
 
 router.beforeEach((to) => {

@@ -17,6 +17,7 @@ import { isChinesePilotTextbook } from '@/data/curriculum/pilot'
 import { MockCurriculumService } from '@/services/adapters/mock/curriculumMockAdapter'
 import { buildLearningMapViewModel, flattenKnowledgeNodes } from '@/services/learning-map'
 import { validateCurriculumData } from '@/services/validation'
+import { G2_REVISED_CHINESE_TEXTBOOK_ID } from '@/data/curriculum/grade-2/chinese-pep-lower-revised'
 
 const candidateAccessPolicy = {
   allowSampleCurriculum: true,
@@ -77,7 +78,7 @@ describe('Grade 2 PEP Chinese lower-volume curriculum', () => {
     )
   })
 
-  it('supports only Guangdong and Hubei for the lower-volume textbook', () => {
+  it('preserves the existing Guangdong and Hubei source relations', () => {
     expect(gradeTwoChineseLowerRegionTextbookRelations).toHaveLength(2)
     expect(gradeTwoChineseLowerRegionTextbookRelations.map((item) => item.regionId)).toEqual([
       G1_PEP_CHINESE_GUANGDONG_REGION_ID,
@@ -102,6 +103,7 @@ describe('Grade 2 PEP Chinese lower-volume curriculum', () => {
 
       expect(result.chinese.availableTextbooks.map((textbook) => textbook.id)).toEqual([
         G2_PEP_CHINESE_S2_TEXTBOOK_ID,
+        G2_REVISED_CHINESE_TEXTBOOK_ID,
       ])
       expect(result.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
       expect(result.math.availableTextbooks).toEqual([])

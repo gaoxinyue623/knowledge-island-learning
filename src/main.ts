@@ -24,6 +24,7 @@ import './styles/content-expansion.css'
 import './styles/knowledge-point-detail.css'
 import './styles/adventure.css'
 import './styles/reading-quest.css'
+import './styles/personal.css'
 
 const app = createApp(App)
 

@@ -104,8 +104,12 @@ describe('Grade 2 PEP Chinese upper-volume curriculum', () => {
         G2_PEP_CHINESE_S1_TEXTBOOK_ID,
       ])
       expect(result.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
-      expect(result.math.availableTextbooks).toEqual([])
-      expect(result.english.availableTextbooks).toEqual([])
+      expect(result.math.availableTextbooks.map((book) => book.id)).toEqual([
+        'G2_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE',
+      ])
+      expect(result.english.availableTextbooks.map((book) => book.id)).toEqual([
+        'G2_SHENZHEN_SHANGHAI_ENGLISH_S1_2024_CANDIDATE',
+      ])
     },
   )
 

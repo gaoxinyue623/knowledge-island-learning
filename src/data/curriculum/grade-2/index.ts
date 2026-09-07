@@ -1,4 +1,5 @@
 export * from './chinese-pep-upper'
 export * from './chinese-pep-lower'
+export * from './chinese-pep-lower-revised'
 export * from './english-shanghai-upper'
 export * from './math-bnu-upper'

@@ -197,6 +197,13 @@ export interface ParentReport {
   review: ReviewReportSummary
   dailyPlan: DailyPlanCompletionSummary
   activity: LearningActivitySummary
+  participation: {
+    completedLessons: number
+    completedAssessments: number
+    activeDays: number
+    unverifiedCount: number
+    recentItems: ParentActivityItem[]
+  }
   growth: ParentGrowthSummary
   achievements: ParentAchievementSummary
   trend: ParentTrendSummary

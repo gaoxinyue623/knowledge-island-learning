@@ -103,7 +103,7 @@ describe('Content Expansion 01.1 domain and registry', () => {
         ),
       ).toBe(true)
     }
-    expect(await contentExpansionRepository.listBundles('candidate')).toHaveLength(245)
+    expect(await contentExpansionRepository.listBundles('candidate')).toHaveLength(357)
   })
 
   it('covers every Shenzhen Grade 1 English lesson with spelling and introduction practice', () => {

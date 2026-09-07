@@ -87,7 +87,7 @@ async function loadOptions() {
 }
 
 function saveSelection(textbookId: string) {
-  if (!subjectCode.value) return
+  if (!subjectCode.value || curriculumStore.loading) return
   if (curriculumStore.selectTextbook(subjectCode.value, textbookId)) {
     void curriculumStore.confirmCurriculum(LOCAL_STUDENT_ID).then((profile) => {
       if (profile) router.push('/curriculum-settings')
@@ -95,13 +95,16 @@ function saveSelection(textbookId: string) {
   }
 }
 
-onMounted(() => void loadOptions())
+onMounted(() => {
+  curriculumStore.beginEdit()
+  void loadOptions()
+})
 </script>
 
 <template>
   <CurriculumPageFrame
     :title="`你正在更换${subjectLabel}课本`"
-    description="只会修改这一门学科，其他学科教材保持不变。"
+    description="同年级、同册次的已接入教材均可自主选择，不受地区限制。只修改这一门学科，其他科目保持不变。"
     :step="3"
     back-to="/curriculum-settings"
     context="我的学习设置"
@@ -125,7 +128,12 @@ onMounted(() => void loadOptions())
         :semester-name="semesterName"
         @select="saveSelection"
       />
-      <p v-else class="curriculum-inline-empty">这个学科暂时没有可选教材版本。</p>
+      <p v-else class="curriculum-inline-empty">
+        当前年级和学期尚未接入这门学科的教材，无需更换地区。
+      </p>
+      <p v-if="curriculumStore.error" class="curriculum-alert" role="alert">
+        {{ curriculumStore.error }}
+      </p>
       <div class="curriculum-actions">
         <AppButton
           variant="ghost"

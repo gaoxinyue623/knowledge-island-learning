@@ -9,8 +9,6 @@ import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import TextbookCard from '@/components/curriculum/TextbookCard.vue'
 import TextbookVersionSelector from '@/components/curriculum/TextbookVersionSelector.vue'
-import { G1_SHENZHEN_ENGLISH_S2_SEMESTER_ID } from '@/data/curriculum/grade-1'
-import { G2_PEP_CHINESE_GRADE_ID } from '@/data/curriculum/grade-2'
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
 import { curriculumService } from '@/services'
 import { useCurriculumStore } from '@/stores/curriculumStore'
@@ -53,38 +51,15 @@ const profileReady = computed(() =>
     curriculumStore.selectedSemesterId,
   ),
 )
-const isChinesePilot = computed(() => curriculumStore.isChinesePilot)
-const isEnglishPilot = computed(() => curriculumStore.isEnglishPilot)
-const isMathPilot = computed(() => curriculumStore.isMathPilot)
-const englishGradeLabel = computed(() =>
-  curriculumStore.selectedGradeId === G2_PEP_CHINESE_GRADE_ID ? '二年级' : '一年级',
-)
-const englishVolumeLabel = computed(() =>
-  curriculumStore.selectedSemesterId === G1_SHENZHEN_ENGLISH_S2_SEMESTER_ID ? '下册' : '上册',
-)
-const pilotSubject = computed<SubjectCode | null>(() =>
-  isChinesePilot.value ? 'CHINESE' : isEnglishPilot.value ? 'ENGLISH' : null,
-)
-const pilotSubjectLabel = computed(() =>
-  pilotSubject.value === 'CHINESE' ? '语文' : pilotSubject.value === 'ENGLISH' ? '英语' : '',
-)
-const requiredSubjects = computed<SubjectCode[]>(() =>
-  pilotSubject.value ? [pilotSubject.value] : subjects.map((subject) => subject.code),
-)
-const hasUnavailableSubject = computed(() =>
-  isMathPilot.value
-    ? ['MATH', 'ENGLISH'].every(
-        (code) => curriculumStore.resolutionStatus[code as SubjectCode] === 'NOT_AVAILABLE',
-      )
-    : requiredSubjects.value.some(
-        (subjectCode) => curriculumStore.resolutionStatus[subjectCode] === 'NOT_AVAILABLE',
-      ),
+const hasNoTextbooks = computed(() =>
+  subjects.every((subject) => curriculumStore.resolutionStatus[subject.code] === 'NOT_AVAILABLE'),
 )
 const canConfirm = computed(
   () =>
     !loading.value &&
+    !error.value &&
     profileReady.value &&
-    !hasUnavailableSubject.value &&
+    !hasNoTextbooks.value &&
     curriculumStore.draftIsComplete,
 )
 
@@ -170,40 +145,13 @@ onMounted(() => void loadTextbooks())
 
 <template>
   <CurriculumPageFrame
-    :title="
-      isMathPilot
-        ? '确认你的数学和英语课本'
-        : isChinesePilot
-          ? '先确认你的语文课本'
-          : isEnglishPilot
-            ? '先确认你的英语课本'
-            : '确认一下你的课本'
-    "
-    :description="
-      isMathPilot
-        ? '深圳二年级上册已接入北师大版数学和沪教版英语。选择正在使用的课本，可以只选其中一科。'
-        : isChinesePilot
-          ? '广东、湖北的一、二年级试点当前先开放人教版语文，数学和英语会在资料准备好后开放。'
-          : isEnglishPilot
-            ? `深圳地区当前先开放沪教版英语${englishGradeLabel}${englishVolumeLabel}，其他学科会在资料准备好后开放。`
-            : '根据你选择的地区和年级，我们找到了这些学习版本。请分别确认三科课本。'
-    "
+    title="选择你的课本"
+    description="按年级和上下册选择正在使用的教材。所有已接入版本均可自主选择，不受地区限制。"
     :step="3"
     :back-to="backTo"
     :context="isSettingsEdit ? '我的学习设置' : '课程配置'"
   >
-    <AppLoading
-      v-if="loading"
-      :label="
-        isMathPilot
-          ? '正在准备数学和英语教材'
-          : isChinesePilot
-            ? '正在准备语文教材'
-            : isEnglishPilot
-              ? '正在准备英语教材'
-              : '正在准备三科教材'
-      "
-    />
+    <AppLoading v-if="loading" label="正在准备可选教材" />
     <AppErrorState
       v-else-if="error"
       title="教材暂时打不开"
@@ -212,19 +160,7 @@ onMounted(() => void loadTextbooks())
     />
     <template v-else>
       <div class="curriculum-alert curriculum-alert--info">
-        <template v-if="isMathPilot">
-          数学有知识讲解、看图闯关和动手探究；英语有单词拼写与句子练习。请选择要学习的科目课本，已有的英语配置可以继续使用。
-        </template>
-        <template v-else-if="isChinesePilot">
-          当前已接入广东、湖北一、二年级人教版语文课程，数学和英语会在资料准备好后开放。
-        </template>
-        <template v-else-if="isEnglishPilot">
-          当前已接入深圳地区沪教版（牛津上海版）{{ englishGradeLabel
-          }}{{ englishVolumeLabel }}英语课程，其他学科会在资料准备好后开放。
-        </template>
-        <template v-else>
-          地区只用来查找教材。出版社和教材版本来自课程数据层，不会由页面自行猜测。
-        </template>
+        可以只选一科，也可以分别选择多科。请对照课本封面的出版社、年级和上下册，选择适合自己的版本。
       </div>
       <div class="textbook-card-grid">
         <TextbookCard
@@ -240,20 +176,20 @@ onMounted(() => void loadTextbooks())
           :grade-name="gradeName"
           :semester-name="semesterName"
           @change="openSelector(subject.code)"
+          @clear="curriculumStore.clearTextbookSelection(subject.code)"
         />
       </div>
       <AppEmptyState
-        v-if="hasUnavailableSubject"
-        :title="pilotSubject ? `${pilotSubjectLabel}教材暂时无法使用` : '还有学科没有匹配课本'"
-        :description="
-          isChinesePilot
-            ? '请确认当前选择的是广东或湖北。'
-            : isEnglishPilot
-              ? '请确认当前选择的是深圳市。'
-              : '请返回修改地区或年级；没有匹配关系时，不会随机选择教材。'
+        v-if="hasNoTextbooks"
+        title="当前年级和学期还没有可选教材"
+        description="可以检查年级和上下册是否选对，或等待后续教材接入。无需更换地区。"
+        action-label="修改年级和学期"
+        @action="
+          router.push({
+            path: '/onboarding/grade',
+            query: isSettingsEdit ? { from: 'settings' } : {},
+          })
         "
-        action-label="修改地区"
-        @action="router.push('/onboarding/region')"
       />
       <section class="curriculum-helper" aria-label="教材确认帮助">
         <button class="curriculum-text-button" type="button" @click="helpOpen = true">
@@ -264,16 +200,11 @@ onMounted(() => void loadTextbooks())
         </button>
       </section>
       <div class="curriculum-actions">
+        <p v-if="curriculumStore.error" class="curriculum-alert" role="alert">
+          {{ curriculumStore.error }}
+        </p>
         <p v-if="!canConfirm" class="curriculum-hint">
-          {{
-            isMathPilot
-              ? '请先确认数学或英语教材后再继续。'
-              : isChinesePilot
-                ? '请先确认语文教材后再继续。'
-                : isEnglishPilot
-                  ? '请先确认英语教材后再继续。'
-                  : '请先确认三科教材后再继续。'
-          }}
+          请至少选择一科教材后再继续，其他科目可以稍后在学习设置中添加。
         </p>
         <AppButton
           size="lg"
@@ -307,7 +238,7 @@ onMounted(() => void loadTextbooks())
       <AppEmptyState
         v-else
         title="暂时没有可选版本"
-        description="请返回修改地区或年级，或等待课程数据补充。"
+        description="当前年级和学期尚未接入这门学科的教材，其他学科可以正常选择。"
       />
     </AppBottomSheet>
     <AppBottomSheet

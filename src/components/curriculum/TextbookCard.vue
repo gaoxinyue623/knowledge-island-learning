@@ -16,7 +16,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const emit = defineEmits<{ change: [] }>()
+const emit = defineEmits<{ change: []; clear: [] }>()
 </script>
 
 <template>
@@ -40,10 +40,24 @@ const emit = defineEmits<{ change: [] }>()
       这里有 {{ props.candidateCount }} 种课本版本，请确认你正在使用哪一本。
     </p>
     <p v-else-if="props.resolutionStatus === 'NOT_AVAILABLE'" class="textbook-card__notice">
-      这个地区暂时没有匹配课本。
+      当前年级和学期尚未接入这门学科的教材，可以先选择其他学科。
     </p>
     <button class="textbook-card__change" type="button" @click="emit('change')">
-      {{ props.resolutionStatus === 'NOT_AVAILABLE' ? '手动查看' : '修改版本' }}
+      {{
+        props.resolutionStatus === 'NOT_AVAILABLE'
+          ? '查看版本'
+          : props.selected
+            ? '修改版本'
+            : '选择教材'
+      }}
+    </button>
+    <button
+      v-if="props.selected"
+      class="curriculum-text-button"
+      type="button"
+      @click="emit('clear')"
+    >
+      暂不选择{{ props.subjectName }}教材
     </button>
   </article>
 </template>

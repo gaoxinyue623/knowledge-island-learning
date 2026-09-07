@@ -136,6 +136,7 @@ export interface ContinueLearningViewModel {
 export type SubjectMapStatus = 'available' | 'not_available' | 'sample' | 'unverified'
 
 export interface SubjectHomeSummary {
+  completedLearningSessions?: number
   code: SubjectCode
   label: string
   color: string

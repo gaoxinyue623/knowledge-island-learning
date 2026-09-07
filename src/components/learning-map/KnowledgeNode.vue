@@ -48,13 +48,17 @@ const masteryLabels: Record<KnowledgeLearningState, string> = {
 const masteryStateLabel = computed(() =>
   props.node.mastery ? masteryLabels[props.node.mastery.state] : '',
 )
+const masterySummary = computed(() => {
+  const mastery = props.node.mastery
+  if (!mastery) return ''
+  if (!mastery.evidenceCount || mastery.state === 'not_started') return '掌握度待评估'
+  return `${masteryStateLabel.value} · 掌握度 ${Math.round(mastery.score)}%`
+})
 
 const ariaLabel = computed(
   () =>
     `${props.node.title}，${statusLabels[props.node.status]}，完成度 ${Math.round(props.node.progress)}%${
-      props.node.mastery
-        ? `，${masteryStateLabel.value}，掌握度 ${Math.round(props.node.mastery.score)}%`
-        : ''
+      masterySummary.value ? `，${masterySummary.value}` : ''
     }`,
 )
 </script>
@@ -81,7 +85,7 @@ const ariaLabel = computed(
       {{ Math.round(props.node.progress) }}%
     </span>
     <span v-if="props.node.mastery" class="knowledge-node__mastery">
-      {{ masteryStateLabel }} · {{ Math.round(props.node.mastery.score) }}%
+      {{ masterySummary }}
     </span>
   </button>
 </template>

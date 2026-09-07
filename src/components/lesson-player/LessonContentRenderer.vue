@@ -10,6 +10,7 @@ import InteractiveBlock from './InteractiveBlock.vue'
 import IntroBlock from './IntroBlock.vue'
 import MediaBlock from './MediaBlock.vue'
 import PracticeBlock from './PracticeBlock.vue'
+import ReadingTextBlock from './ReadingTextBlock.vue'
 import SummaryBlock from './SummaryBlock.vue'
 import UnknownContentBlock from './UnknownContentBlock.vue'
 
@@ -17,13 +18,16 @@ interface Props {
   blocks: LessonContentBlockViewModel[]
   showDiagnostics?: boolean
   practiceAvailable?: boolean | null
+  presentation?: 'steps' | 'reading'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showDiagnostics: false,
   practiceAvailable: null,
+  presentation: 'steps',
 })
 const emit = defineEmits<{ 'start-assessment': [] }>()
+const readingTypes = new Set(['intro', 'concept', 'explanation', 'example', 'summary'])
 
 const componentByType: Record<string, Component> = {
   intro: IntroBlock,
@@ -50,8 +54,12 @@ const sortedBlocks = computed(() =>
 <template>
   <div class="lesson-content-renderer" aria-live="polite">
     <template v-for="block in sortedBlocks" :key="block.id">
+      <ReadingTextBlock
+        v-if="props.presentation === 'reading' && readingTypes.has(block.type)"
+        :block="block"
+      />
       <PracticeBlock
-        v-if="block.type === 'practice'"
+        v-else-if="block.type === 'practice'"
         :block="block"
         :assessment-available="props.practiceAvailable"
         @start-assessment="emit('start-assessment')"

@@ -103,7 +103,7 @@ describe('深圳沪教版一年级上册英语课程', () => {
     expect(isPilotTextbook(G1_SHENZHEN_ENGLISH_S1_TEXTBOOK_ID)).toBe(true)
   })
 
-  it('在深圳市一年级上册只解析英语教材', async () => {
+  it('在深圳市一年级上册可分别选择语文、数学和英语教材', async () => {
     const service = new MockCurriculumService({ accessPolicy: candidateAccessPolicy })
     const result = await service.resolveAvailableTextbooks({
       regionId: G1_SHENZHEN_REGION_ID,
@@ -116,12 +116,14 @@ describe('深圳沪教版一年级上册英语课程', () => {
       availableTextbooks: [expect.objectContaining({ id: G1_SHENZHEN_ENGLISH_S1_TEXTBOOK_ID })],
     })
     expect(result.chinese).toMatchObject({
-      availableTextbooks: [],
-      resolutionStatus: 'NOT_AVAILABLE',
+      availableTextbooks: [expect.objectContaining({ id: 'G1_PEP_CHINESE_S1_2024_CANDIDATE' })],
+      resolutionStatus: 'NEEDS_CONFIRMATION',
     })
     expect(result.math).toMatchObject({
-      availableTextbooks: [],
-      resolutionStatus: 'NOT_AVAILABLE',
+      availableTextbooks: [
+        expect.objectContaining({ id: 'G1_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE' }),
+      ],
+      resolutionStatus: 'NEEDS_CONFIRMATION',
     })
   })
 
@@ -174,9 +176,8 @@ describe('深圳沪教版一年级上册英语课程', () => {
       source: 'USER_CONFIRMED',
     })
 
-    expect(store.isChinesePilot).toBe(false)
-    expect(store.isEnglishPilot).toBe(true)
-    expect(store.isCurriculumPilot).toBe(true)
+    expect(store.chineseTextbookVersionId).toBeNull()
+    expect(store.englishTextbookVersionId).not.toBeNull()
     expect(store.isComplete).toBe(true)
   })
 

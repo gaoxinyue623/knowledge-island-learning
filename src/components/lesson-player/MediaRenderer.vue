@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { usePreferencesStore } from '@/stores/preferencesStore'
+
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { MediaViewModel } from '@/types'
 
@@ -9,6 +11,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const settings = usePreferencesStore()
 const failed = ref(false)
 
 function markFailed() {
@@ -39,6 +42,7 @@ function isVideo() {
         class="lesson-media__video"
         :src="props.media.url"
         :aria-label="props.media.altText || '课程动画'"
+        :muted="settings.preferences.muted"
         controls
         playsinline
         @error="markFailed"
@@ -53,6 +57,7 @@ function isVideo() {
         class="lesson-media__audio"
         :src="props.media.url"
         :aria-label="props.media.altText || '课程音频'"
+        :muted="settings.preferences.muted"
         controls
         @error="markFailed"
       />
@@ -61,8 +66,13 @@ function isVideo() {
       <AppIcon name="info" :size="20" decorative />
       <span>{{ props.media.fallbackText }}</span>
     </div>
-    <figcaption v-if="props.media.transcript" class="lesson-media__transcript">
+    <details
+      v-if="props.media.transcript"
+      :open="settings.preferences.showTranscript"
+      class="lesson-media__transcript"
+    >
+      <summary>文字讲解</summary>
       {{ props.media.transcript }}
-    </figcaption>
+    </details>
   </figure>
 </template>

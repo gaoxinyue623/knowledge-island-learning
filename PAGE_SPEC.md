@@ -44,7 +44,7 @@
 | `focus` | 清晰 Focus ring，不只改变颜色 |
 | `active` | 当前页面、节点或卡片的图标、边框和文案状态 |
 
-课程配置额外支持：`REGION_NOT_SUPPORTED`、`TEXTBOOK_NOT_FOUND`、`MULTIPLE_TEXTBOOKS`、`TEXTBOOK_NEEDS_CONFIRMATION`、`NO_DEFAULT_TEXTBOOK`、`GRADE_NOT_AVAILABLE`。禁止显示 `404`、`No Data`、`Null`、`Undefined`。
+课程配置通过 `NEEDS_CONFIRMATION` 和 `NOT_AVAILABLE` 表达教材可选状态，另保留加载、错误和年级未开放状态。地区不再产生课程不可用状态。禁止显示 `404`、`No Data`、`Null`、`Undefined`。
 
 ### 1.2 课程配置的事实边界
 
@@ -54,13 +54,18 @@ Publisher：回答“谁出版？”
 TextbookVersion：回答“使用哪套课本？”
 ```
 
-正确文案是“所在地区”“广东省”或“北京市”，然后进入“确认一下你的课本”。禁止写成“选择地区：人教版”。
+正确文案是“所在地区”“广东省”或“北京市”，然后进入“选择你的课本”。禁止写成“选择地区：人教版”。
 
-- `resolveAvailableTextbooks(regionId, gradeId, semesterId)` 是确定性数据读取，不由 UI 推断。
+**当前规则（2026-09-05）**：教材由用户自主选择，不再按地区限制。以下规则取代早期设计中按地区选用关系筛选和默认选择教材的行为，不代表确认了任何地区的官方教材选用事实。
+
+- `resolveAvailableTextbooks(regionId, gradeId, semesterId)` 按年级、学期和学科读取教材目录；`regionId` 保留在资料和兼容接口中，不参与可选范围筛选。
 - 语文、数学、英语分别显示和确认，三科可以使用不同版本。
-- 一个地区可以返回多个教材版本；多版本必须让用户确认。
-- 没有可核验关系时允许手动选择，禁止随机、默认猜测或 AI 推断。
+- 相同年级和学期在各地区返回相同候选。即使只有一个版本，也必须由用户选择；至少选一科即可继续，其他科目可稍后添加。
+- `RegionTextbookRelation` 仍是地区选用事实和审核元数据，不是访问权限；其 DEFAULT 和有效期不决定教材选择或自动推荐。
+- 教材和出版社的来源、状态及生产访问校验仍然生效，不因移除地区限制而发布不可读内容。
+- 更换地区保留已选教材；更换年级或学期清空不适用的草稿选择。保存校验教材的年级、学期和学科；失败或取消不覆盖已保存档案，历史学习记录不删除。
 - 课程主题如“计算工厂”是游戏世界名；真实教材单元名称必须单独展示并来自课程事实。
+- 二下语文另提供“含《我不是最弱小的》”版本，保留原版本和各自进度，由用户明确选择，不自动迁移；见[本次接入说明](CURRICULUM_G2_CHINESE_LOWER_REVISION.md)。
 
 ---
 
@@ -71,12 +76,14 @@ TextbookVersion：回答“使用哪套课本？”
 | `OnboardingWelcome` | 了解开场并开始课程配置 | 开始设置 | 首次进入 |
 | `RegionSelect` | 选择所在地区 | 下一步 | Welcome 或学习设置 |
 | `GradeSelect` | 选择当前年级 | 下一步 | RegionSelect 或学习设置 |
-| `TextbookConfirm` | 确认三科教材 | 确认并继续 | GradeSelect 后解析 |
+| `TextbookConfirm` | 自主选择各科教材（至少一科） | 确认并继续 | GradeSelect 后解析 |
 | `TextbookVersionSelector` | 选择某一科的完整教材版本 | 选择此版本 | TextbookConfirm / 设置 |
 | `CharacterSetup` | 选择知识团子外观 | 出发去知识岛 | TextbookConfirm |
 | `OnboardingComplete` | 检查配置并进入首页 | 进入知识岛 | CharacterSetup |
 | `Home` | 找到今日学习入口 | 继续学习 | 已完成配置后默认入口 |
 | `LearningMap` | 选择下一个地图节点 | 开始 / 继续关卡 | Home 或学科入口 |
+| `ThinkingIslands` | 自主选择课外思维训练岛与路线 | 进入小岛 / 开始训练 | 首页、教材地图或直接访问 |
+| `ThinkingMission` | 完成选卡、配对、排序、路径和材料组合任务 | 检查方案 / 下一个任务 | 思维岛路线入口 |
 | `Lesson` | 学习当前知识重点 | 继续 / 我会了 | MapNode |
 | `Question` / `Assessment` | 完成固定题目集合 | 提交 / 下一题 / 完成本次练习 | Lesson / Practice |
 | `Result` | 理解结果并决定下一步 | 继续下一关 | Question 完成 |
@@ -155,21 +162,21 @@ TextbookVersion：回答“使用哪套课本？”
 
 **次 CTA**：`返回`；`换个方式查找` 可以聚焦搜索框，不新增后台 Cascader。
 
-**组件**：`OnboardingProgress`、`RegionSelector`、`RegionCard`、`UnsupportedRegionState`、`AppEmptyState`、`AppLoading`。
+**组件**：`OnboardingProgress`、`RegionSelector`、`RegionCard`、`AppEmptyState`、`AppLoading`。
 
-**状态**：`NORMAL`、`SEARCHING`、`NO_RESULT`、`REGION_NOT_SUPPORTED`、`LOADING`、`ERROR`、`OFFLINE`、`focus`。
+**状态**：`NORMAL`、`SEARCHING`、`NO_RESULT`、`LOADING`、`ERROR`、`OFFLINE`、`focus`。
 
 **跳转**：
 
 - 选择地区 → 进入下一级或启用 `下一步`。
 - 已有城市数据时省份 → 城市；城市确认 → `GradeSelect`。
 - MVP 省级数据时直接 → `GradeSelect`。
-- `REGION_NOT_SUPPORTED` → `选择其他地区`，不进入空课程。
+- 地区只用于个人学习资料，不决定后续可选教材。
 
 **异常与文案**：
 
 - 无结果：“没有找到这个地区，换个关键词试试。”
-- 暂未支持：“这个地区的课程还在准备中。” CTA：`选择其他地区`。
+- 地区列表为空：“还没有可选地区。” CTA：`重新加载`；不把地区数据缺失说成教材不可用。
 - 网络异常：“地区列表没有加载出来。” CTA：`再试一次`。
 - 不出现省 / 市 / 区后台级联器作为默认主交互。
 
@@ -191,7 +198,7 @@ TextbookVersion：回答“使用哪套课本？”
 
 **状态**：`normal`、`selected`、`GRADE_NOT_AVAILABLE`、`loading`、`error`、`focus`。
 
-**MVP 规则**：三年级卡片标记 `当前支持`；未实现的其他年级标记 `即将开放`，不可进入空页面。`GRADE_NOT_AVAILABLE` 状态提供“先看看支持的年级”或返回地区的路径。
+**当前规则**：已接入一年级和二年级，均可选择上册或下册。教材缺失时提示检查年级和学期或等待内容接入，不引导更换地区。
 
 **响应式**：Desktop 2～3 列；Tablet 保留大卡片和触控间距；Mobile 单列或两列但卡片高度足够单手点击，不缩小成下拉框。
 
@@ -205,7 +212,7 @@ TextbookVersion：回答“使用哪套课本？”
 
 **信息优先级**：
 
-1. “确认一下你的课本”。
+1. “选择你的课本”。
 2. 当前年级、学期和地区摘要。
 3. 语文、数学、英语三张教材卡。
 4. 需要确认的学科及“更换版本”。
@@ -221,33 +228,32 @@ TextbookVersion：回答“使用哪套课本？”
 - `Grade.name` 和 `Semester.name`，如“三年级 · 上册”。
 - 版次 / 年份（有数据才显示）。
 - `更换版本` 或 `选择教材`。
-- `TEXTBOOK_NEEDS_CONFIRMATION`、`推荐` 等数据状态。
+- 可选版本数量、已选状态；不显示地区默认推荐。
 
-**主 CTA**：`确认并继续`。三科都必须有已确认版本；未确认学科时按钮解释原因。
+**主 CTA**：`确认教材并继续`。至少一科有用户明确选择的版本即可继续；全部未选时解释原因。各科可用“暂不选择”撤销草稿选择。
 
 **次 CTA**：`返回修改年级`、`请家长帮我确认`、`怎么看我的教材版本？`。
 
 **组件**：`OnboardingProgress`、`TextbookCard`、`TextbookVersionSelector`、`CurriculumSummary`、`AppBottomSheet` / `AppModal`、`AppButton`。
 
-**状态**：`loading`、`normal`、`MULTIPLE_TEXTBOOKS`、`NO_DEFAULT_TEXTBOOK`、`TEXTBOOK_NOT_FOUND`、`TEXTBOOK_NEEDS_CONFIRMATION`、`error`、`offline`、`focus`。
+**状态**：`loading`、`NEEDS_CONFIRMATION`、`NOT_AVAILABLE`、已选、保存失败、`error`、`focus`。
 
-**数据边界**：页面只能展示 `resolveAvailableTextbooks` 返回的候选集和推荐依据。不得依据地区名称、出版社常识、地图主题或 UI 排序自行拼教材名。
+**数据边界**：页面只能展示 `resolveAvailableTextbooks` 返回的候选集。不得依据地区名称、出版社常识、地图主题或 UI 排序自行拼教材名。
 
 **多版本行为**：
 
-- 某学科多个 `SUPPORTED` / `OPTIONAL` 版本 → 显示“这里有几种课本版本，请确认你正在使用哪一本”，可打开选择器。
-- 只有一个有效 `DEFAULT` → 可以展示“系统推荐”，但首次确认仍保留用户确认动作。
-- 无 `DEFAULT` → 显示 `NO_DEFAULT_TEXTBOOK`，引导查看封面或出版社并手动选择。
-- 没有可用候选 → `TEXTBOOK_NOT_FOUND`，保留手动确认入口，但不得随机选择或猜测。
+- 某学科有可读版本 → 显示版本数量，用户打开选择器并选择；地区选用关系不参与筛选。
+- 一个或多个版本均不自动勾选，也不覆盖已有有效选择。
+- 某科没有候选 → 提示当前年级和学期尚未接入该科，不阻塞选择其他科目；全部为空时提示检查年级和学期。
 - 某一科切换只更新该科的 profile 字段，不能覆盖另外两科。
 
-**跳转**：三科确认 → 写入 `StudentCurriculumProfile` 草稿 → `CharacterSetup`；返回地区 / 年级会重新解析并刷新候选，不静默覆盖已保存档案。
+**跳转**：至少选一科并确认 → 保存 `StudentCurriculumProfile` → `CharacterSetup`。设置编辑则返回 `CurriculumSettings`；重新选择地区保留课本，改变年级或学期后重新选择，不静默覆盖已保存档案。
 
 ### 3.5 TextbookVersionSelector
 
 **目标**：让用户在单一学科范围内从多个数据层候选中选择完整教材版本。
 
-**信息优先级**：学科上下文、完整教材名称、出版社、年级 / 学期、适用范围、版次 / 年份、版本说明、推荐状态。
+**信息优先级**：学科上下文、完整教材名称、出版社、年级 / 学期、版次 / 年份、版本说明、已选状态。
 
 **布局**：Desktop 使用 Modal 或右侧 Drawer；Tablet 使用大 Modal；Mobile 使用 BottomSheet 或全屏选择页，每项可单手点选。
 
@@ -261,7 +267,7 @@ TextbookVersion：回答“使用哪套课本？”
 
 **约束**：选择器必须接收 `subjectId` 和候选版本，不允许自己请求或推断另一个学科；完整名称从 `TextbookVersion` 和 `Publisher` 数据读取。
 
-选择器中的“适用范围”如果需要展示，只能是当前 `RegionTextbookRelation` 的派生读取结果，不是 `TextbookVersion` 上的权威 `regionScope` 字段。
+教材名称中的“深圳用”等版本名称保留原数据含义，不是使用权限提示；不得据此排除其他地区用户。
 
 ### 3.6 CharacterSetup
 
@@ -297,7 +303,7 @@ TextbookVersion：回答“使用哪套课本？”
 
 **状态**：`normal`、`saving`、`save-error`、`offline`。
 
-**保存规则**：在进入 Home 前确认三科教材字段均已确认并写入 `StudentCurriculumProfile`；保存失败时保留草稿并提供重试，不进入缺少课程上下文的学习首页。
+**保存规则**：在进入 Home 前至少确认一科教材并写入 `StudentCurriculumProfile`，未选科目保存为 `null`；保存失败时保留草稿并提供重试，不进入缺少课程上下文的学习首页。
 
 **跳转**：成功保存 → `Home`；返回 → `TextbookConfirm`；关闭不丢草稿。
 
@@ -348,6 +354,38 @@ TextbookVersion：回答“使用哪套课本？”
 **响应式**：Desktop 横向大地图，支持拖动、滚轮平移和缩放；Tablet 支持触控拖动和缩放；Mobile 使用纵向地图，当前节点优先居中，不强制双指操作。
 
 **事实边界**：游戏场景名、角色路径和节点文案属于 UI 配置；真实教材单元名称、知识点和教材版本必须来自课程事实。
+
+### 4.2.1 KnowledgePointDetailPage / 课后强化训练
+
+**原文阅读区（2026-09-06）**：详情页使用浅绿外框、暖白书页和书签装饰，正文常规字重，限制行宽并增加段落间距。语文采用本机宋体类字体，英语和数学采用清晰的无衬线字体；保留诗歌、对话和算式的原有换行。提供「标准／大字／特大」三档正文字号，支持键盘选择，窄屏控制条换行。仅在显示层合并与正文首行完全相同的标题，不改变课程原始文本、来源状态、闯关输入或学习记录；字号保存在当前组件内存，不写入档案。步骤式 LessonPlayer 保持原样。
+
+**英语跟读角（2026-09-06，已实现）**：英语知识点详情的原文区增加设备合成朗读。默认逐句跟读，读完一句后等待孩子主动重听或下一句；可切换连续听读，选择对话、歌谣、小故事或单词，跳转句子，使用 0.7／0.85／1 倍语速。暂停会停止当前句，继续时从该句开头播放；改变语速、模式或内容后需主动开始。原文和中文译文仍完整显示，歌谣只朗读、不演唱。
+
+**朗读来源与边界**：`englishReading.ts` 从已通过课程加载边界的 `LessonContentBlockViewModel` 只读提取英语短句及词汇，跳过译文、角色名、章节标题、填空句型、附录和课后题目；纯词汇复习可使用该课核心单词。`useEnglishReadAloud.ts` 管理内存播放状态，使用浏览器 [SpeechSynthesis](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis)，优先选择本地英语声音；远程声音提示可能需要联网，不承诺所有设备离线可用。未增加音频服务、下载或录音，不是教材原声，不进行口语评分。原文、来源状态、学习记录、Mastery、Strategy 和步骤式 LessonPlayer 不变。
+
+**朗读异常与生命周期**：不自动播放，不以中文声音代替英语声音。浏览器不支持、缺少英语声音、没有英语短句、静音、播放失败或超时均显示提示，保留正常阅读。监听英语声音延迟加载；切换知识点／档案、离开页面、页面隐藏或开启静音时停止，返回不自动续播。组件卸载清理语音、监听器和计时器；朗读状态和选项不持久化。
+
+**当前实现（2026-09-06 体验优化后）**：知识点详情首次默认显示「基础热身」，可切换「强化训练」；强度与组号按档案记住。强化训练每组九关，分为独立热身、方法进阶、综合实战；三组固定变式循环，每组进度单独保存，换回旧组可以继续。训练内容和覆盖范围见[课后强化训练](QUEST_TRAINING.md)。
+
+**操作与状态**：答错可重试；两步提示需主动打开；通过当前关卡才开放后续关卡。小结显示首次独立通过、重试和提示使用情况。数字、字词、算式卡片、匹配与排序均可点击操作，表单与按钮保留键盘入口，不要求拖拽。窄屏卡片换行。
+
+**边界**：这是独立本机保存的课后拓展，不是 Assessment Session。保留原有来源校验与基础练习，不写掌握度、地图进度、历史、正式错题本或奖励；刷新可继续已通过关卡，未提交草稿不保存。进行中重新挑战需确认。不可生成强化训练时回退基础练习，不绕过不可读内容。详情页「本课学习进度」取当前档案的 LessonSession，而不是旧链接上的百分比。
+
+### 4.2.2 ThinkingIslands / 课外思维群岛
+
+**当前实现（2026-09-06）**：`/thinking-islands` 展示规律发现、逻辑侦探、空间想象、策略工坊四座原创训练岛；`/thinking-islands/:islandId` 展示入门、进阶、挑战三条路线；`/thinking-islands/:islandId/:missionId` 承载实际游戏。路线可以自主选择，不依赖地区、年级或教材配置。首页与教材地图提供入口。
+
+**交互与状态**：每条路线四个任务，正确完成当前任务后继续。两步提示、重试、撤回或取消选择、小结和重新挑战均由独立游戏组件负责；支持选卡、条件配对、依赖排序、方格路线及材料组合。校验接受所有符合规则的顺序、路径和组合；不是限时速度赛或智力测评。
+
+**事实边界**：思维训练不是第四个教材学科，不改变 Curriculum、QuestionSession、Mastery、Strategy、地图解锁、正式历史、错题本或奖励。`thinkingStore` 单独保存当前学习档案的完成任务 ID，刷新恢复到未完成任务；不保存未提交方案或本次提示／重试统计。数据和来源、存储失败行为、验证记录见[思维群岛说明](THINKING_ISLANDS.md)。
+
+### 4.2.3 ReadingIslands / 课外阅读群岛
+
+**当前实现（2026-09-06）**：`/reading-islands` 提供语文、英语各六篇原创课外短文，分为轻松起步、阅读进阶两档，支持语言、难度和标题／主题／词语搜索；`/reading-islands/:storyId` 为独立阅读详情。首页、语文／英语教材地图及知识点详情提供入口。不依赖地区、教材或年级解锁。
+
+**阅读与练习**：读前猜想 → 带段落编号的正文 → 词语卡 → 阅读闯关 → 开口表达。语文每篇六关，英语每篇七关，共七十八关；包含细节理解、词义配对、故事排序、多选推理、字词运用、英语拼写与句子搭建。英文正文支持已有的设备朗读，中文参考可展开。保留三档正文字号，卡片可点击或键盘操作。开放表达有支架、参考和自查，不自动评分。
+
+**事实与状态边界**：这些内容明确标为原创课外阅读，不是教材原文。阅读内容与练习在独立数据目录中，复用只读展示及纯校验组件，不写正式学习历史、错题本、教材掌握度、地图解锁或奖励。闯关记录按档案与练习保存到本机，刷新后继续，目录显示已通过关卡；未提交草稿和开放表达自查不保存。内容检查、既有教材覆盖范围和验证记录见[阅读群岛与内容结构检查](READING_ISLANDS.md)。
 
 ### 4.3 Lesson
 
@@ -459,6 +497,8 @@ TextbookVersion：回答“使用哪套课本？”
 
 ### 5.3 Profile
 
+**当前实现**：`/profile` 已接入课程展示、正式成长摘要和成就进度，并提供角色装扮、学习记录、错题、待巩固、家长中心及通用设置入口。
+
 **目标**：管理角色、成就、学习记录和学习设置入口。
 
 **信息优先级**：头像 / 角色、当前年级、学习设置、成长摘要、成就和其他入口。
@@ -474,6 +514,8 @@ TextbookVersion：回答“使用哪套课本？”
 **响应式**：Mobile 单列；Desktop / Tablet 可使用两栏，但“我的学习设置”保持清晰入口而不隐藏在技术菜单。
 
 ### 5.4 Character
+
+**当前实现**：`/character` 提供三套可用基础配色，支持试穿、保存和刷新恢复；保存前不改变其他页面的角色外观。装扮由 `studentStore` 保存到当前浏览器，写入失败时保留原资料并提示重试。锁定装扮仍属设计范围，当前没有付费或成就解锁装扮。
 
 **目标**：查看和更换知识团子装扮。
 
@@ -521,6 +563,8 @@ TextbookVersion：回答“使用哪套课本？”
 
 ### 5.7 Settings
 
+**当前实现**：`/settings` 支持昵称、减少动效、媒体默认静音和默认展开文字讲解的保存。昵称使用 `studentStore`，播放与动效偏好使用 `preferencesStore`；偏好已接入课程、题目媒体和全局动效。帮助区提供课程设置、学习记录、本地保存和网络使用说明；系统推送、后台提醒和跨设备同步未实现。
+
 **目标**：管理通用偏好、动效、音频和帮助，不承载课程配置主流程。
 
 **信息优先级**：动效偏好、音频 / Transcript、通知、帮助与隐私说明。
@@ -564,7 +608,7 @@ TextbookVersion：回答“使用哪套课本？”
 
 **状态**：`loading`、`normal`、`draft`、`save-error`、`offline`、`error`。
 
-**修改地区**：点击后先显示“更换地区后，可使用的课本版本可能发生变化”，再进入 `RegionSelect` → 解析 → `TextbookConfirm`。取消或返回时保留旧档案，不静默覆盖。
+**修改地区**：提示“地区仅作为个人学习资料，更换地区不会清空已选教材，也不会限制可选版本”，再进入 `RegionSelect` → `GradeSelect` → 解析 → `TextbookConfirm`。年级和学期不变时保留已选课本；取消或返回时保留旧档案。
 
 **修改年级**：重新查询语文、数学、英语教材；历史学习记录不删除。页面可预留“当前学习 / 历史学习”的位置，MVP 不要求完整迁移。
 
@@ -574,7 +618,7 @@ TextbookVersion：回答“使用哪套课本？”
 
 ```text
 Profile → 我的学习设置
-  ├─ 修改地区 → RegionSelect → Resolve → TextbookConfirm → Save
+  ├─ 修改地区 → RegionSelect → GradeSelect → Resolve → TextbookConfirm → Save
   ├─ 修改年级 → GradeSelect → Resolve → TextbookConfirm → Save
   └─ 更换某科 → TextbookVersionSelector → CurriculumSwitchDialog → Save
 ```
@@ -589,14 +633,14 @@ Profile → 我的学习设置
 | --- | --- |
 | 地区 | “你在哪里学习？”、“所在地区” |
 | 年级 | “你现在几年级？” |
-| 教材 | “确认一下你的课本” |
+| 教材 | “选择你的课本”、“不受地区限制” |
 | 角色 | “选择你的知识团子” |
 | 出发 | “出发去知识岛” |
 | 正确 | “答对啦” / “你发现规律了” |
 | 错误 | “差一点，再试一次” |
 | 复习 | “需要复习” / “快来充能” |
 | 多教材 | “这里有几种课本版本，请确认你正在使用哪一本” |
-| 无地区 | “这个地区的课程还在准备中” |
+| 无教材 | “当前年级和学期还没有可选教材” |
 
 ### 7.2 禁止文案与视觉
 
@@ -612,7 +656,7 @@ Profile → 我的学习设置
 2. 地区、出版社、教材版本在每个页面都保持概念分离。
 3. 多教材、无默认、无候选和未支持年级都有可恢复状态。
 4. 三科教材可以不同；切换数学不改变语文和英语。
-5. 切换地区或年级会重新解析并让用户确认，不静默覆盖旧配置。
+5. 切换地区保留已选课本，相同年级和学期的各地区候选一致；更换年级或学期需重新选择。确认保存前不覆盖旧配置。
 6. 首页不会堆满地区、出版社、版本年份等元数据。
 7. 所有页面具备 Desktop、Tablet、Mobile 设计差异和 Focus / 触控规则。
 8. 页面使用统一 `QuestionShell`、`AppButton`、`AppCard`、`AppIcon` 和状态表达。
@@ -714,6 +758,6 @@ Growth 等级只用于反馈，不改变课程解锁、地图完成度、题目�
 | 跳转 | Lesson / Assessment 使用显式 launch context；WrongBook / ReviewQueue 使用 focus query；完成后通过 `returnTo` 回到 Home |
 | 响应式 | Desktop 分区卡片；Tablet 保持可读间距；Mobile 单列回流，375～1440 宽度无横向溢出 |
 
-Home 的 `今日进度`是可用任务完成比例，不是掌握度。当天 Daily Plan 首次生成后保持 task identity、顺序和数量；刷新只同步上游事实对应的状态、进度和 CTA 可用性。正式首页过滤 SAMPLE / UNVERIFIED / REJECTED，开发首页明确展示固定样本来源。
+Home 的 `今日进度`是可用任务完成比例，不是掌握度。当天 Daily Plan 首次生成后保持 task identity、顺序和数量；刷新只同步上游事实对应的状态、进度和 CTA 可用性。正式任务仍过滤 SAMPLE / UNVERIFIED / REJECTED；「最近学习」独立显示当前档案与教材的非 SAMPLE、非 REJECTED 参与记录，不将其作为正式掌握结论。无可用地图统计时不展示伪造的 0%，改为学习次数或出发提示。首页主入口优先已有待完成任务，无任务时可直接进入一科学习；地图「继续探索」进入当前可用节点详情。开发首页仍明确展示样本来源。
 
 首页使用 `AppShell`、`AppButton`、`AppIcon`、`AppProgress`、`AppLoading`、`AppEmptyState` 和 `AppErrorState`。任务操作使用真实按钮和可见 Focus 状态，状态不只依赖颜色；减少动态效果时遵守 `prefers-reduced-motion`。详细页面与数据流见 `PHASE14.md`、`DAILY_PLAN_DATA_FLOW.md` 和 `HOME_DATA_FLOW.md`。

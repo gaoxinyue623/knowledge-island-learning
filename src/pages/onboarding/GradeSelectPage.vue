@@ -73,7 +73,7 @@ onMounted(() => void loadOptions())
 <template>
   <CurriculumPageFrame
     title="你现在几年级？"
-    description="选择一个年级。当前已接入一年级、二年级语文，深圳市一、二年级英语，以及深圳二年级上册北师大版数学。"
+    description="当前已接入一年级和二年级教材。选好年级和上下册，再自主选择各科课本，不受地区限制。"
     :step="2"
     :back-to="backTo"
   >
@@ -87,9 +87,9 @@ onMounted(() => void loadOptions())
     <AppEmptyState
       v-else-if="!grades.length"
       title="这个年级列表正在准备中"
-      description="请稍后再试，或返回重新选择地区。"
-      action-label="返回地区"
-      @action="router.push('/onboarding/region')"
+      description="请稍后重试。"
+      action-label="重新加载"
+      @action="loadOptions"
     />
     <template v-else>
       <GradeSelector

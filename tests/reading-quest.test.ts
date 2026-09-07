@@ -1,5 +1,7 @@
-import { mount } from '@vue/test-utils'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { enableAutoUnmount, mount } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { QUEST_PROGRESS_PREFIX } from '@/services/content-expansion/questProgressStorage'
+import { memoryQuestStorage } from './helpers/questStorage'
 
 import ReadingQuest from '@/components/knowledge-point/ReadingQuest.vue'
 import DragMatchActivity from '@/components/interactive-activity/DragMatchActivity.vue'
@@ -58,7 +60,12 @@ function shortQuest(stages = springQuest.stages.slice(0, 2)): Quest {
   return { ...structuredClone(springQuest), stages: structuredClone(stages) }
 }
 
-afterEach(() => vi.restoreAllMocks())
+enableAutoUnmount(afterEach)
+beforeEach(() => vi.stubGlobal('localStorage', memoryQuestStorage()))
+afterEach(() => {
+  vi.restoreAllMocks()
+  vi.unstubAllGlobals()
+})
 
 describe('Reading quest content projection', () => {
   it('supports short poems without padding with unrelated text', () => {
@@ -181,7 +188,7 @@ describe('Reading quest content projection', () => {
     expect(JSON.stringify(quest.stages)).not.toContain('练习说明测试标记')
   })
 
-  it('keeps every generated closed answer solvable across all eight imported textbooks', () => {
+  it('keeps every generated closed answer solvable across all eleven imported textbooks', () => {
     const coverage = new Map<string, { lessons: number; stages: number }>()
     for (const bundle of bundles) {
       const quest = createReadingQuest(inputFor(bundle))
@@ -219,7 +226,7 @@ describe('Reading quest content projection', () => {
         }
       }
     }
-    expect(coverage.size).toBe(8)
+    expect(coverage.size).toBe(11)
     expect([...coverage.values()].every((item) => item.lessons >= 6)).toBe(true)
     console.info('Reading quest coverage', Object.fromEntries(coverage))
   })
@@ -302,10 +309,10 @@ describe('Reading quest interaction', () => {
     expect(wrapper.find('textarea').exists()).toBe(false)
   })
 
-  it('supports tile selection, correction, summary and retrying only missed stages without storage writes', async () => {
+  it('supports tile selection, correction, summary and retrying only missed stages with independent practice storage', async () => {
     const stage = springQuest.stages[1] as QuestQuestionStage
     const quest = shortQuest([stage])
-    const write = vi.spyOn(Storage.prototype, 'setItem')
+    const write = vi.spyOn(localStorage, 'setItem')
     const wrapper = mount(ReadingQuest, { props: { quest, profileId: 'child-a' } })
     const answer = correctAnswerDraft(stage.question)
     if (answer.type !== 'fillBlank') throw new Error('Expected fill blank')
@@ -331,7 +338,8 @@ describe('Reading quest interaction', () => {
       .trigger('click')
     expect(wrapper.text()).toContain('这些关卡，再来试试看')
     expect(wrapper.find('[role="progressbar"]').attributes('aria-valuenow')).toBe('0')
-    expect(write).not.toHaveBeenCalled()
+    expect(write).toHaveBeenCalled()
+    expect(write.mock.calls.every(([key]) => key.startsWith(QUEST_PROGRESS_PREFIX))).toBe(true)
   })
 
   it('resets in-memory answers and progress on profile or textbook changes', async () => {

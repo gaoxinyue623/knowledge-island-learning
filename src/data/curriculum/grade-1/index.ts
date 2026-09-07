@@ -2,6 +2,8 @@ export * from './chinese-pep-upper'
 export * from './chinese-pep-lower'
 export * from './english-shanghai-upper'
 export * from './english-shanghai-lower'
+export * from './math-bnu-upper'
+export * from './math-bnu-lower'
 
 import { G1_PEP_CHINESE_S1_TEXTBOOK_ID } from './chinese-pep-upper'
 import { G1_PEP_CHINESE_S2_TEXTBOOK_ID } from './chinese-pep-lower'

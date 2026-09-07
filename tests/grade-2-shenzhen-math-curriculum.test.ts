@@ -12,6 +12,7 @@ import {
   G1_SHENZHEN_REGION_ID,
   G2_PEP_CHINESE_GRADE_ID,
   G2_SHENZHEN_ENGLISH_S1_TEXTBOOK_ID,
+  G1_SHENZHEN_MATH_S1_TEXTBOOK_ID,
 } from '@/data/curriculum'
 import {
   gradeTwoShenzhenMathUpperCurriculum as book,
@@ -87,7 +88,7 @@ describe('Shenzhen BNU grade 2 math upper curriculum', () => {
     expect(report.valid, report.errors.join('; ')).toBe(true)
   })
 
-  it('resolves math only for Shenzhen, grade 2, upper volume', async () => {
+  it('resolves grade 2 upper math across regions without mixing grade or volume', async () => {
     const result = await service.resolveAvailableTextbooks(context)
     expect(result.math.availableTextbooks.map((b) => b.id)).toEqual([bookId])
     expect(result.english.availableTextbooks.map((b) => b.id)).toEqual([
@@ -96,11 +97,22 @@ describe('Shenzhen BNU grade 2 math upper curriculum', () => {
     for (const other of [
       { ...context, regionId: G1_PEP_CHINESE_GUANGDONG_REGION_ID },
       { ...context, regionId: G1_PEP_CHINESE_HUBEI_REGION_ID },
-      { ...context, gradeId: G1_PEP_CHINESE_GRADE_ID },
-      { ...context, semesterId: 'SEMESTER_LOWER' },
     ]) {
-      expect((await service.resolveAvailableTextbooks(other)).math.availableTextbooks).toEqual([])
+      expect(
+        (await service.resolveAvailableTextbooks(other)).math.availableTextbooks.map((b) => b.id),
+      ).toEqual([bookId])
     }
+    expect(
+      (await service.resolveAvailableTextbooks({ ...context, semesterId: 'SEMESTER_LOWER' })).math
+        .availableTextbooks,
+    ).toEqual([])
+    const gradeOne = await service.resolveAvailableTextbooks({
+      ...context,
+      gradeId: G1_PEP_CHINESE_GRADE_ID,
+    })
+    expect(gradeOne.math.availableTextbooks.map((b) => b.id)).toEqual([
+      G1_SHENZHEN_MATH_S1_TEXTBOOK_ID,
+    ])
   })
 
   it('lets a learner select math without breaking existing English-only profiles', async () => {
@@ -110,7 +122,6 @@ describe('Shenzhen BNU grade 2 math upper curriculum', () => {
     store.setContext(context)
     await store.resolveTextbooks()
     expect(store.draftIsComplete).toBe(false)
-    expect(store.isMathPilot).toBe(true)
     expect(store.selectTextbook('MATH', bookId)).toBe(true)
     expect(store.draftIsComplete).toBe(true)
     expect(store.selectTextbook('ENGLISH', bookId)).toBe(false)
@@ -125,7 +136,7 @@ describe('Shenzhen BNU grade 2 math upper curriculum', () => {
     })
     expect(store.isComplete).toBe(true)
     store.selectGrade(G1_PEP_CHINESE_GRADE_ID)
-    expect(store.isMathPilot).toBe(false)
+    expect(store.draftIsComplete).toBe(false)
     expect(store.mathTextbookVersionId).toBeNull()
   })
 

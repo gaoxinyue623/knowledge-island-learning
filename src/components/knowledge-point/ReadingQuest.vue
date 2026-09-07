@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onDeactivated, ref, watch } from 'vue'
 
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 import AppButton from '@/components/common/AppButton.vue'
@@ -8,12 +8,24 @@ import DragMatchActivity from '@/components/interactive-activity/DragMatchActivi
 import SortOrderActivity from '@/components/interactive-activity/SortOrderActivity.vue'
 import MathQuestVisual from './MathQuestVisual.vue'
 import { checkQuestAnswer, emptyQuestDraft } from '@/services/content-expansion/readingQuest'
+import {
+  browserQuestStorage,
+  freshQuestProgress,
+  questContentRevision,
+  readQuestProgress,
+  saveQuestProgress,
+} from '@/services/content-expansion/questProgressStorage'
 import type { ActivityResult, QuestionAnswerDraft } from '@/types'
-import type { ReadingQuest } from '@/types/reading-quest'
+import type { ReadingPracticeQuest } from '@/types/reading-quest'
 
-const props = defineProps<{ quest: ReadingQuest; profileId: string }>()
+const props = defineProps<{
+  quest: ReadingPracticeQuest
+  profileId: string
+  readingLabel?: string
+  note?: string
+}>()
 const isMath = computed(() => props.quest.subject === 'MATH')
-const readingLabel = computed(() => (isMath.value ? '回看知识' : '回看课文'))
+const readingLabel = computed(() => props.readingLabel ?? (isMath.value ? '回看知识' : '回看课文'))
 const stageIndex = ref(0)
 const passed = ref<string[]>([])
 const mistakes = ref<string[]>([])
@@ -21,11 +33,22 @@ const reviewIds = ref<string[] | null>(null)
 const summaryVisible = ref(false)
 const round = ref(0)
 const hintVisible = ref(false)
+const hintStep = ref(0)
+const helped = ref<string[]>([])
 const feedback = ref('')
 const selectedTiles = ref<number[]>([])
 const draft = ref<QuestionAnswerDraft>({ type: 'singleChoice' })
 const stageHeading = ref<HTMLElement | null>(null)
 const summaryHeading = ref<HTMLElement | null>(null)
+const completedStageIds = ref<string[]>([])
+const storageWarning = ref<string | null>(null)
+const writable = ref(false)
+const resumed = ref(false)
+const saved = ref(false)
+const restartRequested = ref(false)
+const revision = computed(() => questContentRevision(props.quest))
+let loadedScope = ''
+const scope = () => JSON.stringify([props.profileId, props.quest.id, revision.value])
 
 const stages = computed(() =>
   props.quest.stages.filter((stage) => !reviewIds.value || reviewIds.value.includes(stage.id)),
@@ -45,9 +68,29 @@ const canCheck = computed(
 const prompt = computed(
   () => question.value?.stem.map((block) => block.text ?? '').join('\n') ?? '',
 )
+const isTraining = computed(() => Boolean(props.quest.training))
+const hints = computed(() =>
+  stage.value?.hints?.length ? stage.value.hints : [stage.value?.hint ?? ''],
+)
+const bands = [
+  { id: 'foundation', label: '独立热身' },
+  { id: 'reasoning', label: '方法进阶' },
+  { id: 'transfer', label: '综合实战' },
+] as const
+const independentCount = computed(
+  () =>
+    passed.value.filter((id) => !mistakes.value.includes(id) && !helped.value.includes(id)).length,
+)
+
+function openHint(): void {
+  hintVisible.value = !hintVisible.value
+  if (stage.value && hintVisible.value && !helped.value.includes(stage.value.id))
+    helped.value.push(stage.value.id)
+}
 
 function resetStage(): void {
   hintVisible.value = false
+  hintStep.value = 0
   feedback.value = ''
   selectedTiles.value = []
   if (question.value) draft.value = emptyQuestDraft(question.value)
@@ -55,9 +98,65 @@ function resetStage(): void {
 
 watch(() => stage.value?.id, resetStage, { immediate: true })
 watch(
-  () => [props.quest.id, props.profileId],
-  () => restart(false),
+  () => [props.profileId, revision.value],
+  () => {
+    const result = readQuestProgress(browserQuestStorage(), props.profileId, props.quest)
+    const data = result.data
+    reviewIds.value = data.reviewIds
+    passed.value = data.passedIds
+    mistakes.value = data.mistakeIds
+    helped.value = data.helpedIds
+    completedStageIds.value = data.completedStageIds
+    stageIndex.value = Math.max(
+      0,
+      stages.value.findIndex((item) => item.id === data.activeStageId),
+    )
+    summaryVisible.value = data.summaryVisible
+    storageWarning.value = result.warning
+    writable.value = result.writable
+    resumed.value = result.resumed
+    saved.value = false
+    restartRequested.value = false
+    round.value += 1
+    loadedScope = scope()
+    resetStage()
+  },
+  { immediate: true, flush: 'sync' },
 )
+
+function persist(): void {
+  if (!writable.value || loadedScope !== scope()) return
+  const warning = saveQuestProgress(
+    browserQuestStorage(),
+    {
+      ...freshQuestProgress(props.profileId, props.quest),
+      passedIds: [...passed.value],
+      mistakeIds: [...mistakes.value],
+      helpedIds: [...helped.value],
+      completedStageIds: [...completedStageIds.value],
+      reviewIds: reviewIds.value ? [...reviewIds.value] : null,
+      activeStageId: stage.value?.id ?? null,
+      summaryVisible: summaryVisible.value,
+    },
+    props.quest,
+  )
+  storageWarning.value = warning
+  saved.value = !warning
+}
+watch(
+  [passed, mistakes, helped, completedStageIds, reviewIds, stageIndex, summaryVisible],
+  persist,
+  { deep: true, flush: 'post' },
+)
+onBeforeUnmount(persist)
+onDeactivated(persist)
+
+function passStage(): void {
+  if (!stage.value || isPassed.value) return
+  passed.value.push(stage.value.id)
+  if (!completedStageIds.value.includes(stage.value.id))
+    completedStageIds.value.push(stage.value.id)
+}
 
 async function focusStage(): Promise<void> {
   await nextTick()
@@ -94,7 +193,7 @@ function completeActivity(result: ActivityResult): void {
     result.activityId !== stage.value.activity.id
   )
     return
-  if (!isPassed.value) passed.value.push(stage.value.id)
+  passStage()
 }
 
 function check(): void {
@@ -103,7 +202,7 @@ function check(): void {
   if (result === 'incomplete') {
     feedback.value = '先完成你的答案，再来检查吧。'
   } else if (result === 'correct') {
-    passed.value.push(stage.value.id)
+    passStage()
     feedback.value = ''
   } else if (result === 'incorrect') {
     recordMistake()
@@ -177,7 +276,10 @@ function restart(onlyMistakes: boolean): void {
   stageIndex.value = 0
   passed.value = []
   mistakes.value = []
+  helped.value = []
   summaryVisible.value = false
+  restartRequested.value = false
+  resumed.value = false
   round.value += 1
   resetStage()
   void focusStage()
@@ -196,9 +298,11 @@ function restart(onlyMistakes: boolean): void {
           {{
             reviewIds
               ? '这些关卡，再来试试看！'
-              : isMath
-                ? '学会一个方法，解开数学小谜题'
-                : '读懂一个故事，闯过一串小关卡'
+              : isTraining
+                ? '不只会答，还要会想、会用'
+                : isMath
+                  ? '学会一个方法，解开数学小谜题'
+                  : '读懂一个故事，闯过一串小关卡'
           }}
         </h3>
         <p>一关一关来，不限时。答错没关系，找到线索再出发。</p>
@@ -210,6 +314,34 @@ function restart(onlyMistakes: boolean): void {
       </div>
     </header>
 
+    <div class="reading-quest__save-bar">
+      <p role="status">
+        {{
+          storageWarning ??
+          (resumed
+            ? '已接上上次的进度，继续这一关吧。'
+            : saved
+              ? '闯关进度已保存在这台设备。'
+              : '通过的关卡会自动保存，下次可以接着玩。')
+        }}
+      </p>
+      <button
+        v-if="!summaryVisible && (passed.length || reviewIds)"
+        type="button"
+        :aria-expanded="restartRequested"
+        @click="restartRequested = !restartRequested"
+      >
+        从第一关重练
+      </button>
+    </div>
+    <section v-if="restartRequested" class="reading-quest__restart" aria-label="确认重练">
+      <p>要从第一关重新练习吗？本轮答案和提示记录会重置，已通过的足迹仍保留。</p>
+      <div class="reading-quest__actions">
+        <AppButton variant="soft" @click="restartRequested = false">继续当前关卡</AppButton>
+        <AppButton @click="restart(false)">确认重新练习</AppButton>
+      </div>
+    </section>
+
     <div
       class="reading-quest__progress"
       role="progressbar"
@@ -220,6 +352,23 @@ function restart(onlyMistakes: boolean): void {
     >
       <span :style="{ width: percentage + '%' }" />
     </div>
+
+    <ol v-if="isTraining && !reviewIds" class="quest-training__bands" aria-label="强化训练三个阶段">
+      <li
+        v-for="band in bands"
+        :key="band.id"
+        :aria-current="stage?.trainingBand === band.id && !summaryVisible ? 'step' : undefined"
+      >
+        <strong>{{ band.label }}</strong>
+        <span
+          >{{
+            stages.filter((item) => item.trainingBand === band.id && passed.includes(item.id))
+              .length
+          }}
+          / {{ stages.filter((item) => item.trainingBand === band.id).length }}</span
+        >
+      </li>
+    </ol>
 
     <nav class="reading-quest__trail" aria-label="闯关路线">
       <button
@@ -262,6 +411,10 @@ function restart(onlyMistakes: boolean): void {
         }}
       </p>
       <p v-if="mistakes.length">有 {{ mistakes.length }} 关是重试后完成的，再练一遍会更熟悉。</p>
+      <p v-if="isTraining">
+        本轮首次独立通过 {{ independentCount }} 关；有
+        {{ helped.length }} 关使用过提示。用过提示也值得再独立试一遍。
+      </p>
       <div class="reading-quest__actions">
         <AppButton v-if="mistakes.length" @click="restart(true)">再练错过的关卡</AppButton>
         <AppButton variant="soft" @click="restart(false)">全部再闯一次</AppButton>
@@ -281,7 +434,11 @@ function restart(onlyMistakes: boolean): void {
       </div>
 
       <template v-if="!isPassed">
-        <MathQuestVisual v-if="stage.visual" :key="stage.id" :visual="stage.visual" />
+        <aside v-if="stage.context" class="quest-training__context" aria-label="连续任务情境">
+          <strong>带着这些线索，连续解决问题</strong>
+          <p>{{ stage.context }}</p>
+        </aside>
+        <MathQuestVisual v-if="stage.visual" :key="round + ':' + stage.id" :visual="stage.visual" />
         <template v-if="stage.kind === 'question' && question">
           <p id="quest-question-prompt" class="reading-quest__prompt">{{ prompt }}</p>
           <fieldset
@@ -292,7 +449,9 @@ function restart(onlyMistakes: boolean): void {
             <legend>
               {{
                 question.questionType === 'multipleChoice'
-                  ? `选择${question.answerRule.ruleType === 'MULTIPLE_OPTIONS' ? question.answerRule.correctOptionKeys.length : ''}个答案，再检查`
+                  ? isTraining
+                    ? '选出所有符合条件的答案，再检查'
+                    : `选择${question.answerRule.ruleType === 'MULTIPLE_OPTIONS' ? question.answerRule.correctOptionKeys.length : ''}个答案，再检查`
                   : '选择一个答案，再检查'
               }}
             </legend>
@@ -362,7 +521,13 @@ function restart(onlyMistakes: boolean): void {
               {{
                 stage.tileMode === 'letters'
                   ? '按顺序点字母；点上方已选字母可以退回。'
-                  : '点击下方字词卡，把答案放进空格。'
+                  : stage.tileMode === 'characters'
+                    ? '按顺序点汉字；多余的字不用选，点上方已选字可退回。'
+                    : stage.tileMode === 'sequence'
+                      ? '按顺序点数字和符号搭建算式；多余的卡不用选，已选卡片可以移回。'
+                      : isMath
+                        ? '点击下方数字或符号卡，把答案放进空格。'
+                        : '点击下方字词卡，把答案放进空格。'
               }}
             </p>
             <div class="reading-quest__answer-slot" aria-label="我的答案" aria-live="polite">
@@ -376,16 +541,27 @@ function restart(onlyMistakes: boolean): void {
                 {{ stage.tiles[tileIndex] }}
               </button>
               <span v-if="!selectedTiles.length">{{
-                stage.tileMode === 'letters' ? '你的单词会出现在这里' : '把字词放到这里'
+                stage.tileMode === 'letters'
+                  ? '你的单词会出现在这里'
+                  : isMath
+                    ? '把答案卡放到这里'
+                    : '把字词放到这里'
               }}</span>
             </div>
-            <div class="reading-quest__tiles" aria-label="待选字词卡">
+            <div class="reading-quest__tiles" :aria-label="isMath ? '待选答案卡' : '待选字词卡'">
               <button
                 v-for="(tile, index) in stage.tiles"
                 :key="index"
                 type="button"
                 :disabled="selectedTiles.includes(index)"
-                :aria-label="tile + (stage.tileMode === 'letters' ? '，字母卡' + (index + 1) : '')"
+                :aria-label="
+                  tile +
+                  (stage.tileMode === 'letters'
+                    ? '，字母卡' + (index + 1)
+                    : stage.tileMode === 'characters'
+                      ? '，字卡' + (index + 1)
+                      : '')
+                "
                 @click="chooseTile(index)"
               >
                 {{ tile }}
@@ -429,7 +605,7 @@ function restart(onlyMistakes: boolean): void {
             type="button"
             :aria-expanded="hintVisible"
             aria-controls="quest-hint"
-            @click="hintVisible = !hintVisible"
+            @click="openHint"
           >
             <AppIcon name="lightbulb" :size="18" decorative />{{
               hintVisible ? '收起提示' : '给我一点提示'
@@ -437,7 +613,17 @@ function restart(onlyMistakes: boolean): void {
           </button>
         </div>
         <p v-if="feedback" class="reading-quest__feedback" role="status">{{ feedback }}</p>
-        <p v-if="hintVisible" id="quest-hint" class="reading-quest__hint">{{ stage.hint }}</p>
+        <div v-if="hintVisible" id="quest-hint" class="reading-quest__hint" role="status">
+          <p v-for="(hint, index) in hints.slice(0, hintStep + 1)" :key="index">{{ hint }}</p>
+          <button
+            v-if="hintStep + 1 < hints.length"
+            type="button"
+            class="reading-quest__hint-toggle"
+            @click="hintStep += 1"
+          >
+            再给一步提示
+          </button>
+        </div>
       </template>
 
       <div v-else class="reading-quest__success" role="status">
@@ -455,6 +641,11 @@ function restart(onlyMistakes: boolean): void {
         }}</AppButton>
       </div>
     </section>
-    <p class="reading-quest__note">这是本页的课后拓展，不计入掌握度。离开页面后，可以重新挑战。</p>
+    <p class="reading-quest__note">
+      {{
+        props.note ??
+        '这是课后拓展练习，闯关记录与教材掌握度分开保存，不计入正式错题本。未提交的答案不保存。'
+      }}
+    </p>
   </div>
 </template>

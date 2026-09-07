@@ -11,8 +11,14 @@ const router = useRouter()
 const studentStore = useStudentStore()
 
 function enterHome() {
-  studentStore.setProfile({ id: LOCAL_STUDENT_ID, displayName: '小岛同学' })
-  studentStore.setCharacter('default-character')
+  if (
+    !studentStore.savePersonalProfile(
+      studentStore.profile?.displayName ?? '小岛同学',
+      studentStore.characterId ?? 'default-character',
+      LOCAL_STUDENT_ID,
+    )
+  )
+    return
   router.push('/home')
 }
 </script>
@@ -32,6 +38,7 @@ function enterHome() {
           <h2>知识团子</h2>
           <p>它会在学习开始、完成和需要鼓励时陪着你。</p>
         </div>
+        <p v-if="studentStore.warning" role="alert">{{ studentStore.warning }}</p>
         <AppButton size="lg" icon-right="arrow-right" @click="enterHome">出发去知识岛</AppButton>
       </AppCard>
     </section>

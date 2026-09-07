@@ -1,10 +1,14 @@
 import type { Question } from '@/types'
 import type { MathQuestVisual, QuestQuestionStage, ReadingQuest } from '@/types/reading-quest'
 
-export function createMathQuestBuilder(quest: ReadingQuest, family: string, options: { titles?: string[]; foundationOnly?: boolean } = {}) {
+export function createMathQuestBuilder(
+  quest: ReadingQuest,
+  family: string,
+  options: { titles?: string[]; foundationOnly?: boolean } = {},
+) {
   const provenance = {
     sourceId: quest.sourceId,
-    isSample: false,
+    isSample: quest.isSample,
     verificationStatus: quest.verificationStatus,
   }
   const mix = <T>(items: T[]): T[] => {
@@ -81,7 +85,7 @@ export function createMathQuestBuilder(quest: ReadingQuest, family: string, opti
     answers: string[],
     distractors: string[],
     explanation: string,
-    hint = '看清问题里的数量和单位，先想一想每个数表示什么。',
+    hint = '先说说题目要你找什么，再对照条件，逐个检查选项。',
     visual?: MathQuestVisual,
   ) {
     const stage = question(
@@ -166,8 +170,25 @@ export function createMathQuestBuilder(quest: ReadingQuest, family: string, opti
     })
   }
 
-  function tiles(prompt: string, answer: string, bank: string[], explanation: string, hint = '点一张卡片，把空格补完整。', visual?: MathQuestVisual) {
-    const stage = question(prompt, 'fillBlank', {ruleType: 'TEXT_BLANKS', blanks: [{blankId: 'answer', acceptedAnswers: [answer], normalization: 'TRIM'}]}, explanation, hint, visual)
+  function tiles(
+    prompt: string,
+    answer: string,
+    bank: string[],
+    explanation: string,
+    hint = '点一张卡片，把空格补完整。',
+    visual?: MathQuestVisual,
+  ) {
+    const stage = question(
+      prompt,
+      'fillBlank',
+      {
+        ruleType: 'TEXT_BLANKS',
+        blanks: [{ blankId: 'answer', acceptedAnswers: [answer], normalization: 'TRIM' }],
+      },
+      explanation,
+      hint,
+      visual,
+    )
     stage.tiles = mix([...new Set(bank)])
     stage.tileMode = 'word'
   }

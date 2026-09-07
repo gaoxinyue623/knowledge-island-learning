@@ -65,12 +65,6 @@ const FALLBACK_SUBJECT_ID_BY_CODE = {
   ENGLISH: 'SUBJECT_ENGLISH',
 } as const
 
-const USAGE_PRIORITY = {
-  DEFAULT: 0,
-  SUPPORTED: 1,
-  OPTIONAL: 2,
-} as const
-
 function groupBy<T>(records: T[], keyOf: (record: T) => string): Map<string, T[]> {
   const grouped = new Map<string, T[]>()
   for (const record of records) {
@@ -257,11 +251,18 @@ export class MockCurriculumService implements CurriculumService {
       return { subjectId, availableTextbooks: [], resolutionStatus: 'NOT_AVAILABLE' }
     }
 
-    const region = this.data.regions.find((candidate) => candidate.id === input.regionId)
-    if (!region || !this.usableForResolution(region)) {
-      return { subjectId, availableTextbooks: [], resolutionStatus: 'NOT_AVAILABLE' }
-    }
+    const availableTextbooks = [...this.textbookById.values()]
+      .filter(
+        (textbook) =>
+          this.usableForResolution(textbook) &&
+          this.usableForResolution(this.publisherById.get(textbook.publisherId) ?? {}) &&
+          textbook.gradeId === input.gradeId &&
+          textbook.semesterId === input.semesterId &&
+          textbook.subjectId === subjectId,
+      )
+      .sort((left, right) => left.id.localeCompare(right.id))
 
+    // Regional adoption metadata is diagnostic only, never a selection restriction.
     const relations = (this.relationsByRegionId.get(input.regionId) ?? []).filter((relation) => {
       const textbook = this.textbookById.get(relation.textbookVersionId)
       if (!textbook) return false
@@ -276,25 +277,6 @@ export class MockCurriculumService implements CurriculumService {
       )
     })
 
-    const bestRelationByTextbookId = new Map<Id, (typeof relations)[number]>()
-    for (const relation of relations) {
-      const existing = bestRelationByTextbookId.get(relation.textbookVersionId)
-      if (!existing || USAGE_PRIORITY[relation.usageType] < USAGE_PRIORITY[existing.usageType]) {
-        bestRelationByTextbookId.set(relation.textbookVersionId, relation)
-      }
-    }
-
-    const bestRelations = [...bestRelationByTextbookId.values()].sort(
-      (left, right) =>
-        USAGE_PRIORITY[left.usageType] - USAGE_PRIORITY[right.usageType] ||
-        left.textbookVersionId.localeCompare(right.textbookVersionId),
-    )
-    const availableTextbooks = bestRelations
-      .map((relation) => this.textbookById.get(relation.textbookVersionId))
-      .filter((textbook): textbook is TextbookVersion => {
-        if (!textbook) return false
-        return this.usableForResolution(textbook)
-      })
     const defaultIds = new Set(
       relations
         .filter((relation) => relation.usageType === 'DEFAULT')
@@ -309,14 +291,6 @@ export class MockCurriculumService implements CurriculumService {
 
     if (availableTextbooks.length === 0) {
       return { subjectId, availableTextbooks, resolutionStatus: 'NOT_AVAILABLE' }
-    }
-    if (defaultIds.size === 1 && availableTextbooks.length === 1) {
-      return {
-        subjectId,
-        recommendedTextbookId: [...defaultIds][0],
-        availableTextbooks,
-        resolutionStatus: 'AUTO_RESOLVED',
-      }
     }
     return { subjectId, availableTextbooks, resolutionStatus: 'NEEDS_CONFIRMATION' }
   }
@@ -348,6 +322,29 @@ export class MockCurriculumService implements CurriculumService {
     profile: StudentCurriculumProfile,
   ): Promise<StudentCurriculumProfile> {
     return this.run(() => {
+      const selections = [
+        ['CHINESE', profile.chineseTextbookVersionId],
+        ['MATH', profile.mathTextbookVersionId],
+        ['ENGLISH', profile.englishTextbookVersionId],
+      ] as const
+      if (!selections.some(([, id]) => id)) throw new Error('请至少选择一科教材')
+      for (const [code, id] of selections) {
+        if (!id) continue
+        const subjectId =
+          this.data.subjects.find((subject) => subject.code === code)?.id ??
+          FALLBACK_SUBJECT_ID_BY_CODE[code]
+        const book = this.textbookById.get(id)
+        if (
+          !book ||
+          !this.usableForResolution(book) ||
+          !this.usableForResolution(this.publisherById.get(book.publisherId) ?? {}) ||
+          book.subjectId !== subjectId ||
+          book.gradeId !== profile.gradeId ||
+          book.semesterId !== profile.semesterId
+        ) {
+          throw new Error('所选教材不适用于当前年级、学期或学科，请重新选择')
+        }
+      }
       this.profileRepository.save(profile)
       return profile
     })

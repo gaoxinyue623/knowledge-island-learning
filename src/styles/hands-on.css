@@ -1,0 +1,500 @@
+.hands-on {
+  scroll-margin-top: 95px;
+  margin: 28px 0;
+  padding: clamp(16px, 3vw, 28px);
+  min-width: 0;
+  border: 2px solid #bdcfb2;
+  border-radius: 26px;
+  background: #f7f9ee;
+  color: #324f43;
+  text-align: left;
+  box-shadow: 0 5px 0 #e5ead9;
+  overflow-wrap: anywhere;
+}
+.hands-on-jump {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  margin: 8px 0 18px;
+  border: 1px solid #adc69d;
+  border-radius: 14px;
+  background: #edf4de;
+  color: #345d43;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.hands-on h3 {
+  margin: 6px 0 12px;
+  font-size: clamp(20px, 2.3vw, 26px);
+  line-height: 1.5;
+}
+.hands-on h4 {
+  margin: 22px 0 10px;
+  font-size: 19px;
+  line-height: 1.6;
+}
+.hands-on p {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.85;
+}
+.hands-on .hands-on__eyebrow {
+  color: #536d45;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.hands-on .hands-on__note {
+  font-size: 13px;
+  color: #637266;
+  line-height: 1.8;
+}
+.hands-on button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 9px 15px;
+  border: 2px solid #b7c5a4;
+  border-radius: 14px;
+  background: #fffdf3;
+  color: #345344;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.hands-on button:hover:not(:disabled) {
+  background-color: #e8f0d8;
+  border-color: #6d9666;
+}
+.hands-on button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.hands-on button[aria-pressed='true'] {
+  border-color: #376b57;
+  background: #e4efce;
+  box-shadow: 0 0 0 2px #87ad77;
+}
+.hands-on :is(button, input):focus-visible {
+  outline: 3px solid #226a75;
+  outline-offset: 3px;
+}
+.hands-on__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 10px;
+}
+.hands-on__actions > span {
+  font-size: 14px;
+}
+.hands-on__success,
+.hands-on__hint,
+.hands-on__notice,
+.hands-on__say {
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 18px;
+  background: #edf1d6;
+  border: 1px solid #c7d4ab;
+  line-height: 1.85;
+}
+.hands-on__notice {
+  background: #fff1d9;
+  border-color: #dbc89e;
+}
+.hands-on__say {
+  background: #fff6de;
+  border-color: #d7caaa;
+}
+.hands-on__say h4 {
+  margin-top: 0;
+}
+.hands-on__say blockquote {
+  margin: 14px 0;
+  border-left: 4px solid #b79956;
+  padding-left: 15px;
+  font-size: 18px;
+  line-height: 1.9;
+}
+.hands-on__say label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.hands-on__say input {
+  width: 22px;
+  height: 22px;
+  margin: 4px 0 0;
+  flex-shrink: 0;
+  accent-color: #477660;
+}
+.hands-on__say button {
+  margin: 6px 8px 6px 0;
+}
+.hands-on .hands-on__reset {
+  margin-top: 14px;
+  background: transparent;
+}
+.hands-on .workshop-piece {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.workshop-drag-ghost {
+  position: fixed;
+  z-index: 1000;
+  width: 66px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 6px 7px #233c4933);
+}
+.ten-workshop__equation {
+  margin: 20px 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+.ten-workshop__equation span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.ten-workshop__frame {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  max-width: 370px;
+  padding: 9px;
+  border: 3px solid #a4bd8d;
+  border-radius: 18px;
+  background: #e4ecd5;
+}
+.ten-workshop__frame button {
+  display: grid;
+  place-items: center;
+  min-height: 70px;
+  padding: 6px 0;
+  background: #fffcf1;
+  border: 1px dashed #91a67c;
+  border-radius: 9px;
+}
+.ten-workshop__frame .is-filled {
+  border-style: solid;
+  background: #f9fce9;
+}
+.ten-workshop__slot-number {
+  font-size: 13px;
+  color: #647655;
+}
+.workshop-stick {
+  display: inline-block;
+  width: 13px;
+  height: 49px;
+  border: 2px solid #608557;
+  border-radius: 5px;
+  background: repeating-linear-gradient(0deg, #a7c780, #a7c780 12px, #8aac68 12px, #8aac68 14px);
+}
+.workshop-stick--orange,
+.is-moved .workshop-stick {
+  border-color: #b07f37;
+  background: repeating-linear-gradient(0deg, #edbf77, #edbf77 12px, #d8a556 12px, #d8a556 14px);
+}
+.ten-workshop__pool {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  min-height: 76px;
+  align-items: center;
+}
+.ten-workshop__pool .workshop-piece {
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  min-width: 44px;
+  background: #fff4dc;
+}
+.ten-workshop__pool-label {
+  font-weight: 700;
+}
+.evidence-workshop__question {
+  border-left: 4px solid #7da384;
+  padding: 12px 16px;
+  background: #edf2e3;
+  border-radius: 0 14px 14px 0;
+  line-height: 1.8;
+}
+.evidence-workshop__paper {
+  margin: 16px 0;
+  padding: clamp(14px, 2vw, 28px);
+  border: 1px solid #dccfb4;
+  border-radius: 16px;
+  background: #fffcf3;
+}
+.evidence-workshop__paper h4 {
+  text-align: center;
+  margin-top: 0;
+}
+.evidence-workshop__paper p {
+  line-height: 2.4;
+  margin: 16px 0;
+}
+.evidence-workshop__paper button {
+  display: inline;
+  padding: 7px 3px;
+  margin: 0 3px 0 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 5px;
+  box-shadow: none;
+  font-family: 'Kaiti SC', STKaiti, KaiTi, serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: inherit;
+  text-align: left;
+  background: transparent;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.evidence-workshop__paper button[aria-pressed='true'] {
+  background: #f6e2a0;
+  border-bottom-color: #9b7425;
+  box-shadow: none;
+}
+.evidence-workshop__paper.is-verified button[aria-pressed='true'] {
+  background: #d9eabd;
+  border-bottom-color: #5c834d;
+}
+.evidence-workshop__order {
+  display: grid;
+  gap: 10px;
+  min-height: 80px;
+  padding: 12px;
+  border: 2px dashed #b9c99e;
+  border-radius: 18px;
+}
+.evidence-workshop__order button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.evidence-workshop__order b {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e0edc6;
+}
+.evidence-workshop__order small {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-weight: 500;
+  font-size: 12px;
+}
+.evidence-workshop__cards {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.evidence-workshop__cards button {
+  flex: 1 1 220px;
+  background: #fff4da;
+  text-align: left;
+}
+.listen-place__tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin: 16px 0;
+  min-height: 118px;
+  border: 2px dashed #bccea4;
+  border-radius: 20px;
+  background: #fcfff4;
+}
+.listen-place__tray > span {
+  width: 100%;
+  color: #617554;
+  font-size: 13px;
+}
+.listen-place .workshop-piece {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+  max-width: 130px;
+  flex: 0 1 110px;
+}
+.listen-place .workshop-piece .workshop-object {
+  width: 58px;
+  max-width: 100%;
+}
+.listen-place .workshop-piece span {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.listen-place__scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  grid-template-rows: minmax(132px, auto) minmax(155px, auto);
+  gap: 26px 20px;
+  position: relative;
+  isolation: isolate;
+  padding: 20px 20px 35px;
+  border: 1px solid #ced9bc;
+  border-radius: 22px;
+  background: linear-gradient(#edf4df 92%, #d5e1c1 92%);
+}
+.listen-place__zone {
+  position: relative;
+  min-width: 0;
+  border: 2px dashed #a1b890;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.listen-place__zone--on {
+  grid-area: 1 / 1;
+}
+.listen-place__zone--on::after {
+  content: 'desk';
+  position: absolute;
+  bottom: -23px;
+  left: -8px;
+  right: -8px;
+  height: 19px;
+  background: #c29363;
+  border: 2px solid #96704e;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #fff9ed;
+  pointer-events: none;
+}
+.listen-place__zone--under {
+  grid-area: 2 / 1;
+  margin: 8px 20px 0;
+}
+.listen-place__zone--under::before,
+.listen-place__zone--under::after {
+  content: '';
+  position: absolute;
+  top: -17px;
+  bottom: -12px;
+  left: -18px;
+  width: 12px;
+  background: #c29363;
+  border: 2px solid #96704e;
+  border-radius: 0 0 5px 5px;
+  pointer-events: none;
+}
+.listen-place__zone--under::after {
+  left: auto;
+  right: -18px;
+}
+.listen-place__zone--in {
+  grid-area: 2 / 2;
+  border: 4px solid #bb9469;
+  border-top: 7px solid #a47d52;
+  background: #ead3ac;
+  box-shadow: 0 5px 0 #bc956a;
+  margin-top: 20px;
+}
+.listen-place .listen-place__drop {
+  border: 0;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 6px;
+  width: 100%;
+}
+.listen-place__placed {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  padding: 3px 6px 7px;
+}
+.listen-place__placed .workshop-piece {
+  flex: 0 1 80px;
+  padding: 2px 4px;
+  background: #fffaf0e6;
+}
+.listen-place__placed .workshop-piece:disabled {
+  opacity: 1;
+  border-color: transparent;
+  background: transparent;
+}
+.listen-place__placed .workshop-piece .workshop-object {
+  width: 46px;
+}
+@media (max-width: 520px) {
+  .knowledge-detail .quest-training > .hands-on {
+    margin-inline: -18px;
+  }
+  .hands-on {
+    padding: 14px;
+    border-radius: 20px;
+  }
+  .hands-on__success,
+  .hands-on__hint,
+  .hands-on__notice,
+  .hands-on__say {
+    padding: 14px;
+  }
+  .ten-workshop__frame {
+    padding: 5px;
+    gap: 3px;
+  }
+  .ten-workshop__frame button {
+    min-width: 0;
+    min-height: 66px;
+  }
+  .evidence-workshop__order button {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .evidence-workshop__order small {
+    width: 100%;
+    text-align: right;
+  }
+  .listen-place__scene {
+    padding: 14px 8px 30px;
+    column-gap: 12px;
+  }
+  .listen-place__zone--under {
+    margin-inline: 9px;
+  }
+  .listen-place__zone--under::before {
+    left: -12px;
+    width: 8px;
+  }
+  .listen-place__zone--under::after {
+    right: -12px;
+    width: 8px;
+  }
+  .listen-place .workshop-piece {
+    max-width: 96px;
+  }
+  .listen-place__tray {
+    gap: 6px;
+    padding: 8px;
+  }
+}

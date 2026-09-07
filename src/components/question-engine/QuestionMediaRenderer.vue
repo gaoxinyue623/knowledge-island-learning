@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { usePreferencesStore } from '@/stores/preferencesStore'
+
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { QuestionMediaViewModel } from '@/types'
 
@@ -7,6 +9,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const settings = usePreferencesStore()
 </script>
 
 <template>
@@ -29,6 +32,7 @@ const props = defineProps<Props>()
         v-else-if="mediaAsset.isAvailable && mediaAsset.mediaType === 'AUDIO'"
         class="question-media__audio"
         :src="mediaAsset.url"
+        :muted="settings.preferences.muted"
         controls
       >
         当前浏览器不支持音频播放。
@@ -38,15 +42,21 @@ const props = defineProps<Props>()
         class="question-media__video"
         :src="mediaAsset.url"
         :aria-label="mediaAsset.altText || '题目视频'"
+        :muted="settings.preferences.muted"
         controls
       />
       <div v-else class="question-media__fallback" role="status">
         <AppIcon name="info" :size="18" decorative />
         <span>这项媒体内容暂时无法显示，可以继续阅读题目。</span>
       </div>
-      <figcaption v-if="mediaAsset.transcript" class="question-media__transcript">
+      <details
+        v-if="mediaAsset.transcript"
+        :open="settings.preferences.showTranscript"
+        class="question-media__transcript"
+      >
+        <summary>文字讲解</summary>
         {{ mediaAsset.transcript }}
-      </figcaption>
+      </details>
     </figure>
   </div>
 </template>

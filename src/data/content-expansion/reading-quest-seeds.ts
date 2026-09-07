@@ -1,4 +1,8 @@
+import { revisedChineseReadingSeeds } from './g2-chinese-lower-revised-practice'
+
 export interface ReadingQuestionSeed {
+  textbookId?: string
+  wordPairs?: [string, string][]
   title: string
   evidence: string
   prompt: string
@@ -8,6 +12,7 @@ export interface ReadingQuestionSeed {
 }
 
 export const readingQuestionSeeds: ReadingQuestionSeed[] = [
+  ...revisedChineseReadingSeeds,
   {
     title: '静夜思',
     evidence: '低头思故乡',

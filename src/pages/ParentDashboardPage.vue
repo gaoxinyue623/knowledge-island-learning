@@ -14,6 +14,11 @@ import { subjectTheme } from '@/data/subjectTheme'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useParentReportStore } from '@/stores/parentReportStore'
+import { useStudentStore } from '@/stores/studentStore'
+import {
+  getCurriculumPresentation,
+  type CurriculumPresentation,
+} from '@/composables/useCurriculumPresentation'
 import type {
   ParentReport,
   ParentReportDemoScenario,
@@ -25,6 +30,8 @@ const route = useRoute()
 const router = useRouter()
 const curriculumStore = useCurriculumStore()
 const reportStore = useParentReportStore()
+const studentStore = useStudentStore()
+const presentation = ref<CurriculumPresentation | null>(null)
 
 const demoScenario = ref<ParentReportDemoScenario>('full')
 const demoScenarios: Array<{ value: ParentReportDemoScenario; label: string }> = [
@@ -50,10 +57,23 @@ const currentProfile = computed(() =>
   isDevRoute.value ? phase14DemoProfile : curriculumStore.curriculumProfile,
 )
 const report = computed(() => reportStore.report)
+const displayName = computed(() =>
+  !isDevRoute.value && studentStore.profile?.id === currentProfileId.value
+    ? studentStore.profile.displayName
+    : report.value?.profile.displayName,
+)
+const companionTip = computed(() => {
+  if (report.value?.wrongBook.activeCount)
+    return '一起选一道错题，请孩子先讲自己的想法，再看提示重练。'
+  if (report.value?.participation.completedLessons)
+    return '请孩子挑出今天学到的一件事，讲给你听；一起回看一个例子或一句话。'
+  return '先陪孩子选一科，完成一小段学习，再听听孩子发现了什么。'
+})
 const hasAnyData = computed(() => {
   const value = report.value
   if (!value) return false
   return Boolean(
+    value.participation.recentItems.length ||
     value.overview.learningDays ||
     value.overview.completedLessons ||
     value.overview.completedAssessments ||
@@ -137,7 +157,7 @@ function assessmentSummary(item: ParentReport['activity']['recentItems'][number]
     summary.assessmentPercentage === null || summary.assessmentPercentage === undefined
       ? '待人工判断'
       : `${summary.assessmentPercentage}%`
-  return `共 ${summary.questionCount ?? 0} 题 · 答对 ${summary.correctCount ?? 0} · 答错 ${summary.incorrectCount ?? 0} · 完成度 ${percentage}`
+  return `共 ${summary.questionCount ?? 0} 题 · 答对 ${summary.correctCount ?? 0} · 答错 ${summary.incorrectCount ?? 0} · 答题正确率 ${percentage}（不等于掌握度）`
 }
 
 function childPath(path: '/learning-map' | '/wrong-book' | '/review-queue'): string {
@@ -154,6 +174,16 @@ function returnToChild(): void {
 
 async function loadReport(): Promise<void> {
   const profileId = currentProfileId.value
+  const profile = currentProfile.value
+  presentation.value = null
+  if (profile) {
+    try {
+      const result = await getCurriculumPresentation(profile)
+      if (profileId === currentProfileId.value) presentation.value = result
+    } catch {
+      /* Names are optional; report facts still load independently. */
+    }
+  }
   await reportStore.loadReport(profileId, {
     dataset: isDevRoute.value ? 'demo' : 'profile',
     profile: currentProfile.value ?? undefined,
@@ -178,7 +208,7 @@ async function changeDemoScenario(): Promise<void> {
 
 onMounted(() => void loadReport())
 watch(
-  () => route.path,
+  () => [route.path, currentProfileId.value],
   () => void loadReport(),
 )
 </script>
@@ -188,13 +218,14 @@ watch(
     <div class="parent-report-page content-container">
       <header class="parent-report-page__header">
         <div class="parent-report-page__header-copy">
-          <p class="curriculum-eyebrow">PARENT LEARNING REPORT · PHASE 15</p>
+          <p class="curriculum-eyebrow">一起看见每一步进步</p>
           <h1>{{ isDevRoute ? '家长学习报告样本' : '学习报告' }}</h1>
           <p>看看孩子最近学过什么、哪些地方正在巩固，以及已经留下的学习足迹。</p>
           <p class="parent-report-page__profile-line">
-            {{ report?.profile.displayName || '当前学习档案' }}
-            <span v-if="currentProfile?.gradeId">· {{ currentProfile.gradeId }}</span>
-            <span v-if="currentProfile?.semesterId">· {{ currentProfile.semesterId }}</span>
+            {{ displayName || '当前学习档案' }}
+            <span v-if="presentation"
+              >· {{ presentation.gradeName }} · {{ presentation.semesterName }}</span
+            >
           </p>
         </div>
         <div class="parent-report-page__header-actions">
@@ -217,7 +248,7 @@ watch(
 
       <section class="parent-report-page__controls" aria-labelledby="report-controls-title">
         <div>
-          <p class="curriculum-eyebrow">REPORT VIEW</p>
+          <p class="curriculum-eyebrow">按需要查看</p>
           <h2 id="report-controls-title">查看范围</h2>
         </div>
         <div class="parent-report-page__control-grid">
@@ -258,7 +289,11 @@ watch(
 
       <div v-if="reportStore.warning" class="parent-report-page__notice" role="status">
         <AppIcon name="alert-circle" :size="18" decorative />
-        <span>{{ reportStore.warning }}</span>
+        <span>{{
+          isDevRoute
+            ? reportStore.warning
+            : '部分内容未纳入正式统计，或有记录暂时无法读取；已显示能够读取的学习足迹。'
+        }}</span>
       </div>
 
       <div v-if="report?.flags.isSampleDerived" class="parent-report-page__source-note" role="note">
@@ -290,338 +325,404 @@ watch(
       />
 
       <template v-else-if="report">
-        <section
-          class="parent-report-page__section parent-report-page__overview"
-          aria-labelledby="overview-title"
-        >
+        <section class="parent-report-page__section" aria-labelledby="participation-title">
           <div class="parent-report-page__section-heading">
             <div>
-              <p class="curriculum-eyebrow">OVERVIEW</p>
-              <h2 id="overview-title">最近学习概览</h2>
+              <p class="curriculum-eyebrow">先看孩子做过什么</p>
+              <h2 id="participation-title">孩子的学习足迹</h2>
             </div>
-            <span class="parent-report-page__muted">只汇总已经发生的学习记录</span>
+            <span class="parent-report-page__muted">当前档案 · 当前时间与学科范围</span>
           </div>
           <div class="parent-report-page__metric-grid">
             <article class="parent-report-page__metric-card">
-              <AppIcon name="route" :size="20" decorative />
-              <strong>{{ report.overview.learningDays }}</strong>
-              <span>学习天数</span>
+              <strong>{{ report.participation.completedLessons }}</strong
+              ><span>学过的课程</span>
             </article>
             <article class="parent-report-page__metric-card">
-              <AppIcon name="book-open" :size="20" decorative />
-              <strong>{{ report.overview.completedLessons }}</strong>
-              <span>完成课程</span>
+              <strong>{{ report.participation.completedAssessments }}</strong
+              ><span>完成课后练习次数</span>
             </article>
             <article class="parent-report-page__metric-card">
-              <AppIcon name="check-circle" :size="20" decorative />
-              <strong>{{ report.overview.completedAssessments }}</strong>
-              <span>完成练习</span>
-            </article>
-            <article class="parent-report-page__metric-card">
-              <AppIcon name="route" :size="20" decorative />
-              <strong
-                >{{ report.overview.completedDailyTasks }} /
-                {{ report.overview.totalDailyTasks }}</strong
-              >
-              <span>计划任务</span>
-            </article>
-            <article class="parent-report-page__metric-card">
-              <AppIcon name="circle-help" :size="20" decorative />
-              <strong>{{ report.overview.activeWrongQuestions }}</strong>
-              <span>待处理错题</span>
-            </article>
-            <article class="parent-report-page__metric-card">
-              <AppIcon name="lightbulb" :size="20" decorative />
-              <strong>{{ report.review.pendingCount }}</strong>
-              <span>待巩固内容</span>
+              <strong>{{ report.participation.activeDays }}</strong
+              ><span>留下完成记录的天数</span>
             </article>
           </div>
-        </section>
-
-        <section class="parent-report-page__section" aria-labelledby="activity-title">
-          <div class="parent-report-page__section-heading">
-            <div>
-              <p class="curriculum-eyebrow">RECENT ACTIVITY</p>
-              <h2 id="activity-title">最近学习</h2>
-            </div>
-            <strong>{{ report.activity.recentItems.length }} 条</strong>
-          </div>
-          <ol v-if="report.activity.recentItems.length" class="parent-report-page__activity-list">
-            <li v-for="item in report.activity.recentItems" :key="item.id">
+          <p class="parent-report-page__muted">
+            学习足迹记录已经完成的教材学习，不等于已经掌握。独立闯关和课外阅读练习在各自页面记录。
+          </p>
+          <p v-if="report.participation.unverifiedCount" class="parent-report-page__muted">
+            其中
+            {{ report.participation.unverifiedCount }}
+            条完成记录对应的内容仍待核验：足迹会保留，但不作为下方正式学习结论。
+          </p>
+          <ol
+            v-if="report.participation.recentItems.length"
+            class="parent-report-page__activity-list"
+          >
+            <li v-for="item in report.participation.recentItems" :key="item.id">
               <span class="parent-report-page__activity-dot" aria-hidden="true" />
               <div>
-                <strong>{{ item.title }}</strong>
-                <span>{{ subjectLabel(item.subject) }} · {{ formatDate(item.occurredAt) }}</span>
-                <small v-if="assessmentSummary(item)">{{ assessmentSummary(item) }}</small>
+                <strong>{{ item.title }}</strong
+                ><span>{{ subjectLabel(item.subject) }} · {{ formatDate(item.occurredAt) }}</span
+                ><small v-if="assessmentSummary(item)">{{ assessmentSummary(item) }}</small>
               </div>
             </li>
           </ol>
           <p v-else class="parent-report-page__section-empty">
-            完成学习后，这里会留下孩子的学习记录。
+            这个范围内还没有教材完成记录，可以换个时间范围，或一起开始一小段学习。
           </p>
         </section>
-
-        <section class="parent-report-page__section" aria-labelledby="trend-title">
-          <div class="parent-report-page__section-heading">
-            <div>
-              <p class="curriculum-eyebrow">ACTIVITY TREND</p>
-              <h2 id="trend-title">学习完成记录</h2>
-            </div>
-            <span class="parent-report-page__muted">{{ report.trend.description }}</span>
-          </div>
-          <div
-            v-if="report.trend.hasData"
-            class="parent-report-page__trend"
-            role="img"
-            aria-label="按日期查看完成记录"
+        <section class="parent-report-page__section" aria-labelledby="companion-title">
+          <h2 id="companion-title">今天可以怎样陪一陪？</h2>
+          <p>{{ companionTip }}</p>
+          <AppButton
+            variant="soft"
+            @click="goToChild(report.wrongBook.activeCount ? '/wrong-book' : '/learning-map')"
+            >{{ report.wrongBook.activeCount ? '一起回看错题' : '一起回到知识岛' }}</AppButton
           >
+        </section>
+        <details class="parent-report-page__formal-details">
+          <summary>查看已核验内容的学习统计与巩固建议</summary>
+          <p>这里仅展示符合来源规则的数据。没有记录不等于没有学习，也不等于已经全部掌握。</p>
+          <section
+            class="parent-report-page__section parent-report-page__overview"
+            aria-labelledby="overview-title"
+          >
+            <div class="parent-report-page__section-heading">
+              <div>
+                <p class="curriculum-eyebrow">学习概览</p>
+                <h2 id="overview-title">已核验内容的学习统计</h2>
+              </div>
+              <span class="parent-report-page__muted"
+                >仅统计符合来源规则的记录；为 0 不表示孩子没有学习</span
+              >
+            </div>
+            <div class="parent-report-page__metric-grid">
+              <article class="parent-report-page__metric-card">
+                <AppIcon name="route" :size="20" decorative />
+                <strong>{{ report.overview.learningDays }}</strong>
+                <span>学习天数</span>
+              </article>
+              <article class="parent-report-page__metric-card">
+                <AppIcon name="book-open" :size="20" decorative />
+                <strong>{{ report.overview.completedLessons }}</strong>
+                <span>完成课程</span>
+              </article>
+              <article class="parent-report-page__metric-card">
+                <AppIcon name="check-circle" :size="20" decorative />
+                <strong>{{ report.overview.completedAssessments }}</strong>
+                <span>完成练习</span>
+              </article>
+              <article class="parent-report-page__metric-card">
+                <AppIcon name="route" :size="20" decorative />
+                <strong
+                  >{{ report.overview.completedDailyTasks }} /
+                  {{ report.overview.totalDailyTasks }}</strong
+                >
+                <span>计划任务</span>
+              </article>
+              <article class="parent-report-page__metric-card">
+                <AppIcon name="circle-help" :size="20" decorative />
+                <strong>{{ report.overview.activeWrongQuestions }}</strong>
+                <span>待处理错题</span>
+              </article>
+              <article class="parent-report-page__metric-card">
+                <AppIcon name="lightbulb" :size="20" decorative />
+                <strong>{{ report.review.pendingCount }}</strong>
+                <span>待巩固内容</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="parent-report-page__section" aria-labelledby="activity-title">
+            <div class="parent-report-page__section-heading">
+              <div>
+                <p class="curriculum-eyebrow">完成记录</p>
+                <h2 id="activity-title">纳入正式统计的最近学习</h2>
+              </div>
+              <strong>{{ report.activity.recentItems.length }} 条</strong>
+            </div>
+            <ol v-if="report.activity.recentItems.length" class="parent-report-page__activity-list">
+              <li v-for="item in report.activity.recentItems" :key="item.id">
+                <span class="parent-report-page__activity-dot" aria-hidden="true" />
+                <div>
+                  <strong>{{ item.title }}</strong>
+                  <span>{{ subjectLabel(item.subject) }} · {{ formatDate(item.occurredAt) }}</span>
+                  <small v-if="assessmentSummary(item)">{{ assessmentSummary(item) }}</small>
+                </div>
+              </li>
+            </ol>
+            <p v-else class="parent-report-page__section-empty">
+              暂无符合来源规则的完成记录，已发生的学习请查看上方“学习足迹”。
+            </p>
+          </section>
+
+          <section class="parent-report-page__section" aria-labelledby="trend-title">
+            <div class="parent-report-page__section-heading">
+              <div>
+                <p class="curriculum-eyebrow">按日期回看</p>
+                <h2 id="trend-title">学习完成记录</h2>
+              </div>
+              <span class="parent-report-page__muted">{{ report.trend.description }}</span>
+            </div>
             <div
-              v-for="point in report.trend.points"
-              :key="point.dateKey"
-              class="parent-report-page__trend-point"
+              v-if="report.trend.hasData"
+              class="parent-report-page__trend"
+              role="img"
+              aria-label="按日期查看完成记录"
             >
-              <div class="parent-report-page__trend-bar-wrap">
-                <span
-                  class="parent-report-page__trend-bar"
-                  :style="{ height: `${trendHeight(point)}%` }"
-                  :aria-label="`${point.dateKey} 共 ${point.completedTaskCount + point.activityCount} 条完成记录`"
+              <div
+                v-for="point in report.trend.points"
+                :key="point.dateKey"
+                class="parent-report-page__trend-point"
+              >
+                <div class="parent-report-page__trend-bar-wrap">
+                  <span
+                    class="parent-report-page__trend-bar"
+                    :style="{ height: `${trendHeight(point)}%` }"
+                    :aria-label="`${point.dateKey} 共 ${point.completedTaskCount + point.activityCount} 条完成记录`"
+                  />
+                </div>
+                <strong>{{ point.completedTaskCount + point.activityCount }}</strong>
+                <small>{{ formatDateKey(point.dateKey) }}</small>
+              </div>
+            </div>
+            <p v-if="report.trend.hasData" class="sr-only">{{ trendAccessibleSummary }}</p>
+            <p v-else class="parent-report-page__section-empty">
+              选择范围内还没有可展示的趋势记录。
+            </p>
+          </section>
+
+          <section class="parent-report-page__section" aria-labelledby="subjects-title">
+            <div class="parent-report-page__section-heading">
+              <div>
+                <p class="curriculum-eyebrow">分学科查看</p>
+                <h2 id="subjects-title">学科进展</h2>
+              </div>
+            </div>
+            <div class="parent-report-page__subject-grid">
+              <article
+                v-for="subject in visibleSubjects"
+                :key="subject.subject"
+                class="parent-report-page__subject-card"
+                :class="`parent-report-page__subject-card--${subject.subject.toLowerCase()}`"
+              >
+                <div class="parent-report-page__subject-heading">
+                  <div>
+                    <span class="parent-report-page__subject-name">{{
+                      subjectLabel(subject.subject)
+                    }}</span>
+                    <span v-if="!subject.hasData" class="parent-report-page__muted"
+                      >暂无已核验的学习记录</span
+                    >
+                  </div>
+                  <AppIcon :name="subjectTheme[subject.subject].icon" :size="22" decorative />
+                </div>
+                <dl class="parent-report-page__compact-stats">
+                  <div>
+                    <dt>课程</dt>
+                    <dd>{{ subject.completedLessons }}</dd>
+                  </div>
+                  <div>
+                    <dt>练习</dt>
+                    <dd>{{ subject.completedAssessments }}</dd>
+                  </div>
+                  <div>
+                    <dt>已掌握</dt>
+                    <dd>{{ subject.masteredKnowledgePoints }}</dd>
+                  </div>
+                  <div>
+                    <dt>待巩固</dt>
+                    <dd>{{ subject.weakKnowledgePoints }}</dd>
+                  </div>
+                </dl>
+              </article>
+            </div>
+          </section>
+
+          <div class="parent-report-page__two-column">
+            <section class="parent-report-page__section" aria-labelledby="mastery-title">
+              <div class="parent-report-page__section-heading">
+                <div>
+                  <p class="curriculum-eyebrow">了解掌握情况</p>
+                  <h2 id="mastery-title">知识点状态</h2>
+                </div>
+                <strong>{{ report.mastery.totalKnowledgePoints }} 个</strong>
+              </div>
+              <div class="parent-report-page__mastery-list">
+                <div>
+                  <span>尚未开始</span><strong>{{ report.mastery.notStarted }}</strong>
+                </div>
+                <AppProgress
+                  :value="
+                    report.mastery.totalKnowledgePoints
+                      ? (report.mastery.notStarted / report.mastery.totalKnowledgePoints) * 100
+                      : 0
+                  "
+                />
+                <div>
+                  <span>学习中</span><strong>{{ report.mastery.learning }}</strong>
+                </div>
+                <AppProgress
+                  :value="
+                    report.mastery.totalKnowledgePoints
+                      ? (report.mastery.learning / report.mastery.totalKnowledgePoints) * 100
+                      : 0
+                  "
+                />
+                <div>
+                  <span>需要巩固</span><strong>{{ report.mastery.weak }}</strong>
+                </div>
+                <AppProgress
+                  :value="
+                    report.mastery.totalKnowledgePoints
+                      ? (report.mastery.weak / report.mastery.totalKnowledgePoints) * 100
+                      : 0
+                  "
+                  state="warning"
+                />
+                <div>
+                  <span>已掌握</span><strong>{{ report.mastery.mastered }}</strong>
+                </div>
+                <AppProgress
+                  :value="
+                    report.mastery.totalKnowledgePoints
+                      ? (report.mastery.mastered / report.mastery.totalKnowledgePoints) * 100
+                      : 0
+                  "
+                  state="success"
                 />
               </div>
-              <strong>{{ point.completedTaskCount + point.activityCount }}</strong>
-              <small>{{ formatDateKey(point.dateKey) }}</small>
-            </div>
-          </div>
-          <p v-if="report.trend.hasData" class="sr-only">{{ trendAccessibleSummary }}</p>
-          <p v-else class="parent-report-page__section-empty">选择范围内还没有可展示的趋势记录。</p>
-        </section>
+            </section>
 
-        <section class="parent-report-page__section" aria-labelledby="subjects-title">
-          <div class="parent-report-page__section-heading">
-            <div>
-              <p class="curriculum-eyebrow">SUBJECTS</p>
-              <h2 id="subjects-title">学科进展</h2>
-            </div>
-          </div>
-          <div class="parent-report-page__subject-grid">
-            <article
-              v-for="subject in visibleSubjects"
-              :key="subject.subject"
-              class="parent-report-page__subject-card"
-              :class="`parent-report-page__subject-card--${subject.subject.toLowerCase()}`"
-            >
-              <div class="parent-report-page__subject-heading">
+            <section class="parent-report-page__section" aria-labelledby="weak-title">
+              <div class="parent-report-page__section-heading">
                 <div>
-                  <span class="parent-report-page__subject-name">{{
-                    subjectLabel(subject.subject)
-                  }}</span>
-                  <span v-if="!subject.hasData" class="parent-report-page__muted"
-                    >暂无学习记录</span
-                  >
+                  <p class="curriculum-eyebrow">再练一练</p>
+                  <h2 id="weak-title">值得回看</h2>
                 </div>
-                <AppIcon :name="subjectTheme[subject.subject].icon" :size="22" decorative />
+                <strong>{{ report.weakKnowledge.totalCount }} 个</strong>
               </div>
-              <dl class="parent-report-page__compact-stats">
+              <ul v-if="report.weakKnowledge.items.length" class="parent-report-page__item-list">
+                <li
+                  v-for="item in report.weakKnowledge.items"
+                  :key="item.knowledgePointId"
+                  class="parent-report-page__list-item"
+                >
+                  <div class="parent-report-page__list-icon">
+                    <AppIcon name="lightbulb" :size="18" decorative />
+                  </div>
+                  <div>
+                    <strong>{{ item.name }}</strong>
+                    <span
+                      >{{ subjectLabel(item.subject) }} · {{ stateLabel(item.state) }} · 掌握度
+                      {{ item.masteryScore }}</span
+                    >
+                  </div>
+                  <span v-if="item.hasReviewRecommendation" class="parent-report-page__status-badge"
+                    >有建议</span
+                  >
+                </li>
+              </ul>
+              <p v-else class="parent-report-page__section-empty">
+                目前没有可展示的巩固建议，不代表已经全部掌握。
+              </p>
+              <AppButton
+                v-if="report.weakKnowledge.items.length"
+                variant="secondary"
+                icon-right="arrow-right"
+                @click="goToChild('/review-queue')"
+              >
+                查看待巩固列表
+              </AppButton>
+            </section>
+          </div>
+
+          <div class="parent-report-page__two-column">
+            <section class="parent-report-page__section" aria-labelledby="wrong-title">
+              <div class="parent-report-page__section-heading">
                 <div>
-                  <dt>课程</dt>
-                  <dd>{{ subject.completedLessons }}</dd>
+                  <p class="curriculum-eyebrow">从错误中发现</p>
+                  <h2 id="wrong-title">错题记录</h2>
+                </div>
+                <strong>{{ report.wrongBook.activeCount }} 道待处理</strong>
+              </div>
+              <ul v-if="report.wrongBook.recentItems.length" class="parent-report-page__item-list">
+                <li
+                  v-for="item in report.wrongBook.recentItems"
+                  :key="item.questionId"
+                  class="parent-report-page__list-item"
+                >
+                  <div class="parent-report-page__list-icon">
+                    <AppIcon name="circle-help" :size="18" decorative />
+                  </div>
+                  <div>
+                    <strong>题目 {{ item.questionId }}</strong>
+                    <span
+                      >{{ subjectLabel(item.subject) }} · 错过 {{ item.wrongCount }} 次 ·
+                      {{ item.status === 'active' ? '待巩固' : '已解决' }}</span
+                    >
+                  </div>
+                </li>
+              </ul>
+              <p v-else class="parent-report-page__section-empty">目前没有可展示的错题记录。</p>
+              <AppButton
+                variant="secondary"
+                icon-right="arrow-right"
+                @click="goToChild('/wrong-book')"
+              >
+                查看错题本
+              </AppButton>
+            </section>
+
+            <section class="parent-report-page__section" aria-labelledby="review-title">
+              <div class="parent-report-page__section-heading">
+                <div>
+                  <p class="curriculum-eyebrow">主动回看</p>
+                  <h2 id="review-title">待巩固列表</h2>
+                </div>
+                <strong>{{ report.review.pendingCount }} 项待完成</strong>
+              </div>
+              <dl class="parent-report-page__review-stats">
+                <div>
+                  <dt>当前待巩固</dt>
+                  <dd>{{ report.review.pendingCount }}</dd>
                 </div>
                 <div>
-                  <dt>练习</dt>
-                  <dd>{{ subject.completedAssessments }}</dd>
+                  <dt>已完成巩固</dt>
+                  <dd>{{ report.review.completedCount }}</dd>
                 </div>
                 <div>
-                  <dt>已掌握</dt>
-                  <dd>{{ subject.masteredKnowledgePoints }}</dd>
-                </div>
-                <div>
-                  <dt>待巩固</dt>
-                  <dd>{{ subject.weakKnowledgePoints }}</dd>
+                  <dt>范围内完成</dt>
+                  <dd>{{ report.review.recentCompletedCount }}</dd>
                 </div>
               </dl>
-            </article>
+              <p class="parent-report-page__section-copy">
+                待巩固来自现有学习策略的建议，报告只展示，不会自动安排学习。
+              </p>
+              <AppButton
+                variant="secondary"
+                icon-right="arrow-right"
+                @click="goToChild('/review-queue')"
+              >
+                查看待巩固列表
+              </AppButton>
+            </section>
           </div>
-        </section>
-
-        <div class="parent-report-page__two-column">
-          <section class="parent-report-page__section" aria-labelledby="mastery-title">
-            <div class="parent-report-page__section-heading">
-              <div>
-                <p class="curriculum-eyebrow">MASTERY DISTRIBUTION</p>
-                <h2 id="mastery-title">知识点状态</h2>
-              </div>
-              <strong>{{ report.mastery.totalKnowledgePoints }} 个</strong>
-            </div>
-            <div class="parent-report-page__mastery-list">
-              <div>
-                <span>尚未开始</span><strong>{{ report.mastery.notStarted }}</strong>
-              </div>
-              <AppProgress
-                :value="
-                  report.mastery.totalKnowledgePoints
-                    ? (report.mastery.notStarted / report.mastery.totalKnowledgePoints) * 100
-                    : 0
-                "
-              />
-              <div>
-                <span>学习中</span><strong>{{ report.mastery.learning }}</strong>
-              </div>
-              <AppProgress
-                :value="
-                  report.mastery.totalKnowledgePoints
-                    ? (report.mastery.learning / report.mastery.totalKnowledgePoints) * 100
-                    : 0
-                "
-              />
-              <div>
-                <span>需要巩固</span><strong>{{ report.mastery.weak }}</strong>
-              </div>
-              <AppProgress
-                :value="
-                  report.mastery.totalKnowledgePoints
-                    ? (report.mastery.weak / report.mastery.totalKnowledgePoints) * 100
-                    : 0
-                "
-                state="warning"
-              />
-              <div>
-                <span>已掌握</span><strong>{{ report.mastery.mastered }}</strong>
-              </div>
-              <AppProgress
-                :value="
-                  report.mastery.totalKnowledgePoints
-                    ? (report.mastery.mastered / report.mastery.totalKnowledgePoints) * 100
-                    : 0
-                "
-                state="success"
-              />
-            </div>
-          </section>
-
-          <section class="parent-report-page__section" aria-labelledby="weak-title">
-            <div class="parent-report-page__section-heading">
-              <div>
-                <p class="curriculum-eyebrow">WEAK KNOWLEDGE</p>
-                <h2 id="weak-title">值得回看</h2>
-              </div>
-              <strong>{{ report.weakKnowledge.totalCount }} 个</strong>
-            </div>
-            <ul v-if="report.weakKnowledge.items.length" class="parent-report-page__item-list">
-              <li
-                v-for="item in report.weakKnowledge.items"
-                :key="item.knowledgePointId"
-                class="parent-report-page__list-item"
-              >
-                <div class="parent-report-page__list-icon">
-                  <AppIcon name="lightbulb" :size="18" decorative />
-                </div>
-                <div>
-                  <strong>{{ item.name }}</strong>
-                  <span
-                    >{{ subjectLabel(item.subject) }} · {{ stateLabel(item.state) }} · 掌握度
-                    {{ item.masteryScore }}</span
-                  >
-                </div>
-                <span v-if="item.hasReviewRecommendation" class="parent-report-page__status-badge"
-                  >有建议</span
-                >
-              </li>
-            </ul>
-            <p v-else class="parent-report-page__section-empty">目前没有待巩固知识点。</p>
-            <AppButton
-              v-if="report.weakKnowledge.items.length"
-              variant="secondary"
-              icon-right="arrow-right"
-              @click="goToChild('/review-queue')"
-            >
-              查看待巩固列表
-            </AppButton>
-          </section>
-        </div>
-
-        <div class="parent-report-page__two-column">
-          <section class="parent-report-page__section" aria-labelledby="wrong-title">
-            <div class="parent-report-page__section-heading">
-              <div>
-                <p class="curriculum-eyebrow">WRONG BOOK</p>
-                <h2 id="wrong-title">错题记录</h2>
-              </div>
-              <strong>{{ report.wrongBook.activeCount }} 道待处理</strong>
-            </div>
-            <ul v-if="report.wrongBook.recentItems.length" class="parent-report-page__item-list">
-              <li
-                v-for="item in report.wrongBook.recentItems"
-                :key="item.questionId"
-                class="parent-report-page__list-item"
-              >
-                <div class="parent-report-page__list-icon">
-                  <AppIcon name="circle-help" :size="18" decorative />
-                </div>
-                <div>
-                  <strong>题目 {{ item.questionId }}</strong>
-                  <span
-                    >{{ subjectLabel(item.subject) }} · 错过 {{ item.wrongCount }} 次 ·
-                    {{ item.status === 'active' ? '待巩固' : '已解决' }}</span
-                  >
-                </div>
-              </li>
-            </ul>
-            <p v-else class="parent-report-page__section-empty">目前没有可展示的错题记录。</p>
-            <AppButton
-              variant="secondary"
-              icon-right="arrow-right"
-              @click="goToChild('/wrong-book')"
-            >
-              查看错题本
-            </AppButton>
-          </section>
-
-          <section class="parent-report-page__section" aria-labelledby="review-title">
-            <div class="parent-report-page__section-heading">
-              <div>
-                <p class="curriculum-eyebrow">REVIEW QUEUE</p>
-                <h2 id="review-title">待巩固列表</h2>
-              </div>
-              <strong>{{ report.review.pendingCount }} 项待完成</strong>
-            </div>
-            <dl class="parent-report-page__review-stats">
-              <div>
-                <dt>当前待巩固</dt>
-                <dd>{{ report.review.pendingCount }}</dd>
-              </div>
-              <div>
-                <dt>已完成巩固</dt>
-                <dd>{{ report.review.completedCount }}</dd>
-              </div>
-              <div>
-                <dt>范围内完成</dt>
-                <dd>{{ report.review.recentCompletedCount }}</dd>
-              </div>
-            </dl>
-            <p class="parent-report-page__section-copy">
-              待巩固来自现有学习策略的建议，报告只展示，不会自动安排学习。
-            </p>
-            <AppButton
-              variant="secondary"
-              icon-right="arrow-right"
-              @click="goToChild('/review-queue')"
-            >
-              查看待巩固列表
-            </AppButton>
-          </section>
-        </div>
+        </details>
 
         <div class="parent-report-page__two-column">
           <section class="parent-report-page__section" aria-labelledby="growth-title">
             <div class="parent-report-page__section-heading">
               <div>
-                <p class="curriculum-eyebrow">GROWTH</p>
+                <p class="curriculum-eyebrow">一点一滴的积累</p>
                 <h2 id="growth-title">成长记录</h2>
               </div>
               <AppIcon name="star" :size="22" decorative />
             </div>
             <div class="parent-report-page__growth-value">
               <strong>{{ report.growth.knowledgeEnergy }}</strong>
-              <span>KnowledgeEnergy</span>
+              <span>成长能量</span>
             </div>
             <p>
               当前成长等级 {{ report.growth.growthLevel }} · 本范围新增
@@ -638,7 +739,7 @@ watch(
           <section class="parent-report-page__section" aria-labelledby="achievement-title">
             <div class="parent-report-page__section-heading">
               <div>
-                <p class="curriculum-eyebrow">ACHIEVEMENTS</p>
+                <p class="curriculum-eyebrow">值得记住的时刻</p>
                 <h2 id="achievement-title">已经留下的里程碑</h2>
               </div>
               <strong
@@ -668,7 +769,11 @@ watch(
           </section>
         </div>
 
-        <div v-if="report.diagnostics.length" class="parent-report-page__diagnostics" role="status">
+        <div
+          v-if="isDevRoute && report.diagnostics.length"
+          class="parent-report-page__diagnostics"
+          role="status"
+        >
           <AppIcon name="info" :size="18" decorative />
           <span>{{ report.diagnostics.join('；') }}</span>
         </div>

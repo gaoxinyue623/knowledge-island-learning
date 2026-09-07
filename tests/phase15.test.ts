@@ -569,6 +569,10 @@ describe('PHASE 15 Parent Report', () => {
 
     expect(formal.flags.isSampleDerived).toBe(false)
     expect(formal.overview.completedLessons).toBe(1)
+    expect(formal.participation.completedLessons).toBe(1)
+    expect(formal.participation.recentItems.some((item) => item.id === 'history-sample')).toBe(
+      false,
+    )
     expect(demo.flags.isSampleDerived).toBe(true)
     expect(demo.overview.completedLessons).toBe(2)
   })
@@ -712,6 +716,67 @@ describe('PHASE 15 Parent Report', () => {
     })
     expect(report.overview.completedLessons).toBe(0)
     expect(report.flags.containsUnverifiedContent).toBe(false)
+    expect(report.participation.completedLessons).toBe(1)
+    expect(report.participation.unverifiedCount).toBe(1)
+    expect(report.participation.recentItems[0]?.title).toContain('加法探险')
+    expect(unverifiedHistory.provenance.verificationStatus).toBe('UNVERIFIED')
+  })
+
+  it('keeps participation scoped by profile, subject and time, and retains old textbook titles without admitting unsafe mastery', async () => {
+    const old = {
+      ...history[0]!,
+      id: 'old-unverified',
+      textbookId: 'OLD_CHINESE',
+      occurredAt: '2026-08-01T10:00:00+08:00',
+      provenance: { isSampleDerived: false, verificationStatus: 'UNVERIFIED' as const },
+    }
+    const rows = [
+      old,
+      old,
+      { ...old, id: 'other-child', profileId: 'PROFILE_B' },
+      {
+        ...old,
+        id: 'rejected',
+        provenance: { isSampleDerived: false, verificationStatus: 'REJECTED' as const },
+      },
+    ]
+    const oldSource = {
+      ...source,
+      textbook: {
+        ...source.textbook,
+        id: 'OLD_CHINESE',
+        subject: 'CHINESE' as const,
+        verificationStatus: 'UNVERIFIED' as const,
+      },
+      verificationStatus: 'UNVERIFIED' as const,
+    }
+    const service = createFixture({
+      historyService: { listByProfile: () => rows, getLastWarning: () => null } as never,
+      mapRepository: {
+        getMapSource: async (request) =>
+          request.textbookId === 'OLD_CHINESE' ? oldSource : source,
+      },
+    })
+    const options = {
+      profile,
+      now: '2026-09-10T12:00:00+08:00',
+      range: 'all' as const,
+      subject: 'CHINESE' as const,
+    }
+    const report = await service.buildReport('PROFILE_A', options)
+    expect(report.range.startDate).toBe('2026-08-01')
+    expect(report.participation.completedLessons).toBe(1)
+    expect(report.participation.recentItems.map((r) => r.id)).toEqual(['old-unverified'])
+    expect(report.overview.completedLessons).toBe(0)
+    expect(
+      (await service.buildReport('PROFILE_A', { ...options, range: '7d' })).participation
+        .completedLessons,
+    ).toBe(0)
+    expect(
+      (await service.buildReport('PROFILE_A', { ...options, subject: 'MATH' })).participation
+        .completedLessons,
+    ).toBe(0)
+    expect(oldSource.verificationStatus).toBe('UNVERIFIED')
   })
 
   it('handles empty and explicit development fixture variants without changing domain storage', async () => {

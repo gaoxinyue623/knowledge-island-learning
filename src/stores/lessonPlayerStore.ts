@@ -403,6 +403,7 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
 
   return {
     context,
+    activeStudentId: computed(() => studentId.value),
     viewModel,
     session,
     currentStepIndex,

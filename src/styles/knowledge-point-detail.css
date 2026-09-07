@@ -123,7 +123,6 @@
 .knowledge-detail__facts,
 .knowledge-detail__mastery,
 .knowledge-detail__goals,
-.knowledge-detail__reading,
 .knowledge-detail__challenges,
 .knowledge-detail__practice {
   min-width: 0;
@@ -278,18 +277,9 @@
   list-style: disc;
 }
 
-.knowledge-detail__content-note,
 .knowledge-detail__section-intro {
   color: var(--color-text-secondary);
   font-size: 14px;
-}
-
-.knowledge-detail__reading .lesson-content-renderer {
-  gap: var(--space-4);
-}
-
-.knowledge-detail__reading .lesson-block {
-  background: var(--color-surface);
 }
 
 .knowledge-detail__challenges {

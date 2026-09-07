@@ -9,21 +9,55 @@ import AppIcon from '@/components/common/AppIcon.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import SubjectHabitat from '@/components/illustrations/SubjectHabitat.vue'
+import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
+import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import islandAdventure from '@/assets/illustrations/island-adventure.jpg'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useHomeStore } from '@/stores/homeStore'
+import { useStudentStore } from '@/stores/studentStore'
 import type { DailyLearningTask, HomeViewModel, IconName, SubjectCode } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
 const curriculumStore = useCurriculumStore()
 const homeStore = useHomeStore()
+const studentStore = useStudentStore()
 
 const isDevRoute = computed(() => route.path === '/dev/home')
 const isTasksRoute = computed(() => route.path === '/tasks')
 const viewModel = computed(() => homeStore.viewModel)
+const primaryTask = computed(
+  () =>
+    viewModel.value?.today.tasks.find(
+      (task) => task.type === 'continue_learning' && task.status === 'pending',
+    ) ?? viewModel.value?.today.tasks.find((task) => task.status === 'pending'),
+)
+const primarySubject = computed(() =>
+  viewModel.value?.subjects.find(
+    (subject) => subject.textbookId && subject.mapStatus !== 'not_available',
+  ),
+)
+const primaryLabel = computed(() =>
+  primaryTask.value
+    ? taskActionLabel(primaryTask.value)
+    : primarySubject.value
+      ? `从${primarySubject.value.label}岛出发`
+      : '选一本教材，开始学习',
+)
+function openPrimary(): void {
+  if (primaryTask.value) return openTask(primaryTask.value)
+  if (primarySubject.value) {
+    void router.push({
+      path: routeForHomePath('/learning-map'),
+      query: {
+        subject: primarySubject.value.code,
+        ...(!isDevRoute.value ? { open: 'continue' } : {}),
+      },
+    })
+  } else void router.push('/curriculum-settings')
+}
 const isFormalPilot = computed(
   () => viewModel.value?.subjects.some((subject) => isPilotTextbook(subject.textbookId)) ?? false,
 )
@@ -174,7 +208,12 @@ async function loadHome(): Promise<void> {
     await homeStore.load(undefined, { dataset: 'demo', seedDemo: true })
     return
   }
-  await homeStore.load(curriculumStore.curriculumProfile ?? undefined, { dataset: 'profile' })
+  await homeStore.load(curriculumStore.curriculumProfile ?? undefined, {
+    dataset: 'profile',
+    ...(studentStore.profile?.id === curriculumStore.curriculumProfile?.studentId
+      ? { displayName: studentStore.profile?.displayName }
+      : {}),
+  })
 }
 
 function progressLabel(progress: HomeViewModel['today']['progress']): string {
@@ -190,7 +229,7 @@ function historySummary(item: HomeViewModel['recentLearning'][number]): string {
 
 onMounted(() => void loadHome())
 watch(
-  () => route.path,
+  () => [route.path, curriculumStore.curriculumProfile?.studentId],
   () => void loadHome(),
 )
 </script>
@@ -219,11 +258,8 @@ watch(
             <h1 id="home-title">小小好奇心，<br />大大的知识岛。</h1>
             <p>和知识团子一起，读故事、动脑筋，发现学习的小乐趣。</p>
             <div class="home-page__hero-actions">
-              <AppButton
-                icon-right="arrow-right"
-                @click="openShortcut(routeForHomePath('/learning-map'))"
-              >
-                出发，探索知识岛
+              <AppButton icon-right="arrow-right" @click="openPrimary">
+                {{ primaryLabel }}
               </AppButton>
               <AppButton
                 v-if="isDevRoute"
@@ -235,6 +271,8 @@ watch(
                 重置今日样本
               </AppButton>
             </div>
+            <p v-if="primaryTask">接着学习：{{ primaryTask.title }}</p>
+            <p v-else>先完成一小段阅读，再选几关练习。也可以在下方换一科出发。</p>
             <span class="home-page__date"
               >{{ viewModel.greeting.dateLabel }} · 每一步，都是新发现</span
             >
@@ -285,9 +323,9 @@ watch(
           <AppEmptyState
             v-if="!viewModel.today.tasks.length"
             title="今天的探索，从哪里开始？"
-            description="还没有学习安排。选一个亮起的关卡，和团子一起出发吧。"
-            action-label="打开知识岛地图"
-            @action="openShortcut(routeForHomePath('/learning-map'))"
+            description="不必等安排，先选一科开始。做完一小段就可以休息，下次再继续。"
+            :action-label="primaryLabel"
+            @action="openPrimary"
           />
           <ol v-else class="home-page__task-list">
             <li
@@ -397,10 +435,17 @@ watch(
                 当前：{{ subject.currentKnowledgePointTitle }}
               </p>
               <AppProgress
+                v-if="subject.progress.total > 0"
                 :value="subject.progress.percentage"
                 :show-value="true"
                 label="地图进度"
               />
+              <p v-else-if="subject.completedLearningSessions" class="home-page__subject-current">
+                已完成 {{ subject.completedLearningSessions }} 次课程学习 · 进岛接着探索
+              </p>
+              <p v-else class="home-page__subject-current">
+                从亮起的第一站开始，一小步也值得记录。
+              </p>
               <AppButton
                 variant="ghost"
                 full-width
@@ -411,6 +456,9 @@ watch(
             </article>
           </div>
         </section>
+
+        <ThinkingEntry v-if="!isDevRoute && !isTasksRoute" />
+        <ReadingEntry v-if="!isDevRoute && !isTasksRoute" />
 
         <div class="home-page__lower-grid">
           <section class="home-page__panel" aria-labelledby="recent-title">
@@ -446,7 +494,13 @@ watch(
                 /></span>
                 <div>
                   <strong>{{ item.title }}</strong
-                  ><span>{{ item.subject }} · {{ historySummary(item) }}</span>
+                  ><span
+                    >{{
+                      viewModel.subjects.find((subject) => subject.code === item.subject)?.label ??
+                      '学习'
+                    }}
+                    · {{ historySummary(item) }}</span
+                  >
                 </div>
                 <time :datetime="item.occurredAt">{{ item.occurredAt.slice(0, 10) }}</time>
               </li>

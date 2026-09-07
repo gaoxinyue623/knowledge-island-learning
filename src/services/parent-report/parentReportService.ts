@@ -60,6 +60,86 @@ const UNSAFE_STATUSES = new Set(['SAMPLE', 'UNVERIFIED', 'REJECTED'])
 const MASTERY_UNSAFE_STATUSES = new Set(['SAMPLE', 'UNVERIFIED', 'MIXED'])
 const EMPTY_DATE = '1970-01-01'
 
+function emptyParticipation(): ParentReport['participation'] {
+  return {
+    completedLessons: 0,
+    completedAssessments: 0,
+    activeDays: 0,
+    unverifiedCount: 0,
+    recentItems: [],
+  }
+}
+
+function participationAllowed(
+  record: LearningHistoryRecord,
+  profileId: Id,
+  dataset: ParentReportDataset,
+): boolean {
+  return (
+    record.profileId === profileId &&
+    record.provenance.verificationStatus !== 'REJECTED' &&
+    (dataset === 'demo' ||
+      (!record.provenance.isSampleDerived && record.provenance.verificationStatus !== 'SAMPLE'))
+  )
+}
+
+// Read-only participation, not evidence of mastery. Keep the formal projection below unchanged.
+function projectParticipation(
+  history: LearningHistoryRecord[],
+  range: ParentReportRange,
+  selectedSubject: ParentReportSubjectFilter,
+  sources: Map<Id, LearningMapCurriculumSource>,
+  textbookSubjects: Map<Id, SubjectCode>,
+): ParentReport['participation'] {
+  const records = [
+    ...new Map(
+      history
+        .filter(
+          (record) =>
+            (record.type === 'lesson_completed' || record.type === 'assessment_completed') &&
+            inRange(record.occurredAt, range) &&
+            subjectMatches(
+              subjectFromTextbookId(record.textbookId, textbookSubjects),
+              selectedSubject,
+            ),
+        )
+        .map((record) => [record.id, record]),
+    ).values(),
+  ].sort(
+    (a, b) =>
+      new Date(b.occurredAt).getTime() - new Date(a.occurredAt).getTime() ||
+      a.id.localeCompare(b.id),
+  )
+  return {
+    completedLessons: new Set(
+      records
+        .filter((r) => r.type === 'lesson_completed')
+        .map((r) => JSON.stringify([r.textbookId, r.lessonId])),
+    ).size,
+    completedAssessments: records.filter((r) => r.type === 'assessment_completed').length,
+    activeDays: new Set(records.map((r) => dateKeyFromValue(r.occurredAt))).size,
+    unverifiedCount: records.filter((r) => !factAllowed(r.provenance, 'profile')).length,
+    recentItems: records.slice(0, 8).map((record) => {
+      const source = sources.get(record.textbookId)
+      const lesson = source?.lessons.find(
+        (l) => l.id === record.lessonId && l.unitId === record.unitId,
+      )
+      const title =
+        lesson && !lesson.isSample && lesson.verificationStatus !== 'REJECTED'
+          ? `《${lesson.title}》`
+          : '教材课程'
+      return {
+        id: record.id,
+        type: record.type as 'lesson_completed' | 'assessment_completed',
+        title: `${title} · ${record.type === 'lesson_completed' ? '完成学习' : '完成课后练习'}`,
+        subject: subjectFromTextbookId(record.textbookId, textbookSubjects),
+        occurredAt: record.occurredAt,
+        ...(record.summary ? { summary: { ...record.summary } } : {}),
+      }
+    }),
+  }
+}
+
 export interface ParentReportAchievementReader {
   listDefinitions(): AchievementDefinition[]
   listUnlocks(profileId: Id, includeSample?: boolean): AchievementUnlock[]
@@ -499,6 +579,7 @@ function applyDemoScenario(
     flags: { ...report.flags },
   }
   if (scenario === 'empty') {
+    next.participation = emptyParticipation()
     next.overview = {
       learningDays: 0,
       completedLessons: 0,
@@ -686,6 +767,9 @@ export class ParentReportService {
     const history = historyRaw.filter(
       (record) => record.profileId === profileId && factAllowed(record.provenance, dataset),
     )
+    const participationHistory = historyRaw.filter((record) =>
+      participationAllowed(record, profileId, dataset),
+    )
     const wrongBook = wrongBookRaw.filter(
       (record) => record.profileId === profileId && factAllowed(record.provenance, dataset),
     )
@@ -709,7 +793,7 @@ export class ParentReportService {
     )
 
     const allDateCandidates = [
-      ...history.map((item) => item.occurredAt),
+      ...participationHistory.map((item) => item.occurredAt),
       ...wrongBook.flatMap((item) => [item.firstWrongAt, item.lastWrongAt, item.resolvedAt ?? '']),
       ...reviewQueue.flatMap((item) => [item.completedAt ?? '']),
       ...rewards.map((item) => item.occurredAt),
@@ -726,7 +810,7 @@ export class ParentReportService {
       const textbookId = profileTextbooks[subject]
       if (textbookId) textbookSubjects.set(textbookId, subject)
     }
-    for (const record of history) {
+    for (const record of participationHistory) {
       const subject = subjectFromTextbookId(record.textbookId, textbookSubjects)
       if (subject) textbookSubjects.set(record.textbookId, subject)
     }
@@ -749,7 +833,7 @@ export class ParentReportService {
 
     const textbookIds = new Set<Id>([
       ...Object.values(profileTextbooks).filter((value): value is Id => Boolean(value)),
-      ...history.map((item) => item.textbookId),
+      ...participationHistory.map((item) => item.textbookId),
       ...wrongBook.flatMap((item) =>
         [item.textbookId, ...(item.textbookIds ?? [])].filter((value): value is Id =>
           Boolean(value),
@@ -760,6 +844,7 @@ export class ParentReportService {
     if (dataset === 'demo' && textbookIds.size === 0) textbookIds.add(phase14DemoTextbookId)
 
     const maps: MapContext[] = []
+    const participationSources = new Map<Id, LearningMapCurriculumSource>()
     const strategyRecommendations: Array<{
       knowledgePointId: Id
       priority: number
@@ -778,6 +863,15 @@ export class ParentReportService {
         null,
       )
       if (!source) continue
+      if (
+        source.textbook.id === requestedTextbookId &&
+        (dataset === 'demo' || (!source.isSample && !source.textbook.isSample)) &&
+        source.verificationStatus !== 'REJECTED' &&
+        source.textbook.verificationStatus !== 'REJECTED'
+      ) {
+        participationSources.set(source.textbook.id, source)
+        textbookSubjects.set(source.textbook.id, source.textbook.subject)
+      }
       if (sourceHasUnverifiedContent(source))
         addDiagnostic(diagnostics, `知识地图 ${source.textbook.id} 含有未审核内容。`)
       if (!sourceAllowed(source, dataset)) {
@@ -857,6 +951,13 @@ export class ParentReportService {
       diagnostics,
     )
     this.lastWarning = diagnostics[0] ?? null
+    report.participation = projectParticipation(
+      participationHistory,
+      range,
+      selectedSubject,
+      participationSources,
+      textbookSubjects,
+    )
     return applyDemoScenario(report, options.demoScenario)
   }
 
@@ -1278,6 +1379,7 @@ export class ParentReportService {
       },
       dailyPlan,
       activity: activitySummary,
+      participation: emptyParticipation(),
       growth,
       achievements,
       trend,

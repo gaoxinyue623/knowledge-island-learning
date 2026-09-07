@@ -70,10 +70,11 @@ onMounted(() => void loadSettings())
 <template>
   <AppShell :show-bottom-nav="true" context="我的学习设置">
     <div class="curriculum-page content-container">
+      <RouterLink class="personal-back" to="/profile">← 返回我的</RouterLink>
       <header class="curriculum-page__header">
         <p class="curriculum-eyebrow">PROFILE / SETTINGS</p>
         <h1>我的学习设置</h1>
-        <p>这里查看和修改学习地区、年级、学期及三科教材。修改后会重新确认，不会静默覆盖旧配置。</p>
+        <p>各科教材可自主选择，不受地区限制。更换年级或教材需要确认，历史学习记录会保留。</p>
       </header>
       <AppLoading v-if="curriculumStore.loading" label="正在读取学习设置" />
       <AppErrorState
@@ -135,9 +136,10 @@ onMounted(() => void loadSettings())
             >
           </div>
         </section>
-        <section class="curriculum-placeholder-panel">
+        <section class="personal-panel">
           <h2>历史学习</h2>
-          <p>切换年级不会删除历史学习记录；历史年级查看位置将在后续阶段开放。</p>
+          <p>切换年级不会删除历史学习记录，可以随时回看已完成的学习。</p>
+          <RouterLink class="personal-text-link" to="/history">查看学习记录 →</RouterLink>
         </section>
       </template>
       <CurriculumSwitchDialog
@@ -145,7 +147,7 @@ onMounted(() => void loadSettings())
         :title="switchKind === 'region' ? '要更换学习地区吗？' : '要更换年级吗？'"
         :description="
           switchKind === 'region'
-            ? '更换地区后，可使用的课本版本可能发生变化。'
+            ? '地区仅作为个人学习资料，更换地区不会清空已选教材，也不会限制可选版本。'
             : '更换年级后，会重新查询三科课本；历史学习记录不会删除。'
         "
         @close="switchDialogOpen = false"

@@ -17,13 +17,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{ select: [region: Region] }>()
 
-const regionLabel = computed(() => {
-  if (props.region.code === 'CN-GD' || props.region.code === 'CN-HB') {
-    return '省级范围 · 人教版语文'
-  }
-  if (props.region.code === 'CN-GD-SZ') return '沪教版英语 · 北师大版二年级上册数学'
-  return props.region.level === 'PROVINCE' ? '省级学习范围' : '学习地区'
-})
+const regionLabel = computed(() =>
+  props.region.level === 'PROVINCE' ? '省级地区 · 教材自由选择' : '城市地区 · 教材自由选择',
+)
 </script>
 
 <template>

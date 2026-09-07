@@ -562,3 +562,27 @@
     transition: none;
   }
 }
+.parent-report-page__formal-details {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--color-border, #d8e1d2);
+  border-radius: 24px;
+  background: var(--color-surface, #fffdf5);
+}
+.parent-report-page__formal-details > summary {
+  min-height: 44px;
+  padding: 10px 4px;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.parent-report-page__formal-details > summary:focus-visible {
+  outline: 3px solid #287865;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+.parent-report-page__formal-details > .parent-report-page__section,
+.parent-report-page__formal-details > .parent-report-page__two-column {
+  margin-top: 24px;
+}

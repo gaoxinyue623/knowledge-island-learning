@@ -136,7 +136,7 @@ describe('Grade 1 PEP Chinese upper-volume candidate curriculum', () => {
   })
 
   it.each([G1_PEP_CHINESE_GUANGDONG_REGION_ID, G1_PEP_CHINESE_HUBEI_REGION_ID])(
-    'resolves Chinese and leaves unavailable subjects empty for %s',
+    'resolves all three subjects independently for %s',
     async (regionId) => {
       const service = new MockCurriculumService({ accessPolicy: candidateAccessPolicy })
       const result = await service.resolveAvailableTextbooks({
@@ -150,12 +150,16 @@ describe('Grade 1 PEP Chinese upper-volume candidate curriculum', () => {
         G1_PEP_CHINESE_S1_TEXTBOOK_ID,
       ])
       expect(result.math).toMatchObject({
-        availableTextbooks: [],
-        resolutionStatus: 'NOT_AVAILABLE',
+        availableTextbooks: [
+          expect.objectContaining({ id: 'G1_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE' }),
+        ],
+        resolutionStatus: 'NEEDS_CONFIRMATION',
       })
       expect(result.english).toMatchObject({
-        availableTextbooks: [],
-        resolutionStatus: 'NOT_AVAILABLE',
+        availableTextbooks: [
+          expect.objectContaining({ id: 'G1_SHENZHEN_SHANGHAI_ENGLISH_S1_2024_CANDIDATE' }),
+        ],
+        resolutionStatus: 'NEEDS_CONFIRMATION',
       })
     },
   )
@@ -208,7 +212,7 @@ describe('Grade 1 PEP Chinese upper-volume candidate curriculum', () => {
       source: 'USER_CONFIRMED',
     })
 
-    expect(store.isChinesePilot).toBe(true)
+    expect(store.chineseTextbookVersionId).toBe(G1_PEP_CHINESE_S1_TEXTBOOK_ID)
     expect(store.isComplete).toBe(true)
   })
 

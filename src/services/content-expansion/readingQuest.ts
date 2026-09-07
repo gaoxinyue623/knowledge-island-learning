@@ -1,5 +1,7 @@
 import { readingQuestionSeeds } from '@/data/content-expansion/reading-quest-seeds'
 import { createMathQuest } from './mathQuest'
+import { createEarlyMathQuest } from './earlyMathQuest'
+import { createLowerMathQuest } from './lowerMathQuest'
 import { productionConfig } from '@/config/production'
 import {
   gradeOneShenzhenEnglishUpperKnowledgePoints,
@@ -36,6 +38,10 @@ const englishDefinitions = new Map([
     (kp, i) => [kp.id, gradeTwoShenzhenEnglishUpperLessonPracticeDefinitions[i]] as const,
   ),
 ])
+
+export function englishPracticeFor(knowledgePointId: string) {
+  return englishDefinitions.get(knowledgePointId)
+}
 
 function hash(value: string): number {
   let result = 2166136261
@@ -203,7 +209,8 @@ export function createReadingQuest(input: {
   )
     return null
   const english = englishDefinitions.get(bundle.knowledgePointId)
-  if (bundle.textbookId.includes('BNU_MATH')) return createMathQuest(bundle)
+  if (bundle.textbookId.includes('BNU_MATH'))
+    return createLowerMathQuest(bundle) ?? createEarlyMathQuest(bundle) ?? createMathQuest(bundle)
   if (!english && !bundle.textbookId.includes('CHINESE')) return null
   const text = plainText(input.text, title)
   const quest: ReadingQuest = {
@@ -341,9 +348,10 @@ export function createReadingQuest(input: {
     sourceLabel: string,
     targetLabel: string,
     instruction: string,
+    title = '找到好搭档',
   ): void {
     if (pairs.length < 2) return
-    const base = activityBase('找到好搭档', instruction)
+    const base = activityBase(title, instruction)
     const stage: QuestActivityStage = {
       id: base.id,
       title: base.title,
@@ -496,7 +504,10 @@ export function createReadingQuest(input: {
     const selected = short.length >= 3 ? short : sentences
     const first = selected[0]!
     const seed = readingQuestionSeeds.find(
-      (seed) => title.includes(seed.title) && text.includes(seed.evidence),
+      (seed) =>
+        (!seed.textbookId || seed.textbookId === bundle.textbookId) &&
+        title.includes(seed.title) &&
+        text.includes(seed.evidence),
     )
     if (seed)
       choice(
@@ -535,6 +546,14 @@ export function createReadingQuest(input: {
       )
     }
     cloze(selected[1]!, '字词补给站')
+    if (seed?.wordPairs)
+      matching(
+        seed.wordPairs,
+        '汉字',
+        '词语',
+        '点一个汉字，再点含有这个字的词语。配好后，把词语读一遍。',
+        '生字组词配配对',
+      )
     const pairs: [string, string][] = []
     for (const sentence of originalSentences) {
       const [left, ...rest] = sentence.split('，')

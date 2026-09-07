@@ -102,8 +102,12 @@ describe('Grade 1 PEP Chinese lower-volume curriculum', () => {
         G1_PEP_CHINESE_S2_TEXTBOOK_ID,
       ])
       expect(result.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
-      expect(result.math.availableTextbooks).toEqual([])
-      expect(result.english.availableTextbooks).toEqual([])
+      expect(result.math.availableTextbooks.map((book) => book.id)).toEqual([
+        'G1_SHENZHEN_BNU_MATH_S2_2024_CANDIDATE',
+      ])
+      expect(result.english.availableTextbooks.map((book) => book.id)).toEqual([
+        'G1_SHENZHEN_SHANGHAI_ENGLISH_S2_2024_CANDIDATE',
+      ])
     },
   )
 
@@ -133,10 +137,13 @@ describe('Grade 1 PEP Chinese lower-volume curriculum', () => {
       G1_PEP_CHINESE_S2_TEXTBOOK_ID,
       'G2_PEP_CHINESE_S1_2024_CANDIDATE',
       'G2_PEP_CHINESE_S2_2024_CANDIDATE',
+      'G2_PEP_CHINESE_S2_REVISED_CANDIDATE',
       'G1_SHENZHEN_SHANGHAI_ENGLISH_S1_2024_CANDIDATE',
       'G1_SHENZHEN_SHANGHAI_ENGLISH_S2_2024_CANDIDATE',
       'G2_SHENZHEN_SHANGHAI_ENGLISH_S1_2024_CANDIDATE',
       'G2_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE',
+      'G1_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE',
+      'G1_SHENZHEN_BNU_MATH_S2_2024_CANDIDATE',
     ])
   })
 })

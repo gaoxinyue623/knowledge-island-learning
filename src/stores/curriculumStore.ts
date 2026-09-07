@@ -1,15 +1,6 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
-import {
-  G1_PEP_CHINESE_GRADE_ID,
-  G1_PEP_CHINESE_GUANGDONG_REGION_ID,
-  G1_PEP_CHINESE_HUBEI_REGION_ID,
-  G1_SHENZHEN_ENGLISH_SEMESTER_ID,
-  G1_SHENZHEN_ENGLISH_S2_SEMESTER_ID,
-  G1_SHENZHEN_REGION_ID,
-} from '@/data/curriculum/grade-1'
-import { G2_PEP_CHINESE_GRADE_ID } from '@/data/curriculum/grade-2'
 import { curriculumService } from '@/services'
 import type { CurriculumService } from '@/services/contracts'
 import { curriculumProfileRepository } from '@/services/storage/curriculumProfileRepository'
@@ -22,20 +13,6 @@ import type {
 } from '@/types'
 
 const SUBJECT_CODES: SubjectCode[] = ['CHINESE', 'MATH', 'ENGLISH']
-// This pilot intentionally covers only the two user-requested regions for the
-// Grade 1 and Grade 2 PEP Chinese candidate datasets. The legacy three-subject contract is
-// kept only for explicitly supplied development/test profiles.
-const CHINESE_PILOT_REGION_IDS = new Set<Id>([
-  G1_PEP_CHINESE_GUANGDONG_REGION_ID,
-  G1_PEP_CHINESE_HUBEI_REGION_ID,
-])
-const CHINESE_PILOT_GRADE_IDS = new Set<Id>([G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID])
-const ENGLISH_PILOT_REGION_IDS = new Set<Id>([G1_SHENZHEN_REGION_ID])
-const ENGLISH_PILOT_GRADE_IDS = new Set<Id>([G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID])
-const ENGLISH_PILOT_SEMESTER_IDS = new Set<Id>([
-  G1_SHENZHEN_ENGLISH_SEMESTER_ID,
-  G1_SHENZHEN_ENGLISH_S2_SEMESTER_ID,
-])
 
 export interface CurriculumStoreDependencies {
   curriculumService: CurriculumService
@@ -54,30 +31,6 @@ function isLegacySampleProfile(profile: StudentCurriculumProfile): boolean {
     profile.mathTextbookVersionId,
     profile.englishTextbookVersionId,
   ].some((value) => value?.startsWith('SAMPLE_') === true)
-}
-
-function isEnglishPilotContext(
-  regionId: Id | null,
-  gradeId: Id | null,
-  semesterId: Id | null,
-): boolean {
-  return (
-    Boolean(regionId && ENGLISH_PILOT_REGION_IDS.has(regionId)) &&
-    Boolean(gradeId && ENGLISH_PILOT_GRADE_IDS.has(gradeId)) &&
-    Boolean(semesterId && ENGLISH_PILOT_SEMESTER_IDS.has(semesterId))
-  )
-}
-
-function isMathPilotContext(
-  regionId: Id | null,
-  gradeId: Id | null,
-  semesterId: Id | null,
-): boolean {
-  return (
-    regionId === G1_SHENZHEN_REGION_ID &&
-    gradeId === G2_PEP_CHINESE_GRADE_ID &&
-    semesterId === G1_SHENZHEN_ENGLISH_SEMESTER_ID
-  )
 }
 
 /** Test/dev seam; the application uses the runtime curriculum boundary. */
@@ -126,36 +79,10 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   )
   const loading = ref(false)
   const error = ref<string | null>(null)
+  let resolutionRequestId = 0
 
-  const isChinesePilot = computed(
-    () =>
-      Boolean(selectedGradeId.value && CHINESE_PILOT_GRADE_IDS.has(selectedGradeId.value)) &&
-      Boolean(selectedRegionId.value && CHINESE_PILOT_REGION_IDS.has(selectedRegionId.value)),
-  )
-  const isEnglishPilot = computed(() =>
-    isEnglishPilotContext(selectedRegionId.value, selectedGradeId.value, selectedSemesterId.value),
-  )
-  const isCurriculumPilot = computed(() => isChinesePilot.value || isEnglishPilot.value)
-  const isMathPilot = computed(() =>
-    isMathPilotContext(selectedRegionId.value, selectedGradeId.value, selectedSemesterId.value),
-  )
-
-  function hasRequiredTextbooks(
-    selection: SubjectTextbookSelection,
-    regionId: Id | null,
-    gradeId: Id | null,
-    semesterId: Id | null,
-  ): boolean {
-    const isChinesePilotContext =
-      Boolean(gradeId && CHINESE_PILOT_GRADE_IDS.has(gradeId)) &&
-      Boolean(regionId && CHINESE_PILOT_REGION_IDS.has(regionId))
-    return isChinesePilotContext
-      ? Boolean(selection.CHINESE)
-      : isMathPilotContext(regionId, gradeId, semesterId)
-        ? Boolean(selection.MATH || selection.ENGLISH)
-        : isEnglishPilotContext(regionId, gradeId, semesterId)
-          ? Boolean(selection.ENGLISH)
-          : SUBJECT_CODES.every((subjectCode) => selection[subjectCode])
+  function hasSelectedTextbook(selection: SubjectTextbookSelection): boolean {
+    return SUBJECT_CODES.some((subjectCode) => Boolean(selection[subjectCode]))
   }
 
   const isComplete = computed(() => {
@@ -164,16 +91,11 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       profile?.regionId &&
       profile.gradeId &&
       profile.semesterId &&
-      hasRequiredTextbooks(
-        {
-          CHINESE: profile.chineseTextbookVersionId,
-          MATH: profile.mathTextbookVersionId,
-          ENGLISH: profile.englishTextbookVersionId,
-        },
-        profile.regionId,
-        profile.gradeId,
-        profile.semesterId,
-      ) &&
+      hasSelectedTextbook({
+        CHINESE: profile.chineseTextbookVersionId,
+        MATH: profile.mathTextbookVersionId,
+        ENGLISH: profile.englishTextbookVersionId,
+      }) &&
       profile.confirmedAt,
     )
   })
@@ -183,12 +105,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       selectedRegionId.value &&
       selectedGradeId.value &&
       selectedSemesterId.value &&
-      hasRequiredTextbooks(
-        selectedTextbooks.value,
-        selectedRegionId.value,
-        selectedGradeId.value,
-        selectedSemesterId.value,
-      ),
+      hasSelectedTextbook(selectedTextbooks.value),
     ),
   )
 
@@ -197,6 +114,8 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   const englishTextbookVersionId = computed(() => selectedTextbooks.value.ENGLISH)
 
   function clearResolution() {
+    resolutionRequestId += 1
+    loading.value = false
     availableTextbooks.value = null
     resolutionStatus.value = emptyResolutionStatus()
   }
@@ -258,7 +177,6 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   }
 
   function selectRegion(regionId: Id) {
-    if (selectedRegionId.value !== regionId) selectedTextbooks.value = emptySelections()
     selectedRegionId.value = regionId
     confirmedAt.value = null
     clearResolution()
@@ -282,6 +200,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   }
 
   async function resolveTextbooks(): Promise<ResolveAvailableTextbooksOutput | null> {
+    clearResolution()
     if (!selectedRegionId.value || !selectedGradeId.value || !selectedSemesterId.value) {
       error.value = '请先完成地区、年级和学期选择'
       return null
@@ -289,12 +208,14 @@ export const useCurriculumStore = defineStore('curriculum', () => {
 
     loading.value = true
     error.value = null
+    const requestId = resolutionRequestId
     try {
       const result = await dependencies.curriculumService.resolveAvailableTextbooks({
         regionId: selectedRegionId.value,
         gradeId: selectedGradeId.value,
         semesterId: selectedSemesterId.value,
       })
+      if (requestId !== resolutionRequestId) return null
       availableTextbooks.value = result
       const nextSelections = { ...selectedTextbooks.value }
       const resolutions = {
@@ -306,12 +227,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
         const resolution = resolutions[subjectCode]
         const selectedId = nextSelections[subjectCode]
         const stillAvailable = resolution.availableTextbooks.some((book) => book.id === selectedId)
-        nextSelections[subjectCode] =
-          resolution.resolutionStatus === 'AUTO_RESOLVED' && resolution.recommendedTextbookId
-            ? resolution.recommendedTextbookId
-            : stillAvailable
-              ? selectedId
-              : null
+        nextSelections[subjectCode] = stillAvailable ? selectedId : null
       }
       selectedTextbooks.value = nextSelections
       resolutionStatus.value = {
@@ -321,10 +237,11 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       }
       return result
     } catch (caught) {
+      if (requestId !== resolutionRequestId) return null
       error.value = caught instanceof Error ? caught.message : '教材暂时无法加载'
       return null
     } finally {
-      loading.value = false
+      if (requestId === resolutionRequestId) loading.value = false
     }
   }
 
@@ -334,12 +251,17 @@ export const useCurriculumStore = defineStore('curriculum', () => {
         subjectCode === 'CHINESE' ? 'chinese' : subjectCode === 'MATH' ? 'math' : 'english'
       ]
     if (!resolution?.availableTextbooks.some((book) => book.id === textbookVersionId)) {
-      error.value = '这个教材版本不在当前地区和年级的可选范围内'
+      error.value = '这个教材版本不在当前年级、学期和学科的可选范围内'
       return false
     }
     selectedTextbooks.value = { ...selectedTextbooks.value, [subjectCode]: textbookVersionId }
     error.value = null
     return true
+  }
+
+  function clearTextbookSelection(subjectCode: SubjectCode) {
+    selectedTextbooks.value = { ...selectedTextbooks.value, [subjectCode]: null }
+    error.value = null
   }
 
   async function confirmCurriculum(
@@ -352,13 +274,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       !selectedSemesterId.value ||
       !draftIsComplete.value
     ) {
-      error.value = isChinesePilot.value
-        ? '请先确认语文教材'
-        : isMathPilot.value
-          ? '请先确认数学或英语教材'
-          : isEnglishPilot.value
-            ? '请先确认英语教材'
-            : '请先确认语文、数学和英语教材'
+      error.value = '请选择年级和学期，并至少确认一科教材'
       return null
     }
 
@@ -432,10 +348,6 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     englishTextbookVersionId,
     confirmedAt,
     source,
-    isChinesePilot,
-    isEnglishPilot,
-    isMathPilot,
-    isCurriculumPilot,
     isComplete,
     draftIsComplete,
     setProfile,
@@ -447,6 +359,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     selectSemester,
     resolveTextbooks,
     selectTextbook,
+    clearTextbookSelection,
     confirmCurriculum,
     loadCurriculumProfile,
     resetCurriculum,

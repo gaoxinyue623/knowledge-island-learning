@@ -51,7 +51,7 @@ afterEach(() => {
 })
 
 describe('resolveAvailableTextbooks', () => {
-  it('auto-resolves a subject with exactly one DEFAULT', async () => {
+  it('requires an explicit choice even when regional metadata has one DEFAULT', async () => {
     const service = new MockCurriculumService({ data: sampleCurriculumData })
     const result = await service.resolveAvailableTextbooks({
       regionId: 'SAMPLE_REGION_A',
@@ -59,8 +59,11 @@ describe('resolveAvailableTextbooks', () => {
       semesterId: 'SAMPLE_SEMESTER_UPPER',
     })
 
-    expect(result.chinese.resolutionStatus).toBe('AUTO_RESOLVED')
-    expect(result.chinese.recommendedTextbookId).toBe('SAMPLE_CHINESE_TEXTBOOK_G3_UPPER_A')
+    expect(result.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
+    expect(result.chinese.recommendedTextbookId).toBeUndefined()
+    expect(result.chinese.availableTextbooks.map((book) => book.id)).toContain(
+      'SAMPLE_CHINESE_TEXTBOOK_G3_UPPER_A',
+    )
   })
 
   it('requires confirmation when multiple DEFAULT records exist and reports the anomaly', async () => {
@@ -91,7 +94,7 @@ describe('resolveAvailableTextbooks', () => {
     expect(service.getLastResolutionAnomalies()).toHaveLength(1)
   })
 
-  it('returns NOT_AVAILABLE when a region has no textbook relations', async () => {
+  it('offers the same catalog when a region has no textbook relations', async () => {
     const service = new MockCurriculumService({ data: sampleCurriculumData })
     const result = await service.resolveAvailableTextbooks({
       regionId: 'SAMPLE_REGION_C',
@@ -99,9 +102,14 @@ describe('resolveAvailableTextbooks', () => {
       semesterId: 'SAMPLE_SEMESTER_UPPER',
     })
 
-    expect(result.chinese.resolutionStatus).toBe('NOT_AVAILABLE')
-    expect(result.math.availableTextbooks).toEqual([])
-    expect(result.english.resolutionStatus).toBe('NOT_AVAILABLE')
+    expect(result).toEqual(
+      await service.resolveAvailableTextbooks({
+        regionId: 'SAMPLE_REGION_A',
+        gradeId: 'SAMPLE_GRADE_3',
+        semesterId: 'SAMPLE_SEMESTER_UPPER',
+      }),
+    )
+    expect(result.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
   })
 
   it('keeps three subject selections independent', async () => {
@@ -113,9 +121,9 @@ describe('resolveAvailableTextbooks', () => {
     })
 
     const selectedIds = [
-      result.chinese.recommendedTextbookId,
-      result.math.recommendedTextbookId,
-      result.english.recommendedTextbookId,
+      result.chinese.availableTextbooks[0]?.id,
+      result.math.availableTextbooks[0]?.id,
+      result.english.availableTextbooks[0]?.id,
     ]
     expect(new Set(selectedIds).size).toBe(3)
   })
@@ -132,7 +140,11 @@ describe('resolveAvailableTextbooks', () => {
     store.selectSemester('SAMPLE_SEMESTER_UPPER')
 
     const resolution = await store.resolveTextbooks()
-    expect(resolution?.chinese.resolutionStatus).toBe('AUTO_RESOLVED')
+    expect(resolution?.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
+    expect(store.draftIsComplete).toBe(false)
+    store.selectTextbook('CHINESE', 'SAMPLE_CHINESE_TEXTBOOK_G3_UPPER_A')
+    store.selectTextbook('MATH', 'SAMPLE_MATH_TEXTBOOK_G3_UPPER_A')
+    store.selectTextbook('ENGLISH', 'SAMPLE_ENGLISH_TEXTBOOK_G3_UPPER_A')
     expect(store.draftIsComplete).toBe(true)
 
     const saved = await store.confirmCurriculum('SAMPLE_STUDENT_01')
@@ -157,6 +169,7 @@ describe('curriculumStore and profile persistence', () => {
     store.selectGrade('SAMPLE_GRADE_3')
     store.selectSemester('SAMPLE_SEMESTER_UPPER')
     await store.resolveTextbooks()
+    store.selectTextbook('CHINESE', 'SAMPLE_CHINESE_TEXTBOOK_G3_UPPER_A')
     const chineseId = store.selectedTextbooks.CHINESE
     const englishId = 'SAMPLE_ENGLISH_TEXTBOOK_G3_UPPER_B'
     store.selectTextbook('ENGLISH', englishId)
