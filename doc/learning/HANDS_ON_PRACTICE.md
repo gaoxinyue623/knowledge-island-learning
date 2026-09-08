@@ -22,7 +22,7 @@
 - `evidencePractice.ts` 是证据练习的只读投影：教材复用已有题目种子，先按标题、适用教材及真实文本匹配；课外故事复用现有问题、答案和事件序列。只剔除展示标题与课后题／教学提示等附加部分，不把这些提示当成原文证据，不写回课程正文。
 - 原文句子保留标点，匹配时忽略空白与标点。证据跨句时需选出对应句子集合；漏选、额外无关句都不通过。本版使用每题预设的直接证据，尚不自动理解其他可能合理的论证；匹配失败不显示该练习。
 - 教材排序是「在当前原文中的先后顺序」，不是宣称唯一因果解释。课外故事排序沿用该故事的事件序列。理由是开放表达，只提供支架、提示与自查，不做关键词评分。
-- `ListenPlaceWorkshop.vue` 拥有新增的三个原创英语位置场景，图形由 `WorkshopObject.vue` 绘制。朗读默认复用 `useEnglishReadAloud` 的设备英语声音；2026-09-07 增加按需选择豆包合成，见 [豆包语音说明](DOUBAO_TTS.md)。不是教材原声，不添加录音或语音识别。
+- `ListenPlaceWorkshop.vue` 拥有新增的三个原创英语位置场景，图形由 `WorkshopObject.vue` 绘制。朗读默认复用 `useEnglishReadAloud` 的设备英语声音；2026-09-07 增加按需选择豆包合成，见 [豆包语音说明](../operations/DOUBAO_TTS.md)。不是教材原声，不添加录音或语音识别。
 - `ThinkingPathBoard.vue` 只消费 `ThinkingPlayer` 的合法行走方案，复用现有团子形象；验证和完成进度仍由原来的 thinking validator／store 管理。
 
 本次没有修改 MASTERY_V1、STRATEGY_V1、地图解锁、生产来源 guard 或任何教材的审核状态。

@@ -20,7 +20,7 @@
 
 ## 数据与状态边界
 
-- 入口是 [QuestTraining](src/components/knowledge-point/QuestTraining.vue)；[trainingQuest](src/services/content-expansion/trainingQuest.ts) 先取得原有、已通过访问条件的基础闯关投影，再调用数学或语言构造器。
+- 入口是 [QuestTraining](../../src/components/knowledge-point/QuestTraining.vue)；[trainingQuest](../../src/services/content-expansion/trainingQuest.ts) 先取得原有、已通过访问条件的基础闯关投影，再调用数学或语言构造器。
 - 内容仍属于 `content-expansion`；使用当前教材、课程、知识点和可读内容，不新增教材事实或地区选择限制。
 - 训练 ID 包含基础练习 ID、`training-v1` 和组号。题目与活动继承来源和 SAMPLE 标识，保留现有生产访问限制，不将生成成功视为审核完成。
 - 封闭题复用现有确定性答案校验；匹配和排序复用已有活动组件。没有修改 QuestionEngine、MASTERY_V1、STRATEGY_V1 或地图解锁算法。
@@ -34,7 +34,7 @@
 
 候选内容回归目前覆盖 11 本教材中已有基础闯关的 348 个节点：数学 124、语文 186、英语 38。每个节点检查三组、每组九关，共 9,396 个关卡实例。这不是整个 Curriculum 数据集的节点总数，也不代表这些内容在所有生产配置下均可公开读取。
 
-[训练回归测试](tests/training-quest.test.ts) 检查确定性与换组、题型结构、封闭答案可提交、数值范围、卡片可拼出答案、活动身份与顺序、空答案、来源与 SAMPLE 条件、题目依据、档案隔离、提示统计、纠错与模式切换；[基础闯关测试](tests/reading-quest.test.ts) 继续检查原有练习。
+[训练回归测试](../../tests/training-quest.test.ts) 检查确定性与换组、题型结构、封闭答案可提交、数值范围、卡片可拼出答案、活动身份与顺序、空答案、来源与 SAMPLE 条件、题目依据、档案隔离、提示统计、纠错与模式切换；[基础闯关测试](../../tests/reading-quest.test.ts) 继续检查原有练习。
 
 浏览器已验证：
 
@@ -45,6 +45,6 @@
 
 上述结构、工程与交互检查不替代逐题教学效果评估。仍有同方法题和通用阅读题，尚未加入自适应难度、跨设备同步或口语评分。体验优化修正了分类题使用数量／单位提示的问题；没有宣称全部课程提示均已逐题人工审核。
 
-首次强化训练接入时的工程检查：`npm test -- --reporter=dot` 共 35 个文件、442 项测试通过（新增训练测试 14 项）；`npm run build`（包含类型检查）、`npm run lint`、`npm run format:check`、`git diff --check` 通过。构建仍有大分块和 Zod PURE 注释警告，测试运行时仍有 Node localStorage 实验性警告；未把这些警告当作已修复问题。后续体验优化的验证见 [UX_OPTIMIZATION_01.md](UX_OPTIMIZATION_01.md)。
+首次强化训练接入时的工程检查：`npm test -- --reporter=dot` 共 35 个文件、442 项测试通过（新增训练测试 14 项）；`npm run build`（包含类型检查）、`npm run lint`、`npm run format:check`、`git diff --check` 通过。构建仍有大分块和 Zod PURE 注释警告，测试运行时仍有 Node localStorage 实验性警告；未把这些警告当作已修复问题。后续体验优化的验证见 [UX_OPTIMIZATION_01.md](../design/UX_OPTIMIZATION_01.md)。
 
 已同步 `PAGE_SPEC.md` 的详情页契约和二下语文接入说明的基础/强化区分。工作区原有其他修改保留，未修改 `doc/`，未执行 Git 提交。

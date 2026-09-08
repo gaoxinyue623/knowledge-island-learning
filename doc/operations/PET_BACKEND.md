@@ -71,4 +71,4 @@ PET_ALLOWED_ORIGINS=http://127.0.0.1:5183 npm run server
 
 SQLite 的正常关闭后文件副本可用于运维备份；不要在服务仍写入时只复制主文件而遗漏 WAL。数据库需仅对服务用户可读写。当前未提供自动运维备份、邮件找回或管理后台，部署前需根据实际使用方式补齐。尚未执行生产域名、证书、反向代理或真实远程设备的部署验证。
 
-验证由 `tests/pet-server.test.ts`（真实 HTTP 和临时 SQLite）、`tests/pet-phase2.test.ts`（迁移、独立成长和恢复冲突）、`tests/pet-cloud-ui.test.ts`（会话失效、过期预览与档案切换）及原宠物回归测试覆盖；浏览器联调使用独立本地来源与测试数据库，详情见 [成长说明](PET_GROWTH.md)。
+验证由 `tests/pet-server.test.ts`（真实 HTTP 和临时 SQLite）、`tests/pet-phase2.test.ts`（迁移、独立成长和恢复冲突）、`tests/pet-cloud-ui.test.ts`（会话失效、过期预览与档案切换）及原宠物回归测试覆盖；浏览器联调使用独立本地来源与测试数据库，详情见 [成长说明](../learning/PET_GROWTH.md)。

@@ -1,6 +1,6 @@
 # KnowledgeEnergy / Growth Data Flow
 
-2026-09-07：本文件描述原教材成长投影。新增可消费学习积分、食物与宠物经验由独立 PetAccount 账本维护，见 [学习积分与宠物成长](PET_GROWTH.md)。喂养不减少原 KnowledgeEnergy。
+2026-09-07：本文件描述原教材成长投影。新增可消费学习积分、食物与宠物经验由独立 PetAccount 账本维护，见 [学习积分与宠物成长](../learning/PET_GROWTH.md)。喂养不减少原 KnowledgeEnergy。
 
 ## Authority
 

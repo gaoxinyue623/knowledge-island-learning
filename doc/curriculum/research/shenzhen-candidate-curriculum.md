@@ -52,7 +52,7 @@
 
 ### 2.3 二年级上册附件目录（已录入待核验）
 
-已完成的逐项目录、页码、候选知识点和课次映射见：[二年级语文上册文档](./grade-2/chinese.md)；图片证据与转录台账见：[二年级语文上册附件证据记录](./grade-2/chinese-attachment-evidence.md)。
+已完成的逐项目录、页码、候选知识点和课次映射见：[二年级语文上册文档](grade-2/chinese.md)；图片证据与转录台账见：[二年级语文上册附件证据记录](grade-2/chinese-attachment-evidence.md)。
 
 | 单元 | 类型 | 课文编号 | 起始页 | 目录摘要 |
 | ---: | --- | --- | ---: | --- |
@@ -244,7 +244,7 @@
 
 ### 4.1 低年级附件证据
 
-详细图片转录见 [深圳英语教材附件证据记录](./shenzhen-english-attachment-evidence.md)。
+详细图片转录见 [深圳英语教材附件证据记录](shenzhen-english-attachment-evidence.md)。
 
 | 年级 / 册次 | 当前可记录的版本信息 | 目录或主题线索 | 状态 |
 | --- | --- | --- | --- |

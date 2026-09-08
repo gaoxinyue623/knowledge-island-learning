@@ -1,4 +1,4 @@
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import {
@@ -48,6 +48,9 @@ if (!schemaResult.success) {
   throw new Error(`Curriculum Data Review 01 schema invalid: ${schemaResult.error.message}`)
 }
 
+const outputDirectory = resolve(process.cwd(), 'doc/curriculum')
+mkdirSync(outputDirectory, { recursive: true })
+
 const artifacts = [
   {
     path: 'CURRICULUM_BATCH_01_MANUAL_REVIEW.md',
@@ -68,7 +71,7 @@ const artifacts = [
 ]
 
 for (const artifact of artifacts) {
-  writeFileSync(resolve(process.cwd(), artifact.path), `${artifact.contents.trimEnd()}\n`, 'utf8')
+  writeFileSync(resolve(outputDirectory, artifact.path), `${artifact.contents.trimEnd()}\n`, 'utf8')
 }
 
 console.log(`Curriculum Data Review 01: ${report.status}`)
@@ -77,4 +80,4 @@ console.log(`Evidence complete: ${report.evidenceCompleteSlots.length}`)
 console.log(`Evidence missing: ${report.evidenceMissingSlots.length}`)
 console.log(`Evidence conflict: ${report.evidenceConflictSlots.length}`)
 console.log(`Production Index: ${report.productionIndexChange}`)
-for (const artifact of artifacts) console.log(`Artifact: ${resolve(process.cwd(), artifact.path)}`)
+for (const artifact of artifacts) console.log(`Artifact: ${resolve(outputDirectory, artifact.path)}`)

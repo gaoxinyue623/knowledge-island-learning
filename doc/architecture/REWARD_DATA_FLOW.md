@@ -52,4 +52,4 @@ Zod strict schema 只允许 `reward.knowledgeEnergy`，不允许 coin、currency
 
 所有入口都经过同一个 `RewardService`，没有页面直接执行 `energy +=`。
 
-2026-09-07：保存成功后通知积分适配器读取已保存事实。宠物积分在内容去重和每日额度规则下独立结算，未改变上述原能量数额或 Mastery 来源门槛。课后闯关、思维与阅读参与奖励直接进入宠物账本，不伪装为正式 RewardEvent；详情见 [学习积分与宠物成长](PET_GROWTH.md)。
+2026-09-07：保存成功后通知积分适配器读取已保存事实。宠物积分在内容去重和每日额度规则下独立结算，未改变上述原能量数额或 Mastery 来源门槛。课后闯关、思维与阅读参与奖励直接进入宠物账本，不伪装为正式 RewardEvent；详情见 [学习积分与宠物成长](../learning/PET_GROWTH.md)。

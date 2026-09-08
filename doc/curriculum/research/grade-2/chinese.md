@@ -9,7 +9,7 @@
 | 覆盖范围 | 二年级 / 语文 / 上册（本次完成）；下册待采集 |
 | 当前状态 | 已录入待核验（已根据附件完成上册目录；版次、ISBN、知识点和映射待核验） |
 | 教材版本 | 深圳候选：人民教育出版社统编语文二年级上册（具体版次待核验） |
-| 权威来源 | `USER-ATTACHMENT-SZ-CHINESE-G2-UPPER-2026-09-02`、`PEP-G2-UPPER-PUBLIC-2024`；见 [附件证据记录](./chinese-attachment-evidence.md) |
+| 权威来源 | `USER-ATTACHMENT-SZ-CHINESE-G2-UPPER-2026-09-02`、`PEP-G2-UPPER-PUBLIC-2024`；见 [附件证据记录](chinese-attachment-evidence.md) |
 | 下游实体 | `TextbookVersion`、`Unit`、`Lesson`、`KnowledgePoint` |
 | 更新日期 | 2026-09-02 |
 
@@ -181,7 +181,7 @@
 
 | source id | 类型 | 标题 / 书目信息 | 链接或 ISBN | 版次 / 页码 / 章节 | 获取日期 | 核验人 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `USER-ATTACHMENT-SZ-CHINESE-G2-UPPER-2026-09-02`; `PEP-G2-UPPER-PUBLIC-2024` | 用户附件 / 公开目录校对 | 二年级语文上册封面、8 个单元、23 个编号课文、栏目、附录和页码 | [附件证据记录](./chinese-attachment-evidence.md)；[公开目录校对页](https://www.renjiaoshe.com/jiaocai/2392.html) | 图片页码已录入；版次、ISBN、版权页待补录 | 2026-09-02 | 待核验 | `UNVERIFIED` |
+| `USER-ATTACHMENT-SZ-CHINESE-G2-UPPER-2026-09-02`; `PEP-G2-UPPER-PUBLIC-2024` | 用户附件 / 公开目录校对 | 二年级语文上册封面、8 个单元、23 个编号课文、栏目、附录和页码 | [附件证据记录](chinese-attachment-evidence.md)；[公开目录校对页](https://www.renjiaoshe.com/jiaocai/2392.html) | 图片页码已录入；版次、ISBN、版权页待补录 | 2026-09-02 | 待核验 | `UNVERIFIED` |
 | `SZ-TEXTBOOK-2022-2024`; `MOE-CATALOG-2024` | 官方目录 / 国家目录 | 深圳语文版本第一轮映射及统编系列范围 | [深圳课本目录](https://www.sz.gov.cn/attachment/0/799/799233/8905786.pdf)；[教育部国家目录](https://www.moe.gov.cn/srcsite/A26/s8001/202408/W020250418502592948423.pdf) | 学年有效期和具体版次待核验 | 2026-09-02 | 待核验 | `UNVERIFIED` |
 
 ## 6.1 本次附件完成情况
@@ -192,7 +192,7 @@
 - [ ] 仍需补录版权页、ISBN、版次、编者和深圳 2026—2027 学年适用关系。
 - [ ] 仍需使用教师用书或正式教学指导资料核验生字词、语文要素、课后练习和栏目目标。
 
-详细图片转录见 [二年级语文上册附件证据记录](./chinese-attachment-evidence.md)；跨年级版本调查见 [深圳教材版本调查](../shenzhen-textbook-research.md)。
+详细图片转录见 [二年级语文上册附件证据记录](chinese-attachment-evidence.md)；跨年级版本调查见 [深圳教材版本调查](../shenzhen-textbook-research.md)。
 
 ## 7. 待办
 

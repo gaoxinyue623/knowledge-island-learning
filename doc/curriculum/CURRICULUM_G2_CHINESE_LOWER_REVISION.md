@@ -8,7 +8,7 @@
 
 - 8 个单元、37 个节点：28 篇编号课程、8 个语文园地、1 个快乐读书吧。
 - 新目录包含《我不是最弱小的》《黄帝的传说》《大禹治水》，《一匹出色的马》在第四单元。
-- 每个节点均有文字详情和 7 关基础热身，共 259 关；类型包括选择、字词补空、生字组词配对、原句练习、排序、多选和判断。另已接入独立的九关强化模式，见[课后强化训练](QUEST_TRAINING.md)，下方接入验证记录仍对应原有七关基础练习。
+- 每个节点均有文字详情和 7 关基础热身，共 259 关；类型包括选择、字词补空、生字组词配对、原句练习、排序、多选和判断。另已接入独立的九关强化模式，见[课后强化训练](../learning/QUEST_TRAINING.md)，下方接入验证记录仍对应原有七关基础练习。
 - 另有每课一项词语造句和一项阅读表达，不自动判分。配套练习为原创，不作为教材原题。
 - 附录位于《语文园地八》的内容区，不混入该课的自动阅读练习。
 
@@ -16,7 +16,7 @@
 
 教材 ID 为 `G2_PEP_CHINESE_S2_REVISED_CANDIDATE`。课程、知识点、内容和练习均使用独立身份；语义键不随课号调整复用。旧教材 `G2_PEP_CHINESE_S2_2024_CANDIDATE`、其 38 个节点和已有进度继续保留。切换教材不迁移或清除历史记录。
 
-课程事实源为 [revised-texts](src/data/curriculum/grade-2/chinese-pep-lower-revised-texts.ts)；[课程包](src/data/curriculum/grade-2/chinese-pep-lower-revised.ts) 负责投影到现有 Curriculum Domain。地图、LessonPlayer 和练习读取课程包，不维护另一套课文。MASTERY_V1、STRATEGY_V1、解锁算法及存储结构均不变。
+课程事实源为 [revised-texts](../../src/data/curriculum/grade-2/chinese-pep-lower-revised-texts.ts)；[课程包](../../src/data/curriculum/grade-2/chinese-pep-lower-revised.ts) 负责投影到现有 Curriculum Domain。地图、LessonPlayer 和练习读取课程包，不维护另一套课文。MASTERY_V1、STRATEGY_V1、解锁算法及存储结构均不变。
 
 ## 来源与文本处理
 
@@ -31,7 +31,7 @@
 
 ## 附录范围
 
-[附录数据与计数](src/data/curriculum/grade-2/chinese-pep-lower-revised-appendix.ts) 保留输入分组和重复项，只显示“本次提供条目”，不补造缺项：
+[附录数据与计数](../../src/data/curriculum/grade-2/chinese-pep-lower-revised-appendix.ts) 保留输入分组和重复项，只显示“本次提供条目”，不补造缺项：
 
 | 清单 | 输入标称 | 实际条目 | 去重后 |
 | --- | --- | --- | --- |
@@ -43,9 +43,9 @@
 
 ## 验证入口
 
-- [新版本回归测试](tests/grade-2-chinese-lower-revised.test.ts)：目录、来源、附录、逐课加载、259 关答案与题型、版本隔离、配对点击交互。
-- [教材选择测试](tests/textbook-choice.test.ts)：跨地区相同候选、用户明确选择、保存、取消和恢复。
-- [全书闯关回归](tests/reading-quest.test.ts)：11 本教材生成的封闭题答案可通过验证。
+- [新版本回归测试](../../tests/grade-2-chinese-lower-revised.test.ts)：目录、来源、附录、逐课加载、259 关答案与题型、版本隔离、配对点击交互。
+- [教材选择测试](../../tests/textbook-choice.test.ts)：跨地区相同候选、用户明确选择、保存、取消和恢复。
+- [全书闯关回归](../../tests/reading-quest.test.ts)：11 本教材生成的封闭题答案可通过验证。
 
 ## 本次验证结果
 

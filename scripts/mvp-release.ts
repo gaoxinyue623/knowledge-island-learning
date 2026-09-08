@@ -22,7 +22,7 @@ const gate = evaluateMVPReleaseGate({
   engineering: { build, lint },
   qa: { runtimeSmoke },
   regression: { tests },
-  documentation: { releaseNotes: existsSync('LOCAL_RELEASE_FIXES.md') },
+  documentation: { releaseNotes: existsSync('doc/operations/LOCAL_RELEASE_FIXES.md') },
   limitations: [
     '8 节导读、识字或拼音内容仅提供学习和互动，不计入自动判分测验覆盖。',
     '豆包语音仅限本地开发工具；当前正式版本提供设备语音。',

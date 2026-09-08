@@ -20,9 +20,9 @@
 | ParentReport Preferences | `knowledge-island.parent-report-preferences` | 1 | v1 读取；只保留 range/subject | 默认 7d / ALL | LOW |
 | Pet account ledger（IndexedDB） | `knowledge-island.pet.v1` 数据库，`accounts` 表 | 2 | v1 原事件保留，原伙伴归属 mint；PET_V1 金额不变 | 保留原账本，阻止消费，事务失败整体回滚 | MEDIUM |
 
-后端 SQLite 使用 user_version 1，表结构和账号隔离见 [后端说明](PET_BACKEND.md)，不属于浏览器 Storage 自动修复范围。
+后端 SQLite 使用 user_version 1，表结构和账号隔离见 [后端说明](../operations/PET_BACKEND.md)，不属于浏览器 Storage 自动修复范围。
 
-宠物积分、背包、独立伙伴经验和家园装饰由同一事件账本重放，详情见 [学习积分与宠物成长](PET_GROWTH.md)。
+宠物积分、背包、独立伙伴经验和家园装饰由同一事件账本重放，详情见 [学习积分与宠物成长](../learning/PET_GROWTH.md)。
 
 ## 1. 孤儿数据
 

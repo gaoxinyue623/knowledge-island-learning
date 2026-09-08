@@ -42,7 +42,7 @@
 
 影响：跨学科或切换教材后，地图上的已完成状态、解锁状态及依赖这些记录的统计可能丢失。这里确认丢失的是地图存储，不代表所有答题历史都被删除。该存储也没有学生维度，不能直接扩展成多孩子档案。
 
-依据：[地图存储](src/services/learning-map/learningMapStorage.ts)，[地图 Store](src/stores/learningMapStore.ts)，[课程完成回写](src/services/learning-map/learningMapCompletion.ts)。
+依据：[地图存储](../../src/services/learning-map/learningMapStorage.ts)，[地图 Store](../../src/stores/learningMapStore.ts)，[课程完成回写](../../src/services/learning-map/learningMapCompletion.ts)。
 
 建议：按学生、教材、数据集保存独立记录，并迁移旧的单教材 payload。验收应覆盖数学 → 语文 → 数学、上下册切换、刷新和不同学生隔离。
 
@@ -52,7 +52,7 @@
 
 这不是建议放宽审核闸门。需要补齐一个明确的最小发布课程包，或把当前版本定义为可独立进入阅读、思维体验的试用版本，并提供明确入口及范围说明。
 
-依据：[正式课程索引](src/data/curriculum/production/index.ts)，[运行时数据选择](src/services/runtime.ts)，[生产配置](src/config/production.ts)。
+依据：[正式课程索引](../../src/data/curriculum/production/index.ts)，[运行时数据选择](../../src/services/runtime.ts)，[生产配置](../../src/config/production.ts)。
 
 ### P1-03：待巩固的知识点直达链接参数不完整
 
@@ -60,7 +60,7 @@
 
 影响：这类条目点击“去巩固”无法加载正常详情。存在地图节点的分支也只传 `focusNodeId`，没有传教材，需要同时验收旧教材复习条目能否打开正确地图。
 
-依据：[复习入口](src/pages/ReviewQueuePage.vue)，[详情页上下文校验](src/pages/KnowledgePointDetailPage.vue)。
+依据：[复习入口](../../src/pages/ReviewQueuePage.vue)，[详情页上下文校验](../../src/pages/KnowledgePointDetailPage.vue)。
 
 建议：通过统一导航解析函数，从教材与知识点解析完整课次上下文；找不到关联时给出可恢复的提示。验收无地图节点、跨教材、内容已移除三个场景。
 
@@ -70,7 +70,7 @@
 
 影响：再次进入通常回到旧结果，无法形成新一轮独立作答与学习记录。错题专用重试有 `sessionScope`，阅读闯关也有自己的重练机制，不能据此认为普通整组测验已经支持重做。
 
-依据：[课程 Store](src/stores/lessonPlayerStore.ts)，[答题 Store](src/stores/questionEngineStore.ts)，[课程完成页](src/pages/LessonPlayerPage.vue)，[测验页](src/pages/QuestionEnginePage.vue)。
+依据：[课程 Store](../../src/stores/lessonPlayerStore.ts)，[答题 Store](../../src/stores/questionEngineStore.ts)，[课程完成页](../../src/pages/LessonPlayerPage.vue)，[测验页](../../src/pages/QuestionEnginePage.vue)。
 
 建议：提供明确的“回看内容”和“重新挑战”；新挑战生成 attempt/session 标识，保留历史，奖励继续按规则去重。
 
@@ -80,7 +80,7 @@
 
 影响：未练习也可以被统计为完成；相同薄弱点后续再次需要巩固时可能仍隐藏在已完成列表，除非用户手动重新加入。当前队列也没有完整到期时间、复习间隔和延期机制。
 
-依据：[队列 Store](src/stores/reviewQueueStore.ts)，[队列 ID 与 upsert](src/services/review-queue/reviewQueueRepository.ts)，[队列页面](src/pages/ReviewQueuePage.vue)。
+依据：[队列 Store](../../src/stores/reviewQueueStore.ts)，[队列 ID 与 upsert](../../src/services/review-queue/reviewQueueRepository.ts)，[队列页面](../../src/pages/ReviewQueuePage.vue)。
 
 建议：区分“手动处理”和“练习达标”；携带 reviewItemId 进入训练，按结果完成或保留。新的学习证据应能够开启新的复习轮次，不覆盖已完成历史。
 
@@ -90,7 +90,7 @@
 
 影响：孩子完成阅读或思维任务、获得积分，但教材学习历史、错题本与报告不会相应展示这些活动。Quest 错误只留在该组练习的 mistakeIds，不能进入全局错题复习。思维、Quest 进度也没有足够的会话时间信息用于按天还原完整活动。
 
-依据：[ReadingQuest](src/components/knowledge-point/ReadingQuest.vue)，[Quest 存储](src/services/content-expansion/questProgressStorage.ts)，[思维 Store](src/stores/thinkingStore.ts)，[宠物参与奖励](src/services/pet/petQuestRewards.ts)，[报告数据来源](src/services/parent-report/parentReportService.ts)。
+依据：[ReadingQuest](../../src/components/knowledge-point/ReadingQuest.vue)，[Quest 存储](../../src/services/content-expansion/questProgressStorage.ts)，[思维 Store](../../src/stores/thinkingStore.ts)，[宠物参与奖励](../../src/services/pet/petQuestRewards.ts)，[报告数据来源](../../src/services/parent-report/parentReportService.ts)。
 
 建议：建立统一学习活动记录，至少包含学生、内容版本、活动类型、会话、时间和结果。参与事实先进入历史和报告；只有满足证据要求的活动才更新教材掌握度，不能把宠物积分直接当作掌握证据。
 
@@ -100,7 +100,7 @@
 
 影响：若未来流水线用 `release:check && deploy`，当前检查不会阻止后续命令；即使内容条件将来通过，缺失工程或 QA 结果也不会自动构成失败。
 
-依据：[发布脚本](scripts/mvp-release.ts)，[门禁实现](src/services/production-readiness/mvpReleaseGate.ts)，[npm scripts](package.json)。
+依据：[发布脚本](../../scripts/mvp-release.ts)，[门禁实现](../../src/services/production-readiness/mvpReleaseGate.ts)，[npm scripts](../../package.json)。
 
 建议：NOT_READY 返回非零退出码，定义必检项并校验缺失值，把实际测试与浏览器验收结果接入发布流程。
 
@@ -110,7 +110,7 @@
 
 建议：若保留本地工具定位，生产隐藏此选项；若作为产品能力，补充正式接口和服务可用性探测，以及配额与失败回退。仅部署 dist 不会获得豆包合成能力。
 
-依据：[声音选项](src/components/lesson-player/SpeechProviderSelect.vue)，[语音调用](src/composables/useEnglishReadAloud.ts)，[本地插件](scripts/tts/vitePlugin.ts)，[服务入口](server/index.ts)。
+依据：[声音选项](../../src/components/lesson-player/SpeechProviderSelect.vue)，[语音调用](../../src/composables/useEnglishReadAloud.ts)，[本地插件](../../scripts/tts/vitePlugin.ts)，[服务入口](../../server/index.ts)。
 
 ### P2-02：课程完成回写缺少完整失败补偿
 
@@ -118,7 +118,7 @@
 
 影响：在地图不可读或写入异常时，可出现课程显示完成而地图未更新的状态；这与跨教材覆盖是不同的失败路径。
 
-依据：[课程完成和载入](src/stores/lessonPlayerStore.ts)，[地图完成服务](src/services/learning-map/learningMapCompletion.ts)。建议统一记录待处理结果，按幂等方式重试各投影，并保留可见的错误反馈。
+依据：[课程完成和载入](../../src/stores/lessonPlayerStore.ts)，[地图完成服务](../../src/services/learning-map/learningMapCompletion.ts)。建议统一记录待处理结果，按幂等方式重试各投影，并保留可见的错误反馈。
 
 ### P2-03：路由与用户角色还未形成完整边界
 
@@ -126,7 +126,7 @@
 
 家长报告当前是本机只读页面，因此这里是产品边界缺失，不能直接描述成已存在的跨账号数据泄漏。若要支持家庭账号、多孩子和远程家长报告，需要建立真实授权。
 
-依据：[路由](src/router/index.ts)，[路由守卫](src/router/guard.ts)。建议移除或重定向旧占位路径、增加 404，明确“本机学习报告”和“受保护的家长中心”的产品差异。
+依据：[路由](../../src/router/index.ts)，[路由守卫](../../src/router/guard.ts)。建议移除或重定向旧占位路径、增加 404，明确“本机学习报告”和“受保护的家长中心”的产品差异。
 
 ## 4. 缺失或需要补齐的模块
 
@@ -144,7 +144,7 @@
 | 开放题批改与口语评价 | 主观题缺审核队列与结果回流；英语朗读是播放辅助，没有录音识别和发音评价 | 根据课程需求决定 |
 | 生产运行与故障排查 | 缺可验证的发布流水线、浏览器 E2E 配置、集中错误采集及完整生产联调证据 | 发布前 |
 
-全站备份和账号边界依据：[宠物后端](server/petServer.ts)、[云端备份面板](src/components/pet/PetCloudPanel.vue)、[设置](src/pages/SettingsPage.vue)、[PET_BACKEND](PET_BACKEND.md)。测试范围依据：[Vitest 配置](vitest.config.ts)和[脚本](package.json)。
+全站备份和账号边界依据：[宠物后端](../../server/petServer.ts)、[云端备份面板](../../src/components/pet/PetCloudPanel.vue)、[设置](../../src/pages/SettingsPage.vue)、[PET_BACKEND](PET_BACKEND.md)。测试范围依据：[Vitest 配置](../../vitest.config.ts)和[脚本](../../package.json)。
 
 ## 5. 建议实施顺序与验收
 

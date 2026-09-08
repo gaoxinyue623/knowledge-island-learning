@@ -1,11 +1,12 @@
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import { goldenMathPepG3S1Package } from '../src/data/curriculum/verified/math/pep/g3-s1'
 import { importCurriculumPackage } from '../src/services/curriculum'
 
 const result = importCurriculumPackage(goldenMathPepG3S1Package)
-const outputDirectory = process.cwd()
+const outputDirectory = resolve(process.cwd(), 'doc/curriculum')
+mkdirSync(outputDirectory, { recursive: true })
 const jsonPath = resolve(outputDirectory, 'curriculum-verification-report.json')
 const markdownPath = resolve(outputDirectory, 'CURRICULUM_VERIFICATION_REPORT.md')
 
