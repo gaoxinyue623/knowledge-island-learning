@@ -43,6 +43,7 @@ const links: { title: string; description: string; path: string; icon: IconName 
   },
   { title: '待巩固', description: '温习学过的知识', path: '/review-queue', icon: 'route' },
   { title: '家长中心', description: '一起了解学习进展', path: '/parent', icon: 'user-round' },
+  { title: '家庭学习档案', description: '多个孩子与跨设备同步', path: '/family', icon: 'user-round' },
   { title: '通用设置', description: '昵称、播放偏好与帮助', path: '/settings', icon: 'settings' },
 ]
 async function load() {

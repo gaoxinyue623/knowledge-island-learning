@@ -24,8 +24,8 @@
     "curriculum:content:import-pdf": "tsx --tsconfig tsconfig.app.json scripts/curriculum-content-import-pdf.ts",
     "curriculum:validate": "npm run curriculum:review",
     "release:check": "tsx --tsconfig tsconfig.app.json scripts/mvp-release.ts",
-    "server": "tsx server/index.ts",
-    "server:dev": "tsx watch server/index.ts"
+    "server": "tsx --tsconfig tsconfig.app.json server/index.ts",
+    "server:dev": "tsx --tsconfig tsconfig.app.json watch server/index.ts"
   },
   "dependencies": {
     "lucide-vue-next": "^0.468.0",

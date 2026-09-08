@@ -13,6 +13,7 @@ export class PetCloudError extends Error {
     public status: number,
     message: string,
     public code?: string,
+    public details?: unknown,
   ) {
     super(message)
   }
@@ -39,11 +40,12 @@ export async function petCloudRequest(
     })
     const data: unknown = await response.json().catch(() => null)
     if (!response.ok) {
-      const error = z.object({ error: z.string(), code: z.string().optional() }).safeParse(data)
+      const error = z.object({ error: z.string(), code: z.string().optional(), details: z.unknown().optional() }).safeParse(data)
       throw new PetCloudError(
         response.status,
         error.success ? error.data.error : '云端服务暂时无法连接，本机记录不受影响。',
         error.success ? error.data.code : undefined,
+        error.success ? error.data.details : undefined,
       )
     }
     if (data === null) throw new Error('云端服务返回了无法识别的内容。')

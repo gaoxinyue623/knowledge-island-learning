@@ -5,6 +5,12 @@ import { DatabaseSync } from 'node:sqlite'
 import { z } from 'zod'
 import { PetDataError, validatePetAccount, summarizePet } from '../src/services/pet/petPolicy'
 import { extendsPetHistory } from '../src/services/pet/petBackup'
+import {
+  familyArchiveDigest,
+  familyCreateInputSchema,
+  familyUpdateInputSchema,
+  validateFamilyArchive,
+} from './familyArchive'
 const derive = promisify(scrypt)
 const credentials = z
   .object({
@@ -29,6 +35,7 @@ class HttpError extends Error {
     public status: number,
     message: string,
     public code?: string,
+    public details?: unknown,
   ) {
     super(message)
   }
@@ -43,14 +50,16 @@ export function createPetServer(options: {
 }) {
   const db = new DatabaseSync(options.databasePath)
   const version = Number(db.prepare('PRAGMA user_version').get()!.user_version)
-  if (version > 1) {
+  if (version > 2) {
     db.close()
     throw new Error('后端数据库版本较新，已停止启动并保留数据。')
   }
   db.exec(`PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;
     CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT NOT NULL UNIQUE, salt TEXT NOT NULL, password_hash TEXT NOT NULL) STRICT;
     CREATE TABLE IF NOT EXISTS sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires INTEGER NOT NULL) STRICT;
-    CREATE TABLE IF NOT EXISTS pet_backups (user_id TEXT NOT NULL REFERENCES users(id), profile_id TEXT NOT NULL, label TEXT NOT NULL, revision INTEGER NOT NULL, account TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(user_id, profile_id)) STRICT; PRAGMA user_version = 1;`)
+    CREATE TABLE IF NOT EXISTS pet_backups (user_id TEXT NOT NULL REFERENCES users(id), profile_id TEXT NOT NULL, label TEXT NOT NULL, revision INTEGER NOT NULL, account TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(user_id, profile_id)) STRICT;
+    CREATE TABLE IF NOT EXISTS family_profile_backups (user_id TEXT NOT NULL REFERENCES users(id), cloud_profile_id TEXT NOT NULL, label TEXT NOT NULL, revision INTEGER NOT NULL CHECK (revision >= 1), content_hash TEXT NOT NULL, archive TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(user_id, cloud_profile_id)) STRICT;
+    PRAGMA user_version = 2;`)
   const now = options.now ?? Date.now
   const limits = new Map<string, { count: number; until: number }>()
   let hashing = 0
@@ -190,6 +199,93 @@ export function createPetServer(options: {
         )
         return send(res, 200, { ok: true })
       }
+      if (path === '/api/pet/family/profiles' && req.method === 'GET') {
+        const rows = db.prepare(
+          'SELECT cloud_profile_id, label, revision, content_hash, updated_at FROM family_profile_backups WHERE user_id = ? ORDER BY updated_at DESC',
+        ).all(user.id) as Array<Record<string, unknown>>
+        return send(res, 200, {
+          profiles: rows.map((row) => ({
+            cloudProfileId: row.cloud_profile_id,
+            label: row.label,
+            revision: row.revision,
+            digest: row.content_hash,
+            updatedAt: row.updated_at,
+          })),
+        })
+      }
+      if (path === '/api/pet/family/profiles' && req.method === 'POST') {
+        const input = familyCreateInputSchema.safeParse(await body(req))
+        const archive = input.success ? validateFamilyArchive(input.data.archive) : null
+        if (!input.success || !archive) throw new HttpError(400, '学习档案格式无法识别。')
+        const cloudProfileId = randomUUID()
+        const digest = familyArchiveDigest(archive)
+        const updatedAt = new Date(now()).toISOString()
+        db.prepare(
+          'INSERT INTO family_profile_backups (user_id, cloud_profile_id, label, revision, content_hash, archive, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        ).run(user.id, cloudProfileId, input.data.label, 1, digest, JSON.stringify(archive), updatedAt)
+        return send(res, 200, { cloudProfileId, label: input.data.label, revision: 1, digest, updatedAt })
+      }
+      const familyProfileMatch = path.match(/^\/api\/pet\/family\/profiles\/([0-9a-f-]{36})$/i)
+      if (familyProfileMatch && req.method === 'GET') {
+        const cloudProfileId = familyProfileMatch[1]!
+        const row = db.prepare(
+          'SELECT label, revision, content_hash, archive, updated_at FROM family_profile_backups WHERE user_id = ? AND cloud_profile_id = ?',
+        ).get(user.id, cloudProfileId) as Record<string, unknown> | undefined
+        if (!row) throw new HttpError(404, '尚无这份家庭档案。')
+        const archive = validateFamilyArchive(JSON.parse(String(row.archive)))
+        if (!archive) throw new HttpError(500, '云端档案暂时无法读取，原记录已保留。')
+        return send(res, 200, {
+          cloudProfileId,
+          label: row.label,
+          revision: row.revision,
+          digest: row.content_hash,
+          updatedAt: row.updated_at,
+          archive,
+        })
+      }
+      if (familyProfileMatch && req.method === 'PUT') {
+        const cloudProfileId = familyProfileMatch[1]!
+        const input = familyUpdateInputSchema.safeParse(await body(req))
+        const archive = input.success ? validateFamilyArchive(input.data.archive) : null
+        if (!input.success || !archive) throw new HttpError(400, '学习档案格式无法识别。')
+        const digest = familyArchiveDigest(archive)
+        db.exec('BEGIN IMMEDIATE')
+        try {
+          const current = db.prepare(
+            'SELECT revision, content_hash, updated_at FROM family_profile_backups WHERE user_id = ? AND cloud_profile_id = ?',
+          ).get(user.id, cloudProfileId) as Record<string, unknown> | undefined
+          if (!current) throw new HttpError(404, '尚无这份家庭档案。')
+          if (current.content_hash === digest) {
+            db.exec('COMMIT')
+            return send(res, 200, {
+              cloudProfileId,
+              label: db.prepare('SELECT label FROM family_profile_backups WHERE user_id = ? AND cloud_profile_id = ?').get(user.id, cloudProfileId)!.label,
+              revision: current.revision,
+              digest: current.content_hash,
+              updatedAt: current.updated_at,
+            })
+          }
+          if (Number(current.revision) !== input.data.expectedRevision) {
+            throw new HttpError(
+              409,
+              '云端档案已有更新，双方记录均已保留。',
+              'REVISION_CONFLICT',
+              { currentRevision: current.revision, currentDigest: current.content_hash, updatedAt: current.updated_at },
+            )
+          }
+          const updatedAt = new Date(now()).toISOString()
+          const nextRevision = input.data.expectedRevision + 1
+          db.prepare(
+            'UPDATE family_profile_backups SET revision = ?, content_hash = ?, archive = ?, updated_at = ? WHERE user_id = ? AND cloud_profile_id = ?',
+          ).run(nextRevision, digest, JSON.stringify(archive), updatedAt, user.id, cloudProfileId)
+          db.exec('COMMIT')
+          const label = db.prepare('SELECT label FROM family_profile_backups WHERE user_id = ? AND cloud_profile_id = ?').get(user.id, cloudProfileId)!.label
+          return send(res, 200, { cloudProfileId, label, revision: nextRevision, digest, updatedAt })
+        } catch (error) {
+          db.exec('ROLLBACK')
+          throw error
+        }
+      }
       if (path === '/api/pet/backups' && req.method === 'GET') {
         const rows = db
           .prepare(
@@ -283,6 +379,7 @@ export function createPetServer(options: {
         error instanceof HttpError ? error.status : error instanceof PetDataError ? 400 : 500,
         {
           ...(error instanceof HttpError && error.code ? { code: error.code } : {}),
+          ...(error instanceof HttpError && error.details !== undefined ? { details: error.details } : {}),
           error:
             error instanceof HttpError || error instanceof PetDataError
               ? error.message
