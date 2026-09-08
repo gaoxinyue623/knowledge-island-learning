@@ -44,7 +44,7 @@ const props = withDefaults(
     reviewAttemptId?: string
     activityContext?: Pick<LearningActivity, 'title' | 'subject' | 'href'>
   }>(),
-  { muted: undefined, readingLabel: undefined, note: undefined, reviewAttemptId: undefined },
+  { muted: undefined, readingLabel: undefined, note: undefined, reviewAttemptId: undefined, activityContext: undefined },
 )
 const petRewardWarning = ref('')
 const appInstance = getCurrentInstance()
