@@ -23,6 +23,8 @@ export const questProgressSchema = z
     summaryVisible: z.boolean(),
     attemptId: z.string().optional(),
     completedAt: z.string().datetime().optional(),
+    // Written only by newly completed rounds that explicitly qualify for evidence.
+    evidenceVersion: z.literal(1).optional(),
   })
   .strict()
 export type QuestProgress = z.infer<typeof questProgressSchema>

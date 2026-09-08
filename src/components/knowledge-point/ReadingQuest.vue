@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { recordLearningActivity } from '@/services/learning-activity/activityHistory'
+import { spacedReviewService } from '@/services/student-growth/spacedReview'
 import { readingStories } from '@/data/reading-islands'
 import { productionCurriculumIndex } from '@/data/curriculum/production'
 import { settleQuestPetReward } from '@/services/pet/petQuestRewards'
@@ -40,11 +41,13 @@ const props = withDefaults(
     muted?: boolean
     readingLabel?: string
     note?: string
+    reviewAttemptId?: string
   }>(),
-  { muted: undefined, readingLabel: undefined, note: undefined },
+  { muted: undefined, readingLabel: undefined, note: undefined, reviewAttemptId: undefined },
 )
 const petRewardWarning = ref('')
-const appPinia = getCurrentInstance()?.appContext.config.globalProperties.$pinia as
+const appInstance = getCurrentInstance()
+const appPinia = appInstance?.appContext.config.globalProperties.$pinia as
   Pinia | undefined
 const preferences = appPinia ? usePreferencesStore(appPinia) : null
 const muted = computed(() => props.muted ?? preferences?.preferences.muted ?? false)
@@ -84,9 +87,24 @@ const writable = ref(false)
 const resumed = ref(false)
 const saved = ref(false)
 const restartRequested = ref(false)
+const hasExplicitEvidence = ref(false)
 const revision = computed(() => questContentRevision(props.quest))
+const reviewAttemptId = computed(() => {
+  const currentRoute = appInstance?.appContext.config.globalProperties.$route as
+    | { query?: Record<string, unknown> }
+    | undefined
+  const value = props.reviewAttemptId ?? currentRoute?.query?.reviewAttempt
+  if (typeof value !== 'string') return null
+  return value && /^[a-zA-Z0-9_-]{1,100}$/.test(value) ? value : null
+})
+const isReviewAttempt = computed(() => Boolean(reviewAttemptId.value))
+const progressQuest = computed<ReadingPracticeQuest>(() =>
+  reviewAttemptId.value
+    ? { ...props.quest, id: `${props.quest.id}:review:${reviewAttemptId.value}` }
+    : props.quest,
+)
 let loadedScope = ''
-const scope = () => JSON.stringify([props.profileId, props.quest.id, revision.value])
+const scope = () => JSON.stringify([props.profileId, props.quest.id, revision.value, reviewAttemptId.value])
 
 const stages = computed(() =>
   props.quest.stages.filter((stage) => !reviewIds.value || reviewIds.value.includes(stage.id)),
@@ -153,12 +171,13 @@ function resetStage(): void {
 
 watch(() => stage.value?.id, resetStage, { immediate: true })
 watch(
-  () => [props.profileId, revision.value],
+  () => [props.profileId, revision.value, reviewAttemptId.value],
   () => {
-    const result = readQuestProgress(browserQuestStorage(), props.profileId, props.quest)
+    const result = readQuestProgress(browserQuestStorage(), props.profileId, progressQuest.value)
     const data = result.data
     attemptId.value = data.attemptId ?? crypto.randomUUID()
     completedAt.value = data.completedAt
+    hasExplicitEvidence.value = data.evidenceVersion === 1
     reviewIds.value = data.reviewIds
     passed.value = data.passedIds
     mistakes.value = data.mistakeIds
@@ -179,7 +198,7 @@ watch(
     resetStage()
     petRewardWarning.value = ''
     if (result.writable) {
-      settleReward()
+      if (!isReviewAttempt.value) settleReward()
       if (data.completedAt) queueMicrotask(persist)
     }
   },
@@ -191,7 +210,7 @@ function persist(): void {
   const warning = saveQuestProgress(
     browserQuestStorage(),
     {
-      ...freshQuestProgress(props.profileId, props.quest),
+      ...freshQuestProgress(props.profileId, progressQuest.value),
       passedIds: [...passed.value],
       mistakeIds: [...mistakes.value],
       helpedIds: [...helped.value],
@@ -201,13 +220,14 @@ function persist(): void {
       summaryVisible: summaryVisible.value,
       attemptId: attemptId.value,
       completedAt: completedAt.value,
+      ...(hasExplicitEvidence.value ? { evidenceVersion: 1 as const } : {}),
     },
-    props.quest,
+    progressQuest.value,
   )
   storageWarning.value = warning
   saved.value = !warning
   if (!warning) {
-    settleReward()
+    if (!isReviewAttempt.value) settleReward()
     if (
       summaryVisible.value &&
       completedAt.value &&
@@ -248,7 +268,67 @@ function persist(): void {
         storageWarning.value = '闯关进度已保存，活动记录暂未更新；重新打开本组练习会重试。'
       }
     }
+    if (hasExplicitEvidence.value) recordSpacedReviewEvidence()
   }
+}
+
+function reviewCourseHref(): string | null {
+  const quest = props.quest as ReadingPracticeQuest & {
+    textbookId?: string
+    knowledgePointId?: string
+    lessonId?: string
+  }
+  const lesson = productionCurriculumIndex.lessons.find((item) => item.id === quest.lessonId)
+  if (!quest.textbookId || !quest.knowledgePointId || !lesson?.unitId) return null
+  const query = new URLSearchParams({
+    textbookId: quest.textbookId,
+    knowledgePointId: quest.knowledgePointId,
+    lessonId: quest.lessonId ?? '',
+    unitId: lesson.unitId,
+  })
+  return `/knowledge-point/${encodeURIComponent(quest.knowledgePointId)}?${query}#knowledge-challenges`
+}
+
+function recordSpacedReviewEvidence(): void {
+  if (!summaryVisible.value || !completedAt.value || !isComplete.value || reviewIds.value) return
+  const courseHref = reviewCourseHref()
+  if (!courseHref) return
+  const questContext = props.quest as ReadingPracticeQuest & { textbookId?: string }
+  const textbook = productionCurriculumIndex.textbooks.find(
+    (item) => item.id === questContext.textbookId,
+  )
+  const subject = textbook
+    ? productionCurriculumIndex.subjects.find((item) => item.id === textbook.subjectId)?.code
+    : undefined
+  if (!subject) return
+  const attemptIdForEvidence = isReviewAttempt.value
+    ? `${props.quest.id}:review:${reviewAttemptId.value}`
+    : `${props.quest.id}:foundation:${attemptId.value}`
+  const recorded = spacedReviewService.record({
+    attemptId: attemptIdForEvidence,
+    profileId: props.profileId,
+    questId: props.quest.id,
+    contentRevision: revision.value,
+    courseHref,
+    title: props.readingLabel ?? (isMath.value ? '课后数学练习' : '课后阅读练习'),
+    subject,
+    completedAt: completedAt.value,
+    stages: stages.value.map((item) => {
+      const hadIncorrectAnswer = mistakes.value.includes(item.id)
+      const usedHint = helped.value.includes(item.id)
+      return {
+        stageId: item.id,
+        prompt:
+          item.kind === 'question'
+            ? item.question.stem.map((block) => block.text ?? '').join('\n') || item.title
+            : item.activity.instruction || item.title,
+        firstAttempt: hadIncorrectAnswer ? 'incorrect' : usedHint ? 'hint_used' : 'independent',
+        usedHint,
+        hadIncorrectAnswer,
+      }
+    }),
+  })
+  if (!recorded && !storageWarning.value) storageWarning.value = spacedReviewService.getLastWarning()
 }
 watch(
   [passed, mistakes, helped, completedStageIds, reviewIds, stageIndex, summaryVisible],
@@ -284,6 +364,7 @@ async function advance(): Promise<void> {
   if (!isPassed.value) return
   if (isComplete.value) {
     completedAt.value = new Date().toISOString()
+    hasExplicitEvidence.value = true
     summaryVisible.value = true
     await nextTick()
     summaryHeading.value?.focus({ preventScroll: true })
@@ -382,6 +463,7 @@ function chooseTile(index: number): void {
 function restart(onlyMistakes: boolean): void {
   attemptId.value = crypto.randomUUID()
   completedAt.value = undefined
+  hasExplicitEvidence.value = false
   reviewIds.value = onlyMistakes && mistakes.value.length ? [...mistakes.value] : null
   stageIndex.value = 0
   passed.value = []

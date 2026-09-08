@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -11,12 +11,19 @@ import AppProgress from '@/components/common/AppProgress.vue'
 import SubjectHabitat from '@/components/illustrations/SubjectHabitat.vue'
 import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
 import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
+import SpacedReviewEntry from '@/components/student-growth/SpacedReviewEntry.vue'
 import islandAdventure from '@/assets/illustrations/island-adventure.jpg'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useHomeStore } from '@/stores/homeStore'
 import { useStudentStore } from '@/stores/studentStore'
+import {
+  createReviewLaunchHref,
+  spacedReviewService,
+  type SpacedReviewDue,
+} from '@/services/student-growth/spacedReview'
+import { resolveCurrentQuestRevision } from '@/services/student-growth/currentQuestResolver'
 import type { DailyLearningTask, HomeViewModel, IconName, SubjectCode } from '@/types'
 
 const router = useRouter()
@@ -24,6 +31,8 @@ const route = useRoute()
 const curriculumStore = useCurriculumStore()
 const homeStore = useHomeStore()
 const studentStore = useStudentStore()
+const dueReviews = ref<SpacedReviewDue[]>([])
+let spacedReviewRequest = 0
 
 const isDevRoute = computed(() => route.path === '/dev/home')
 const isTasksRoute = computed(() => route.path === '/tasks')
@@ -191,6 +200,37 @@ function openShortcut(path: string): void {
   void router.push(path)
 }
 
+function openSpacedReview(item: SpacedReviewDue): void {
+  const attemptId = crypto.randomUUID()
+  const href = createReviewLaunchHref(item.courseHref, attemptId)
+  if (href) void router.push(href)
+}
+
+async function loadSpacedReviews(): Promise<void> {
+  const activeProfileId = studentStore.profile?.id
+  const request = ++spacedReviewRequest
+  if (!activeProfileId) {
+    dueReviews.value = []
+    return
+  }
+  const evidence = spacedReviewService.listEvidence(activeProfileId)
+  const revisions = await Promise.all(
+    evidence.map(async (item) => ({
+      questId: item.questId,
+      resolved: await resolveCurrentQuestRevision(item.courseHref),
+    })),
+  )
+  if (request !== spacedReviewRequest || activeProfileId !== studentStore.profile?.id) return
+  const revisionByQuest: Record<string, string | null> = {}
+  for (const item of revisions) {
+    if (item.resolved && item.resolved.questId === item.questId)
+      revisionByQuest[item.questId] = item.resolved.contentRevision
+    else revisionByQuest[item.questId] = null
+  }
+  // An old or unresolvable record stays preserved but is not presented as current learning work.
+  dueReviews.value = spacedReviewService.listDue(activeProfileId, new Date(), revisionByQuest)
+}
+
 function openSubject(subject: SubjectCode): void {
   const path = routeForHomePath('/learning-map')
   void router.push({ path, query: { subject } })
@@ -227,10 +267,17 @@ function historySummary(item: HomeViewModel['recentLearning'][number]): string {
   return `${summary.correctCount ?? 0} 对 · ${summary.incorrectCount ?? 0} 错`
 }
 
-onMounted(() => void loadHome())
+onMounted(() => {
+  void loadHome()
+  void loadSpacedReviews()
+})
 watch(
   () => [route.path, curriculumStore.curriculumProfile?.studentId],
   () => void loadHome(),
+)
+watch(
+  () => studentStore.profile?.id,
+  () => void loadSpacedReviews(),
 )
 </script>
 
@@ -360,6 +407,8 @@ watch(
             </li>
           </ol>
         </section>
+
+        <SpacedReviewEntry :items="dueReviews" @launch="openSpacedReview" />
 
         <section
           v-if="viewModel.continueLearning"
