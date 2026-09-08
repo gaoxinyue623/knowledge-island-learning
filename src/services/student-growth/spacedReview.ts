@@ -48,6 +48,13 @@ export interface SpacedReviewDue {
   nextDueAt: string
   completedIndependentRounds: number
 }
+export interface SpacedReviewProjection {
+  latest: SpacedReviewEvidence
+  nextDueAt: string
+  completedIndependentRounds: number
+  isDue: boolean
+  needsSupport: boolean
+}
 export const spacedReviewEvidenceSchema = evidenceSchema
 export const spacedReviewPayloadSchema = payloadSchema
 
@@ -77,6 +84,47 @@ function addDays(occurredAt: string, days: number): string {
   const value = new Date(occurredAt)
   value.setUTCDate(value.getUTCDate() + days)
   return value.toISOString()
+}
+
+/**
+ * Pure shared projection for the home review queue and the ability portfolio.
+ * Callers provide one quest revision only; the function never infers a revision.
+ */
+export function projectSpacedReviewEvidence(
+  attempts: readonly SpacedReviewEvidence[],
+  now = new Date(),
+): SpacedReviewProjection | null {
+  if (!attempts.length) return null
+  const days = new Map<string, SpacedReviewEvidence[]>()
+  for (const attempt of [...attempts].sort((left, right) => left.completedAt.localeCompare(right.completedAt)))
+    days.set(dayKey(attempt.completedAt), [...(days.get(dayKey(attempt.completedAt)) ?? []), attempt])
+  let independentLevel = 0
+  let nextDueAt: string | null = null
+  let last: SpacedReviewEvidence | null = null
+  let needsSupport = false
+  for (const dayAttempts of days.values()) {
+    const completion = dayAttempts[dayAttempts.length - 1]!
+    const independentlyCompleted = dayAttempts.every(isIndependent)
+    last = completion
+    needsSupport = !independentlyCompleted
+    if (!independentlyCompleted) {
+      independentLevel = 0
+      nextDueAt = addDays(completion.completedAt, SPACED_REVIEW_DELAYS_DAYS[0])
+      continue
+    }
+    if (nextDueAt && new Date(completion.completedAt) < new Date(nextDueAt)) continue
+    independentLevel = Math.min(independentLevel + 1, SPACED_REVIEW_DELAYS_DAYS.length)
+    nextDueAt = addDays(completion.completedAt, SPACED_REVIEW_DELAYS_DAYS[independentLevel - 1]!)
+  }
+  return last && nextDueAt
+    ? {
+        latest: last,
+        nextDueAt,
+        completedIndependentRounds: independentLevel,
+        isDue: new Date(nextDueAt) <= now,
+        needsSupport,
+      }
+    : null
 }
 
 /** Keeps review links inside the application's existing knowledge-point surface. */
@@ -174,38 +222,16 @@ export function createSpacedReviewService(storage: SpacedReviewStorage | undefin
     }
     const due: SpacedReviewDue[] = []
     for (const attempts of groups.values()) {
-      const days = new Map<string, SpacedReviewEvidence[]>()
-      for (const attempt of [...attempts].sort((left, right) => left.completedAt.localeCompare(right.completedAt)))
-        days.set(dayKey(attempt.completedAt), [...(days.get(dayKey(attempt.completedAt)) ?? []), attempt])
-      let independentLevel = 0
-      let nextDueAt: string | null = null
-      let last: SpacedReviewEvidence | null = null
-      for (const dayAttempts of days.values()) {
-        const completion = dayAttempts[dayAttempts.length - 1]!
-        const independentlyCompleted = dayAttempts.every(isIndependent)
-        last = completion
-        if (!independentlyCompleted) {
-          independentLevel = 0
-          nextDueAt = addDays(completion.completedAt, SPACED_REVIEW_DELAYS_DAYS[0])
-          continue
-        }
-        if (nextDueAt && new Date(completion.completedAt) < new Date(nextDueAt)) continue
-        independentLevel = Math.min(independentLevel + 1, SPACED_REVIEW_DELAYS_DAYS.length)
-        nextDueAt = addDays(
-          completion.completedAt,
-          SPACED_REVIEW_DELAYS_DAYS[independentLevel - 1]!,
-        )
-      }
-      if (!last || !nextDueAt) continue
-      if (new Date(nextDueAt) > now) continue
+      const projection = projectSpacedReviewEvidence(attempts, now)
+      if (!projection?.isDue) continue
       due.push({
-        questId: last.questId,
-        contentRevision: last.contentRevision,
-        courseHref: last.courseHref,
-        title: last.title,
-        subject: last.subject,
-        nextDueAt,
-        completedIndependentRounds: independentLevel,
+        questId: projection.latest.questId,
+        contentRevision: projection.latest.contentRevision,
+        courseHref: projection.latest.courseHref,
+        title: projection.latest.title,
+        subject: projection.latest.subject,
+        nextDueAt: projection.nextDueAt,
+        completedIndependentRounds: projection.completedIndependentRounds,
       })
     }
     return due.sort((left, right) => left.nextDueAt.localeCompare(right.nextDueAt))
