@@ -38,12 +38,10 @@ npm run release:check
 
 ## 当前验证状态
 
-- build、lint 已通过。
-- 既有测试中 660/661 通过；`tests/tts-server.test.ts` 有 1 项既有缓存绝对路径断言失败。
-- runtime 专项 2 项通过。
-- Windows 下 `release:check` 的 `spawnSync('npm')` 返回 `ENOENT`；Node 版本不足是另一个独立环境问题。
-- 上述结果为 2026-09-08 迁移前复测；迁移后类型检查、文档链接检查和隔离报告生成均通过。当前不具备全绿的发布验证结果。
+- 2026-09-08 学生体验分支验证：build、lint、58 个测试文件中的 683 项测试全部通过，runtime 专项 2 项通过。
+- Windows 下 npm 子进程启动和 TTS 缓存路径断言已修复；`npm run release:check` 退出码为 0，结果为 `READY_WITH_LIMITATIONS`。
+- 既有边界：8 节内容不计自动判分覆盖，豆包语音限本地开发，全站学习记录仍在本机。Node 22 的本机验证不代表已完成项目声明的 Node 24 环境验收。
 
-历史文档中的 `READY_WITH_LIMITATIONS` 是 2026-09-07 快照；已实现修复见 [`doc/operations/LOCAL_RELEASE_FIXES.md`](doc/operations/LOCAL_RELEASE_FIXES.md)，当前验证结果以上述 2026-09-08 记录为准。
+本批功能及后续计划见 [学生学习体验改进](doc/product/STUDENT_LEARNING_ROADMAP.md)。历史修复见 [`doc/operations/LOCAL_RELEASE_FIXES.md`](doc/operations/LOCAL_RELEASE_FIXES.md)，当前验证结果以上述记录为准。
 
 文档分类入口：[`doc/README.md`](doc/README.md)。

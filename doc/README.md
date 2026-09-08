@@ -4,6 +4,7 @@
 
 ## 产品与页面
 
+- [学生学习体验改进与后续计划](product/STUDENT_LEARNING_ROADMAP.md)
 - [`ASSESSMENT.md`](product/ASSESSMENT.md)
 - [`CORE_PAGE_SPEC.md`](product/CORE_PAGE_SPEC.md)
 - [`PAGE_SPEC.md`](product/PAGE_SPEC.md)
