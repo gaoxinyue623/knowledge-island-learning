@@ -100,7 +100,7 @@ const planSchema = z.object({
   policyVersion: z.string().min(1),
 })
 
-const payloadSchema = z.object({
+export const dailyPlanStoragePayloadSchema = z.object({
   schemaVersion: z.literal(1),
   plans: z.array(planSchema),
 })
@@ -144,7 +144,7 @@ function clonePlan(plan: DailyLearningPlan): DailyLearningPlan {
 function parsePayload(raw: string | null): DailyPlanStoragePayload | null {
   if (!raw) return null
   try {
-    const result = payloadSchema.safeParse(JSON.parse(raw))
+    const result = dailyPlanStoragePayloadSchema.safeParse(JSON.parse(raw))
     return result.success ? (result.data as DailyPlanStoragePayload) : null
   } catch {
     return null
@@ -185,7 +185,7 @@ export function createDailyPlanStorage(
       schemaVersion: 1,
       plans: plans.map(clonePlan),
     }
-    const result = payloadSchema.safeParse(payload)
+    const result = dailyPlanStoragePayloadSchema.safeParse(payload)
     if (!result.success) {
       lastWarning = '今日学习计划格式无效，本次更新未保存。'
       return
@@ -245,7 +245,7 @@ export function migrateDailyPlanStoragePayload(value: unknown): {
   payload: DailyPlanStoragePayload | null
   warning: string | null
 } {
-  const result = payloadSchema.safeParse(value)
+  const result = dailyPlanStoragePayloadSchema.safeParse(value)
   if (result.success) return { payload: result.data as DailyPlanStoragePayload, warning: null }
   return {
     payload: null,

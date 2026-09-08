@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import AppShell from '@/layouts/AppShell.vue'
 import AppButton from '@/components/common/AppButton.vue'
+import ProfileArchivePanel from '@/components/profile-archive/ProfileArchivePanel.vue'
 import { useStudentStore } from '@/stores/studentStore'
 import { usePreferencesStore } from '@/stores/preferencesStore'
 const student = useStudentStore()
@@ -78,6 +79,7 @@ function savePreferences() {
             <p v-if="preferencesMessage" role="status">{{ preferencesMessage }}</p>
             <p v-if="settings.warning" role="alert">{{ settings.warning }}</p>
           </form>
+          <ProfileArchivePanel />
         </div>
         <section class="personal-panel personal-help">
           <h2>帮助与隐私</h2>

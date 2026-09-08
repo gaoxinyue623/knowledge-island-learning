@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Id } from '@/types'
+import { recoverActiveProfileJournal } from '@/services/family/activeProfileStorage'
 
 export interface StudentBasicProfile {
   id: Id
@@ -13,24 +14,21 @@ export const characterOptions = [
   { id: 'sunshine-character', name: '阳光团子', color: '#ffe098', shadow: '#b78636' },
   { id: 'berry-character', name: '莓果团子', color: '#f3bbd0', shadow: '#b97596' },
 ] as const
+export function isValidStudentProfilePayload(value: unknown): value is { version: 1; profile: StudentBasicProfile; characterId: Id } {
+  const saved = value as { version?: unknown; profile?: StudentBasicProfile; characterId?: unknown }
+  return saved?.version === 1 && typeof saved.profile?.id === 'string' && typeof saved.profile.displayName === 'string' && Boolean(saved.profile.displayName.trim()) && saved.profile.displayName.length <= 20 && typeof saved.characterId === 'string' && characterOptions.some((option) => option.id === saved.characterId)
+}
 
 export const useStudentStore = defineStore('student', () => {
   const profile = ref<StudentBasicProfile | null>(null)
   const characterId = ref<Id | null>(null)
   const warning = ref<string | null>(null)
   try {
+    if (!recoverActiveProfileJournal(window.localStorage)) throw new Error('Pending profile activation')
     const raw = window.localStorage.getItem(STUDENT_STORAGE_KEY)
     if (raw) {
       const saved = JSON.parse(raw)
-      if (
-        saved.version !== 1 ||
-        !saved.profile ||
-        typeof saved.profile.id !== 'string' ||
-        typeof saved.profile.displayName !== 'string' ||
-        !saved.profile.displayName.trim() ||
-        saved.profile.displayName.length > 20 ||
-        !characterOptions.some((option) => option.id === saved.characterId)
-      )
+      if (!isValidStudentProfilePayload(saved))
         throw new Error()
       profile.value = saved.profile
       characterId.value = saved.characterId

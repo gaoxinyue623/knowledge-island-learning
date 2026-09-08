@@ -66,7 +66,7 @@ const itemSchema = z.object({
   completedAt: z.string().min(1).optional(),
 })
 
-const payloadSchema = z.object({
+export const reviewQueueStoragePayloadSchema = z.object({
   schemaVersion: z.literal(1),
   items: z.array(itemSchema),
 })
@@ -91,7 +91,7 @@ function clonePayload(payload: ReviewQueueStoragePayload): ReviewQueueStoragePay
 function parsePayload(raw: string | null): ReviewQueueStoragePayload | null {
   if (!raw) return null
   try {
-    const result = payloadSchema.safeParse(JSON.parse(raw))
+    const result = reviewQueueStoragePayloadSchema.safeParse(JSON.parse(raw))
     return result.success ? result.data : null
   } catch {
     return null
@@ -132,7 +132,7 @@ export function createReviewQueueStorage(
       schemaVersion: 1,
       items: payload.items.map(cloneItem),
     }
-    const result = payloadSchema.safeParse(normalized)
+    const result = reviewQueueStoragePayloadSchema.safeParse(normalized)
     if (!result.success) {
       lastWarning = '待巩固列表格式无效，本次更新未保存。'
       return
@@ -169,7 +169,7 @@ export function migrateReviewQueueStoragePayload(value: unknown): {
   payload: ReviewQueueStoragePayload | null
   warning: string | null
 } {
-  const result = payloadSchema.safeParse(value)
+  const result = reviewQueueStoragePayloadSchema.safeParse(value)
   if (result.success) return { payload: result.data, warning: null }
   return {
     payload: null,

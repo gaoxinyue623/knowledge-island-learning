@@ -62,10 +62,10 @@ function parseRecords(value: unknown): LearningMapProgressRecord[] | null {
   return records
 }
 
-function parsePayload(value: string | null): LearningMapProgressStoragePayload | null {
+export function parseLearningMapProgressStoragePayload(value: unknown): LearningMapProgressStoragePayload | null {
   if (!value) return null
   try {
-    const parsed: unknown = JSON.parse(value)
+    const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value
     if (typeof parsed !== 'object' || parsed === null) return null
     const candidate = parsed as Record<string, unknown>
     if (
@@ -117,7 +117,7 @@ export function createLearningMapProgressStorage(
     load(textbookId, scope = {}) {
       const raw = storage?.getItem(mapProgressStorageKey(textbookId, scope)) ?? null
       if (raw !== null) {
-        const payload = parsePayload(raw)
+        const payload = parseLearningMapProgressStoragePayload(raw)
         if (!payload || payload.textbookId !== textbookId)
           throw new Error('地图进度格式异常，原记录已保留。')
         return payload.records
@@ -127,7 +127,7 @@ export function createLearningMapProgressStorage(
         (scope.profileId ?? 'local-profile') === 'local-profile' &&
         (scope.dataset ?? 'profile') === 'profile'
       ) {
-        const legacy = parsePayload(storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null)
+        const legacy = parseLearningMapProgressStoragePayload(storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null)
         if (legacy?.textbookId === textbookId) {
           save(textbookId, legacy.records, scope)
           return legacy.records

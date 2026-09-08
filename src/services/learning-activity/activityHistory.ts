@@ -14,7 +14,7 @@ const activitySchema = z.object({
   mistakeCount: z.number().int().nonnegative(),
   href: z.string().startsWith('/'),
 })
-const payloadSchema = z.object({ version: z.literal(1), records: z.array(activitySchema) })
+export const activityHistoryPayloadSchema = z.object({ version: z.literal(1), records: z.array(activitySchema) })
 export type LearningActivity = z.infer<typeof activitySchema>
 interface Storage {
   getItem(key: string): string | null
@@ -29,7 +29,7 @@ export function readActivityHistory(
 ): LearningActivity[] {
   const raw = storage.getItem(activityHistoryKey(profileId))
   if (!raw) return []
-  const records = payloadSchema.parse(JSON.parse(raw)).records
+  const records = activityHistoryPayloadSchema.parse(JSON.parse(raw)).records
   if (records.some((record) => record.profileId !== profileId))
     throw new Error('活动档案不匹配，原记录已保留。')
   return records.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))

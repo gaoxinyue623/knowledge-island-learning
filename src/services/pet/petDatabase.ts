@@ -3,6 +3,9 @@ import { freshPetAccount, PetDataError, validatePetAccount, type PetAccount } fr
 export const PET_DATABASE_NAME = 'knowledge-island.pet.v1'
 export interface PetRepository {
   update(profileId: string, change: (account: PetAccount) => PetAccount): Promise<PetAccount>
+  read(profileId: string): Promise<PetAccount | null>
+  putNewProfile(profileId: string, account: PetAccount): Promise<void>
+  deleteProfile(profileId: string): Promise<void>
 }
 export function createPetRepository(
   factory: () => IDBFactory | undefined = () => globalThis.indexedDB,
@@ -37,6 +40,49 @@ export function createPetRepository(
     })
   }
   return {
+    async read(profileId) {
+      const database = await open()
+      return new Promise<PetAccount | null>((resolve, reject) => {
+        const transaction = database.transaction('accounts', 'readonly')
+        const request = transaction.objectStore('accounts').get(profileId)
+        request.onsuccess = () => {
+          try {
+            resolve(request.result === undefined ? null : validatePetAccount(request.result, profileId))
+          } catch (error) {
+            reject(error)
+          } finally {
+            database.close()
+          }
+        }
+        request.onerror = () => { database.close(); reject(new PetDataError('宠物记录暂时无法读取，请重试。')) }
+      })
+    },
+    async putNewProfile(profileId, account) {
+      const database = await open()
+      return new Promise<void>((resolve, reject) => {
+        let failure: unknown
+        const transaction = database.transaction('accounts', 'readwrite')
+        const store = transaction.objectStore('accounts')
+        const request = store.get(profileId)
+        request.onsuccess = () => {
+          try {
+            if (request.result !== undefined) throw new PetDataError('目标档案已存在，未覆盖原宠物记录。')
+            store.put(validatePetAccount(account, profileId))
+          } catch (error) { failure = error; transaction.abort() }
+        }
+        transaction.oncomplete = () => { database.close(); resolve() }
+        transaction.onabort = () => { database.close(); reject(failure ?? new PetDataError('宠物记录没有保存。')) }
+      })
+    },
+    async deleteProfile(profileId) {
+      const database = await open()
+      return new Promise<void>((resolve, reject) => {
+        const transaction = database.transaction('accounts', 'readwrite')
+        transaction.objectStore('accounts').delete(profileId)
+        transaction.oncomplete = () => { database.close(); resolve() }
+        transaction.onabort = () => { database.close(); reject(new PetDataError('宠物记录没有清理。')) }
+      })
+    },
     async update(profileId, change) {
       const database = await open()
       return new Promise<PetAccount>((resolve, reject) => {

@@ -64,10 +64,10 @@ function parseSession(value: unknown): LessonSession | null {
   }
 }
 
-function parsePayload(value: string | null): LessonSessionStoragePayload | null {
+export function parseLessonSessionStoragePayload(value: unknown): LessonSessionStoragePayload | null {
   if (!value) return null
   try {
-    const parsed: unknown = JSON.parse(value)
+    const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value
     if (typeof parsed !== 'object' || parsed === null) return null
     const candidate = parsed as Record<string, unknown>
     if (candidate.schemaVersion !== 1 || !Array.isArray(candidate.sessions)) return null
@@ -134,7 +134,7 @@ export function createLessonSessionStorage(
       return []
     }
     if (!raw) return []
-    const payload = parsePayload(raw)
+    const payload = parseLessonSessionStoragePayload(raw)
     if (!payload) {
       lastWarning = '学习进度格式需要更新，已安全恢复为空白会话。'
       try {

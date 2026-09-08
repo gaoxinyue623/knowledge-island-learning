@@ -72,7 +72,7 @@ const questionSessionSchema = z.object({
   completedAt: z.string().optional(),
 })
 
-const questionSessionPayloadSchema = z.object({
+export const questionSessionStoragePayloadSchema = z.object({
   schemaVersion: z.literal(1),
   sessions: z.array(questionSessionSchema),
 })
@@ -147,7 +147,7 @@ export function createQuestionSessionStorage(
     if (!raw) return { schemaVersion: 1, sessions: [] }
     try {
       const parsed: unknown = JSON.parse(raw)
-      const result = questionSessionPayloadSchema.safeParse(parsed)
+      const result = questionSessionStoragePayloadSchema.safeParse(parsed)
       if (!result.success) {
         storage.removeItem(key)
         lastWarning = '题目会话存储格式无法识别，已安全清理。'

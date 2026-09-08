@@ -154,7 +154,7 @@ export function saveQuestProgress(
   }
 }
 
-const choiceSchema = z
+export const questChoiceSchema = z
   .object({
     schemaVersion: z.literal(1),
     profileId: z.string().min(1),
@@ -163,8 +163,8 @@ const choiceSchema = z
     variant: z.number().int().min(0).max(9),
   })
   .strict()
-type QuestChoice = z.infer<typeof choiceSchema>
-const choiceKey = (profileId: string, questId: string) =>
+type QuestChoice = z.infer<typeof questChoiceSchema>
+export const choiceKey = (profileId: string, questId: string) =>
   QUEST_CHOICE_PREFIX + encodeURIComponent(profileId) + ':' + encodeURIComponent(questId)
 export function readQuestChoice(profileId: string, questId: string) {
   const data: QuestChoice = { schemaVersion: 1, profileId, questId, mode: 'foundation', variant: 0 }
@@ -173,7 +173,7 @@ export function readQuestChoice(profileId: string, questId: string) {
     if (!storage) throw new Error('Storage unavailable')
     const raw = storage.getItem(choiceKey(profileId, questId))
     if (raw === null) return { data, writable: true }
-    const choice = choiceSchema.parse(JSON.parse(raw))
+    const choice = questChoiceSchema.parse(JSON.parse(raw))
     if (choice.profileId !== profileId || choice.questId !== questId)
       throw new Error('Scope mismatch')
     return { data: choice, writable: true }
@@ -187,7 +187,7 @@ export function saveQuestChoice(data: QuestChoice): boolean {
     if (!storage) return false
     storage.setItem(
       choiceKey(data.profileId, data.questId),
-      JSON.stringify(choiceSchema.parse(data)),
+      JSON.stringify(questChoiceSchema.parse(data)),
     )
     return true
   } catch {

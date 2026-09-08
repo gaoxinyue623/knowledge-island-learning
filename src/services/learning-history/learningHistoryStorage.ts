@@ -52,7 +52,7 @@ const recordSchema = z.object({
   }),
 })
 
-const payloadSchema = z.object({
+export const learningHistoryStoragePayloadSchema = z.object({
   schemaVersion: z.literal(1),
   records: z.array(recordSchema),
 })
@@ -74,7 +74,7 @@ function parsePayload(value: string | null): LearningHistoryStoragePayload | nul
   if (!value) return null
   try {
     const parsed: unknown = JSON.parse(value)
-    const result = payloadSchema.safeParse(parsed)
+    const result = learningHistoryStoragePayloadSchema.safeParse(parsed)
     return result.success ? result.data : null
   } catch {
     return null
@@ -117,7 +117,7 @@ export function createLearningHistoryStorage(
       schemaVersion: 1,
       records: records.map(cloneRecord),
     }
-    const result = payloadSchema.safeParse(payload)
+    const result = learningHistoryStoragePayloadSchema.safeParse(payload)
     if (!result.success) {
       lastWarning = '学习记录格式无效，本次记录未保存。'
       return
@@ -154,7 +154,7 @@ export function migrateLearningHistoryStoragePayload(value: unknown): {
   payload: LearningHistoryStoragePayload | null
   warning: string | null
 } {
-  const result = payloadSchema.safeParse(value)
+  const result = learningHistoryStoragePayloadSchema.safeParse(value)
   if (result.success) return { payload: result.data, warning: null }
   return {
     payload: null,

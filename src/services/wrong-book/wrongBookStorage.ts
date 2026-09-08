@@ -41,7 +41,7 @@ const recordSchema = z.object({
   lessonId: z.string().min(1).optional(),
 })
 
-const payloadSchema = z.object({
+export const wrongBookStoragePayloadSchema = z.object({
   schemaVersion: z.literal(1),
   records: z.array(recordSchema),
   processedAttemptIds: z.array(z.string().min(1)),
@@ -73,7 +73,7 @@ function clonePayload(payload: WrongBookStoragePayload): WrongBookStoragePayload
 function parsePayload(raw: string | null): WrongBookStoragePayload | null {
   if (!raw) return null
   try {
-    const result = payloadSchema.safeParse(JSON.parse(raw))
+    const result = wrongBookStoragePayloadSchema.safeParse(JSON.parse(raw))
     return result.success ? result.data : null
   } catch {
     return null
@@ -115,7 +115,7 @@ export function createWrongBookStorage(
       records: payload.records.map(cloneRecord),
       processedAttemptIds: [...new Set(payload.processedAttemptIds)],
     }
-    const result = payloadSchema.safeParse(normalized)
+    const result = wrongBookStoragePayloadSchema.safeParse(normalized)
     if (!result.success) {
       lastWarning = '错题本格式无效，本次记录未保存。'
       return
@@ -152,7 +152,7 @@ export function migrateWrongBookStoragePayload(value: unknown): {
   payload: WrongBookStoragePayload | null
   warning: string | null
 } {
-  const result = payloadSchema.safeParse(value)
+  const result = wrongBookStoragePayloadSchema.safeParse(value)
   if (result.success) return { payload: result.data, warning: null }
   return {
     payload: null,

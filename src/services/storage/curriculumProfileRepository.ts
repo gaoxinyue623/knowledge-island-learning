@@ -1,6 +1,7 @@
 import type { StudentCurriculumProfile } from '@/types'
 
 import { storagePayloadSchema } from '@/services/validation/schemas'
+import { recoverActiveProfileJournal } from '@/services/family/activeProfileStorage'
 
 export const curriculumProfileStorageKey = 'knowledge-island.curriculum-profile'
 
@@ -36,6 +37,7 @@ export function createCurriculumProfileRepository(
     load() {
       if (!storage) return null
       try {
+        if (!recoverActiveProfileJournal(storage)) return null
         const raw = storage.getItem(curriculumProfileStorageKey)
         if (!raw) return null
         const parsed: unknown = JSON.parse(raw)
