@@ -12,6 +12,7 @@ import SubjectHabitat from '@/components/illustrations/SubjectHabitat.vue'
 import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
 import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import SpacedReviewEntry from '@/components/student-growth/SpacedReviewEntry.vue'
+import WeeklyPlanCard from '@/components/weekly-plan/WeeklyPlanCard.vue'
 import islandAdventure from '@/assets/illustrations/island-adventure.jpg'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
@@ -409,6 +410,13 @@ watch(
         </section>
 
         <SpacedReviewEntry :items="dueReviews" @launch="openSpacedReview" />
+        <WeeklyPlanCard
+          v-if="!isDevRoute"
+          :profile-id="viewModel.profile.profileId"
+          :daily-plan="viewModel.today"
+          @open-task="openTask"
+          @refresh="loadHome"
+        />
 
         <section
           v-if="viewModel.continueLearning"
