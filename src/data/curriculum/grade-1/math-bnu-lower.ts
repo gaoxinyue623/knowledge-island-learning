@@ -584,7 +584,7 @@ const courseContents: CourseContent[] = definitions.map((d, i) => ({
       { type: 'TEXT', text: `${d.title}\n\n${d.explanation}` },
       {
         type: 'TEXT',
-        text: `动手探索\n${d.discovery}\n\n先自己试一试，再到下方“动手探究”查看参考思路。`,
+        text: `动手探索\n${d.discovery}\n\n先自己试一试。可以和家人说说你的做法；需要时，请家人读题并和你一起回看前面的学习内容。`,
       },
     ],
   },

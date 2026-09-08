@@ -8,6 +8,7 @@ import { memoryQuestStorage } from './helpers/questStorage'
 import QuestTraining from '@/components/knowledge-point/QuestTraining.vue'
 import ReadingQuest from '@/components/knowledge-point/ReadingQuest.vue'
 import { curriculumData } from '@/data/curriculum'
+import { gradeOneShenzhenMathUpperDefinitions } from '@/data/curriculum/grade-1/math-bnu-upper'
 import { StaticContentExpansionRepository } from '@/services/content-expansion/contentExpansionRepository'
 import { createTrainingQuest } from '@/services/content-expansion/trainingQuest'
 import {
@@ -347,10 +348,26 @@ describe('Training interaction', () => {
   })
 
   it('gives classification questions a relevant first hint, not a numerical-units hint', () => {
-    const input = inputFor(bundles.find((b) => b.knowledgePointId === 'G1_SHENZHEN_MATH_S1_KP_01')!)
+    const classification = gradeOneShenzhenMathUpperDefinitions.find(
+      (definition) => definition.family === 'classify',
+    )!
+    const input = inputFor(
+      bundles.find((bundle) => bundle.knowledgePointId === classification.knowledgePointId)!,
+    )
     const quest = createTrainingQuest(input)!
     expect(quest.stages[0]!.hint).toContain('标准')
     expect(quest.stages[0]!.hint).not.toContain('数量和单位')
+  })
+
+  it('gives the classroom-preparation lesson an observing-and-listening first hint', () => {
+    const welcome = gradeOneShenzhenMathUpperDefinitions.find(
+      (definition) => definition.unitIndex === 0 && definition.family === 'welcome',
+    )!
+    const input = inputFor(
+      bundles.find((bundle) => bundle.knowledgePointId === welcome.knowledgePointId)!,
+    )
+
+    expect(createTrainingQuest(input)!.stages[0]!.hint).toMatch(/观察|同伴|课堂|说话/)
   })
 
   it('records hint-assisted completion separately from independent success', async () => {

@@ -485,10 +485,26 @@ const knowledgePoints: KnowledgePoint[] = definitions.map((d, i) => ({
   subjectId: 'SUBJECT_MATH',
   gradeScope: { minGrade: 1, maxGrade: 1, explicitGradeIds: [gradeOneChineseUpperGrade.id] },
   description: d.explanation,
-  learningObjective: [
-    `能通过点数、摆物或观察，理解“${d.title}”中的方法。`,
-    '能用一句话说出自己的发现，再检查一次。',
-  ],
+  learningObjective:
+    d.family === 'welcome'
+      ? [
+          '能在同伴发言时先倾听，想发言时举手等待。',
+          '能把课本和铅笔摆整齐，说出一项上课前的准备方法。',
+        ]
+      : d.unitIndex === 0 && d.family === 'count'
+        ? [
+            '能把教室里的物品一个一个点数，不漏数也不重复数。',
+            '能说出最后一个数表示物品的总数，并用另一种摆法检查。',
+          ]
+        : d.unitIndex === 0 && d.family === 'ordinal'
+          ? [
+              '能先说明从哪一边开始数，再找出队伍里的第几个位置。',
+              '能区分“有几个”的总数和“第几个”的位置。',
+            ]
+          : [
+              `能通过点数、摆物或观察，理解“${d.title}”中的方法。`,
+              '能用一句话说出自己的发现，再检查一次。',
+            ],
   abilityTags: ['数感', '观察比较', '动手操作', '数学表达'],
   difficultyLevel: 'FOUNDATION',
   status: 'ACTIVE',
@@ -531,7 +547,7 @@ const courseContents: CourseContent[] = definitions.map((d, i) => ({
       { type: 'TEXT', text: `${d.title}\n\n${d.explanation}` },
       {
         type: 'TEXT',
-        text: `动手探索\n${d.discovery}\n\n先自己试一试，再到下方“动手探究”查看参考思路。`,
+        text: `动手探索\n${d.discovery}\n\n先自己试一试。可以和家人说说你的做法；需要时，请家人读题并和你一起回看前面的学习内容。`,
       },
     ],
   },
