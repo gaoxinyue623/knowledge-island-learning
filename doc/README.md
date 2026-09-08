@@ -5,6 +5,8 @@
 ## 产品与页面
 
 - [学生学习体验改进与后续计划](product/STUDENT_LEARNING_ROADMAP.md)
+- [学生持续学习功能与验收](product/STUDENT_GROWTH_IMPLEMENTATION.md)
+- [三年级原创拓展内容范围](product/GRADE_EXPANSION_CONTENT.md)
 - [`ASSESSMENT.md`](product/ASSESSMENT.md)
 - [`CORE_PAGE_SPEC.md`](product/CORE_PAGE_SPEC.md)
 - [`PAGE_SPEC.md`](product/PAGE_SPEC.md)
@@ -106,6 +108,7 @@
 
 ## 运维与发布
 
+- [家庭档案服务与恢复边界](operations/STUDENT_FAMILY_ARCHIVES.md)
 - [`DOUBAO_TTS.md`](operations/DOUBAO_TTS.md)
 - [`LOCAL_RELEASE_FIXES.md`](operations/LOCAL_RELEASE_FIXES.md)
 - [`MVP_RELEASE_CHECKLIST.md`](operations/MVP_RELEASE_CHECKLIST.md)

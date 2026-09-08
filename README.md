@@ -17,14 +17,14 @@ npm ci
 npm run dev
 ```
 
-可选的宠物账号与备份服务需另开终端：
+可选的家长账号、家庭档案与宠物备份服务需另开终端：
 
 ```sh
 npm run server
 npm run dev
 ```
 
-服务默认监听 `127.0.0.1:8787`，前端通过 `/api/pet` 代理访问；开发期间可使用 `npm run server:dev` 自动重启。服务边界与接口见 [`doc/operations/PET_BACKEND.md`](doc/operations/PET_BACKEND.md)。
+服务默认监听 `127.0.0.1:8787`，前端通过 `/api/pet` 代理访问；开发期间可使用 `npm run server:dev` 自动重启。家庭完整档案同步与数据库升级说明见 [家庭档案服务运维](doc/operations/STUDENT_FAMILY_ARCHIVES.md)，宠物接口见 [宠物后端](doc/operations/PET_BACKEND.md)。
 
 ## 常用命令
 
@@ -38,11 +38,11 @@ npm run release:check
 
 ## 当前验证状态
 
-- 2026-09-08 学生体验分支在 Node.js 24.20.0 下验证：build、lint、59 个测试文件中的 689 项测试全部通过，runtime 专项 2 项通过。
+- 2026-09-08 学生体验分支在 Node.js 24.20.0 下验证：build、lint、68 个测试文件中的 759 项测试全部通过，runtime 专项 2 项通过。
 - Windows 下 npm 子进程启动和 TTS 缓存路径断言已修复；`npm run release:check` 退出码为 0，结果为 `READY_WITH_LIMITATIONS`。
-- 课程正文听读、三档字号和完成后只读回看已通过独立审查及 320px、390px 窄屏浏览器检查。
-- 既有边界：8 节内容不计自动判分覆盖，豆包语音限本地开发，全站学习记录仍在本机；尚未完成真机手机及学生试用。
+- 间隔复习、本领册、周计划、宠物故事、档案恢复和家庭同步已通过独立审查及 320px、390px 浏览器检查；双设备冲突和恢复使用临时本地服务验证。
+- 当前边界：8 节内容不计自动判分覆盖，豆包语音限本地开发，家庭云同步需要自行部署后端并手动发起；三年级为 9 节原创拓展短课，暂未教师校审。尚未完成生产部署、真机手机及学生试用。
 
-本批功能及后续计划见 [学生学习体验改进](doc/product/STUDENT_LEARNING_ROADMAP.md)。历史修复见 [`doc/operations/LOCAL_RELEASE_FIXES.md`](doc/operations/LOCAL_RELEASE_FIXES.md)，当前验证结果以上述记录为准。
+本批功能、入口与分项提交见 [学生持续学习功能验收](doc/product/STUDENT_GROWTH_IMPLEMENTATION.md)，路线图见 [学生学习体验改进](doc/product/STUDENT_LEARNING_ROADMAP.md)。历史修复见 [本地正式课程与学习流程修复](doc/operations/LOCAL_RELEASE_FIXES.md)。
 
 文档分类入口：[`doc/README.md`](doc/README.md)。
