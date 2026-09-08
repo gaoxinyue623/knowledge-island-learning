@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -9,9 +9,13 @@ import AppIcon from '@/components/common/AppIcon.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
+import LessonGuidedPractice from '@/components/lesson-player/LessonGuidedPractice.vue'
 import KnowledgePointExperienceHub from '@/components/content-expansion/KnowledgePointExperienceHub.vue'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
+import { contentExpansionRepository } from '@/services/content-expansion'
+import { createReadingQuest, questReadingText } from '@/services/content-expansion/readingQuest'
+import { lessonProgressPresentation } from '@/services/lesson-player/lessonProgressPresentation'
 import { questionEngineAdapter } from '@/services/question-engine'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
 import { useLearningProfile } from '@/composables/useLearningProfile'
@@ -21,6 +25,7 @@ import type {
   LessonPlayerDemoState,
   LessonStepType,
 } from '@/types'
+import type { ContentExpansionBundle, LessonContentBlockViewModel } from '@/types'
 
 const stepTypeLabels: Record<LessonStepType, string> = {
   intro: '今天学什么',
@@ -39,6 +44,9 @@ const lessonPlayerStore = useLessonPlayerStore()
 const { profileId } = useLearningProfile()
 const invalidContextMessage = ref<string | null>(null)
 const practiceAvailable = ref<boolean | null>(null)
+const guidedPracticeBundle = ref<ContentExpansionBundle | null>(null)
+const guidedPracticeState = ref<'loading' | 'ready' | 'unavailable' | 'error'>('loading')
+let guidedPracticeRequest = 0
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/lesson-player'))
 const dataset = computed<LessonPlayerDataset>(() => {
@@ -130,6 +138,21 @@ const progressLabel = computed(() =>
 const canShowContent = computed(
   () => Boolean(viewModel.value) && ['ready', 'completed'].includes(lessonPlayerStore.status),
 )
+const displayedProgress = computed(() =>
+  lessonProgressPresentation(viewModel.value?.session, false).progress,
+)
+const lessonContentBlocks = computed<LessonContentBlockViewModel[]>(() =>
+  (viewModel.value?.steps.flatMap((step) => step.contentBlocks) ?? []).sort(
+    (left, right) => left.sort - right.sort || left.id.localeCompare(right.id),
+  ),
+)
+const guidedPracticeQuest = computed(() =>
+  createReadingQuest({
+    bundle: guidedPracticeBundle.value,
+    title: viewModel.value?.lesson.title ?? '',
+    text: questReadingText(lessonContentBlocks.value),
+  }),
+)
 const demoStateOptions: Array<{ value: LessonPlayerDemoState; label: string }> = [
   { value: 'full', label: '完整课程' },
   { value: 'resume', label: '恢复中' },
@@ -150,6 +173,9 @@ async function loadLesson() {
     return
   }
   practiceAvailable.value = null
+  guidedPracticeRequest += 1
+  guidedPracticeBundle.value = null
+  guidedPracticeState.value = 'loading'
   await lessonPlayerStore.loadLesson(context.value, {
     dataset: dataset.value,
     studentId: profileId.value,
@@ -160,6 +186,43 @@ async function loadLesson() {
   if (profileId.value !== activeProfile || route.fullPath !== activePath) return
   applyAssessmentCompletion()
   await checkPracticeAvailability()
+  if (profileId.value !== activeProfile || route.fullPath !== activePath) return
+  if (lessonPlayerStore.status === 'completed') await loadGuidedPractice(activeProfile, activePath)
+}
+
+async function loadGuidedPractice(
+  activeProfile = profileId.value,
+  activePath = route.fullPath,
+): Promise<void> {
+  const request = ++guidedPracticeRequest
+  const activeContext = context.value
+  guidedPracticeBundle.value = null
+  guidedPracticeState.value = 'loading'
+  if (!activeContext || !viewModel.value) {
+    guidedPracticeState.value = 'unavailable'
+    return
+  }
+  try {
+    const bundle = await contentExpansionRepository.getBundle(
+      activeContext.knowledgePointId,
+      dataset.value === 'profile' ? 'profile' : 'golden',
+    )
+    if (
+      request !== guidedPracticeRequest ||
+      profileId.value !== activeProfile ||
+      route.fullPath !== activePath
+    )
+      return
+    guidedPracticeBundle.value = bundle
+    guidedPracticeState.value = guidedPracticeQuest.value ? 'ready' : 'unavailable'
+  } catch {
+    if (
+      request === guidedPracticeRequest &&
+      profileId.value === activeProfile &&
+      route.fullPath === activePath
+    )
+      guidedPracticeState.value = 'error'
+  }
 }
 
 async function checkPracticeAvailability() {
@@ -274,7 +337,14 @@ function startAssessment() {
 }
 
 async function finishLesson() {
-  await lessonPlayerStore.completeLesson()
+  const activeProfile = profileId.value,
+    activePath = route.fullPath
+  if (
+    (await lessonPlayerStore.completeLesson()) &&
+    profileId.value === activeProfile &&
+    route.fullPath === activePath
+  )
+    await loadGuidedPractice(activeProfile, activePath)
 }
 
 function selectDemoState(nextState: LessonPlayerDemoState) {
@@ -311,6 +381,9 @@ function previousStep() {
 }
 
 onMounted(() => void loadLesson())
+onBeforeUnmount(() => {
+  guidedPracticeRequest += 1
+})
 watch(
   () => [route.fullPath, profileId.value],
   () => void loadLesson(),
@@ -460,7 +533,7 @@ watch(
               <strong>{{ progressLabel }}</strong>
             </div>
             <AppProgress
-              :value="viewModel.session.progress"
+              :value="displayedProgress"
               label="学习步骤进度"
               :show-value="false"
               state="normal"
@@ -486,7 +559,11 @@ watch(
             </nav>
           </section>
 
-          <section class="lesson-player__content-card" aria-labelledby="lesson-content-title">
+          <section
+            id="knowledge-reading"
+            class="lesson-player__content-card"
+            aria-labelledby="lesson-content-title"
+          >
             <header class="lesson-player__content-header">
               <div>
                 <p class="curriculum-eyebrow">
@@ -520,7 +597,7 @@ watch(
             <p>
               {{
                 isFormalPilot
-                  ? '读完了，带着你的发现去做课后练习吧！也可以回到地图继续探索。'
+                  ? '读完了，现在就在这里先练一关课后练习吧！也可以回到地图继续探索。'
                   : '你已经走完本次学习步骤。完成学习不等于掌握度，下一步可以回到地图继续探索。'
               }}
             </p>
@@ -532,17 +609,27 @@ watch(
               <AppIcon name="sparkles" :size="20" decorative />
               <span
                 >本次完成获得 {{ lessonPlayerStore.lastRewardEvent.reward.knowledgeEnergy }} 点
-                KnowledgeEnergy。</span
+                知识能量。</span
               >
             </div>
+            <LessonGuidedPractice
+              v-if="isFormalPilot"
+              :key="`${profileId}:${context?.knowledgePointId ?? ''}`"
+              :quest="guidedPracticeQuest"
+              :title="viewModel.lesson.title"
+              :profile-id="profileId"
+              :state="guidedPracticeState"
+              @open-details="openAfterReading"
+              @retry="loadGuidedPractice"
+            />
             <div class="lesson-player__completion-actions">
               <AppButton variant="secondary" @click="restartLesson()">重新学习</AppButton>
               <AppButton
                 v-if="isFormalPilot"
-                size="lg"
+                variant="secondary"
                 icon-right="arrow-right"
                 @click="openAfterReading"
-                >去做课后练习</AppButton
+                >查看完整练习与拓展</AppButton
               >
               <AppButton size="lg" icon-left="map" @click="returnToMap">{{
                 returnLabel
