@@ -49,6 +49,7 @@ const requestedSubject = computed<SubjectCode>(() => {
   return 'ENGLISH'
 })
 const selectedTextbookId = computed(() => {
+  if (typeof route.query.textbookId === 'string') return route.query.textbookId
   if (!profile.value) return null
   return {
     CHINESE: profile.value.chineseTextbookVersionId,
@@ -74,6 +75,7 @@ async function loadMap() {
   if (!textbookId) return
   await masteryStore.load(profile.value?.studentId ?? 'local-profile')
   const loaded = await learningMapStore.loadMap({
+    profileId: profile.value?.studentId,
     dataset: 'profile',
     textbookId,
     masteryRecords: masteryStore.records,
@@ -149,6 +151,9 @@ watch(
   <AppShell :show-bottom-nav="true" :context="contextLabel">
     <div class="learning-map-page content-container">
       <ThinkingEntry compact />
+      <p v-if="learningMapStore.error && learningMapStore.status !== 'error'" role="alert">
+        {{ learningMapStore.error }}
+      </p>
       <AppLoading v-if="learningMapStore.loading" label="正在准备知识岛地图" />
       <AppErrorState
         v-else-if="learningMapStore.status === 'error'"

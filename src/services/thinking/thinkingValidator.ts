@@ -14,7 +14,13 @@ const incorrect = (message = '还差一点点。逐条检查条件，修改后�
 const correct = () => result('correct', '这个方案符合所有条件！')
 
 export function emptyThinkingDraft(puzzle: ThinkingPuzzle): ThinkingDraft {
-  return puzzle.kind === 'assign' ? {} : puzzle.kind === 'path' ? [puzzle.start] : []
+  return puzzle.kind === 'sudoku'
+    ? [...puzzle.givens]
+    : puzzle.kind === 'assign'
+      ? {}
+      : puzzle.kind === 'path'
+        ? [puzzle.start]
+        : []
 }
 
 export function isThinkingStep(
@@ -40,7 +46,59 @@ export function isThinkingStep(
   )
 }
 
+export function thinkingLights(
+  puzzle: Extract<ThinkingPuzzle, { kind: 'switches' }>,
+  moves: string[],
+): boolean[] {
+  const lights = [...puzzle.initial]
+  for (const id of moves) {
+    const control = puzzle.switches.find((item) => item.id === id)
+    if (control) for (const cell of control.affects) lights[cell] = !lights[cell]
+  }
+  return lights
+}
+
 export function checkThinkingAnswer(puzzle: ThinkingPuzzle, draft: ThinkingDraft): ThinkingCheck {
+  if (puzzle.kind === 'sudoku') {
+    if (
+      !Array.isArray(draft) ||
+      draft.length !== 16 ||
+      draft.some((n) => typeof n !== 'number' || !Number.isInteger(n) || n < 0 || n > 4)
+    )
+      return incorrect('每格只能填入1、2、3、4。')
+    const values = draft as number[]
+    if (puzzle.givens.some((n, i) => n !== 0 && values[i] !== n))
+      return incorrect('题目给出的数字不能改变。')
+    if (values.includes(0)) return incomplete()
+    for (let i = 0; i < 4; i++) {
+      if (new Set(values.slice(i * 4, i * 4 + 4)).size !== 4)
+        return incorrect(`第${i + 1}行有重复的数字，检查这一行。`)
+      if (new Set([0, 1, 2, 3].map((r) => values[r * 4 + i])).size !== 4)
+        return incorrect(`第${i + 1}列有重复的数字，检查这一列。`)
+    }
+    for (const start of [0, 2, 8, 10]) {
+      if (new Set([0, 1, 4, 5].map((offset) => values[start + offset])).size !== 4)
+        return incorrect('粗线围成的四格小宫里有重复数字，再检查小宫。')
+    }
+    return correct()
+  }
+  if (puzzle.kind === 'switches') {
+    if (
+      !Array.isArray(draft) ||
+      draft.some((id) => typeof id !== 'string' || !puzzle.switches.some((item) => item.id === id))
+    )
+      return incorrect()
+    if (!draft.length) return incomplete()
+    if (draft.length > puzzle.maxMoves)
+      return incorrect('按动次数超过了限制。撤回一步，想想哪些开关可以省掉。')
+    const lights = thinkingLights(puzzle, draft as string[])
+    const mismatch = lights.findIndex((on, i) => on !== puzzle.target[i])
+    return mismatch === -1
+      ? correct()
+      : incorrect(
+          `第${mismatch + 1}盏灯还没有达到目标。找找哪些开关会影响它，也看看其他灯会怎样变化。`,
+        )
+  }
   if (puzzle.kind === 'assign') {
     if (Array.isArray(draft)) return incomplete()
     const people = puzzle.people.map((p) => p.id),

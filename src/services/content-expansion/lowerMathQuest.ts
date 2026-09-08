@@ -1,3 +1,4 @@
+import { isLocallyApproved } from '../../data/curriculum/localApproval'
 import {
   G1_SHENZHEN_MATH_S2_TEXTBOOK_ID,
   G1_SHENZHEN_MATH_S2_EXERCISE_SOURCE_ID,
@@ -22,8 +23,7 @@ export function createLowerMathQuest(bundle: ContentExpansionBundle): ReadingQue
   )
   if (
     !d ||
-    productionConfig.isProduction ||
-    !productionConfig.allowUnreviewedQuestions ||
+    (!isLocallyApproved(bundle.learningContent) && !productionConfig.allowUnreviewedQuestions) ||
     bundle.textbookId !== G1_SHENZHEN_MATH_S2_TEXTBOOK_ID ||
     bundle.unitId !== gradeOneShenzhenMathLowerCurriculum.units[d.unitIndex]?.id ||
     bundle.learningContent.sourceId !== G1_SHENZHEN_MATH_S2_EXERCISE_SOURCE_ID ||

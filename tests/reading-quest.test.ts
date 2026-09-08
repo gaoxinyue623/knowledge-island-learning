@@ -339,7 +339,13 @@ describe('Reading quest interaction', () => {
     expect(wrapper.text()).toContain('这些关卡，再来试试看')
     expect(wrapper.find('[role="progressbar"]').attributes('aria-valuenow')).toBe('0')
     expect(write).toHaveBeenCalled()
-    expect(write.mock.calls.every(([key]) => key.startsWith(QUEST_PROGRESS_PREFIX))).toBe(true)
+    expect(
+      write.mock.calls.every(
+        ([key]) =>
+          key.startsWith(QUEST_PROGRESS_PREFIX) ||
+          key.startsWith('knowledge-island.activities.v1:'),
+      ),
+    ).toBe(true)
   })
 
   it('resets in-memory answers and progress on profile or textbook changes', async () => {

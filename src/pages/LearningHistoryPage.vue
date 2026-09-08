@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import LearningActivityHistory from '@/components/common/LearningActivityHistory.vue'
+import { computed, watch, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -10,17 +11,34 @@ import AppLoading from '@/components/common/AppLoading.vue'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import { phase12DemoLessonSession, phase12DemoQuestionSession } from '@/data/learning-history'
 import AppShell from '@/layouts/AppShell.vue'
-import { useCurriculumStore } from '@/stores/curriculumStore'
+import { useLearningProfile } from '@/composables/useLearningProfile'
+import { curriculumService } from '@/services'
 import { useLearningHistoryStore } from '@/stores/learningHistoryStore'
 import type { LearningHistoryRecord } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
-const curriculumStore = useCurriculumStore()
+
 const learningHistoryStore = useLearningHistoryStore()
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/history'))
-const profileId = computed(() => curriculumStore.curriculumProfile?.studentId ?? 'local-profile')
+const { profileId } = useLearningProfile()
+const titles = ref<Record<string, string>>({})
+let titleVersion = 0
+async function loadTitles() {
+  const version = ++titleVersion
+  titles.value = {}
+  const result = await Promise.all(
+    [...new Set(records.value.map((r) => r.knowledgePointId))].map(async (id) => {
+      try {
+        return [id, (await curriculumService.getKnowledgePointById(id))?.name ?? ''] as const
+      } catch {
+        return [id, ''] as const
+      }
+    }),
+  )
+  if (version === titleVersion) titles.value = Object.fromEntries(result)
+}
 const records = computed(() => learningHistoryStore.records)
 const wrongBookPath = computed(() => (isDevRoute.value ? '/dev/wrong-book' : '/wrong-book'))
 const reviewQueuePath = computed(() => (isDevRoute.value ? '/dev/review-queue' : '/review-queue'))
@@ -39,6 +57,7 @@ function loadHistory() {
     })
     demoSeeded.value = true
   }
+  void loadTitles()
 }
 
 function typeLabel(type: LearningHistoryRecord['type']): string {
@@ -90,15 +109,19 @@ function clearDemoHistory() {
   learningHistoryStore.clearDemoHistory()
 }
 
-onMounted(loadHistory)
+watch([profileId, isDevRoute], loadHistory, { immediate: true })
 </script>
 
 <template>
   <AppShell :show-bottom-nav="!isDevRoute" :context="isDevRoute ? 'DEV / 学习记录' : '学习记录'">
+    <LearningActivityHistory v-if="!isDevRoute" :profile-id="profileId" />
     <div class="phase12-page content-container history-page">
+      <RouterLink v-if="!isDevRoute" class="personal-back" to="/profile"
+        >← 返回我的学习空间</RouterLink
+      >
       <header class="phase12-page__header">
         <div>
-          <p class="curriculum-eyebrow">LEARNING HISTORY · PHASE 12</p>
+          <p class="curriculum-eyebrow">学习的每一步，都有迹可循</p>
           <h1>我的学习记录</h1>
           <p>这里记录你真正开始过、完成过的课程和练习，不用来计算掌握度。</p>
         </div>
@@ -140,7 +163,9 @@ onMounted(loadHistory)
       <AppEmptyState
         v-else-if="!records.length"
         title="这里还没有学习记录"
-        description="完成学习后，这里会留下你的学习记录。"
+        description="开始教材课程或练习后，这里会留下记录。阅读与思维训练的奖励可在成长页查看。"
+        action-label="去学习"
+        @action="router.push(isDevRoute ? '/dev/learning-map' : '/learning-map')"
       />
       <section v-else class="history-page__list" aria-labelledby="history-list-title">
         <div class="phase12-page__section-heading">
@@ -173,8 +198,19 @@ onMounted(loadHistory)
                   {{ sourceWarningLabel(record.provenance.verificationStatus, record.textbookId) }}
                 </span>
               </div>
-              <p>教材 {{ record.textbookId }} · 单元 {{ record.unitId }}</p>
-              <p>课程 {{ record.lessonId }} · 知识点 {{ record.knowledgePointId }}</p>
+              <p>{{ titles[record.knowledgePointId] || '教材学习' }}</p>
+              <RouterLink
+                :to="{
+                  path: `${isDevRoute ? '/dev' : ''}/knowledge-point/${encodeURIComponent(record.knowledgePointId)}`,
+                  query: {
+                    textbookId: record.textbookId,
+                    unitId: record.unitId,
+                    lessonId: record.lessonId,
+                  },
+                }"
+                class="personal-text-link"
+                >回到这节学习 →</RouterLink
+              >
               <small>{{ formatTime(record.occurredAt) }}</small>
               <small v-if="summaryText(record)" class="history-page__summary">
                 {{ summaryText(record) }}

@@ -1,5 +1,7 @@
 # KnowledgeEnergy / Growth Data Flow
 
+2026-09-07：本文件描述原教材成长投影。新增可消费学习积分、食物与宠物经验由独立 PetAccount 账本维护，见 [学习积分与宠物成长](PET_GROWTH.md)。喂养不减少原 KnowledgeEnergy。
+
 ## Authority
 
 ```text
@@ -14,7 +16,7 @@ RewardEvent 是事实来源。Energy 与 Growth snapshot 删除后可以重新�
 
 ## Energy contract
 
-`KnowledgeEnergyBalance` 保存 `profileId`、`totalEarned`、`current`、`updatedAt`、`algorithmVersion` 和 provenance。第一版没有消费行为，所以 `current = totalEarned`。不存在 wallet、debit、purchase、inventory 或未来消费事务。
+`KnowledgeEnergyBalance` 保存 `profileId`、`totalEarned`、`current`、`updatedAt`、`algorithmVersion` 和 provenance。原能量没有消费行为，所以 `current = totalEarned`。本投影不承担钱包、扣款、兑换或库存事务；这些操作由独立宠物账本承担。
 
 正式 profile 读取排除 SAMPLE；开发 demo 显式包含 SAMPLE 并显示样本来源。profile isolation 在 RewardEventRepository 和 GrowthService 两层都执行。
 

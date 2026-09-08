@@ -3,8 +3,6 @@ import {
   demoQuestions,
   demoQuestionKnowledgePoints,
 } from '@/data/question-engine'
-import { productionConfig } from '@/config/production'
-import { curriculumData } from '@/data/curriculum'
 import { productionCurriculumIndex } from '@/data/curriculum/production'
 import type {
   AssessmentDefinition,
@@ -78,16 +76,10 @@ export class MockQuestionRepository implements QuestionRepository {
 
   constructor(options: QuestionRepositoryOptions = {}) {
     this.mode = options.mode ?? 'success'
-    this.profileQuestions =
-      options.profileQuestions ??
-      (productionConfig.isProduction
-        ? [...productionCurriculumIndex.questions]
-        : curriculumData.questions)
-    this.profileMappings =
-      options.profileQuestionKnowledgePoints ??
-      (productionConfig.isProduction
-        ? [...productionCurriculumIndex.questionKnowledgePoints]
-        : curriculumData.questionKnowledgePoints)
+    this.profileQuestions = options.profileQuestions ?? [...productionCurriculumIndex.questions]
+    this.profileMappings = options.profileQuestionKnowledgePoints ?? [
+      ...productionCurriculumIndex.questionKnowledgePoints,
+    ]
     this.demoQuestions = options.demoQuestions ?? demoQuestions
     this.demoMappings = options.demoQuestionKnowledgePoints ?? demoQuestionKnowledgePoints
     this.demoAssessment = options.demoAssessment ?? demoAssessmentDefinition

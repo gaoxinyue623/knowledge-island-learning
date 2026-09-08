@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -10,20 +10,20 @@ import AppProgress from '@/components/common/AppProgress.vue'
 import { createPhase13DemoRewardFacts } from '@/data/reward'
 import AppShell from '@/layouts/AppShell.vue'
 import { useAchievementStore } from '@/stores/achievementStore'
-import { useCurriculumStore } from '@/stores/curriculumStore'
+import { useLearningProfile } from '@/composables/useLearningProfile'
+import PetGarden from '@/components/pet/PetGarden.vue'
 import { useGrowthStore } from '@/stores/growthStore'
 import { useRewardStore } from '@/stores/rewardStore'
 import type { AchievementProgress, RewardEvent, RewardEventType } from '@/types'
 
 const route = useRoute()
-const curriculumStore = useCurriculumStore()
+const { profileId } = useLearningProfile()
 const rewardStore = useRewardStore()
 const growthStore = useGrowthStore()
 const achievementStore = useAchievementStore()
 const demoSeeded = ref(false)
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/reward'))
-const profileId = computed(() => curriculumStore.curriculumProfile?.studentId ?? 'local-profile')
 const events = computed(() => rewardStore.events)
 const progress = computed(() => achievementStore.progress)
 const growth = computed(() => growthStore.growth)
@@ -88,7 +88,7 @@ function sourceLabel(event: RewardEvent): string {
   return event.provenance.isSampleDerived ? '开发样本' : '正式学习记录'
 }
 
-onMounted(loadData)
+watch(() => [profileId.value, isDevRoute.value], loadData, { immediate: true })
 </script>
 
 <template>
@@ -96,8 +96,8 @@ onMounted(loadData)
     <div class="reward-page content-container">
       <header class="reward-page__header">
         <div>
-          <p class="curriculum-eyebrow">REWARD · GROWTH · PHASE 13</p>
-          <h1>我的成长反馈</h1>
+          <p class="curriculum-eyebrow">和伙伴一起成长</p>
+          <h1>我的成长与宠物</h1>
           <p>每一次真正完成的学习，都会留下可以回看的成长记录。</p>
         </div>
         <div class="reward-page__header-actions">
@@ -109,6 +109,8 @@ onMounted(loadData)
           </AppButton>
         </div>
       </header>
+
+      <PetGarden v-if="!isDevRoute" />
 
       <div
         v-if="rewardStore.warning || growthStore.warning || achievementStore.warning"
@@ -133,13 +135,13 @@ onMounted(loadData)
           <div class="reward-page__growth-heading">
             <div>
               <p class="curriculum-eyebrow">KnowledgeEnergy</p>
-              <h2 id="growth-card-title">累计成长能量</h2>
+              <h2 id="growth-card-title">教材成长能量</h2>
             </div>
             <AppIcon name="sparkles" :size="28" color="var(--color-primary)" decorative />
           </div>
           <div class="reward-page__energy-value">
             <strong>{{ energy?.current ?? 0 }}</strong>
-            <span>KnowledgeEnergy</span>
+            <span>累计能量</span>
           </div>
           <div class="reward-page__level-row">
             <span>成长等级 {{ growth?.growthLevel ?? 1 }}</span>
@@ -152,7 +154,7 @@ onMounted(loadData)
             state="success"
           />
           <p class="reward-page__growth-caption">
-            成长等级只用于记录和反馈，不会改变课程解锁、题目难度或掌握度。
+            这里保留原有课程、练习与复习产生的成长能量，不是可消费积分。喂养不会减少它，也不会改变掌握度。
           </p>
         </section>
 
@@ -160,7 +162,7 @@ onMounted(loadData)
           <div class="reward-page__section-heading">
             <div>
               <p class="curriculum-eyebrow">Milestones</p>
-              <h2 id="achievement-title">学习里程碑</h2>
+              <h2 id="achievement-title">教材学习里程碑</h2>
             </div>
             <strong>{{ achievementStore.unlockedCount }} / {{ progress.length }} 已达成</strong>
           </div>
@@ -208,13 +210,13 @@ onMounted(loadData)
           <div class="reward-page__section-heading">
             <div>
               <p class="curriculum-eyebrow">Reward history</p>
-              <h2 id="reward-history-title">成长记录</h2>
+              <h2 id="reward-history-title">教材成长记录</h2>
             </div>
             <strong>{{ events.length }} 条</strong>
           </div>
           <AppEmptyState
             v-if="!events.length"
-            title="还没有成长记录"
+            title="还没有教材成长记录"
             description="完成课程、练习或主动巩固后，这里会留下记录。"
           />
           <ol v-else class="reward-page__event-list">

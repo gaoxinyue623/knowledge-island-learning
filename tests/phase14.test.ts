@@ -147,6 +147,18 @@ function baseInput(overrides: Partial<DailyPlanProjectionInput> = {}): DailyPlan
 }
 
 describe('PHASE 14.1 Home Domain and Daily Plan', () => {
+  it('fills an empty daily snapshot when a current learning recommendation becomes available', () => {
+    const empty = projectDailyPlan(baseInput())
+    expect(empty.tasks).toHaveLength(0)
+    const recommendation = { ...strategy(), type: 'CONTINUE_CURRENT' as const }
+    const input = baseInput({
+      strategies: [{ subject: 'MATH', textbookId: 'TEXTBOOK_A', recommendation }],
+    })
+    const filled = projectDailyPlan(input, {}, empty)
+    expect(filled.tasks.some((task) => task.type === 'next_learning')).toBe(true)
+    expect(projectDailyPlan(input, {}, filled).tasks).toEqual(filled.tasks)
+  })
+
   it('uses local dates and deterministic plan/task identities', () => {
     expect(getLocalDateKey(new Date(2026, 8, 3, 23, 59))).toBe('2026-09-03')
     const context = buildTextbookContextKey({ MATH: 'TEXTBOOK_A' })

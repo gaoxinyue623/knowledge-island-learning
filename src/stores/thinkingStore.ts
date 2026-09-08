@@ -1,3 +1,5 @@
+import { recordLearningActivity } from '@/services/learning-activity/activityHistory'
+import { notifyPetLearningChanged } from '@/services/pet/petNotifications'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {
@@ -57,6 +59,20 @@ export const useThinkingStore = defineStore('thinking', () => {
         }
         data.value = next
         window.localStorage.setItem(thinkingProgressKey(profileId), JSON.stringify(next))
+        recordLearningActivity({
+          id: `thinking:${missionId}:${mission!.version}:${puzzleId}`,
+          profileId,
+          contentId: puzzleId,
+          contentVersion: String(mission!.version),
+          kind: 'thinking',
+          title: `${mission!.title} · ${puzzle.title}`,
+          subject: 'THINKING',
+          occurredAt: new Date().toISOString(),
+          completedCount: 1,
+          mistakeCount: 0,
+          href: `/thinking-islands/${mission!.islandId}/${missionId}`,
+        })
+        notifyPetLearningChanged()
         warning.value = null
       } catch {
         warning.value = '这次完成记录暂时未保存。你可以继续练习，下次答对时会再试着保存。'

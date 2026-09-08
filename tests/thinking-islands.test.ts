@@ -117,8 +117,56 @@ function solvePath(puzzle: Extract<ThinkingPuzzle, { kind: 'path' }>): number[] 
   }
   return null
 }
+function solveSudoku(puzzle: Extract<ThinkingPuzzle, { kind: 'sudoku' }>): number[][] {
+  const solutions: number[][] = []
+  const values = [...puzzle.givens]
+  function search() {
+    const i = values.indexOf(0)
+    if (i === -1) {
+      solutions.push([...values])
+      return
+    }
+    const row = Math.floor(i / 4),
+      col = i % 4
+    for (let n = 1; n <= 4; n++) {
+      const conflicts = values.some(
+        (v, j) =>
+          v === n &&
+          (Math.floor(j / 4) === row ||
+            j % 4 === col ||
+            (Math.floor(j / 8) === Math.floor(row / 2) &&
+              Math.floor((j % 4) / 2) === Math.floor(col / 2))),
+      )
+      if (!conflicts) {
+        values[i] = n
+        search()
+        values[i] = 0
+      }
+    }
+  }
+  search()
+  return solutions
+}
+function solveSwitches(puzzle: Extract<ThinkingPuzzle, { kind: 'switches' }>): string[][] {
+  // Independently count flips; any repeated pair cancels, so a shortest plan uses each at most once.
+  return subsets(puzzle.switches)
+    .filter(
+      (set) =>
+        set.length <= puzzle.maxMoves &&
+        puzzle.initial.every(
+          (on, cell) =>
+            (Number(on) + set.filter((s) => s.affects.includes(cell)).length) % 2 ===
+            Number(puzzle.target[cell]),
+        ),
+    )
+    .map((set) => set.map((s) => s.id))
+}
 function solution(puzzle: ThinkingPuzzle): ThinkingDraft {
   switch (puzzle.kind) {
+    case 'sudoku':
+      return solveSudoku(puzzle)[0]!
+    case 'switches':
+      return solveSwitches(puzzle)[0]!
     case 'pick':
       return [...puzzle.correctIds]
     case 'assign':
@@ -152,20 +200,20 @@ const player = (missionId = first.id, profileId = 'p1') =>
   })
 
 describe('original thinking island catalogue', () => {
-  it('has four independent islands, three levels each, and 48 source-labelled tasks', () => {
+  it('has four independent islands, three levels each, and 60 source-labelled tasks', () => {
     expect(thinkingIslands).toHaveLength(4)
     expect(new Set(thinkingIslands.map((i) => i.id)).size).toBe(4)
-    expect(thinkingMissions).toHaveLength(12)
+    expect(thinkingMissions).toHaveLength(15)
     const puzzles = thinkingMissions.flatMap((m) => m.puzzles)
-    expect(puzzles).toHaveLength(48)
-    expect(new Set(puzzles.map((p) => p.id)).size).toBe(48)
-    expect(new Set(puzzles.map((p) => p.kind)).size).toBe(5)
+    expect(puzzles).toHaveLength(60)
+    expect(new Set(puzzles.map((p) => p.id)).size).toBe(60)
+    expect(new Set(puzzles.map((p) => p.kind)).size).toBe(7)
     for (const island of thinkingIslands) {
-      expect(thinkingMissions.filter((m) => m.islandId === island.id).map((m) => m.level)).toEqual([
-        '入门',
-        '进阶',
-        '挑战',
-      ])
+      expect(
+        [
+          ...new Set(thinkingMissions.filter((m) => m.islandId === island.id).map((m) => m.level)),
+        ].sort(),
+      ).toEqual(['入门', '进阶', '挑战'].sort())
     }
     for (const mission of thinkingMissions) {
       expect(mission.sourceId).toBe(THINKING_SOURCE.id)
@@ -192,7 +240,18 @@ describe('original thinking island catalogue', () => {
         const draft = solution(puzzle)
         expect(draft, `${puzzle.id}: unsolvable`).toBeTruthy()
         expect(checkThinkingAnswer(puzzle, draft).status, puzzle.id).toBe('correct')
-        if (puzzle.kind === 'pick') {
+        if (puzzle.kind === 'sudoku') {
+          expect(solveSudoku(puzzle)).toHaveLength(1)
+        } else if (puzzle.kind === 'switches') {
+          expect(puzzle.target).toHaveLength(puzzle.initial.length)
+          for (const control of puzzle.switches) {
+            expect(new Set(control.affects).size).toBe(control.affects.length)
+            expect(control.affects.every((cell) => cell < puzzle.initial.length)).toBe(true)
+          }
+          const plans = solveSwitches(puzzle)
+          expect(Math.min(...plans.map((plan) => plan.length))).toBe(puzzle.maxMoves)
+          for (const plan of plans) expect(checkThinkingAnswer(puzzle, plan).status).toBe('correct')
+        } else if (puzzle.kind === 'pick') {
           expect(new Set(puzzle.options.map((o) => o.id)).size).toBe(puzzle.options.length)
           expect(puzzle.correctIds.every((id) => puzzle.options.some((o) => o.id === id))).toBe(
             true,
@@ -294,7 +353,10 @@ describe('isolated local thinking progress', () => {
     store.submit('alice', first.id, firstPuzzle.id, solution(firstPuzzle))
     store.submit('alice', first.id, firstPuzzle.id, solution(firstPuzzle))
     expect(store.completed(first.id)).toEqual([firstPuzzle.id])
-    expect([...items.keys()]).toEqual([thinkingProgressKey('alice')])
+    expect([...items.keys()]).toEqual([
+      thinkingProgressKey('alice'),
+      'knowledge-island.activities.v1:alice',
+    ])
     expect(
       thinkingProgressSchema.safeParse(JSON.parse(items.get(thinkingProgressKey('alice'))!))
         .success,
@@ -313,7 +375,13 @@ describe('isolated local thinking progress', () => {
     useThinkingStore().submit('p1', 'clue-houses', firstPuzzle.id, solution(firstPuzzle))
     expect([...items]).toEqual(before)
     useThinkingStore().submit('p1', first.id, firstPuzzle.id, solution(firstPuzzle))
-    expect([...items].filter(([key]) => !key.startsWith(THINKING_PROGRESS_PREFIX))).toEqual(before)
+    expect(
+      [...items].filter(
+        ([key]) =>
+          !key.startsWith(THINKING_PROGRESS_PREFIX) &&
+          !key.startsWith('knowledge-island.activities.v1:'),
+      ),
+    ).toEqual(before)
     expect(withSolvedThinkingPuzzle(freshThinkingProgress('p1'), first.id, 'bad')).toBeNull()
   })
   it.each([
@@ -367,7 +435,9 @@ describe('isolated local thinking progress', () => {
     expect(store.warning).toContain('暂时未保存')
     expect(store.completed(first.id)).toEqual([firstPuzzle.id])
     store.submit('p1', first.id, firstPuzzle.id, solution(firstPuzzle))
-    expect(set).toHaveBeenCalledTimes(2)
+    expect(set.mock.calls.filter(([key]) => key.startsWith(THINKING_PROGRESS_PREFIX))).toHaveLength(
+      2,
+    )
     expect(store.warning).toBeNull()
     expect(
       readThinkingProgress(window.localStorage, 'p1').data.records[0]?.completedPuzzleIds,
@@ -542,7 +612,7 @@ describe('thinking routes without textbook configuration', () => {
     expect(wrapper.findAll('.thinking-island-card')).toHaveLength(4)
     await router.push('/thinking-islands/logic')
     await flushPromises()
-    expect(wrapper.findAll('.thinking-mission-stop')).toHaveLength(3)
+    expect(wrapper.findAll('.thinking-mission-stop')).toHaveLength(4)
     await router.push('/thinking-islands/logic/clue-houses')
     await flushPromises()
     expect(wrapper.get('#thinking-task-title').text()).toBe('谁住哪间屋')
@@ -553,5 +623,81 @@ describe('thinking routes without textbook configuration', () => {
     await flushPromises()
     expect(wrapper.text()).toContain('这座小岛还没有开放')
     wrapper.unmount()
+  })
+})
+
+describe('reasoning boards', () => {
+  it('replays repeated switches, undoes moves, limits actions and saves correct work', async () => {
+    const wrapper = player('switch-discovery')
+    const controls = () => wrapper.findAll('.thinking-switch-controls button')
+    await controls()[1]!.trigger('click')
+    await button(wrapper, '检查方案').trigger('click')
+    expect(wrapper.get('.thinking-feedback').text()).toContain('第1盏灯')
+    expect(useThinkingStore().completed('switch-discovery')).toEqual([])
+    expect(controls().every((b) => b.attributes('disabled') !== undefined)).toBe(true)
+    await button(wrapper, '撤回一步').trigger('click')
+    expect(wrapper.get('.thinking-switch-count').text()).toContain('0 / 1')
+    await controls()[0]!.trigger('click')
+    await button(wrapper, '检查方案').trigger('click')
+    expect(wrapper.text()).toContain('这个任务通过啦')
+    await button(wrapper, '下一个任务').trigger('click')
+    await controls()[0]!.trigger('click')
+    await controls()[0]!.trigger('click')
+    expect(wrapper.findAll('[aria-label="当前灯光"] .is-on')).toHaveLength(0)
+    await button(wrapper, '清空方案').trigger('click')
+    await controls()[0]!.trigger('click')
+    await controls()[1]!.trigger('click')
+    await button(wrapper, '检查方案').trigger('click')
+    expect(useThinkingStore().completed('switch-discovery')).toHaveLength(2)
+    wrapper.unmount()
+  })
+  it('fills, erases, resets and completes a sudoku without changing givens', async () => {
+    const wrapper = player('mini-sudoku')
+    const puzzle = puzzleOf('sudoku')
+    const answer = solution(puzzle) as number[]
+    const cell = puzzle.givens.indexOf(0)
+    const grid = () => wrapper.findAll('.thinking-sudoku-grid button')
+    const pad = () => wrapper.findAll('.thinking-number-pad button')
+    expect(pad()[0]!.attributes('disabled')).toBeDefined()
+    expect(grid()[puzzle.givens.findIndex(Boolean)]!.attributes('disabled')).toBeDefined()
+    await grid()[cell]!.trigger('click')
+    await pad()[0]!.trigger('click')
+    expect(grid()[cell]!.text()).toBe('1')
+    await pad()[4]!.trigger('click')
+    expect(grid()[cell]!.text()).toBe('·')
+    await pad()[1]!.trigger('click')
+    await button(wrapper, '清空方案').trigger('click')
+    expect(grid()[cell]!.text()).toBe('·')
+    for (let i = 0; i < 16; i++) {
+      if (puzzle.givens[i]) continue
+      await grid()[i]!.trigger('click')
+      await pad()[answer[i]! - 1]!.trigger('click')
+    }
+    await button(wrapper, '检查方案').trigger('click')
+    expect(wrapper.text()).toContain('这个任务通过啦')
+    expect(useThinkingStore().completed('mini-sudoku')).toEqual([puzzle.id])
+    wrapper.unmount()
+  })
+  it('rejects invalid moves, over-budget plans, malformed grids, changed clues and all three sudoku conflicts', () => {
+    const switches = puzzleOf('switches')
+    expect(checkThinkingAnswer(switches, ['bad']).status).toBe('incorrect')
+    expect(checkThinkingAnswer(switches, ['0', '0', '0']).message).toContain('超过')
+    const sudoku = puzzleOf('sudoku')
+    expect(checkThinkingAnswer(sudoku, []).status).toBe('incorrect')
+    expect(checkThinkingAnswer(sudoku, Array(16).fill(5)).status).toBe('incorrect')
+    const changed = solution(sudoku) as number[]
+    changed[sudoku.givens.findIndex(Boolean)] = 0
+    expect(checkThinkingAnswer(sudoku, changed).message).toContain('不能改变')
+    const blank = { ...sudoku, givens: Array(16).fill(0) }
+    expect(checkThinkingAnswer(blank, Array(16).fill(1)).message).toContain('行')
+    expect(
+      checkThinkingAnswer(blank, [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]).message,
+    ).toContain('列')
+    expect(
+      checkThinkingAnswer(blank, [1, 2, 3, 4, 2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, 3]).message,
+    ).toContain('小宫')
+    expect(
+      checkThinkingAnswer(blank, [1, 2, 3, 4, 3, 4, 1, 2, 2, 1, 4, 3, 4, 3, 2, 1]).status,
+    ).toBe('correct')
   })
 })

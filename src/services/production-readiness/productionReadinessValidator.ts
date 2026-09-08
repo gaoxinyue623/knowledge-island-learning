@@ -135,8 +135,11 @@ export function validateProductionReadiness(
   }
 
   const questionCoverage = buildQuestionCoverageReport({
-    knowledgePoints: dataset.knowledgePoints.filter((point) =>
-      index.knowledgePointIds.has(point.id),
+    minimumQuestionsPerKnowledgePoint: scope.minimumQuestionsPerKnowledgePoint,
+    knowledgePoints: dataset.knowledgePoints.filter(
+      (point) =>
+        index.knowledgePointIds.has(point.id) &&
+        !scope.readingOnlyKnowledgePointIds?.includes(point.id),
     ),
     questions: dataset.questions,
     questionKnowledgePoints: dataset.questionKnowledgePoints,

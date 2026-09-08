@@ -1,3 +1,4 @@
+import { approvedLocalBundles } from '@/data/content-expansion/localBundles'
 import {
   candidateContentExpansionBundles,
   candidateG2ShenzhenMathUpperContentExpansionBundles,
@@ -103,7 +104,8 @@ export class StaticContentExpansionRepository implements ContentExpansionReposit
 
   private records(dataset: ContentExpansionDataset): ContentExpansionBundle[] {
     if (dataset === 'candidate') return this.candidateBundles
-    if (dataset === 'profile') return [...this.goldenBundles, ...this.candidateBundles]
+    if (dataset === 'profile')
+      return [...approvedLocalBundles, ...this.goldenBundles, ...this.candidateBundles]
     return this.goldenBundles
   }
 

@@ -52,7 +52,9 @@ function save() {
               ><small>{{ selected === item.id ? '已选择' : '可使用' }}</small>
             </button>
           </div>
-          <p class="personal-muted">三套基础装扮都可以自由使用。</p>
+          <p class="personal-muted">
+            三套基础装扮都可以自由使用。这是你的学习头像，宠物伙伴在成长页单独领养和喂养。
+          </p>
           <AppButton @click="save">保存装扮</AppButton>
           <p v-if="message" role="status" class="personal-notice">{{ message }}</p>
           <p v-if="student.warning" role="alert" class="personal-notice">{{ student.warning }}</p>

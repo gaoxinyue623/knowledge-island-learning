@@ -1,3 +1,4 @@
+import { mapProgressStorageKey } from '@/services/learning-map/learningMapStorage'
 import { describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 
@@ -231,7 +232,7 @@ describe('LearningMap progress rules and storage', () => {
     repository.save('textbook-1', records)
     expect(repository.load('textbook-1')).toEqual(records)
     expect(repository.load('textbook-2')).toEqual([])
-    expect(JSON.parse(storage.getItem('knowledge-island.learning-map-progress') ?? '{}')).toEqual({
+    expect(JSON.parse(storage.getItem(mapProgressStorageKey('textbook-1')) ?? '{}')).toEqual({
       schemaVersion: 1,
       textbookId: 'textbook-1',
       records,

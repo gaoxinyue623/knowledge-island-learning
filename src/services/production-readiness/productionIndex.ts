@@ -84,7 +84,9 @@ export function buildProductionIndex(
   const textbookIds = new Set(entries.map((entry) => entry.textbookVersionId as string))
   const regionCodes = new Set(entries.map((entry) => entry.regionCode))
   const regions = dataset.regions.filter(
-    (region) => regionCodes.has(region.code) && isProductionCurriculumRecord(region),
+    (region) =>
+      (scope.selectionPolicy === 'MANUAL' || regionCodes.has(region.code)) &&
+      isProductionCurriculumRecord(region),
   )
   const regionIds = new Set(regions.map((region) => region.id))
   const textbooks = dataset.textbooks.filter(

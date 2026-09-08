@@ -1,3 +1,4 @@
+import { productionConfig } from '@/config/production'
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch, type Ref } from 'vue'
 
 import type { EnglishReadingSegment } from '@/services/lesson-player/englishReading'
@@ -14,19 +15,27 @@ export function useEnglishReadAloud(
   const state = ref<ReadingState>('idle')
   const mode = ref<'sentence' | 'continuous'>('sentence')
   const rate = ref(0.85)
+  const provider = ref<'browser' | 'doubao'>('browser')
   const index = ref(0)
   const error = ref('')
   const current = computed(() => segments.value[index.value])
   const busy = computed(() => state.value === 'speaking' || state.value === 'starting')
   const unavailable = computed(() => {
-    if (!supported.value) return '这个浏览器暂不支持朗读，可以换一个支持语音朗读的浏览器试试。'
     if (muted.value) return '应用已静音，请先在设置中关闭静音，再来听读。'
-    if (!voice.value) return '暂未找到英语声音。可以重试检测，或在设备设置中添加英语语音。'
+    if (provider.value === 'doubao' && !import.meta.env.DEV)
+      return '豆包语音目前仅在本机 npm run dev 服务中可用，请使用浏览器语音。'
+    if (provider.value === 'browser' && !supported.value)
+      return '这个浏览器暂不支持朗读，可以换一个支持语音朗读的浏览器试试。'
+    if (provider.value === 'browser' && !voice.value)
+      return '暂未找到英语声音。可以重试检测，或在设备设置中添加英语语音。'
     if (!segments.value.length) return '这部分暂时没有可朗读的英文，仍可阅读下面的原文。'
     return ''
   })
   let synth: SpeechSynthesis | undefined
   let utterance: SpeechSynthesisUtterance | undefined
+  let audio: HTMLAudioElement | undefined
+  let audioUrl: string | undefined
+  let request: AbortController | undefined
   let generation = 0
   let timeout: ReturnType<typeof setTimeout> | undefined
 
@@ -38,6 +47,17 @@ export function useEnglishReadAloud(
   function cancel() {
     generation += 1
     clearTimer()
+    request?.abort()
+    request = undefined
+    if (audio) {
+      audio.onended = null
+      audio.onerror = null
+      audio.pause()
+      audio.removeAttribute('src')
+      audio = undefined
+    }
+    if (audioUrl) URL.revokeObjectURL(audioUrl)
+    audioUrl = undefined
     const owned = utterance
     utterance = undefined
     if (owned) {
@@ -89,7 +109,12 @@ export function useEnglishReadAloud(
   }
 
   function speakCurrent(single = false) {
-    if (unavailable.value || !current.value || !synth || !voice.value) return
+    if (unavailable.value || !current.value) return
+    if (provider.value === 'doubao') {
+      void speakDoubao(single)
+      return
+    }
+    if (!synth || !voice.value) return
     if (activeReader && activeReader !== stop) activeReader()
     cancel()
     activeReader = stop
@@ -138,6 +163,70 @@ export function useEnglishReadAloud(
     }
   }
 
+  async function speakDoubao(single: boolean) {
+    if (productionConfig.isProduction) {
+      fail('当前版本使用设备语音，请切换浏览器语音后朗读。')
+      return
+    }
+    if (activeReader && activeReader !== stop) activeReader()
+    cancel()
+    activeReader = stop
+    const token = generation
+    error.value = ''
+    state.value = 'starting'
+    request = new AbortController()
+    timeout = setTimeout(() => fail('豆包语音等待超时，请稍后重试或切回浏览器语音。'), 60000)
+    try {
+      const response = await fetch('/api/tts/doubao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Knowledge-TTS': '1' },
+        body: JSON.stringify({ text: current.value!.text }),
+        signal: request.signal,
+      })
+      if (token !== generation) return
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null)
+        if (token === generation)
+          fail(
+            typeof detail?.message === 'string'
+              ? detail.message
+              : '豆包语音暂不可用，请检查本地配置或切回浏览器语音。',
+          )
+        return
+      }
+      if (!response.headers.get('Content-Type')?.includes('audio/mpeg'))
+        throw new Error('Not audio')
+      const blob = await response.blob()
+      if (token !== generation) return
+      if (!blob.size) throw new Error('Empty audio')
+      audioUrl = URL.createObjectURL(blob)
+      const player = new Audio(audioUrl)
+      audio = player
+      player.playbackRate = rate.value
+      player.preservesPitch = true
+      player.onended = () => {
+        if (token !== generation) return
+        cancel()
+        if (single || mode.value === 'sentence') state.value = 'waiting'
+        else if (index.value + 1 < segments.value.length) {
+          index.value += 1
+          speakCurrent()
+        } else state.value = 'finished'
+      }
+      player.onerror = () => {
+        if (token === generation) fail('音频播放失败，请重听或切回浏览器语音。')
+      }
+      await player.play()
+      if (token !== generation) return
+      clearTimer()
+      state.value = 'speaking'
+      timeout = setTimeout(() => fail('播放等待过久，请重听这句。'), 180000)
+    } catch {
+      if (token === generation)
+        fail('豆包语音未能播放，请重试或切回浏览器语音；请确认本地服务正在运行。')
+    }
+  }
+
   function play() {
     if (busy.value) {
       // Restarting the current short sentence also works on engines without reliable pause/resume.
@@ -174,14 +263,14 @@ export function useEnglishReadAloud(
     },
     { flush: 'sync' },
   )
-  watch([muted, rate, mode], stop, { flush: 'sync' })
+  watch([muted, rate, mode, provider], stop, { flush: 'sync' })
   onMounted(() => {
+    document.addEventListener('visibilitychange', onVisibilityChange)
     supported.value = Boolean(window.speechSynthesis && window.SpeechSynthesisUtterance)
     if (!supported.value) return
     synth = window.speechSynthesis
     refreshVoice()
     synth.addEventListener('voiceschanged', refreshVoice)
-    document.addEventListener('visibilitychange', onVisibilityChange)
   })
   onBeforeUnmount(() => {
     stop()
@@ -195,6 +284,7 @@ export function useEnglishReadAloud(
     state,
     mode,
     rate,
+    provider,
     index,
     current,
     busy,

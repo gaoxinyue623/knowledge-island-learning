@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, watch, ref } from 'vue'
+import { useLearningProfile } from '@/composables/useLearningProfile'
 import AppShell from '@/layouts/AppShell.vue'
 import AppIcon from '@/components/common/AppIcon.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
@@ -16,6 +17,8 @@ import { useGrowthStore } from '@/stores/growthStore'
 import { useAchievementStore } from '@/stores/achievementStore'
 import type { IconName } from '@/types'
 
+const { profileId } = useLearningProfile()
+let loadVersion = 0
 const student = useStudentStore()
 const curriculum = useCurriculumStore()
 const growth = useGrowthStore()
@@ -40,23 +43,28 @@ const links: { title: string; description: string; path: string; icon: IconName 
   { title: '通用设置', description: '昵称、播放偏好与帮助', path: '/settings', icon: 'settings' },
 ]
 async function load() {
+  const version = ++loadVersion
+  const id = profileId.value
   loading.value = true
+  presentation.value = null
   error.value = ''
   try {
     const profile = curriculum.curriculumProfile
-    if (!profile) throw new Error('请先完成学习设置。')
-    presentation.value = await getCurriculumPresentation(profile)
-    growth.load(profile.studentId, { dataset: 'profile', includeSample: false })
-    achievements.load(profile.studentId, { dataset: 'profile', includeSample: false })
+    growth.load(id, { dataset: 'profile', includeSample: false })
+    achievements.load(id, { dataset: 'profile', includeSample: false })
     if (growth.error || achievements.error)
       throw new Error(growth.error || achievements.error || '')
+    const result = profile ? await getCurriculumPresentation(profile) : null
+    if (version !== loadVersion) return
+    presentation.value = result
   } catch (caught) {
+    if (version !== loadVersion) return
     error.value = caught instanceof Error ? caught.message : '个人主页暂时无法读取。'
   } finally {
-    loading.value = false
+    if (version === loadVersion) loading.value = false
   }
 }
-onMounted(load)
+watch(profileId, load, { immediate: true })
 </script>
 
 <template>
@@ -67,8 +75,8 @@ onMounted(load)
         <h1>我的知识岛</h1>
       </header>
       <AppLoading v-if="loading" label="正在整理你的学习足迹" />
-      <AppErrorState v-else-if="error" :description="error" @retry="load" />
-      <template v-else>
+      <AppErrorState v-if="!loading && error" :description="error" @retry="load" />
+      <template v-if="!loading">
         <p
           v-if="student.warning || growth.warning || achievements.warning"
           class="personal-notice"
@@ -81,11 +89,13 @@ onMounted(load)
           <div class="personal-hero__copy">
             <span class="personal-tag">知识岛探索者</span>
             <h2>{{ student.profile?.displayName ?? '小岛同学' }}</h2>
-            <p>
+            <p v-if="presentation">
               {{ presentation?.gradeName }} · {{ presentation?.semesterName }} ·
               {{ presentation?.regionName }}
             </p>
-            <RouterLink class="personal-primary" to="/curriculum-settings"
+            <RouterLink
+              class="personal-primary"
+              :to="curriculum.isComplete ? '/curriculum-settings' : '/onboarding'"
               >我的学习设置 <AppIcon name="arrow-right" :size="18" decorative
             /></RouterLink>
           </div>

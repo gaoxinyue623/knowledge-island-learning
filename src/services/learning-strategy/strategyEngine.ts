@@ -594,7 +594,7 @@ function resolveReviews(
   prepared: PreparedStrategyInput,
   options: LearningStrategyOptions,
 ): ReviewRecommendation[] {
-  if (prepared.sourceBlocked || !prepared.mapNodes.length || !prepared.relations.length) return []
+  if (prepared.sourceBlocked || !prepared.mapNodes.length) return []
 
   const candidateNodes = new Map<Id, StrategyMapNode>()
   for (const node of prepared.mapNodes) {
@@ -730,8 +730,6 @@ function resolveNext(
 ): LearningRecommendation {
   if (prepared.sourceBlocked) return emptyRecommendation(prepared, 'SOURCE_NOT_ALLOWED')
   if (!prepared.mapNodes.length) return emptyRecommendation(prepared, 'KNOWLEDGE_POINT_NOT_FOUND')
-  if (!prepared.relations.length)
-    return emptyRecommendation(prepared, 'NO_AVAILABLE_KNOWLEDGE_POINT')
 
   const currentNode = findCurrentNode(prepared)
   const currentRecord = currentNode

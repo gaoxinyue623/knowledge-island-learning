@@ -1,3 +1,5 @@
+import { questContentRevision } from './questProgressStorage'
+import { approveLocalRecords, isLocallyApproved } from '../../data/curriculum/localApproval'
 import { readingQuestionSeeds } from '@/data/content-expansion/reading-quest-seeds'
 import { createMathQuest } from './mathQuest'
 import { createEarlyMathQuest } from './earlyMathQuest'
@@ -190,7 +192,7 @@ export function checkQuestAnswer(
   return validateQuestionAnswer(question, draft).status
 }
 
-export function createReadingQuest(input: {
+function createReadingQuestDraft(input: {
   bundle: ContentExpansionBundle | null
   title: string
   text: string
@@ -198,7 +200,7 @@ export function createReadingQuest(input: {
   // Only project an already-readable repository bundle; never load or publish candidate content here.
   const { bundle, title } = input
   if (
-    !productionConfig.allowUnreviewedQuestions ||
+    (!isLocallyApproved(bundle?.learningContent) && !productionConfig.allowUnreviewedQuestions) ||
     (bundle?.learningContent.isSample && !productionConfig.allowSampleQuestions)
   )
     return null
@@ -624,4 +626,14 @@ export function createReadingQuest(input: {
     )
   }
   return quest.stages.length >= 3 ? quest : null
+}
+
+export function createReadingQuest(
+  input: Parameters<typeof createReadingQuestDraft>[0],
+): ReadingQuest | null {
+  const quest = createReadingQuestDraft(input)
+  if (!quest || !isLocallyApproved(input.bundle?.learningContent)) return quest
+  return Object.assign(approveLocalRecords(quest), {
+    legacyContentRevision: questContentRevision(quest),
+  })
 }

@@ -190,7 +190,8 @@ describe('Map and profile boundaries', () => {
   it('returns diagnostics for missing relations and malformed progress instead of unlocking nodes', () => {
     const source = fixture('SAMPLE_STRATEGY_IN_PROGRESS').input
     const missingRelations = resolveLearningRecommendation({ ...source, knowledgeRelations: [] })
-    expect(missingRelations.type).toBe('NO_RECOMMENDATION')
+    expect(missingRelations.type).toBe('CONTINUE_CURRENT')
+    expect(missingRelations.nextKnowledgePoint?.mapNodeId).toBe('SAMPLE_STRATEGY_NODE_A')
     expect(missingRelations.diagnostics).toContain('KNOWLEDGE_RELATIONS_MISSING')
 
     const corruptedProgress = resolveLearningRecommendation({

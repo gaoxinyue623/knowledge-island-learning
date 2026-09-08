@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
-import AppAvatar from '@/components/common/AppAvatar.vue'
+import PetStatusLink from '@/components/pet/PetStatusLink.vue'
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { IconName } from '@/types'
 
@@ -36,7 +36,7 @@ const navigationItems: Array<{ label: string; path: string; icon: IconName }> = 
           <span class="app-shell__brand-copy">知识岛<small>让好奇心，带你出发</small></span>
         </a>
         <div class="app-shell__header-context" aria-label="当前学习上下文">{{ props.context }}</div>
-        <AppAvatar kind="character" size="sm" />
+        <PetStatusLink />
       </div>
     </header>
 

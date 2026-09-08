@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useLearningProfile } from '@/composables/useLearningProfile'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -23,7 +24,6 @@ import { contentExpansionRepository, practiceModeLabel } from '@/services/conten
 import { createReadingQuest, questReadingText } from '@/services/content-expansion/readingQuest'
 import { questionEngineAdapter } from '@/services/question-engine'
 import { lessonProgressPresentation } from '@/services/lesson-player/lessonProgressPresentation'
-import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
 import { useMasteryStore } from '@/stores/masteryStore'
 import { usePreferencesStore } from '@/stores/preferencesStore'
@@ -76,7 +76,6 @@ const MASTERY_STATE_LABELS = {
 
 const route = useRoute()
 const router = useRouter()
-const curriculumStore = useCurriculumStore()
 const lessonPlayerStore = useLessonPlayerStore()
 const masteryStore = useMasteryStore()
 const studentStore = useStudentStore()
@@ -127,10 +126,9 @@ const context = computed<LessonLaunchContext | null>(() => {
   return null
 })
 
-const profileId = computed(
-  () =>
-    (isDevRoute.value ? studentStore.profile?.id : curriculumStore.curriculumProfile?.studentId) ??
-    'local-profile',
+const { profileId: learningProfileId } = useLearningProfile()
+const profileId = computed(() =>
+  isDevRoute.value ? (studentStore.profile?.id ?? 'local-profile') : learningProfileId.value,
 )
 
 const returnPath = computed(() => {
@@ -349,8 +347,7 @@ async function loadDetail(): Promise<void> {
     if (token !== loadToken) return
 
     if (['ready', 'completed'].includes(lessonPlayerStore.status)) {
-      const expansionDataset =
-        dataset.value === 'profile' ? (isFormalPilot.value ? 'candidate' : 'profile') : 'golden'
+      const expansionDataset = dataset.value === 'profile' ? 'profile' : 'golden'
       expansionBundle.value = await contentExpansionRepository.getBundle(
         activeContext.knowledgePointId,
         expansionDataset,

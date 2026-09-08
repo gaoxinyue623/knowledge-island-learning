@@ -508,7 +508,10 @@ export class HomeService {
       let progressRecords: LearningMapProgressRecord[] = []
       if (source) {
         try {
-          progressRecords = this.dependencies.progressStorage.load(source.textbook.id)
+          progressRecords = this.dependencies.progressStorage.load(source.textbook.id, {
+            profileId: profile.studentId,
+            dataset,
+          })
         } catch (caught) {
           addWarning(warnings, caught instanceof Error ? caught.message : '地图进度暂时无法读取。')
         }

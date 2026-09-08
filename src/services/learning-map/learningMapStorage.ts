@@ -82,32 +82,63 @@ function parsePayload(value: string | null): LearningMapProgressStoragePayload |
   }
 }
 
+export interface MapProgressScope {
+  profileId?: Id
+  dataset?: string
+}
+
 export interface LearningMapProgressStorage {
-  load(textbookId: Id): LearningMapProgressRecord[]
-  save(textbookId: Id, records: LearningMapProgressRecord[]): void
-  clear(textbookId: Id): void
+  load(textbookId: Id, scope?: MapProgressScope): LearningMapProgressRecord[]
+  save(textbookId: Id, records: LearningMapProgressRecord[], scope?: MapProgressScope): void
+  clear(textbookId: Id, scope?: MapProgressScope): void
+}
+
+export function mapProgressStorageKey(textbookId: Id, scope: MapProgressScope = {}): string {
+  return `${LEARNING_MAP_PROGRESS_STORAGE_KEY}.v2:${JSON.stringify([
+    scope.profileId ?? 'local-profile',
+    scope.dataset ?? 'profile',
+    textbookId,
+  ])}`
 }
 
 export function createLearningMapProgressStorage(
   storage: StorageLike | null = browserStorage(),
 ): LearningMapProgressStorage {
+  function save(
+    textbookId: Id,
+    records: LearningMapProgressRecord[],
+    scope: MapProgressScope = {},
+  ) {
+    if (!storage) throw new Error('浏览器暂时无法保存地图进度。')
+    const payload: LearningMapProgressStoragePayload = { schemaVersion: 1, textbookId, records }
+    storage.setItem(mapProgressStorageKey(textbookId, scope), JSON.stringify(payload))
+  }
   return {
-    load(textbookId) {
-      const payload = parsePayload(storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null)
-      return payload?.textbookId === textbookId ? payload.records : []
-    },
-    save(textbookId, records) {
-      if (!storage) return
-      const payload: LearningMapProgressStoragePayload = {
-        schemaVersion: 1,
-        textbookId,
-        records,
+    load(textbookId, scope = {}) {
+      const raw = storage?.getItem(mapProgressStorageKey(textbookId, scope)) ?? null
+      if (raw !== null) {
+        const payload = parsePayload(raw)
+        if (!payload || payload.textbookId !== textbookId)
+          throw new Error('地图进度格式异常，原记录已保留。')
+        return payload.records
       }
-      storage.setItem(LEARNING_MAP_PROGRESS_STORAGE_KEY, JSON.stringify(payload))
+      // Legacy records belong to the original local student. Preserve the old key as a backup.
+      if (
+        (scope.profileId ?? 'local-profile') === 'local-profile' &&
+        (scope.dataset ?? 'profile') === 'profile'
+      ) {
+        const legacy = parsePayload(storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null)
+        if (legacy?.textbookId === textbookId) {
+          save(textbookId, legacy.records, scope)
+          return legacy.records
+        }
+      }
+      return []
     },
-    clear(textbookId) {
-      const payload = parsePayload(storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null)
-      if (payload?.textbookId === textbookId) storage?.removeItem(LEARNING_MAP_PROGRESS_STORAGE_KEY)
+    save,
+    clear(textbookId, scope) {
+      // Empty payload prevents a deliberate reset from re-importing the legacy backup.
+      save(textbookId, [], scope)
     },
   }
 }

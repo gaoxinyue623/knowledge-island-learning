@@ -1,3 +1,4 @@
+import { notifyPetLearningChanged } from '@/services/pet/petNotifications'
 import { z } from 'zod'
 
 import type { RewardEvent, RewardEventStoragePayload } from '@/types'
@@ -111,7 +112,7 @@ export function createRewardEventStorage(
     try {
       raw = storage.getItem(key)
     } catch {
-      lastWarning = '成长奖励记录暂时无法读取，将从空白记录开始。'
+      lastWarning = '成长奖励记录暂时无法读取，原记录已保留，相关奖励暂不保存。'
       return { schemaVersion: rewardEventStorageSchemaVersion, events: [] }
     }
     if (!raw) return { schemaVersion: rewardEventStorageSchemaVersion, events: [] }
@@ -119,17 +120,15 @@ export function createRewardEventStorage(
     const payload = parsePayload(raw)
     if (payload) return clonePayload(payload)
 
-    lastWarning = '成长奖励记录存储已损坏，已安全恢复为空白记录。'
-    try {
-      storage.removeItem(key)
-    } catch {
-      // Corruption recovery is best effort and must not blank the page.
-    }
+    lastWarning = '成长奖励记录格式或版本损坏，原记录已保留，相关奖励暂不保存。'
     return { schemaVersion: rewardEventStorageSchemaVersion, events: [] }
   }
 
   function save(payload: RewardEventStoragePayload): void {
     if (!storage) return
+    // Never replace an unreadable source ledger with a partial set of newly earned rewards.
+    load()
+    if (lastWarning) return
     const normalized: RewardEventStoragePayload = {
       schemaVersion: rewardEventStorageSchemaVersion,
       events: payload.events.map(cloneEvent),
@@ -141,6 +140,7 @@ export function createRewardEventStorage(
     }
     try {
       storage.setItem(key, JSON.stringify(result.data))
+      notifyPetLearningChanged()
       lastWarning = null
     } catch {
       lastWarning = '成长奖励记录暂时无法保存，本次学习仍可继续。'

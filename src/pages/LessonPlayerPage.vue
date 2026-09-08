@@ -14,7 +14,7 @@ import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { questionEngineAdapter } from '@/services/question-engine'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
-import { useStudentStore } from '@/stores/studentStore'
+import { useLearningProfile } from '@/composables/useLearningProfile'
 import type {
   LessonLaunchContext,
   LessonPlayerDataset,
@@ -36,7 +36,7 @@ const stepTypeLabels: Record<LessonStepType, string> = {
 const route = useRoute()
 const router = useRouter()
 const lessonPlayerStore = useLessonPlayerStore()
-const studentStore = useStudentStore()
+const { profileId } = useLearningProfile()
 const invalidContextMessage = ref<string | null>(null)
 const practiceAvailable = ref<boolean | null>(null)
 
@@ -142,6 +142,8 @@ const demoStateOptions: Array<{ value: LessonPlayerDemoState; label: string }> =
 ]
 
 async function loadLesson() {
+  const activeProfile = profileId.value,
+    activePath = route.fullPath
   invalidContextMessage.value = null
   if (!context.value) {
     invalidContextMessage.value = '请从知识地图进入一个有效的知识点。'
@@ -150,9 +152,12 @@ async function loadLesson() {
   practiceAvailable.value = null
   await lessonPlayerStore.loadLesson(context.value, {
     dataset: dataset.value,
-    studentId: studentStore.profile?.id ?? 'local-profile',
+    studentId: profileId.value,
+    sessionScope:
+      typeof route.query.sessionScope === 'string' ? route.query.sessionScope : undefined,
     demoState: demoState.value,
   })
+  if (profileId.value !== activeProfile || route.fullPath !== activePath) return
   applyAssessmentCompletion()
   await checkPracticeAvailability()
 }
@@ -171,7 +176,9 @@ async function checkPracticeAvailability() {
       {
         dataset: dataset.value,
         demoState: 'full',
-        studentId: studentStore.profile?.id ?? 'local-profile',
+        studentId: profileId.value,
+        sessionScope:
+          typeof route.query.sessionScope === 'string' ? route.query.sessionScope : undefined,
       },
     )
   } catch {
@@ -286,6 +293,10 @@ async function completeDemoSession() {
   await lessonPlayerStore.completeLesson()
 }
 
+function restartLesson() {
+  void router.replace({ query: { ...route.query, sessionScope: crypto.randomUUID() } })
+}
+
 function resetDemoSession() {
   lessonPlayerStore.resetDemoSession()
 }
@@ -301,7 +312,7 @@ function previousStep() {
 
 onMounted(() => void loadLesson())
 watch(
-  () => route.fullPath,
+  () => [route.fullPath, profileId.value],
   () => void loadLesson(),
 )
 watch(
@@ -525,6 +536,7 @@ watch(
               >
             </div>
             <div class="lesson-player__completion-actions">
+              <AppButton variant="secondary" @click="restartLesson()">重新学习</AppButton>
               <AppButton
                 v-if="isFormalPilot"
                 size="lg"

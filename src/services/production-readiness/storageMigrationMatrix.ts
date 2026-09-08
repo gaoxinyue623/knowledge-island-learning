@@ -2,6 +2,14 @@ import type { StorageMigrationMatrixRow, StorageMigrationReport } from '@/types'
 
 export const storageMigrationMatrix: StorageMigrationMatrixRow[] = [
   {
+    storageName: 'Pet account ledger (IndexedDB)',
+    storageKey: 'IndexedDB:knowledge-island.pet.v1/accounts',
+    currentVersion: 2,
+    migrationPath: 'v1 账本原事件保留迁移到 v2；原伙伴归属 mint；PET_V1 金额保持不变',
+    fallbackBehavior: '保留原记录，阻止消费；事务失败整次回滚',
+    dataLossRisk: 'MEDIUM',
+  },
+  {
     storageName: 'StudentCurriculumProfile',
     storageKey: 'knowledge-island.curriculum-profile',
     currentVersion: 1,
@@ -11,10 +19,10 @@ export const storageMigrationMatrix: StorageMigrationMatrixRow[] = [
   },
   {
     storageName: 'LearningMap Progress',
-    storageKey: 'knowledge-island.learning-map-progress',
+    storageKey: 'knowledge-island.learning-map-progress.v2:[profile,dataset,textbook]',
     currentVersion: 1,
-    migrationPath: 'v1 读取；未知版本丢弃不可解析记录',
-    fallbackBehavior: '以空进度继续，地图事实从 Curriculum 重建',
+    migrationPath: '旧单教材键按需迁移，保留备份；payload 仍为 v1',
+    fallbackBehavior: '保留损坏数据并提示，禁止静默覆盖；可从完成会话恢复',
     dataLossRisk: 'LOW',
   },
   {
@@ -70,7 +78,7 @@ export const storageMigrationMatrix: StorageMigrationMatrixRow[] = [
     storageKey: 'knowledge-island.reward-events',
     currentVersion: 1,
     migrationPath: 'v1 读取；按 sourceId 去重',
-    fallbackBehavior: '恢复为空事件，禁止生成重复奖励',
+    fallbackBehavior: '保留损坏原记录，返回空视图并阻止覆盖写入',
     dataLossRisk: 'MEDIUM',
   },
   {

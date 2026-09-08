@@ -40,6 +40,7 @@ export type CurriculumSourceType =
   | 'licensed'
 
 export interface SourceReference {
+  releaseApprovalId?: string
   id: string
   type: CurriculumSourceType
   title: string

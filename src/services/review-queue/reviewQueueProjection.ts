@@ -140,6 +140,7 @@ export class ReviewQueueProjectionService {
           reasonCode: review.reason.code,
           status: 'active',
           sourceStrategyVersion: review.strategyVersion,
+          evidenceId: options.evidenceId,
           sourceRecommendationId: recommendationId(
             review.strategyVersion,
             review.type,

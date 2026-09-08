@@ -44,6 +44,7 @@ const reasonSchema = z.object({
 })
 
 const itemSchema = z.object({
+  evidenceId: z.string().optional(),
   id: z.string().min(1),
   profileId: z.string().min(1),
   textbookId: z.string().min(1),

@@ -5,16 +5,10 @@ import GradeSelectPage from '@/pages/onboarding/GradeSelectPage.vue'
 import OnboardingWelcomePage from '@/pages/onboarding/OnboardingWelcomePage.vue'
 import RegionSelectPage from '@/pages/onboarding/RegionSelectPage.vue'
 import TextbookConfirmPage from '@/pages/onboarding/TextbookConfirmPage.vue'
-import PagePlaceholder from '@/pages/PagePlaceholder.vue'
 import { productionConfig } from '@/config/production'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { pinia } from '@/stores/pinia'
 import { getOnboardingRedirect } from './guard'
-
-const placeholder = (title: string, meta: RouteRecordRaw['meta'] = {}) => ({
-  component: PagePlaceholder,
-  meta: { title, ...meta },
-})
 
 // Keep the onboarding shell eager, but load product and developer surfaces on
 // demand so the first route does not pay for every feature bundle.
@@ -43,6 +37,11 @@ const CurriculumSettingsPage = () => import('@/pages/curriculum/CurriculumSettin
 const TextbookSubjectSelectPage = () => import('@/pages/curriculum/TextbookSubjectSelectPage.vue')
 
 const routes: RouteRecordRaw[] = [
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/pages/NotFoundPage.vue'),
+    meta: { title: '页面未找到' },
+  },
   { path: '/', redirect: '/onboarding' },
   {
     path: '/onboarding',
@@ -152,23 +151,8 @@ const routes: RouteRecordRaw[] = [
       immersiveMode: true,
     },
   },
-  {
-    path: '/question/:nodeId',
-    ...placeholder('Question', {
-      requiresOnboarding: true,
-      studentOnly: true,
-      hideBottomNav: true,
-      immersiveMode: true,
-    }),
-  },
-  {
-    path: '/result/:nodeId',
-    ...placeholder('Result', {
-      requiresOnboarding: true,
-      studentOnly: true,
-      hideBottomNav: true,
-    }),
-  },
+  { path: '/question/:nodeId', redirect: '/learning-map' },
+  { path: '/result/:nodeId', redirect: '/history' },
   {
     path: '/tasks',
     component: HomePage,
@@ -177,37 +161,37 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/wrong-book',
     component: WrongBookPage,
-    meta: { title: '错题本', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '错题本', studentOnly: true },
   },
   {
     path: '/review-queue',
     component: ReviewQueuePage,
-    meta: { title: '待巩固', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '待巩固', studentOnly: true },
   },
   {
     path: '/history',
     component: LearningHistoryPage,
-    meta: { title: '学习记录', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '学习记录', studentOnly: true },
   },
   {
     path: '/profile',
     component: () => import('@/pages/ProfilePage.vue'),
-    meta: { title: '我的知识岛', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '我的知识岛', studentOnly: true },
   },
   {
     path: '/character',
     component: () => import('@/pages/CharacterPage.vue'),
-    meta: { title: '角色装扮', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '角色装扮', studentOnly: true },
   },
   {
     path: '/achievements',
     component: RewardPage,
-    meta: { title: '成长反馈', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '成长与宠物', studentOnly: true },
   },
   {
     path: '/parent',
     component: ParentDashboardPage,
-    meta: { title: '学习报告', parentOnly: true, hideBottomNav: true },
+    meta: { title: '本机学习报告', hideBottomNav: true },
   },
   {
     path: '/curriculum-settings',

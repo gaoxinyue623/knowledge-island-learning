@@ -32,6 +32,7 @@ export function validateRegionMappings(
   const defaults = new Map<string, string[]>()
 
   for (const entry of releasedEntries) {
+    if (scope.selectionPolicy === 'MANUAL') continue
     const region = records.regions.find((candidate) => candidate.code === entry.regionCode)
     if (!region) {
       issues.push(`REGION_NOT_FOUND:${entry.id}`)

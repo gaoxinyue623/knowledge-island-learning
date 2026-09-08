@@ -273,13 +273,15 @@ describe('PHASE 13.1 Reward Event Domain', () => {
     expect(repository.listByProfile('PROFILE_B', { includeSample: true })).toHaveLength(1)
   })
 
-  it('recovers from malformed versioned storage without throwing', () => {
+  it('preserves malformed versioned reward storage without throwing or overwriting', () => {
     const raw = memoryStorage()
     const storage = createRewardEventStorage(raw)
     raw.setItem('knowledge-island.reward-events', '{broken')
     expect(storage.load()).toEqual({ schemaVersion: 1, events: [] })
     expect(storage.getLastWarning()).toContain('损坏')
-    expect(raw.getItem('knowledge-island.reward-events')).toBeNull()
+    expect(raw.getItem('knowledge-island.reward-events')).toBe('{broken')
+    storage.save({ schemaVersion: 1, events: [] })
+    expect(raw.getItem('knowledge-island.reward-events')).toBe('{broken')
   })
 })
 

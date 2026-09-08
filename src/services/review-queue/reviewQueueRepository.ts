@@ -66,9 +66,16 @@ export function createReviewQueueRepository(
       const payload = storage.load()
       const index = payload.items.findIndex((candidate) => candidate.id === item.id)
       const existing = index >= 0 ? payload.items[index] : undefined
+      const newEvidence =
+        existing?.status === 'completed' &&
+        (item.reason.evidenceCount > existing.reason.evidenceCount ||
+          Boolean(item.evidenceId && item.evidenceId !== existing.evidenceId))
+      if (newEvidence && existing)
+        payload.items.push({ ...existing, id: `${existing.id}:completed:${existing.completedAt}` })
       const next: ReviewQueueItem = {
         ...item,
-        ...(existing?.status === 'completed'
+        evidenceId: item.evidenceId ?? existing?.evidenceId,
+        ...(existing?.status === 'completed' && !newEvidence
           ? {
               status: 'completed' as const,
               ...(existing.completedAt ? { completedAt: existing.completedAt } : {}),

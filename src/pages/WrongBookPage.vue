@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import LearningActivityHistory from '@/components/common/LearningActivityHistory.vue'
+import { useLearningProfile } from '@/composables/useLearningProfile'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -12,13 +14,11 @@ import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { questionRepository, questionSessionStorage } from '@/services/question-engine'
 import { wrongBookService } from '@/services/wrong-book'
-import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useWrongBookStore } from '@/stores/wrongBookStore'
 import type { Id, Question, WrongQuestionRecord } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
-const curriculumStore = useCurriculumStore()
 const wrongBookStore = useWrongBookStore()
 
 const includeResolved = ref(false)
@@ -26,7 +26,7 @@ const actionMessage = ref<string | null>(null)
 const questionTitles = ref<Record<Id, string>>({})
 const questionLoading = ref(false)
 const isDevRoute = computed(() => route.path.startsWith('/dev/wrong-book'))
-const profileId = computed(() => curriculumStore.curriculumProfile?.studentId ?? 'local-profile')
+const { profileId } = useLearningProfile()
 const records = computed(() => wrongBookStore.records)
 const focusedQuestionId = computed(() =>
   typeof route.query.questionId === 'string' ? route.query.questionId : undefined,
@@ -81,11 +81,15 @@ function loadWrongBook() {
   void loadQuestionTitles()
 }
 
+let titleVersion = 0
 async function loadQuestionTitles() {
+  const version = ++titleVersion
+  const requestedRecords = [...records.value]
+  questionTitles.value = {}
   questionLoading.value = true
   const nextTitles: Record<Id, string> = {}
   try {
-    for (const record of records.value) {
+    for (const record of requestedRecords) {
       const question = await questionRepository.getQuestionById(
         record.questionId,
         record.provenance.isSampleDerived ? 'demo' : 'profile',
@@ -93,9 +97,11 @@ async function loadQuestionTitles() {
       const title = question ? textFromQuestion(question) : ''
       if (title) nextTitles[record.questionId] = title
     }
-    questionTitles.value = nextTitles
+    if (version === titleVersion) questionTitles.value = nextTitles
+  } catch {
+    if (version === titleVersion) actionMessage.value = '题目标题暂时无法读取，可刷新重试。'
   } finally {
-    questionLoading.value = false
+    if (version === titleVersion) questionLoading.value = false
   }
 }
 
@@ -158,17 +164,21 @@ function sourceWarningLabel(
   return status === 'UNVERIFIED' ? '来源待核验' : '来源异常'
 }
 
-onMounted(loadWrongBook)
+watch(profileId, loadWrongBook, { immediate: true })
 </script>
 
 <template>
   <AppShell :show-bottom-nav="!isDevRoute" :context="isDevRoute ? 'DEV / 错题本' : '错题本'">
+    <LearningActivityHistory v-if="!isDevRoute" :profile-id="profileId" mistakes-only />
     <div class="phase12-page content-container wrong-book-page">
+      <RouterLink v-if="!isDevRoute" class="personal-back" to="/profile"
+        >← 返回我的学习空间</RouterLink
+      >
       <header class="phase12-page__header">
         <div>
-          <p class="curriculum-eyebrow">WRONG BOOK · PHASE 12</p>
+          <p class="curriculum-eyebrow">每一次改正，都是新的进步</p>
           <h1>错题本</h1>
-          <p>这里只收录已经提交、并被确定性判分为答错的题目。</p>
+          <p>这里收录教材练习中已经提交并判为答错的题目。</p>
         </div>
         <div class="phase12-page__header-actions">
           <AppButton size="sm" variant="secondary" icon-left="refresh-cw" @click="loadWrongBook">
@@ -219,7 +229,9 @@ onMounted(loadWrongBook)
       <AppEmptyState
         v-else-if="!records.length"
         title="这里还没有错题"
-        description="提交并答错题目后，它会出现在这里，等你回来再挑战。"
+        description="教材练习中答错的题会出现在这里，可重新作答并回看已解决记录。"
+        action-label="去学习和练习"
+        @action="router.push(isDevRoute ? '/dev/learning-map' : '/learning-map')"
       />
       <section v-else class="wrong-book-page__list" aria-labelledby="wrong-book-list-title">
         <div class="phase12-page__section-heading">

@@ -1,3 +1,4 @@
+import { LOCAL_RELEASE_APPROVAL } from '../../data/curriculum/localApproval'
 import type {
   ContentSource,
   CourseContent,
@@ -92,10 +93,10 @@ export function isProductionChallenge(record: Challenge): boolean {
 
 export function isProductionSourceReference(record: SourceReference): boolean {
   return Boolean(
-    record.sourceUrl &&
+    (record.sourceUrl || record.releaseApprovalId === LOCAL_RELEASE_APPROVAL) &&
     record.verifiedAt &&
     record.verifiedBy &&
-    !record.sourceUrl.startsWith('sample:') &&
+    !record.sourceUrl?.startsWith('sample:') &&
     !record.id.startsWith('SAMPLE_'),
   )
 }
@@ -103,10 +104,10 @@ export function isProductionSourceReference(record: SourceReference): boolean {
 export function isProductionContentSource(record: ContentSource): boolean {
   return Boolean(
     record.verificationStatus === 'REVIEWED' &&
-    record.copyrightStatus === 'CLEARED' &&
-    record.sourceRef &&
+    (record.copyrightStatus === 'CLEARED' || record.releaseApprovalId === LOCAL_RELEASE_APPROVAL) &&
+    (record.sourceRef || record.releaseApprovalId === LOCAL_RELEASE_APPROVAL) &&
     record.verifiedAt &&
-    !record.sourceRef.startsWith('sample:') &&
+    !record.sourceRef?.startsWith('sample:') &&
     !record.id.startsWith('SAMPLE_'),
   )
 }

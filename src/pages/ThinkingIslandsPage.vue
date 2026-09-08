@@ -14,6 +14,8 @@ const { thinking } = useThinkingProfile()
 const islandId = computed(() => String(route.params.islandId ?? ''))
 const island = computed(() => findThinkingIsland(islandId.value))
 const missions = computed(() => thinkingMissions.filter((m) => m.islandId === islandId.value))
+const islandMissions = (id: string) => thinkingMissions.filter((m) => m.islandId === id)
+const islandTaskCount = (id: string) => islandMissions(id).reduce((n, m) => n + m.puzzles.length, 0)
 const done = (id: string) => thinking.completed(id).length
 const islandDone = (id: string) =>
   thinkingMissions.filter((m) => m.islandId === id).reduce((n, m) => n + done(m.id), 0)
@@ -69,7 +71,8 @@ const islandDone = (id: string) =>
                 <h3>{{ item.title }}</h3>
                 <p>{{ item.subtitle }}</p>
                 <p class="thinking-muted">
-                  3 条训练路线 · 已完成 {{ islandDone(item.id) }} / 12 个任务
+                  {{ islandMissions(item.id).length }} 条训练路线 · 已完成
+                  {{ islandDone(item.id) }} / {{ islandTaskCount(item.id) }} 个任务
                 </p>
                 <RouterLink :to="'/thinking-islands/' + item.id" class="thinking-button"
                   >进入{{ item.title }}<AppIcon name="arrow-right" :size="18" decorative
@@ -97,6 +100,9 @@ const islandDone = (id: string) =>
                 <span class="thinking-level">{{ mission.level }}</span>
                 <h3>{{ mission.title }}</h3>
                 <p>{{ mission.description }}</p>
+                <p v-if="mission.suggestedGrades" class="thinking-muted">
+                  {{ mission.suggestedGrades }}
+                </p>
                 <p class="thinking-muted">
                   已完成 {{ done(mission.id) }} / {{ mission.puzzles.length }} 个任务
                 </p>

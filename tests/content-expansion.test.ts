@@ -269,7 +269,11 @@ describe('Content Expansion 01.1 domain and registry', () => {
   })
 
   it('keeps activity records out of the profile dataset until reviewed', async () => {
-    expect(await contentExpansionRepository.listBundles('profile')).toEqual([])
+    expect(
+      (await contentExpansionRepository.listBundles('profile')).every(
+        (bundle) => bundle.learningContent.verificationStatus === 'REVIEWED',
+      ),
+    ).toBe(true)
     expect(await contentExpansionRepository.listBundles('golden')).toHaveLength(4)
     expect(isProductionInteractiveActivity(matchActivity)).toBe(false)
   })

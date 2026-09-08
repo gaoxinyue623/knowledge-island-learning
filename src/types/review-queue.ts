@@ -10,6 +10,7 @@ export type ReviewQueueRecommendationType = 'REINFORCE' | 'GATHER_MORE_EVIDENCE'
 export type ReviewQueueItemStatus = 'active' | 'completed'
 
 export interface ReviewQueueItem {
+  evidenceId?: Id
   id: Id
   profileId: Id
   textbookId: Id
@@ -56,6 +57,7 @@ export interface ReviewQueueRepository {
 }
 
 export interface ReviewQueueProjectionOptions {
+  evidenceId?: Id
   profileId: Id
   textbookId: Id
   dataset?: 'profile' | 'golden' | 'demo'

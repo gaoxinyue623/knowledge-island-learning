@@ -4,6 +4,7 @@ import type {
   ThinkingPuzzle,
   ThinkingToken,
 } from '@/types/thinking'
+import { reasoningMissions } from './reasoningMissions'
 import { THINKING_SOURCE } from '@/types/thinking'
 
 export const thinkingIslands: ThinkingIsland[] = [
@@ -38,7 +39,7 @@ export const thinkingIslands: ThinkingIsland[] = [
     id: 'strategy',
     title: '策略工坊岛',
     subtitle: '先想一想，再动手',
-    description: '安排先后、组合材料，在几条规则下找到可行方案。',
+    description: '预测联动灯光、挑战更少步数、组合材料，在多条规则下找到可行方案。',
     color: '#92603f',
     softColor: '#fbecd7',
     skill: '规划 · 组合 · 解决问题',
@@ -316,6 +317,7 @@ export const thinkingMissions: ThinkingMission[] = [
       ),
     ],
   ),
+  ...reasoningMissions,
   mission('logic', 'clue-houses', '小屋分配员', '入门', '先找确定的一对，再把剩下的可能性排除。', [
     assign(
       '谁住哪间屋',

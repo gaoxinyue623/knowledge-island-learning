@@ -163,10 +163,12 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     rebuildViewModel()
   }
 
+  let loadGeneration = 0
   async function loadLesson(
     launchContext: LessonLaunchContext,
     options: LessonPlayerLoadOptions = {},
   ): Promise<LessonPlayerViewModel | null> {
+    const generation = ++loadGeneration
     context.value = launchContext
     dataset.value = options.dataset ?? 'profile'
     studentId.value = options.studentId ?? 'local-profile'
@@ -178,12 +180,14 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     loading.value = true
     error.value = null
     warning.value = null
+    lastRewardEvent.value = null
     try {
       const result = await dependencies.repository.getLessonPlayerSource(
         launchContext,
         dataset.value,
         { demoState: options.demoState },
       )
+      if (generation !== loadGeneration) return null
       if (!result.source) {
         status.value = statusForIssue(result.issue)
         error.value = result.message ?? null
@@ -201,7 +205,9 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
         return null
       }
       source.value = result.source
-      const sessionId = createLessonSession(launchContext, studentId.value).id
+      const freshSession = createLessonSession(launchContext, studentId.value)
+      if (options.sessionScope) freshSession.id += `:attempt:${options.sessionScope}`
+      const sessionId = freshSession.id
       const persisted = dependencies.sessionStorage.get(sessionId)
       let nextSession = normalizeLessonSession(
         persisted &&
@@ -210,7 +216,7 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
           persisted.lessonId === launchContext.lessonId &&
           persisted.knowledgePointId === launchContext.knowledgePointId
           ? persisted
-          : createLessonSession(launchContext, studentId.value),
+          : freshSession,
         result.source.steps.map((step) => step.id),
       )
       if (
@@ -248,15 +254,19 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
       status.value = nextSession.status === 'completed' ? 'completed' : 'ready'
       rebuildViewModel()
       if (nextSession.status !== 'not_started') projectHistory(nextSession)
-      if (nextSession.status === 'completed') projectReward(nextSession)
-      warning.value = dependencies.sessionStorage.getLastWarning()
+      if (nextSession.status === 'completed') {
+        projectReward(nextSession)
+        await projectMapCompletion(launchContext, studentId.value, dataset.value)
+      }
+      warning.value = warning.value ?? dependencies.sessionStorage.getLastWarning()
       return viewModel.value
     } catch (caught) {
+      if (generation !== loadGeneration) return null
       status.value = 'error'
       error.value = readableLoadError(caught)
       return null
     } finally {
-      loading.value = false
+      if (generation === loadGeneration) loading.value = false
     }
   }
 
@@ -349,6 +359,22 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     return true
   }
 
+  async function projectMapCompletion(
+    launchContext: LessonLaunchContext,
+    profileId: Id,
+    dataset: LessonPlayerDataset,
+  ) {
+    try {
+      const saved = await dependencies.mapCompletionService.markKnowledgePointCompleted(
+        launchContext,
+        { dataset, profileId },
+      )
+      if (!saved) throw new Error('地图尚未就绪')
+    } catch {
+      warning.value = '课程已完成，地图进度暂未更新。重新打开本节课程会自动重试。'
+    }
+  }
+
   async function completeLesson(): Promise<boolean> {
     const active = session.value
     const activeViewModel = viewModel.value
@@ -375,11 +401,7 @@ export const useLessonPlayerStore = defineStore('lessonPlayer', () => {
     rebuildViewModel()
     projectHistory(completed)
     projectReward(completed)
-    if (context.value) {
-      await dependencies.mapCompletionService.markKnowledgePointCompleted(context.value, {
-        dataset: dataset.value,
-      })
-    }
+    if (context.value) await projectMapCompletion(context.value, studentId.value, dataset.value)
     return true
   }
 

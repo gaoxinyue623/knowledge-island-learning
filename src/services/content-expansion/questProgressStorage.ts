@@ -21,6 +21,8 @@ export const questProgressSchema = z
     reviewIds: ids.nullable(),
     activeStageId: z.string().nullable(),
     summaryVisible: z.boolean(),
+    attemptId: z.string().optional(),
+    completedAt: z.string().datetime().optional(),
   })
   .strict()
 export type QuestProgress = z.infer<typeof questProgressSchema>
@@ -28,7 +30,9 @@ export type QuestProgress = z.infer<typeof questProgressSchema>
 // Include prompts, rules, options and provenance: changed content must not inherit old passes.
 export function questContentRevision(quest: ReadingPracticeQuest): string {
   let hash = 2166136261
-  const content = JSON.stringify(quest)
+  const content = JSON.stringify(quest, (key, value) =>
+    key === 'legacyContentRevision' ? undefined : value,
+  )
   for (let i = 0; i < content.length; i++) hash = Math.imul(hash ^ content.charCodeAt(i), 16777619)
   return `${content.length}:${(hash >>> 0).toString(16)}`
 }
@@ -101,7 +105,11 @@ export function readQuestProgress(
     if (raw === null) return { data: fresh, warning: null, writable: true, resumed: false }
     const data = questProgressSchema.parse(JSON.parse(raw))
     if (data.profileId !== profileId || data.questId !== quest.id) throw new Error('Scope mismatch')
-    if (data.contentRevision !== fresh.contentRevision) {
+    if (
+      data.contentRevision !== fresh.contentRevision &&
+      data.contentRevision !==
+        (quest as ReadingPracticeQuest & { legacyContentRevision?: string }).legacyContentRevision
+    ) {
       return {
         data: fresh,
         warning: '题目已更新，这一组从第一关开始。',
@@ -109,6 +117,7 @@ export function readQuestProgress(
         resumed: false,
       }
     }
+    data.contentRevision = fresh.contentRevision
     if (!validProgress(data, profileId, quest)) throw new Error('Invalid progression')
     return { data, warning: null, writable: true, resumed: data.completedStageIds.length > 0 }
   } catch {

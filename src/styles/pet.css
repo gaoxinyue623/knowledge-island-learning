@@ -1,0 +1,432 @@
+.pet-garden {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  display: grid;
+  gap: 24px;
+  padding: clamp(16px, 3vw, 32px);
+  border: 1px solid #d5dfc6;
+  border-radius: 28px;
+  background: #fffef8;
+  color: #354536;
+}
+.pet-garden-heading,
+.pet-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pet-garden h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+}
+.pet-garden h3 {
+  font-size: 1.15rem;
+  font-weight: 750;
+}
+.pet-garden h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.pet-garden p {
+  line-height: 1.7;
+}
+.pet-eyebrow {
+  color: #597a47;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.pet-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 1px solid #486747;
+  border-radius: 14px;
+  background: #486747;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.pet-button--light {
+  color: #385137;
+  background: #f0f5e8;
+  border-color: #bcccad;
+}
+.pet-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pet-button:focus-visible,
+.pet-garden input:focus-visible,
+.pet-garden summary:focus-visible {
+  outline: 3px solid #b97829;
+  outline-offset: 3px;
+}
+.pet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pet-balance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.pet-balance-grid > div {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  background: #f0f5e8;
+  border-radius: 18px;
+}
+.pet-balance-grid strong {
+  font-size: 2rem;
+  color: #3c6540;
+}
+.pet-balance-grid small {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+.pet-home-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.pet-home-scene {
+  display: grid;
+  position: relative;
+  place-items: center;
+  min-height: 310px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(#e9f4ea 0 68%, #d9e7be 68%);
+  padding: 35px 12px 18px;
+  isolation: isolate;
+}
+.pet-home-scene--2 {
+  background: linear-gradient(#f5eff4 0 68%, #e5e8c4 68%);
+}
+.pet-home-scene--3 {
+  background: linear-gradient(#f9ecf0 0 68%, #e2e9be 68%);
+}
+.pet-home-scene--4 {
+  background: linear-gradient(#e8e5f5 0 68%, #dce5ca 68%);
+}
+.pet-scene-cloud {
+  position: absolute;
+  top: 15px;
+  color: white;
+  font-size: 4rem;
+  z-index: -1;
+}
+.pet-scene-cloud--one {
+  left: 10%;
+}
+.pet-scene-cloud--two {
+  right: 5%;
+  top: 40px;
+  font-size: 3rem;
+}
+.pet-character {
+  position: relative;
+  padding-top: 20px;
+}
+.pet-character-crown {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.6rem;
+  z-index: 1;
+}
+.pet-character--fed {
+  animation: pet-bounce 0.65s ease-out;
+}
+.pet-scene-caption {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 6px 22px;
+  background: #fffdf0d9;
+  border-radius: 18px;
+}
+.pet-scene-caption strong {
+  font-size: 1.2rem;
+  overflow-wrap: anywhere;
+}
+.pet-scene-caption span {
+  font-size: 0.8rem;
+}
+.pet-companion-panel {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+}
+.pet-companion-panel progress {
+  width: 100%;
+  height: 14px;
+  accent-color: #63864c;
+}
+.pet-name-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pet-name-form label,
+.pet-name-form input {
+  width: 100%;
+}
+.pet-name-form input {
+  min-width: 0;
+  min-height: 48px;
+  border: 1px solid #a7ba9c;
+  background: white;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+.pet-food-section {
+  display: grid;
+  gap: 14px;
+}
+.pet-food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.pet-food-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  border: 1px solid #e5ddc8;
+  border-radius: 20px;
+  padding: 18px;
+  background: #fffbf0;
+}
+.pet-food-symbol {
+  font-size: 2.5rem;
+}
+.pet-inventory {
+  color: #537044;
+}
+.pet-album {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  padding: 14px 0 0;
+}
+.pet-album li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 14px;
+  border: 1px dashed #b9c3b1;
+  border-radius: 16px;
+  background: #f3f2ed;
+  color: #6a7267;
+}
+.pet-album li > span {
+  font-size: 1.8rem;
+  filter: grayscale(1);
+}
+.pet-album li.is-unlocked {
+  background: #eef5df;
+  border-style: solid;
+  color: #3b5937;
+}
+.pet-album li.is-unlocked > span {
+  filter: none;
+}
+.pet-album small {
+  font-size: 0.75rem;
+}
+.pet-learning-guide {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  background: #f3f5ec;
+  border-radius: 18px;
+}
+.pet-learning-guide details {
+  font-size: 0.85rem;
+}
+.pet-learning-guide summary {
+  cursor: pointer;
+  min-height: 36px;
+}
+.pet-ledger {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+.pet-ledger li {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e0e6d8;
+}
+.pet-ledger li > div {
+  display: grid;
+  gap: 4px;
+}
+.pet-ledger small {
+  font-size: 0.75rem;
+  color: #65725d;
+}
+.pet-ledger li > span {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.pet-notice {
+  padding: 14px;
+  border: 1px solid #d3ac72;
+  border-radius: 14px;
+  background: #fff3db;
+  color: #745019;
+}
+.pet-message {
+  border-radius: 14px;
+  background: #e9f3dd;
+  padding: 12px 16px;
+}
+.pet-muted {
+  color: #68735e;
+}
+@keyframes pet-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-18px) rotate(-4deg);
+  }
+  65% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+@media (max-width: 760px) {
+  .pet-home-layout {
+    grid-template-columns: 1fr;
+  }
+  .pet-food-grid {
+    grid-template-columns: 1fr;
+  }
+  .pet-album {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pet-balance-grid {
+    gap: 6px;
+  }
+  .pet-balance-grid > div {
+    padding: 10px;
+  }
+  .pet-balance-grid strong {
+    font-size: 1.5rem;
+  }
+  .pet-balance-grid span {
+    font-size: 0.8rem;
+  }
+  .pet-home-scene {
+    min-height: 280px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pet-character--fed {
+    animation: none;
+  }
+}
+
+.pet-companion-panel progress {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e0e7d8;
+}
+.pet-companion-panel progress::-webkit-progress-bar {
+  background: #e0e7d8;
+  border-radius: 999px;
+}
+.pet-companion-panel progress::-webkit-progress-value {
+  background: #63864c;
+  border-radius: 999px;
+}
+.pet-companion-panel progress::-moz-progress-bar {
+  background: #63864c;
+  border-radius: 999px;
+}
+.pet-decoration-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.pet-landscape--meadow {
+  background: linear-gradient(#d9f2f3 0 68%, #c5dea5 68%);
+}
+.pet-landscape--night {
+  background:
+    radial-gradient(circle at 75% 16%, #fff7c4 0 20px, transparent 21px),
+    linear-gradient(#45476f 0 68%, #aebcbd 68%);
+}
+.pet-scene-ornament {
+  position: absolute;
+  right: 6%;
+  bottom: 22%;
+  font-size: 2.7rem;
+}
+.pet-cloud-panel {
+  padding: 18px;
+  border: 1px solid #d5dfc6;
+  border-radius: 18px;
+  display: grid;
+  gap: 12px;
+}
+.pet-cloud-panel summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.pet-cloud-panel select {
+  max-width: 100%;
+  padding: 10px;
+  background: white;
+  border: 1px solid #a7ba9c;
+  border-radius: 10px;
+}
+.pet-table-wrap {
+  overflow-x: auto;
+}
+.pet-source-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.pet-source-table th,
+.pet-source-table td {
+  padding: 10px;
+  border-bottom: 1px solid #d5dfc6;
+}
+@media (max-width: 900px) {
+  .pet-decoration-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .pet-decoration-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pet-garden > * {
+  min-width: 0;
+}
+.pet-cloud-panel select {
+  width: 100%;
+  min-width: 0;
+}

@@ -111,9 +111,9 @@ function eventTime(
 function sourceIdForFact(fact: RewardLearningFact): Id {
   switch (fact.type) {
     case 'lesson_completed':
-      return fact.session.id
+      return fact.session.id.split(':attempt:')[0]!
     case 'assessment_completed':
-      return fact.session.id
+      return fact.session.id.split(':attempt:')[0]!
     case 'knowledge_mastered':
       return buildMasteryRewardSourceId(fact.transition.next)
     case 'review_completed':

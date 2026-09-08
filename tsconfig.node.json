@@ -9,5 +9,12 @@
     "skipLibCheck": true,
     "types": ["node", "vite/client"]
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "tailwind.config.ts"]
+  "include": [
+    "vite.config.ts",
+    "vitest.config.ts",
+    "tailwind.config.ts",
+    "scripts/tts/**/*.ts",
+    "scripts/generate-tts.ts",
+    "server/**/*.ts"
+  ]
 }

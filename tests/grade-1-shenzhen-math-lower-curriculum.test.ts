@@ -171,7 +171,10 @@ describe('Shenzhen G1 BNU math lower integration', () => {
     const repository = new StaticContentExpansionRepository()
     for (const b of bundles) {
       expect((await repository.getBundle(b.knowledgePointId, 'candidate'))?.textbookId).toBe(bookId)
-      expect(await repository.getBundle(b.knowledgePointId, 'profile')).toBeNull()
+      expect(
+        (await repository.getBundle(b.knowledgePointId, 'profile'))?.learningContent
+          .verificationStatus,
+      ).toBe('REVIEWED')
       expect(b.learningContent.isSample).toBe(false)
       expect(b.learningContent.sourceId).not.toBe(book.courseContents[0]!.sourceId)
     }

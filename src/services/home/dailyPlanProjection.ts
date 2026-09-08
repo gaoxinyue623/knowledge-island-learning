@@ -457,7 +457,10 @@ function candidateTasks(
       })
     }
 
-    if (recommendation.type === 'PROCEED_TO_NEXT' && recommendation.nextKnowledgePoint) {
+    if (
+      ['PROCEED_TO_NEXT', 'CONTINUE_CURRENT'].includes(recommendation.type) &&
+      recommendation.nextKnowledgePoint
+    ) {
       const next = recommendation.nextKnowledgePoint
       if (!isAllowedProvenance(input.dataset, recommendation.isSampleDerived, undefined)) continue
       const reference = referenceFor(
@@ -612,7 +615,7 @@ function strategySourceExists(task: DailyLearningTask, input: DailyPlanProjectio
     if (task.type === 'next_learning') {
       const next = snapshot.recommendation.nextKnowledgePoint
       return Boolean(
-        snapshot.recommendation.type === 'PROCEED_TO_NEXT' &&
+        ['PROCEED_TO_NEXT', 'CONTINUE_CURRENT'].includes(snapshot.recommendation.type) &&
         next &&
         next.knowledgePointId === task.knowledgePointId &&
         sourceIdForStrategy(snapshot, 'PROCEED_TO_NEXT', next.knowledgePointId, next.mapNodeId) ===
@@ -749,7 +752,7 @@ export function projectDailyPlan(
       candidatesById.set(id, candidate)
     }
   }
-  const tasks = existingPlan
+  const tasks = existingPlan?.tasks.length
     ? existingPlan.tasks.map((task) =>
         refreshExistingTask(task, candidatesById.get(task.id), input, generatedAt),
       )

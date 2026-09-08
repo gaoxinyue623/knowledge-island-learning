@@ -1,3 +1,7 @@
+import {
+  lessonSessionStorage,
+  buildLessonSessionId,
+} from '@/services/lesson-player/lessonSessionStorage'
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
@@ -26,6 +30,7 @@ export interface LearningMapStoreOptions {
 
 export interface LearningMapLoadOptions {
   dataset?: LearningMapDataset
+  profileId?: Id
   textbookId?: Id
   isReadOnly?: boolean
   masteryRecords?: readonly MasteryRecord[]
@@ -47,6 +52,8 @@ export const useLearningMapStore = defineStore('learningMap', () => {
   const error = ref<string | null>(null)
   const dataset = ref<LearningMapDataset>('profile')
   const readOnly = ref(false)
+  const profileId = ref('local-profile')
+  let loadGeneration = 0
 
   const selectedNode = computed(() => {
     if (!viewModel.value || !selectedNodeId.value) return null
@@ -85,6 +92,8 @@ export const useLearningMapStore = defineStore('learningMap', () => {
   async function loadMap(
     loadOptions: LearningMapLoadOptions = {},
   ): Promise<LearningMapViewModel | null> {
+    const generation = ++loadGeneration
+    profileId.value = loadOptions.profileId ?? 'local-profile'
     loading.value = true
     status.value = 'loading'
     error.value = null
@@ -96,6 +105,7 @@ export const useLearningMapStore = defineStore('learningMap', () => {
         dataset: dataset.value,
         textbookId: loadOptions.textbookId,
       })
+      if (generation !== loadGeneration) return null
       activeSource.value = source
       activeTextbookId.value = source?.textbook.id ?? loadOptions.textbookId ?? null
       if (!source) {
@@ -104,20 +114,64 @@ export const useLearningMapStore = defineStore('learningMap', () => {
         status.value = 'not_available'
         return null
       }
-      mapProgress.value = progressStorage.load(source.textbook.id)
+      mapProgress.value = progressStorage.load(source.textbook.id, {
+        profileId: profileId.value,
+        dataset: dataset.value,
+      })
+      if (dataset.value === 'profile') {
+        const sessions = lessonSessionStorage.loadAll()
+        let recovered = false
+        for (const mapping of source.lessonKnowledgePoints) {
+          const lesson = source.lessons.find((lesson) => lesson.id === mapping.lessonId)
+          if (!lesson) continue
+          const context = {
+            textbookId: source.textbook.id,
+            unitId: lesson.unitId,
+            lessonId: lesson.id,
+            knowledgePointId: mapping.knowledgePointId,
+          }
+          const baseId = buildLessonSessionId(context, profileId.value)
+          const completed = sessions.find(
+            (session) =>
+              session.status === 'completed' &&
+              (session.id === baseId || session.id.startsWith(baseId + ':attempt:')),
+          )
+          const nodeId = `learning-map:${source.textbook.id}:knowledge:${mapping.id}`
+          if (
+            completed &&
+            !mapProgress.value.some(
+              (record) =>
+                record.nodeId === nodeId &&
+                ['completed', 'mastered', 'perfect'].includes(record.status),
+            )
+          ) {
+            mapProgress.value = mapProgress.value.filter((record) => record.nodeId !== nodeId)
+            mapProgress.value.push({
+              nodeId,
+              status: 'completed',
+              progress: 100,
+              completedAt: completed.completedAt,
+              startedAt: completed.startedAt,
+            })
+            recovered = true
+          }
+        }
+        if (recovered) persistProgress()
+      }
       refreshViewModel()
       selectFirstUnit()
       focusedNodeId.value = viewModel.value?.currentNodeId ?? null
       status.value = viewModel.value?.islands.length ? 'ready' : 'empty'
       return viewModel.value
     } catch (caught) {
+      if (generation !== loadGeneration) return null
       activeSource.value = null
       viewModel.value = null
       status.value = 'error'
       error.value = caught instanceof Error ? caught.message : '学习地图暂时无法加载'
       return null
     } finally {
-      loading.value = false
+      if (generation === loadGeneration) loading.value = false
     }
   }
 
@@ -141,7 +195,14 @@ export const useLearningMapStore = defineStore('learningMap', () => {
 
   function persistProgress() {
     if (!activeTextbookId.value || readOnly.value) return
-    progressStorage.save(activeTextbookId.value, mapProgress.value)
+    try {
+      progressStorage.save(activeTextbookId.value, mapProgress.value, {
+        profileId: profileId.value,
+        dataset: dataset.value,
+      })
+    } catch {
+      error.value = '地图进度暂未保存，请不要关闭页面，稍后重试。'
+    }
   }
 
   function updateProgress(node: KnowledgeMapNode, next: LearningMapProgressRecord): boolean {
@@ -191,7 +252,15 @@ export const useLearningMapStore = defineStore('learningMap', () => {
 
   function resetDemoProgress() {
     if (!activeTextbookId.value || readOnly.value) return false
-    progressStorage.clear(activeTextbookId.value)
+    if (dataset.value === 'profile') return false
+    try {
+      progressStorage.clear(activeTextbookId.value, {
+        profileId: profileId.value,
+        dataset: dataset.value,
+      })
+    } catch {
+      error.value = '地图进度暂未保存。'
+    }
     mapProgress.value = []
     refreshViewModel()
     focusedNodeId.value = viewModel.value?.currentNodeId ?? null

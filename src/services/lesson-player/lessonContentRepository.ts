@@ -1,5 +1,4 @@
 import { curriculumData } from '@/data/curriculum'
-import { productionConfig } from '@/config/production'
 import { productionCurriculumIndex } from '@/data/curriculum/production'
 import type {
   ContentBlock,
@@ -109,11 +108,7 @@ export class MockLearningContentRepository {
   private readonly accessPolicy: CurriculumAccessPolicy
 
   constructor(options: MockLearningContentRepositoryOptions = {}) {
-    this.records =
-      options.records ??
-      (productionConfig.isProduction
-        ? [...productionCurriculumIndex.contents]
-        : curriculumData.courseContents)
+    this.records = options.records ?? curriculumData.courseContents
     this.accessPolicy = options.accessPolicy ?? curriculumAccessConfig
   }
 
@@ -133,4 +128,6 @@ export class MockLearningContentRepository {
   }
 }
 
-export const learningContentRepository = new MockLearningContentRepository()
+export const learningContentRepository = new MockLearningContentRepository({
+  records: [...productionCurriculumIndex.contents],
+})

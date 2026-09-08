@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import MathQuestVisual from '@/components/knowledge-point/MathQuestVisual.vue'
+import { localQuestionVisuals } from '@/data/curriculum/production/localRelease'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -20,7 +22,7 @@ import { useLearningStrategyStore } from '@/stores/learningStrategyStore'
 import { useReviewQueueStore } from '@/stores/reviewQueueStore'
 import { useWrongBookStore } from '@/stores/wrongBookStore'
 import { useRewardStore } from '@/stores/rewardStore'
-import { useStudentStore } from '@/stores/studentStore'
+import { useLearningProfile } from '@/composables/useLearningProfile'
 import type {
   AssessmentLaunchContext,
   QuestionAnswerDraft,
@@ -37,7 +39,7 @@ const learningStrategyStore = useLearningStrategyStore()
 const reviewQueueStore = useReviewQueueStore()
 const wrongBookStore = useWrongBookStore()
 const rewardStore = useRewardStore()
-const studentStore = useStudentStore()
+const { profileId } = useLearningProfile()
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/question-engine'))
 const dataset = computed<QuestionEngineDataset>(() => {
@@ -169,6 +171,8 @@ const demoStateOptions: Array<{ value: QuestionEngineDemoState; label: string }>
 ]
 
 async function loadAssessment() {
+  const activeProfile = profileId.value,
+    activePath = route.fullPath
   if (!context.value) return
   masteryProcessingStatus.value = 'idle'
   masteryProcessingMessage.value = null
@@ -177,19 +181,23 @@ async function loadAssessment() {
   await questionEngineStore.loadAssessment(context.value, {
     dataset: dataset.value,
     demoState: demoState.value,
-    studentId: studentStore.profile?.id ?? 'local-profile',
+    studentId: profileId.value,
     ...(sessionScope.value ? { sessionScope: sessionScope.value } : {}),
     ...(retryQuestionId.value ? { initialQuestionId: retryQuestionId.value } : {}),
     ...(retryQuestionId.value ? { reviewQuestionId: retryQuestionId.value } : {}),
   })
+  if (profileId.value !== activeProfile || route.fullPath !== activePath) return
   if (questionEngineStore.session?.status === 'completed') await processCompletedSession()
 }
 
 async function processCompletedSession(): Promise<void> {
   const session = questionEngineStore.session
   if (!session) return
-  const studentProfileId = studentStore.profile?.id ?? 'local-profile'
+  const studentProfileId = profileId.value
+  const stillActive = () =>
+    profileId.value === studentProfileId && questionEngineStore.session?.id === session.id
   await masteryStore.load(studentProfileId)
+  if (!stillActive()) return
   const previousMastery = new Map(
     masteryStore.records.map((record) => [record.knowledgePointId, record]),
   )
@@ -200,6 +208,7 @@ async function processCompletedSession(): Promise<void> {
       dataset: dataset.value,
     })
     await masteryStore.load(studentProfileId)
+    if (!stillActive()) return
     rewardStore.load(studentProfileId, { includeSample: dataset.value === 'demo' })
     const completionRewards = [questionEngineStore.lastRewardEvent].filter(
       (event): event is NonNullable<typeof event> => Boolean(event),
@@ -232,11 +241,13 @@ async function processCompletedSession(): Promise<void> {
       if (reward.event) completionRewards.push(reward.event)
     }
     const map = await learningMapStore.loadMap({
+      profileId: studentProfileId,
       dataset: dataset.value,
       textbookId: session.textbookId,
       masteryRecords: masteryStore.records,
       isReadOnly: dataset.value !== 'profile',
     })
+    if (!stillActive()) return
     if (map) {
       const resolved = await learningStrategyStore.resolveForMap(map, {
         studentProfileId,
@@ -246,8 +257,10 @@ async function processCompletedSession(): Promise<void> {
         currentKnowledgePointId: session.knowledgePointId,
         dataset: dataset.value,
       })
+      if (!stillActive()) return
       if (resolved) {
         reviewQueueStore.project(resolved, {
+          evidenceId: session.id,
           profileId: studentProfileId,
           textbookId: map.textbook.id,
           dataset: dataset.value,
@@ -272,6 +285,29 @@ async function processCompletedSession(): Promise<void> {
       )
       if (wrongBookStore.lastRewardEvent) completionRewards.push(wrongBookStore.lastRewardEvent)
     }
+    const reviewId =
+      typeof route.query.reviewItemId === 'string' ? route.query.reviewItemId : undefined
+    if (reviewId) {
+      reviewQueueStore.load(studentProfileId, { includeSample: dataset.value === 'demo' })
+      const item = reviewQueueStore.items.find((item) => item.id === reviewId)
+      if (
+        item &&
+        item.textbookId === session.textbookId &&
+        item.knowledgePointId === session.knowledgePointId &&
+        session.status === 'completed' &&
+        session.questionIds.length > 0 &&
+        session.questionIds.every((id) =>
+          session.attempts.some(
+            (attempt) =>
+              attempt.questionId === id &&
+              attempt.submitted &&
+              attempt.result?.status === 'correct',
+          ),
+        )
+      ) {
+        reviewQueueStore.complete(item.id, session.completedAt ?? new Date().toISOString())
+      }
+    }
     const energy = completionRewards.reduce(
       (total, event) => total + event.reward.knowledgeEnergy,
       0,
@@ -282,6 +318,7 @@ async function processCompletedSession(): Promise<void> {
       ? `已根据 ${result.appendedEvidence.length} 条作答证据更新知识掌握。`
       : '这次练习的掌握度记录已经更新过。'
   } catch (caught) {
+    if (!stillActive()) return
     learningStrategyStore.clear()
     masteryProcessingStatus.value = 'error'
     masteryProcessingMessage.value =
@@ -290,6 +327,10 @@ async function processCompletedSession(): Promise<void> {
 }
 
 function returnToLesson(completed = false) {
+  if (route.query.reviewItemId) {
+    void router.push(isDevRoute.value ? '/dev/review-queue' : '/review-queue')
+    return
+  }
   const launchContext = context.value
   if (!launchContext) {
     void router.push(returnPath.value)
@@ -390,13 +431,19 @@ async function clearDemoStorage() {
   await loadAssessment()
 }
 
+async function restartAssessment() {
+  await router.replace({
+    query: { ...route.query, sessionScope: `attempt:${crypto.randomUUID()}` },
+  })
+}
+
 async function resetDemoAssessment() {
   await questionEngineStore.resetDemoAssessment()
 }
 
 onMounted(() => void loadAssessment())
 watch(
-  () => route.fullPath,
+  () => [route.fullPath, profileId.value],
   () => void loadAssessment(),
 )
 </script>
@@ -416,7 +463,7 @@ watch(
               {{ returnLabel }}
             </RouterLink>
             <p class="curriculum-eyebrow">动动脑筋 · 练习时间</p>
-            <h1>{{ viewModel?.definition.id || '准备一组练习' }}</h1>
+            <h1>{{ viewModel ? '本次课后练习' : '准备一组练习' }}</h1>
             <p v-if="viewModel">完成一次练习，看看自己对这一步的理解。</p>
           </div>
           <div v-if="viewModel" class="question-engine__header-status" aria-label="题目来源状态">
@@ -562,6 +609,10 @@ watch(
             v-if="questionEngineStore.status !== 'completed' && currentQuestion"
             class="question-engine__question-card"
           >
+            <MathQuestVisual
+              v-if="currentQuestion && localQuestionVisuals.has(currentQuestion.id)"
+              :visual="localQuestionVisuals.get(currentQuestion.id)!"
+            />
             <QuestionRenderer
               :question="currentQuestion"
               :show-diagnostics="isDevRoute"
@@ -624,6 +675,7 @@ watch(
               </div>
             </div>
             <div class="question-engine__completion-actions">
+              <AppButton variant="secondary" @click="restartAssessment">重新挑战</AppButton>
               <AppButton size="lg" icon-left="book-open" @click="returnToLesson(true)">{{
                 returnLabel
               }}</AppButton>

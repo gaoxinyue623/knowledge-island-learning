@@ -25,6 +25,22 @@ const base = {
 export const thinkingPuzzleSchema = z.discriminatedUnion('kind', [
   z.object({
     ...base,
+    kind: z.literal('switches'),
+    initial: z.array(z.boolean()).min(3).max(6),
+    target: z.array(z.boolean()).min(3).max(6),
+    switches: z
+      .array(card.extend({ affects: z.array(z.number().int().min(0).max(5)).min(1) }))
+      .min(2)
+      .max(6),
+    maxMoves: z.number().int().min(1).max(6),
+  }),
+  z.object({
+    ...base,
+    kind: z.literal('sudoku'),
+    givens: z.array(z.number().int().min(0).max(4)).length(16),
+  }),
+  z.object({
+    ...base,
     kind: z.literal('pick'),
     options: z.array(card).min(2),
     correctIds: z.array(id).min(1),
@@ -77,6 +93,7 @@ export interface ThinkingMission {
   title: string
   level: '入门' | '进阶' | '挑战'
   description: string
+  suggestedGrades?: string
   puzzles: ThinkingPuzzle[]
 }
 export interface ThinkingIsland {

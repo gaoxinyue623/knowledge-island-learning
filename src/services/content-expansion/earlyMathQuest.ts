@@ -1,3 +1,4 @@
+import { isLocallyApproved } from '../../data/curriculum/localApproval'
 import {
   G1_SHENZHEN_MATH_S1_TEXTBOOK_ID,
   G1_SHENZHEN_MATH_S1_EXERCISE_SOURCE_ID,
@@ -16,8 +17,7 @@ export function createEarlyMathQuest(bundle: ContentExpansionBundle): ReadingQue
       item.knowledgePointId === bundle.knowledgePointId && item.lessonId === bundle.lessonId,
   )
   if (
-    productionConfig.isProduction ||
-    !productionConfig.allowUnreviewedQuestions ||
+    (!isLocallyApproved(bundle.learningContent) && !productionConfig.allowUnreviewedQuestions) ||
     !d ||
     bundle.textbookId !== G1_SHENZHEN_MATH_S1_TEXTBOOK_ID ||
     bundle.unitId !== gradeOneShenzhenMathUpperCurriculum.units[d.unitIndex]?.id ||

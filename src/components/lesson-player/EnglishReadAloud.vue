@@ -3,6 +3,7 @@ import { computed, ref, toRef, useId, watch } from 'vue'
 import { Headphones, Pause, Play, RotateCcw, Square } from 'lucide-vue-next'
 
 import AppButton from '@/components/common/AppButton.vue'
+import SpeechProviderSelect from './SpeechProviderSelect.vue'
 import { useEnglishReadAloud } from '@/composables/useEnglishReadAloud'
 import {
   buildEnglishReadingSegments,
@@ -47,6 +48,7 @@ const {
   state,
   mode,
   rate,
+  provider,
   index,
   current,
   busy,
@@ -90,6 +92,7 @@ const status = computed(() => {
       <span class="english-listener__badge">听读 · 开口练习</span>
     </header>
 
+    <SpeechProviderSelect v-model="provider" />
     <div class="english-listener__options">
       <label :for="`${id}-section`"
         >朗读内容
@@ -171,12 +174,17 @@ const status = computed(() => {
     </div>
     <p class="english-listener__status" role="status" aria-live="polite">{{ status }}</p>
     <a v-if="props.muted" class="english-listener__settings" href="/settings">前往声音设置</a>
-    <AppButton v-else-if="supported && !voice" variant="secondary" @click="refreshVoice"
+    <AppButton
+      v-else-if="provider === 'browser' && supported && !voice"
+      variant="secondary"
+      @click="refreshVoice"
       >重新检测声音</AppButton
     >
     <p class="english-listener__source">
-      设备合成朗读，不是教材原声；歌谣按文字朗读，不演唱。不录音、不评分。
-      <span v-if="voice"
+      {{
+        provider === 'browser' ? '设备合成朗读' : '豆包 AI 合成朗读'
+      }}，不是教材原声；歌谣按文字朗读，不演唱。不录音、不评分。
+      <span v-if="provider === 'browser' && voice"
         >当前声音：{{ voice.name }}<span v-if="!voice.localService">（可能需要联网）</span>。</span
       >
     </p>

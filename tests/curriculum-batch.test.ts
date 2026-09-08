@@ -139,7 +139,9 @@ describe('Curriculum Data Batch 01', () => {
     })
     expect(batch01MathG1S1Package.metadata.verificationStatus).toBe('UNVERIFIED')
     expect(batch01MathG1S2Package.metadata.verificationStatus).toBe('UNVERIFIED')
-    expect(productionCurriculumIndex.textbooks).toHaveLength(0)
+    expect(
+      productionCurriculumIndex.textbooks.every((book) => book.verificationStatus === 'REVIEWED'),
+    ).toBe(true)
   })
 
   it('keeps candidate packages manual, unverified and free of generated content or questions', () => {
@@ -232,9 +234,13 @@ describe('Curriculum Data Batch 01', () => {
 
     expect(first).toBe(second)
     expect(first).toContain('B01_SZ_G1_MATH_S1_BNUP_2024_TEXTBOOK_CANDIDATE')
-    expect(productionCurriculumIndex.textbooks).toHaveLength(0)
-    expect(productionCurriculumIndex.units).toHaveLength(0)
-    expect(mvpCurriculumScope.entries.every((entry) => entry.status === 'CANDIDATE')).toBe(true)
+    expect(
+      productionCurriculumIndex.textbooks.every((book) => book.verificationStatus === 'REVIEWED'),
+    ).toBe(true)
+    expect(
+      productionCurriculumIndex.units.every((unit) => unit.verificationStatus === 'REVIEWED'),
+    ).toBe(true)
+    expect(mvpCurriculumScope.entries.every((entry) => entry.status === 'RELEASED')).toBe(true)
   })
 
   it('strips unknown import fields while preserving the existing package contract', () => {

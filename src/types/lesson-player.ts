@@ -241,6 +241,7 @@ export interface LessonSessionOwnerOptions {
 }
 
 export interface LessonPlayerLoadOptions extends LessonSessionOwnerOptions {
+  sessionScope?: string
   dataset?: LessonPlayerDataset
   demoState?: LessonPlayerDemoState
 }
@@ -263,5 +264,6 @@ export interface LessonPlayerAdapterOptions {
 }
 
 export interface LessonCompletionMapOptions {
+  profileId?: Id
   dataset?: LessonPlayerDataset
 }

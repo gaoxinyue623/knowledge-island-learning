@@ -348,9 +348,13 @@ describe('Reading routes and interactive practice', () => {
       ).toBe(true)
       await finishStory(wrapper, story)
       expect(write).toHaveBeenCalled()
-      expect(write.mock.calls.every(([key]) => String(key).startsWith(QUEST_PROGRESS_PREFIX))).toBe(
-        true,
-      )
+      expect(
+        write.mock.calls.every(
+          ([key]) =>
+            String(key).startsWith(QUEST_PROGRESS_PREFIX) ||
+            String(key).startsWith('knowledge-island.activities.v1:'),
+        ),
+      ).toBe(true)
       await button(wrapper, '全部再闯一次').trigger('click')
       expect(wrapper.get('.reading-quest__counter strong').text()).toContain('0')
     },
@@ -380,9 +384,13 @@ describe('Reading routes and interactive practice', () => {
       false,
     )
     expect(wrapper.get('.reading-quest__counter strong').text()).toContain('0')
-    expect(write.mock.calls.every(([key]) => String(key).startsWith(QUEST_PROGRESS_PREFIX))).toBe(
-      true,
-    )
+    expect(
+      write.mock.calls.every(
+        ([key]) =>
+          String(key).startsWith(QUEST_PROGRESS_PREFIX) ||
+          String(key).startsWith('knowledge-island.activities.v1:'),
+      ),
+    ).toBe(true)
   })
 
   it('remounts learner-scoped practice when the story or active learner changes', async () => {

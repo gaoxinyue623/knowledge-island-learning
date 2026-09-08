@@ -7,17 +7,12 @@ import ReadingStoryExperience from '@/components/reading-islands/ReadingStoryExp
 import { findReadingStory, readingLength, readingStories } from '@/data/reading-islands'
 import { readingLevels } from '@/types/reading-islands'
 import { usePreferencesStore } from '@/stores/preferencesStore'
-import { useCurriculumStore } from '@/stores/curriculumStore'
-import { LOCAL_STUDENT_ID, useStudentStore } from '@/stores/studentStore'
+import { useLearningProfile } from '@/composables/useLearningProfile'
 import '@/styles/reading-islands.css'
 
 const route = useRoute(),
-  preferences = usePreferencesStore(),
-  curriculum = useCurriculumStore(),
-  student = useStudentStore()
-const profileId = computed(
-  () => curriculum.curriculumProfile?.studentId ?? student.profile?.id ?? LOCAL_STUDENT_ID,
-)
+  preferences = usePreferencesStore()
+const { profileId } = useLearningProfile()
 const story = computed(() => findReadingStory(String(route.params.storyId)))
 const related = computed(() =>
   readingStories

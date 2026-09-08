@@ -44,7 +44,7 @@ export class MockLearningMapCompletionService implements LearningMapCompletionSe
     )
     if (!mapping) return false
     const nodeId = mapNodeId(context.textbookId, mapping.id)
-    const existing = this.progressStorage.load(context.textbookId)
+    const existing = this.progressStorage.load(context.textbookId, options)
     const existingRecord = existing.find((record) => record.nodeId === nodeId)
     const completedAt = existingRecord?.completedAt ?? new Date().toISOString()
     const next = existing.filter((record) => record.nodeId !== nodeId)
@@ -55,7 +55,7 @@ export class MockLearningMapCompletionService implements LearningMapCompletionSe
       startedAt: existingRecord?.startedAt ?? completedAt,
       completedAt,
     })
-    this.progressStorage.save(context.textbookId, next)
+    this.progressStorage.save(context.textbookId, next, options)
     return true
   }
 }

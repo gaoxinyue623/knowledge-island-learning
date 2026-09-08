@@ -839,3 +839,117 @@
     font-size: 24px;
   }
 }
+
+.thinking-light-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  background: var(--thinking-soft, #fbecd7);
+}
+.thinking-light-panel h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+}
+.thinking-lights {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.thinking-lights li {
+  display: grid;
+  justify-items: center;
+  min-width: 3rem;
+  padding: 0.6rem;
+  border: 2px solid #b1b8bd;
+  border-radius: 1rem;
+  background: #edf0f2;
+  color: #47535c;
+}
+.thinking-lights li > span {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+.thinking-lights li > strong {
+  font-size: 0.8rem;
+}
+.thinking-lights li.is-on {
+  background: #ffe99a;
+  color: #71430c;
+  border-color: #b97a1c;
+}
+.thinking-switch-controls,
+.thinking-number-pad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.thinking-switch-controls button,
+.thinking-number-pad button {
+  min-width: 3rem;
+  min-height: 3rem;
+  border: 2px solid var(--thinking-color, #725b86);
+  border-radius: 0.85rem;
+  padding: 0.7rem 1rem;
+  background: white;
+  color: #3d3446;
+}
+.thinking-switch-controls button {
+  display: grid;
+  gap: 0.25rem;
+  text-align: left;
+}
+.thinking-switch-controls button:disabled,
+.thinking-number-pad button:disabled {
+  opacity: 0.5;
+}
+.thinking-switch-history {
+  overflow-wrap: anywhere;
+}
+.thinking-sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: min(100%, 340px);
+  border: 3px solid #725b86;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.thinking-sudoku-grid button {
+  aspect-ratio: 1;
+  min-height: 48px;
+  border: 1px solid #c8c0d0;
+  background: #fff;
+  color: #725b86;
+  font-size: 1.65rem;
+  font-weight: 700;
+}
+.thinking-sudoku-grid button.is-given {
+  background: #eee8f3;
+  color: #33283e;
+  opacity: 1;
+}
+.thinking-sudoku-grid button.is-active {
+  background: #ffefbc;
+  box-shadow: inset 0 0 0 3px #946323;
+}
+.thinking-sudoku-grid button.palace-right {
+  border-right: 3px solid #725b86;
+}
+.thinking-sudoku-grid button.palace-bottom {
+  border-bottom: 3px solid #725b86;
+}
+.thinking-sudoku-grid button:focus-visible,
+.thinking-switch-controls button:focus-visible,
+.thinking-number-pad button:focus-visible {
+  outline: 3px solid #946323;
+  outline-offset: -4px;
+}
+
+.thinking-switch-game,
+.thinking-sudoku-game {
+  display: grid;
+  gap: 0.85rem;
+}

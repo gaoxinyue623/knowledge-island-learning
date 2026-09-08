@@ -9,12 +9,12 @@
 | 产品名称 | 知识岛（暂定） |
 | 产品定位 | 课本同步 + 游戏闯关 + 课外拓展的小学语数英学习平台 |
 | 当前阶段 | PHASE 16.4：MVP Release Gate / Final Verification |
-| 文档状态 | 产品事实源；PHASE 7～15 与 PHASE 16 工程门禁已实现，Parent Dashboard 是只读报告层；当前没有可发布的真实 Curriculum Scope 条目，Golden Sample Framework、Demo Lesson、Demo Questions、Demo Mastery、Demo Strategy、PHASE 12～15 Demo records 仍受未核验 / SAMPLE 闸门保护 |
+| 文档状态 | 产品事实源；PHASE 7～15 与 PHASE 16 工程门禁已实现，Parent Dashboard 是只读报告层；2026-09-07 项目所有者批准当前 11 套本地教材、357 节课程作为正式课程，详见 LOCAL_RELEASE_FIXES.md，Golden Sample Framework、Demo Lesson、Demo Questions、Demo Mastery、Demo Strategy、PHASE 12～15 Demo records 仍受未核验 / SAMPLE 闸门保护 |
 | 版本 | 0.1 |
 | 日期 | 2026-09-03 |
 | 当前事实源 | 用户提供的产品总 Prompt、PHASE 2.1 / 2.2 数据与课程文档、PHASE 3 / 3.1 设计文档，以及 PHASE 4 工程基础 |
 | 产品负责人 | 待确定 |
-| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine、只读 Learning Strategy、Learning History、WrongBook、Review Queue、Reward / Growth / Achievement、Home / Daily Plan 本地投影、只读 ParentReport / Parent Dashboard、PHASE 16 生产 Scope / Source Manifest / production index / readiness validator / release gate 已创建；当前发布决定为 `NOT_READY`，AI Learning Path、复习排程与其他自适应算法仍未实现 |
+| 工程状态 | Vue 3 + TypeScript + Vite 工程、课程 Mock 数据管线、教材解析、档案持久化、导入验证与审核闸门，以及 Knowledge Island / LearningMap 地图、LessonPlayer 步骤、Question Engine、Assessment Session、结构化题目渲染、确定性判题、会话恢复、地图回链、LearningEvidence、MasteryRecord、确定性 Mastery Engine、只读 Learning Strategy、Learning History、WrongBook、Review Queue、Reward / Growth / Achievement、Home / Daily Plan 本地投影、只读 ParentReport / Parent Dashboard、PHASE 16 生产 Scope / Source Manifest / production index / readiness validator / release gate 已创建；此前空正式索引的发布限制已由本地正式课程审批替代，最新验证见 LOCAL_RELEASE_FIXES.md，AI Learning Path、复习排程与其他自适应算法仍未实现 |
 
 ---
 

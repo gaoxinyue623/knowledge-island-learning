@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import LearningActivityHistory from '@/components/common/LearningActivityHistory.vue'
+import { useLearningProfile } from '@/composables/useLearningProfile'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import PetParentReport from '@/components/pet/PetParentReport.vue'
 import AppButton from '@/components/common/AppButton.vue'
 import AppEmptyState from '@/components/common/AppEmptyState.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
@@ -26,6 +29,7 @@ import type {
   SubjectCode,
 } from '@/types'
 
+const { profileId: learningProfileId } = useLearningProfile()
 const route = useRoute()
 const router = useRouter()
 const curriculumStore = useCurriculumStore()
@@ -49,9 +53,7 @@ const demoScenarios: Array<{ value: ParentReportDemoScenario; label: string }> =
 const isDevRoute = computed(() => route.path === '/dev/parent-dashboard')
 const pageContext = computed(() => (isDevRoute.value ? 'DEV / 家长学习报告' : '家长学习报告'))
 const currentProfileId = computed(() =>
-  isDevRoute.value
-    ? phase14DemoProfile.studentId
-    : (curriculumStore.curriculumProfile?.studentId ?? 'local-profile'),
+  isDevRoute.value ? phase14DemoProfile.studentId : learningProfileId.value,
 )
 const currentProfile = computed(() =>
   isDevRoute.value ? phase14DemoProfile : curriculumStore.curriculumProfile,
@@ -215,7 +217,17 @@ watch(
 
 <template>
   <AppShell :show-bottom-nav="false" :context="pageContext">
+    <LearningActivityHistory
+      v-if="!isDevRoute"
+      :profile-id="currentProfileId"
+      :start-date="report?.range.startDate"
+      :end-date="report?.range.endDate"
+      :subject="reportStore.selectedSubject"
+    />
     <div class="parent-report-page content-container">
+      <RouterLink v-if="!isDevRoute" class="personal-back" to="/profile"
+        >← 返回我的学习空间</RouterLink
+      >
       <header class="parent-report-page__header">
         <div class="parent-report-page__header-copy">
           <p class="curriculum-eyebrow">一起看见每一步进步</p>
@@ -245,6 +257,7 @@ watch(
           </AppButton>
         </div>
       </header>
+      <PetParentReport v-if="!isDevRoute" />
 
       <section class="parent-report-page__controls" aria-labelledby="report-controls-title">
         <div>

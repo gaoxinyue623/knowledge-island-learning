@@ -1,3 +1,4 @@
+import { isLocallyApproved } from '../../data/curriculum/localApproval'
 import {
   G2_SHENZHEN_MATH_S1_TEXTBOOK_ID,
   G2_SHENZHEN_MATH_S1_EXERCISE_SOURCE_ID,
@@ -11,8 +12,7 @@ import { productionConfig } from '@/config/production'
 // Deterministic local exercises; assessment, mastery and map progress stay untouched.
 export function createMathQuest(bundle: ContentExpansionBundle): ReadingQuest | null {
   if (
-    productionConfig.isProduction ||
-    !productionConfig.allowUnreviewedQuestions ||
+    (!isLocallyApproved(bundle.learningContent) && !productionConfig.allowUnreviewedQuestions) ||
     bundle.learningContent.isSample ||
     bundle.learningContent.knowledgePointId !== bundle.knowledgePointId ||
     bundle.learningContent.lessonId !== bundle.lessonId

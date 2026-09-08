@@ -48,6 +48,9 @@ export interface MvpCurriculumScopeEntry {
 }
 
 export interface MvpCurriculumScope {
+  selectionPolicy?: 'MANUAL'
+  minimumQuestionsPerKnowledgePoint?: number
+  readingOnlyKnowledgePointIds?: string[]
   id: string
   version: number
   title: string

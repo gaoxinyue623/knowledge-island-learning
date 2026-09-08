@@ -251,11 +251,15 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
 
   async function rebuildViewModel(): Promise<void> {
     if (!assessment.value || !session.value) return
-    viewModel.value = await dependencies.adapter.buildViewModel(
-      assessment.value,
-      session.value,
+    const activeAssessment = assessment.value,
+      activeSession = session.value
+    const next = await dependencies.adapter.buildViewModel(
+      activeAssessment,
+      activeSession,
       status.value,
     )
+    if (assessment.value === activeAssessment && session.value === activeSession)
+      viewModel.value = next
   }
 
   async function updateSession(nextSession: QuestionSession): Promise<void> {
@@ -264,10 +268,12 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     await rebuildViewModel()
   }
 
+  let loadGeneration = 0
   async function loadAssessment(
     launchContext: AssessmentLaunchContext,
     options: QuestionEngineLoadOptions = {},
   ): Promise<QuestionEngineViewModel | null> {
+    const generation = ++loadGeneration
     context.value = launchContext
     dataset.value = options.dataset ?? 'profile'
     studentId.value = options.studentId ?? 'local-profile'
@@ -280,11 +286,13 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     loading.value = true
     error.value = null
     warning.value = null
+    lastRewardEvent.value = null
     try {
       const result = await dependencies.adapter.loadAssessment(launchContext, {
         ...options,
         dataset: dataset.value,
       })
+      if (generation !== loadGeneration) return null
       if (!result.definition) {
         status.value = statusForIssue(result.issue)
         error.value = result.message ?? null
@@ -349,6 +357,7 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
       session.value = nextSession
       status.value = nextSession.status === 'completed' ? 'completed' : 'ready'
       await rebuildViewModel()
+      if (generation !== loadGeneration) return null
       if (nextSession.status !== 'not_started') {
         projectHistory(nextSession)
         projectWrongBook(nextSession)
@@ -357,11 +366,12 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
       warning.value = dependencies.sessionStorage.getLastWarning()
       return viewModel.value
     } catch (caught) {
+      if (generation !== loadGeneration) return null
       status.value = 'error'
       error.value = readableLoadError(caught)
       return null
     } finally {
-      loading.value = false
+      if (generation === loadGeneration) loading.value = false
     }
   }
 

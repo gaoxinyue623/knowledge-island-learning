@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { recordLearningActivity } from '@/services/learning-activity/activityHistory'
+import { readingStories } from '@/data/reading-islands'
+import { productionCurriculumIndex } from '@/data/curriculum/production'
+import { settleQuestPetReward } from '@/services/pet/petQuestRewards'
 import { computed, nextTick, onBeforeUnmount, onDeactivated, ref, watch } from 'vue'
 
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
@@ -24,6 +28,21 @@ const props = defineProps<{
   readingLabel?: string
   note?: string
 }>()
+const petRewardWarning = ref('')
+const attemptId = ref(''),
+  completedAt = ref<string | undefined>()
+function settleReward() {
+  const activeScope = scope()
+  void settleQuestPetReward(props.profileId, props.quest)
+    .then(() => {
+      if (scope() === activeScope) petRewardWarning.value = ''
+    })
+    .catch(() => {
+      if (scope() === activeScope)
+        petRewardWarning.value =
+          '练习已保存，积分暂未结算。重新打开这组练习或再试一次，会自动重试。'
+    })
+}
 const isMath = computed(() => props.quest.subject === 'MATH')
 const readingLabel = computed(() => props.readingLabel ?? (isMath.value ? '回看知识' : '回看课文'))
 const stageIndex = ref(0)
@@ -102,6 +121,8 @@ watch(
   () => {
     const result = readQuestProgress(browserQuestStorage(), props.profileId, props.quest)
     const data = result.data
+    attemptId.value = data.attemptId ?? crypto.randomUUID()
+    completedAt.value = data.completedAt
     reviewIds.value = data.reviewIds
     passed.value = data.passedIds
     mistakes.value = data.mistakeIds
@@ -120,6 +141,11 @@ watch(
     round.value += 1
     loadedScope = scope()
     resetStage()
+    petRewardWarning.value = ''
+    if (result.writable) {
+      settleReward()
+      if (data.completedAt) queueMicrotask(persist)
+    }
   },
   { immediate: true, flush: 'sync' },
 )
@@ -137,11 +163,56 @@ function persist(): void {
       reviewIds: reviewIds.value ? [...reviewIds.value] : null,
       activeStageId: stage.value?.id ?? null,
       summaryVisible: summaryVisible.value,
+      attemptId: attemptId.value,
+      completedAt: completedAt.value,
     },
     props.quest,
   )
   storageWarning.value = warning
   saved.value = !warning
+  if (!warning) {
+    settleReward()
+    if (
+      summaryVisible.value &&
+      completedAt.value &&
+      !window.location.pathname.startsWith('/dev/')
+    ) {
+      try {
+        const quest = props.quest as ReadingPracticeQuest & {
+          textbookId?: string
+          knowledgePointId?: string
+          lessonId?: string
+        }
+        const lesson = productionCurriculumIndex.lessons.find((item) => item.id === quest.lessonId)
+        const story = readingStories.find((item) =>
+          window.location.pathname.endsWith('/' + item.id),
+        )
+        const query = new URLSearchParams({
+          textbookId: quest.textbookId ?? '',
+          knowledgePointId: quest.knowledgePointId ?? '',
+          lessonId: lesson?.id ?? '',
+          unitId: lesson?.unitId ?? '',
+        })
+        recordLearningActivity({
+          id: `quest:${attemptId.value}`,
+          profileId: props.profileId,
+          contentId: props.quest.id,
+          contentVersion: revision.value,
+          kind: 'quest',
+          title: lesson?.title ?? story?.title ?? '课后闯关',
+          subject: props.quest.subject ?? (story?.language === 'english' ? 'ENGLISH' : 'CHINESE'),
+          occurredAt: completedAt.value,
+          completedCount: passed.value.length,
+          mistakeCount: mistakes.value.length,
+          href: lesson
+            ? `/knowledge-point/${encodeURIComponent(quest.knowledgePointId!)}?${query}#knowledge-challenges`
+            : window.location.pathname,
+        })
+      } catch {
+        storageWarning.value = '闯关进度已保存，活动记录暂未更新；重新打开本组练习会重试。'
+      }
+    }
+  }
 }
 watch(
   [passed, mistakes, helped, completedStageIds, reviewIds, stageIndex, summaryVisible],
@@ -176,6 +247,7 @@ function visit(index: number): void {
 async function advance(): Promise<void> {
   if (!isPassed.value) return
   if (isComplete.value) {
+    completedAt.value = new Date().toISOString()
     summaryVisible.value = true
     await nextTick()
     summaryHeading.value?.focus({ preventScroll: true })
@@ -272,6 +344,8 @@ function chooseTile(index: number): void {
 }
 
 function restart(onlyMistakes: boolean): void {
+  attemptId.value = crypto.randomUUID()
+  completedAt.value = undefined
   reviewIds.value = onlyMistakes && mistakes.value.length ? [...mistakes.value] : null
   stageIndex.value = 0
   passed.value = []
@@ -334,6 +408,9 @@ function restart(onlyMistakes: boolean): void {
         从第一关重练
       </button>
     </div>
+    <p v-if="petRewardWarning" role="status" class="reading-quest__storage-warning">
+      {{ petRewardWarning }}
+    </p>
     <section v-if="restartRequested" class="reading-quest__restart" aria-label="确认重练">
       <p>要从第一关重新练习吗？本轮答案和提示记录会重置，已通过的足迹仍保留。</p>
       <div class="reading-quest__actions">
@@ -418,6 +495,7 @@ function restart(onlyMistakes: boolean): void {
       <div class="reading-quest__actions">
         <AppButton v-if="mistakes.length" @click="restart(true)">再练错过的关卡</AppButton>
         <AppButton variant="soft" @click="restart(false)">全部再闯一次</AppButton>
+        <a href="/achievements">去宠物小屋</a>
         <a href="#knowledge-reading">{{ readingLabel }}</a>
       </div>
     </section>

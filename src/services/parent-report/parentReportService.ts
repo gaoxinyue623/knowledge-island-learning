@@ -880,7 +880,7 @@ export class ParentReportService {
       }
       const progressRecords = readSource(
         '知识地图进度',
-        () => this.dependencies.progressStorage.load(source.textbook.id),
+        () => this.dependencies.progressStorage.load(source.textbook.id, { profileId, dataset }),
         diagnostics,
         [],
       )

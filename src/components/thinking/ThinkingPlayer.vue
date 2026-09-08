@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import AppIcon from '@/components/common/AppIcon.vue'
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 import ThinkingToken from './ThinkingToken.vue'
+import ThinkingReasoningBoard from './ThinkingReasoningBoard.vue'
 import ThinkingPathBoard from './ThinkingPathBoard.vue'
 import WorkshopObject from '@/components/hands-on/WorkshopObject.vue'
 import { useReducedMotion } from '@/composables/useReducedMotion'
@@ -74,6 +75,10 @@ const directions = [
   { label: '向下走', dr: 1, dc: 0, arrow: 'down' },
   { label: '向右走', dr: 0, dc: 1, arrow: 'right' },
 ] as const
+function changeReasoningDraft(next: ThinkingDraft) {
+  draft.value = next
+  feedback.value = ''
+}
 function resetAnswer() {
   stopMovement()
   draft.value = emptyThinkingDraft(puzzle.value)
@@ -248,6 +253,13 @@ function replay() {
         <div v-if="puzzle.tokens" class="thinking-token-row" aria-label="观察图形与数字">
           <ThinkingToken v-for="(token, i) in puzzle.tokens" :key="i" :token="token" />
         </div>
+        <ThinkingReasoningBoard
+          v-if="puzzle.kind === 'switches' || puzzle.kind === 'sudoku'"
+          :key="puzzle.id"
+          :puzzle="puzzle"
+          :draft="draft"
+          @change="changeReasoningDraft"
+        />
         <fieldset
           v-if="puzzle.kind === 'pick'"
           class="thinking-options"
@@ -434,6 +446,7 @@ function replay() {
         <div>
           <h3>这个任务通过啦！</h3>
           <p>{{ puzzle.explanation }}</p>
+          <RouterLink to="/achievements">去宠物小屋查看学习积分</RouterLink>
         </div>
       </div>
       <button v-if="isPassed" type="button" class="thinking-button" @click="advance">

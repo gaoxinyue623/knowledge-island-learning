@@ -162,7 +162,10 @@ describe('Shenzhen grade 1 BNU math upper integration', () => {
       expect(b.learningContent.isSample).toBe(false)
       expect(b.learningContent.sourceId).not.toBe(book.courseContents[0]!.sourceId)
       expect(validateExtensionActivity(b.extensionActivities[0]).success).toBe(true)
-      expect(await repository.getBundle(b.knowledgePointId, 'profile')).toBeNull()
+      expect(
+        (await repository.getBundle(b.knowledgePointId, 'profile'))?.learningContent
+          .verificationStatus,
+      ).toBe('REVIEWED')
     }
     const original = productionConfig.allowUnreviewedQuestions
     try {

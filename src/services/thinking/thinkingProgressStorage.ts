@@ -29,7 +29,7 @@ export function thinkingProgressKey(profileId: string) {
 }
 
 export function readThinkingProgress(
-  storage: ThinkingStorage,
+  storage: Pick<ThinkingStorage, 'getItem'>,
   profileId: string,
 ): { data: ThinkingProgress; warning: string | null; writable: boolean } {
   const fallback = freshThinkingProgress(profileId)

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import WorkshopObject from './WorkshopObject.vue'
+import SpeechProviderSelect from '@/components/lesson-player/SpeechProviderSelect.vue'
 import { usePieceTransfer } from '@/composables/usePieceTransfer'
 import { useEnglishReadAloud } from '@/composables/useEnglishReadAloud'
 import type { EnglishReadingSegment } from '@/services/lesson-player/englishReading'
@@ -104,6 +105,7 @@ watch(() => [props.profileId, props.contextId], reset)
     <p class="hands-on__eyebrow">听力小剧场 · 额外的口语练习</p>
     <h3>听一句，摆一摆，再自己说一句</h3>
     <p>认识三个小伙伴：球、书和玩具熊。听指令后，拖动物品；也可以点物品，再点位置。</p>
+    <SpeechProviderSelect v-model="reader.provider.value" />
     <div class="hands-on__actions">
       <strong>{{ complete ? '三个场景都练过啦' : `场景 ${index + 1} / 3` }}</strong>
       <button type="button" :disabled="!!reader.unavailable.value || complete" @click="listen()">
@@ -115,8 +117,14 @@ watch(() => [props.profileId, props.contextId], reset)
       </button>
     </div>
     <p class="hands-on__note">
-      设备合成语音，不是教材原声。{{
-        reader.voice.value && !reader.voice.value.localService ? '当前声音可能需要联网。' : ''
+      {{
+        reader.provider.value === 'browser' ? '设备合成语音' : '豆包 AI 合成语音'
+      }}，不是教材原声。{{
+        reader.provider.value === 'browser' &&
+        reader.voice.value &&
+        !reader.voice.value.localService
+          ? '当前声音可能需要联网。'
+          : ''
       }}
     </p>
     <div

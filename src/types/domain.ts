@@ -77,6 +77,7 @@ export type ContentSourceType =
 export type SourceCopyrightStatus = 'UNKNOWN' | 'PENDING' | 'CLEARED' | 'RESTRICTED'
 
 export interface ContentSource {
+  releaseApprovalId?: string
   id: Id
   sourceType: ContentSourceType
   title: string

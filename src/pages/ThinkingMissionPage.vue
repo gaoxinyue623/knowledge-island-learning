@@ -33,6 +33,7 @@ const mission = computed(() =>
           <p class="thinking-eyebrow">{{ island.title }}</p>
           <h1>{{ mission.title }}</h1>
           <p>{{ mission.description }}</p>
+          <p v-if="mission.suggestedGrades" class="thinking-muted">{{ mission.suggestedGrades }}</p>
         </header>
         <ThinkingPlayer
           :key="mission.id + ':' + profileId"

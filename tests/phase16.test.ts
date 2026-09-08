@@ -28,7 +28,6 @@ import type {
 import {
   buildContentCoverageReport,
   buildCurriculumPackageFingerprint,
-  buildProductionIndex,
   buildQuestionCoverageReport,
   diffCurriculumPackages,
   evaluateMVPReleaseGate,
@@ -320,16 +319,13 @@ describe('PHASE 16 production config and scope', () => {
     expect(config.devRoutes).toBe(false)
   })
 
-  it('keeps the current candidate scope out of the production index', () => {
+  it('includes the owner-approved local curriculum in the release index', () => {
     const report = validateProductionReadiness(productionCurriculumData, mvpCurriculumScope)
-    const index = buildProductionIndex(productionCurriculumData, mvpCurriculumScope)
-    expect(report.status).toBe('FAIL')
-    expect(report.issues.some((item) => item.code === 'RELEASE_SCOPE_EMPTY')).toBe(true)
-    expect(report.content.passed).toBe(false)
-    expect(report.questions.passed).toBe(false)
-    expect(index.textbooks).toEqual([])
-    expect(index.contents).toEqual([])
-    expect(index.questions).toEqual([])
+    expect(report.status).toBe('PASS')
+    expect(report.issues).toEqual([])
+    expect(report.index.textbooks).toHaveLength(11)
+    expect(report.content.passed).toBe(true)
+    expect(report.questions.passed).toBe(true)
   })
 
   it('requires active curriculum and published content/question records', () => {
@@ -553,19 +549,19 @@ describe('PHASE 16 content, question and release readiness', () => {
     const gate = evaluateMVPReleaseGate({
       readiness,
       config: resolveProductionConfig({ isProduction: true }),
-      engineering: { tests: true },
-      qa: { responsive: true },
-      regression: { parentReport: true },
-      documentation: { phase16Artifacts: true },
+      engineering: { build: true, lint: true },
+      qa: { runtimeSmoke: true },
+      regression: { tests: true },
+      documentation: { releaseNotes: true },
     })
     expect(gate.decision).toBe('READY')
     const limited = evaluateMVPReleaseGate({
       readiness,
       config: resolveProductionConfig({ isProduction: true }),
-      engineering: { tests: true },
-      qa: { responsive: true },
-      regression: { parentReport: true },
-      documentation: { phase16Artifacts: true },
+      engineering: { build: true, lint: true },
+      qa: { runtimeSmoke: true },
+      regression: { tests: true },
+      documentation: { releaseNotes: true },
       limitations: ['英语教材尚未纳入本次正式范围'],
     })
     expect(limited.decision).toBe('READY_WITH_LIMITATIONS')

@@ -2,6 +2,16 @@ import type { MVPReleaseGateInput, MVPReleaseGateReport } from '@/types'
 
 export function evaluateMVPReleaseGate(input: MVPReleaseGateInput): MVPReleaseGateReport {
   const checks: Record<string, 'PASS' | 'FAIL'> = {}
+  const required = {
+    engineering: ['build', 'lint'],
+    qa: ['runtimeSmoke'],
+    regression: ['tests'],
+    documentation: ['releaseNotes'],
+  } as const
+  for (const [group, names] of Object.entries(required)) {
+    const values = input[group as keyof typeof required]
+    for (const name of names) checks[`${group}.${name}`] = values[name] === true ? 'PASS' : 'FAIL'
+  }
   const addChecks = (group: string, values: Record<string, boolean>) => {
     for (const [name, value] of Object.entries(values))
       checks[`${group}.${name}`] = value ? 'PASS' : 'FAIL'
