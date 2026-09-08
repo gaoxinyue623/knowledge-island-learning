@@ -8,7 +8,7 @@
 - Vitest、Vue Test Utils、JSDOM
 - Node.js `>=24.0.0`
 
-当前本机 Node.js 为 `22.19.0`，低于项目要求；这与其他验证结果分别记录，不能据此推断脚本失败原因。
+当前本机默认 Node.js 为 `22.19.0`；2026-09-08 已使用临时 Node.js `24.20.0` 通过完整发布检查，未修改全局安装。开发和验证请使用 Node.js 24 或更高版本。
 
 ## 快速开始
 
@@ -38,9 +38,10 @@ npm run release:check
 
 ## 当前验证状态
 
-- 2026-09-08 学生体验分支验证：build、lint、58 个测试文件中的 683 项测试全部通过，runtime 专项 2 项通过。
+- 2026-09-08 学生体验分支在 Node.js 24.20.0 下验证：build、lint、59 个测试文件中的 689 项测试全部通过，runtime 专项 2 项通过。
 - Windows 下 npm 子进程启动和 TTS 缓存路径断言已修复；`npm run release:check` 退出码为 0，结果为 `READY_WITH_LIMITATIONS`。
-- 既有边界：8 节内容不计自动判分覆盖，豆包语音限本地开发，全站学习记录仍在本机。Node 22 的本机验证不代表已完成项目声明的 Node 24 环境验收。
+- 课程正文听读、三档字号和完成后只读回看已通过独立审查及 320px、390px 窄屏浏览器检查。
+- 既有边界：8 节内容不计自动判分覆盖，豆包语音限本地开发，全站学习记录仍在本机；尚未完成真机手机及学生试用。
 
 本批功能及后续计划见 [学生学习体验改进](doc/product/STUDENT_LEARNING_ROADMAP.md)。历史修复见 [`doc/operations/LOCAL_RELEASE_FIXES.md`](doc/operations/LOCAL_RELEASE_FIXES.md)，当前验证结果以上述记录为准。
 
