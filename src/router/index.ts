@@ -174,6 +174,11 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '学习记录', studentOnly: true },
   },
   {
+    path: '/grade-explorer',
+    component: () => import('@/pages/GradeExplorerPage.vue'),
+    meta: { title: '三年级原创拓展', requiresOnboarding: true, studentOnly: true },
+  },
+  {
     path: '/profile',
     component: () => import('@/pages/ProfilePage.vue'),
     meta: { title: '我的知识岛', studentOnly: true },
