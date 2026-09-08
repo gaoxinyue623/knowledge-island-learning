@@ -3,11 +3,20 @@ import { recordLearningActivity } from '@/services/learning-activity/activityHis
 import { readingStories } from '@/data/reading-islands'
 import { productionCurriculumIndex } from '@/data/curriculum/production'
 import { settleQuestPetReward } from '@/services/pet/petQuestRewards'
-import { computed, nextTick, onBeforeUnmount, onDeactivated, ref, watch } from 'vue'
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  onBeforeUnmount,
+  onDeactivated,
+  ref,
+  watch,
+} from 'vue'
 
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 import AppButton from '@/components/common/AppButton.vue'
 import AppIcon from '@/components/common/AppIcon.vue'
+import StudentReadAloud from '@/components/common/StudentReadAloud.vue'
 import DragMatchActivity from '@/components/interactive-activity/DragMatchActivity.vue'
 import SortOrderActivity from '@/components/interactive-activity/SortOrderActivity.vue'
 import MathQuestVisual from './MathQuestVisual.vue'
@@ -21,14 +30,24 @@ import {
 } from '@/services/content-expansion/questProgressStorage'
 import type { ActivityResult, QuestionAnswerDraft } from '@/types'
 import type { ReadingPracticeQuest } from '@/types/reading-quest'
+import { usePreferencesStore } from '@/stores/preferencesStore'
+import type { Pinia } from 'pinia'
 
-const props = defineProps<{
-  quest: ReadingPracticeQuest
-  profileId: string
-  readingLabel?: string
-  note?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    quest: ReadingPracticeQuest
+    profileId: string
+    muted?: boolean
+    readingLabel?: string
+    note?: string
+  }>(),
+  { muted: undefined, readingLabel: undefined, note: undefined },
+)
 const petRewardWarning = ref('')
+const appPinia = getCurrentInstance()?.appContext.config.globalProperties.$pinia as
+  Pinia | undefined
+const preferences = appPinia ? usePreferencesStore(appPinia) : null
+const muted = computed(() => props.muted ?? preferences?.preferences.muted ?? false)
 const attemptId = ref(''),
   completedAt = ref<string | undefined>()
 function settleReward() {
@@ -87,9 +106,26 @@ const canCheck = computed(
 const prompt = computed(
   () => question.value?.stem.map((block) => block.text ?? '').join('\n') ?? '',
 )
+const supportsQuestionReadAloud = computed(() => isMath.value)
+const readAloudScope = computed(
+  () => `${props.profileId}:${props.quest.id}:${stage.value?.id ?? ''}`,
+)
+const questionReadAloudText = computed(() => {
+  if (!question.value) return ''
+  const options = question.value.options?.map((option) =>
+    option.content.map((block) => block.text ?? '').join(' '),
+  )
+  return [prompt.value, ...(options ?? [])].filter(Boolean).join('\n')
+})
 const isTraining = computed(() => Boolean(props.quest.training))
 const hints = computed(() =>
   stage.value?.hints?.length ? stage.value.hints : [stage.value?.hint ?? ''],
+)
+const visibleHintText = computed(() =>
+  hints.value
+    .slice(0, hintStep.value + 1)
+    .filter(Boolean)
+    .join('\n'),
 )
 const bands = [
   { id: 'foundation', label: '独立热身' },
@@ -519,6 +555,12 @@ function restart(onlyMistakes: boolean): void {
         <MathQuestVisual v-if="stage.visual" :key="round + ':' + stage.id" :visual="stage.visual" />
         <template v-if="stage.kind === 'question' && question">
           <p id="quest-question-prompt" class="reading-quest__prompt">{{ prompt }}</p>
+          <StudentReadAloud
+            v-if="supportsQuestionReadAloud"
+            :text="questionReadAloudText"
+            :scope="readAloudScope"
+            :muted="muted"
+          />
           <fieldset
             v-if="question.options?.length"
             class="reading-quest__options"
@@ -692,6 +734,13 @@ function restart(onlyMistakes: boolean): void {
         </div>
         <p v-if="feedback" class="reading-quest__feedback" role="status">{{ feedback }}</p>
         <div v-if="hintVisible" id="quest-hint" class="reading-quest__hint" role="status">
+          <StudentReadAloud
+            v-if="supportsQuestionReadAloud"
+            :text="visibleHintText"
+            :scope="readAloudScope + ':hint:' + hintStep"
+            :muted="muted"
+            label="听提示"
+          />
           <p v-for="(hint, index) in hints.slice(0, hintStep + 1)" :key="index">{{ hint }}</p>
           <button
             v-if="hintStep + 1 < hints.length"
