@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { recordLearningActivity } from '@/services/learning-activity/activityHistory'
+import { recordLearningActivity, type LearningActivity } from '@/services/learning-activity/activityHistory'
 import { spacedReviewService } from '@/services/student-growth/spacedReview'
 import { readingStories } from '@/data/reading-islands'
 import { productionCurriculumIndex } from '@/data/curriculum/production'
@@ -42,6 +42,7 @@ const props = withDefaults(
     readingLabel?: string
     note?: string
     reviewAttemptId?: string
+    activityContext?: Pick<LearningActivity, 'title' | 'subject' | 'href'>
   }>(),
   { muted: undefined, readingLabel: undefined, note: undefined, reviewAttemptId: undefined },
 )
@@ -255,14 +256,14 @@ function persist(): void {
           contentId: props.quest.id,
           contentVersion: revision.value,
           kind: 'quest',
-          title: lesson?.title ?? story?.title ?? '课后闯关',
-          subject: props.quest.subject ?? (story?.language === 'english' ? 'ENGLISH' : 'CHINESE'),
+          title: props.activityContext?.title ?? lesson?.title ?? story?.title ?? '课后闯关',
+          subject: props.activityContext?.subject ?? props.quest.subject ?? (story?.language === 'english' ? 'ENGLISH' : 'CHINESE'),
           occurredAt: completedAt.value,
           completedCount: passed.value.length,
           mistakeCount: mistakes.value.length,
-          href: lesson
+          href: props.activityContext?.href ?? (lesson
             ? `/knowledge-point/${encodeURIComponent(quest.knowledgePointId!)}?${query}#knowledge-challenges`
-            : window.location.pathname,
+            : window.location.pathname),
         })
       } catch {
         storageWarning.value = '闯关进度已保存，活动记录暂未更新；重新打开本组练习会重试。'

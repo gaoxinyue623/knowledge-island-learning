@@ -56,7 +56,7 @@ watch(subject, () => { if (selected.value && subject.value !== 'ALL' && selected
         <EnglishReadAloud v-if="selected.subject === 'ENGLISH'" :key="`${profileId}:${selected.id}`" :blocks="englishBlocks" :muted="preferences.preferences.muted" />
         <StudentReadAloud v-else :text="selected.body" :scope="`${profileId}:${selected.id}`" :muted="preferences.preferences.muted" label="听读短课" />
         <div class="grade-explorer__actions"><button type="button" @click="switchVariant">换一组练习（第 {{ variant + 1 }} 组）</button></div>
-        <ReadingQuest v-if="quest" :key="`${profileId}:${quest.id}`" :quest="quest" :profile-id="profileId" :reading-label="selected.title" note="先读短课，再完成三道有依据的练习；进度只保存在当前学习档案。" />
+        <ReadingQuest v-if="quest" :key="`${profileId}:${quest.id}`" :quest="quest" :profile-id="profileId" :activity-context="{ title: selected.title, subject: selected.subject, href: route.fullPath }" :reading-label="selected.title" note="先读短课，再完成三道有依据的练习；进度只保存在当前学习档案。" />
         <p class="grade-explorer__notice">内容来源：项目原创；参考课程标准方向，暂未教师校审。</p>
       </section>
     </div>

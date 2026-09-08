@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import ReadingQuest from '@/components/knowledge-point/ReadingQuest.vue'
 import { gradeExtensionLessons } from '@/data/grade-extension/gradeExtensionLessons'
 import { createGradeExtensionQuest } from '@/services/grade-extension/gradeExtensionQuest'
@@ -8,8 +8,26 @@ import { checkQuestAnswer } from '@/services/content-expansion/readingQuest'
 import { validateQuestion } from '@/services/validation/questionValidation'
 import { freshQuestProgress, saveQuestProgress } from '@/services/content-expansion/questProgressStorage'
 import { questPetSource } from '@/services/pet/petQuestRewards'
+import { readActivityHistory } from '@/services/learning-activity/activityHistory'
 
 describe('grade three original extension lessons', () => {
+  it('keeps English supplemental history in its subject with a link to the exact short lesson', async () => {
+    const profileId = 'english-extension-history'
+    const quest = createGradeExtensionQuest('g3-english-my-bag', 0)!
+    const progress = freshQuestProgress(profileId, quest)
+    progress.passedIds = quest.stages.map(stage => stage.id)
+    progress.completedStageIds = [...progress.passedIds]
+    progress.activeStageId = progress.passedIds.at(-1)!
+    progress.summaryVisible = true
+    progress.attemptId = 'english-extension-complete'
+    progress.completedAt = '2026-09-08T00:00:00.000Z'
+    expect(saveQuestProgress(localStorage, progress, quest)).toBeNull()
+    const activityContext = { title: 'My School Bag', subject: 'ENGLISH' as const, href: '/grade-explorer?lesson=g3-english-my-bag&variant=0' }
+    const wrapper = mount(ReadingQuest, { props: { quest, profileId, activityContext } })
+    await flushPromises()
+    expect(readActivityHistory(profileId)).toEqual([expect.objectContaining(activityContext)])
+    wrapper.unmount()
+  })
   it('does not turn unreviewed supplemental completions into curriculum pet rewards', () => {
     const data = new Map<string, string>()
     const storage = { getItem: (key: string) => data.get(key) ?? null, setItem: (key: string, value: string) => { data.set(key, value) } }
