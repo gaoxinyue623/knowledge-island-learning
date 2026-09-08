@@ -184,6 +184,11 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '我的本领册', requiresOnboarding: true, studentOnly: true },
   },
   {
+    path: '/pet-stories',
+    component: () => import('@/pages/PetStoriesPage.vue'),
+    meta: { title: '团子的知识小故事', requiresOnboarding: true, studentOnly: true },
+  },
+  {
     path: '/profile',
     component: () => import('@/pages/ProfilePage.vue'),
     meta: { title: '我的知识岛', studentOnly: true },

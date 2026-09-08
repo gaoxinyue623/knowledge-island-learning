@@ -33,6 +33,7 @@ const links: { title: string; description: string; path: string; icon: IconName 
   { title: '角色装扮', description: '给团子换个新模样', path: '/character', icon: 'sparkles' },
   { title: '学习记录', description: '回看每一步探索', path: '/history', icon: 'book-open' },
   { title: '我的本领册', description: '从练过到掌握，查看真实证据', path: '/abilities', icon: 'book-open' },
+  { title: '团子的知识小故事', description: '复习、讲解和生活中的新发现', path: '/pet-stories', icon: 'sparkles' },
   { title: '三年级原创拓展', description: '语数英短课与迁移练习', path: '/grade-explorer', icon: 'book-open' },
   {
     title: '我的错题',
