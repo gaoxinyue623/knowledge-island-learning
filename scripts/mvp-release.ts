@@ -1,5 +1,5 @@
-import { spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
+import { runNpmCommand } from './release-command'
 import { productionCurriculumData, mvpCurriculumScope } from '../src/data/curriculum/production'
 import { resolveProductionConfig } from '../src/config/production'
 import {
@@ -8,8 +8,7 @@ import {
 } from '../src/services/production-readiness'
 
 function check(args: string[]): boolean {
-  const result = spawnSync('npm', args, { stdio: 'inherit', env: process.env })
-  return result.status === 0
+  return runNpmCommand(args)
 }
 const build = check(['run', 'build'])
 const lint = check(['run', 'lint'])

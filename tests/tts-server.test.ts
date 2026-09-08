@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { mkdtemp, readFile, writeFile, rm, readdir } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { basename, join } from 'node:path'
 import { createServer, type IncomingMessage } from 'node:http'
 import {
   createTtsGenerator,
@@ -79,7 +79,11 @@ describe('local Doubao synthesis', () => {
     expect(await readFile(one.path)).toEqual(mp3)
     expect((await generate('Hello!')).cached).toBe(true)
     expect(fetcher).toHaveBeenCalledTimes(1)
-    expect(await readdir(join(path, '.tts-cache'))).toEqual([one.path.split('/').at(-1)])
+    const cacheDirectory = join(path, '.tts-cache')
+    const cacheEntries = await readdir(cacheDirectory)
+    expect(cacheEntries).toEqual([basename(one.path)])
+    expect(cacheEntries).not.toContain(expect.stringMatching(/\.tmp$/))
+    expect(await readFile(join(cacheDirectory, cacheEntries[0]!))).toEqual(mp3)
     await writeFile(one.path, 'corrupted')
     expect((await generate('Hello!')).cached).toBe(false)
     expect(fetcher).toHaveBeenCalledTimes(2)
