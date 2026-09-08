@@ -10,14 +10,21 @@ import AppLoading from '@/components/common/AppLoading.vue'
 import AppProgress from '@/components/common/AppProgress.vue'
 import LessonContentRenderer from '@/components/lesson-player/LessonContentRenderer.vue'
 import LessonGuidedPractice from '@/components/lesson-player/LessonGuidedPractice.vue'
+import LessonReadingControls from '@/components/lesson-player/LessonReadingControls.vue'
 import KnowledgePointExperienceHub from '@/components/content-expansion/KnowledgePointExperienceHub.vue'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import AppShell from '@/layouts/AppShell.vue'
 import { contentExpansionRepository } from '@/services/content-expansion'
 import { createReadingQuest, questReadingText } from '@/services/content-expansion/readingQuest'
 import { lessonProgressPresentation } from '@/services/lesson-player/lessonProgressPresentation'
+import {
+  lessonReadingSubject,
+  lessonReadingText,
+  supportsChineseLessonReading,
+} from '@/services/lesson-player/lessonReadingText'
 import { questionEngineAdapter } from '@/services/question-engine'
 import { useLessonPlayerStore } from '@/stores/lessonPlayerStore'
+import { usePreferencesStore } from '@/stores/preferencesStore'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import type {
   LessonLaunchContext,
@@ -41,6 +48,7 @@ const stepTypeLabels: Record<LessonStepType, string> = {
 const route = useRoute()
 const router = useRouter()
 const lessonPlayerStore = useLessonPlayerStore()
+const preferencesStore = usePreferencesStore()
 const { profileId } = useLearningProfile()
 const invalidContextMessage = ref<string | null>(null)
 const practiceAvailable = ref<boolean | null>(null)
@@ -128,18 +136,35 @@ const context = computed<LessonLaunchContext | null>(() => {
 
 const viewModel = computed(() => lessonPlayerStore.viewModel)
 const isFormalPilot = computed(() => isPilotTextbook(context.value?.textbookId))
-const currentStep = computed(() => viewModel.value?.steps[lessonPlayerStore.currentStepIndex])
+const reviewStepIndex = ref<number | null>(null)
+const displayedStepIndex = computed(() =>
+  lessonPlayerStore.status === 'completed' && reviewStepIndex.value !== null
+    ? reviewStepIndex.value
+    : lessonPlayerStore.currentStepIndex,
+)
+const currentStep = computed(() => viewModel.value?.steps[displayedStepIndex.value])
 const isPracticeStep = computed(() => currentStep.value?.type === 'practice')
+const readingSize = ref<'standard' | 'large' | 'xlarge'>('standard')
+const currentReadingSubject = computed(() => lessonReadingSubject(context.value?.textbookId))
+const currentStepReadingText = computed(() =>
+  isPracticeStep.value ? '' : lessonReadingText(currentStep.value?.contentBlocks ?? []),
+)
+const canReadCurrentStep = computed(
+  () =>
+    supportsChineseLessonReading(currentReadingSubject.value) &&
+    currentStepReadingText.value.length > 0,
+)
+const currentReadingScope = computed(
+  () => `${profileId.value}:${route.fullPath}:${currentStep.value?.id ?? 'no-step'}`,
+)
 const progressLabel = computed(() =>
-  viewModel.value
-    ? `${lessonPlayerStore.currentStepIndex + 1} / ${viewModel.value.steps.length}`
-    : '—',
+  viewModel.value ? `${displayedStepIndex.value + 1} / ${viewModel.value.steps.length}` : '—',
 )
 const canShowContent = computed(
   () => Boolean(viewModel.value) && ['ready', 'completed'].includes(lessonPlayerStore.status),
 )
-const displayedProgress = computed(() =>
-  lessonProgressPresentation(viewModel.value?.session, false).progress,
+const displayedProgress = computed(
+  () => lessonProgressPresentation(viewModel.value?.session, false).progress,
 )
 const lessonContentBlocks = computed<LessonContentBlockViewModel[]>(() =>
   (viewModel.value?.steps.flatMap((step) => step.contentBlocks) ?? []).sort(
@@ -167,6 +192,7 @@ const demoStateOptions: Array<{ value: LessonPlayerDemoState; label: string }> =
 async function loadLesson() {
   const activeProfile = profileId.value,
     activePath = route.fullPath
+  reviewStepIndex.value = null
   invalidContextMessage.value = null
   if (!context.value) {
     invalidContextMessage.value = '请从知识地图进入一个有效的知识点。'
@@ -226,6 +252,10 @@ async function loadGuidedPractice(
 }
 
 async function checkPracticeAvailability() {
+  if (lessonPlayerStore.status === 'completed') {
+    practiceAvailable.value = false
+    return
+  }
   if (!context.value || !isPracticeStep.value) {
     practiceAvailable.value = null
     return
@@ -305,6 +335,10 @@ function openAfterReading(): void {
 }
 
 function goToStep(index: number) {
+  if (lessonPlayerStore.status === 'completed') {
+    reviewStepIndex.value = index
+    return
+  }
   if (isDevRoute.value || index <= lessonPlayerStore.currentStepIndex) {
     lessonPlayerStore.goToStep(index)
   }
@@ -319,7 +353,13 @@ function nextStep() {
 }
 
 function startAssessment() {
-  if (!context.value || !isPracticeStep.value || practiceAvailable.value !== true) return
+  if (
+    lessonPlayerStore.status === 'completed' ||
+    !context.value ||
+    !isPracticeStep.value ||
+    practiceAvailable.value !== true
+  )
+    return
   void router.push({
     path: isDevRoute.value ? '/dev/question-engine' : '/assessment',
     query: {
@@ -364,6 +404,7 @@ async function completeDemoSession() {
 }
 
 function restartLesson() {
+  reviewStepIndex.value = null
   void router.replace({ query: { ...route.query, sessionScope: crypto.randomUUID() } })
 }
 
@@ -544,13 +585,16 @@ watch(
                 :key="step.id"
                 class="lesson-player__step-button"
                 :class="{
-                  'lesson-player__step-button--current':
-                    index === lessonPlayerStore.currentStepIndex,
+                  'lesson-player__step-button--current': index === displayedStepIndex,
                   'lesson-player__step-button--done': step.isCompleted,
                 }"
                 type="button"
-                :disabled="index > lessonPlayerStore.currentStepIndex && !isDevRoute"
-                :aria-current="index === lessonPlayerStore.currentStepIndex ? 'step' : undefined"
+                :disabled="
+                  index > lessonPlayerStore.currentStepIndex &&
+                  !isDevRoute &&
+                  lessonPlayerStore.status !== 'completed'
+                "
+                :aria-current="index === displayedStepIndex ? 'step' : undefined"
                 @click="goToStep(index)"
               >
                 <span class="lesson-player__step-number">{{ index + 1 }}</span>
@@ -562,6 +606,13 @@ watch(
           <section
             id="knowledge-reading"
             class="lesson-player__content-card"
+            :class="[
+              `lesson-player__content-card--${readingSize}`,
+              {
+                'lesson-player__content-card--reviewing-practice':
+                  lessonPlayerStore.status === 'completed' && isPracticeStep,
+              },
+            ]"
             aria-labelledby="lesson-content-title"
           >
             <header class="lesson-player__content-header">
@@ -573,6 +624,20 @@ watch(
               </div>
               <p v-if="currentStep?.estimatedSeconds">大约 {{ currentStep.estimatedSeconds }} 秒</p>
             </header>
+            <LessonReadingControls
+              v-model="readingSize"
+              :text="currentStepReadingText"
+              :can-read="canReadCurrentStep"
+              :muted="preferencesStore.preferences.muted"
+              :scope="currentReadingScope"
+            />
+            <p
+              v-if="lessonPlayerStore.status === 'completed' && isPracticeStep"
+              class="lesson-player__review-notice"
+              role="status"
+            >
+              当前为回看模式：可以重看这一步的思路，不会再次开始练习，也不会改变完成记录或奖励。
+            </p>
             <LessonContentRenderer
               :blocks="currentStep?.contentBlocks || []"
               :show-diagnostics="isDevRoute"

@@ -43,15 +43,15 @@ function stop(): void {
 
 function play(): void {
   if (props.muted) {
-    message.value = '应用已静音，请先在设置中关闭静音，再来听题。'
+    message.value = '应用已静音，请先在设置中关闭静音，再来听读。'
     return
   }
   if (!text.value) {
-    message.value = '这里暂时没有可朗读的内容，仍可以继续答题。'
+    message.value = '这里暂时没有可朗读的内容，仍可阅读并继续学习。'
     return
   }
   if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) {
-    message.value = '这个浏览器暂不支持朗读，仍可以继续答题。'
+    message.value = '这个浏览器暂不支持朗读，仍可阅读并继续学习。'
     return
   }
   activeStop?.()
