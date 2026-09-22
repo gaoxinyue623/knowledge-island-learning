@@ -1,3 +1,4 @@
+import type { LearningErrorPattern } from './learning-agent'
 import type {
   ContentBlock,
   Id,
@@ -50,6 +51,8 @@ export interface QuestionAttemptResult {
 }
 
 export interface QuestionAttempt {
+  /** Optional deterministic analysis, separate from grading and mastery. */
+  errorPatterns?: LearningErrorPattern[]
   questionId: Id
   answer: QuestionAnswerDraft
   submitted: boolean

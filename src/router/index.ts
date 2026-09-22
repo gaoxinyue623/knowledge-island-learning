@@ -319,6 +319,16 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'Mastery Debug View', devOnly: true, hideBottomNav: true },
   },
   {
+    path: '/agent',
+    redirect: '/dev/learning-agent',
+    meta: { title: 'Learning Agent 实验室', devOnly: true },
+  },
+  {
+    path: '/dev/learning-agent',
+    component: () => import('@/pages/DevLearningAgentPage.vue'),
+    meta: { title: 'Learning Agent Simulation', devOnly: true, hideBottomNav: true },
+  },
+  {
     path: '/dev/strategy',
     component: DevStrategyPage,
     meta: { title: 'Learning Strategy Debug View', devOnly: true, hideBottomNav: true },

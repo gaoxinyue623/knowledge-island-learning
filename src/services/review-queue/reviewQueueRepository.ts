@@ -75,6 +75,7 @@ export function createReviewQueueRepository(
       const next: ReviewQueueItem = {
         ...item,
         evidenceId: item.evidenceId ?? existing?.evidenceId,
+        dueAt: item.dueAt ?? existing?.dueAt,
         ...(existing?.status === 'completed' && !newEvidence
           ? {
               status: 'completed' as const,

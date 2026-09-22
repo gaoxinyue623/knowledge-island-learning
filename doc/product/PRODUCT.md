@@ -2,13 +2,21 @@
 
 > 本文档是项目当前阶段的唯一产品架构事实源。本文同时区分目标产品、设计决策和已验证实现；未特别标注的目标能力不应被理解为已经实现。
 
+## PHASE 18.1–18.3 更新（2026-09-17）
+
+教育 Agent 实验室增加 REAL_LLM 模式、服务端安全调用、结构化题目生成、独立数学约束验证、局部修复、明确回退与用量信息。仅用于原创课程样本的开发模拟；真实供应商联网验收需配置服务端密钥，正式学生流程不启用。见 [PHASE18](../history/PHASE18.md)。
+
+## PHASE 17 更新（2026-09-17）
+
+已增加课程约束下的确定性 Agent 决策、生成协议与校验、答题证据闭环、Trace、开发模拟及场景评估。继续复用 MASTERY_V1 / STRATEGY_V1，生产模式禁止 `/dev/learning-agent`，不发布 AI 内容或修改正式学生学习流程。实现与限制见 [PHASE17](../history/PHASE17.md)。下文 PHASE 16 发布状态与日期为历史记录。
+
 ## 文档状态
 
 | 项目 | 内容 |
 | --- | --- |
 | 产品名称 | 知识岛（暂定） |
 | 产品定位 | 课本同步 + 游戏闯关 + 课外拓展的小学语数英学习平台 |
-| 当前阶段 | PHASE 16.4：MVP Release Gate / Final Verification |
+| 当前阶段 | PHASE 18.1–18.3：LLM Runtime 与受约束题目生成（开发模拟；正式学生页面尚未接入） |
 | 文档状态 | 产品事实源；PHASE 7～15 与 PHASE 16 工程门禁已实现，Parent Dashboard 是只读报告层；2026-09-07 项目所有者批准当前 11 套本地教材、357 节课程作为正式课程，详见 LOCAL_RELEASE_FIXES.md，Golden Sample Framework、Demo Lesson、Demo Questions、Demo Mastery、Demo Strategy、PHASE 12～15 Demo records 仍受未核验 / SAMPLE 闸门保护 |
 | 版本 | 0.1 |
 | 日期 | 2026-09-03 |

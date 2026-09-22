@@ -8,7 +8,7 @@
 - Vitest、Vue Test Utils、JSDOM
 - Node.js `>=24.0.0`
 
-当前本机默认 Node.js 为 `22.19.0`；2026-09-08 已使用临时 Node.js `24.20.0` 通过完整发布检查，未修改全局安装。开发和验证请使用 Node.js 24 或更高版本。
+2026-09-17 本机默认 Node.js 为 `26.7.0`；项目回归继续使用 `24.20.0`，未修改全局安装。Node.js 26 的全局 localStorage 与现有 JSDOM 测试存在兼容问题，验证请使用 Node.js 24.20.0。
 
 ## 快速开始
 
@@ -35,6 +35,22 @@ npm run test
 npm run curriculum:review
 npm run release:check
 ```
+
+## PHASE 18.1–18.3 LLM 题目生成
+
+`/dev/learning-agent` 已支持 MOCK / REAL_LLM。真实调用经仅本机开发环境开放的 BFF，包含严格 Zod 输出、独立数学验证、最多两次修复、部分成功保留、显式 Mock 回退和 Usage / Trace。Planner 与正式学生流程保持原边界。
+
+在忽略的 `.env.local` 中配置服务端 `LLM_PROVIDER / LLM_BASE_URL / LLM_API_KEY / LLM_MODEL` 后重启开发服务；禁止 `VITE_LLM_API_KEY`。完整配置、支持范围与联网验收限制见 [PHASE18](doc/history/PHASE18.md)。
+
+## PHASE 17 教育 Agent 基础架构
+
+开发入口：`/agent`（短路径，跳转到 `/dev/learning-agent`），无需模型 API Key。主项目首页和“我的知识岛”在本地开发模式下也提供 Agent 实验室入口。包含确定性决策、受约束 Mock 生成、独立校验、答题证据闭环、Trace 和 A～H 场景模拟；正式学生页面尚未接入。架构、复用边界和验证见 [PHASE17](doc/history/PHASE17.md)。
+
+运行场景评估：`npm run agent:evaluate`。2026-09-17 验证：Node.js 24.20.0 下 70 个测试文件、824 项测试通过（其中 Agent 专项 65 项）；类型检查、lint、生产构建和 A～H 场景评估通过。
+
+## PHASE 19 Learning Agent 本地服务
+
+REAL_LLM 实验室使用独立的本地服务。开发时另开终端运行 `npm run agent:server`，再运行 `npm run dev`；服务从被忽略的 `.env.local` 读取 `LLM_*` 配置，浏览器不会接触 API Key。服务默认监听 `127.0.0.1:8788`，仅接受本机来源；服务状态可通过 `GET /api/agent/health` 检查。详细边界见 [PHASE19](doc/history/PHASE19.md)。
 
 ## 当前验证状态
 

@@ -16,6 +16,10 @@
 
 ## 架构与数据
 
+- [PHASE 18.1–18.3 LLM Runtime 与真实题目生成](history/PHASE18.md)
+- [PHASE 19.1 Learning Agent Backend Foundation](history/PHASE19.md)
+- [PHASE 17 教育 Agent Foundation](history/PHASE17.md)
+
 - [`ACHIEVEMENT_DATA_FLOW.md`](architecture/ACHIEVEMENT_DATA_FLOW.md)
 - [`ARCHITECTURE.md`](architecture/ARCHITECTURE.md)
 - [`DAILY_PLAN_DATA_FLOW.md`](architecture/DAILY_PLAN_DATA_FLOW.md)

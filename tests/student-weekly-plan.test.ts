@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import WeeklyPlanCard from '@/components/weekly-plan/WeeklyPlanCard.vue'
 import { sameWeeklyTask } from '@/services/weekly-plan/weeklyPlanService'
@@ -78,6 +78,12 @@ function evidence(overrides: Partial<WeeklyPlanEvidenceReader> = {}): WeeklyPlan
 }
 
 describe('student weekly plan', () => {
+  // The component reads the current week; keep it aligned with these dated fixtures.
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-09-08T08:00:00.000Z'))
+  })
+  afterEach(() => vi.useRealTimers())
   it('does not complete review or wrong-question tasks from an unrelated lesson completion', () => {
     const history: LearningHistoryRecord = {
       id: 'history', profileId: 'STUDENT_A', type: 'lesson_completed', sourceId: 'different-session',

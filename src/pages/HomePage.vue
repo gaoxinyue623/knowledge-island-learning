@@ -15,6 +15,7 @@ import SpacedReviewEntry from '@/components/student-growth/SpacedReviewEntry.vue
 import WeeklyPlanCard from '@/components/weekly-plan/WeeklyPlanCard.vue'
 import islandAdventure from '@/assets/illustrations/island-adventure.jpg'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
+import { productionConfig } from '@/config/production'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useHomeStore } from '@/stores/homeStore'
@@ -32,6 +33,7 @@ const route = useRoute()
 const curriculumStore = useCurriculumStore()
 const homeStore = useHomeStore()
 const studentStore = useStudentStore()
+const showAgentEntry = productionConfig.devRoutes
 const dueReviews = ref<SpacedReviewDue[]>([])
 let spacedReviewRequest = 0
 
@@ -317,6 +319,15 @@ watch(
                 @click="homeStore.clearDemoPlans"
               >
                 重置今日样本
+              </AppButton>
+              <AppButton
+                v-if="showAgentEntry && !isDevRoute"
+                size="sm"
+                variant="secondary"
+                icon-left="sparkles"
+                @click="openShortcut('/agent')"
+              >
+                Agent 实验室
               </AppButton>
             </div>
             <p v-if="primaryTask">接着学习：{{ primaryTask.title }}</p>

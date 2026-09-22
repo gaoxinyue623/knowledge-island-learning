@@ -18,6 +18,9 @@
     "vitest.config.ts",
     "tailwind.config.ts",
     "scripts/tts/**/*.ts",
+    "scripts/llm/**/*.ts",
+    "scripts/real-llm-evaluate.ts",
+    "scripts/real-llm-review.ts",
     "scripts/generate-tts.ts",
     "server/**/*.ts"
   ]

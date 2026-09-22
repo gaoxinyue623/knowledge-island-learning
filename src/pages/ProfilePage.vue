@@ -16,6 +16,7 @@ import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useGrowthStore } from '@/stores/growthStore'
 import { useAchievementStore } from '@/stores/achievementStore'
 import type { IconName } from '@/types'
+import { productionConfig } from '@/config/production'
 
 const { profileId } = useLearningProfile()
 let loadVersion = 0
@@ -23,6 +24,7 @@ const student = useStudentStore()
 const curriculum = useCurriculumStore()
 const growth = useGrowthStore()
 const achievements = useAchievementStore()
+const showAgentEntry = productionConfig.devRoutes
 const presentation = ref<CurriculumPresentation | null>(null)
 const loading = ref(true)
 const error = ref('')
@@ -32,9 +34,24 @@ const nextAchievement = computed(() =>
 const links: { title: string; description: string; path: string; icon: IconName }[] = [
   { title: '角色装扮', description: '给团子换个新模样', path: '/character', icon: 'sparkles' },
   { title: '学习记录', description: '回看每一步探索', path: '/history', icon: 'book-open' },
-  { title: '我的本领册', description: '从练过到掌握，查看真实证据', path: '/abilities', icon: 'book-open' },
-  { title: '团子的知识小故事', description: '复习、讲解和生活中的新发现', path: '/pet-stories', icon: 'sparkles' },
-  { title: '三年级原创拓展', description: '语数英短课与迁移练习', path: '/grade-explorer', icon: 'book-open' },
+  {
+    title: '我的本领册',
+    description: '从练过到掌握，查看真实证据',
+    path: '/abilities',
+    icon: 'book-open',
+  },
+  {
+    title: '团子的知识小故事',
+    description: '复习、讲解和生活中的新发现',
+    path: '/pet-stories',
+    icon: 'sparkles',
+  },
+  {
+    title: '三年级原创拓展',
+    description: '语数英短课与迁移练习',
+    path: '/grade-explorer',
+    icon: 'book-open',
+  },
   {
     title: '我的错题',
     description: '把还不熟悉的再练一练',
@@ -43,9 +60,21 @@ const links: { title: string; description: string; path: string; icon: IconName 
   },
   { title: '待巩固', description: '温习学过的知识', path: '/review-queue', icon: 'route' },
   { title: '家长中心', description: '一起了解学习进展', path: '/parent', icon: 'user-round' },
-  { title: '家庭学习档案', description: '多个孩子与跨设备同步', path: '/family', icon: 'user-round' },
+  {
+    title: '家庭学习档案',
+    description: '多个孩子与跨设备同步',
+    path: '/family',
+    icon: 'user-round',
+  },
   { title: '通用设置', description: '昵称、播放偏好与帮助', path: '/settings', icon: 'settings' },
 ]
+if (showAgentEntry)
+  links.splice(0, 0, {
+    title: 'Agent 实验室',
+    description: '查看学习决策与题目生成过程（开发入口）',
+    path: '/agent',
+    icon: 'sparkles',
+  })
 async function load() {
   const version = ++loadVersion
   const id = profileId.value

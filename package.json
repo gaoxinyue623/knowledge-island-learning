@@ -25,7 +25,12 @@
     "curriculum:validate": "npm run curriculum:review",
     "release:check": "tsx --tsconfig tsconfig.app.json scripts/mvp-release.ts",
     "server": "tsx --tsconfig tsconfig.app.json server/index.ts",
-    "server:dev": "tsx --tsconfig tsconfig.app.json watch server/index.ts"
+    "server:dev": "tsx --tsconfig tsconfig.app.json watch server/index.ts",
+    "agent:server": "tsx --tsconfig tsconfig.app.json server/learningAgentIndex.ts",
+    "agent:server:dev": "tsx --tsconfig tsconfig.app.json watch server/learningAgentIndex.ts",
+    "agent:evaluate": "tsx --tsconfig tsconfig.app.json scripts/learning-agent-evaluate.ts",
+    "llm:evaluate": "tsx --tsconfig tsconfig.app.json scripts/real-llm-evaluate.ts",
+    "llm:review": "tsx --tsconfig tsconfig.app.json scripts/real-llm-review.ts"
   },
   "dependencies": {
     "lucide-vue-next": "^0.468.0",

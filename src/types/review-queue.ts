@@ -10,6 +10,8 @@ export type ReviewQueueRecommendationType = 'REINFORCE' | 'GATHER_MORE_EVIDENCE'
 export type ReviewQueueItemStatus = 'active' | 'completed'
 
 export interface ReviewQueueItem {
+  /** Optional externally scheduled due date; legacy active items have no due date. */
+  dueAt?: string
   evidenceId?: Id
   id: Id
   profileId: Id

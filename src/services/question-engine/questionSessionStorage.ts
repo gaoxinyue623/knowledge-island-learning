@@ -48,6 +48,16 @@ const questionAttemptResultSchema = z.object({
 })
 
 const questionAttemptSchema = z.object({
+  errorPatterns: z
+    .array(
+      z.object({
+        domain: z.string(),
+        category: z.string(),
+        code: z.string(),
+        confidence: z.number().finite().min(0).max(1),
+      }),
+    )
+    .optional(),
   questionId: z.string().min(1),
   answer: questionAnswerDraftSchema,
   submitted: z.boolean(),

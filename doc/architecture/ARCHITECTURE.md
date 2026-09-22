@@ -351,3 +351,12 @@ Exercise Template Engine 当前聚焦 G1 Math，使用 `templateId + seed + inde
 Golden Bundle 当前包含 4 个 `SAMPLE + UNVERIFIED` 一年级数学候选知识点，只能从 `/dev/content-expansion` 和 `/dev/activity-engine` 读取。正式 profile 仓储会过滤这些记录，LessonPlayer 只通过开发态 KnowledgePoint Hub 展示摘要入口。
 
 本扩展不修改 `MASTERY_V1`、`STRATEGY_V1`、`DAILY_PLAN_V1`，不进入 Grade 2 或 PHASE 17。详细契约见 `CONTENT_SYSTEM_EXPANSION_01.md`、`INTERACTIVE_ACTIVITY_ENGINE.md`、`EXERCISE_TEMPLATE_ENGINE.md`、`PRACTICE_SYSTEM.md` 和 `GOLDEN_CONTENT_G1_MATH.md`。
+
+## 17. Education Agent Foundation
+
+PHASE 17 在既有事实层上增加只读 Context / StudentKnowledgeState、确定性 LearningPlanner、生成与校验协议、AnswerAnalyzer、Orchestrator 和 Trace。STRATEGY_V1 仍提供候选；Mastery 仍由原 Evidence / MASTERY_V1 处理。开发模拟通过现有 QuestionSession / Attempt / Evidence 协议验证闭环，并向 WrongBook、History、Review 的独立内存适配器投影。正式学生页面未接入，AI supplement 不进入 Production Curriculum。具体 API、规则优先级、来源闸门、存储兼容和限制见 [PHASE17](../history/PHASE17.md)。
+
+
+## PHASE 18.1–18.3：受约束 LLM 生成
+
+在原 QuestionGeneratorProvider 后增加 AIQuestionGenerator → 通用 LLMRuntime → 服务端 OpenAI-compatible Adapter。仅本机开发 BFF 持有配置和 Key；客户端不依赖具体厂商。Prompt Registry / Zod 输出经原 GeneratedQuestionValidator 增量验证，保留有效题后有界修复、显式回退。Planner、课程来源闸门、Mastery / Evidence 归属不变。配置、协议、故障语义与验证限制见 [PHASE18](../history/PHASE18.md)。
