@@ -62,6 +62,8 @@ export interface QuestionAttempt {
 }
 
 export interface QuestionSession {
+  /** Exact runtime execution binding; absent on legacy and simulation sessions. */
+  runtimeAgent?: { binding: string; reviewBindings: Record<string, string>; projectedAt?: string }
   id: Id
   assessmentId: Id
   textbookId: Id

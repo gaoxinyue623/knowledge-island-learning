@@ -10,6 +10,9 @@ describe('learning agent development simulation', () => {
     setActivePinia(createPinia())
   })
   it('renders only validated questions and adjusts the visible decision after answering', async () => {
+    // Keep this deterministic regression on the internal fixture generator. The page has no
+    // Mock selector; production/default store state remains REAL_LLM.
+    useLearningAgentStore().generatorMode = 'MOCK'
     const wrapper = mount(DevLearningAgentPage, {
       global: { stubs: { AppShell: { template: '<div><slot /></div>' } } },
     })
@@ -29,7 +32,7 @@ describe('learning agent development simulation', () => {
     expect(wrapper.text()).toContain('AGENT_CURRICULUM_GUARD')
     wrapper.unmount()
   })
-  it('selects REAL_LLM, displays explicit fallback usage, and hides failed BFF resources', async () => {
+  it('uses REAL_LLM by default and blocks failed BFF generation without Mock content', async () => {
     const fetcher = vi.spyOn(globalThis, 'fetch')
     const { generateDevQuestions } = await import('../server/llm/devGeneration')
     fetcher.mockImplementation(
@@ -43,17 +46,12 @@ describe('learning agent development simulation', () => {
     })
     try {
       await flushPromises()
-      await wrapper.find('[aria-label="生成模式"]').setValue('REAL_LLM')
-      await wrapper
-        .findAll('button')
-        .find((b) => b.text() === 'Run Agent')!
-        .trigger('click')
-      await flushPromises()
       expect(fetcher).toHaveBeenCalledTimes(1)
-      expect(wrapper.findAll('.questions li')).toHaveLength(5)
-      expect(wrapper.text()).toContain('已回退 Mock：CONFIG_ERROR')
-    expect(wrapper.text()).toContain('question-generation.user.v6')
-      expect(wrapper.text()).toContain('QUESTION_GENERATION_FALLBACK')
+      expect(wrapper.find('[aria-label="生成模式"]').exists()).toBe(false)
+      expect(wrapper.findAll('.questions li')).toHaveLength(0)
+      expect(wrapper.text()).toContain('CONFIG_ERROR')
+      expect(wrapper.text()).not.toContain('QUESTION_GENERATION_FALLBACK')
+      expect(wrapper.text()).not.toContain('Mock')
       fetcher.mockRejectedValueOnce(new Error('SECRET_NETWORK_DETAIL'))
       await wrapper
         .findAll('button')

@@ -39,7 +39,9 @@ export class CurriculumResolver {
       throw new Error('AGENT_CURRICULUM_CONTEXT_MISMATCH')
     const relation = snapshot.regionTextbookRelations.find(
       (r) =>
-        r.regionId === profile.regionId &&
+        // Formal profiles explicitly select any released textbook in onboarding.
+        // Region is personal context, not a restriction on that selection.
+        (snapshot.dataset === 'profile' || r.regionId === profile.regionId) &&
         r.textbookVersionId === textbookId &&
         r.effectiveFrom <= now.slice(0, 10) &&
         (!r.effectiveTo || r.effectiveTo >= now.slice(0, 10)) &&

@@ -12,7 +12,9 @@
 - Production index 是否泄漏 `SAMPLE_*`、`isSample` 或 `verificationStatus = SAMPLE`。
 - Scope 外的 reviewed 内容/题目不被悄悄当作本 Scope 的正式数据。
 
-## 2. 当前运行结果
+## 2. 历史初始运行结果
+
+以下为 PHASE16 初始空发布范围的历史结果，不代表当前版本。2026-09-24 最新工程检查为 `READY_WITH_LIMITATIONS`：11 本教材、357 节课、1694 道题，86 个测试文件、959 项测试通过。具体范围和未完成的公网/真机/学生验收见 [PHASE28](../history/PHASE28.md)。
 
 | 项目 | 结果 |
 | --- | --- |

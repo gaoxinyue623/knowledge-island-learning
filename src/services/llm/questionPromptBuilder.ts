@@ -1,12 +1,7 @@
 import type { LearningAgentSnapshot, QuestionGenerationRequest } from '@/types/learning-agent'
 import { parseArithmetic, questionText } from '../learning-agent/deterministicAnswerValidator'
 import { realMathConstraints } from '../learning-agent/mathConstraints'
-import {
-  QUESTION_GENERATION_REPAIR_V6,
-  QUESTION_GENERATION_SYSTEM_V6,
-  QUESTION_GENERATION_USER_V6,
-  renderPrompt,
-} from './promptRegistry'
+import { PromptRegistry, renderPrompt } from './promptRegistry'
 import type { GeneratedQuestionDTO } from './questionSchema'
 
 const weaknessCodes = new Set([
@@ -56,7 +51,32 @@ export function recentQuestionSummaries(
     ),
   ].slice(-100)
 }
+
+function variationShapeExample(
+  operator: '+' | '-',
+  originalLeft: number | undefined,
+  originalRight: number | undefined,
+  math: ReturnType<typeof realMathConstraints>,
+): string | undefined {
+  if (originalLeft === undefined || originalRight === undefined) return undefined
+  for (
+    let left = math.minLargestOperand ?? math.minNumber;
+    left <= (math.maxLargestOperand ?? math.maxNumber);
+    left++
+  ) {
+    for (let right = math.minNumber; right <= math.maxNumber; right++) {
+      if (left === originalLeft || right === originalRight) continue
+      if (operator === '-' && (left < right || (math.requireBorrowing && left % 10 >= right % 10)))
+        continue
+      if (operator === '+' && math.requireCarrying && (left % 10) + (right % 10) < 10) continue
+      return `${left} ${operator} ${right} = ?`
+    }
+  }
+  return undefined
+}
+export type GenerationPromptVersion = '4' | '5' | '6' | '7'
 export class QuestionGenerationPromptBuilder {
+  constructor(private readonly version: GenerationPromptVersion = '6') {}
   build(
     request: QuestionGenerationRequest,
     snapshot: LearningAgentSnapshot,
@@ -67,6 +87,19 @@ export class QuestionGenerationPromptBuilder {
     },
   ) {
     const c = snapshot.curriculum
+    const math = realMathConstraints(request, snapshot)
+    const selectedTemplates = snapshot.templates.filter((t) =>
+      request.constraints.templateIds.includes(t.id),
+    )
+    const hardMathRules = [
+      ...(math.requireCarrying ? ['每一道加法的两个个位数之和必须 >= 10（必须进位）。'] : []),
+      ...(math.requireBorrowing ? ['每一道减法的被减数个位必须小于减数个位（必须借位）。'] : []),
+      ...selectedTemplates.flatMap((template) =>
+        template.templateType === 'addition_range' && template.config.noCarry
+          ? ['模板 noCarry=true：每一道加法的两个个位数之和必须 < 10。']
+          : [],
+      ),
+    ]
     const context = {
       grade: c.grade.name,
       semester: c.semester.name,
@@ -120,6 +153,12 @@ export class QuestionGenerationPromptBuilder {
                     '不得复制原题算式',
                     '严格服从当前 constraints.math 的操作数范围',
                   ],
+                  repairHint: variationShapeExample(
+                    arithmetic?.operator === '+' ? '+' : '-',
+                    arithmetic?.left,
+                    arithmetic?.right,
+                    math,
+                  ),
                 }
               }),
           }
@@ -127,7 +166,7 @@ export class QuestionGenerationPromptBuilder {
       questionCount: options.count,
       questionTypes: request.allowedQuestionTypes,
       constraints: {
-        math: realMathConstraints(request, snapshot),
+        math,
         maxTextLength: request.constraints.maxTextLength,
         templates: snapshot.templates
           .filter((t) => request.constraints.templateIds.includes(t.id))
@@ -137,6 +176,7 @@ export class QuestionGenerationPromptBuilder {
             limits: t.config,
           })),
       },
+      ...(this.version === '7' ? { hardMathRules } : {}),
       weaknessSignals: request.weaknessSignals.filter((s) => weaknessCodes.has(s)),
       errorPatterns: request.errorPatterns
         .filter((e) => errorCodes.has(e.code))
@@ -165,7 +205,9 @@ export class QuestionGenerationPromptBuilder {
           }
         : {}),
     }
-    const definition = options.repair ? QUESTION_GENERATION_REPAIR_V6 : QUESTION_GENERATION_USER_V6
+    const definition = options.repair
+      ? PromptRegistry[`QUESTION_GENERATION_REPAIR_V${this.version}`]
+      : PromptRegistry[`QUESTION_GENERATION_USER_V${this.version}`]
     if (options.repair) {
       // Repairs retain only grade, targets, schema/constraints and bounded arithmetic diagnostics.
       // Student history, publisher/textbook descriptions and mastery signals are unnecessary.
@@ -184,9 +226,10 @@ export class QuestionGenerationPromptBuilder {
         repair,
         variation,
         difficultyProfile,
+        hardMathRules,
       } = context
       return {
-        systemPrompt: QUESTION_GENERATION_SYSTEM_V6.template,
+        systemPrompt: PromptRegistry[`QUESTION_GENERATION_SYSTEM_V${this.version}`].template,
         userPrompt: renderPrompt(definition, {
           grade,
           knowledgePoints,
@@ -202,12 +245,13 @@ export class QuestionGenerationPromptBuilder {
           repair,
           variation,
           difficultyProfile,
+          hardMathRules,
         }),
         definition,
       }
     }
     return {
-      systemPrompt: QUESTION_GENERATION_SYSTEM_V6.template,
+      systemPrompt: PromptRegistry[`QUESTION_GENERATION_SYSTEM_V${this.version}`].template,
       userPrompt: renderPrompt(definition, context),
       definition,
     }

@@ -41,6 +41,7 @@ export interface LLMTransportDiagnostics {
   reasoningCharacters?: number
   promptCharacters?: number
   outputTokenLimit?: number
+  structuredFailure?: 'JSON_SYNTAX' | 'SCHEMA'
 }
 export interface LLMStructuredResult<T> {
   diagnostics?: LLMTransportDiagnostics

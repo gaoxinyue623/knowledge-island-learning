@@ -108,6 +108,9 @@ export function createWrongBookRepository(
       const recordId = buildWrongQuestionRecordId(input.profileId, input.questionId)
       const existingIndex = nextPayload.records.findIndex((record) => record.id === recordId)
       const existing = existingIndex >= 0 ? nextPayload.records[existingIndex] : undefined
+      // A retry after a failed projection must not count the same session twice.
+      if (existing?.source.questionSessionIds.includes(input.questionSessionId))
+        return clone(existing)
       const base = existing ?? placeholder(input)
       const knowledgePointIds = [
         ...new Set([...(existing?.knowledgePointIds ?? []), ...input.knowledgePointIds]),
@@ -165,6 +168,13 @@ export function createWrongBookRepository(
       delete next.resolvedAt
       if (existingIndex >= 0) nextPayload.records[existingIndex] = next
       else nextPayload.records.push(next)
+      const processedId = buildQuestionAttemptProjectionId(
+        input.profileId,
+        input.questionSessionId,
+        input.questionId,
+      )
+      if (!nextPayload.processedAttemptIds.includes(processedId))
+        nextPayload.processedAttemptIds.push(processedId)
       storage.save(nextPayload)
       return clone(next)
     },

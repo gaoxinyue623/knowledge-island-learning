@@ -32,6 +32,12 @@ const nextAchievement = computed(() =>
   achievements.progress.find((item) => item.status !== 'unlocked'),
 )
 const links: { title: string; description: string; path: string; icon: IconName }[] = [
+  {
+    title: '今日 Agent 建议',
+    description: '根据学习记录安排下一步',
+    path: '/learning-agent',
+    icon: 'sparkles',
+  },
   { title: '角色装扮', description: '给团子换个新模样', path: '/character', icon: 'sparkles' },
   { title: '学习记录', description: '回看每一步探索', path: '/history', icon: 'book-open' },
   {

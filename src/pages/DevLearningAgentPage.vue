@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import AppShell from '@/layouts/AppShell.vue'
 import AppButton from '@/components/common/AppButton.vue'
+import AdaptiveLearningPlanPanel from '@/components/learning-agent/AdaptiveLearningPlanPanel.vue'
 import { useLearningAgentStore } from '@/stores/learningAgentStore'
 import {
   AGENT_SCENARIOS,
@@ -97,31 +98,26 @@ onMounted(selectScenario)
             </option>
           </select></label
         >
-        <label
-          >生成模式<select
-            v-model="store.generatorMode"
-            :disabled="store.busy"
-            aria-label="生成模式"
-          >
-            <option value="MOCK">MOCK</option>
-            <option value="REAL_LLM">REAL_LLM</option>
-          </select></label
-        >
+        <p class="real-only">真实模型生成</p>
         <label>生成种子<input v-model="seed" :disabled="store.busy" maxlength="80" /></label>
         <AppButton :disabled="store.busy" @click="store.run(seed, currentPoint)">{{
           store.busy ? '运行中…' : 'Run Agent'
         }}</AppButton>
       </section>
       <p v-if="store.error" class="notice error" role="alert">{{ store.error }}</p>
+      <AdaptiveLearningPlanPanel
+        :snapshot="inputs"
+        :mode="store.generatorMode"
+        :scenario="selected"
+        :disabled="store.busy"
+      />
       <section v-if="store.result?.questionGeneration" class="panel" aria-label="LLM 运行信息">
         <h2>LLM · {{ store.result.questionGeneration.status }}</h2>
         <p v-if="store.result.questionGeneration.fallbackUsed" class="notice error" role="status">
-          已回退 Mock：{{
-            store.result.questionGeneration.fallbackReason
-          }}。有效题已保留，补充题仍经过独立校验。
+          真实模型未完成本次生成，已阻断，不展示回退内容。
         </p>
         <p class="muted">
-          仅本机开发服务调用模型。未配置服务端 LLM 时会明确回退。修复次数：{{
+          仅本机开发服务调用模型。模型不可用时停止生成。修复次数：{{
             store.result.questionGeneration.repairCount
           }}
           / 2
@@ -259,15 +255,6 @@ onMounted(selectScenario)
         <p class="eyebrow">03 / VALIDATED RESOURCES</p>
         <h2 id="agent-questions">生成任务与模拟作答</h2>
         <template v-if="store.result?.status === 'READY'">
-          <p
-            v-for="content in store.result.generatedResources.content"
-            :key="content.id"
-            class="notice"
-          >
-            AI_GENERATED_SUPPLEMENT · {{ content.generator.provider }}<br />{{
-              content.blocks.map((b) => b.text).join(' ')
-            }}
-          </p>
           <ol class="questions">
             <li v-for="question in store.result.generatedResources.questions" :key="question.id">
               <span>{{ questionText(question) }}</span

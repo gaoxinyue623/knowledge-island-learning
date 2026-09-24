@@ -78,8 +78,10 @@ export class WrongBookProjectionService {
         attempt.questionId,
       )
       if (this.repository.hasProcessedAttempt(processedId)) continue
-      this.repository.markAttemptProcessed(processedId)
-      processedAttemptIds.push(processedId)
+      if (attempt.result?.status !== 'incorrect') {
+        this.repository.markAttemptProcessed(processedId)
+        processedAttemptIds.push(processedId)
+      }
       if (!sessionQuestionIds.has(attempt.questionId)) {
         diagnostics.push(`WRONG_BOOK_ATTEMPT_ORPHAN: ${attempt.questionId}`)
         skippedAttemptIds.push(processedId)
@@ -119,6 +121,12 @@ export class WrongBookProjectionService {
           ...(options.lessonId ? { lessonId: options.lessonId } : {}),
         }),
       )
+      if (this.repository.getLastWarning()) {
+        diagnostics.push(`WRONG_BOOK_STORAGE_FAILED: ${attempt.questionId}`)
+        return { records, processedAttemptIds, skippedAttemptIds, diagnostics }
+      }
+      this.repository.markAttemptProcessed(processedId)
+      processedAttemptIds.push(processedId)
     }
     return { records, processedAttemptIds, skippedAttemptIds, diagnostics }
   }

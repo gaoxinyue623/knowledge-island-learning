@@ -46,3 +46,18 @@ export function agentConnectionConfig(env: Record<string, string | undefined>) {
   })) throw new Error('AGENT_ORIGINS_MUST_BE_LOOPBACK')
   return { host, port, origins, target: `http://${host === '::1' ? '[::1]' : host}:${port}` }
 }
+
+export function agentProxyTarget(env: Record<string, string | undefined>): string {
+  if (env.AGENT_API_BACKEND && !['NODE', 'FASTAPI'].includes(env.AGENT_API_BACKEND))
+    throw new Error('AGENT_API_BACKEND_INVALID')
+  if (env.AGENT_API_BACKEND === 'FASTAPI') {
+    const host = env.FASTAPI_AGENT_HOST ?? '127.0.0.1'
+    const port = Number(env.FASTAPI_AGENT_PORT ?? 8789)
+    if (!['localhost', '127.0.0.1', '::1'].includes(host))
+      throw new Error('FASTAPI_AGENT_HOST_MUST_BE_LOOPBACK')
+    if (!Number.isInteger(port) || port < 1 || port > 65535)
+      throw new Error('FASTAPI_AGENT_PORT_INVALID')
+    return `http://${host === '::1' ? '[::1]' : host}:${port}`
+  }
+  return agentConnectionConfig(env).target
+}

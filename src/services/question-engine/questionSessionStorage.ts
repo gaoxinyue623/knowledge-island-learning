@@ -67,6 +67,13 @@ const questionAttemptSchema = z.object({
 })
 
 const questionSessionSchema = z.object({
+  runtimeAgent: z
+    .object({
+      binding: z.string().min(1),
+      reviewBindings: z.record(z.string(), z.string()),
+      projectedAt: z.string().optional(),
+    })
+    .optional(),
   id: z.string().min(1),
   assessmentId: z.string().min(1),
   textbookId: z.string().min(1),

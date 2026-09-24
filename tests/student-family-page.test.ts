@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ref, type Ref } from 'vue'
 import { PetCloudError } from '@/services/pet/petCloud'
 import { useStudentStore } from '@/stores/studentStore'
+import { clearLearningSyncBinding, loadLearningSyncBinding, saveLearningSyncBinding } from '@/services/family-cloud/learningSyncBindingStorage'
 
 const state = vi.hoisted(() => ({
   profileId: null as unknown as Ref<string>,
@@ -64,6 +65,7 @@ function page() {
 }
 
 beforeEach(() => {
+  clearLearningSyncBinding('student-a')
   setActivePinia(createPinia())
   const student = useStudentStore()
   student.profile = { id: 'student-a', displayName: '小学生' }
@@ -83,6 +85,21 @@ beforeEach(() => {
 })
 
 describe('FamilyProfilesPage', () => {
+  it('removes the previous automatic binding when saving with sync unchecked', async () => {
+    saveLearningSyncBinding({ profileId: 'student-a', username: 'parent_a', cloudProfileId: profile.cloudProfileId, revision: 1, enabled: true, updatedAt: profile.updatedAt })
+    const wrapper = page()
+    await login(wrapper)
+    await wrapper.find('#family-cloud-select').setValue(profile.cloudProfileId)
+    await button(wrapper, '预览本机档案再同步').trigger('click')
+    await flushPromises()
+    await wrapper.find('input[type="checkbox"]').setValue(false)
+    state.update.mockResolvedValue({ kind: 'updated', profile: { ...profile, revision: 2 } })
+    await button(wrapper, '确认更新选中的云端档案').trigger('click')
+    await flushPromises()
+    expect(loadLearningSyncBinding('student-a')).toBeNull()
+    wrapper.unmount()
+  })
+
   it('clears the cloud session for login expiry or account changes', async () => {
     const wrapper = page()
     await login(wrapper)

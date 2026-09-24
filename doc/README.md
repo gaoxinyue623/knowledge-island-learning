@@ -18,6 +18,17 @@
 
 - [PHASE 18.1–18.3 LLM Runtime 与真实题目生成](history/PHASE18.md)
 - [PHASE 19.1 Learning Agent Backend Foundation](history/PHASE19.md)
+- [PHASE 20 真实模型验收](history/PHASE20.md)
+- [PHASE 21 个性化学习计划与任务执行](history/PHASE21.md)
+- [PHASE 22 个性化学习计划复盘](history/PHASE22.md)
+- [PHASE 23 隔离学习计划会话恢复](history/PHASE23.md)
+- [PHASE 24 隔离计划断点续答](history/PHASE24.md)
+- [PHASE 25 正式运行时只读决策边界](history/PHASE25.md)
+- [PHASE 26 正式学习闭环写入](history/PHASE26.md)
+- [PHASE 27 正式 Agent 学生路径接入](history/PHASE27.md)
+- [PHASE 28 学科切换、学习同步与部署准备](history/PHASE28.md)
+- [UCloud 部署与维护](operations/UCLOUD_DEPLOYMENT.md)
+- [电脑、手机与学生试用验收](operations/DEVICE_STUDENT_ACCEPTANCE.md)
 - [PHASE 17 教育 Agent Foundation](history/PHASE17.md)
 
 - [`ACHIEVEMENT_DATA_FLOW.md`](architecture/ACHIEVEMENT_DATA_FLOW.md)
@@ -130,6 +141,9 @@
 - [`PHASE14.md`](history/PHASE14.md)
 - [`PHASE15.md`](history/PHASE15.md)
 - [`PHASE16.md`](history/PHASE16.md)
+- [`PHASE25.md`](history/PHASE25.md)
+- [`PHASE26.md`](history/PHASE26.md)
+- [`PHASE27.md`](history/PHASE27.md)
 
 ## 研究资料入口
 

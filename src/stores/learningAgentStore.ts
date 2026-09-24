@@ -11,7 +11,7 @@ import {
 export const useLearningAgentStore = defineStore('learning-agent', () => {
   const simulation = shallowRef(new LearningAgentSimulation(createAgentScenario('A')))
   const result = shallowRef<LearningAgentResult | null>(null)
-  const generatorMode = ref<QuestionGeneratorMode>('MOCK')
+  const generatorMode = ref<QuestionGeneratorMode>('REAL_LLM')
   const busy = ref(false),
     error = ref<string | null>(null),
     round = ref(0)

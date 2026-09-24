@@ -151,7 +151,10 @@ export class OpenAICompatibleLLMProvider implements LLMProvider {
       data = parseStructured(answer.message.content, request, usage)
     } catch (error) {
       if (error instanceof LLMError)
-        throw new LLMError(error.type, error.transient, error.usage, error.invalidData, diagnostics)
+        throw new LLMError(error.type, error.transient, error.usage, error.invalidData, {
+          ...diagnostics,
+          ...error.diagnostics,
+        })
       throw new LLMError('UNKNOWN')
     }
     return {

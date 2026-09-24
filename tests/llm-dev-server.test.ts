@@ -100,14 +100,15 @@ describe('development LLM BFF', () => {
       await close(upstream)
     }
   })
-  it('explicitly falls back for missing configuration', async () => {
+  it('rejects missing configuration without generating Mock questions', async () => {
     const batch = await generateDevQuestions(input(), {})
     expect(batch.telemetry).toMatchObject({
-      fallbackUsed: true,
-      fallbackReason: 'CONFIG_ERROR',
-      status: 'FALLBACK',
+      fallbackUsed: false,
+      status: 'REJECTED',
     })
-    expect(batch.validation.status).toBe('VALID')
+    expect(batch.validation.status).not.toBe('VALID')
+    expect(batch.questions).toHaveLength(0)
+    expect(batch.telemetry?.usage[0]?.errorType).toBe('CONFIG_ERROR')
   })
   it('rejects arbitrary curriculum, profile, prompt, endpoint and history payloads before any model call', async () => {
     const original = input()

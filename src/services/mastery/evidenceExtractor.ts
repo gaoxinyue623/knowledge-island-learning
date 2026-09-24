@@ -13,6 +13,7 @@ import type {
 import {
   getRecordVerificationStatus,
   isQuestionRecordReadable,
+  isCurriculumRecordReadable,
   type CurriculumAccessPolicy,
 } from '@/services/curriculum'
 import { QUESTION_DIFFICULTY_RANK } from '@/types'
@@ -50,7 +51,13 @@ function mappingIsReadable(
 ): boolean {
   return (
     isQuestionRecordReadable(question, accessPolicy) &&
-    isQuestionRecordReadable(mapping, accessPolicy)
+    isCurriculumRecordReadable(mapping, {
+      ...accessPolicy,
+      allowSampleCurriculum:
+        accessPolicy.allowSampleQuestions ?? accessPolicy.allowSampleCurriculum,
+      allowUnreviewedCurriculum:
+        accessPolicy.allowUnreviewedQuestions ?? accessPolicy.allowUnreviewedCurriculum,
+    })
   )
 }
 

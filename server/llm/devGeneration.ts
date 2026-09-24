@@ -114,7 +114,7 @@ export async function generateDevQuestions(
     if (!config.adapter) throw new LLMError('CONFIG_ERROR')
     runtime = new LLMRuntime(new OpenAICompatibleLLMProvider(config.adapter), config.runtime)
   } catch {
-    // Selecting REAL_LLM without server configuration is explicitly reported as fallback.
+    // Preserve sanitized CONFIG_ERROR telemetry; the live endpoint never fills with Mock.
     const unavailable: LLMProvider = {
       providerId: 'OPENAI_COMPATIBLE',
       model: 'unconfigured',
@@ -125,5 +125,5 @@ export async function generateDevQuestions(
     }
     runtime = new LLMRuntime(unavailable)
   }
-  return new AIQuestionGenerator(runtime, snapshot).generate(request)
+  return new AIQuestionGenerator(runtime, snapshot, 5, '6', undefined, false).generate(request)
 }

@@ -16,7 +16,11 @@ import {
   QUESTION_SCHEMA_VERSION,
   type GeneratedQuestionDTO,
 } from '../llm/questionSchema'
-import { arithmeticSummary, QuestionGenerationPromptBuilder } from '../llm/questionPromptBuilder'
+import {
+  arithmeticSummary,
+  QuestionGenerationPromptBuilder,
+  type GenerationPromptVersion,
+} from '../llm/questionPromptBuilder'
 import {
   GeneratedQuestionValidator,
   matchesTemplate,
@@ -35,6 +39,9 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
     private readonly runtime: LLMRuntime,
     private readonly snapshot: LearningAgentSnapshot,
     private readonly chunkSize = 5,
+    private readonly promptVersion: GenerationPromptVersion = '6',
+    private readonly temperature?: number,
+    private readonly allowMockFallback = true,
   ) {
     if (!Number.isInteger(chunkSize) || chunkSize < 1 || chunkSize > 100)
       throw new Error('INVALID_CHUNK_SIZE')
@@ -87,7 +94,7 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
       generator: {
         provider: this.runtime.provider.providerId,
         model: this.runtime.provider.model,
-        promptVersion: '6',
+        promptVersion: this.promptVersion,
       },
       createdAt: request.createdAt,
       telemetry,
@@ -123,13 +130,17 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
           missingCount: request.count - batch.questions.length,
         })
       }
-      const prompt = new QuestionGenerationPromptBuilder().build(request, this.snapshot, {
-        count: request.count - batch.questions.length,
-        accepted: batch.questions.map(questionText),
-        ...(attempt
-          ? { repair: { failedQuestions: failed, validationErrors: [...new Set(codes)] } }
-          : {}),
-      })
+      const prompt = new QuestionGenerationPromptBuilder(this.promptVersion).build(
+        request,
+        this.snapshot,
+        {
+          count: request.count - batch.questions.length,
+          accepted: batch.questions.map(questionText),
+          ...(attempt
+            ? { repair: { failedQuestions: failed, validationErrors: [...new Set(codes)] } }
+            : {}),
+        },
+      )
       codes = []
       let items: unknown[] = []
       let terminal = false
@@ -147,6 +158,7 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
               request.count - batch.questions.length,
             ),
             schemaName: 'generated_questions_v1',
+            temperature: this.temperature,
             maxOutputTokens: Math.min(
               16000,
               Math.max(4096, (request.count - batch.questions.length) * 350),
@@ -307,6 +319,18 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
       }
       if (terminal) break
     }
+    if (!this.allowMockFallback) {
+      batch.validation = validator.validate(batch, request, this.snapshot)
+      telemetry.status = 'REJECTED'
+      emit('QUESTION_GENERATION_REJECTED', {
+        reason:
+          reason === 'GENERATION_ATTEMPTS_EXHAUSTED'
+            ? [...new Set(codes)].join(',') || reason
+            : reason,
+        retainedCount: batch.questions.length,
+      })
+      return batch
+    }
     telemetry.fallbackUsed = true
     telemetry.fallbackReason =
       reason === 'GENERATION_ATTEMPTS_EXHAUSTED' ? [...new Set(codes)].join(',') || reason : reason
@@ -370,13 +394,20 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
       generator: {
         provider: this.runtime.provider.providerId,
         model: this.runtime.provider.model,
-        promptVersion: '6',
+        promptVersion: this.promptVersion,
       },
       validation: { status: 'GENERATED', checks: [] },
       telemetry,
     }
     for (let offset = 0; offset < request.count; offset += this.chunkSize) {
-      const chunk = await new AIQuestionGenerator(this.runtime, snapshot, this.chunkSize).generate({
+      const chunk = await new AIQuestionGenerator(
+        this.runtime,
+        snapshot,
+        this.chunkSize,
+        this.promptVersion,
+        this.temperature,
+        this.allowMockFallback,
+      ).generate({
         ...request,
         requestId: `${request.requestId}:chunk:${offset / this.chunkSize}`,
         count: Math.min(this.chunkSize, request.count - offset),

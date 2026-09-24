@@ -7,7 +7,10 @@ export function validateStructured<T>(
   usage = {} as LLMTokenUsage,
 ): T {
   const parsed = request.schema.safeParse(data)
-  if (!parsed.success) throw new LLMError('STRUCTURED_OUTPUT_ERROR', false, usage, data)
+  if (!parsed.success)
+    throw new LLMError('STRUCTURED_OUTPUT_ERROR', false, usage, data, {
+      structuredFailure: 'SCHEMA',
+    })
   return parsed.data
 }
 export function parseStructured<T>(
@@ -19,7 +22,9 @@ export function parseStructured<T>(
   try {
     data = JSON.parse(text)
   } catch {
-    throw new LLMError('STRUCTURED_OUTPUT_ERROR', false, usage)
+    throw new LLMError('STRUCTURED_OUTPUT_ERROR', false, usage, undefined, {
+      structuredFailure: 'JSON_SYNTAX',
+    })
   }
   return validateStructured(data, request, usage)
 }

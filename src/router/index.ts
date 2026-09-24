@@ -23,6 +23,7 @@ const LessonPlayerPage = () => import('@/pages/LessonPlayerPage.vue')
 const LearningHistoryPage = () => import('@/pages/LearningHistoryPage.vue')
 const ParentDashboardPage = () => import('@/pages/ParentDashboardPage.vue')
 const QuestionEnginePage = () => import('@/pages/QuestionEnginePage.vue')
+const FormalLearningAgentPage = () => import('@/pages/FormalLearningAgentPage.vue')
 const ReviewQueuePage = () => import('@/pages/ReviewQueuePage.vue')
 const RewardPage = () => import('@/pages/RewardPage.vue')
 const WrongBookPage = () => import('@/pages/WrongBookPage.vue')
@@ -322,6 +323,16 @@ const routes: RouteRecordRaw[] = [
     path: '/agent',
     redirect: '/dev/learning-agent',
     meta: { title: 'Learning Agent 实验室', devOnly: true },
+  },
+  {
+    path: '/learning-agent',
+    component: FormalLearningAgentPage,
+    meta: {
+      title: 'Agent 学习建议',
+      requiresOnboarding: true,
+      studentOnly: true,
+      hideBottomNav: true,
+    },
   },
   {
     path: '/dev/learning-agent',

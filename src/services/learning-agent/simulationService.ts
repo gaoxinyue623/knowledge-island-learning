@@ -1,3 +1,4 @@
+import type { QuestionAnswerDraft } from '@/types'
 import type { QuestionGeneratorMode } from '@/types/llm'
 import { DevQuestionGeneratorClient } from './devQuestionGeneratorClient'
 import type {
@@ -9,7 +10,10 @@ import { productionConfig } from '@/config/production'
 import { LearningOrchestrator } from './learningOrchestrator'
 import { AnswerAnalyzer } from './answerAnalyzer'
 import { parseArithmetic, questionText } from './deterministicAnswerValidator'
-import { correctAnswerDraft } from '@/services/question-engine/answerValidator'
+import {
+  correctAnswerDraft,
+  isQuestionAnswerComplete,
+} from '@/services/question-engine/answerValidator'
 import { createQuestionSession } from '@/services/question-engine/questionEngineAdapter'
 import { rebuildMasteryFromEvidence } from '@/services/mastery/masteryEngine'
 import { DEFAULT_MASTERY_POLICY } from '@/services/mastery/masteryPolicy'
@@ -22,7 +26,7 @@ export type SimulationAnswerMode =
 export class LearningAgentSimulation {
   snapshot: LearningAgentSnapshot
   lastAnalysis: AnswerAnalysisResult[] = []
-  private consumed = new Set<string>()
+  private consumed = new Map<string, AnswerAnalysisResult[]>()
   constructor(snapshot: LearningAgentSnapshot) {
     if (!productionConfig.devRoutes || snapshot.dataset !== 'demo')
       throw new Error('AGENT_SIMULATION_DISABLED')
@@ -37,15 +41,24 @@ export class LearningAgentSimulation {
       {
         now,
         seed,
+        requireRealQuestions: mode === 'REAL_LLM',
         questionProvider:
           mode === 'REAL_LLM' ? new DevQuestionGeneratorClient(this.snapshot) : undefined,
       },
     )
   }
+  async submitAnswers(
+    task: LearningAgentResult,
+    answers: Array<{ questionId: string; answer: QuestionAnswerDraft }>,
+    now: string,
+  ): Promise<AnswerAnalysisResult[]> {
+    return this.answer(task, 'CORRECT', now, answers)
+  }
   async answer(
     task: LearningAgentResult,
     mode: SimulationAnswerMode,
     now: string,
+    submittedAnswers?: Array<{ questionId: string; answer: QuestionAnswerDraft }>,
   ): Promise<AnswerAnalysisResult[]> {
     if (
       task.status !== 'READY' ||
@@ -57,12 +70,25 @@ export class LearningAgentSimulation {
     )
       throw new Error('AGENT_TASK_NOT_READY')
     const taskKey = task.generatedResources.questions.map((q) => q.id).join('|')
-    if (this.consumed.has(taskKey)) return this.lastAnalysis
+    const previous = this.consumed.get(taskKey)
+    if (previous) return previous
     const point = task.decision.targetKnowledgePointId
     const node = task.context.mapNodes.find(
       (n) => n.knowledgePointId === point && n.status !== 'locked',
     )!
     const questions = task.generatedResources.questions
+    if (!Number.isFinite(Date.parse(now)) || !questions.length || !node)
+      throw new Error('AGENT_TASK_NOT_READY')
+    if (
+      submittedAnswers &&
+      (submittedAnswers.length !== questions.length ||
+        new Set(submittedAnswers.map((entry) => entry.questionId)).size !== questions.length ||
+        questions.some((q) => {
+          const entry = submittedAnswers.find((item) => item.questionId === q.id)
+          return !entry || !isQuestionAnswerComplete(q, entry.answer)
+        }))
+    )
+      throw new Error('AGENT_ANSWERS_INCOMPLETE')
     if (mode === 'BORROWING_ERROR' || mode === 'CARRYING_ERROR') {
       const eligible = questions.some((q) => {
         const c = parseArithmetic(questionText(q))
@@ -98,7 +124,9 @@ export class LearningAgentSimulation {
     session.updatedAt = now
     const workings = new Map<string, { tensResult: number; onesResult: number }>()
     session.attempts = questions.map((q) => {
-      let answer = correctAnswerDraft(q)
+      let answer = submittedAnswers
+        ? structuredClone(submittedAnswers.find((entry) => entry.questionId === q.id)!.answer)
+        : correctAnswerDraft(q)
       const c = parseArithmetic(questionText(q))
       if (c && answer.type === 'calculation' && mode !== 'CORRECT') {
         let value = c.result + 1
@@ -148,6 +176,8 @@ export class LearningAgentSimulation {
       attempt.errorPatterns = analysis.errorPatterns
       analyses.push(analysis)
     }
+    if (analyses.some((analysis) => analysis.status === 'manual_review_required'))
+      throw new Error('AGENT_ANSWER_REQUIRES_REVIEW')
     this.snapshot.sessions.push(session)
     this.snapshot.questions = [
       ...new Map([...this.snapshot.questions, ...questions].map((q) => [q.id, q])).values(),
@@ -179,7 +209,7 @@ export class LearningAgentSimulation {
     }
     projectSimulationFacts(this.snapshot, session, task, now)
     this.snapshot.currentKnowledgePointId = point
-    this.consumed.add(taskKey)
+    this.consumed.set(taskKey, analyses)
     this.lastAnalysis = analyses
     return analyses
   }

@@ -12,6 +12,11 @@ export * from './generatedQuestionValidator'
 export * from './generatedContentValidator'
 export * from './learningOrchestrator'
 export * from './runtimeSource'
+export * from './runtimeDecisionService'
+export * from './runtimeExecutionService'
+export * from './formalAgentLaunchStorage'
+export * from '@/services/family-cloud/learningSyncBindingStorage'
+export * from '@/services/family-cloud/learningFactSyncService'
 
 import { LearningOrchestrator } from './learningOrchestrator'
 import { RuntimeLearningAgentSource } from './runtimeSource'
@@ -19,3 +24,6 @@ export const learningOrchestrator = new LearningOrchestrator(new RuntimeLearning
 
 export * from './agentEvaluationService'
 export * from './simulationService'
+export * from './adaptiveLearningPlan'
+export * from './adaptivePlanReport'
+export * from './adaptivePlanCheckpointStorage'

@@ -11,6 +11,9 @@ coverage
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+__pycache__/
+*.py[cod]
+.pytest_cache/
 
 .env.*
 !.env.example

@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { loadEnv } from 'vite'
 import { AIQuestionGenerator } from '../src/services/learning-agent/aiQuestionGenerator'
+import type { GenerationPromptVersion } from '../src/services/llm/questionPromptBuilder'
 import { LLMRuntime } from '../src/services/llm/runtime'
 import { OpenAICompatibleLLMProvider } from '../server/llm/openAICompatibleProvider'
 import { readLLMConfig } from '../server/llm/config'
@@ -31,11 +32,12 @@ function numberArgument(name: string, fallback: number): number {
 function usage() {
   console.error(
     [
-      'Usage: npm run llm:evaluate -- --batches=1 [--batch-size=20] [--sweep-count=20] [--chunk-size=5] [--timeout-ms=30000]',
+      'Usage: npm run llm:evaluate -- --batches=1 [--batch-size=20] [--sweep-count=20] [--chunk-size=5] [--timeout-ms=30000] [--prompt-version=4|5|6|7]',
       'Supported batches: 1, 5, 10, 20, 50.',
       'Use --scenarios=A,B to run a focused subset while developing the evaluator.',
       'Use --no-difficulty-sweep to skip the four-point difficulty observation.',
       'Use --thinking=disabled only with a provider/model verified to support this opt-in parameter.',
+      'Use --temperature=0 for a repeatable acceptance run; the selected value is recorded in evidence.',
       'Use --replay=EVIDENCE.json with the original batch options to re-audit saved evidence without provider calls; writes a new report.',
       'This command performs real provider calls and is intentionally excluded from npm test.',
     ].join('\n'),
@@ -83,6 +85,15 @@ async function main() {
         )
       },
     })
+  const promptVersion = argument('prompt-version') ?? '6'
+  if (!['4', '5', '6', '7'].includes(promptVersion)) throw new Error('INVALID_PROMPT_VERSION')
+  const temperatureArgument = argument('temperature')
+  const temperature = temperatureArgument === undefined ? undefined : Number(temperatureArgument)
+  if (
+    temperature !== undefined &&
+    (!Number.isFinite(temperature) || temperature < 0 || temperature > 2)
+  )
+    throw new Error('INVALID_TEMPERATURE')
   const chunkSize = numberArgument('chunk-size', 5)
   if (batchSize > 100 || sweepCount > 100 || chunkSize > 100) throw new Error('COUNT_LIMIT_100')
   const replayPath = argument('replay')
@@ -108,6 +119,9 @@ async function main() {
     safeWrite(join(outputDir, `real-llm-${runId}-evidence.json`), {
       runId,
       chunkSize,
+      promptVersion,
+      outputTokenBudget: Math.min(16000, Math.max(4096, chunkSize * 350)),
+      temperature: temperature ?? 'provider-default',
       batchCount,
       batchSize,
       sweepCount,
@@ -134,9 +148,13 @@ async function main() {
           `[real-llm] ${scenario.id} batch ${batchIndex + 1}/${batchCount} part ${part.partId} (${part.request.count} questions)`,
         )
         try {
-          const batch = await new AIQuestionGenerator(runtime, part.snapshot, chunkSize).generate(
-            part.request,
-          )
+          const batch = await new AIQuestionGenerator(
+            runtime,
+            part.snapshot,
+            chunkSize,
+            promptVersion as GenerationPromptVersion,
+            temperature,
+          ).generate(part.request)
           observations.push({
             scenarioId: scenario.id,
             scenarioLabel: scenario.label,
@@ -176,9 +194,13 @@ async function main() {
     for (const [index, part] of (replay ? [] : sweepParts).entries()) {
       console.error(`[real-llm] Difficulty ${index + 1}/${sweepParts.length}: ${part.partId}`)
       try {
-        const batch = await new AIQuestionGenerator(runtime, part.snapshot, chunkSize).generate(
-          part.request,
-        )
+        const batch = await new AIQuestionGenerator(
+          runtime,
+          part.snapshot,
+          chunkSize,
+          promptVersion as GenerationPromptVersion,
+          temperature,
+        ).generate(part.request)
         observations.push({
           scenarioId: 'DIFFICULTY',
           scenarioLabel: 'Difficulty sweep',

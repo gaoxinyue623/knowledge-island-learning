@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MathQuestVisual from '@/components/knowledge-point/MathQuestVisual.vue'
 import { localQuestionVisuals } from '@/data/curriculum/production/localRelease'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -23,6 +23,12 @@ import { useReviewQueueStore } from '@/stores/reviewQueueStore'
 import { useWrongBookStore } from '@/stores/wrongBookStore'
 import { useRewardStore } from '@/stores/rewardStore'
 import { useLearningProfile } from '@/composables/useLearningProfile'
+import {
+  loadFormalAgentLaunch,
+  runtimeLearningAgentExecutionService,
+  syncLearningFactsToCloud,
+  type FormalAgentLaunch,
+} from '@/services/learning-agent'
 import type {
   AssessmentLaunchContext,
   QuestionAnswerDraft,
@@ -110,6 +116,7 @@ const context = computed<AssessmentLaunchContext | null>(() => {
 })
 
 const returnPath = computed(() => {
+  if (formalAgentLaunch.value) return '/learning-agent'
   if (context.value?.source === 'wrong_book') {
     return isDevRoute.value ? '/dev/wrong-book' : '/wrong-book'
   }
@@ -124,7 +131,9 @@ const returnPath = computed(() => {
   return isDevRoute.value ? '/dev/lesson-player' : '/lesson'
 })
 const returnLabel = computed(() =>
-  context.value?.source === 'wrong_book'
+  formalAgentLaunch.value
+    ? '返回 Agent 学习建议'
+    : context.value?.source === 'wrong_book'
     ? '返回错题本'
     : ['/home', '/tasks', '/dev/home'].includes(returnPath.value)
       ? '返回首页'
@@ -147,6 +156,8 @@ const retryQuestionId = computed(() =>
 const sessionScope = computed(() =>
   typeof route.query.sessionScope === 'string' ? route.query.sessionScope : undefined,
 )
+const formalAgentLaunch = shallowRef<FormalAgentLaunch | null>(null)
+const formalAgentError = ref<string | null>(null)
 
 const viewModel = computed(() => questionEngineStore.viewModel)
 const currentQuestion = computed(() => questionEngineStore.currentQuestion)
@@ -177,22 +188,110 @@ async function loadAssessment() {
   masteryProcessingStatus.value = 'idle'
   masteryProcessingMessage.value = null
   rewardMessage.value = null
+  formalAgentError.value = null
+  const launchId = typeof route.query.agentLaunchId === 'string' ? route.query.agentLaunchId : ''
+  formalAgentLaunch.value = launchId ? loadFormalAgentLaunch(launchId) : null
+  if (launchId && !formalAgentLaunch.value) {
+    formalAgentError.value = '这次 Agent 练习绑定已经失效，请重新从 Agent 学习建议进入。'
+    return
+  }
   learningStrategyStore.clear()
   await questionEngineStore.loadAssessment(context.value, {
     dataset: dataset.value,
     demoState: demoState.value,
     studentId: profileId.value,
-    ...(sessionScope.value ? { sessionScope: sessionScope.value } : {}),
+    ...(formalAgentLaunch.value?.id
+      ? { sessionScope: formalAgentLaunch.value.id }
+      : sessionScope.value
+        ? { sessionScope: sessionScope.value }
+        : {}),
     ...(retryQuestionId.value ? { initialQuestionId: retryQuestionId.value } : {}),
     ...(retryQuestionId.value ? { reviewQuestionId: retryQuestionId.value } : {}),
   })
   if (profileId.value !== activeProfile || route.fullPath !== activePath) return
+  if (formalAgentLaunch.value && questionEngineStore.definition) {
+    const launch = formalAgentLaunch.value
+    const opened = await runtimeLearningAgentExecutionService.open(
+      {
+        profileId: launch.profileId,
+        textbookId: launch.textbookId,
+        decision: launch.decision,
+        questionIds: [...questionEngineStore.definition.questionIds],
+        sessionScope: launch.id,
+      },
+      new Date().toISOString(),
+    )
+    if (opened.status === 'BLOCKED') {
+      formalAgentError.value = '正式 Agent 练习校验未通过，已阻止提交。'
+      return
+    }
+    // The first Question Engine load creates its legacy shell. Reload after
+    // binding so the UI observes the runtime-owned session and its identity.
+    await questionEngineStore.loadAssessment(context.value, {
+      dataset: 'profile',
+      studentId: profileId.value,
+      sessionScope: launch.id,
+      ...(retryQuestionId.value ? { initialQuestionId: retryQuestionId.value } : {}),
+      ...(retryQuestionId.value ? { reviewQuestionId: retryQuestionId.value } : {}),
+    })
+    if (opened.status === 'RETRY_REQUIRED' && opened.session?.status === 'completed')
+      await syncFormalAgentCompletion(opened.session)
+  }
+  if (profileId.value !== activeProfile || route.fullPath !== activePath) return
   if (questionEngineStore.session?.status === 'completed') await processCompletedSession()
+}
+
+function formalAgentAnswers(session: NonNullable<typeof questionEngineStore.session>) {
+  return session.attempts
+    .filter((attempt) => attempt.submitted)
+    .map((attempt) => ({ questionId: attempt.questionId, answer: attempt.answer }))
+}
+
+async function syncFormalAgentCompletion(session: NonNullable<typeof questionEngineStore.session>) {
+  const launch = formalAgentLaunch.value
+  if (!launch || !session.id) return false
+  const result = await runtimeLearningAgentExecutionService.submit(
+    {
+      profileId: launch.profileId,
+      textbookId: launch.textbookId,
+      decision: launch.decision,
+      questionIds: [...session.questionIds],
+      sessionId: session.id,
+      sessionScope: launch.id,
+      answers: formalAgentAnswers(session),
+    },
+    new Date().toISOString(),
+  )
+  if (result.status !== 'COMPLETED') {
+    formalAgentError.value = '正式学习记录暂时没有完成保存，请保持当前页面并重试。'
+    return false
+  }
+  const cloudSync = await syncLearningFactsToCloud(launch.profileId)
+  if (cloudSync.kind === 'conflict') {
+    formalAgentError.value = '正式学习记录已保存在本机，但云端档案已被另一台设备更新，请到家庭档案处理冲突。'
+  } else if (cloudSync.kind === 'failed') {
+    formalAgentError.value = `正式学习记录已保存在本机，但${cloudSync.message}`
+  }
+  await questionEngineStore.loadAssessment(context.value!, {
+    dataset: 'profile',
+    studentId: profileId.value,
+    sessionScope: launch.id,
+  })
+  return true
 }
 
 async function processCompletedSession(): Promise<void> {
   const session = questionEngineStore.session
   if (!session) return
+  if (formalAgentLaunch.value && session.runtimeAgent) {
+    if (!session.runtimeAgent.projectedAt) {
+      formalAgentError.value = '正式 Agent 记录尚未完成保存。'
+      return
+    }
+    masteryProcessingStatus.value = 'updated'
+    masteryProcessingMessage.value = '正式 Agent 已完成学习记录更新。'
+    return
+  }
   const studentProfileId = profileId.value
   const stillActive = () =>
     profileId.value === studentProfileId && questionEngineStore.session?.id === session.id
@@ -327,6 +426,14 @@ async function processCompletedSession(): Promise<void> {
 }
 
 function returnToLesson(completed = false) {
+  if (formalAgentLaunch.value) {
+    const subject = String(route.query.agentSubject ?? '')
+    void router.push({
+      path: '/learning-agent',
+      query: ['MATH', 'CHINESE', 'ENGLISH'].includes(subject) ? { subject } : {},
+    })
+    return
+  }
   if (route.query.reviewItemId) {
     void router.push(isDevRoute.value ? '/dev/review-queue' : '/review-queue')
     return
@@ -363,14 +470,37 @@ async function updateDraft(draft: QuestionAnswerDraft) {
 }
 
 async function submitAnswer() {
-  await questionEngineStore.submitAnswer()
+  const submitted = await questionEngineStore.submitAnswer()
+  const launch = formalAgentLaunch.value
+  const session = questionEngineStore.session
+  const attempt = questionEngineStore.currentAttempt
+  if (submitted && launch && session && attempt && !questionEngineStore.canComplete) {
+    const result = await runtimeLearningAgentExecutionService.submit(
+      {
+        profileId: launch.profileId,
+        textbookId: launch.textbookId,
+        decision: launch.decision,
+        questionIds: [...session.questionIds],
+        sessionId: session.id,
+        sessionScope: launch.id,
+        answers: [{ questionId: attempt.questionId, answer: attempt.answer }],
+      },
+      new Date().toISOString(),
+    )
+    if (result.status === 'BLOCKED' || result.status === 'RETRY_REQUIRED')
+      formalAgentError.value = '这道题的正式学习记录暂时未保存，请重试。'
+  }
 }
 
 async function nextQuestion() {
   if (questionEngineStore.canGoNext) await questionEngineStore.goNext()
   else if (questionEngineStore.canComplete) {
     const completed = await questionEngineStore.completeAssessment()
-    if (completed) await processCompletedSession()
+    if (completed) {
+      if (formalAgentLaunch.value && questionEngineStore.session)
+        await syncFormalAgentCompletion(questionEngineStore.session)
+      await processCompletedSession()
+    }
   }
 }
 
@@ -517,6 +647,10 @@ watch(
         </section>
 
         <AppLoading v-if="questionEngineStore.loading" label="正在准备练习" />
+        <div v-if="formalAgentError" class="question-engine__notice" role="alert">
+          <AppIcon name="alert-circle" :size="20" decorative />
+          <span>{{ formalAgentError }}</span>
+        </div>
         <AppErrorState
           v-else-if="
             questionEngineStore.status === 'error' ||

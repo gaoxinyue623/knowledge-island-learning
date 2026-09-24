@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig, loadEnv } from 'vite'
 import { localLLMPlugin } from './scripts/llm/vitePlugin'
 import { localTtsPlugin } from './scripts/tts/vitePlugin'
-import { agentConnectionConfig, loadAgentEnvironment } from './server/learningAgentConfig'
+import { agentProxyTarget, loadAgentEnvironment } from './server/learningAgentConfig'
 
 export default defineConfig(({ mode }) => {
   // VITE_* values are public. Refuse this unsafe spelling before dev/build can expose it.
@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '/api/pet': 'http://127.0.0.1:8787',
         '/api/agent': {
-          target: agentConnectionConfig(loadAgentEnvironment()).target,
+          target: agentProxyTarget(loadAgentEnvironment()),
           // Keep the browser Host so the backend can verify Host === Origin.
           changeOrigin: false,
         },

@@ -49,7 +49,14 @@ export function buildGenerationRequests(
         questionMix: decision.recommendedActivity.questionMix,
         maxTextLength: 2000,
       },
-      weaknessSignals: point.weaknessSignals,
+      // A direct-practice batch must not be validated as a wrong-question
+      // variation merely because the student's snapshot contains an active
+      // wrong-book record. Variation rules are enabled only when the activity
+      // mix explicitly requests them.
+      weaknessSignals:
+        decision.recommendedActivity.questionMix.wrongQuestionVariation > 0
+          ? point.weaknessSignals
+          : point.weaknessSignals.filter((signal) => signal !== 'ACTIVE_WRONG_QUESTION'),
       errorPatterns: point.errorPatterns,
       recentQuestionRefs: [...new Set(context.recentAttempts.map((a) => a.questionId))].sort(),
       avoidQuestionRefs: [],

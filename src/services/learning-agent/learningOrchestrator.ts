@@ -22,6 +22,7 @@ export interface LearningOrchestratorOptions {
   questionProvider?: QuestionGeneratorProvider
   contentProvider?: ContentGeneratorProvider
   config?: LearningPlannerConfig
+  requireRealQuestions?: boolean
 }
 /** Coordinates services only; contains no mastery, planning, grading or publication rules. */
 export class LearningOrchestrator {
@@ -94,14 +95,35 @@ export class LearningOrchestrator {
         count: questions.batch.questions?.length,
       })
       event('VALIDATE_QUESTIONS', { validation: questions.validation })
-      const content = await new ContentGenerationService(
-        options.contentProvider ?? new MockContentGenerator(),
-      ).generate(requests.content, snapshot)
-      event('GENERATE_CONTENT', { id: content.content.id, generator: content.content.generator })
-      event('VALIDATE_CONTENT', { validation: content.validation })
+      const realOnly = options.requireRealQuestions === true
+      if (
+        realOnly &&
+        (questions.batch.generator.provider !== 'OPENAI_COMPATIBLE' ||
+          questions.batch.telemetry?.mode !== 'REAL_LLM' ||
+          questions.batch.telemetry?.fallbackUsed ||
+          questions.batch.questions.some(
+            (q) => questions.batch.telemetry?.origins?.[q.id] !== 'REAL_LLM',
+          ))
+      ) {
+        result.validation = finishValidation([
+          ...questions.validation.checks,
+          { stage: 'GENERATION', status: 'FAIL', code: 'REAL_LLM_FALLBACK_DISALLOWED' },
+        ])
+        event('BLOCKED', { code: 'REAL_LLM_FALLBACK_DISALLOWED' })
+        return result
+      }
+      const content = realOnly
+        ? null
+        : await new ContentGenerationService(
+            options.contentProvider ?? new MockContentGenerator(),
+          ).generate(requests.content, snapshot)
+      if (content) {
+        event('GENERATE_CONTENT', { id: content.content.id, generator: content.content.generator })
+        event('VALIDATE_CONTENT', { validation: content.validation })
+      }
       result.validation = finishValidation([
         ...questions.validation.checks,
-        ...content.validation.checks,
+        ...(content?.validation.checks ?? []),
       ])
       if (result.validation.status === 'VALID') {
         // Foundation resources are for isolated development simulation only.
@@ -118,7 +140,7 @@ export class LearningOrchestrator {
           result.generatedResources = {
             questions: questions.batch.questions,
             mappings: questions.batch.mappings,
-            content: [content.content],
+            content: content ? [content.content] : [],
           }
           result.status = 'READY'
         }

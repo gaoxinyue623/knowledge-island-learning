@@ -304,6 +304,19 @@ export interface LearningAgentResult {
   validation: GenerationValidation
   trace: LearningAgentTrace
 }
+export interface LearningAgentDecisionResult {
+  /** A decision is ready for a caller to review; no generated resource is implied. */
+  status: 'READY' | 'BLOCKED'
+  context: LearningAgentContext | null
+  studentStateSummary: StudentKnowledgeState | null
+  decision: LearningDecision | null
+  activityPlan: LearningActivityPlan | null
+  validation: {
+    status: 'VALID' | 'BLOCKED'
+    checks: Array<{ stage: string; status: 'PASS' | 'FAIL'; code: string }>
+  }
+  trace: LearningAgentTrace
+}
 export interface LearningAgentSource {
   load(profileId: string, textbookId: string): Promise<LearningAgentSnapshot>
 }

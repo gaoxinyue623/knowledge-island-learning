@@ -23,6 +23,11 @@ import {
   type FamilyCloudSnapshot,
 } from '@/services/family-cloud/familyCloud'
 import {
+  clearLearningSyncBinding,
+  loadLearningSyncBinding,
+  saveLearningSyncBinding,
+} from '@/services/family-cloud/learningSyncBindingStorage'
+import {
   archiveSectionLabels,
   archiveStatusLabels,
 } from '@/components/profile-archive/archivePresentation'
@@ -50,6 +55,7 @@ const upload = ref<{
   target?: FamilyCloudProfile
 } | null>(null)
 const conflict = ref(false)
+const enableAutoSync = ref(false)
 let generation = 0
 
 function resetCloud() {
@@ -186,8 +192,13 @@ async function sendUpload(asNew: boolean) {
   const account = username.value
   const draft = upload.value
   await run(async (current) => {
+    let cloudProfile: FamilyCloudProfile
     if (asNew) {
-      await createFamilyCloudProfile(draft.preview.source.displayName, draft.archive, account)
+      cloudProfile = await createFamilyCloudProfile(
+        draft.preview.source.displayName,
+        draft.archive,
+        account,
+      )
     } else {
       const target = draft.target!
       const result = await updateFamilyCloudProfile(
@@ -203,15 +214,31 @@ async function sendUpload(asNew: boolean) {
           '另一台设备已更新这份云端档案。本次没有覆盖；可以另存新档案，或预览云端版本并恢复为本机副本。'
         return
       }
+      cloudProfile = result.profile
     }
     if (!current()) return
+    if (enableAutoSync.value) {
+      const saved = saveLearningSyncBinding({
+        profileId: profileId.value,
+        username: account,
+        cloudProfileId: cloudProfile.cloudProfileId,
+        revision: cloudProfile.revision,
+        enabled: true,
+        updatedAt: cloudProfile.updatedAt,
+      })
+      if (!saved) throw new Error('云端已保存，但自动同步设置未能保存。')
+    } else {
+      clearLearningSyncBinding(profileId.value)
+    }
     upload.value = null
     snapshot.value = null
     restorePreview.value = null
     const list = await listFamilyCloudProfiles(account)
     if (current()) {
       profiles.value = list
-      message.value = '云端档案已保存。继续学习后，可以再次预览并同步。'
+      message.value = enableAutoSync.value
+        ? '云端档案已保存；正式 Agent 完成学习后会自动同步。'
+        : '云端档案已保存。继续学习后，可以再次预览并同步。'
     }
   })
 }
@@ -260,6 +287,9 @@ watch(selectedId, () => {
   restorePreview.value = null
   upload.value = null
   conflict.value = false
+  enableAutoSync.value = Boolean(
+    selectedId.value && loadLearningSyncBinding(profileId.value)?.cloudProfileId === selectedId.value,
+  )
 })
 onBeforeUnmount(() => {
   generation++
@@ -274,7 +304,7 @@ onBeforeUnmount(() => {
         <p class="curriculum-eyebrow">由家长管理，一人一份学习记录</p>
         <h1>家庭学习档案</h1>
         <p>
-          本机可建立多个孩子的档案。登录家长账号后，可手动保存到云端，在另一台设备恢复为独立副本。
+          本机可建立多个孩子的档案。登录家长账号后，可保存到云端；开启自动同步后，正式 Agent 完成学习会上传最新学习事实。
         </p>
       </header>
       <p v-if="message" role="status" class="family-profiles__notice">{{ message }}</p>
@@ -396,6 +426,10 @@ onBeforeUnmount(() => {
           <p v-if="upload.target">
             更新将替换云端“{{ upload.target.label }}”的学习快照。本机其他档案不受影响。
           </p>
+          <label class="family-profiles__sync-option">
+            <input v-model="enableAutoSync" type="checkbox" :disabled="busy" />
+            正式 Agent 完成学习后自动同步这个云端档案
+          </label>
           <div class="family-profiles__actions">
             <button type="button" :disabled="busy" @click="sendUpload(true)">
               另存为新的云端档案</button
@@ -517,5 +551,15 @@ onBeforeUnmount(() => {
 .family-profiles__preview ul {
   max-height: 18rem;
   overflow-y: auto;
+}
+.family-profiles__sync-option {
+  display: flex !important;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+.family-profiles__sync-option input {
+  width: auto;
+  min-height: auto;
 }
 </style>

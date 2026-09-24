@@ -203,6 +203,7 @@ function tuneTemplate(
   options: { addition?: boolean; broadRange?: boolean; noCarry?: boolean },
 ) {
   const level = templateDifficulty(difficulty)
+  const profile = difficultyProfile(difficulty)
   snapshot.templates = snapshot.templates.map((template) => {
     if (template.knowledgePointId !== target || template.difficulty !== level) return template
     if (template.templateType === 'addition_range' && options.addition) {
@@ -211,8 +212,10 @@ function tuneTemplate(
         config: {
           ...template.config,
           minAddend: options.broadRange ? 1 : template.config.minAddend,
-          maxAddend: options.broadRange ? 99 : template.config.maxAddend,
-          maxResult: options.broadRange ? 100 : template.config.maxResult,
+          maxAddend: options.broadRange ? profile.maxLargestOperand : template.config.maxAddend,
+          maxResult: options.broadRange
+            ? Math.min(100, profile.maxLargestOperand * 2)
+            : template.config.maxResult,
           noCarry: options.noCarry ?? template.config.noCarry,
         },
       }
@@ -223,9 +226,9 @@ function tuneTemplate(
         config: {
           ...template.config,
           minMinuend: 2,
-          maxMinuend: 99,
+          maxMinuend: profile.maxLargestOperand,
           minSubtrahend: 1,
-          maxSubtrahend: 99,
+          maxSubtrahend: profile.maxLargestOperand,
         },
       }
     }
@@ -343,6 +346,16 @@ function buildSubtraction(
 ): EvaluationRequestPart[] {
   const snapshot = cloneScenario(snapshotId)
   tuneTemplate(snapshot, 'AGENT_KP_CURRENT', difficulty, { broadRange: true })
+  if (scenarioId === 'G') {
+    // Keep the golden variation reference inside the requested operand band.
+    // Out-of-band references are covered by validator tests; mixing that edge
+    // case into the provider quality gate made the model solve two tasks at once.
+    const original = snapshot.questions.find((question) => question.id === 'agent-example')
+    if (original) {
+      original.stem = [{ type: 'FORMULA', text: '41 − 27 = ?' }]
+      original.answerRule = { ruleType: 'NUMERIC', value: 14 }
+    }
+  }
   return [
     requestFor(scenarioId, batchIndex, 'main', snapshot, 'AGENT_KP_CURRENT', difficulty, count, {
       operations: ['-'],

@@ -1,0 +1,33 @@
+services:
+  api:
+    restart: unless-stopped
+    build:
+      context: .
+      target: api
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PET_API_HOST: 0.0.0.0
+      PET_API_PORT: 8787
+      PET_DATABASE_PATH: /data/knowledge-island.sqlite
+      PET_ALLOWED_ORIGINS: ${PET_ALLOWED_ORIGINS:?Set the public origin including scheme and port}
+    volumes:
+      - knowledge-island-data:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8787/api/pet/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  web:
+    restart: unless-stopped
+    build:
+      context: .
+      target: web
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "${WEB_BIND_ADDRESS:-127.0.0.1}:${WEB_PORT:-8081}:80"
+
+volumes:
+  knowledge-island-data:
