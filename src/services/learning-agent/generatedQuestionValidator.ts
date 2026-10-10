@@ -304,8 +304,11 @@ export class GeneratedQuestionValidator {
             fingerprint: normalizedQuestionFingerprint(original),
           }))
           .filter(
-            (reference): reference is typeof reference & { arithmetic: NonNullable<typeof reference.arithmetic> } =>
-              !!reference.arithmetic,
+            (
+              reference,
+            ): reference is typeof reference & {
+              arithmetic: NonNullable<typeof reference.arithmetic>
+            } => !!reference.arithmetic,
           )
         const variationMath = mathConstraintChecks(
           text,
@@ -324,7 +327,9 @@ export class GeneratedQuestionValidator {
           'KNOWLEDGE_POINT',
           references.length > 0 &&
             !!q.knowledgePointId &&
-            references.every((reference) => q.knowledgePointId === reference.question.knowledgePointId),
+            references.every(
+              (reference) => q.knowledgePointId === reference.question.knowledgePointId,
+            ),
           'VARIATION_KNOWLEDGE_POINT',
           q.id,
         )
@@ -341,12 +346,7 @@ export class GeneratedQuestionValidator {
           'VARIATION_OPERANDS',
           q.id,
         )
-        check(
-          'CONSTRAINT',
-          !!arithmetic && references.length > 0,
-          'VARIATION_ARITHMETIC',
-          q.id,
-        )
+        check('CONSTRAINT', !!arithmetic && references.length > 0, 'VARIATION_ARITHMETIC', q.id)
       }
       const explanation =
         arithmetic?.operator === '+'

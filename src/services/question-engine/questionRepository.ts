@@ -117,7 +117,11 @@ export class MockQuestionRepository implements QuestionRepository {
 
     const { questions, mappings } = this.records(dataset)
     const questionIds = questions
-      .filter((question) => sameProfileQuestionContext(question, context))
+      .filter(
+        (question) =>
+          sameProfileQuestionContext(question, context) &&
+          !question.tags.includes('comprehensive-only'),
+      )
       .filter((question) =>
         mappings.some(
           (mapping) =>

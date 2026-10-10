@@ -34,6 +34,11 @@ function isVideo() {
         class="lesson-media__image"
         :src="props.media.url"
         :alt="props.media.altText || '课程插图'"
+        :style="
+          props.media.width && props.media.width < 100
+            ? { maxWidth: `${props.media.width * 3}px` }
+            : undefined
+        "
         @error="markFailed"
       />
     </template>

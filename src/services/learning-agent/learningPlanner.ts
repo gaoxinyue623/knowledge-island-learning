@@ -94,7 +94,7 @@ export class LearningDecisionEngine {
       decisionId: stableId('agent-decision', [
         context.profileId,
         context.curriculum.textbookId,
-        context.knowledgeState,
+        { ...context.knowledgeState, generatedAt: undefined },
         action,
         target,
         reasons,

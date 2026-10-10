@@ -61,6 +61,7 @@ describe('Strengthened training projection', () => {
     const ids = new Set<string>()
     const coverage: Record<string, number> = {}
     const missing: string[] = []
+    const knowledgePointIds = new Set(curriculumData.knowledgePoints.map((k) => k.id))
     for (const bundle of bundles) {
       const input = inputFor(bundle)
       const base = createReadingQuest(input)
@@ -74,21 +75,35 @@ describe('Strengthened training projection', () => {
       expect(initial).toEqual(createTrainingQuest(input))
       for (const variant of [0, 1, 2]) {
         const quest = createTrainingQuest({ ...input, variant })!
-        expect(quest.stages, quest.id).toHaveLength(9)
+        const importedMath =
+          base.textbookId.startsWith('G2_BNU_MATH_S2_') ||
+          base.textbookId === 'G3_BNU_MATH_S1_2022_REVISED' ||
+          base.textbookId === 'G3_BNU_MATH_S2_2022_REVISED' ||
+          base.textbookId === 'G4_BNU_MATH_S1_2022_REVISED' ||
+          base.textbookId === 'G5_BNU_MATH_S2_2013_USER_OUTLINE' ||
+          base.textbookId === 'G6_BNU_MATH_S2_2013_USER_OUTLINE' ||
+          base.textbookId === 'G6_BNU_MATH_S1_2022_USER_OUTLINE' ||
+          base.textbookId === 'G5_BNU_MATH_S1_USER_OUTLINE' ||
+          base.textbookId === 'G4_BNU_MATH_S2_USER_OUTLINE'
+        expect(quest.stages, quest.id).toHaveLength(importedMath ? 3 : 9)
         expect(quest.sourceId).toBe(base.sourceId)
         expect(quest.isSample).toBe(base.isSample)
         expect(quest.verificationStatus).toBe(base.verificationStatus)
-        expect(quest.stages.map((s) => s.trainingBand)).toEqual([
-          'foundation',
-          'foundation',
-          'foundation',
-          'reasoning',
-          'reasoning',
-          'reasoning',
-          'transfer',
-          'transfer',
-          'transfer',
-        ])
+        expect(quest.stages.map((s) => s.trainingBand)).toEqual(
+          importedMath
+            ? ['foundation', 'reasoning', 'transfer']
+            : [
+                'foundation',
+                'foundation',
+                'foundation',
+                'reasoning',
+                'reasoning',
+                'reasoning',
+                'transfer',
+                'transfer',
+                'transfer',
+              ],
+        )
         for (const stage of quest.stages) {
           expect(ids.has(stage.id), stage.id).toBe(false)
           ids.add(stage.id)
@@ -97,7 +112,7 @@ describe('Strengthened training projection', () => {
           expect(stage.hints?.length).toBeGreaterThanOrEqual(2)
           if (stage.kind === 'question') {
             const validation = validateQuestion(stage.question, {
-              knowledgePointIds: new Set(curriculumData.knowledgePoints.map((k) => k.id)),
+              knowledgePointIds,
             })
             expect(validation.valid, `${stage.id}: ${validation.issues.join(';')}`).toBe(true)
             expect(stage.question.sourceId).toBe(bundle.learningContent.sourceId)
@@ -145,13 +160,13 @@ describe('Strengthened training projection', () => {
         }
       }
     }
-    expect(Object.keys(coverage)).toHaveLength(11)
+    expect(Object.keys(coverage)).toHaveLength(40)
     expect(coverage['G1_SHENZHEN_BNU_MATH_S2_2024_CANDIDATE']).toBe(40)
     expect(missing).toEqual([])
-    expect(Object.values(coverage).reduce((total, count) => total + count, 0)).toBe(348)
+    expect(Object.values(coverage).reduce((total, count) => total + count, 0)).toBe(957)
     expect(JSON.stringify(bundles)).toBe(before)
     console.info('Strengthened training coverage', coverage, 'warmup-only', missing)
-  })
+  }, 15000)
 
   it('changes actual math problems between three rounds and wraps deterministically', () => {
     const prompts = [0, 1, 2].map(

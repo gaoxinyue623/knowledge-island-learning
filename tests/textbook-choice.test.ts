@@ -69,7 +69,7 @@ describe('region-independent textbook catalog', () => {
     ['GRADE_1', 'SEMESTER_UPPER', 3],
     ['GRADE_1', 'SEMESTER_LOWER', 3],
     ['GRADE_2', 'SEMESTER_UPPER', 3],
-    ['GRADE_2', 'SEMESTER_LOWER', 2],
+    ['GRADE_2', 'SEMESTER_LOWER', 5],
   ] as const)(
     'offers every imported book in %s / %s across all regions',
     async (gradeId, semesterId, count) => {
@@ -304,7 +304,10 @@ describe('explicit textbook choice and persistence', () => {
     await store.resolveTextbooks()
     finish(result)
     expect(await pending).toBeNull()
-    expect(store.availableTextbooks?.math.availableTextbooks).toEqual([])
+    expect(store.availableTextbooks?.math.availableTextbooks.map((book) => book.gradeId)).toEqual([
+      'GRADE_2',
+      'GRADE_2',
+    ])
     expect(store.selectTextbook('MATH', books.MATH)).toBe(false)
   })
 
@@ -373,27 +376,26 @@ describe('textbook choice page', () => {
   }
 
   it.each(regions)(
-    'shows all three subjects and permits one explicit choice in %s',
+    'preselects single versions and permits direct confirmation in %s',
     async (regionId) => {
       const { wrapper, store, router } = await renderPage('GRADE_1', 'SEMESTER_LOWER', regionId)
-      expect(wrapper.text()).toContain('不受地区限制')
+      expect(wrapper.text()).toContain('按当前年级和课本册次')
       const cards = wrapper.findAllComponents(TextbookCard)
       expect(cards).toHaveLength(3)
       expect(
-        cards.every((card) => card.props('candidateCount') === 1 && !card.props('selected')),
+        cards.every((card) => card.props('candidateCount') === 1 && card.props('selected')),
       ).toBe(true)
       const submit = () =>
         wrapper.findAll('button').find((button) => button.text() === '确认教材并继续')!
+      expect(submit().attributes('disabled')).toBeUndefined()
+      expect(store.selectedTextbooks).toEqual(books)
+      for (const card of cards) await card.get('.textbook-card__change').trigger('click')
       expect(submit().attributes('disabled')).toBeDefined()
       const math = cards.find((card) => card.props('subjectCode') === 'MATH')!
       await math.get('.textbook-card__change').trigger('click')
-      await wrapper.getComponent(TextbookVersionSelector).get('button').trigger('click')
+      expect(wrapper.findComponent(TextbookVersionSelector).exists()).toBe(false)
       expect(store.selectedTextbooks).toEqual({ CHINESE: null, MATH: books.MATH, ENGLISH: null })
       expect(submit().attributes('disabled')).toBeUndefined()
-      await math.get('.curriculum-text-button').trigger('click')
-      expect(submit().attributes('disabled')).toBeDefined()
-      await math.get('.textbook-card__change').trigger('click')
-      await wrapper.getComponent(TextbookVersionSelector).get('button').trigger('click')
       await submit().trigger('click')
       await flushPromises()
       expect(router.currentRoute.value.path).toBe('/onboarding/character')

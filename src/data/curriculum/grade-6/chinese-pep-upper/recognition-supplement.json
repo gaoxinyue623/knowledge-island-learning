@@ -1,0 +1,20 @@
+{
+  "updatedAt": "2026-10-10T09:20:00.000Z",
+  "sourceSha256": "0963e16c42f60f8e67b9834f59dced1dea4cc3efca4540af1063162c44468e11",
+  "lesson": {
+    "unit": 9,
+    "key": "literacy-recognition",
+    "title": "识字表（会认字·带拼音）",
+    "kind": "appendix",
+    "number": null,
+    "optional": false,
+    "text": "识字表（会认字，只认不写）\n\n### 第一单元\n\n1. 草原：勒lè、骏jùn、鞭biān、貌mào、拘jū\n\n2. 丁香结：缀zhuì、窥kuī、潇xiāo、雅yǎ、檐yán、浊zhuó、拙zhuō、簇cù、恍huǎng\n\n3. 古诗词三首：鹊què、蝉chán\n\n4. *花之歌：穹qióng、孕yùn、曳yè\n\n### 第二单元\n\n5. 七律·长征：逶wēi、迤yí、磅páng、礴bó\n\n6. 狼牙山五壮士：寇kòu、榴liú、抡lūn、涧jiàn、雹báo、屹yì\n\n7. 开国大典：宾bīn、帜zhì、距jù、隆lóng\n\n8. *灯光：郝hǎo、璀璨cuǐ càn\n\n9. *我的战友邱少云：邱qiū、灼zhuó、咆páo\n\n### 第三单元\n\n10. 竹节人：凛lǐn、疙gē、瘩da、豁huō、叉chǎ、卡qiǎ、绺liǔ、俨yǎn、攒cuán、咚dōng、锵qiāng、沮jǔ、屉tì\n\n11. 宇宙生命之谜：尚shàng、氧yǎng、揭jiē、斑bān、燥zào、漠mò、磁cí、御yù、盗dào、培péi\n\n12. *故宫博物院：鳌áo、銮luán、磐pán、鎏liú、矫jiǎo、嫔pín、湛zhàn\n\n### 第四单元\n\n13. 桥：咆páo、哮xiào、呻shēn\n\n14. 穷人：汹xiōng、澎péng、湃pài、熄xī、掀xiān、唉āi\n\n15. *金色的鱼钩：颧quán、鬓bìn、疙gē、瘩da、奄yǎn、噎yē、瞻zhān\n\n### 第五单元\n\n16. 夏天里的成长：蔗zhè、缝fèng\n\n17. 盼：篷péng、蹦bèng、炖dùn\n\n### 第六单元\n\n18. 古诗三首：簸bǒ、涯yá、莺yīng\n\n19. 只有一个地球：裹guǒ、篮lán、蔼ǎi、资zī、矿kuàng、赐cì、慷kāng、慨kǎi、睹dǔ\n\n20. *青山不老：踞jù、虐nüè、擎qíng、敖áo\n\n21. *三黑和土地：荞qiáo、蝈guō、耙pá\n\n### 第七单元\n\n22. 文言文二则：哉zāi、巍wēi、弦xián\n\n23. 月光曲：券quàn、恬tián、霎shà\n\n24. *京剧趣谈：骋chěng、奴nú、仆pú、戛jiá\n\n### 第八单元\n\n25. 少年闰土：闰rùn、秕bǐ、鹁bó、鸪gū、獾huān、刺cì、猹chá\n\n26. 好的故事：藻zǎo、萍píng、漾yàng、瞬shùn\n\n27. *我的伯父鲁迅先生：悼dào、浒hǔ、敷fū、绷běng、镊niè、祷dǎo\n\n28. *有的人——纪念鲁迅有感：臧zāng",
+    "sourceNote": "按用户提供的2022版独立识字表接入，按八个单元、28篇课文保留字音及星号；用于认读，独立于原写字表和词语表。版本和字音按来稿登记，未独立核验出版社原版。",
+    "importNotes": [
+      "“璀璨cuǐ càn”保留来稿双字条目；多音字及轻声按来稿原样保存。",
+      "来稿28篇课文分组与当前本册26篇正文目录存在差异，作为独立附录展示，不按课号自动绑定正文。"
+    ],
+    "questions": [],
+    "missingSections": []
+  }
+}

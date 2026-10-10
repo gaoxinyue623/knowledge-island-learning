@@ -9,7 +9,7 @@ FROM node:24-bookworm-slim AS api
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package.json package-lock.json ./
-RUN npm ci --include=dev --omit=optional
+COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/src ./src
 COPY --from=build /app/server ./server
 COPY --from=build /app/scripts ./scripts

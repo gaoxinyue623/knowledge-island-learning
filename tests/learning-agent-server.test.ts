@@ -1,7 +1,11 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it } from 'vitest'
 import { createLearningAgentServer } from '../server/learningAgentServer'
-import { agentConnectionConfig, agentProxyTarget, loadAgentEnvironment } from '../server/learningAgentConfig'
+import {
+  agentConnectionConfig,
+  agentProxyTarget,
+  loadAgentEnvironment,
+} from '../server/learningAgentConfig'
 
 const apps: Array<ReturnType<typeof createLearningAgentServer>> = []
 async function listen(app: ReturnType<typeof createLearningAgentServer>) {
@@ -17,10 +21,22 @@ describe('Learning Agent backend foundation', () => {
   it('switches the proxy between local Node and FastAPI targets and rejects invalid configuration', () => {
     expect(agentProxyTarget({})).toBe('http://127.0.0.1:8788')
     expect(agentProxyTarget({ AGENT_API_BACKEND: 'FASTAPI' })).toBe('http://127.0.0.1:8789')
-    expect(agentProxyTarget({ AGENT_API_BACKEND: 'FASTAPI', FASTAPI_AGENT_HOST: '::1', FASTAPI_AGENT_PORT: '9001' })).toBe('http://[::1]:9001')
-    expect(() => agentProxyTarget({ AGENT_API_BACKEND: 'FASTAPI', FASTAPI_AGENT_HOST: '0.0.0.0' })).toThrow('FASTAPI_AGENT_HOST_MUST_BE_LOOPBACK')
-    expect(() => agentProxyTarget({ AGENT_API_BACKEND: 'FASTAPI', FASTAPI_AGENT_PORT: '0' })).toThrow('FASTAPI_AGENT_PORT_INVALID')
-    expect(() => agentProxyTarget({ AGENT_API_BACKEND: 'UNKNOWN' })).toThrow('AGENT_API_BACKEND_INVALID')
+    expect(
+      agentProxyTarget({
+        AGENT_API_BACKEND: 'FASTAPI',
+        FASTAPI_AGENT_HOST: '::1',
+        FASTAPI_AGENT_PORT: '9001',
+      }),
+    ).toBe('http://[::1]:9001')
+    expect(() =>
+      agentProxyTarget({ AGENT_API_BACKEND: 'FASTAPI', FASTAPI_AGENT_HOST: '0.0.0.0' }),
+    ).toThrow('FASTAPI_AGENT_HOST_MUST_BE_LOOPBACK')
+    expect(() =>
+      agentProxyTarget({ AGENT_API_BACKEND: 'FASTAPI', FASTAPI_AGENT_PORT: '0' }),
+    ).toThrow('FASTAPI_AGENT_PORT_INVALID')
+    expect(() => agentProxyTarget({ AGENT_API_BACKEND: 'UNKNOWN' })).toThrow(
+      'AGENT_API_BACKEND_INVALID',
+    )
   })
   it('loads ignored local configuration for the standalone process without exposing it to the browser', () => {
     const env = loadAgentEnvironment('/tmp/knowledge-island-agent-no-env', {
@@ -39,9 +55,9 @@ describe('Learning Agent backend foundation', () => {
     expect(() => agentConnectionConfig({ AGENT_API_HOST: '0.0.0.0' })).toThrow(
       'AGENT_HOST_MUST_BE_LOOPBACK',
     )
-    expect(() =>
-      agentConnectionConfig({ AGENT_ALLOWED_ORIGINS: 'https://example.com' }),
-    ).toThrow('AGENT_ORIGINS_MUST_BE_LOOPBACK')
+    expect(() => agentConnectionConfig({ AGENT_ALLOWED_ORIGINS: 'https://example.com' })).toThrow(
+      'AGENT_ORIGINS_MUST_BE_LOOPBACK',
+    )
   })
 
   it('exposes a credential-free health contract without leaking the API key', async () => {

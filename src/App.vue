@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import ParentGate from '@/components/account/ParentGate.vue'
+import { accountState } from '@/services/account/accountService'
 import { watchEffect, ref, onBeforeUnmount } from 'vue'
 import { usePreferencesStore } from '@/stores/preferencesStore'
 import { RouterView, useRouter } from 'vue-router'
 const router = useRouter()
+function expired() {
+  accountState.username = null
+  accountState.ready = false
+  void router.replace('/login')
+}
+window.addEventListener('ki-session-expired', expired)
 const opening = ref(''),
   failedPath = ref('')
 const removeBefore = router.beforeEach((to) => {
@@ -17,6 +25,7 @@ const removeError = router.onError((_error, to) => {
   failedPath.value = to.fullPath
 })
 onBeforeUnmount(() => {
+  window.removeEventListener('ki-session-expired', expired)
   removeBefore()
   removeAfter()
   removeError()
@@ -38,10 +47,76 @@ watchEffect(() => {
     >
     <template v-else>正在打开{{ opening }}……</template>
   </div>
-  <RouterView />
+  <div
+    v-if="accountState.username && ['pending', 'conflict'].includes(accountState.sync)"
+    class="account-sync-notice"
+    role="status"
+  >
+    {{
+      accountState.sync === 'conflict'
+        ? '另一台设备更新了记录，请选择要保留的版本。'
+        : '记录已保存在本机，正在等待同步。'
+    }}
+    <RouterLink to="/account">查看同步</RouterLink>
+  </div>
+  <RouterLink
+    v-if="accountState.username && !$route.path.startsWith('/feedback')"
+    class="feedback-entry"
+    :to="{
+      path: '/feedback',
+      query: {
+        from: $route.path,
+        contentId: String(
+          $route.params.knowledgePointId ??
+            $route.params.nodeId ??
+            $route.query.knowledgePointId ??
+            '',
+        ),
+      },
+    }"
+    >问题反馈</RouterLink
+  >
+  <RouterView
+    v-if="accountState.username || $route.meta.public || $route.meta.devOnly"
+    v-slot="{ Component }"
+  >
+    <ParentGate v-if="$route.meta.parentOnly"><component :is="Component" /></ParentGate>
+    <component :is="Component" v-else />
+  </RouterView>
 </template>
 
 <style scoped>
+.feedback-entry {
+  position: fixed;
+  right: 16px;
+  bottom: 86px;
+  z-index: 40;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: #49684c;
+  background: #f5f9f1;
+  border: 1px solid #c8d8c4;
+  border-radius: 18px;
+}
+.account-sync-notice {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  padding: 10px 16px;
+  background: #fff8e8;
+  border: 1px solid #dfd3ae;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #705c37;
+}
+.account-sync-notice a {
+  margin-left: 12px;
+  text-decoration: underline;
+}
 .navigation-feedback {
   position: fixed;
   top: 12px;

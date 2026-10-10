@@ -4,6 +4,9 @@ import { MockCurriculumService } from './adapters/mock/curriculumMockAdapter'
 import { MockStudentService } from './adapters/mock/studentMockAdapter'
 import { curriculumProfileRepository } from './storage/curriculumProfileRepository'
 
+// The imported catalog is application-wide. Account storage only owns the
+// learner's selections/progress; login, migration and cloud restore must never
+// filter or replace these shared textbook records.
 const runtimeCurriculumData = {
   regions: [...productionCurriculumIndex.regions],
   grades: [...productionCurriculumIndex.grades],

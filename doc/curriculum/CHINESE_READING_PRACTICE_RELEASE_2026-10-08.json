@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-08T06:59:36.117Z",
+  "source": "REAL_LLM",
+  "model": "deepseek-v4-flash-0731",
+  "topic": "快乐读书吧 读读儿童故事",
+  "questions": 3,
+  "readingMaterialPresent": true,
+  "unansweredSolutionsHidden": true,
+  "correctGrading": true,
+  "wrongAnswerReview": true,
+  "originalWrongFeedbackPreserved": true,
+  "persisted": true,
+  "isolatedDatabase": true,
+  "schemaVersion": 1,
+  "approvalId": "OWNER_CHINESE_READING_PRACTICE_2026_10_08",
+  "publishedQuestions": 24,
+  "knowledgePointsAdded": 8,
+  "totalReleasedKnowledgePoints": 357,
+  "aiCoveredKnowledgePoints": 357,
+  "readingOnlyExemptions": 0,
+  "optionGradingChecks": 72,
+  "accountCatalogChecks": 16,
+  "tests": {
+    "files": 100,
+    "passed": 1081,
+    "failed": 0
+  },
+  "build": "PASS",
+  "lint": "PASS",
+  "localServices": [
+    {
+      "service": "frontend",
+      "status": 200
+    },
+    {
+      "service": "familyApi",
+      "status": 200
+    },
+    {
+      "service": "agentApi",
+      "status": 200
+    }
+  ]
+}

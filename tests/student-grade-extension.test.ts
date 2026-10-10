@@ -6,7 +6,10 @@ import { createGradeExtensionQuest } from '@/services/grade-extension/gradeExten
 import { correctAnswerDraft } from '@/services/question-engine/answerValidator'
 import { checkQuestAnswer } from '@/services/content-expansion/readingQuest'
 import { validateQuestion } from '@/services/validation/questionValidation'
-import { freshQuestProgress, saveQuestProgress } from '@/services/content-expansion/questProgressStorage'
+import {
+  freshQuestProgress,
+  saveQuestProgress,
+} from '@/services/content-expansion/questProgressStorage'
 import { questPetSource } from '@/services/pet/petQuestRewards'
 import { readActivityHistory } from '@/services/learning-activity/activityHistory'
 
@@ -15,14 +18,18 @@ describe('grade three original extension lessons', () => {
     const profileId = 'english-extension-history'
     const quest = createGradeExtensionQuest('g3-english-my-bag', 0)!
     const progress = freshQuestProgress(profileId, quest)
-    progress.passedIds = quest.stages.map(stage => stage.id)
+    progress.passedIds = quest.stages.map((stage) => stage.id)
     progress.completedStageIds = [...progress.passedIds]
     progress.activeStageId = progress.passedIds.at(-1)!
     progress.summaryVisible = true
     progress.attemptId = 'english-extension-complete'
     progress.completedAt = '2026-09-08T00:00:00.000Z'
     expect(saveQuestProgress(localStorage, progress, quest)).toBeNull()
-    const activityContext = { title: 'My School Bag', subject: 'ENGLISH' as const, href: '/grade-explorer?lesson=g3-english-my-bag&variant=0' }
+    const activityContext = {
+      title: 'My School Bag',
+      subject: 'ENGLISH' as const,
+      href: '/grade-explorer?lesson=g3-english-my-bag&variant=0',
+    }
     const wrapper = mount(ReadingQuest, { props: { quest, profileId, activityContext } })
     await flushPromises()
     expect(readActivityHistory(profileId)).toEqual([expect.objectContaining(activityContext)])
@@ -30,12 +37,17 @@ describe('grade three original extension lessons', () => {
   })
   it('does not turn unreviewed supplemental completions into curriculum pet rewards', () => {
     const data = new Map<string, string>()
-    const storage = { getItem: (key: string) => data.get(key) ?? null, setItem: (key: string, value: string) => { data.set(key, value) } }
+    const storage = {
+      getItem: (key: string) => data.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        data.set(key, value)
+      },
+    }
     for (const lesson of gradeExtensionLessons) {
       for (const variant of [0, 1]) {
         const quest = createGradeExtensionQuest(lesson.id, variant)!
         const progress = freshQuestProgress('extension-child', quest)
-        progress.passedIds = quest.stages.map(stage => stage.id)
+        progress.passedIds = quest.stages.map((stage) => stage.id)
         progress.completedStageIds = [...progress.passedIds]
         progress.activeStageId = progress.passedIds.at(-1)!
         progress.summaryVisible = true
@@ -47,13 +59,19 @@ describe('grade three original extension lessons', () => {
 
   it('varies correct option positions while keeping every answer grounded in its option text', () => {
     const positions = new Set<string>()
-    for (const lesson of gradeExtensionLessons) for (const variant of [0, 1]) {
-      const quest = createGradeExtensionQuest(lesson.id, variant)!
-      for (const stage of quest.stages) if (stage.kind === 'question' && stage.question.answerRule.ruleType === 'SINGLE_OPTION') {
-        positions.add(stage.question.answerRule.correctOptionKey)
-        expect(stage.question.options?.some(option => option.optionKey === stage.question.answerRule.correctOptionKey)).toBe(true)
+    for (const lesson of gradeExtensionLessons)
+      for (const variant of [0, 1]) {
+        const quest = createGradeExtensionQuest(lesson.id, variant)!
+        for (const stage of quest.stages)
+          if (stage.kind === 'question' && stage.question.answerRule.ruleType === 'SINGLE_OPTION') {
+            positions.add(stage.question.answerRule.correctOptionKey)
+            expect(
+              stage.question.options?.some(
+                (option) => option.optionKey === stage.question.answerRule.correctOptionKey,
+              ),
+            ).toBe(true)
+          }
       }
-    }
     expect(positions).toEqual(new Set(['A', 'B', 'C']))
   })
   it('offers nine complete project-original lessons across the three subjects', () => {
@@ -81,7 +99,9 @@ describe('grade three original extension lessons', () => {
       for (const stage of [...first.stages, ...second.stages]) {
         expect(stage.kind).toBe('question')
         if (stage.kind !== 'question') continue
-        const report = validateQuestion(stage.question, { sourceIds: new Set(['grade-extension:original:v1']) })
+        const report = validateQuestion(stage.question, {
+          sourceIds: new Set(['grade-extension:original:v1']),
+        })
         expect(report.valid, report.issues.join('; ')).toBe(true)
         expect(checkQuestAnswer(stage.question, correctAnswerDraft(stage.question))).toBe('correct')
       }
@@ -92,10 +112,13 @@ describe('grade three original extension lessons', () => {
     const multiplication = createGradeExtensionQuest('g3-math-market-groups', 0)!
     const first = multiplication.stages[0]
     expect(first?.kind === 'question' && first.question.answerRule).toMatchObject({
-      ruleType: 'NUMERIC', value: 24,
+      ruleType: 'NUMERIC',
+      value: 24,
     })
     const reading = createGradeExtensionQuest('g3-chinese-rainy-window', 0)!
-    const evidence = reading.stages.map((stage) => (stage.kind === 'question' ? stage.explanation : '')).join(' ')
+    const evidence = reading.stages
+      .map((stage) => (stage.kind === 'question' ? stage.explanation : ''))
+      .join(' ')
     expect(evidence).toContain('小乐没有伞')
     expect(evidence).toContain('雨')
   })

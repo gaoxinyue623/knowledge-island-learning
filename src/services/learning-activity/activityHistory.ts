@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 export const ACTIVITY_HISTORY_CHANGED = 'knowledge-island:activity-history'
@@ -14,7 +15,10 @@ const activitySchema = z.object({
   mistakeCount: z.number().int().nonnegative(),
   href: z.string().startsWith('/'),
 })
-export const activityHistoryPayloadSchema = z.object({ version: z.literal(1), records: z.array(activitySchema) })
+export const activityHistoryPayloadSchema = z.object({
+  version: z.literal(1),
+  records: z.array(activitySchema),
+})
 export type LearningActivity = z.infer<typeof activitySchema>
 interface Storage {
   getItem(key: string): string | null
@@ -25,7 +29,7 @@ export const activityHistoryKey = (profileId: string) =>
 
 export function readActivityHistory(
   profileId: string,
-  storage: Storage = window.localStorage,
+  storage: Storage = accountStorage,
 ): LearningActivity[] {
   const raw = storage.getItem(activityHistoryKey(profileId))
   if (!raw) return []
@@ -37,7 +41,7 @@ export function readActivityHistory(
 
 export function recordLearningActivity(
   record: LearningActivity,
-  storage: Storage = window.localStorage,
+  storage: Storage = accountStorage,
 ): void {
   const item = activitySchema.parse(record)
   const records = readActivityHistory(item.profileId, storage)

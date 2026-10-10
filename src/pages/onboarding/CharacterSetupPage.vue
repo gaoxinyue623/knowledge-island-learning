@@ -27,7 +27,7 @@ function enterHome() {
   <CurriculumPageFrame
     title="选择你的知识团子"
     description="先选一个陪你学习的默认角色，之后还可以在我的页面查看。"
-    :step="4"
+    :step="3"
     back-to="/onboarding/textbooks"
   >
     <section class="character-setup">

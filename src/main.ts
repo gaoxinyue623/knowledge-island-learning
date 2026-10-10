@@ -1,3 +1,4 @@
+import { initializeAccount, startAccountSync } from './services/account/accountService'
 import { createApp } from 'vue'
 
 import App from './App.vue'
@@ -28,6 +29,13 @@ import './styles/personal.css'
 
 const app = createApp(App)
 
-app.use(pinia)
-app.use(router)
-app.mount('#app')
+async function start() {
+  const root = document.querySelector('#app')
+  if (root) root.textContent = '正在连接你的小岛…'
+  await initializeAccount()
+  app.use(pinia)
+  app.use(router)
+  app.mount('#app')
+  startAccountSync()
+}
+void start()

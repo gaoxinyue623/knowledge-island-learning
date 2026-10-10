@@ -1,3 +1,5 @@
+import { G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-2/shenzhen-english-lower'
+import { G2_BNU_MATH_S2_TEXTBOOK_IDS } from '@/data/curriculum/grade-2/bnu-lower'
 import { describe, expect, it } from 'vitest'
 
 import {
@@ -106,8 +108,12 @@ describe('Grade 2 PEP Chinese lower-volume curriculum', () => {
         G2_REVISED_CHINESE_TEXTBOOK_ID,
       ])
       expect(result.chinese.resolutionStatus).toBe('NEEDS_CONFIRMATION')
-      expect(result.math.availableTextbooks).toEqual([])
-      expect(result.english.availableTextbooks).toEqual([])
+      expect(result.math.availableTextbooks.map((book) => book.id)).toEqual([
+        ...G2_BNU_MATH_S2_TEXTBOOK_IDS,
+      ])
+      expect(result.english.availableTextbooks.map((book) => book.id)).toEqual([
+        G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID,
+      ])
     },
   )
 
@@ -131,6 +137,10 @@ describe('Grade 2 PEP Chinese lower-volume curriculum', () => {
     expect(curriculumData.grades.map((grade) => grade.id)).toEqual([
       'GRADE_1',
       G2_PEP_CHINESE_GRADE_ID,
+      'GRADE_3',
+      'GRADE_4',
+      'GRADE_5',
+      'GRADE_6',
     ])
     expect(isChinesePilotTextbook(G2_PEP_CHINESE_S2_TEXTBOOK_ID)).toBe(true)
     expect(gradeTwoChineseLowerCurriculum.textbooks[0]?.verificationStatus).toBe('UNVERIFIED')

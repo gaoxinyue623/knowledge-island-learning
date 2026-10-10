@@ -22,7 +22,7 @@ describe('learning agent entry', () => {
 
   it('exposes the formal student route separately from the development simulator', () => {
     const resolved = router.resolve('/learning-agent')
-    expect(resolved.matched.at(-1)?.meta.title).toBe('Agent 学习建议')
+    expect(resolved.matched.at(-1)?.meta.title).toBe('学习建议')
     expect(resolved.matched.at(-1)?.meta.devOnly).not.toBe(true)
   })
 

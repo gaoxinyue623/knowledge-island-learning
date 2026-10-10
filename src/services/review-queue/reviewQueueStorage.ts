@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 import type { ReviewQueueItem, ReviewQueueStoragePayload } from '@/types'
@@ -73,8 +74,8 @@ export const reviewQueueStoragePayloadSchema = z.object({
 })
 
 function browserStorage(): ReviewQueueStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function cloneItem(item: ReviewQueueItem): ReviewQueueItem {

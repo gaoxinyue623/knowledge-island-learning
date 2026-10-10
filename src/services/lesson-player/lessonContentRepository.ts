@@ -7,6 +7,7 @@ import type {
   LearningContent,
   LessonContentBlockRecord,
   LessonStep,
+  LiteracyTablePresentation,
 } from '@/types'
 
 import {
@@ -34,6 +35,49 @@ function bodyStrings(content: CourseContent, key: string): string[] {
     : []
 }
 
+function bodyLiteracyTable(content: CourseContent): LiteracyTablePresentation | undefined {
+  const body = content.body
+  const kind = body.tableKind
+  if (!['recognition', 'writing', 'words'].includes(String(kind))) return undefined
+  const groups = body.literacyGroups
+  if (
+    !Array.isArray(groups) ||
+    !groups.length ||
+    !groups.every(
+      (group) =>
+        group &&
+        typeof group.heading === 'string' &&
+        Array.isArray(group.entries) &&
+        group.entries.every((entry: unknown) => {
+          if (kind !== 'recognition') return typeof entry === 'string'
+          if (!entry || typeof entry !== 'object') return false
+          const character = entry as Record<string, unknown>
+          return (
+            typeof character.character === 'string' &&
+            typeof character.pinyin === 'string' &&
+            typeof character.polyphonic === 'boolean'
+          )
+        }),
+    )
+  )
+    return undefined
+  if (typeof body.declaredCount !== 'number' || typeof body.entryCount !== 'number')
+    return undefined
+  return {
+    title: content.title,
+    tableKind: kind as LiteracyTablePresentation['tableKind'],
+    declaredCount: body.declaredCount,
+    entryCount: body.entryCount,
+    polyphonicCount: typeof body.polyphonicCount === 'number' ? body.polyphonicCount : 0,
+    groups: groups as LiteracyTablePresentation['groups'],
+    sourcePages: Array.isArray(body.sourcePages)
+      ? body.sourcePages.filter(
+          (page) => page && typeof page.url === 'string' && typeof page.title === 'string',
+        )
+      : [],
+  }
+}
+
 function stableBlockFingerprint(block: ContentBlock): string {
   const seed = [block.type, block.text ?? '', block.mediaAssetId ?? '', block.altText ?? ''].join(
     '|',
@@ -52,6 +96,7 @@ export function buildLearningContentFromCourseContent(
   const blocks = bodyBlocks(content)
   if (!blocks?.length) return null
 
+  const literacyTable = bodyLiteracyTable(content)
   const occurrenceByFingerprint = new Map<string, number>()
   const blockRecords: LessonContentBlockRecord[] = blocks.map((block, index) => {
     const fingerprint = stableBlockFingerprint(block)
@@ -61,8 +106,9 @@ export function buildLearningContentFromCourseContent(
     return {
       id: `${content.id}:block:${stableKey}`,
       block,
-      stepType: index === 0 ? 'intro' : 'concept',
-      title: index === 0 ? content.title : undefined,
+      stepType: block.mediaAssetId ? 'media' : index === 0 ? 'intro' : 'concept',
+      title: index === 0 && !literacyTable ? content.title : undefined,
+      ...(index === 1 && literacyTable ? { literacyTable } : {}),
       mediaAssetIds:
         index === 0 && content.media?.length
           ? content.media

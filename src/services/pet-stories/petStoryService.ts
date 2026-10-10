@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 import type { SpacedReviewEvidence } from '@/services/student-growth/spacedReview'
 
@@ -10,23 +11,37 @@ export interface PetStoryStorage {
   setItem(key: string, value: string): void
 }
 
-const progressSchema = z.object({
-  key: z.string().min(1),
-  profileId: z.string().min(1),
-  questId: z.string().min(1),
-  contentRevision: z.string().min(1),
-  openedAt: z.string().datetime(),
-  expressionCompletedAt: z.string().datetime().optional(),
-  discoveryCompletedAt: z.string().datetime().optional(),
-}).strict().refine(record => record.key === `${record.questId}:${record.contentRevision}` &&
-  (!record.expressionCompletedAt || record.expressionCompletedAt >= record.openedAt) &&
-  (!record.discoveryCompletedAt || record.discoveryCompletedAt >= record.openedAt), 'Invalid story progression')
+const progressSchema = z
+  .object({
+    key: z.string().min(1),
+    profileId: z.string().min(1),
+    questId: z.string().min(1),
+    contentRevision: z.string().min(1),
+    openedAt: z.string().datetime(),
+    expressionCompletedAt: z.string().datetime().optional(),
+    discoveryCompletedAt: z.string().datetime().optional(),
+  })
+  .strict()
+  .refine(
+    (record) =>
+      record.key === `${record.questId}:${record.contentRevision}` &&
+      (!record.expressionCompletedAt || record.expressionCompletedAt >= record.openedAt) &&
+      (!record.discoveryCompletedAt || record.discoveryCompletedAt >= record.openedAt),
+    'Invalid story progression',
+  )
 
 /** Exported for profile archive registration; callers must preserve this exact version. */
-export const petStoryPayloadSchema = z.object({
-  schemaVersion: z.literal(petStorySchemaVersion),
-  records: z.array(progressSchema).max(500),
-}).strict().refine(payload => new Set(payload.records.map(record => record.key)).size === payload.records.length, 'Duplicate story')
+export const petStoryPayloadSchema = z
+  .object({
+    schemaVersion: z.literal(petStorySchemaVersion),
+    records: z.array(progressSchema).max(500),
+  })
+  .strict()
+  .refine(
+    (payload) =>
+      new Set(payload.records.map((record) => record.key)).size === payload.records.length,
+    'Duplicate story',
+  )
 
 export type PetStoryProgress = z.infer<typeof progressSchema>
 
@@ -109,13 +124,16 @@ export function createPetStoryService(
     const key = storyKey(evidence.questId, evidence.contentRevision)
     if (records.some((record) => record.key === key)) return true
 
-    return save(profileId, [...records, {
-      key,
-      profileId,
-      questId: evidence.questId,
-      contentRevision: evidence.contentRevision,
-      openedAt: now(),
-    }])
+    return save(profileId, [
+      ...records,
+      {
+        key,
+        profileId,
+        questId: evidence.questId,
+        contentRevision: evidence.contentRevision,
+        openedAt: now(),
+      },
+    ])
   }
 
   function selfReport(
@@ -133,14 +151,13 @@ export function createPetStoryService(
       return false
     }
 
-    const timestampKey = chapter === 'expression'
-      ? 'expressionCompletedAt'
-      : 'discoveryCompletedAt'
+    const timestampKey = chapter === 'expression' ? 'expressionCompletedAt' : 'discoveryCompletedAt'
     if (records[index]![timestampKey]) return true
     const updated = { ...records[index]!, [timestampKey]: now() }
-    return save(profileId, records.map((record, recordIndex) => (
-      recordIndex === index ? updated : record
-    )))
+    return save(
+      profileId,
+      records.map((record, recordIndex) => (recordIndex === index ? updated : record)),
+    )
   }
 
   function list(
@@ -162,9 +179,9 @@ export function createPetStoryService(
       const representative = latestEvidence(items)
       const storyProgress = progress.find((record) => record.key === key)
       // A story review is only earned by a later evidence record, never by opening it.
-      const reviewCompleted = Boolean(storyProgress && items.some((item) => (
-        item.completedAt > storyProgress.openedAt
-      )))
+      const reviewCompleted = Boolean(
+        storyProgress && items.some((item) => item.completedAt > storyProgress.openedAt),
+      )
 
       return {
         key,
@@ -205,7 +222,7 @@ export function createPetStoryService(
 
 function browserStorage(): PetStoryStorage | undefined {
   try {
-    return typeof window === 'undefined' ? undefined : window.localStorage
+    return typeof window === 'undefined' ? undefined : accountStorage
   } catch {
     return undefined
   }

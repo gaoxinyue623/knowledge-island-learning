@@ -52,6 +52,25 @@ afterEach(() => {
 })
 
 describe('Question domain and repository', () => {
+  it('loads the frozen Agent subset and rejects IDs outside the original assessment', async () => {
+    const adapter = new QuestionEngineAdapter()
+    const ids = [demoQuestions[2]!.id, demoQuestions[0]!.id]
+    const result = await adapter.loadAssessment(demoAssessmentContext, {
+      dataset: 'demo',
+      selectedQuestionIds: ids,
+    })
+    expect(result.definition?.questionIds).toEqual(ids)
+    expect(result.questions.map((q) => q.id)).toEqual(ids)
+    for (const invalid of [[], [ids[0]!, ids[0]!], ['not-in-assessment']]) {
+      const blocked = await adapter.loadAssessment(demoAssessmentContext, {
+        dataset: 'demo',
+        selectedQuestionIds: invalid,
+      })
+      expect(blocked.definition).toBeNull()
+      expect(blocked.issue).toBe('QUESTION_NOT_AVAILABLE')
+    }
+  })
+
   it('keeps a stable demo assessment order and a multi-knowledge-point relation', async () => {
     const result = await questionRepository.getAssessmentDefinition(demoAssessmentContext, 'demo')
 

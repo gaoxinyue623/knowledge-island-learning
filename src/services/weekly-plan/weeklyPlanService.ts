@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 import type {
@@ -106,8 +107,8 @@ export interface WeeklyPlanEvidenceReader {
 }
 
 function browserStorage(): WeeklyPlanStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function cloneAction(action: DailyLearningTaskAction): DailyLearningTaskAction {
@@ -165,7 +166,10 @@ export function buildWeeklyPlanId(profileId: string, weekStartDateKey: string): 
   return `weekly-plan:${profileId}:${weekStartDateKey}`
 }
 
-export function taskReferenceFrom(task: DailyLearningTask, selectedAt: string): WeeklyTaskReference {
+export function taskReferenceFrom(
+  task: DailyLearningTask,
+  selectedAt: string,
+): WeeklyTaskReference {
   return {
     id: task.id,
     sourceId: task.sourceId,
@@ -181,7 +185,11 @@ export function taskReferenceFrom(task: DailyLearningTask, selectedAt: string): 
   }
 }
 
-export function defaultWeeklyPlan(profileId: string, weekStartDateKey = getLocalWeekStartDateKey(), now = new Date()): WeeklyPlan {
+export function defaultWeeklyPlan(
+  profileId: string,
+  weekStartDateKey = getLocalWeekStartDateKey(),
+  now = new Date(),
+): WeeklyPlan {
   const timestamp = now.toISOString()
   return {
     id: buildWeeklyPlanId(profileId, weekStartDateKey),
@@ -219,7 +227,8 @@ export function createWeeklyPlanStorage(
     load(profileId, weekStartDateKey) {
       const result = payload()
       const plan = result.value?.plans.find(
-        (candidate) => candidate.profileId === profileId && candidate.weekStartDateKey === weekStartDateKey,
+        (candidate) =>
+          candidate.profileId === profileId && candidate.weekStartDateKey === weekStartDateKey,
       )
       return { value: plan ? clonePlan(plan) : null, warning: result.warning }
     },
@@ -253,12 +262,15 @@ export function createWeeklyPlanStorage(
 export function createWeeklyPlanEvidenceReader(): WeeklyPlanEvidenceReader {
   const lessonReader = createHomeLessonSessionReader()
   return {
-    history: (profileId) => learningHistoryStorage.loadAll().filter((item) => item.profileId === profileId),
+    history: (profileId) =>
+      learningHistoryStorage.loadAll().filter((item) => item.profileId === profileId),
     lessons: (profileId) => lessonReader.listByProfile(profileId),
     assessments: (profileId) =>
       questionSessionStorage.loadAll().filter((item) => item.id.includes(`:${profileId}:`)),
-    reviewQueue: (profileId) => reviewQueueService.listByProfile(profileId, { includeCompleted: true }),
-    wrongBook: (profileId) => wrongBookStorage.load().records.filter((item) => item.profileId === profileId),
+    reviewQueue: (profileId) =>
+      reviewQueueService.listByProfile(profileId, { includeCompleted: true }),
+    wrongBook: (profileId) =>
+      wrongBookStorage.load().records.filter((item) => item.profileId === profileId),
     warning: () =>
       learningHistoryStorage.getLastWarning() ??
       lessonSessionStorage.getLastWarning() ??
@@ -272,7 +284,10 @@ function completedAfter(occurredAt: string | undefined, selectedAt: string): boo
   return Boolean(occurredAt && occurredAt.localeCompare(selectedAt) >= 0)
 }
 
-function contextMatches(reference: WeeklyTaskReference, context: { textbookId: string; lessonId: string; knowledgePointId: string }): boolean {
+function contextMatches(
+  reference: WeeklyTaskReference,
+  context: { textbookId: string; lessonId: string; knowledgePointId: string },
+): boolean {
   return (
     reference.textbookId === context.textbookId &&
     (!reference.lessonId || reference.lessonId === context.lessonId) &&
@@ -280,21 +295,26 @@ function contextMatches(reference: WeeklyTaskReference, context: { textbookId: s
   )
 }
 
-export function sameWeeklyTask(reference: WeeklyTaskReference, task: DailyLearningTask | WeeklyTaskReference): boolean {
-  return reference.type === task.type && reference.sourceId === task.sourceId &&
-    reference.textbookId === task.textbookId && reference.knowledgePointId === task.knowledgePointId &&
+export function sameWeeklyTask(
+  reference: WeeklyTaskReference,
+  task: DailyLearningTask | WeeklyTaskReference,
+): boolean {
+  return (
+    reference.type === task.type &&
+    reference.sourceId === task.sourceId &&
+    reference.textbookId === task.textbookId &&
+    reference.knowledgePointId === task.knowledgePointId &&
     (!reference.lessonId || !task.lessonId || reference.lessonId === task.lessonId) &&
     reference.action.type === task.action.type
+  )
 }
 
-function liveTaskMatch(reference: WeeklyTaskReference, dailyPlan: DailyLearningPlan | null): DailyLearningTask | null {
+function liveTaskMatch(
+  reference: WeeklyTaskReference,
+  dailyPlan: DailyLearningPlan | null,
+): DailyLearningTask | null {
   if (!dailyPlan) return null
-  return (
-    dailyPlan.tasks.find(
-      (task) =>
-        sameWeeklyTask(reference, task),
-    ) ?? null
-  )
+  return dailyPlan.tasks.find((task) => sameWeeklyTask(reference, task)) ?? null
 }
 
 function evidenceStatus(
@@ -303,48 +323,62 @@ function evidenceStatus(
   evidence: WeeklyPlanEvidenceReader,
 ): WeeklyTaskStatus {
   try {
-    const history = reference.action.type === 'lesson' || reference.action.type === 'assessment'
-      ? evidence.history(profileId) : []
+    const history =
+      reference.action.type === 'lesson' || reference.action.type === 'assessment'
+        ? evidence.history(profileId)
+        : []
     const completedHistory = history.some(
       (record) =>
         completedAfter(record.occurredAt, reference.selectedAt) &&
-        record.type === (reference.action.type === 'lesson' ? 'lesson_completed' : 'assessment_completed') &&
+        record.type ===
+          (reference.action.type === 'lesson' ? 'lesson_completed' : 'assessment_completed') &&
         contextMatches(reference, record),
     )
     if (completedHistory) return 'completed'
     if (reference.action.type === 'lesson') {
-      const completedLesson = evidence.lessons(profileId).some(
-        (session) =>
-          session.status === 'completed' &&
-          completedAfter(session.completedAt, reference.selectedAt) &&
-          contextMatches(reference, session),
-      )
+      const completedLesson = evidence
+        .lessons(profileId)
+        .some(
+          (session) =>
+            session.status === 'completed' &&
+            completedAfter(session.completedAt, reference.selectedAt) &&
+            contextMatches(reference, session),
+        )
       return completedLesson ? 'completed' : 'pending'
     }
     if (reference.action.type === 'assessment') {
-      const completedAssessment = evidence.assessments(profileId).some(
-        (session) =>
-          session.status === 'completed' &&
-          completedAfter(session.completedAt, reference.selectedAt) &&
-          contextMatches(reference, session),
-      )
+      const completedAssessment = evidence
+        .assessments(profileId)
+        .some(
+          (session) =>
+            session.status === 'completed' &&
+            completedAfter(session.completedAt, reference.selectedAt) &&
+            contextMatches(reference, session),
+        )
       return completedAssessment ? 'completed' : 'pending'
     }
     if (reference.action.type === 'review_queue') {
       const action = reference.action
-      const item = evidence.reviewQueue(profileId).find(
-        (candidate) => candidate.id === reference.sourceId || candidate.id === action.reviewQueueItemId,
-      )
+      const item = evidence
+        .reviewQueue(profileId)
+        .find(
+          (candidate) =>
+            candidate.id === reference.sourceId || candidate.id === action.reviewQueueItemId,
+        )
       return item?.status === 'completed' && completedAfter(item.completedAt, reference.selectedAt)
         ? 'completed'
         : 'pending'
     }
     if (reference.action.type === 'wrong_question') {
       const action = reference.action
-      const record = evidence.wrongBook(profileId).find(
-        (candidate) => candidate.id === reference.sourceId || candidate.questionId === action.wrongQuestionId,
-      )
-      return record?.status === 'resolved' && completedAfter(record.resolvedAt, reference.selectedAt)
+      const record = evidence
+        .wrongBook(profileId)
+        .find(
+          (candidate) =>
+            candidate.id === reference.sourceId || candidate.questionId === action.wrongQuestionId,
+        )
+      return record?.status === 'resolved' &&
+        completedAfter(record.resolvedAt, reference.selectedAt)
         ? 'completed'
         : 'pending'
     }
@@ -367,13 +401,20 @@ export function resolveWeeklyPlan(
     days: plan.days.map((day) => {
       const dayDateKey = weekDateKey(plan.weekStartDateKey, day.weekday)
       const taskReferences = day.taskReferences.map((reference) => {
-        const current = liveTaskMatch(reference, dailyPlan?.profileId === plan.profileId ? dailyPlan : null)
+        const current = liveTaskMatch(
+          reference,
+          dailyPlan?.profileId === plan.profileId ? dailyPlan : null,
+        )
         const status = warning
           ? 'unconfirmed'
           : current?.status === 'completed'
             ? 'completed'
             : evidenceStatus(plan.profileId, reference, evidence)
-        return { ...cloneReference(reference), status, canContinue: Boolean(today && dayDateKey < today && status === 'pending') }
+        return {
+          ...cloneReference(reference),
+          status,
+          canContinue: Boolean(today && dayDateKey < today && status === 'pending'),
+        }
       })
       return {
         ...cloneDay(day),
@@ -402,13 +443,18 @@ export function updateWeeklyPlanDay(
 ): WeeklyPlan {
   const selectedAt = now.toISOString()
   const priorDay = plan.days.find((day) => day.weekday === weekday)
-  const retained = input.retainedTaskReferences ?? (input.tasks === undefined ? priorDay?.taskReferences ?? [] : [])
+  const retained =
+    input.retainedTaskReferences ??
+    (input.tasks === undefined ? (priorDay?.taskReferences ?? []) : [])
   const uniqueTasks = new Map((input.tasks ?? []).map((task) => [task.id, task]))
   const remainingCapacity = Math.max(0, MAX_TASKS - retained.length)
   const selected = [...uniqueTasks.values()]
     .filter((task) => !retained.some((reference) => reference.id === task.id))
     .slice(0, remainingCapacity)
-  const references = [...retained.map(cloneReference), ...selected.map((task) => taskReferenceFrom(task, selectedAt))]
+  const references = [
+    ...retained.map(cloneReference),
+    ...selected.map((task) => taskReferenceFrom(task, selectedAt)),
+  ]
   // A lower future goal may not erase already selected/completed evidence.
   const targetCount = Math.min(
     MAX_TASKS,
@@ -435,7 +481,9 @@ export function listWeeklyPlanCarryOvers(
   const loaded = storage.loadAll()
   if (loaded.warning) return { value: [], warning: loaded.warning }
   const tasks = loaded.value
-    .filter((plan) => plan.profileId === profileId && plan.weekStartDateKey < currentWeekStartDateKey)
+    .filter(
+      (plan) => plan.profileId === profileId && plan.weekStartDateKey < currentWeekStartDateKey,
+    )
     .sort((left, right) => right.weekStartDateKey.localeCompare(left.weekStartDateKey))
     .flatMap((plan) => resolveWeeklyPlan(plan, dailyPlan, evidence).days)
     .flatMap((day) => day.taskReferences)

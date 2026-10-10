@@ -1,0 +1,1762 @@
+{
+  "title": "沪教牛津英语六年级下册（三年级起点）",
+  "publisher": "上海教育出版社",
+  "sourceSha256": "c1dfd2a03f7d4ebc826bea58ccb1ff2a800a760c42a705f0a45265f1c080c398",
+  "sourceNote": "用户提供的三年级起点六下双语文本，未注明版次年份；页码沿用来稿，未对照出版社原书逐页核验。12个Unit、4个Project及6个附录栏目全部按来稿接入。词表二仅提供英文词条；部分正文存在错位或语法问题，保留原句并附核对说明。设备跟读为合成语音，非教材原声。基础练习及明确标示的口语、词义补充为项目原创；Project和附录不自动评分。",
+  "modules": [
+    {
+      "number": 1,
+      "title": "Changes and differences"
+    },
+    {
+      "number": 2,
+      "title": "Work and play"
+    },
+    {
+      "number": 3,
+      "title": "Things we do"
+    },
+    {
+      "number": 4,
+      "title": "Things we enjoy"
+    },
+    {
+      "number": 5,
+      "title": "册末附录"
+    }
+  ],
+  "wordLists": [
+    {
+      "title": "Word list 1",
+      "page": 82,
+      "words": [
+        "weigh",
+        "kilogram",
+        "centimetre",
+        "fan",
+        "theatre",
+        "life",
+        "writer",
+        "street cleaner",
+        "drive",
+        "poor",
+        "wish",
+        "carry",
+        "mountain",
+        "even",
+        "space",
+        "oil",
+        "brush",
+        "paints",
+        "artist",
+        "unhappy",
+        "carefully",
+        "scissors",
+        "tape",
+        "glue",
+        "tool",
+        "easily",
+        "still",
+        "long race",
+        "short race",
+        "win",
+        "long jump",
+        "high jump",
+        "gatekeeper",
+        "sign",
+        "look out",
+        "follow",
+        "exit",
+        "smoke",
+        "reuse",
+        "throw away",
+        "can",
+        "vase",
+        "pen holder",
+        "storybook",
+        "foolish",
+        "clever",
+        "emperor",
+        "Western",
+        "festival",
+        "Easter",
+        "Halloween",
+        "Thanksgiving",
+        "Christmas",
+        "turkey",
+        "pea",
+        "pod",
+        "bullet",
+        "useful"
+      ]
+    },
+    {
+      "title": "Word list 2",
+      "page": 85,
+      "words": [
+        "countryside",
+        "underground",
+        "crop",
+        "fairy",
+        "digital camera",
+        "street sweeper",
+        "machine",
+        "time box",
+        "online",
+        "ink painting",
+        "oil painting",
+        "crown",
+        "model",
+        "craftsman",
+        "saw",
+        "athlete",
+        "Olympic",
+        "ant",
+        "bee",
+        "forest",
+        "furniture",
+        "cloth",
+        "emperor",
+        "wolf",
+        "crow",
+        "pudding",
+        "church"
+      ]
+    }
+  ],
+  "verbRows": [
+    {
+      "base": "weigh",
+      "past": "weighed",
+      "kind": "regular"
+    },
+    {
+      "base": "use",
+      "past": "used",
+      "kind": "regular"
+    },
+    {
+      "base": "catch",
+      "past": "caught",
+      "kind": "irregular"
+    },
+    {
+      "base": "cut",
+      "past": "cut",
+      "kind": "irregular"
+    },
+    {
+      "base": "meet",
+      "past": "met",
+      "kind": "irregular"
+    },
+    {
+      "base": "see",
+      "past": "saw",
+      "kind": "irregular"
+    },
+    {
+      "base": "tell",
+      "past": "told",
+      "kind": "irregular"
+    },
+    {
+      "base": "make",
+      "past": "made",
+      "kind": "irregular"
+    },
+    {
+      "base": "take",
+      "past": "took",
+      "kind": "irregular"
+    },
+    {
+      "base": "fall",
+      "past": "fell",
+      "kind": "irregular"
+    },
+    {
+      "base": "grow",
+      "past": "grew",
+      "kind": "irregular"
+    },
+    {
+      "base": "get",
+      "past": "got",
+      "kind": "irregular"
+    }
+  ],
+  "units": [
+    {
+      "number": 1,
+      "moduleNumber": 1,
+      "kind": "unit",
+      "title": "Unit 1 You and me",
+      "page": 2,
+      "words": [
+        {
+          "english": "weigh",
+          "phonetic": "/weɪ/",
+          "chinese": "重；称重",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "kilogram",
+          "phonetic": "/ˈkɪləɡræm/",
+          "chinese": "千克",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "centimetre",
+          "phonetic": "/ˈsentɪmiːtə(r)/",
+          "chinese": "厘米",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "fan",
+          "phonetic": "/fæn/",
+          "chinese": "迷；风扇",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "theatre",
+          "phonetic": "/ˈθɪətə(r)/",
+          "chinese": "剧院",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Joe is visiting his cousin George in the countryside.\nJoe: I weigh 47 kilograms. How much do you weigh, George?\nGeorge: I weigh 40 kilograms.\nJoe: I’m 150 centimetres tall. How tall are you?\nGeorge: I’m 152 centimetres tall.\nJoe: You’re taller. Do you do a lot of exercise?\nGeorge: Yes. I usually play basketball and table tennis after school.\nJoe: I usually play football after school. I’m a football fan.\nGeorge: Sometimes I go fishing with my grandpa.\nJoe: How exciting! I don’t go fishing often. There’s no river near my home.\nGeorge: But you can go to museums. That’s fantastic!",
+          "chinese": "乔正在乡下看望表哥乔治。\n乔：我重47千克。乔治，你多重？\n乔治：我40千克。\n乔：我身高150厘米。你多高？\n乔治：我152厘米。\n乔：你更高。你经常锻炼吗？\n乔治：是的。放学后我通常打篮球和乒乓球。\n乔：放学后我经常踢足球，我是足球迷。\n乔治：我有时候和爷爷去钓鱼。\n乔：好刺激！我很少钓鱼，我家附近没有河。\n乔治：但你可以去博物馆，太棒了！"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Look and read",
+          "byline": "",
+          "english": "Hi! I'm Joe. I live in the city.\nThere are a lot of tall buildings in the city. There are a lot of shops and restaurants too. People go to work by car, bus or underground. At the weekend, some people enjoy themselves at the cinema or theatre. Some people visit museums.\nHi! I'm George. I live in the countryside.\nThere are a lot of houses with gardens in the countryside. There are hills, rivers, lakes and a lot of trees. There aren't many cars. The air is fresh. People here like to walk or ride their bikes. Farmers plant crops in spring. Then in autumn they get the crops in.",
+          "chinese": "你好，我是乔。我住在城市。城市有很多高楼，也有很多商店和餐馆。人们开车、坐公交或者地铁上班。周末，有些人去电影院、剧院消遣，有些人参观博物馆。\n你好，我是乔治。我住在乡下。乡下有很多带花园的房子，有小山、河流、湖泊和大片树木。车辆不多，空气清新。这里的人们喜欢散步或者骑车。农民春天播种，秋天收割庄稼。"
+        }
+      ],
+      "sounds": "a, a-e, ai, ay, eigh, i, i-e, y, igh, ie",
+      "soundExamples": "name, rain, day, eight, fine, my, high, pie",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "How much do you weigh? How tall are you?",
+      "sentencePrompt": "用本课问句练习询问身高或体重，按自己的情况回答。",
+      "sentenceAnswer": "I’m 150 centimetres tall.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "weigh 的意思是什么？",
+          "options": [
+            "重；称重",
+            "骑自行车",
+            "画画"
+          ],
+          "correctIndex": 0,
+          "explanation": "weigh 表示重或称重。"
+        },
+        {
+          "stem": "对话中询问身高，使用哪个问句？",
+          "options": [
+            "How tall are you?",
+            "How much do you weigh?",
+            "Which painting do you like?"
+          ],
+          "correctIndex": 0,
+          "explanation": "How tall are you? 用于询问身高。"
+        },
+        {
+          "stem": "根据对话，George 多重？",
+          "options": [
+            "40 kilograms.",
+            "47 kilograms.",
+            "152 kilograms."
+          ],
+          "correctIndex": 0,
+          "explanation": "George 说 I weigh 40 kilograms。"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "moduleNumber": 1,
+      "kind": "unit",
+      "title": "Unit 2 Changes in our lives",
+      "page": 8,
+      "words": [
+        {
+          "english": "life",
+          "phonetic": "/laɪf/",
+          "chinese": "生活；生命",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "writer",
+          "phonetic": "/ˈraɪtə(r)/",
+          "chinese": "作家",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "street cleaner",
+          "phonetic": "/striːt ˈkliːnə(r)/",
+          "chinese": "环卫工人",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "drive",
+          "phonetic": "/draɪv/",
+          "chinese": "驾驶",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "poor",
+          "phonetic": "/pʊə(r)/",
+          "chinese": "贫穷的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "wish",
+          "phonetic": "/wɪʃ/",
+          "chinese": "愿望；许愿",
+          "partOfSpeech": "n. & v."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Ms Wen is a writer. In the past, she used a pen and paper to write her books. Now she uses a computer.\nMrs Hong is a farmer. In the past, she got her crops in by hand. Now she uses a machine.\nMr Zhang is a photographer. In the past, he used film to take photos. Now he uses a digital camera. He can see his photos right away.\nMr Yang is a street cleaner. In the past, he swept the streets with a broom. Now he drives a street sweeper. It can clean the streets in a short time.",
+          "chinese": "温女士是作家。过去，她用纸笔写书。现在她用电脑。\n洪夫人是农民。过去，她手工收割庄稼。现在她用机器。\n张先生是摄影师。过去，他用胶卷拍照。现在他用数码相机，可以立刻看到照片。\n杨先生是环卫工人。过去，他用扫帚扫地。现在他开清扫车，很快就能清扫街道。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "The happy farmer and his wife",
+          "byline": "",
+          "english": "A long time ago, there was a poor farmer and his wife. One day, the farmer caught a fairy. The fairy said, “I can give you three wishes.”\nFred and Doris smiled at each other and said, “Thank you, but we don’t need any wishes.”\n“I can give you some gold. Then you won’t have to work,” said the fairy.\n“Thank you. We’re poor, but we’re happy,” said Doris.\n“I can give you a big, new house,” said the fairy.\n“Thank you. Our house is small and old, but it’s warm and nice,” said Fred.\nThe fairy was happy. She helped them look after their farm. They were happy every day.",
+          "chinese": "快乐的农夫和妻子\n很久以前，有一对贫穷的农夫夫妇。一天，农夫抓到一位仙女。仙女说：“我可以满足你们三个愿望。”\n弗雷德和多丽丝相视一笑：“谢谢您，我们不需要愿望。”\n仙女：“我可以给你们金子，这样你们就不用劳作了。”\n多丽丝：“谢谢您。我们虽然贫穷，但很幸福。”\n仙女：“我可以给你们一栋崭新的大房子。”\n弗雷德：“谢谢您。我们的房子虽然老旧狭小，但温暖舒适。”\n仙女很开心，帮他们照料农场。他们每天过得很快乐。"
+        }
+      ],
+      "sounds": "o, o-e, ow, ou",
+      "soundExamples": "hot, home, slow, house",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "In the past, she used a pen. Now she uses a computer.",
+      "sentencePrompt": "用 In the past … Now … 描述一项生活变化。",
+      "sentenceAnswer": "In the past, she used a pen. Now she uses a computer.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "writer 的意思是什么？",
+          "options": [
+            "作家",
+            "消防员",
+            "门卫"
+          ],
+          "correctIndex": 0,
+          "explanation": "writer 意为作家。"
+        },
+        {
+          "stem": "表示过去用笔写书，选择正确句子。",
+          "options": [
+            "In the past, she used a pen.",
+            "In the past, she use a pen.",
+            "In the past, she using a pen."
+          ],
+          "correctIndex": 0,
+          "explanation": "过去发生的动作使用过去式 used。"
+        },
+        {
+          "stem": "根据课文，Ms Wen 现在用什么写书？",
+          "options": [
+            "A computer.",
+            "A broom.",
+            "Film."
+          ],
+          "correctIndex": 0,
+          "explanation": "课文说 Now she uses a computer。"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "moduleNumber": 1,
+      "kind": "unit",
+      "title": "Unit 3 Our school in the future",
+      "page": 14,
+      "words": [
+        {
+          "english": "carry",
+          "phonetic": "/ˈkæri/",
+          "chinese": "拿；携带",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "mountain",
+          "phonetic": "/ˈmaʊntən/",
+          "chinese": "高山",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "even",
+          "phonetic": "/ˈiːvn/",
+          "chinese": "甚至",
+          "partOfSpeech": "adv."
+        },
+        {
+          "english": "space",
+          "phonetic": "/speɪs/",
+          "chinese": "太空",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Ms Guo: What changes would you like to see in our school? Write your wishes down on a piece of paper. Then put your paper in this time box.\nStudents: Yes, Ms Guo.\nAlice: Students will grow a lot of plants in the garden.\nJoe: Students will not carry any books. All their books will be on a small computer.\nPeter: I will be the head teacher.\nKitty: Students will study online at home.\nMs Guo: In the future, you’ll open the box and read your wishes.\nStudents: Great!",
+          "chinese": "郭老师：你们希望学校发生哪些变化？把愿望写在纸上，放进这个时间胶囊。\n学生：好的，郭老师。\n爱丽丝：学生们会在花园里种植很多植物。\n乔：学生不用背书本，所有书本都放在小小的电脑里。\n彼得：我将来当校长。\n基蒂：学生可以在家线上学习。\n郭老师：将来，你们打开盒子，读你们写下的愿望。\n学生：太棒啦！"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Schools of the future",
+          "byline": "By Joe",
+          "english": "In the future, schools will be different. They will be under the sea, on high mountains and even in space.\nRobots will help us find books in the library. They will also do other things in schools.\nWe will use computers in all our lessons. They will help us see dinosaurs and other interesting things.\nWe will have lessons with students from other countries. We will do a lot of things online together.\nWe will not carry books to school. All our books will be on a small computer.",
+          "chinese": "未来的学校 作者：乔\n未来，学校会变得不一样。它们会建在海底、高山上，甚至太空里。\n机器人帮我们在图书馆找书，也会在学校做其他工作。\n我们所有课程都使用电脑。电脑可以带我们看恐龙和其他有趣事物。\n我们会和其他国家的学生一起上课，一起在线完成很多任务。\n我们不用带书上学，所有书本都存储在小小的电脑中。"
+        }
+      ],
+      "sounds": "m, n, ng, n(k), n(g)",
+      "soundExamples": "my, no, sing, bank, thank",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "What changes would you like to see? Students will grow plants in the garden.",
+      "sentencePrompt": "用 will 描述你希望未来学校出现的变化。",
+      "sentenceAnswer": "Students will grow plants in the garden.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "carry 的意思是什么？",
+          "options": [
+            "拿；携带",
+            "跳高",
+            "回收"
+          ],
+          "correctIndex": 0,
+          "explanation": "carry 意为拿或携带。"
+        },
+        {
+          "stem": "选择正确的一般将来时句子。",
+          "options": [
+            "Students will study online.",
+            "Students will studies online.",
+            "Students will studying online."
+          ],
+          "correctIndex": 0,
+          "explanation": "will 后面接动词原形 study。"
+        },
+        {
+          "stem": "根据阅读，机器人会在图书馆帮学生做什么？",
+          "options": [
+            "Find books.",
+            "Catch a fairy.",
+            "Paint an egg."
+          ],
+          "correctIndex": 0,
+          "explanation": "原文 Robots will help us find books in the library。"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "moduleNumber": 1,
+      "kind": "project",
+      "title": "Project 1",
+      "page": 20,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "project",
+          "scope": "Project",
+          "title": "Project 1",
+          "byline": "",
+          "english": "Aim: Make a poster about changes in our lives.\nStep1 Think and collect\nWork in groups. Think about changes in our lives. Collect photos or draw pictures.\nStep2 Make your poster\nWrite captions. Use words and sentences from Module1.\nStep3 Show and share\nPresent your poster to the class.",
+          "chinese": "目标：制作一张关于生活变化的海报\n步骤1 思考收集：小组合作，思考生活里的变化，收集照片或画图。\n步骤2 制作海报：写图片说明，使用Module1的词句。\n步骤3 展示分享：向全班展示海报。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "制作生活变化海报并分享。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 4,
+      "moduleNumber": 2,
+      "kind": "unit",
+      "title": "Unit 4 Art",
+      "page": 22,
+      "words": [
+        {
+          "english": "oil",
+          "phonetic": "/ɔɪl/",
+          "chinese": "油",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "brush",
+          "phonetic": "/brʌʃ/",
+          "chinese": "画笔；刷子",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "paints",
+          "phonetic": "/peɪnts/",
+          "chinese": "颜料",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "artist",
+          "phonetic": "/ˈɑːtɪst/",
+          "chinese": "艺术家",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "unhappy",
+          "phonetic": "/ʌnˈhæpi/",
+          "chinese": "不开心的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "carefully",
+          "phonetic": "/ˈkeəfəli/",
+          "chinese": "仔细地",
+          "partOfSpeech": "adv."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "The students are going to an art museum tomorrow.\nMiss Wang: Which painting do you like, Joe?\nJoe: I like the one on the left. I like the colours.\nMiss Wang: This is an oil painting. It’s colourful.\nMiss Wang: Which one do you like, Kitty?\nKitty: I like the one on the right. I like horses.\nMiss Wang: This is a Chinese ink painting. It’s in black and white.",
+          "chinese": "学生们明天要去美术博物馆。\n王老师：乔，你喜欢哪一幅画？\n乔：我喜欢左边这幅，我喜欢它的色彩。\n王老师：这是油画，色彩丰富。\n王老师：基蒂，你喜欢哪一幅？\n基蒂：我喜欢右边这幅。我喜欢马。\n王老师：这是中国水墨画，黑白的。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Little Leo",
+          "byline": "",
+          "english": "Little Leo liked drawing very much. He studied painting in a school.\nEvery day after school, Leo worked hard. His teacher showed him many paintings.\nOne day, the teacher asked Leo to draw an egg. Leo thought, “It’s easy to draw an egg.” He drew quickly.\nThe teacher looked at his picture and said, “Draw it again. You should draw it carefully.”\nLittle Leo felt unhappy and asked, “Why do we draw eggs all the time?”\n“Look carefully! It’s an egg again, but it looks different,” said the teacher.\nLeo learned to draw carefully. Later he became a great artist.",
+          "chinese": "小利奥\n小利奥非常喜欢画画。他在一所学校学习绘画。\n每天放学后，利奥刻苦练习。老师给他看很多画作。\n一天，老师让利奥画鸡蛋。利奥心想：画鸡蛋很简单。他很快画完。\n老师看了画说：“重新画，你要仔细画。”\n小利奥不开心：“为什么我们一直画鸡蛋？”\n老师：“仔细看！这依然是鸡蛋，但每一枚样子都不一样。”\n利奥学会仔细作画，后来他成了伟大的艺术家。"
+        }
+      ],
+      "sounds": "oy, oi, ear, ere, eer",
+      "soundExamples": "boy, oil, ear, here, deer",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "Which painting do you like?",
+      "sentencePrompt": "介绍自己喜欢的画和理由。",
+      "sentenceAnswer": "I like the oil painting.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "carefully 的意思是什么？",
+          "options": [
+            "仔细地",
+            "轻松地",
+            "不开心的"
+          ],
+          "correctIndex": 0,
+          "explanation": "carefully 表示仔细地。"
+        },
+        {
+          "stem": "课文中询问喜欢哪幅画，用哪个问句？",
+          "options": [
+            "Which painting do you like?",
+            "How tall are you?",
+            "How much do you weigh?"
+          ],
+          "correctIndex": 0,
+          "explanation": "Which painting do you like? 询问喜欢哪幅画。"
+        },
+        {
+          "stem": "根据 Little Leo，老师让 Leo 反复画什么？",
+          "options": [
+            "An egg.",
+            "A museum.",
+            "A street sweeper."
+          ],
+          "correctIndex": 0,
+          "explanation": "老师让 Leo 画鸡蛋，并教他仔细观察。"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "moduleNumber": 2,
+      "kind": "unit",
+      "title": "Unit 5 Crafts",
+      "page": 28,
+      "words": [
+        {
+          "english": "scissors",
+          "phonetic": "/ˈsɪzəz/",
+          "chinese": "剪刀",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "tape",
+          "phonetic": "/teɪp/",
+          "chinese": "胶带",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "glue",
+          "phonetic": "/ɡluː/",
+          "chinese": "胶水",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "tool",
+          "phonetic": "/tuːl/",
+          "chinese": "工具",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "easily",
+          "phonetic": "/ˈiːzɪli/",
+          "chinese": "容易地",
+          "partOfSpeech": "adv."
+        },
+        {
+          "english": "still",
+          "phonetic": "/stɪl/",
+          "chinese": "仍然",
+          "partOfSpeech": "adv."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Ms Guo and her students are making some crafts for their families and friends. Ms Guo is helping them.\nMs Guo: What do you want to make, Jill? What do you need?\nJill: I want to make a crown. I need a pair of scissors.\nMs Guo: That sounds nice.\nPeter: I’m making a toy plane for my brother. He likes playing with toy planes.\nMs Guo: That’s good. What are you making, Joe and Alice?\nJoe & Alice: We’re making a model house. It’s for Kitty. Her birthday is coming. We don’t have any tape. Can you give us some, please?\nMs Guo: Sure!",
+          "chinese": "郭老师和学生正在为家人朋友做手工，郭老师帮忙。\n郭老师：吉尔，你想做什么？你需要什么？\n吉尔：我想做一顶王冠。我需要一把剪刀。\n郭老师：听起来很棒。\n彼得：我给弟弟做玩具飞机，他喜欢玩具飞机。\n郭老师：很好。乔和爱丽丝，你们在做什么？\n乔&爱丽丝：我们在做模型房子，送给基蒂，她生日快到了。我们没有胶带，可以给我们一些吗？\n郭老师：当然！"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Look and read",
+          "byline": "",
+          "english": "A long time ago, there was a craftsman. His name was Lu Ban.\nOne day, Lu Ban was at work on a mountain. A leaf cut his finger. He looked at the leaf. There were many sharp teeth on it.\nLu Ban wanted to make a tool like this leaf. He wanted to cut wood easily. Then he made the saw. People still use the saw today.",
+          "chinese": "很久以前，有一位工匠，名叫鲁班。\n一天鲁班在山上干活，一片叶子割破他的手指。他观察叶子，叶子边缘有很多锋利小齿。\n鲁班想做出像这片叶子一样的工具，可以轻松切割木头。于是他发明了锯子。直到今天人们还在使用锯子。"
+        }
+      ],
+      "sounds": "air, ere, ear, are, ure, our, oor",
+      "soundExamples": "chair, where, bear, care, sure, tour, poor",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "What are you making? I’m making a toy plane.",
+      "sentencePrompt": "用现在进行时介绍正在制作的手工作品。",
+      "sentenceAnswer": "I’m making a toy plane.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "scissors 的意思是什么？",
+          "options": [
+            "剪刀",
+            "胶水",
+            "胶带"
+          ],
+          "correctIndex": 0,
+          "explanation": "scissors 意为剪刀。"
+        },
+        {
+          "stem": "描述正在做玩具飞机，选择正确句子。",
+          "options": [
+            "I’m making a toy plane.",
+            "I’m make a toy plane.",
+            "I making a toy plane."
+          ],
+          "correctIndex": 0,
+          "explanation": "现在进行时为 be + 动词-ing，使用 I’m making。"
+        },
+        {
+          "stem": "根据对话，Joe 和 Alice 在为 Kitty 制作什么？",
+          "options": [
+            "A model house.",
+            "A crown.",
+            "A toy plane."
+          ],
+          "correctIndex": 0,
+          "explanation": "Joe & Alice 说 We’re making a model house. It’s for Kitty。"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "moduleNumber": 2,
+      "kind": "unit",
+      "title": "Unit 6 PE lessons",
+      "page": 34,
+      "words": [
+        {
+          "english": "long race",
+          "phonetic": "/lɒŋ reɪs/",
+          "chinese": "长跑",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "short race",
+          "phonetic": "/ʃɔːt reɪs/",
+          "chinese": "短跑",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "win",
+          "phonetic": "/wɪn/",
+          "chinese": "赢",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "long jump",
+          "phonetic": "/lɒŋ dʒʌmp/",
+          "chinese": "跳远",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "high jump",
+          "phonetic": "/haɪ dʒʌmp/",
+          "chinese": "跳高",
+          "partOfSpeech": ""
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "We have two PE lessons at school every week. My friends and I like PE lessons very much.\nWe run long races and short races. The races are exciting. We all want to win.\nWe do the long jump and the high jump. Jill is good at the high jump. Joe is good at the long jump.\nSometimes we play ball games. I like playing football, volleyball and basketball.\nMy friends and I like playing sport. We have a lot of fun together!",
+          "chinese": "我们每周有两节体育课。我和朋友们非常喜欢体育课。\n我们进行长跑和短跑比赛，比赛很刺激。我们都想赢。\n我们练习跳远和跳高。吉尔擅长跳高，乔擅长跳远。\n有时候我们打球。我喜欢足球、排球和篮球。\n我和朋友们喜爱运动，我们在一起玩得很开心！"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Sports",
+          "byline": "",
+          "english": "Sport helps us stay healthy. Many people love sport.\nSome people like running. Some people like swimming. Some people like ball games.\nAt the Olympics, athletes run, jump and play games. They try their best.\nWe can do sport at school or in the park. Sport is fun.",
+          "chinese": "运动\n运动帮助我们保持健康。很多人热爱运动。\n有些人喜欢跑步，有些人喜欢游泳，有些人喜欢球类。\n奥运会上，运动员奔跑、跳跃、比赛，他们全力以赴。\n我们可以在学校或者公园运动。运动充满乐趣。"
+        }
+      ],
+      "sounds": "y, h, w, wh, l, r, rr",
+      "soundExamples": "yes, hat, we, what, leg, red, hurry",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "Jill is good at the high jump.",
+      "sentencePrompt": "说说自己擅长或喜欢的运动。",
+      "sentenceAnswer": "I like playing football.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "high jump 的意思是什么？",
+          "options": [
+            "跳高",
+            "跳远",
+            "长跑"
+          ],
+          "correctIndex": 0,
+          "explanation": "high jump 表示跳高。"
+        },
+        {
+          "stem": "选择正确的搭配。Jill is good ____ the high jump.",
+          "options": [
+            "at",
+            "on",
+            "to"
+          ],
+          "correctIndex": 0,
+          "explanation": "be good at 表示擅长。"
+        },
+        {
+          "stem": "根据课文，他们每周有几节体育课？",
+          "options": [
+            "Two.",
+            "Three.",
+            "Five."
+          ],
+          "correctIndex": 0,
+          "explanation": "开头 We have two PE lessons at school every week。"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "moduleNumber": 2,
+      "kind": "project",
+      "title": "Project 2",
+      "page": 40,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "project",
+          "scope": "Project",
+          "title": "Project 2",
+          "byline": "",
+          "english": "Aim: Make a poster about your favourite sport.\nStep1 Think and collect\nWhat is your favourite sport? Why do you like it? Find pictures.\nStep2 Make your poster\nWrite sentences about your sport.\nStep3 Show and share",
+          "chinese": "目标：制作一张关于你最喜欢运动的海报。\n步骤1：思考收集：你最喜欢什么运动？为什么喜欢？找图片。\n步骤2：制作海报，写句子介绍这项运动。\n步骤3：展示分享。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "制作最喜欢的运动海报并介绍。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 7,
+      "moduleNumber": 3,
+      "kind": "unit",
+      "title": "Unit 7 Helping others",
+      "page": 42,
+      "words": [
+        {
+          "english": "gatekeeper",
+          "phonetic": "/ˈɡeɪtkiːpə(r)/",
+          "chinese": "门卫；看门人",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "ant",
+          "chinese": "蚂蚁",
+          "phonetic": "",
+          "partOfSpeech": "n.",
+          "sourceScope": "PROJECT_GLOSS_FROM_SUPPLIED_BILINGUAL_READING"
+        },
+        {
+          "english": "bee",
+          "chinese": "蜜蜂",
+          "phonetic": "",
+          "partOfSpeech": "n.",
+          "sourceScope": "PROJECT_GLOSS_FROM_SUPPLIED_BILINGUAL_READING"
+        },
+        {
+          "english": "queen",
+          "chinese": "蚁后",
+          "phonetic": "",
+          "partOfSpeech": "n.",
+          "sourceScope": "PROJECT_GLOSS_FROM_SUPPLIED_BILINGUAL_READING"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Today is Sunday. Sally and Peter are in the park. A boy is crying.\nSally: Hello. What’s the matter? Can we help you?\nBoy: I can’t find my dog.\nPeter: We can help you. What does your dog look like?\nBoy: She’s small and white. She has a pink bell around her neck.\nMan: I saw her half an hour ago. She was near the gate.\nWoman: I saw her too. She was running towards the lake.\nSally: Let’s go to the gatekeeper. Peter, you go to the lake.\nPeter: OK. Let’s meet here in 15 minutes.\nBoy: Thank you for your help.",
+          "chinese": "今天周日，萨莉和彼得在公园。一个小男孩在哭。\n萨莉：你好，怎么了？我们可以帮你吗？\n男孩：我找不到我的狗了。\n彼得：我们帮你。你的狗长什么样？\n男孩：她小小的，白色，脖子上有粉色铃铛。\n男士：半小时前我见过她，在大门附近。\n女士：我也看见了，她朝湖边跑去了。\n萨莉：我去找门卫。彼得，你去湖边看看。\n彼得：好。我们15分钟后在这里汇合。\n男孩：谢谢你们帮忙。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "The ant and the bee",
+          "byline": "",
+          "english": "One day, the ant met the bee.\nAnt: Hello, Miss Bee. Can I ask you a question?\nBee: Of course, Mr Ant. Please go ahead.\nAnt: You and I both work very hard. People like you, but they don’t like me. Why is that?\nBee: You work for yourself and your queen only, but my work also helps flowers and people. People like those who help others.",
+          "chinese": "蚂蚁和蜜蜂\n一天，蚂蚁遇见蜜蜂。\n蚂蚁：你好蜜蜂小姐，我能问你一个问题吗？\n蜜蜂：当然，蚂蚁先生，请讲。\n蚂蚁：你和我都辛勤劳作。人们喜欢你，却不喜欢我，为什么？\n蜜蜂：你只为自己和蚁后干活。我的工作还帮助花朵和人类。人们喜欢乐于助人的人。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "Syllables 音节划分",
+      "speechExamples": "be-gin, com-pu-ter",
+      "sentencePattern": "What does your dog look like?",
+      "sentencePrompt": "描述一只动物的外貌。",
+      "sentenceAnswer": "She is small and white.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "gatekeeper 的意思是什么？",
+          "options": [
+            "门卫；看门人",
+            "画家",
+            "农夫"
+          ],
+          "correctIndex": 0,
+          "explanation": "gatekeeper 意为门卫或看门人。"
+        },
+        {
+          "stem": "对话中询问狗的外貌，用哪个问句？",
+          "options": [
+            "What does your dog look like?",
+            "What does it mean?",
+            "How tall are you?"
+          ],
+          "correctIndex": 0,
+          "explanation": "What does your dog look like? 用来询问狗的外貌。"
+        },
+        {
+          "stem": "根据对话，男孩的狗是什么颜色？",
+          "options": [
+            "White.",
+            "Black.",
+            "Brown."
+          ],
+          "correctIndex": 0,
+          "explanation": "男孩说 She’s small and white。"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "moduleNumber": 3,
+      "kind": "unit",
+      "title": "Unit 8 Reading signs",
+      "page": 48,
+      "words": [
+        {
+          "english": "sign",
+          "phonetic": "/saɪn/",
+          "chinese": "标识；标志",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "look out",
+          "phonetic": "",
+          "chinese": "小心；留意",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "follow",
+          "phonetic": "/ˈfɒləʊ/",
+          "chinese": "跟随",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "exit",
+          "phonetic": "/ˈeksɪt/",
+          "chinese": "出口",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "smoke",
+          "phonetic": "/sməʊk/",
+          "chinese": "吸烟",
+          "partOfSpeech": "v."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Ms Wang and her students are reading signs in the library.\nMs Wang: Look at this sign. What does it mean?\nJill: It means “We must look out for them.” We must keep quiet.\nMs Wang: That’s right. What about that sign?\nPeter: It means “We can follow them back home.” We can use the exit.\nMs Wang: Good. Don’t touch the fire. We shouldn’t smoke in the library.",
+          "chinese": "王老师和学生在图书馆看标识。\n王老师：看这个标识，是什么意思？\n吉尔：意思是“我们必须留意”，我们必须保持安静。\n王老师：对。那个标识呢？\n彼得：意思是“我们可以跟着返回”，我们可以走出口。\n王老师：很好。不要触碰火源。图书馆内禁止吸烟。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Signs around us",
+          "byline": "",
+          "english": "We can see many signs around us. Different signs tell us different things.\nSome signs tell us what we must do. Some tell us what we must not do.\nWe can see signs in the library, in the park, on the road and in the underground. They help us stay safe.",
+          "chinese": "我们身边的标识\n我们身边能看到很多标识。不同标识传递不同信息。\n有些标识告诉我们必须做什么，有些告诉我们禁止做什么。\n图书馆、公园、马路、地铁里都有标识。它们帮助我们保障安全。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "Word stress 单词重音",
+      "speechExamples": "'paper, be'gin",
+      "sentencePattern": "We must keep quiet. We shouldn’t smoke.",
+      "sentencePrompt": "用 must 或 shouldn’t 说一条规则。",
+      "sentenceAnswer": "We must keep quiet.",
+      "excludedReadingLines": [
+        "Jill: It means “We must look out for them.” We must keep quiet.",
+        "Peter: It means “We can follow them back home.” We can use the exit."
+      ],
+      "notes": [
+        "来稿标识解释“We must look out for them”与保持安静不对应，“We can follow them back home”与使用出口不对应。原句保留并标注待核对，不自动跟读，也不用于标识含义判分题。未提供标识图片，不补写出版社原文。"
+      ],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "exit 的意思是什么？",
+          "options": [
+            "出口",
+            "花瓶",
+            "胶带"
+          ],
+          "correctIndex": 0,
+          "explanation": "exit 意为出口。"
+        },
+        {
+          "stem": "选择正确的情态动词句子。",
+          "options": [
+            "We must keep quiet.",
+            "We must keeps quiet.",
+            "We must keeping quiet."
+          ],
+          "correctIndex": 0,
+          "explanation": "must 后面接动词原形 keep；此题考查语法，不把来稿错位的标识解释当作依据。"
+        },
+        {
+          "stem": "根据 Signs around us，标识有什么作用？",
+          "options": [
+            "They help us stay safe.",
+            "They replace all our books.",
+            "They make us taller."
+          ],
+          "correctIndex": 0,
+          "explanation": "阅读末句 They help us stay safe。"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "moduleNumber": 3,
+      "kind": "unit",
+      "title": "Unit 9 Reusing things",
+      "page": 54,
+      "words": [
+        {
+          "english": "reuse",
+          "phonetic": "/ˌriːˈjuːz/",
+          "chinese": "重新利用；再使用",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "throw away",
+          "phonetic": "",
+          "chinese": "扔掉",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "can",
+          "phonetic": "/kæn/",
+          "chinese": "金属罐",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "vase",
+          "phonetic": "/vɑːz/",
+          "chinese": "花瓶",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "pen holder",
+          "phonetic": "/pen ˈhəʊldə(r)/",
+          "chinese": "笔筒",
+          "partOfSpeech": ""
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Alice and her mum are talking about old bottles and cans.\nAlice: Mum, can I throw away these bottles and cans?\nMrs Wang: No, we should keep them.\nAlice: Why, Mum?\nMrs Wang: Because we can reuse them. Let me show you.\nMrs Wang: Look, Alice. We can clean this small can and put your rubbers and crayons in it.\nAlice: That’s a good idea.\nMrs Wang: We can put some flowers in this bottle. Then it’ll be a vase!\nAlice: That’s right. We can reuse other old things too. Do you have any other old cans?\nMrs Wang: Yes. Look at this big can. I can put my pens, pencils and rulers in it.\nAlice: Wow, that’s right! It might still be a nice pen holder.\nMrs Wang: Good idea, Alice!",
+          "chinese": "爱丽丝和妈妈讨论旧瓶子和金属罐。\n爱丽丝：妈妈，我可以扔掉这些瓶瓶罐罐吗？\n王夫人：不行，我们要留着。\n爱丽丝：为什么？\n王夫人：因为我们可以重复利用。我演示给你看。\n王夫人：爱丽丝，你看。我们清洗这个小罐子，可以放橡皮蜡笔。\n爱丽丝：好主意。\n王夫人：瓶子里插上花，它就变成花瓶！\n爱丽丝：对。我们还可以重复利用其他旧物品。你还有别的旧罐子吗？\n王夫人：有。你看这个大罐子，可以放钢笔、铅笔、尺子。\n爱丽丝：哇，还能做成漂亮笔筒。\n王夫人：好想法，爱丽丝！"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Trees",
+          "byline": "",
+          "english": "A long time ago, many trees grew in the forest. People cut down trees and used the wood to make houses, paper and furniture. Wood pulp can also be used to make some kinds of cloth. We can reuse wood to make new things. We should not waste it.",
+          "chinese": "树木\n很久以前，森林里长着许多树。人们砍伐树木，用木材制作房屋、纸张和家具。木浆也可以用来制作某些布料。我们可以重复利用木材制作新物品，不应该浪费木材。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "Sentence stress 句子重音",
+      "speechExamples": "I can reuse bottles.",
+      "sentencePattern": "We can reuse old things.",
+      "sentencePrompt": "说明一种旧物品可以怎样再次使用。",
+      "sentenceAnswer": "We can reuse old bottles.",
+      "excludedReadingLines": [],
+      "notes": [
+        "Trees 栏已删除与段落无关的花瓶对白，并统一 trees / wood 的指代。木浆可用于制作某些纤维织物，参见加拿大自然资源部木材产品资料：https://prod-natural-resources.azure.cloud.nrcan-rncan.gc.ca/forests-forestry/forest-industry-trade/wood-products-everywhere-everyone 。修订版是项目整理文本，未确认出版社原文；原附件其余内容仍待同版教材原页核对。"
+      ],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "vase 的意思是什么？",
+          "options": [
+            "花瓶",
+            "豌豆",
+            "出口"
+          ],
+          "correctIndex": 0,
+          "explanation": "vase 意为花瓶。"
+        },
+        {
+          "stem": "选择正确的建议句子。",
+          "options": [
+            "We should reuse old things.",
+            "We should reuses old things.",
+            "We should reused old things."
+          ],
+          "correctIndex": 0,
+          "explanation": "should 后面接动词原形 reuse。"
+        },
+        {
+          "stem": "根据对话，瓶子里可以放什么，让它变成花瓶？",
+          "options": [
+            "Flowers.",
+            "Scissors.",
+            "A computer."
+          ],
+          "correctIndex": 0,
+          "explanation": "Mrs Wang 说 We can put some flowers in this bottle。"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "moduleNumber": 3,
+      "kind": "project",
+      "title": "Project 3",
+      "page": 60,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "project",
+          "scope": "Project",
+          "title": "Project 3",
+          "byline": "",
+          "english": "Aim: Make a reusable craft.\nStep1 Think: What old things can you reuse?\nStep2 Make your craft.\nStep3 Show and tell your classmates.",
+          "chinese": "目标：制作一件废旧物品手工。\n步骤1思考：你可以利用哪些旧物品？\n步骤2制作手工。\n步骤3展示并向同学介绍。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "利用旧物品制作手工并展示。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 10,
+      "moduleNumber": 4,
+      "kind": "unit",
+      "title": "Unit 10 Great storybooks",
+      "page": 62,
+      "words": [
+        {
+          "english": "storybook",
+          "phonetic": "/ˈstɔːribʊk/",
+          "chinese": "故事书",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "foolish",
+          "phonetic": "/ˈfuːlɪʃ/",
+          "chinese": "愚蠢的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "clever",
+          "phonetic": "/ˈklevə(r)/",
+          "chinese": "聪明的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "emperor",
+          "phonetic": "/ˈempərə(r)/",
+          "chinese": "皇帝",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Miss Li and her students are talking about storybooks.\nMiss Li: What storybooks do you like reading?\nJill: I like The Emperor’s New Clothes.\nMiss Li: What do you think of the story?\nJill: It’s interesting. The emperor was foolish.\nPeter: I like Little Red Riding Hood. The wolf is bad.\nJoe: I like The fox and the crow. The fox is clever.",
+          "chinese": "李老师和学生讨论故事书。\n李老师：你们喜欢读什么故事书？\n吉尔：我喜欢《皇帝的新衣》。\n李老师：你觉得这个故事怎么样？\n吉尔：很有趣。皇帝很愚蠢。\n彼得：我喜欢《小红帽》，大灰狼很坏。\n乔：我喜欢《狐狸和乌鸦》，狐狸很聪明。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "The fox and the crow",
+          "byline": "",
+          "english": "A crow has a piece of meat. She stands in the tree. A fox sees her. He wants the meat.\nFox: Hello, Miss Crow. You have a beautiful voice. Can you sing a song for me?\nThe crow is happy. She opens her mouth and sings. The meat falls down. The fox catches the meat and runs away.",
+          "chinese": "狐狸和乌鸦\n乌鸦叼着一块肉站在树上。狐狸看见了，想要这块肉。\n狐狸：乌鸦小姐，你嗓音优美，可以给我唱首歌吗？\n乌鸦很开心，张开嘴唱歌。肉掉下来，狐狸叼起肉跑掉了。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "Intonation 语调（升调、降调）",
+      "speechExamples": "Are you happy? Yes, I am.",
+      "sentencePattern": "What do you think of the story?",
+      "sentencePrompt": "介绍自己喜欢的故事并说说看法。",
+      "sentenceAnswer": "I think the story is interesting.",
+      "excludedReadingLines": [],
+      "notes": [
+        "狐狸的台词已补上必要冠词 a，作为项目语法校正；未将该句标作出版社原文，待同版教材原页核对。"
+      ],
+      "corrections": [
+        "Fox: Hello, Miss Crow. You have a beautiful voice. Can you sing a song for me?"
+      ],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "clever 的意思是什么？",
+          "options": [
+            "聪明的",
+            "愚蠢的",
+            "贫穷的"
+          ],
+          "correctIndex": 0,
+          "explanation": "clever 意为聪明的。"
+        },
+        {
+          "stem": "课文中询问对故事的看法，用哪个问句？",
+          "options": [
+            "What do you think of the story?",
+            "How tall are you?",
+            "What does your dog look like?"
+          ],
+          "correctIndex": 0,
+          "explanation": "What do you think of the story? 用来询问对故事的看法。"
+        },
+        {
+          "stem": "根据 The fox and the crow，狐狸想要什么？",
+          "options": [
+            "The meat.",
+            "A toy plane.",
+            "Some paints."
+          ],
+          "correctIndex": 0,
+          "explanation": "开头 He wants the meat；故事中的狐狸想得到乌鸦的肉。"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "moduleNumber": 4,
+      "kind": "unit",
+      "title": "Unit 11 Western festivals",
+      "page": 68,
+      "words": [
+        {
+          "english": "Western",
+          "phonetic": "/ˈwestən/",
+          "chinese": "西方的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "festival",
+          "phonetic": "/ˈfestɪvl/",
+          "chinese": "节日",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "Easter",
+          "phonetic": "/ˈiːstə(r)/",
+          "chinese": "复活节",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "Halloween",
+          "phonetic": "/ˌhæləˈwiːn/",
+          "chinese": "万圣节",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "Thanksgiving",
+          "phonetic": "/ˌθæŋksˈɡɪvɪŋ/",
+          "chinese": "感恩节",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "Christmas",
+          "phonetic": "/ˈkrɪsməs/",
+          "chinese": "圣诞节",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "turkey",
+          "phonetic": "/ˈtɜːki/",
+          "chinese": "火鸡",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Miss Li is telling her students about Western festivals.\n\n1. Easter is on a Sunday in March or April. At Easter, children usually eat chocolate eggs.\n\n2. Halloween is on 31st October. Children in the US and the UK love this festival. They get candy from their neighbours.\n\n3. Thanksgiving is on the fourth Thursday in November. It is a holiday in the US. People eat turkey on Thanksgiving Day.\n\n4. Christmas is on 25th December. It is an important festival in many Western countries. People give presents to each other. Children wait for presents from Father Christmas on Christmas Eve.",
+          "chinese": "李老师给学生介绍西方节日。\n1. 复活节在三或四月的一个周日。复活节时，孩子们通常吃巧克力蛋。\n\n2. 万圣节在10月31日。美国、英国的孩子很喜欢这个节日。他们从邻居那里讨糖果。\n\n3. 感恩节在11月第四个周四。是美国的假日。人们在感恩节吃火鸡。\n\n4. 圣诞节在12月25日。很多西方国家重要节日。人们互赠礼物。平安夜，孩子们等待圣诞老人送礼物。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "Christmas",
+          "byline": "",
+          "english": "Christmas comes in winter. It is always on the same day every year.\nPeople usually have a big dinner with their family. They eat turkey and Christmas pudding.\nMany people go to church. Children like Christmas very much. They love Father Christmas.",
+          "chinese": "圣诞节\n圣诞节在冬天，每年固定同一天。\n人们通常和家人吃丰盛晚餐，吃火鸡和圣诞布丁。\n很多人去教堂。孩子们非常喜欢圣诞节，他们喜爱圣诞老人。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "Word linking 连读",
+      "speechExamples": "come on, pick it up",
+      "sentencePattern": "Children usually eat chocolate eggs.",
+      "sentencePrompt": "用一般现在时说说文中一种节日的活动。",
+      "sentenceAnswer": "Children usually eat chocolate eggs.",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": [
+        {
+          "stem": "turkey 的意思是什么？",
+          "options": [
+            "火鸡",
+            "巧克力蛋",
+            "礼物"
+          ],
+          "correctIndex": 0,
+          "explanation": "turkey 意为火鸡。"
+        },
+        {
+          "stem": "选择正确的一般现在时句子。",
+          "options": [
+            "Children usually eat chocolate eggs.",
+            "Children usually eats chocolate eggs.",
+            "Children usually eating chocolate eggs."
+          ],
+          "correctIndex": 0,
+          "explanation": "Children 是复数主语，使用 eat。"
+        },
+        {
+          "stem": "根据课文，Halloween 是哪一天？",
+          "options": [
+            "31st October.",
+            "25th December.",
+            "1st January."
+          ],
+          "correctIndex": 0,
+          "explanation": "来稿写 Halloween is on 31st October。"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "moduleNumber": 4,
+      "kind": "unit",
+      "title": "Unit 12 The five peas",
+      "page": 74,
+      "words": [
+        {
+          "english": "pea",
+          "phonetic": "/piː/",
+          "chinese": "豌豆",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "pod",
+          "phonetic": "/pɒd/",
+          "chinese": "豆荚",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "bullet",
+          "phonetic": "/ˈbʊlɪt/",
+          "chinese": "子弹",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "useful",
+          "phonetic": "/ˈjuːsfl/",
+          "chinese": "有用的",
+          "partOfSpeech": "adj."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "scope": "Listen and say",
+          "title": "Listen and say",
+          "byline": "",
+          "english": "Five peas live in a pod.\nPea1: What will we do when we get out?\nPea2: I will go out into the world.\nPea3: I will fly to the sun.\nPea4: I will sleep in the dark.\nPea5: I will do something useful.",
+          "chinese": "五颗豌豆住在豆荚里。\n豌豆1：我们出去之后要做什么？\n豌豆2：我要去外面的世界。\n豌豆3：我要飞向太阳。\n豌豆4：我要在黑暗里睡觉。\n豌豆5：我要做有用的事。"
+        },
+        {
+          "kind": "story",
+          "scope": "Look and read",
+          "title": "The five peas",
+          "byline": "",
+          "english": "Five peas grew bigger and bigger. One day, a boy picked the pod.\nThe boy took the peas out of the pod. “You’ll make good bullets,” he said.\nThe first two peas flew away. The third and fourth peas fell into the yard and chickens ate them.\nThe fifth pea hit a window and fell on the ground. Soon it grew into a plant with green leaves.\nA girl was ill. She looked out of the window and saw the plant.\n“The pea is growing bigger and taller. It must be strong. I want to be like it,” she said.\nA few weeks later, the girl got well. Her mother said, “Thank you, little pea. You helped my daughter.”",
+          "chinese": "五颗豌豆\n五颗豌豆越长越大。一天，一个男孩摘下豆荚。\n男孩把豌豆取出来：“你们可以当子弹。”\n前两颗豌豆飞远了。第三、四颗豌豆掉进院子，被鸡吃掉。\n第五颗豌豆撞到窗户，落在地上。很快它长成一株带绿叶的植物。\n有个女孩生病了。她望向窗外看见了这株豌豆。\n“豌豆越长越高，它一定很坚强。我想像它一样。”她说。\n几周之后，女孩康复了。妈妈说：“谢谢你，小豌豆。你帮助了我的女儿。”"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "Intonation & word linking",
+      "speechExamples": "",
+      "sentencePattern": "I will do something useful.",
+      "sentencePrompt": "用 will 说说自己希望做的一件有用的事。",
+      "sentenceAnswer": "I will do something useful.",
+      "excludedReadingLines": [],
+      "notes": [
+        "The five peas 按故事阅读，女孩康复的情节不作为医疗知识或治疗方法题。"
+      ],
+      "corrections": [],
+      "missingSections": [
+        "Sounds 示例文本"
+      ],
+      "questions": [
+        {
+          "stem": "useful 的意思是什么？",
+          "options": [
+            "有用的",
+            "不开心的",
+            "贫穷的"
+          ],
+          "correctIndex": 0,
+          "explanation": "useful 意为有用的。"
+        },
+        {
+          "stem": "选择正确的一般将来时句子。",
+          "options": [
+            "I will do something useful.",
+            "I will does something useful.",
+            "I will doing something useful."
+          ],
+          "correctIndex": 0,
+          "explanation": "will 后接动词原形 do。"
+        },
+        {
+          "stem": "根据故事，第五颗豌豆后来长成了什么？",
+          "options": [
+            "A plant with green leaves.",
+            "A toy plane.",
+            "A gold coin."
+          ],
+          "correctIndex": 0,
+          "explanation": "原文 Soon it grew into a plant with green leaves。"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "moduleNumber": 4,
+      "kind": "project",
+      "title": "Project 4",
+      "page": 80,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "project",
+          "scope": "Project",
+          "title": "Project 4",
+          "byline": "",
+          "english": "Aim: Make a story poster.\nStep1 Choose your favourite story.\nStep2 Draw pictures and write sentences.\nStep3 Tell your story to classmates.",
+          "chinese": "目标：制作故事海报\n步骤1：选你最喜欢的故事。\n步骤2：画图并写句子。\n步骤3：向同学讲述这个故事。"
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "制作故事海报并讲述故事。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 17,
+      "moduleNumber": 5,
+      "kind": "appendix",
+      "title": "Word list 1 单词表一",
+      "page": 82,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Word list 1",
+          "byline": "",
+          "english": "weigh, kilogram, centimetre, fan, theatre, life, writer, street cleaner, drive, poor, wish, carry, mountain, even, space, oil, brush, paints, artist, unhappy, carefully, scissors, tape, glue, tool, easily, still, long race, short race, win, long jump, high jump, gatekeeper, sign, look out, follow, exit, smoke, reuse, throw away, can, vase, pen holder, storybook, foolish, clever, emperor, Western, festival, Easter, Halloween, Thanksgiving, Christmas, turkey, pea, pod, bullet, useful",
+          "chinese": ""
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "阅读来稿附录，复习本册词汇、表达或语法。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 18,
+      "moduleNumber": 5,
+      "kind": "appendix",
+      "title": "Word list 2 单词表二",
+      "page": 85,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Word list 2",
+          "byline": "",
+          "english": "countryside, underground, crop, fairy, digital camera, street sweeper, machine, time box, online, ink painting, oil painting, crown, model, craftsman, saw, athlete, Olympic, ant, bee, forest, furniture, cloth, emperor, wolf, crow, pudding, church",
+          "chinese": ""
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "阅读来稿附录，复习本册词汇、表达或语法。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 19,
+      "moduleNumber": 5,
+      "kind": "appendix",
+      "title": "Daily expressions 日常用语",
+      "page": 88,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Daily expressions",
+          "byline": "",
+          "english": "What’s the matter?\nCan we help you?\nWhat does it mean?\nThat sounds nice.\nThank you for your help.",
+          "chinese": ""
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "阅读来稿附录，复习本册词汇、表达或语法。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 20,
+      "moduleNumber": 5,
+      "kind": "appendix",
+      "title": "Proper nouns 专有名词",
+      "page": 88,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Proper nouns",
+          "byline": "",
+          "english": "Joe, George, Alice, Peter, Kitty, Ms Guo, Ms Wang, Miss Li, Fred, Doris, Lu Ban, The Emperor’s New Clothes, Little Red Riding Hood, The fox and the crow",
+          "chinese": ""
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "阅读来稿附录，复习本册词汇、表达或语法。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 21,
+      "moduleNumber": 5,
+      "kind": "appendix",
+      "title": "Irregular verbs 动词过去式表",
+      "page": 89,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Irregular verbs",
+          "byline": "",
+          "english": "weigh — weighed\nuse — used\ncatch — caught\ncut — cut\nmeet — met\nsee — saw\ntell — told\nmake — made\ntake — took\nfall — fell\ngrow — grew\nget — got",
+          "chinese": ""
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "阅读来稿附录，复习本册词汇、表达或语法。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [
+        "来稿标题为 Irregular verbs，但 weigh—weighed 与 use—used 为规则变化，其余10组为不规则变化。保留全部12组原稿，并单独标示分类。"
+      ],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    },
+    {
+      "number": 22,
+      "moduleNumber": 5,
+      "kind": "appendix",
+      "title": "Grammar review table 语法总表",
+      "page": 90,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Grammar review table",
+          "byline": "",
+          "english": "一般现在时（描述常态） I usually play football after school.\nThere be 句型 There are a lot of tall buildings in the city.\nIn the past … Now … 过去和现在对比 In the past, she used a pen. Now she uses a computer.\nwould like 愿望表达 What changes would you like to see?\nwill 一般将来时 Students will grow plants in the garden.\nbe going to 计划打算 The students are going to an art museum tomorrow.\n过去式：was / were；实义动词过去式 Little Leo took drawing lessons.\n现在进行时 What are you making? I’m making a toy plane.\nmust / should 情态动词 We must look out for them. We shouldn’t smoke.",
+          "chinese": ""
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "speechFeature": "",
+      "speechExamples": "",
+      "sentencePattern": "",
+      "sentencePrompt": "阅读来稿附录，复习本册词汇、表达或语法。",
+      "sentenceAnswer": "",
+      "excludedReadingLines": [],
+      "notes": [],
+      "corrections": [],
+      "missingSections": [],
+      "questions": []
+    }
+  ]
+}

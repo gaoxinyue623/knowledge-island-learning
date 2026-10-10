@@ -1,0 +1,717 @@
+{
+  "title": "北师大四年级下册数学单元自测",
+  "sourceSha256": "a2af2cfe4953e141578208150dce839e13ece9c4f1c2dfdec5d747cbafb6b949",
+  "sourceNote": "用户提供的四下配套自测，原题与答案已转录归档；比较题乱码修复、观察题条件与答案修正和优化条件补充均有记录。",
+  "notice": "原稿部分分值小计与题量不一致，本测验按实际题目统计，不换算为100分。自动题仅核对所填答案；竖式、简便计算、解方程过程和画图需由老师或家长核对，提交后可查看参考解法。",
+  "papers": [
+    {
+      "topicKey": "decimal-meaning",
+      "title": "第一单元 小数的意义和加减法",
+      "sourceScoring": "填空每空3分共30分；竖式每题8分共32分；简便计算每题9分共18分；解决问题20分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "0.6表示把单位1平均分成（）份，取其中（）份。",
+          "originalReference": "10；6",
+          "stem": "0.6表示把单位1平均分成（）份，取其中（）份。",
+          "kind": "fillBlank",
+          "reference": "10；6",
+          "adjustment": "",
+          "answers": [
+            ["10", "十"],
+            ["6", "六"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "0.37里面有（）个0.01。",
+          "originalReference": "37",
+          "stem": "0.37里面有（）个0.01。",
+          "kind": "fillBlank",
+          "reference": "37",
+          "adjustment": "",
+          "answers": [["37"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "小数加减法计算时，要把（）对齐。",
+          "originalReference": "小数点对齐，也就是相同数位对齐。",
+          "stem": "小数加减法计算时，要把（）对齐。",
+          "kind": "fillBlank",
+          "reference": "小数点对齐，也就是相同数位对齐。",
+          "adjustment": "",
+          "answers": [["小数点", "相同数位", "数位"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "5厘米＝（）米；3元5角＝（）元。",
+          "originalReference": "0.05；3.5",
+          "stem": "5厘米＝（）米；3元5角＝（）元。",
+          "kind": "fillBlank",
+          "reference": "0.05；3.5",
+          "adjustment": "",
+          "answers": [["0.05"], ["3.5", "3.50"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "比较大小：2.08(2.08(0.7〇0.699)2.80)2.80；0.7(2.08(0.7〇0.699)2.80)0.699。",
+          "originalReference": "＜；＞",
+          "stem": "依次填＜、＞或＝：2.08（）2.80；0.7（）0.699。",
+          "kind": "fillBlank",
+          "reference": "＜；＞",
+          "adjustment": "比较符号处有重复乱码，按两端数字和原答案恢复两道比较题。",
+          "answers": [
+            ["＜", "<"],
+            ["＞", ">"]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "3.6＋2.15＝（）；10－4.8＝（）。",
+          "originalReference": "5.75；5.2",
+          "stem": "3.6＋2.15＝（）；10－4.8＝（）。",
+          "kind": "fillBlank",
+          "reference": "5.75；5.2",
+          "adjustment": "",
+          "answers": [["5.75"], ["5.2", "5.20"]]
+        },
+        {
+          "number": 7,
+          "originalStem": "竖式计算：12.53＋4.67",
+          "originalReference": "17.2",
+          "stem": "在纸上列竖式，写出关键过程：12.53＋4.67",
+          "kind": "shortAnswer",
+          "reference": "12.53＋4.67＝17.20＝17.2，注意连续进位。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "竖式计算：8.2－3.15",
+          "originalReference": "5.05",
+          "stem": "在纸上列竖式，写出关键过程：8.2－3.15",
+          "kind": "shortAnswer",
+          "reference": "把8.2写成8.20，小数点对齐，8.20－3.15＝5.05。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "竖式计算：15.4＋2.78",
+          "originalReference": "18.18",
+          "stem": "在纸上列竖式，写出关键过程：15.4＋2.78",
+          "kind": "shortAnswer",
+          "reference": "15.40＋2.78＝18.18。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "竖式计算：20－7.64",
+          "originalReference": "12.36",
+          "stem": "在纸上列竖式，写出关键过程：20－7.64",
+          "kind": "shortAnswer",
+          "reference": "20.00－7.64＝12.36，注意跨位退位。",
+          "adjustment": ""
+        },
+        {
+          "number": 11,
+          "originalStem": "用简便方法计算并写出过程：5.64＋1.7＋4.36。",
+          "originalReference": "5.64＋4.36＋1.7＝11.7",
+          "stem": "用简便方法计算并写出过程：5.64＋1.7＋4.36。",
+          "kind": "shortAnswer",
+          "reference": "5.64＋4.36＋1.7＝10＋1.7＝11.7。",
+          "adjustment": ""
+        },
+        {
+          "number": 12,
+          "originalStem": "用简便方法计算并写出过程：14.2－3.72－6.28。",
+          "originalReference": "14.2－（3.72＋6.28）＝4.2",
+          "stem": "用简便方法计算并写出过程：14.2－3.72－6.28。",
+          "kind": "shortAnswer",
+          "reference": "14.2－（3.72＋6.28）＝14.2－10＝4.2。",
+          "adjustment": ""
+        },
+        {
+          "number": 13,
+          "originalStem": "一根绳子长10.5米，剪掉3.8米，又剪掉2.4米，还剩多少米？",
+          "originalReference": "10.5－3.8－2.4＝4.3米。",
+          "stem": "一根绳子长10.5米，剪掉3.8米，又剪掉2.4米，还剩多少米？（只填数值，单位：米）",
+          "kind": "calculation",
+          "reference": "10.5－3.8－2.4＝4.3米。",
+          "adjustment": "",
+          "value": 4.3
+        }
+      ],
+      "sourceText": "## 第一单元 小数的意义和加减法\n\n原稿分值：填空每空3分共30分；竖式每题8分共32分；简便计算每题9分共18分；解决问题20分。\n\n1. 0.6表示把单位1平均分成（）份，取其中（）份。\n原参考答案：10；6\n\n2. 0.37里面有（）个0.01。\n原参考答案：37\n\n3. 小数加减法计算时，要把（）对齐。\n原参考答案：小数点对齐，也就是相同数位对齐。\n\n4. 5厘米＝（）米；3元5角＝（）元。\n原参考答案：0.05；3.5\n\n5. 比较大小：2.08(2.08(0.7〇0.699)2.80)2.80；0.7(2.08(0.7〇0.699)2.80)0.699。\n原参考答案：＜；＞\n\n6. 3.6＋2.15＝（）；10－4.8＝（）。\n原参考答案：5.75；5.2\n\n7. 竖式计算：12.53＋4.67\n原参考答案：17.2\n\n8. 竖式计算：8.2－3.15\n原参考答案：5.05\n\n9. 竖式计算：15.4＋2.78\n原参考答案：18.18\n\n10. 竖式计算：20－7.64\n原参考答案：12.36\n\n11. 用简便方法计算并写出过程：5.64＋1.7＋4.36。\n原参考答案：5.64＋4.36＋1.7＝11.7\n\n12. 用简便方法计算并写出过程：14.2－3.72－6.28。\n原参考答案：14.2－（3.72＋6.28）＝4.2\n\n13. 一根绳子长10.5米，剪掉3.8米，又剪掉2.4米，还剩多少米？\n原参考答案：10.5－3.8－2.4＝4.3米。"
+    },
+    {
+      "topicKey": "shape-classify",
+      "title": "第二单元 认识三角形和四边形",
+      "sourceScoring": "填空每空4分共32分；判断每题5分共30分；求角度18分；画图20分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "三角形内角和是（）°。",
+          "originalReference": "180",
+          "stem": "三角形内角和是（）°。",
+          "kind": "fillBlank",
+          "reference": "180",
+          "adjustment": "",
+          "answers": [["180"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "三角形两边之和（）第三边。",
+          "originalReference": "大于",
+          "stem": "三角形任意两边之和（）第三边。",
+          "kind": "fillBlank",
+          "reference": "大于",
+          "adjustment": "",
+          "answers": [["大于", "＞", ">"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "有一个角是90°的三角形叫（）三角形。",
+          "originalReference": "直角",
+          "stem": "有一个角是90°的三角形叫（）三角形。",
+          "kind": "fillBlank",
+          "reference": "直角",
+          "adjustment": "",
+          "answers": [["直角"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "等边三角形三个内角都是（）°。",
+          "originalReference": "60",
+          "stem": "等边三角形三个内角都是（）°。",
+          "kind": "fillBlank",
+          "reference": "60",
+          "adjustment": "",
+          "answers": [["60"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "（）具有稳定性，平行四边形容易（）。",
+          "originalReference": "三角形；变形",
+          "stem": "（）具有稳定性，活动连接的平行四边形框架容易（）。",
+          "kind": "fillBlank",
+          "reference": "三角形；变形",
+          "adjustment": "",
+          "answers": [["三角形", "三角形框架"], ["变形"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "只有一组对边平行的四边形叫（）。",
+          "originalReference": "梯形",
+          "stem": "只有一组对边平行的四边形叫（）。",
+          "kind": "fillBlank",
+          "reference": "梯形",
+          "adjustment": "",
+          "answers": [["梯形"]]
+        },
+        {
+          "number": 7,
+          "originalStem": "长方形属于特殊的（）。",
+          "originalReference": "平行四边形",
+          "stem": "长方形属于特殊的（）。",
+          "kind": "fillBlank",
+          "reference": "平行四边形",
+          "adjustment": "",
+          "answers": [["平行四边形"]]
+        },
+        {
+          "number": 8,
+          "originalStem": "钝角三角形只有1个钝角。",
+          "originalReference": "√",
+          "stem": "钝角三角形只有1个钝角。",
+          "kind": "trueFalse",
+          "reference": "正确。两个钝角之和就超过180°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "3厘米、4厘米、7厘米三根直小棒可以首尾拼成三角形。",
+          "originalReference": "×",
+          "stem": "3厘米、4厘米、7厘米三根直小棒可以首尾拼成三角形。",
+          "kind": "trueFalse",
+          "reference": "错误。3＋4＝7，必须大于第三边才可围成三角形。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "等腰三角形一定是锐角三角形。",
+          "originalReference": "×",
+          "stem": "等腰三角形一定是锐角三角形。",
+          "kind": "trueFalse",
+          "reference": "错误。等腰三角形也可以有一个直角或钝角。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 11,
+          "originalStem": "两个完全一样的三角形可以拼成平行四边形。",
+          "originalReference": "√",
+          "stem": "两个完全一样的三角形通过适当旋转和平移，可以拼成平行四边形。",
+          "kind": "trueFalse",
+          "reference": "正确。沿一条对应边拼接可组成平行四边形。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 12,
+          "originalStem": "平行四边形两组对边分别平行。",
+          "originalReference": "√",
+          "stem": "平行四边形两组对边分别平行。",
+          "kind": "trueFalse",
+          "reference": "正确。这是平行四边形的定义。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 13,
+          "originalStem": "直角三角形两个锐角之和等于90°。",
+          "originalReference": "√",
+          "stem": "直角三角形两个锐角之和等于90°。",
+          "kind": "trueFalse",
+          "reference": "正确。180°－90°＝90°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 14,
+          "originalStem": "一个三角形中∠1＝45°，∠2＝50°，∠3是多少？",
+          "originalReference": "180°－45°－50°＝85°。",
+          "stem": "一个三角形中∠1＝45°，∠2＝50°，∠3是多少？（只填数值，单位：度）",
+          "kind": "calculation",
+          "reference": "180°－45°－50°＝85°。",
+          "adjustment": "",
+          "value": 85
+        },
+        {
+          "number": 15,
+          "originalStem": "画一个钝角三角形，再画一个梯形。",
+          "originalReference": "画图略",
+          "stem": "在纸上画一个钝角三角形，再画一个梯形，说明怎样检查。",
+          "kind": "shortAnswer",
+          "reference": "三角形应有且只有一个大于90°的内角，三角和为180°；梯形只有一组对边平行。请老师或家长核对纸上图形。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第二单元 认识三角形和四边形\n\n原稿分值：填空每空4分共32分；判断每题5分共30分；求角度18分；画图20分。\n\n1. 三角形内角和是（）°。\n原参考答案：180\n\n2. 三角形两边之和（）第三边。\n原参考答案：大于\n\n3. 有一个角是90°的三角形叫（）三角形。\n原参考答案：直角\n\n4. 等边三角形三个内角都是（）°。\n原参考答案：60\n\n5. （）具有稳定性，平行四边形容易（）。\n原参考答案：三角形；变形\n\n6. 只有一组对边平行的四边形叫（）。\n原参考答案：梯形\n\n7. 长方形属于特殊的（）。\n原参考答案：平行四边形\n\n8. 钝角三角形只有1个钝角。\n原参考答案：√\n\n9. 3厘米、4厘米、7厘米三根直小棒可以首尾拼成三角形。\n原参考答案：×\n\n10. 等腰三角形一定是锐角三角形。\n原参考答案：×\n\n11. 两个完全一样的三角形可以拼成平行四边形。\n原参考答案：√\n\n12. 平行四边形两组对边分别平行。\n原参考答案：√\n\n13. 直角三角形两个锐角之和等于90°。\n原参考答案：√\n\n14. 一个三角形中∠1＝45°，∠2＝50°，∠3是多少？\n原参考答案：180°－45°－50°＝85°。\n\n15. 画一个钝角三角形，再画一个梯形。\n原参考答案：画图略"
+    },
+    {
+      "topicKey": "decimal-shift",
+      "title": "第三单元 小数乘法",
+      "sourceScoring": "口算每题3分共15分；竖式每题8分共32分；简便计算每题10分共20分；解决问题33分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "口算：0.4×2＝？",
+          "originalReference": "0.8",
+          "stem": "口算：0.4×2＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "0.8",
+          "adjustment": "",
+          "value": 0.8
+        },
+        {
+          "number": 2,
+          "originalStem": "口算：0.3×0.5＝？",
+          "originalReference": "0.15",
+          "stem": "口算：0.3×0.5＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "0.15",
+          "adjustment": "",
+          "value": 0.15
+        },
+        {
+          "number": 3,
+          "originalStem": "口算：1.2×3＝？",
+          "originalReference": "3.6",
+          "stem": "口算：1.2×3＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "3.6",
+          "adjustment": "",
+          "value": 3.6
+        },
+        {
+          "number": 4,
+          "originalStem": "口算：0.25×4＝？",
+          "originalReference": "1",
+          "stem": "口算：0.25×4＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "1",
+          "adjustment": "",
+          "value": 1
+        },
+        {
+          "number": 5,
+          "originalStem": "口算：0.6×0.6＝？",
+          "originalReference": "0.36",
+          "stem": "口算：0.6×0.6＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "0.36",
+          "adjustment": "",
+          "value": 0.36
+        },
+        {
+          "number": 6,
+          "originalStem": "竖式计算：2.4×1.5",
+          "originalReference": "3.6",
+          "stem": "在纸上列竖式并写出关键过程：2.4×1.5",
+          "kind": "shortAnswer",
+          "reference": "24×15＝360，共两位小数，得3.60＝3.6。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "originalStem": "竖式计算：0.36×0.8",
+          "originalReference": "0.288",
+          "stem": "在纸上列竖式并写出关键过程：0.36×0.8",
+          "kind": "shortAnswer",
+          "reference": "36×8＝288，共三位小数，得0.288。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "竖式计算：1.05×2.4",
+          "originalReference": "2.52",
+          "stem": "在纸上列竖式并写出关键过程：1.05×2.4",
+          "kind": "shortAnswer",
+          "reference": "105×24＝2520，共三位小数，得2.520＝2.52。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "竖式计算：3.2×0.25",
+          "originalReference": "0.8",
+          "stem": "在纸上列竖式并写出关键过程：3.2×0.25",
+          "kind": "shortAnswer",
+          "reference": "32×25＝800，共三位小数，得0.800＝0.8。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "用简便方法计算并写出过程：0.25×3.2×1.25。",
+          "originalReference": "0.25×4×0.8×1.25＝1",
+          "stem": "用简便方法计算并写出过程：0.25×3.2×1.25。",
+          "kind": "shortAnswer",
+          "reference": "将3.2分成4×0.8：0.25×4×0.8×1.25＝1×1＝1。",
+          "adjustment": ""
+        },
+        {
+          "number": 11,
+          "originalStem": "用简便方法计算并写出过程：4.8×99＋4.8。",
+          "originalReference": "4.8×（99＋1）＝480",
+          "stem": "用简便方法计算并写出过程：4.8×99＋4.8。",
+          "kind": "shortAnswer",
+          "reference": "4.8×（99＋1）＝4.8×100＝480。",
+          "adjustment": ""
+        },
+        {
+          "number": 12,
+          "originalStem": "苹果每千克7.5元，买2.4千克，要付多少元？",
+          "originalReference": "7.5×2.4＝18元。",
+          "stem": "苹果每千克7.5元，买2.4千克，要付多少元？（只填数值，单位：元）",
+          "kind": "calculation",
+          "reference": "7.5×2.4＝18元。",
+          "adjustment": "",
+          "value": 18
+        }
+      ],
+      "sourceText": "## 第三单元 小数乘法\n\n原稿分值：口算每题3分共15分；竖式每题8分共32分；简便计算每题10分共20分；解决问题33分。\n\n1. 口算：0.4×2＝？\n原参考答案：0.8\n\n2. 口算：0.3×0.5＝？\n原参考答案：0.15\n\n3. 口算：1.2×3＝？\n原参考答案：3.6\n\n4. 口算：0.25×4＝？\n原参考答案：1\n\n5. 口算：0.6×0.6＝？\n原参考答案：0.36\n\n6. 竖式计算：2.4×1.5\n原参考答案：3.6\n\n7. 竖式计算：0.36×0.8\n原参考答案：0.288\n\n8. 竖式计算：1.05×2.4\n原参考答案：2.52\n\n9. 竖式计算：3.2×0.25\n原参考答案：0.8\n\n10. 用简便方法计算并写出过程：0.25×3.2×1.25。\n原参考答案：0.25×4×0.8×1.25＝1\n\n11. 用简便方法计算并写出过程：4.8×99＋4.8。\n原参考答案：4.8×（99＋1）＝480\n\n12. 苹果每千克7.5元，买2.4千克，要付多少元？\n原参考答案：7.5×2.4＝18元。"
+    },
+    {
+      "topicKey": "views",
+      "title": "第四单元 观察物体",
+      "sourceScoring": "五题各20分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "从不同方向观察同一个立体图形，看到的形状（）相同。",
+          "originalReference": "不一定相同。",
+          "stem": "从不同方向观察同一个立体图形，看到的形状（）相同。",
+          "kind": "fillBlank",
+          "reference": "不一定相同。",
+          "adjustment": "",
+          "answers": [["不一定", "可能不"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "一个正方体，从正面、上面、左面看到的图形都是（）。",
+          "originalReference": "正方形",
+          "stem": "一个正方体平放在桌面上，正对它的正面、上面、左面观察，看到的轮廓都是（）。",
+          "kind": "fillBlank",
+          "reference": "正方形",
+          "adjustment": "明确与面正对观察，避免透视与斜放歧义。",
+          "answers": [["正方形"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "从上面看到正方形，立体图形一定是正方体。",
+          "originalReference": "×",
+          "stem": "从上面看到正方形，立体图形一定是正方体。",
+          "kind": "trueFalse",
+          "reference": "错误。底面是正方形但高度不同的长方体，俯视也可为正方形。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 4,
+          "originalStem": "用3个小正方体搭立体图形，从正面看到2个正方形，这个立体图形最少用（）个小正方体。",
+          "originalReference": "最少2个，水平并排摆放即可；多余方块可能被遮挡，但不会使最少数量减少。",
+          "stem": "若只要求从正面看到水平并排的2个正方形，使用相同小正方体，最少需要几个？（不限定必须用3个）（只填数值，单位：个）",
+          "kind": "calculation",
+          "reference": "最少2个，水平并排摆放即可；多余方块可能被遮挡，但不会使最少数量减少。",
+          "adjustment": "原题先限定3个又问最少，条件矛盾。按原答案2的意图，改成只给定正视轮廓求最少数量；若保留“用3个”条件，总数应为3。",
+          "value": 2
+        },
+        {
+          "number": 5,
+          "originalStem": "画出：由2个前后摆放小正方体，从左面看到的图形。",
+          "originalReference": "一个小正方形（画图略）",
+          "stem": "两个相同小正方体在桌面上前后紧贴成一列（同一高度，不堆叠），从左面正对观察。画出看到的平面轮廓，并说明格子怎样排列。",
+          "kind": "shortAnswer",
+          "reference": "从左面看到水平方向并排的两个正方形，组成一个长方形；从正面才会被遮挡成一个正方形。由老师或家长检查实际图形。",
+          "adjustment": "原参考答案“一个小正方形”对应正面，不对应左面。明确前后摆放、平放条件，更正为水平并排两个正方形。"
+        }
+      ],
+      "sourceText": "## 第四单元 观察物体\n\n原稿分值：五题各20分。\n\n1. 从不同方向观察同一个立体图形，看到的形状（）相同。\n原参考答案：不一定相同。\n\n2. 一个正方体，从正面、上面、左面看到的图形都是（）。\n原参考答案：正方形\n\n3. 从上面看到正方形，立体图形一定是正方体。\n原参考答案：×\n\n4. 用3个小正方体搭立体图形，从正面看到2个正方形，这个立体图形最少用（）个小正方体。\n原参考答案：最少2个，水平并排摆放即可；多余方块可能被遮挡，但不会使最少数量减少。\n\n5. 画出：由2个前后摆放小正方体，从左面看到的图形。\n原参考答案：一个小正方形（画图略）"
+    },
+    {
+      "topicKey": "letters",
+      "title": "第五单元 认识方程",
+      "sourceScoring": "填空每空4分共24分；解方程每题9分共36分；列方程解决问题40分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "含有（）的等式叫做方程。",
+          "originalReference": "未知数",
+          "stem": "含有（）的等式叫做方程。",
+          "kind": "fillBlank",
+          "reference": "未知数",
+          "adjustment": "",
+          "answers": [["未知数"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "等式两边同时加上同一个数，等式仍然（）。",
+          "originalReference": "成立",
+          "stem": "等式两边同时加上同一个数，等式仍然（）。",
+          "kind": "fillBlank",
+          "reference": "成立",
+          "adjustment": "",
+          "answers": [["成立"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "a×a简写为（）；2×a简写为（）。",
+          "originalReference": "a²；2a。",
+          "stem": "a×a简写为（）；2×a简写为（）。",
+          "kind": "fillBlank",
+          "reference": "a²；2a。",
+          "adjustment": "",
+          "answers": [
+            ["a²", "a^2"],
+            ["2a", "2 a"]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "正方形边长a，周长公式C＝（）。",
+          "originalReference": "4a。",
+          "stem": "正方形边长a，周长公式C＝（）。",
+          "kind": "fillBlank",
+          "reference": "4a。",
+          "adjustment": "",
+          "answers": [["4a", "4×a", "a×4", "4*a", "a*4"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "x＋5＝12，x＝（）。",
+          "originalReference": "7",
+          "stem": "x＋5＝12，x＝（）。",
+          "kind": "fillBlank",
+          "reference": "7",
+          "adjustment": "",
+          "answers": [["7"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "解方程：x＋2.8＝7.2",
+          "originalReference": "x＝4.4",
+          "stem": "解方程并写出步骤、代回检验：x＋2.8＝7.2",
+          "kind": "shortAnswer",
+          "reference": "两边同时减2.8，x＝4.4；4.4＋2.8＝7.2。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "originalStem": "解方程：x－15＝36",
+          "originalReference": "x＝51",
+          "stem": "解方程并写出步骤、代回检验：x－15＝36",
+          "kind": "shortAnswer",
+          "reference": "两边同时加15，x＝51；51－15＝36。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "解方程：4x＝9.6",
+          "originalReference": "x＝2.4",
+          "stem": "解方程并写出步骤、代回检验：4x＝9.6",
+          "kind": "shortAnswer",
+          "reference": "两边同时除以4，x＝2.4；4×2.4＝9.6。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "解方程：x÷3＝1.8",
+          "originalReference": "x＝5.4",
+          "stem": "解方程并写出步骤、代回检验：x÷3＝1.8",
+          "kind": "shortAnswer",
+          "reference": "两边同时乘3，x＝5.4；5.4÷3＝1.8。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "列方程解决问题：一个数加上18等于45，求这个数。",
+          "originalReference": "设这个数为x，x＋18＝45，x＝27。",
+          "stem": "一个数加上18等于45，求这个数。请设未知数、列方程、解方程并检验。",
+          "kind": "shortAnswer",
+          "reference": "设这个数为x。x＋18＝45，两边减18，x＝27。检验27＋18＝45，答：这个数是27。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第五单元 认识方程\n\n原稿分值：填空每空4分共24分；解方程每题9分共36分；列方程解决问题40分。\n\n1. 含有（）的等式叫做方程。\n原参考答案：未知数\n\n2. 等式两边同时加上同一个数，等式仍然（）。\n原参考答案：成立\n\n3. a×a简写为（）；2×a简写为（）。\n原参考答案：a²；2a。\n\n4. 正方形边长a，周长公式C＝（）。\n原参考答案：4a。\n\n5. x＋5＝12，x＝（）。\n原参考答案：7\n\n6. 解方程：x＋2.8＝7.2\n原参考答案：x＝4.4\n\n7. 解方程：x－15＝36\n原参考答案：x＝51\n\n8. 解方程：4x＝9.6\n原参考答案：x＝2.4\n\n9. 解方程：x÷3＝1.8\n原参考答案：x＝5.4\n\n10. 列方程解决问题：一个数加上18等于45，求这个数。\n原参考答案：设这个数为x，x＋18＝45，x＝27。"
+    },
+    {
+      "topicKey": "tiling",
+      "title": "数学好玩",
+      "sourceScoring": "选择题30分；烙饼35分；沏茶35分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "下面图形可以密铺的是（）。A.圆 B.三角形 C.正五边形",
+          "originalReference": "B，三角形。",
+          "stem": "用同样大小的同一种图形无缝隙、不重叠地铺满平面，以下哪种可以密铺？填字母或图形名称：A.圆　B.三角形　C.正五边形。",
+          "kind": "fillBlank",
+          "reference": "B，三角形。",
+          "adjustment": "",
+          "answers": [["B", "b", "三角形"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "烙饼：一个锅一次烙2张饼，烙一面需要3分钟，烙3张饼最少要（）分钟。",
+          "originalReference": "至少6面×3分钟÷2锅位＝9分钟。三轮各3分钟：A正B正；A反C正；B反C反，可以完成。",
+          "stem": "一个锅可同时烙2张饼，每张两面都要烙，每面3分钟，换面和换饼时间忽略，允许交替换饼。烙3张饼最少几分钟？（只填数值，单位：分钟）",
+          "kind": "calculation",
+          "reference": "至少6面×3分钟÷2锅位＝9分钟。三轮各3分钟：A正B正；A反C正；B反C反，可以完成。",
+          "adjustment": "明确每张两面、锅位可同时使用、换饼不计时以及可交替轮换的前提。",
+          "value": 9
+        },
+        {
+          "number": 3,
+          "originalStem": "沏茶：洗水壶2分钟，烧水8分钟，洗茶杯3分钟，接水1分钟，最少需要（）分钟。",
+          "originalReference": "2＋1＋8＝11分钟。烧水的8分钟内完成洗杯，不能在接好水前开始烧水。",
+          "stem": "一人沏茶：先洗壶2分钟，再接水1分钟，之后自动烧水8分钟。洗杯3分钟可在烧水期间完成，不计其他时间。最少几分钟？（只填数值，单位：分钟）",
+          "kind": "calculation",
+          "reference": "2＋1＋8＝11分钟。烧水的8分钟内完成洗杯，不能在接好水前开始烧水。",
+          "adjustment": "明确单人、先洗壶接水、自动烧水期间可洗杯及忽略其他时间，原题缺少并行条件。",
+          "value": 11
+        }
+      ],
+      "sourceText": "## 数学好玩\n\n原稿分值：选择题30分；烙饼35分；沏茶35分。\n\n1. 下面图形可以密铺的是（）。A.圆 B.三角形 C.正五边形\n原参考答案：B，三角形。\n\n2. 烙饼：一个锅一次烙2张饼，烙一面需要3分钟，烙3张饼最少要（）分钟。\n原参考答案：至少6面×3分钟÷2锅位＝9分钟。三轮各3分钟：A正B正；A反C正；B反C反，可以完成。\n\n3. 沏茶：洗水壶2分钟，烧水8分钟，洗茶杯3分钟，接水1分钟，最少需要（）分钟。\n原参考答案：2＋1＋8＝11分钟。烧水的8分钟内完成洗杯，不能在接好水前开始烧水。"
+    },
+    {
+      "topicKey": "charts",
+      "title": "第六单元 数据的表示和分析",
+      "sourceScoring": "填空每空5分共30分；判断每题8分共32分；应用题38分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "平均数＝（）÷（）。",
+          "originalReference": "总数量；总份数",
+          "stem": "平均数＝（）÷（）。",
+          "kind": "fillBlank",
+          "reference": "总数量；总份数",
+          "adjustment": "",
+          "answers": [
+            ["总数量", "总数", "总和", "数据总和"],
+            ["总份数", "份数", "数据个数", "个数"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "（）统计图可以看出数量的增减变化趋势。",
+          "originalReference": "折线",
+          "stem": "（）统计图可以看出数量的增减变化趋势。",
+          "kind": "fillBlank",
+          "reference": "折线",
+          "adjustment": "",
+          "answers": [["折线"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "4名同学成绩85、95、90、90，平均分是（）。",
+          "originalReference": "（85＋95＋90＋90）÷4＝90分。",
+          "stem": "4名同学成绩85、95、90、90，平均分是（）。",
+          "kind": "fillBlank",
+          "reference": "（85＋95＋90＋90）÷4＝90分。",
+          "adjustment": "",
+          "answers": [["90"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "平均数一定大于这组数据里所有数。",
+          "originalReference": "×",
+          "stem": "平均数一定大于这组数据里所有数。",
+          "kind": "trueFalse",
+          "reference": "错误。平均数不大于最大值，不小于最小值。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "originalStem": "折线统计图可以看出数量变化趋势。",
+          "originalReference": "√",
+          "stem": "折线统计图可以看出数量变化趋势。",
+          "kind": "trueFalse",
+          "reference": "正确。按顺序连接数据点可以观察增减趋势。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "条形统计图能直观看出数量多少。",
+          "originalReference": "√",
+          "stem": "条形统计图能直观看出数量多少。",
+          "kind": "trueFalse",
+          "reference": "正确。根据统一刻度读取条形长度对应的数量。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "一组数据的平均数可能不在这组数据中。",
+          "originalReference": "√",
+          "stem": "一组数据的平均数可能不在这组数据中。",
+          "kind": "trueFalse",
+          "reference": "正确。例如3和5的平均数4不在原数据中。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "小明4次跳绳成绩为120、135、125、140下，平均每次跳多少下？",
+          "originalReference": "（120＋135＋125＋140）÷4＝520÷4＝130下。",
+          "stem": "小明4次跳绳成绩为120、135、125、140下，平均每次跳多少下？（只填数值，单位：下）",
+          "kind": "calculation",
+          "reference": "（120＋135＋125＋140）÷4＝520÷4＝130下。",
+          "adjustment": "",
+          "value": 130
+        }
+      ],
+      "sourceText": "## 第六单元 数据的表示和分析\n\n原稿分值：填空每空5分共30分；判断每题8分共32分；应用题38分。\n\n1. 平均数＝（）÷（）。\n原参考答案：总数量；总份数\n\n2. （）统计图可以看出数量的增减变化趋势。\n原参考答案：折线\n\n3. 4名同学成绩85、95、90、90，平均分是（）。\n原参考答案：（85＋95＋90＋90）÷4＝90分。\n\n4. 平均数一定大于这组数据里所有数。\n原参考答案：×\n\n5. 折线统计图可以看出数量变化趋势。\n原参考答案：√\n\n6. 条形统计图能直观看出数量多少。\n原参考答案：√\n\n7. 一组数据的平均数可能不在这组数据中。\n原参考答案：√\n\n8. 小明4次跳绳成绩为120、135、125、140下，平均每次跳多少下？\n原参考答案：（120＋135＋125＋140）÷4＝520÷4＝130下。"
+    }
+  ]
+}

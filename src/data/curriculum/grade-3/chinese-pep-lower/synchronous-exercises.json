@@ -1,0 +1,1597 @@
+{
+  "title": "部编版三年级下册语文 单元同步练习题（用户提供·含参考答案）",
+  "sourceSha256": "4e1002011920af3091306cae6b5a0da6c7a4f04d1480920870fc7a93b36dfc49",
+  "sourceNote": "按用户提供的八个单元及参考答案接入；题干、原始答案与调整说明分别保留。原材料的加点标记、部分节选语境和设问空格已明确；组词、句子改写、语义解释、翻译、默写、习作和多解阅读为人工点评。看图习作未提供配图；默写参考取自本册已导入诗文，不作出版社原题认证。",
+  "units": [
+    {
+      "number": 1,
+      "title": "第一单元 同步练习",
+      "originalText": "### 一、看拼音，写词语\njù lǒng （）  xiān xì（）  huā bàn（）  lián peng（）\nwǔ dǎo（）  qiān xū（）  chuī fú（）  zhī zhū（）\n\n### 二、给加点字选择正确读音，打√\n闲散（sǎn sàn）  蚂蚱（mǎ mà）  圆晕（yùn yūn）\n纤细（xiān qiān）  荷花（hé hè）  河豚（tún téng）\n\n### 三、选词填空\n飘荡  飘扬\n1. 五星红旗迎风（）。\n2. 柔软的柳枝在水面上轻轻（）。\n\n### 四、按要求写句子\n1. 小燕子掠过湖面。（扩句，至少两处）\n________________________________________________\n2. 荷花很美。（改成感叹句）\n________________________________________________\n\n### 五、课内阅读（《荷花》节选）\n荷花已经开了不少了。荷叶挨挨挤挤的，像一个个碧绿的大圆盘。白荷花在这些大圆盘之间冒出来。有的才展开两三片花瓣儿。有的花瓣儿全展开了，露出嫩黄色的小莲蓬。有的还是花骨朵儿，看起来饱胀得马上要破裂似的。\n1. 这段话选自课文《________》，作者是________。\n2. 用“____”画出文中比喻句。句中把____比作____。\n3. “冒”字写出了________________________。\n\n### 六、习作\n题目：我的植物朋友\n要求：写清楚植物样子、气味，写出你的感受，不少于300字。",
+      "originalAnswerText": "一、聚拢 纤细 花瓣 莲蓬 舞蹈 谦虚 吹拂 蜘蛛\n二、sǎn √  mà √  yùn √  xiān √  hé √  tún √\n三、1.飘扬 2.飘荡\n四、示例：\n1. 可爱的小燕子轻快地掠过波光粼粼的湖面。\n2. 荷花多么美啊！\n五、1.荷花，叶圣陶；2.荷叶挨挨挤挤的，像一个个碧绿的大圆盘。荷叶，大圆盘；3.荷花蓬勃生长、生机勃勃的样子。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "jù lǒng （）",
+          "kind": "fillBlank",
+          "reference": "聚拢",
+          "originalStem": "jù lǒng （）",
+          "originalReference": "聚拢",
+          "answers": [["聚拢"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "xiān xì（）",
+          "kind": "fillBlank",
+          "reference": "纤细",
+          "originalStem": "xiān xì（）",
+          "originalReference": "纤细",
+          "answers": [["纤细"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "huā bàn（）",
+          "kind": "fillBlank",
+          "reference": "花瓣",
+          "originalStem": "huā bàn（）",
+          "originalReference": "花瓣",
+          "answers": [["花瓣"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "lián peng（）",
+          "kind": "fillBlank",
+          "reference": "莲蓬",
+          "originalStem": "lián peng（）",
+          "originalReference": "莲蓬",
+          "answers": [["莲蓬"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "wǔ dǎo（）",
+          "kind": "fillBlank",
+          "reference": "舞蹈",
+          "originalStem": "wǔ dǎo（）",
+          "originalReference": "舞蹈",
+          "answers": [["舞蹈"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "qiān xū（）",
+          "kind": "fillBlank",
+          "reference": "谦虚",
+          "originalStem": "qiān xū（）",
+          "originalReference": "谦虚",
+          "answers": [["谦虚"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "chuī fú（）",
+          "kind": "fillBlank",
+          "reference": "吹拂",
+          "originalStem": "chuī fú（）",
+          "originalReference": "吹拂",
+          "answers": [["吹拂"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "zhī zhū（）",
+          "kind": "fillBlank",
+          "reference": "蜘蛛",
+          "originalStem": "zhī zhū（）",
+          "originalReference": "蜘蛛",
+          "answers": [["蜘蛛"]]
+        },
+        {
+          "number": 9,
+          "section": "二、选择正确读音",
+          "stem": "闲散（sǎn sàn）\n给“散”选择正确读音。",
+          "kind": "singleChoice",
+          "reference": "sǎn",
+          "originalStem": "闲散（sǎn sàn）",
+          "originalReference": "sǎn",
+          "options": ["sǎn", "sàn"],
+          "correctOptionKey": "A",
+          "adjustment": "原材料未显示加点标记，明确需要选择读音的字。"
+        },
+        {
+          "number": 10,
+          "section": "二、选择正确读音",
+          "stem": "蚂蚱（mǎ mà）\n给“蚂”选择正确读音。",
+          "kind": "singleChoice",
+          "reference": "mà",
+          "originalStem": "蚂蚱（mǎ mà）",
+          "originalReference": "mà",
+          "options": ["mǎ", "mà"],
+          "correctOptionKey": "B",
+          "adjustment": "原材料未显示加点标记，明确需要选择读音的字。"
+        },
+        {
+          "number": 11,
+          "section": "二、选择正确读音",
+          "stem": "圆晕（yùn yūn）\n给“晕”选择正确读音。",
+          "kind": "singleChoice",
+          "reference": "yùn",
+          "originalStem": "圆晕（yùn yūn）",
+          "originalReference": "yùn",
+          "options": ["yùn", "yūn"],
+          "correctOptionKey": "A",
+          "adjustment": "原材料未显示加点标记，明确需要选择读音的字。"
+        },
+        {
+          "number": 12,
+          "section": "二、选择正确读音",
+          "stem": "纤细（xiān qiān）\n给“纤”选择正确读音。",
+          "kind": "singleChoice",
+          "reference": "xiān",
+          "originalStem": "纤细（xiān qiān）",
+          "originalReference": "xiān",
+          "options": ["xiān", "qiān"],
+          "correctOptionKey": "A",
+          "adjustment": "原材料未显示加点标记，明确需要选择读音的字。"
+        },
+        {
+          "number": 13,
+          "section": "二、选择正确读音",
+          "stem": "荷花（hé hè）\n给“荷”选择正确读音。",
+          "kind": "singleChoice",
+          "reference": "hé",
+          "originalStem": "荷花（hé hè）",
+          "originalReference": "hé",
+          "options": ["hé", "hè"],
+          "correctOptionKey": "A",
+          "adjustment": "原材料未显示加点标记，明确需要选择读音的字。"
+        },
+        {
+          "number": 14,
+          "section": "二、选择正确读音",
+          "stem": "河豚（tún téng）\n给“豚”选择正确读音。",
+          "kind": "singleChoice",
+          "reference": "tún",
+          "originalStem": "河豚（tún téng）",
+          "originalReference": "tún",
+          "options": ["tún", "téng"],
+          "correctOptionKey": "A",
+          "adjustment": "原材料未显示加点标记，明确需要选择读音的字。"
+        },
+        {
+          "number": 15,
+          "section": "三、选词填空",
+          "stem": "备选词：飘荡、飘扬\n五星红旗迎风（）。",
+          "kind": "fillBlank",
+          "reference": "飘扬",
+          "originalStem": "五星红旗迎风（）。",
+          "originalReference": "飘扬",
+          "answers": [["飘扬"]]
+        },
+        {
+          "number": 16,
+          "section": "三、选词填空",
+          "stem": "备选词：飘荡、飘扬\n柔软的柳枝在水面上轻轻（）。",
+          "kind": "fillBlank",
+          "reference": "飘荡",
+          "originalStem": "柔软的柳枝在水面上轻轻（）。",
+          "originalReference": "飘荡",
+          "answers": [["飘荡"]]
+        },
+        {
+          "number": 17,
+          "section": "四、按要求写句子",
+          "stem": "小燕子掠过湖面。（扩句，至少两处）",
+          "kind": "shortAnswer",
+          "reference": "示例：可爱的小燕子轻快地掠过波光粼粼的湖面。",
+          "originalStem": "小燕子掠过湖面。（扩句，至少两处）",
+          "originalReference": "示例：可爱的小燕子轻快地掠过波光粼粼的湖面。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 18,
+          "section": "四、按要求写句子",
+          "stem": "荷花很美。（改成感叹句）",
+          "kind": "shortAnswer",
+          "reference": "示例：荷花多么美啊！",
+          "originalStem": "荷花很美。（改成感叹句）",
+          "originalReference": "示例：荷花多么美啊！",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 19,
+          "section": "五、课内阅读",
+          "stem": "荷花已经开了不少了。荷叶挨挨挤挤的，像一个个碧绿的大圆盘。白荷花在这些大圆盘之间冒出来。有的才展开两三片花瓣儿。有的花瓣儿全展开了，露出嫩黄色的小莲蓬。有的还是花骨朵儿，看起来饱胀得马上要破裂似的。\n这段话选自课文《____》，作者是____。",
+          "kind": "fillBlank",
+          "reference": "荷花；叶圣陶",
+          "originalStem": "这段话选自课文《________》，作者是________。",
+          "originalReference": "荷花；叶圣陶",
+          "answers": [["荷花"], ["叶圣陶"]]
+        },
+        {
+          "number": 20,
+          "section": "五、课内阅读",
+          "stem": "荷花已经开了不少了。荷叶挨挨挤挤的，像一个个碧绿的大圆盘。白荷花在这些大圆盘之间冒出来。有的才展开两三片花瓣儿。有的花瓣儿全展开了，露出嫩黄色的小莲蓬。有的还是花骨朵儿，看起来饱胀得马上要破裂似的。\n摘录文中的比喻句，说说把什么比作什么。",
+          "kind": "shortAnswer",
+          "reference": "荷叶挨挨挤挤的，像一个个碧绿的大圆盘。把荷叶比作大圆盘。",
+          "originalStem": "用“____”画出文中比喻句。句中把____比作____。",
+          "originalReference": "荷叶挨挨挤挤的，像一个个碧绿的大圆盘。把荷叶比作大圆盘。",
+          "adjustment": "将纸面画线转换为可输入的摘录和说明，评分仍为人工点评。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 21,
+          "section": "五、课内阅读",
+          "stem": "荷花已经开了不少了。荷叶挨挨挤挤的，像一个个碧绿的大圆盘。白荷花在这些大圆盘之间冒出来。有的才展开两三片花瓣儿。有的花瓣儿全展开了，露出嫩黄色的小莲蓬。有的还是花骨朵儿，看起来饱胀得马上要破裂似的。\n“冒”字写出了什么？",
+          "kind": "shortAnswer",
+          "reference": "荷花蓬勃生长、生机勃勃的样子。",
+          "originalStem": "“冒”字写出了________________________。",
+          "originalReference": "荷花蓬勃生长、生机勃勃的样子。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 22,
+          "section": "六、习作",
+          "stem": "题目：我的植物朋友\n要求：写清楚植物样子、气味，写出你的感受，不少于300字。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "题目：我的植物朋友\n要求：写清楚植物样子、气味，写出你的感受，不少于300字。",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "第二单元 同步练习",
+      "originalText": "### 一、看拼音写词语\ngēng tián（）  qiān xū（）  nuò ruò（）  dài jià（）\nchí táng（）  xīn shǎng（）  shī zi（）  tàn qì（）\n\n### 二、辨字组词\n侍（）  株（）  骄（）\n待（）  珠（）  娇（）\n\n### 三、补全成语\n（）（）不断  邯郸（）（）  井底（）（）\n（）（）矛盾  刻舟（）（）  画蛇（）（）\n\n### 四、句子练习\n1. 铁罐看不起陶罐。（改为反问句）\n________________________________________________\n2. 鹿的角被树枝挂住了。（改成“把”字句）\n________________________________________________\n\n### 五、课内阅读《守株待兔》\n宋人有耕者。田中有株。兔走触株，折颈而死。因释其耒而守株，冀复得兔。兔不可复得，而身为宋国笑。\n1. 解释加点字：\n走：________  释：________  冀：________\n2. 翻译句子：兔不可复得，而身为宋国笑。\n________________________________________________\n3. 这个故事告诉我们什么道理？\n________________________________________________\n\n### 六、习作：看图写故事（本单元习作：看图画，写一写）",
+      "originalAnswerText": "一、耕田 谦虚 懦弱 代价 池塘 欣赏 狮子 叹气\n二、示例：侍候/等待；一株/珍珠；骄傲/娇弱\n三、源源不断、邯郸学步、井底之蛙、自相矛盾、刻舟求剑、画蛇添足\n四、1.难道铁罐会看得起陶罐吗？\n2. 树枝把鹿的角挂住了。\n五、1.跑；放下；希望。2.兔子不可能再得到，而他自己被宋国人嘲笑。3.不能心存侥幸，妄想不劳而获。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "gēng tián（）",
+          "kind": "fillBlank",
+          "reference": "耕田",
+          "originalStem": "gēng tián（）",
+          "originalReference": "耕田",
+          "answers": [["耕田"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "qiān xū（）",
+          "kind": "fillBlank",
+          "reference": "谦虚",
+          "originalStem": "qiān xū（）",
+          "originalReference": "谦虚",
+          "answers": [["谦虚"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "nuò ruò（）",
+          "kind": "fillBlank",
+          "reference": "懦弱",
+          "originalStem": "nuò ruò（）",
+          "originalReference": "懦弱",
+          "answers": [["懦弱"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "dài jià（）",
+          "kind": "fillBlank",
+          "reference": "代价",
+          "originalStem": "dài jià（）",
+          "originalReference": "代价",
+          "answers": [["代价"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "chí táng（）",
+          "kind": "fillBlank",
+          "reference": "池塘",
+          "originalStem": "chí táng（）",
+          "originalReference": "池塘",
+          "answers": [["池塘"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "xīn shǎng（）",
+          "kind": "fillBlank",
+          "reference": "欣赏",
+          "originalStem": "xīn shǎng（）",
+          "originalReference": "欣赏",
+          "answers": [["欣赏"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "shī zi（）",
+          "kind": "fillBlank",
+          "reference": "狮子",
+          "originalStem": "shī zi（）",
+          "originalReference": "狮子",
+          "answers": [["狮子"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "tàn qì（）",
+          "kind": "fillBlank",
+          "reference": "叹气",
+          "originalStem": "tàn qì（）",
+          "originalReference": "叹气",
+          "answers": [["叹气"]]
+        },
+        {
+          "number": 9,
+          "section": "二、辨字组词",
+          "stem": "侍（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：侍候",
+          "originalStem": "侍（____）",
+          "originalReference": "示例：侍候",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 10,
+          "section": "二、辨字组词",
+          "stem": "株（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：一株",
+          "originalStem": "株（____）",
+          "originalReference": "示例：一株",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 11,
+          "section": "二、辨字组词",
+          "stem": "骄（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：骄傲",
+          "originalStem": "骄（____）",
+          "originalReference": "示例：骄傲",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 12,
+          "section": "二、辨字组词",
+          "stem": "待（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：等待",
+          "originalStem": "待（____）",
+          "originalReference": "示例：等待",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 13,
+          "section": "二、辨字组词",
+          "stem": "珠（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：珍珠",
+          "originalStem": "珠（____）",
+          "originalReference": "示例：珍珠",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 14,
+          "section": "二、辨字组词",
+          "stem": "娇（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：娇弱",
+          "originalStem": "娇（____）",
+          "originalReference": "示例：娇弱",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 15,
+          "section": "三、补全成语",
+          "stem": "（）（）不断",
+          "kind": "fillBlank",
+          "reference": "源源不断",
+          "originalStem": "（）（）不断",
+          "originalReference": "源源不断",
+          "answers": [["源"], ["源"]]
+        },
+        {
+          "number": 16,
+          "section": "三、补全成语",
+          "stem": "邯郸（）（）",
+          "kind": "fillBlank",
+          "reference": "邯郸学步",
+          "originalStem": "邯郸（）（）",
+          "originalReference": "邯郸学步",
+          "answers": [["学"], ["步"]]
+        },
+        {
+          "number": 17,
+          "section": "三、补全成语",
+          "stem": "井底（）（）",
+          "kind": "fillBlank",
+          "reference": "井底之蛙",
+          "originalStem": "井底（）（）",
+          "originalReference": "井底之蛙",
+          "answers": [["之"], ["蛙"]]
+        },
+        {
+          "number": 18,
+          "section": "三、补全成语",
+          "stem": "（）（）矛盾",
+          "kind": "fillBlank",
+          "reference": "自相矛盾",
+          "originalStem": "（）（）矛盾",
+          "originalReference": "自相矛盾",
+          "answers": [["自"], ["相"]]
+        },
+        {
+          "number": 19,
+          "section": "三、补全成语",
+          "stem": "刻舟（）（）",
+          "kind": "fillBlank",
+          "reference": "刻舟求剑",
+          "originalStem": "刻舟（）（）",
+          "originalReference": "刻舟求剑",
+          "answers": [["求"], ["剑"]]
+        },
+        {
+          "number": 20,
+          "section": "三、补全成语",
+          "stem": "画蛇（）（）",
+          "kind": "fillBlank",
+          "reference": "画蛇添足",
+          "originalStem": "画蛇（）（）",
+          "originalReference": "画蛇添足",
+          "answers": [["添"], ["足"]]
+        },
+        {
+          "number": 21,
+          "section": "四、句子练习",
+          "stem": "铁罐看不起陶罐。（改为反问句）",
+          "kind": "shortAnswer",
+          "reference": "示例：难道铁罐会看得起陶罐吗？",
+          "originalStem": "铁罐看不起陶罐。（改为反问句）",
+          "originalReference": "示例：难道铁罐会看得起陶罐吗？",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 22,
+          "section": "四、句子练习",
+          "stem": "鹿的角被树枝挂住了。（改成“把”字句）",
+          "kind": "shortAnswer",
+          "reference": "树枝把鹿的角挂住了。",
+          "originalStem": "鹿的角被树枝挂住了。（改成“把”字句）",
+          "originalReference": "树枝把鹿的角挂住了。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 23,
+          "section": "五、课内阅读",
+          "stem": "宋人有耕者。田中有株。兔走触株，折颈而死。因释其耒而守株，冀复得兔。兔不可复得，而身为宋国笑。\n解释“走”在文中的意思。",
+          "kind": "shortAnswer",
+          "reference": "跑",
+          "originalStem": "走：________",
+          "originalReference": "跑",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 24,
+          "section": "五、课内阅读",
+          "stem": "宋人有耕者。田中有株。兔走触株，折颈而死。因释其耒而守株，冀复得兔。兔不可复得，而身为宋国笑。\n解释“释”在文中的意思。",
+          "kind": "shortAnswer",
+          "reference": "放下",
+          "originalStem": "释：________",
+          "originalReference": "放下",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 25,
+          "section": "五、课内阅读",
+          "stem": "宋人有耕者。田中有株。兔走触株，折颈而死。因释其耒而守株，冀复得兔。兔不可复得，而身为宋国笑。\n解释“冀”在文中的意思。",
+          "kind": "shortAnswer",
+          "reference": "希望",
+          "originalStem": "冀：________",
+          "originalReference": "希望",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 26,
+          "section": "五、课内阅读",
+          "stem": "宋人有耕者。田中有株。兔走触株，折颈而死。因释其耒而守株，冀复得兔。兔不可复得，而身为宋国笑。\n翻译句子：兔不可复得，而身为宋国笑。",
+          "kind": "shortAnswer",
+          "reference": "兔子不可能再得到，而他自己被宋国人嘲笑。",
+          "originalStem": "翻译句子：兔不可复得，而身为宋国笑。",
+          "originalReference": "兔子不可能再得到，而他自己被宋国人嘲笑。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 27,
+          "section": "五、课内阅读",
+          "stem": "宋人有耕者。田中有株。兔走触株，折颈而死。因释其耒而守株，冀复得兔。兔不可复得，而身为宋国笑。\n这个故事告诉我们什么道理？",
+          "kind": "shortAnswer",
+          "reference": "不能心存侥幸，妄想不劳而获。",
+          "originalStem": "这个故事告诉我们什么道理？",
+          "originalReference": "不能心存侥幸，妄想不劳而获。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 28,
+          "section": "六、习作",
+          "stem": "看图写故事（本单元习作：看图画，写一写）\n原附件未提供图片，请先准备一幅图，再根据图画写清人物、事情经过和结果。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "习作：看图写故事（本单元习作：看图画，写一写）",
+          "originalReference": "原附件未提供本题参考答案。",
+          "adjustment": "原题没有配图，明确图片缺失，不虚构或替换原题图片。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "第三单元 同步练习",
+      "originalText": "### 一、看拼音写词语\nmì fēng（）  biàn rèn（）  zǔ lì（）  bāo kuò（）\njiǎn chá（）  zhǔn què（）  yán tú（）  kūn chóng（）\n\n### 二、选择正确答案\n1. “缸里的小虾十分有趣”中“缸”读音（）\nA.gāng  B.gān\n2. 《海底世界》是一篇（）\nA.童话 B.说明文 C.寓言\n\n### 三、按要求写句子\n1. 海底的动物常常在窃窃私语。（仿写拟人句）\n________________________________________________\n2. 它们飞得这么低，怎么能看到遥远的家呢？（改为陈述句）\n________________________________________________\n\n### 四、课内阅读《海底世界》\n海底是否没有一点儿声音呢？不是的。海底的动物常常在窃窃私语。你用水中听音器一听，就能听见各种声音：有的像蜜蜂一样嗡嗡，有的像小鸟一样啾啾，有的像小狗一样汪汪，还有的好像在打鼾……\n1. 这是一个____问句。\n2. “窃窃私语”在文中指：________________。\n3. 这段话写出了海底________的特点。\n\n### 五、习作：我做了一项小实验\n要求：把实验过程写清楚，写出心情变化，300字左右。",
+      "originalAnswerText": "一、蜜蜂 辨认 阻力 包括 检查 准确 沿途 昆虫\n二、1.A  2.B\n三、1.示例：小鸟在树枝上开心地聊天。\n2.它们飞得这么低，看不到遥远的家。\n四、1.设问；2.海底动物发出轻微的声音；3.有各种各样的声音。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "mì fēng（）",
+          "kind": "fillBlank",
+          "reference": "蜜蜂",
+          "originalStem": "mì fēng（）",
+          "originalReference": "蜜蜂",
+          "answers": [["蜜蜂"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "biàn rèn（）",
+          "kind": "fillBlank",
+          "reference": "辨认",
+          "originalStem": "biàn rèn（）",
+          "originalReference": "辨认",
+          "answers": [["辨认"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "zǔ lì（）",
+          "kind": "fillBlank",
+          "reference": "阻力",
+          "originalStem": "zǔ lì（）",
+          "originalReference": "阻力",
+          "answers": [["阻力"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "bāo kuò（）",
+          "kind": "fillBlank",
+          "reference": "包括",
+          "originalStem": "bāo kuò（）",
+          "originalReference": "包括",
+          "answers": [["包括"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "jiǎn chá（）",
+          "kind": "fillBlank",
+          "reference": "检查",
+          "originalStem": "jiǎn chá（）",
+          "originalReference": "检查",
+          "answers": [["检查"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "zhǔn què（）",
+          "kind": "fillBlank",
+          "reference": "准确",
+          "originalStem": "zhǔn què（）",
+          "originalReference": "准确",
+          "answers": [["准确"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "yán tú（）",
+          "kind": "fillBlank",
+          "reference": "沿途",
+          "originalStem": "yán tú（）",
+          "originalReference": "沿途",
+          "answers": [["沿途"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "kūn chóng（）",
+          "kind": "fillBlank",
+          "reference": "昆虫",
+          "originalStem": "kūn chóng（）",
+          "originalReference": "昆虫",
+          "answers": [["昆虫"]]
+        },
+        {
+          "number": 9,
+          "section": "二、选择正确答案",
+          "stem": "“缸里的小虾十分有趣”中“缸”读音（）",
+          "kind": "singleChoice",
+          "reference": "gāng",
+          "originalStem": "“缸里的小虾十分有趣”中“缸”读音（）",
+          "originalReference": "gāng",
+          "options": ["gāng", "gān"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 10,
+          "section": "二、选择正确答案",
+          "stem": "《海底世界》是一篇（）",
+          "kind": "singleChoice",
+          "reference": "说明文",
+          "originalStem": "《海底世界》是一篇（）",
+          "originalReference": "说明文",
+          "options": ["童话", "说明文", "寓言"],
+          "correctOptionKey": "B"
+        },
+        {
+          "number": 11,
+          "section": "三、按要求写句子",
+          "stem": "海底的动物常常在窃窃私语。（仿写拟人句）",
+          "kind": "shortAnswer",
+          "reference": "示例：小鸟在树枝上开心地聊天。",
+          "originalStem": "海底的动物常常在窃窃私语。（仿写拟人句）",
+          "originalReference": "示例：小鸟在树枝上开心地聊天。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 12,
+          "section": "三、按要求写句子",
+          "stem": "它们飞得这么低，怎么能看到遥远的家呢？（改为陈述句）",
+          "kind": "shortAnswer",
+          "reference": "它们飞得这么低，看不到遥远的家。",
+          "originalStem": "它们飞得这么低，怎么能看到遥远的家呢？（改为陈述句）",
+          "originalReference": "它们飞得这么低，看不到遥远的家。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 13,
+          "section": "四、课内阅读",
+          "stem": "海底是否没有一点儿声音呢？不是的。海底的动物常常在窃窃私语。你用水中听音器一听，就能听见各种声音：有的像蜜蜂一样嗡嗡，有的像小鸟一样啾啾，有的像小狗一样汪汪，还有的好像在打鼾……\n“海底是否没有一点儿声音呢？不是的。”这是一个____句。",
+          "kind": "fillBlank",
+          "reference": "设问",
+          "originalStem": "这是一个____问句。",
+          "originalReference": "设问",
+          "answers": [["设问"]],
+          "adjustment": "明确判断的句子；移除空格后多余的“问”字，填写“设问”即可组成“设问句”，与原参考答案一致。"
+        },
+        {
+          "number": 14,
+          "section": "四、课内阅读",
+          "stem": "海底是否没有一点儿声音呢？不是的。海底的动物常常在窃窃私语。你用水中听音器一听，就能听见各种声音：有的像蜜蜂一样嗡嗡，有的像小鸟一样啾啾，有的像小狗一样汪汪，还有的好像在打鼾……\n“窃窃私语”在文中指什么？",
+          "kind": "shortAnswer",
+          "reference": "海底动物发出轻微的声音。",
+          "originalStem": "“窃窃私语”在文中指：________________。",
+          "originalReference": "海底动物发出轻微的声音。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 15,
+          "section": "四、课内阅读",
+          "stem": "海底是否没有一点儿声音呢？不是的。海底的动物常常在窃窃私语。你用水中听音器一听，就能听见各种声音：有的像蜜蜂一样嗡嗡，有的像小鸟一样啾啾，有的像小狗一样汪汪，还有的好像在打鼾……\n这段话写出了海底怎样的特点？",
+          "kind": "shortAnswer",
+          "reference": "有各种各样的声音。",
+          "originalStem": "这段话写出了海底________的特点。",
+          "originalReference": "有各种各样的声音。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 16,
+          "section": "五、习作",
+          "stem": "我做了一项小实验\n要求：把实验过程写清楚，写出心情变化，300字左右。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "我做了一项小实验\n要求：把实验过程写清楚，写出心情变化，300字左右。",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "第四单元 同步练习",
+      "originalText": "### 一、看拼音写词语\nwěi dà（）  jì lù（）  bǎo cún（）  shè jì（）\nchuàng jǔ（）  zhì huì（）  lì shǐ（）  jié shěng（）\n\n### 二、默写古诗三首\n《元日》《清明》《九月九日忆山东兄弟》\n\n### 三、判断对错，打√/×\n1. 造纸术是我国四大发明之一。（）\n2. 赵州桥是唐朝石匠李春设计建造。（）\n3. 《清明上河图》作者张择端，北宋画家。（）\n\n### 四、句子练习\n1. 赵州桥很雄伟。赵州桥很坚固。（用关联词合并句子）\n________________________________________________\n\n### 五、课内阅读《纸的发明》\n大约在一千九百年前的东汉时代，有个叫蔡伦的人，吸收了人们长期积累的经验，改进了造纸术。他把树皮、麻头、稻草、破布等原料剪碎或切断，浸在水里捣烂成浆；再把浆捞出来晒干，就成了一种既轻便又好用的纸。\n1. 蔡伦改进造纸术的原料：________________。\n2. 造纸术的意义：________________________________。\n\n### 六、综合性学习：中华传统节日（简单写节日习俗）",
+      "originalAnswerText": "一、伟大 记录 保存 设计 创举 智慧 历史 节省\n二、默写略\n三、1.√ 2.×（隋朝）3.√\n四、赵州桥不但很雄伟，而且很坚固。\n五、1.树皮、麻头、稻草、破布；2.方便书写，促进全世界文化传播。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "wěi dà（）",
+          "kind": "fillBlank",
+          "reference": "伟大",
+          "originalStem": "wěi dà（）",
+          "originalReference": "伟大",
+          "answers": [["伟大"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "jì lù（）",
+          "kind": "fillBlank",
+          "reference": "记录",
+          "originalStem": "jì lù（）",
+          "originalReference": "记录",
+          "answers": [["记录"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "bǎo cún（）",
+          "kind": "fillBlank",
+          "reference": "保存",
+          "originalStem": "bǎo cún（）",
+          "originalReference": "保存",
+          "answers": [["保存"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "shè jì（）",
+          "kind": "fillBlank",
+          "reference": "设计",
+          "originalStem": "shè jì（）",
+          "originalReference": "设计",
+          "answers": [["设计"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "chuàng jǔ（）",
+          "kind": "fillBlank",
+          "reference": "创举",
+          "originalStem": "chuàng jǔ（）",
+          "originalReference": "创举",
+          "answers": [["创举"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "zhì huì（）",
+          "kind": "fillBlank",
+          "reference": "智慧",
+          "originalStem": "zhì huì（）",
+          "originalReference": "智慧",
+          "answers": [["智慧"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "lì shǐ（）",
+          "kind": "fillBlank",
+          "reference": "历史",
+          "originalStem": "lì shǐ（）",
+          "originalReference": "历史",
+          "answers": [["历史"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "jié shěng（）",
+          "kind": "fillBlank",
+          "reference": "节省",
+          "originalStem": "jié shěng（）",
+          "originalReference": "节省",
+          "answers": [["节省"]]
+        },
+        {
+          "number": 9,
+          "section": "二、默写古诗三首",
+          "stem": "默写《元日》。",
+          "kind": "shortAnswer",
+          "reference": "本册已导入文本：\n[宋]王安石\n爆竹声中一岁除，\n春风送暖入屠苏。\n千门万户曈曈日，\n总把新桃换旧符。",
+          "originalStem": "默写《元日》。",
+          "originalReference": "默写略",
+          "adjustment": "原答案为“默写略”；参考诗文取自本册已导入《古诗三首》，作为人工核对材料。",
+          "referenceSource": "G3_PEP_CHINESE_S2_USER_TEXT_V1",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 10,
+          "section": "二、默写古诗三首",
+          "stem": "默写《清明》。",
+          "kind": "shortAnswer",
+          "reference": "本册已导入文本：\n[唐]杜牧\n清明时节雨纷纷，\n路上行人欲断魂。\n借问酒家何处有？\n牧童遥指杏花村。",
+          "originalStem": "默写《清明》。",
+          "originalReference": "默写略",
+          "adjustment": "原答案为“默写略”；参考诗文取自本册已导入《古诗三首》，作为人工核对材料。",
+          "referenceSource": "G3_PEP_CHINESE_S2_USER_TEXT_V1",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 11,
+          "section": "二、默写古诗三首",
+          "stem": "默写《九月九日忆山东兄弟》。",
+          "kind": "shortAnswer",
+          "reference": "本册已导入文本：\n[唐]王维\n独在异乡为异客，\n每逢佳节倍思亲。\n遥知兄弟登高处，\n遍插茱萸少一人。",
+          "originalStem": "默写《九月九日忆山东兄弟》。",
+          "originalReference": "默写略",
+          "adjustment": "原答案为“默写略”；参考诗文取自本册已导入《古诗三首》，作为人工核对材料。",
+          "referenceSource": "G3_PEP_CHINESE_S2_USER_TEXT_V1",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 12,
+          "section": "三、判断对错",
+          "stem": "造纸术是我国四大发明之一。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "造纸术是我国四大发明之一。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": "按提供练习与本册文本核对。"
+        },
+        {
+          "number": 13,
+          "section": "三、判断对错",
+          "stem": "赵州桥是唐朝石匠李春设计建造。",
+          "kind": "trueFalse",
+          "reference": "×",
+          "originalStem": "赵州桥是唐朝石匠李春设计建造。",
+          "originalReference": "×",
+          "correctValue": false,
+          "explanation": "按提供练习与本册文本核对。应为隋朝。"
+        },
+        {
+          "number": 14,
+          "section": "三、判断对错",
+          "stem": "《清明上河图》作者张择端，北宋画家。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "《清明上河图》作者张择端，北宋画家。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": "按提供练习与本册文本核对。"
+        },
+        {
+          "number": 15,
+          "section": "四、句子练习",
+          "stem": "赵州桥很雄伟。赵州桥很坚固。（用关联词合并句子）",
+          "kind": "shortAnswer",
+          "reference": "赵州桥不但很雄伟，而且很坚固。",
+          "originalStem": "赵州桥很雄伟。赵州桥很坚固。（用关联词合并句子）",
+          "originalReference": "赵州桥不但很雄伟，而且很坚固。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 16,
+          "section": "五、课内阅读",
+          "stem": "大约在一千九百年前的东汉时代，有个叫蔡伦的人，吸收了人们长期积累的经验，改进了造纸术。他把树皮、麻头、稻草、破布等原料剪碎或切断，浸在水里捣烂成浆；再把浆捞出来晒干，就成了一种既轻便又好用的纸。\n蔡伦改进造纸术的原料有哪些？",
+          "kind": "shortAnswer",
+          "reference": "树皮、麻头、稻草、破布。",
+          "originalStem": "蔡伦改进造纸术的原料：________________。",
+          "originalReference": "树皮、麻头、稻草、破布。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 17,
+          "section": "五、课内阅读",
+          "stem": "大约在一千九百年前的东汉时代，有个叫蔡伦的人，吸收了人们长期积累的经验，改进了造纸术。他把树皮、麻头、稻草、破布等原料剪碎或切断，浸在水里捣烂成浆；再把浆捞出来晒干，就成了一种既轻便又好用的纸。\n结合本册《纸的发明》全文，说说造纸术的意义。",
+          "kind": "shortAnswer",
+          "reference": "方便书写，促进全世界文化传播。",
+          "originalStem": "造纸术的意义：________________________________。",
+          "originalReference": "方便书写，促进全世界文化传播。",
+          "adjustment": "给出的节选未说明传播意义，提示结合本册已导入全文作答。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 18,
+          "section": "六、综合性学习",
+          "stem": "中华传统节日：简单写一个节日及其习俗。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "综合性学习：中华传统节日（简单写节日习俗）",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "第五单元（习作单元）同步练习",
+      "originalText": "### 一、看拼音写词语\nhú li（）  jì xù（）  mì mì（）  tái tóu（）\nqiǎo kè lì（）  xiāng cháng（）\n\n### 二、多音字组词\n长 cháng（） zhǎng（）\n担 dān（） dàn（）\n\n### 三、按要求想象写句子\n1. 胡萝卜先生的长胡子可以用来做什么？写两种。\n________________________________________________\n2. 如果你会变，你想变成什么？简单写几句话。\n________________________________________________\n\n### 四、课内阅读《我变成了一棵树》\n我真希望变成一棵树，这样就没人在你玩的时候叫你吃饭了。我心里想着，就觉得身上痒痒的，低头一看，发现许多小树枝正从我身上冒出来。呀，我真的变成了一棵树！\n1. “我”想变成树的原因：________________。\n2. 想象作文要大胆想象，还要符合逻辑。（√/×）\n\n### 五、习作：奇妙的想象\n任选一个题目：《一本有魔法的书》《手罢工啦》，不少于300字。",
+      "originalAnswerText": "一、狐狸 继续 秘密 抬头 巧克力 香肠\n二、长短/长大；担心/担子\n三、示例：1.放风筝线、晾尿布。2.我想变成小鸟，在天上自由飞翔。\n四、1.不想吃饭，想自由自在玩；2.√",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "hú li（）",
+          "kind": "fillBlank",
+          "reference": "狐狸",
+          "originalStem": "hú li（）",
+          "originalReference": "狐狸",
+          "answers": [["狐狸"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "jì xù（）",
+          "kind": "fillBlank",
+          "reference": "继续",
+          "originalStem": "jì xù（）",
+          "originalReference": "继续",
+          "answers": [["继续"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "mì mì（）",
+          "kind": "fillBlank",
+          "reference": "秘密",
+          "originalStem": "mì mì（）",
+          "originalReference": "秘密",
+          "answers": [["秘密"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "tái tóu（）",
+          "kind": "fillBlank",
+          "reference": "抬头",
+          "originalStem": "tái tóu（）",
+          "originalReference": "抬头",
+          "answers": [["抬头"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "qiǎo kè lì（）",
+          "kind": "fillBlank",
+          "reference": "巧克力",
+          "originalStem": "qiǎo kè lì（）",
+          "originalReference": "巧克力",
+          "answers": [["巧克力"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "xiāng cháng（）",
+          "kind": "fillBlank",
+          "reference": "香肠",
+          "originalStem": "xiāng cháng（）",
+          "originalReference": "香肠",
+          "answers": [["香肠"]]
+        },
+        {
+          "number": 7,
+          "section": "二、多音字组词",
+          "stem": "长 cháng（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：长短",
+          "originalStem": "长 cháng（____）",
+          "originalReference": "示例：长短",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 8,
+          "section": "二、多音字组词",
+          "stem": "长 zhǎng（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：长大",
+          "originalStem": "长 zhǎng（____）",
+          "originalReference": "示例：长大",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 9,
+          "section": "二、多音字组词",
+          "stem": "担 dān（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：担心",
+          "originalStem": "担 dān（____）",
+          "originalReference": "示例：担心",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 10,
+          "section": "二、多音字组词",
+          "stem": "担 dàn（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：担子",
+          "originalStem": "担 dàn（____）",
+          "originalReference": "示例：担子",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 11,
+          "section": "三、按要求想象写句子",
+          "stem": "胡萝卜先生的长胡子可以用来做什么？写两种。",
+          "kind": "shortAnswer",
+          "reference": "示例：放风筝线、晾尿布。",
+          "originalStem": "胡萝卜先生的长胡子可以用来做什么？写两种。",
+          "originalReference": "示例：放风筝线、晾尿布。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 12,
+          "section": "三、按要求想象写句子",
+          "stem": "如果你会变，你想变成什么？简单写几句话。",
+          "kind": "shortAnswer",
+          "reference": "示例：我想变成小鸟，在天上自由飞翔。",
+          "originalStem": "如果你会变，你想变成什么？简单写几句话。",
+          "originalReference": "示例：我想变成小鸟，在天上自由飞翔。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 13,
+          "section": "四、课内阅读",
+          "stem": "我真希望变成一棵树，这样就没人在你玩的时候叫你吃饭了。我心里想着，就觉得身上痒痒的，低头一看，发现许多小树枝正从我身上冒出来。呀，我真的变成了一棵树！\n“我”想变成树的原因是什么？",
+          "kind": "shortAnswer",
+          "reference": "不想吃饭，想自由自在玩。",
+          "originalStem": "“我”想变成树的原因：________________。",
+          "originalReference": "不想吃饭，想自由自在玩。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 14,
+          "section": "四、课内阅读",
+          "stem": "想象作文要大胆想象，还要符合逻辑。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "想象作文要大胆想象，还要符合逻辑。",
+          "originalReference": "√",
+          "correctValue": true
+        },
+        {
+          "number": 15,
+          "section": "五、习作",
+          "stem": "奇妙的想象\n任选一个题目：《一本有魔法的书》《手罢工啦》，不少于300字。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "奇妙的想象\n任选一个题目：《一本有魔法的书》《手罢工啦》，不少于300字。",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "第六单元 同步练习",
+      "originalText": "### 一、看拼音写词语\nmó gu（）  chuí liǔ（）  rǎn sè（）  suī rán（）\nféi zào（）  tòu míng（）  jiāo ruǎn（）  lā lā（）\n\n### 二、给加点字注音\n瞭望（）  颤巍巍（）  薄球（）  山巅（）\n\n### 三、句子练习\n1. 松林里一个个斗笠像蘑菇一样。（仿写比喻句）\n________________________________________________\n2. 宋庆龄说：“我不能失信。”（改为转述句）\n________________________________________________\n\n### 四、课内阅读《肥皂泡》\n那一个个轻清脆丽的小球，像一串美丽的梦，是我们自己小心地轻轻吹起的，吹了起来，又轻轻地飞起，是那么圆满，那么自由，那么透明，那么美丽。\n1. 本段作者是____。\n2. 用“那么……那么……那么……”造句。\n________________________________________________\n\n### 五、习作：身边那些有特点的人\n写一个身边的人，抓住特点，300字左右。",
+      "originalAnswerText": "一、蘑菇 垂柳 染色 虽然 肥皂 透明 娇软 拉拉\n二、liào  chàn  báo  diān\n三、1.天上的云朵像棉花糖一样。\n2.宋庆龄说，她不能失信。\n四、1.冰心；造句示例：天空是那么蓝，那么高，那么干净，那么辽阔。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "mó gu（）",
+          "kind": "fillBlank",
+          "reference": "蘑菇",
+          "originalStem": "mó gu（）",
+          "originalReference": "蘑菇",
+          "answers": [["蘑菇"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "chuí liǔ（）",
+          "kind": "fillBlank",
+          "reference": "垂柳",
+          "originalStem": "chuí liǔ（）",
+          "originalReference": "垂柳",
+          "answers": [["垂柳"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "rǎn sè（）",
+          "kind": "fillBlank",
+          "reference": "染色",
+          "originalStem": "rǎn sè（）",
+          "originalReference": "染色",
+          "answers": [["染色"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "suī rán（）",
+          "kind": "fillBlank",
+          "reference": "虽然",
+          "originalStem": "suī rán（）",
+          "originalReference": "虽然",
+          "answers": [["虽然"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "féi zào（）",
+          "kind": "fillBlank",
+          "reference": "肥皂",
+          "originalStem": "féi zào（）",
+          "originalReference": "肥皂",
+          "answers": [["肥皂"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "tòu míng（）",
+          "kind": "fillBlank",
+          "reference": "透明",
+          "originalStem": "tòu míng（）",
+          "originalReference": "透明",
+          "answers": [["透明"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "jiāo ruǎn（）",
+          "kind": "fillBlank",
+          "reference": "娇软",
+          "originalStem": "jiāo ruǎn（）",
+          "originalReference": "娇软",
+          "answers": [["娇软"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "lā lā（）",
+          "kind": "fillBlank",
+          "reference": "拉拉",
+          "originalStem": "lā lā（）",
+          "originalReference": "拉拉",
+          "answers": [["拉拉"]]
+        },
+        {
+          "number": 9,
+          "section": "二、给字注音",
+          "stem": "瞭望（）\n给“瞭”注音（填写带声调的拼音）。",
+          "kind": "fillBlank",
+          "reference": "liào",
+          "originalStem": "瞭望（）",
+          "originalReference": "liào",
+          "answers": [["liào"]],
+          "adjustment": "原材料未显示加点标记，明确要注音的字，保留给定词语和答案。"
+        },
+        {
+          "number": 10,
+          "section": "二、给字注音",
+          "stem": "颤巍巍（）\n给“颤”注音（填写带声调的拼音）。",
+          "kind": "fillBlank",
+          "reference": "chàn",
+          "originalStem": "颤巍巍（）",
+          "originalReference": "chàn",
+          "answers": [["chàn"]],
+          "adjustment": "原材料未显示加点标记，明确要注音的字，保留给定词语和答案。"
+        },
+        {
+          "number": 11,
+          "section": "二、给字注音",
+          "stem": "薄球（）\n给“薄”注音（填写带声调的拼音）。",
+          "kind": "fillBlank",
+          "reference": "báo",
+          "originalStem": "薄球（）",
+          "originalReference": "báo",
+          "answers": [["báo"]],
+          "adjustment": "原材料未显示加点标记，明确要注音的字，保留给定词语和答案。"
+        },
+        {
+          "number": 12,
+          "section": "二、给字注音",
+          "stem": "山巅（）\n给“巅”注音（填写带声调的拼音）。",
+          "kind": "fillBlank",
+          "reference": "diān",
+          "originalStem": "山巅（）",
+          "originalReference": "diān",
+          "answers": [["diān"]],
+          "adjustment": "原材料未显示加点标记，明确要注音的字，保留给定词语和答案。"
+        },
+        {
+          "number": 13,
+          "section": "三、句子练习",
+          "stem": "松林里一个个斗笠像蘑菇一样。（仿写比喻句）",
+          "kind": "shortAnswer",
+          "reference": "示例：天上的云朵像棉花糖一样。",
+          "originalStem": "松林里一个个斗笠像蘑菇一样。（仿写比喻句）",
+          "originalReference": "示例：天上的云朵像棉花糖一样。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 14,
+          "section": "三、句子练习",
+          "stem": "宋庆龄说：“我不能失信。”（改为转述句）",
+          "kind": "shortAnswer",
+          "reference": "宋庆龄说，她不能失信。",
+          "originalStem": "宋庆龄说：“我不能失信。”（改为转述句）",
+          "originalReference": "宋庆龄说，她不能失信。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 15,
+          "section": "四、课内阅读",
+          "stem": "那一个个轻清脆丽的小球，像一串美丽的梦，是我们自己小心地轻轻吹起的，吹了起来，又轻轻地飞起，是那么圆满，那么自由，那么透明，那么美丽。\n本段作者是____。",
+          "kind": "fillBlank",
+          "reference": "冰心",
+          "originalStem": "本段作者是____。",
+          "originalReference": "冰心",
+          "answers": [["冰心"]]
+        },
+        {
+          "number": 16,
+          "section": "四、课内阅读",
+          "stem": "那一个个轻清脆丽的小球，像一串美丽的梦，是我们自己小心地轻轻吹起的，吹了起来，又轻轻地飞起，是那么圆满，那么自由，那么透明，那么美丽。\n用“那么……那么……那么……”造句。",
+          "kind": "shortAnswer",
+          "reference": "示例：天空是那么蓝，那么高，那么干净，那么辽阔。",
+          "originalStem": "用“那么……那么……那么……”造句。",
+          "originalReference": "示例：天空是那么蓝，那么高，那么干净，那么辽阔。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 17,
+          "section": "五、习作",
+          "stem": "身边那些有特点的人\n写一个身边的人，抓住特点，300字左右。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "身边那些有特点的人\n写一个身边的人，抓住特点，300字左右。",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "第七单元 同步练习",
+      "originalText": "### 一、看拼音写词语\nbiàn huàn（）  là zhú（）  guāng máng（）  pǔ tōng（）\ncàn làn（）  wēi wǔ（）  xiōng měng（）  zhèn jìng（）\n\n### 二、选词填空\n平静  宁静  安静\n1. 海底十分（）。\n2. 教室里很（）。\n\n### 三、句子练习\n1. 火烧云变化极多。（扩句）\n________________________________________________\n2. 太阳会发光，会发热。（改成比喻句）\n________________________________________________\n\n### 四、课内阅读《我们奇妙的世界》\n这是一个奇妙的世界，一切看上去都是有生命的。只要我们仔细地观察、寻找，就能从极普通的事物中找到美。\n1. 短文从____和____两个方面写世界的奇妙。\n2. 生活中你发现了什么美？写一句。\n________________________________________________\n\n### 五、习作：国宝大熊猫\n介绍大熊猫外形、爱吃的食物、生活习性，300字。",
+      "originalAnswerText": "一、变幻 蜡烛 光芒 普通 灿烂 威武 凶猛 镇静\n二、1.宁静 2.安静\n三、示例：1.傍晚的火烧云变化极多。2.太阳像一个巨大的火球，会发光，会发热。\n四、1.天空，大地；2.示例：雨后的小草挂着水珠，很美。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "biàn huàn（）",
+          "kind": "fillBlank",
+          "reference": "变幻",
+          "originalStem": "biàn huàn（）",
+          "originalReference": "变幻",
+          "answers": [["变幻"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "là zhú（）",
+          "kind": "fillBlank",
+          "reference": "蜡烛",
+          "originalStem": "là zhú（）",
+          "originalReference": "蜡烛",
+          "answers": [["蜡烛"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "guāng máng（）",
+          "kind": "fillBlank",
+          "reference": "光芒",
+          "originalStem": "guāng máng（）",
+          "originalReference": "光芒",
+          "answers": [["光芒"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "pǔ tōng（）",
+          "kind": "fillBlank",
+          "reference": "普通",
+          "originalStem": "pǔ tōng（）",
+          "originalReference": "普通",
+          "answers": [["普通"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "càn làn（）",
+          "kind": "fillBlank",
+          "reference": "灿烂",
+          "originalStem": "càn làn（）",
+          "originalReference": "灿烂",
+          "answers": [["灿烂"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "wēi wǔ（）",
+          "kind": "fillBlank",
+          "reference": "威武",
+          "originalStem": "wēi wǔ（）",
+          "originalReference": "威武",
+          "answers": [["威武"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "xiōng měng（）",
+          "kind": "fillBlank",
+          "reference": "凶猛",
+          "originalStem": "xiōng měng（）",
+          "originalReference": "凶猛",
+          "answers": [["凶猛"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "zhèn jìng（）",
+          "kind": "fillBlank",
+          "reference": "镇静",
+          "originalStem": "zhèn jìng（）",
+          "originalReference": "镇静",
+          "answers": [["镇静"]]
+        },
+        {
+          "number": 9,
+          "section": "二、选词填空",
+          "stem": "备选词：平静、宁静、安静\n海底十分（）。",
+          "kind": "fillBlank",
+          "reference": "宁静",
+          "originalStem": "海底十分（）。",
+          "originalReference": "宁静",
+          "answers": [["宁静"]]
+        },
+        {
+          "number": 10,
+          "section": "二、选词填空",
+          "stem": "备选词：平静、宁静、安静\n教室里很（）。",
+          "kind": "fillBlank",
+          "reference": "安静",
+          "originalStem": "教室里很（）。",
+          "originalReference": "安静",
+          "answers": [["安静"]]
+        },
+        {
+          "number": 11,
+          "section": "三、句子练习",
+          "stem": "火烧云变化极多。（扩句）",
+          "kind": "shortAnswer",
+          "reference": "示例：傍晚的火烧云变化极多。",
+          "originalStem": "火烧云变化极多。（扩句）",
+          "originalReference": "示例：傍晚的火烧云变化极多。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 12,
+          "section": "三、句子练习",
+          "stem": "太阳会发光，会发热。（改成比喻句）",
+          "kind": "shortAnswer",
+          "reference": "示例：太阳像一个巨大的火球，会发光，会发热。",
+          "originalStem": "太阳会发光，会发热。（改成比喻句）",
+          "originalReference": "示例：太阳像一个巨大的火球，会发光，会发热。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 13,
+          "section": "四、课内阅读",
+          "stem": "这是一个奇妙的世界，一切看上去都是有生命的。只要我们仔细地观察、寻找，就能从极普通的事物中找到美。\n结合本册《我们奇妙的世界》全文，短文从哪两个方面写世界的奇妙？",
+          "kind": "shortAnswer",
+          "reference": "天空、大地。",
+          "originalStem": "短文从____和____两个方面写世界的奇妙。",
+          "originalReference": "天空、大地。",
+          "adjustment": "节选只有开头和结尾，未包含两个方面的描写；提示结合本册已导入全文作答，并按人工点评处理。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 14,
+          "section": "四、课内阅读",
+          "stem": "这是一个奇妙的世界，一切看上去都是有生命的。只要我们仔细地观察、寻找，就能从极普通的事物中找到美。\n生活中你发现了什么美？写一句。",
+          "kind": "shortAnswer",
+          "reference": "示例：雨后的小草挂着水珠，很美。",
+          "originalStem": "生活中你发现了什么美？写一句。",
+          "originalReference": "示例：雨后的小草挂着水珠，很美。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 15,
+          "section": "五、习作",
+          "stem": "国宝大熊猫\n介绍大熊猫外形、爱吃的食物、生活习性，300字。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "国宝大熊猫\n介绍大熊猫外形、爱吃的食物、生活习性，300字。",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "第八单元 同步练习",
+      "originalText": "### 一、看拼音写词语\njiāo huò（）  chèn shān（）  fù zé（）  lòu yǔ（）\npàng lǘ（）  lǐ wū（）  zǎo hé（）  shǒu yì（）\n\n### 二、多音字\n缝 féng（） fèng（）\n卷 juǎn（） juàn（）\n\n### 三、判断对错\n1. 《慢性子裁缝和急性子顾客》作者周锐。（）\n2. “漏”指的是漏雨。（）\n3. 枣核是一个大个子的小伙子。（）\n\n### 四、课内阅读《慢性子裁缝和急性子顾客》\n“您可别忘了，”裁缝提醒他说，“我是个慢性子裁缝啊。”\n1. 顾客先后四次要求修改衣服，依次是：棉袄→____→____→____。\n2. 为什么裁缝一直没有裁料？\n________________________________________________\n\n### 五、习作：这样想象真有趣\n把动物特征反过来写，如蚂蚁变大，母鸡不会下蛋，300字。",
+      "originalAnswerText": "一、交货 衬衫 负责 漏雨 胖驴 里屋 枣核 手艺\n二、缝衣服/缝隙；卷起/试卷\n三、1.√ 2.√ 3.×\n四、1.夹袄、短袖衬衫、春装；2.因为裁缝是慢性子，布料一直放在柜子里，还没开始裁剪。",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "jiāo huò（）",
+          "kind": "fillBlank",
+          "reference": "交货",
+          "originalStem": "jiāo huò（）",
+          "originalReference": "交货",
+          "answers": [["交货"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "chèn shān（）",
+          "kind": "fillBlank",
+          "reference": "衬衫",
+          "originalStem": "chèn shān（）",
+          "originalReference": "衬衫",
+          "answers": [["衬衫"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "fù zé（）",
+          "kind": "fillBlank",
+          "reference": "负责",
+          "originalStem": "fù zé（）",
+          "originalReference": "负责",
+          "answers": [["负责"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "lòu yǔ（）",
+          "kind": "fillBlank",
+          "reference": "漏雨",
+          "originalStem": "lòu yǔ（）",
+          "originalReference": "漏雨",
+          "answers": [["漏雨"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "pàng lǘ（）",
+          "kind": "fillBlank",
+          "reference": "胖驴",
+          "originalStem": "pàng lǘ（）",
+          "originalReference": "胖驴",
+          "answers": [["胖驴"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "lǐ wū（）",
+          "kind": "fillBlank",
+          "reference": "里屋",
+          "originalStem": "lǐ wū（）",
+          "originalReference": "里屋",
+          "answers": [["里屋"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "zǎo hé（）",
+          "kind": "fillBlank",
+          "reference": "枣核",
+          "originalStem": "zǎo hé（）",
+          "originalReference": "枣核",
+          "answers": [["枣核"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "shǒu yì（）",
+          "kind": "fillBlank",
+          "reference": "手艺",
+          "originalStem": "shǒu yì（）",
+          "originalReference": "手艺",
+          "answers": [["手艺"]]
+        },
+        {
+          "number": 9,
+          "section": "二、多音字组词",
+          "stem": "缝 féng（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：缝衣服",
+          "originalStem": "缝 féng（____）",
+          "originalReference": "示例：缝衣服",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 10,
+          "section": "二、多音字组词",
+          "stem": "缝 fèng（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：缝隙",
+          "originalStem": "缝 fèng（____）",
+          "originalReference": "示例：缝隙",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 11,
+          "section": "二、多音字组词",
+          "stem": "卷 juǎn（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：卷起",
+          "originalStem": "卷 juǎn（____）",
+          "originalReference": "示例：卷起",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 12,
+          "section": "二、多音字组词",
+          "stem": "卷 juàn（____）",
+          "kind": "shortAnswer",
+          "reference": "示例：试卷",
+          "originalStem": "卷 juàn（____）",
+          "originalReference": "示例：试卷",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 13,
+          "section": "三、判断对错",
+          "stem": "《慢性子裁缝和急性子顾客》作者周锐。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "《慢性子裁缝和急性子顾客》作者周锐。",
+          "originalReference": "√",
+          "correctValue": true
+        },
+        {
+          "number": 14,
+          "section": "三、判断对错",
+          "stem": "故事题目《漏》中的“漏”指的是漏雨。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "“漏”指的是漏雨。",
+          "originalReference": "√",
+          "correctValue": true,
+          "adjustment": "明确判断的是故事题目中的“漏”，避免与老虎、贼把“漏”误想为怪物的情节混淆。"
+        },
+        {
+          "number": 15,
+          "section": "三、判断对错",
+          "stem": "枣核是一个大个子的小伙子。",
+          "kind": "trueFalse",
+          "reference": "×",
+          "originalStem": "枣核是一个大个子的小伙子。",
+          "originalReference": "×",
+          "correctValue": false,
+          "explanation": "枣核的个头很小。"
+        },
+        {
+          "number": 16,
+          "section": "四、课内阅读",
+          "stem": "“您可别忘了，”裁缝提醒他说，“我是个慢性子裁缝啊。”\n结合本册已导入全文，顾客先后四次要求修改衣服，依次是：棉袄→____→____→____。",
+          "kind": "fillBlank",
+          "reference": "夹袄、短袖衬衫、春装",
+          "originalStem": "顾客先后四次要求修改衣服，依次是：棉袄→____→____→____。",
+          "originalReference": "夹袄、短袖衬衫、春装",
+          "answers": [["夹袄"], ["短袖衬衫"], ["春装"]],
+          "adjustment": "给出的节选仅有裁缝的一句话，提示结合本册已导入全文核对衣服变化顺序。"
+        },
+        {
+          "number": 17,
+          "section": "四、课内阅读",
+          "stem": "“您可别忘了，”裁缝提醒他说，“我是个慢性子裁缝啊。”\n结合本册已导入全文，为什么裁缝一直没有裁料？",
+          "kind": "shortAnswer",
+          "reference": "因为裁缝是慢性子，布料一直放在柜子里，还没开始裁剪。",
+          "originalStem": "为什么裁缝一直没有裁料？",
+          "originalReference": "因为裁缝是慢性子，布料一直放在柜子里，还没开始裁剪。",
+          "adjustment": "节选未提供原因，提示结合已导入全文作答。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        },
+        {
+          "number": 18,
+          "section": "五、习作",
+          "stem": "这样想象真有趣\n把动物特征反过来写，如蚂蚁变大，母鸡不会下蛋，300字。",
+          "kind": "shortAnswer",
+          "reference": "原附件未提供本题参考答案。项目参考提示：围绕题目写清内容，可请老师或家长点评；没有唯一答案，不自动判分。",
+          "originalStem": "这样想象真有趣\n把动物特征反过来写，如蚂蚁变大，母鸡不会下蛋，300字。",
+          "originalReference": "原附件未提供本题参考答案。",
+          "explanation": "本题允许不同合理表达，请对照参考答案或请老师、家长点评；不自动判分。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { computed } from 'vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { LOCAL_STUDENT_ID, useStudentStore } from '@/stores/studentStore'
@@ -8,7 +9,11 @@ export function useLearningProfile() {
     student = useStudentStore()
   const profileId = computed(() => {
     try {
-      if (typeof window !== 'undefined' && window.localStorage.getItem(ACTIVE_PROFILE_JOURNAL_KEY) !== null) return ''
+      if (
+        typeof window !== 'undefined' &&
+        accountStorage.getItem(ACTIVE_PROFILE_JOURNAL_KEY) !== null
+      )
+        return ''
     } catch {
       return ''
     }

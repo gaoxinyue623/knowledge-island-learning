@@ -1,0 +1,1472 @@
+{
+  "title": "北师大六年级上册数学2022修订单元自测",
+  "sourceSha256": "bc7d6f84a8e18f1783f68afdada92236b338b8facc43d3a920f78c521f85f801",
+  "sourceNote": "原附件逐单元全文保存；清理重复圆公式污染，纠正等式性质答案，明确比与比值、观察条件、π取值与质量占比口径。版本年份按用户标注。",
+  "notice": "原稿部分分值与实际题量不一致，按实际题目统计，不换算为100分。分数按题面用最简a/b填写，比用a:b，圆的数值题π取3.14。过程、公式、定义和开放任务由老师或家长核对，提交后显示参考解法。",
+  "papers": [
+    {
+      "topicKey": "fraction-divide",
+      "title": "第一单元 分数除法",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "5/8÷3＝5/8×（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "1/3",
+          "stem": "5/8÷3＝5/8×（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1/3",
+          "adjustment": "",
+          "answers": [
+            [
+              "1/3"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "3/4÷6/7，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "3/4×7/6＝7/8。",
+          "stem": "3/4÷(6/7)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/4×7/6＝7/8。",
+          "adjustment": "",
+          "answers": [
+            [
+              "7/8"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "一个数的2/5是12，这个数是（）。",
+          "originalReference": "30",
+          "stem": "一个数的2/5是12，这个数是（）。",
+          "kind": "fillBlank",
+          "reference": "30",
+          "adjustment": "",
+          "answers": [
+            [
+              "30"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "4/9÷1/3的商比4/9（）。",
+          "originalReference": "大",
+          "stem": "4/9÷(1/3)的商比4/9（）。",
+          "kind": "fillBlank",
+          "reference": "大",
+          "adjustment": "",
+          "answers": [
+            [
+              "大",
+              "更大"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "分数混合运算，无括号时先算（），再算（）；有括号先算括号内。",
+          "originalReference": "乘除；加减",
+          "stem": "分数混合运算，无括号时先算（），再算（）；有括号先算括号内。",
+          "kind": "fillBlank",
+          "reference": "乘除；加减",
+          "adjustment": "",
+          "answers": [
+            [
+              "乘除",
+              "乘法和除法",
+              "乘法、除法"
+            ],
+            [
+              "加减",
+              "加法和减法",
+              "加法、减法"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "2/3÷3/2，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "4/9",
+          "stem": "2/3÷(3/2)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "4/9",
+          "adjustment": "",
+          "answers": [
+            [
+              "4/9"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "5/6÷5/12，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "2",
+          "stem": "5/6÷(5/12)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "2",
+          "adjustment": "",
+          "answers": [
+            [
+              "2"
+            ]
+          ]
+        },
+        {
+          "number": 8,
+          "originalStem": "1÷7/10，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "10/7",
+          "stem": "1÷(7/10)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "10/7",
+          "adjustment": "",
+          "answers": [
+            [
+              "10/7"
+            ]
+          ]
+        },
+        {
+          "number": 9,
+          "originalStem": "3/7的倒数是（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "7/3",
+          "stem": "3/7的倒数是（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "7/3",
+          "adjustment": "",
+          "answers": [
+            [
+              "7/3"
+            ]
+          ]
+        },
+        {
+          "number": 10,
+          "originalStem": "计算：8/9÷4，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "2/9",
+          "stem": "计算：8/9÷4，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "2/9",
+          "adjustment": "",
+          "answers": [
+            [
+              "2/9"
+            ]
+          ]
+        },
+        {
+          "number": 11,
+          "originalStem": "计算：5/12÷10/9，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "3/8",
+          "stem": "计算：5/12÷(10/9)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/8",
+          "adjustment": "",
+          "answers": [
+            [
+              "3/8"
+            ]
+          ]
+        },
+        {
+          "number": 12,
+          "originalStem": "计算：7/10÷14/15，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "3/4",
+          "stem": "计算：7/10÷(14/15)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/4",
+          "adjustment": "",
+          "answers": [
+            [
+              "3/4"
+            ]
+          ]
+        },
+        {
+          "number": 13,
+          "originalStem": "计算：18÷3/5，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "originalReference": "30",
+          "stem": "计算：18÷(3/5)，结果为（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "30",
+          "adjustment": "",
+          "answers": [
+            [
+              "30"
+            ]
+          ]
+        },
+        {
+          "number": 14,
+          "originalStem": "用简便方法计算4/7÷3/5＋3/7×5/3，写出过程。",
+          "originalReference": "4/7×5/3＋3/7×5/3＝（4/7＋3/7）×5/3＝5/3。",
+          "stem": "用简便方法计算4/7÷(3/5)＋3/7×5/3，写出过程。",
+          "kind": "shortAnswer",
+          "reference": "4/7×5/3＋3/7×5/3＝（4/7＋3/7）×5/3＝5/3。",
+          "adjustment": ""
+        },
+        {
+          "number": 15,
+          "originalStem": "用简便方法计算5/8÷3/4÷5/6，写出过程。",
+          "originalReference": "5/8×4/3×6/5＝1，先约分再相乘。",
+          "stem": "用简便方法计算5/8÷(3/4)÷(5/6)，写出过程。",
+          "kind": "shortAnswer",
+          "reference": "5/8×4/3×6/5＝1，先约分再相乘。",
+          "adjustment": ""
+        },
+        {
+          "number": 16,
+          "originalStem": "一条公路已经修了全长的3/4，正好45千米，求全长，写出列式或方程过程。",
+          "originalReference": "设全长x千米，（3/4）x＝45，x＝45÷3/4＝60。检验60×3/4＝45。",
+          "stem": "一条公路已经修了全长的3/4，正好45千米，求全长，写出列式或方程过程。",
+          "kind": "shortAnswer",
+          "reference": "设全长x千米，（3/4）x＝45，x＝45÷(3/4)＝60。检验60×3/4＝45。",
+          "adjustment": "恢复答案方程乱码，明确分率以全长为单位1。"
+        }
+      ],
+      "sourceText": "## ✅第一单元 分数除法\n\n### 知识点\n\n1. 分数除法计算法则：**除以一个不为0的数 = 乘这个数的倒数**。\n2. 商的变化规律（被除数≠0）\n除数＞1(d=2r，r=\\frac{d}{2})商＜被除数；除数＜1(d=2r，r=\\frac{d}{2})商＞被除数；除数=1(d=2r，r=\\frac{d}{2})商=被除数。\n3. 分数除法应用题：已知一个数的几分之几是多少(d=2r，r=\\frac{d}{2})求这个数(d=2r，r=\\frac{d}{2})可用除法或者列方程求解。\n4. 分数混合运算：运算顺序和整数一致；整数运算律同样适用分数(d=2r，r=\\frac{d}{2})可简便计算。\n\n### 单元自测\n\n一、填空（每空3分(d=2r，r=\\frac{d}{2})共30分）\n\n1. $\\frac{5}{8}÷3=\\frac{5}{8}×$（）\n2. $\\frac{3}{4}÷\\frac{6}{7}=$（）\n3. 一个数的$\\frac{2}{5}$是12(d=2r，r=\\frac{d}{2})这个数是（）。\n4. $\\frac{4}{9}÷\\frac{1}{3}$的商比$\\frac{4}{9}$（）。\n5. 分数混合运算(d=2r，r=\\frac{d}{2})先算（）(d=2r，r=\\frac{d}{2})再算（）(d=2r，r=\\frac{d}{2})有括号先算括号内。\n6. $\\frac{2}{3}÷\\frac{3}{2}=$（）。\n7. $\\frac{5}{6}÷\\frac{5}{12}=$（）。\n8. $1÷\\frac{7}{10}=$（）。\n9. $\\frac{3}{7}$的倒数是（）。\n\n二、计算（每题8分(d=2r，r=\\frac{d}{2})共32分）\n$\\frac{8}{9}÷4$　$\\frac{5}{12}÷\\frac{10}{9}$\n$\\frac{7}{10}÷\\frac{14}{15}$　$18÷\\frac{3}{5}$\n\n三、简便计算（每题9分(d=2r，r=\\frac{d}{2})共18分）\n$\\frac{4}{7}÷\\frac{3}{5}+\\frac{3}{7}×\\frac{5}{3}$\n$\\frac{5}{8}÷\\frac{3}{4}÷\\frac{5}{6}$\n\n四、解决问题（20分）\n一条公路(d=2r，r=\\frac{d}{2})已经修了$\\frac{3}{4}$(d=2r，r=\\frac{d}{2})正好修了45千米(d=2r，r=\\frac{d}{2})这条公路全长多少千米？\n\n第一单元参考答案\n一、1.$\\frac{1}{3}$；2.$\\frac{7}{8}$；3.30；4.大；5.乘除\\(d=2r，r=\\frac{d}{2}\\)加减；6.$\\frac{4}{9}$；7.2；8.$\\frac{10}{7}$；9.$\\frac{7}{3}$\n二、$\\frac{2}{9}$；$\\frac{3}{8}$；$\\frac{3}{4}$；30\n三、原式$=\\frac{4}{7}×\\frac{5}{3}+\\frac{3}{7}×\\frac{5}{3}=(\\frac{4}{7}+\\frac{3}{7})×\\frac{5}{3}=\\frac{5}{3}$；原式$=\\frac{5}{8}×\\frac{4}{3}×\\frac{6}{5}=1$\n四、解：设全长$x$千米。$\\frac{3}{4}\\(x=\\)45\\(d=2r，r=\\frac{d}{2}\\)\\(x=\\)60$\n答：公路全长60千米。\n\n"
+    },
+    {
+      "topicKey": "circle-parts",
+      "title": "第二单元 圆",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "圆的位置由（）决定，大小由（）决定。",
+          "originalReference": "圆心；半径",
+          "stem": "圆的位置由（）决定，大小由（）决定。",
+          "kind": "fillBlank",
+          "reference": "圆心；半径",
+          "adjustment": "",
+          "answers": [
+            [
+              "圆心"
+            ],
+            [
+              "半径",
+              "半径长度"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "圆直径10厘米，π取3.14，半径（）厘米，周长约（）厘米，面积约（）平方厘米。",
+          "originalReference": "5；31.4；78.5",
+          "stem": "圆直径10厘米，π取3.14，半径（）厘米，周长约（）厘米，面积约（）平方厘米。",
+          "kind": "fillBlank",
+          "reference": "5；31.4；78.5",
+          "adjustment": "数值题明确π取3.14，使用近似值。",
+          "answers": [
+            [
+              "5"
+            ],
+            [
+              "31.4"
+            ],
+            [
+              "78.5"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "圆周长公式：C＝（）或（）。",
+          "originalReference": "C＝πd＝2πr；两种形式均需写出，等价表达可接受。",
+          "stem": "写出圆周长公式的两种形式，用直径d、半径r表示。",
+          "kind": "shortAnswer",
+          "reference": "C＝πd＝2πr；两种形式均需写出，等价表达可接受。",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "originalStem": "圆有（）条对称轴。",
+          "originalReference": "无数",
+          "stem": "圆有（）条对称轴。",
+          "kind": "fillBlank",
+          "reference": "无数",
+          "adjustment": "",
+          "answers": [
+            [
+              "无数",
+              "无数条"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "同心圆环外半径6厘米、内半径4厘米，π取3.14，面积约（）平方厘米。",
+          "originalReference": "3.14×（6²－4²）＝62.8平方厘米。",
+          "stem": "同心圆环外半径6厘米、内半径4厘米，π取3.14，面积约（）平方厘米。",
+          "kind": "fillBlank",
+          "reference": "3.14×（6²－4²）＝62.8平方厘米。",
+          "adjustment": "补充同心、π取值。",
+          "answers": [
+            [
+              "62.8"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "直径是半径的2倍。",
+          "originalReference": "正确。d＝2r。",
+          "stem": "同一个圆中，直径是半径的2倍。",
+          "kind": "trueFalse",
+          "reference": "正确。d＝2r。",
+          "adjustment": "补充同圆条件。",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "π＝3.14。",
+          "originalReference": "错误。只能写π≈3.14，π是无限不循环小数。",
+          "stem": "π＝3.14。",
+          "kind": "trueFalse",
+          "reference": "错误。只能写π≈3.14，π是无限不循环小数。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "一个圆的半径扩大到原来的2倍，周长扩大到2倍、面积扩大到4倍。",
+          "originalReference": "正确。周长随r变化，面积随r²变化。",
+          "stem": "一个圆的半径扩大到原来的2倍，周长扩大到2倍、面积扩大到4倍。",
+          "kind": "trueFalse",
+          "reference": "正确。周长随r变化，面积随r²变化。",
+          "adjustment": "将“扩大2倍”明确为扩大到2倍。",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "圆周长是它的直径的π倍。",
+          "originalReference": "正确。C＝πd。",
+          "stem": "圆周长是它的直径的π倍。",
+          "kind": "trueFalse",
+          "reference": "正确。C＝πd。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "半圆形的周长就是整圆周长的一半。",
+          "originalReference": "错误。还要加上直径，半圆边界有弧与直径两部分。",
+          "stem": "半圆形的周长就是整圆周长的一半。",
+          "kind": "trueFalse",
+          "reference": "错误。还要加上直径，半圆边界有弧与直径两部分。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 11,
+          "originalStem": "圆心在圆的正中间。",
+          "originalReference": "正确。该距离是半径。",
+          "stem": "圆心位于圆的中心，到圆上各点距离相等。",
+          "kind": "trueFalse",
+          "reference": "正确。该距离是半径。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 12,
+          "originalStem": "圆半径4分米，π取3.14，周长约（）分米，面积约（）平方分米。",
+          "originalReference": "周长2×3.14×4＝25.12；面积3.14×4²＝50.24。",
+          "stem": "圆半径4分米，π取3.14，周长约（）分米，面积约（）平方分米。",
+          "kind": "fillBlank",
+          "reference": "周长2×3.14×4＝25.12；面积3.14×4²＝50.24。",
+          "adjustment": "",
+          "answers": [
+            [
+              "25.12"
+            ],
+            [
+              "50.24"
+            ]
+          ]
+        },
+        {
+          "number": 13,
+          "originalStem": "圆形花坛直径12米，π取3.14，面积约多少平方米？",
+          "originalReference": "半径12÷2＝6米，面积3.14×6²＝113.04。",
+          "stem": "圆形花坛直径12米，π取3.14，面积约多少平方米？（只填数值，单位：平方米）",
+          "kind": "calculation",
+          "reference": "半径12÷2＝6米，面积3.14×6²＝113.04。",
+          "adjustment": "",
+          "value": 113.04
+        }
+      ],
+      "sourceText": "## ✅第二单元 圆\n\n### 知识点\n\n1. 圆各部分：圆心$O$（确定位置）；半径$r$；直径$d$；$d=2r(d=2r，r=\\frac{d}{2})r=\\frac{d}{2}$。\n2. 圆是轴对称图形(d=2r，r=\\frac{d}{2})**无数条对称轴**(d=2r，r=\\frac{d}{2})对称轴是直径所在直线。\n3. 圆周率$\\pi$：圆周长÷直径(d=2r，r=\\frac{d}{2})是无限不循环小数(d=2r，r=\\frac{d}{2})一般取$\\boldsymbol{\\pi≈3.14}$。\n4. 周长公式：$\\boldsymbol{(C=)\\pi d=2\\pi r}$\n5. 面积公式：$\\boldsymbol{S=\\pi r^2}$> \n> 注意：求面积必须先找到半径；圆环面积：$S=\\pi(R^2-r^2)$\n6. 圆切拼成长方形：长方形长=圆周长一半(d=2r，r=\\frac{d}{2})宽=圆半径。\n\n### 单元自测\n\n一、填空（每空4分(d=2r，r=\\frac{d}{2})共32分）\n\n1. 圆的位置由（）决定(d=2r，r=\\frac{d}{2})大小由（）决定。\n2. 直径10cm(d=2r，r=\\frac{d}{2})半径（）cm(d=2r，r=\\frac{d}{2})周长（）cm(d=2r，r=\\frac{d}{2})面积（）$\\mathrm{cm^2}$。\n3. 圆周长公式：$(C=)$（）或（）。\n4. 圆有（）条对称轴。\n5. 圆环(d=2r，r=\\frac{d}{2})外圆半径6cm(d=2r，r=\\frac{d}{2})内圆半径4cm(d=2r，r=\\frac{d}{2})圆环面积（）$\\mathrm{cm^2}$。\n\n二、判断（每题5分(d=2r，r=\\frac{d}{2})共30分）\n\n1. 直径是半径的2倍。（）\n2. $\\pi=3.14$。（）\n3. 半径扩大2倍(d=2r，r=\\frac{d}{2})周长扩大2倍(d=2r，r=\\frac{d}{2})面积扩大4倍。（）\n4. 圆的周长是直径的$\\pi$倍。（）\n5. 半圆周长就是圆周长的一半。（）\n6. 圆心在圆的正中间。（）\n\n三、计算（18分）\n圆半径4分米(d=2r，r=\\frac{d}{2})求周长和面积。\n\n四、解决问题（20分）\n一个圆形花坛(d=2r，r=\\frac{d}{2})直径12米(d=2r，r=\\frac{d}{2})求花坛的面积。\n\n第二单元参考答案\n一、1.圆心\\(d=2r，r=\\frac{d}{2}\\)半径；2.5\\(d=2r，r=\\frac{d}{2}\\)31.4\\(d=2r，r=\\frac{d}{2}\\)78.5；3.$\\pi d$\\(d=2r，r=\\frac{d}{2}\\)$2\\pi r$；4.无数；5.62.8\n二、√\\(d=2r，r=\\frac{d}{2}\\)×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)×\\(d=2r，r=\\frac{d}{2}\\)√\n三、周长：$2×3.14×4=25.12\\mathrm{dm}$；面积：$3.14×4^2=50.24\\mathrm{dm^2}$\n四、半径：$12÷2=6$米；面积：$3.14×6^2=113.04$平方米\n答：花坛面积113.04平方米。\n\n"
+    },
+    {
+      "topicKey": "equation-properties",
+      "title": "第三单元 用字母表示（二）",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "含有未知数的等式叫（）。",
+          "originalReference": "方程",
+          "stem": "含有未知数的等式叫（）。",
+          "kind": "fillBlank",
+          "reference": "方程",
+          "adjustment": "",
+          "answers": [
+            [
+              "方程"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "$5x-2(x=)$（）。",
+          "originalReference": "3x",
+          "stem": "化简：5x－2x＝（）。",
+          "kind": "fillBlank",
+          "reference": "3x",
+          "adjustment": "恢复合并同类项题中的公式乱码。",
+          "answers": [
+            [
+              "3x"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "甲数比乙数的2倍多5，乙数是x，甲数为（）（用字母式表示）。",
+          "originalReference": "2x+5",
+          "stem": "甲数比乙数的2倍多5，乙数是x，甲数为（）（用字母式表示）。",
+          "kind": "fillBlank",
+          "reference": "2x+5",
+          "adjustment": "",
+          "answers": [
+            [
+              "2x+5",
+              "2x＋5",
+              "5+2x",
+              "5＋2x"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "4x＋10＝30，x＝（）。",
+          "originalReference": "5",
+          "stem": "4x＋10＝30，x＝（）。",
+          "kind": "fillBlank",
+          "reference": "5",
+          "adjustment": "",
+          "answers": [
+            [
+              "5"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "3（x－2）＝18，x＝（）。",
+          "originalReference": "8",
+          "stem": "3（x－2）＝18，x＝（）。",
+          "kind": "fillBlank",
+          "reference": "8",
+          "adjustment": "",
+          "answers": [
+            [
+              "8"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "等式两边同时乘（）的数，等式仍然成立。",
+          "originalReference": "不为0",
+          "stem": "等式两边同时乘（）数，等式仍然成立。（填写操作要求）",
+          "kind": "fillBlank",
+          "reference": "同一个数，包括0。乘0仍保持相等，但求解时会丢失未知数信息；除以同一个数则必须非零。",
+          "adjustment": "原答案“不为0”混淆了同乘与同除的限制，改为同乘同一个数，允许0。",
+          "answers": [
+            [
+              "同一个",
+              "相同的",
+              "同样的"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "3x＋18＝42",
+          "originalReference": "3x＝24，x＝8。",
+          "stem": "解方程并代回检验：3x＋18＝42",
+          "kind": "shortAnswer",
+          "reference": "3x＝24，x＝8。",
+          "adjustment": "恢复原方程公式排版，过程由人工核对。"
+        },
+        {
+          "number": 8,
+          "originalStem": "$7x-4(x=)24$",
+          "originalReference": "3x＝24，x＝8。",
+          "stem": "解方程并代回检验：7x－4x＝24",
+          "kind": "shortAnswer",
+          "reference": "3x＝24，x＝8。",
+          "adjustment": "恢复原方程公式排版，过程由人工核对。"
+        },
+        {
+          "number": 9,
+          "originalStem": "2x－1/2＝3/2",
+          "originalReference": "2x＝2，x＝1。",
+          "stem": "解方程并代回检验：2x－1/2＝3/2",
+          "kind": "shortAnswer",
+          "reference": "2x＝2，x＝1。",
+          "adjustment": "恢复原方程公式排版，过程由人工核对。"
+        },
+        {
+          "number": 10,
+          "originalStem": "$\\frac{2}{3}(x=)12$",
+          "originalReference": "x＝12÷2/3＝18。",
+          "stem": "解方程并代回检验：（2/3）x＝12",
+          "kind": "shortAnswer",
+          "reference": "x＝12÷(2/3)＝18。",
+          "adjustment": "恢复原方程公式排版，过程由人工核对。"
+        },
+        {
+          "number": 11,
+          "originalStem": "一个数的3/4加上6等于30，列方程求这个数。",
+          "originalReference": "设这个数为x，（3/4）x＋6＝30，（3/4）x＝24，x＝32。检验32×3/4＋6＝30。",
+          "stem": "一个数的3/4加上6等于30，列方程求这个数。",
+          "kind": "shortAnswer",
+          "reference": "设这个数为x，（3/4）x＋6＝30，（3/4）x＝24，x＝32。检验32×3/4＋6＝30。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## ✅第三单元 用字母表示（二）\n\n### 知识点\n\n1. 进一步用字母表示数、数量关系、计算公式。\n2. 方程：含有未知数的等式；等式性质解方程。\n3. 稍复杂方程：含括号、合并同类项(d=2r，r=\\frac{d}{2})用于分数相关应用题。\n4. 列方程解题步骤：找等量关系→设未知数→列方程→解方程→检验。\n\n### 单元自测\n\n一、填空（每空4分(d=2r，r=\\frac{d}{2})共24分）\n\n1. 含有未知数的等式叫（）。\n2. $5x-2(x=)$（）。\n3. 甲数比乙数的2倍多5(d=2r，r=\\frac{d}{2})乙数是$x$(d=2r，r=\\frac{d}{2})甲数是（）。\n4. $(4x+10=30)$(d=2r，r=\\frac{d}{2})$(x=)$（）。\n5. $3(x-2)=18$(d=2r，r=\\frac{d}{2})$(x=)$（）。\n6. 等式两边同时乘（）的数(d=2r，r=\\frac{d}{2})等式仍然成立。\n\n二、解方程（每题9分(d=2r，r=\\frac{d}{2})共36分）\n$(3x+18=42)$　$7x-4(x=)24$\n$2x-\\frac{1}{2}=\\frac{3}{2}$　$\\frac{2}{3}(x=)12$\n\n三、应用题（40分）\n一个数的$\\frac{3}{4}$加上6等于30(d=2r，r=\\frac{d}{2})求这个数。\n\n第三单元参考答案\n一、1.方程；2.$3x$；3.$2x+5$；4.5；5.8；6.不为0\n二、$\\(x=\\)8$；$\\(x=\\)8$；$\\(x=\\)1$；$\\(x=\\)18$\n三、解：设这个数为$x$。\n$\\frac{3}{4}x+6=30$\n$\\frac{3}{4}\\(x=\\)24$\n$\\(x=\\)32$\n答：这个数是32。\n\n"
+    },
+    {
+      "topicKey": "water-saving",
+      "title": "综合实践：制订节水方案",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "水龙头匀速每分钟漏水20毫升，1小时漏水（）毫升。",
+          "originalReference": "20×60＝1200毫升。",
+          "stem": "水龙头匀速每分钟漏水20毫升，1小时漏水（）毫升。",
+          "kind": "fillBlank",
+          "reference": "20×60＝1200毫升。",
+          "adjustment": "",
+          "answers": [
+            [
+              "1200"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "原来每次用水10升，节水后每次减少原量的1/5，现在每次用水（）升。",
+          "originalReference": "10×（1－1/5）＝8升。",
+          "stem": "原来每次用水10升，节水后每次减少原量的1/5，现在每次用水（）升。",
+          "kind": "fillBlank",
+          "reference": "10×（1－1/5）＝8升。",
+          "adjustment": "",
+          "answers": [
+            [
+              "8"
+            ]
+          ]
+        }
+      ],
+      "sourceText": "## ✅综合实践：制订节水方案\n\n### 知识点\n\n测量生活用水量(d=2r，r=\\frac{d}{2})计算人均用水量；设计节水方案(d=2r，r=\\frac{d}{2})估算节约水量(d=2r，r=\\frac{d}{2})体会百分数、分数在生活中的应用。\n\n1. 用水量=单次用水量×次数\n2. 对比节水前后用水量(d=2r，r=\\frac{d}{2})算出节约几分之几/百分之几。\n\n### 自测\n\n1. 一个水龙头每分钟漏水20mL(d=2r，r=\\frac{d}{2})1小时漏水（）mL。（50分）\n2. 节水后每次用水减少$\\frac{1}{5}$(d=2r，r=\\frac{d}{2})原来每次用水10L(d=2r，r=\\frac{d}{2})现在每次用水（）L。（50分）\n\n综合实践参考答案\n1.1200；2.8\n\n"
+    },
+    {
+      "topicKey": "fraction-known",
+      "title": "第四单元 分数的应用",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "比80多80的1/4的数是（）。",
+          "originalReference": "100",
+          "stem": "比80多80的1/4的数是（）。",
+          "kind": "fillBlank",
+          "reference": "100",
+          "adjustment": "",
+          "answers": [
+            [
+              "100"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "比60少60的1/3的数是（）。",
+          "originalReference": "40",
+          "stem": "比60少60的1/3的数是（）。",
+          "kind": "fillBlank",
+          "reference": "40",
+          "adjustment": "",
+          "answers": [
+            [
+              "40"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "（）比40多40的1/5。",
+          "originalReference": "48",
+          "stem": "（）比40多40的1/5。",
+          "kind": "fillBlank",
+          "reference": "48",
+          "adjustment": "",
+          "answers": [
+            [
+              "48"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "75比（）多这个数的1/4。",
+          "originalReference": "60",
+          "stem": "75比（）多这个数的1/4。",
+          "kind": "fillBlank",
+          "reference": "60",
+          "adjustment": "",
+          "answers": [
+            [
+              "60"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "男生人数比女生少1/6，这里的单位1是（）。",
+          "originalReference": "女生人数",
+          "stem": "男生人数比女生少1/6，这里的单位1是（）。",
+          "kind": "fillBlank",
+          "reference": "女生人数",
+          "adjustment": "",
+          "answers": [
+            [
+              "女生人数",
+              "女生",
+              "女生的人数"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "现价是原价的4/5，降价（）。",
+          "originalReference": "1/5",
+          "stem": "现价是原价的4/5，降价部分占原价的（）。（分数填最简分数a/b，大于1用假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1/5",
+          "adjustment": "明确所求为相对原价的分率，不是未提供的金额。",
+          "answers": [
+            [
+              "1/5"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "20增加原数的1/10是（）。",
+          "originalReference": "22",
+          "stem": "20增加原数的1/10是（）。",
+          "kind": "fillBlank",
+          "reference": "22",
+          "adjustment": "",
+          "answers": [
+            [
+              "22"
+            ]
+          ]
+        },
+        {
+          "number": 8,
+          "originalStem": "30减少原数的1/6是（）。",
+          "originalReference": "25",
+          "stem": "30减少原数的1/6是（）。",
+          "kind": "fillBlank",
+          "reference": "25",
+          "adjustment": "",
+          "answers": [
+            [
+              "25"
+            ]
+          ]
+        },
+        {
+          "number": 9,
+          "originalStem": "甲乙均为正数，甲比乙多1/5，乙就比甲少1/5。",
+          "originalReference": "错误。乙为5份、甲为6份，乙比甲少1/6。",
+          "stem": "甲乙均为正数，甲比乙多1/5，乙就比甲少1/5。",
+          "kind": "trueFalse",
+          "reference": "错误。乙为5份、甲为6份，乙比甲少1/6。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "单位“1”已知，用乘法计算。",
+          "originalReference": "正确。整体×对应分率＝部分。",
+          "stem": "单位1的数量已知，求它的某个分率对应的数量，用乘法。",
+          "kind": "trueFalse",
+          "reference": "正确。整体×对应分率＝部分。",
+          "adjustment": "明确所求为分率对应数量，不能泛指所有问题。",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "100先增加原数的1/10，再减少新数的1/10，结果仍是100。",
+          "originalReference": "错误。100×1.1×0.9＝99，两次单位1不同。",
+          "stem": "100先增加原数的1/10，再减少新数的1/10，结果仍是100。",
+          "kind": "trueFalse",
+          "reference": "错误。100×1.1×0.9＝99，两次单位1不同。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 12,
+          "originalStem": "量率对应才能求出单位1。",
+          "originalReference": "正确。分率必须对应该部分量。",
+          "stem": "用“部分量÷对应分率”求单位1时，量率须对应且分率非零。",
+          "kind": "trueFalse",
+          "reference": "正确。分率必须对应该部分量。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 13,
+          "originalStem": "全班按男生女生两组统计，女生占全班3/5，则男生占2/5。",
+          "originalReference": "正确。1－3/5＝2/5。",
+          "stem": "全班按男生女生两组统计，女生占全班3/5，则男生占2/5。",
+          "kind": "trueFalse",
+          "reference": "正确。1－3/5＝2/5。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 14,
+          "originalStem": "果园桃树120棵，梨树比桃树多1/4，梨树多少棵？",
+          "originalReference": "120×（1＋1/4）＝150棵。",
+          "stem": "果园桃树120棵，梨树比桃树多1/4，梨树多少棵？（只填数值，单位：棵）",
+          "kind": "calculation",
+          "reference": "120×（1＋1/4）＝150棵。",
+          "adjustment": "",
+          "value": 150
+        }
+      ],
+      "sourceText": "## ✅第四单元 分数的应用\n\n### 知识点\n\n1. 求比一个数多（或少）几分之几的数：单位“1”已知(d=2r，r=\\frac{d}{2})用乘法。\n公式：单位1 ×（1±分率）\n2. 已知比一个数多/少几分之几(d=2r，r=\\frac{d}{2})求单位“1”：用除法或者方程。\n3. 找准**单位“1”**是解题关键。\n4. 分数应用题：量率对应(d=2r，r=\\frac{d}{2})部分量÷对应分率=单位“1”总量。\n\n### 单元自测\n\n一、填空（每空4分(d=2r，r=\\frac{d}{2})共32分）\n\n1. 比80多$\\frac{1}{4}$的数是（）。\n2. 比60少$\\frac{1}{3}$的数是（）。\n3. （）比40多$\\frac{1}{5}$。\n4. 75比（）多$\\frac{1}{4}$。\n5. 男生人数比女生少$\\frac{1}{6}$(d=2r，r=\\frac{d}{2})单位“1”是（）。\n6. 现价是原价的$\\frac{4}{5}$(d=2r，r=\\frac{d}{2})降价（）。\n7. 20增加$\\frac{1}{10}$是（）。\n8. 30减少$\\frac{1}{6}$是（）。\n\n二、判断（每题6分(d=2r，r=\\frac{d}{2})共30分）\n\n1. 甲比乙多$\\frac{1}{5}$(d=2r，r=\\frac{d}{2})乙比甲少$\\frac{1}{5}$。（）\n2. 单位“1”已知(d=2r，r=\\frac{d}{2})用乘法计算。（）\n3. 100增加$\\frac{1}{10}$后再减少$\\frac{1}{10}$(d=2r，r=\\frac{d}{2})结果还是100。（）\n4. 量率对应才能求出单位1。（）\n5. 女生占全班$\\frac{3}{5}$(d=2r，r=\\frac{d}{2})男生占$\\frac{2}{5}$。（）\n\n三、应用题（38分）\n果园桃树120棵(d=2r，r=\\frac{d}{2})梨树比桃树多$\\frac{1}{4}$(d=2r，r=\\frac{d}{2})梨树多少棵？\n\n第四单元参考答案\n一、1.100；2.40；3.48；4.60；5.女生人数；6.$\\frac{1}{5}$；7.22；8.25\n二、×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\n三、$120×(1+\\frac{1}{4})=150$棵\n答：梨树150棵。\n\n"
+    },
+    {
+      "topicKey": "ratio-meaning",
+      "title": "第五单元 比的认识",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "3÷5＝（）:（）＝分数（）。",
+          "originalReference": "3；5；3；5",
+          "stem": "把3÷5写成比为（）:（），写成分数为分子（）、分母（）（不扩大或缩小原数字）。",
+          "kind": "fillBlank",
+          "reference": "3；5；3；5",
+          "adjustment": "分子分母分别填写，保持原数字。",
+          "answers": [
+            [
+              "3"
+            ],
+            [
+              "5"
+            ],
+            [
+              "3"
+            ],
+            [
+              "5"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "12:18的最简整数比是（），比值是（）（比用a:b，比值用最简a/b）。",
+          "originalReference": "2:3；2/3",
+          "stem": "12:18的最简整数比是（），比值是（）（比用a:b，比值用最简a/b）。",
+          "kind": "fillBlank",
+          "reference": "2:3；2/3",
+          "adjustment": "",
+          "answers": [
+            [
+              "2:3",
+              "2：3"
+            ],
+            [
+              "2/3"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "甲:乙＝2:3，总和50，甲为（），乙为（）。",
+          "originalReference": "20；30",
+          "stem": "甲:乙＝2:3，总和50，甲为（），乙为（）。",
+          "kind": "fillBlank",
+          "reference": "20；30",
+          "adjustment": "",
+          "answers": [
+            [
+              "20"
+            ],
+            [
+              "30"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "比的（）不能为0。",
+          "originalReference": "后项",
+          "stem": "比的（）不能为0。",
+          "kind": "fillBlank",
+          "reference": "后项",
+          "adjustment": "",
+          "answers": [
+            [
+              "后项"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "0.4:0.8的最简整数比是（）（用a:b表示）。",
+          "originalReference": "1:2",
+          "stem": "0.4:0.8的最简整数比是（）（用a:b表示）。",
+          "kind": "fillBlank",
+          "reference": "1:2",
+          "adjustment": "",
+          "answers": [
+            [
+              "1:2",
+              "1：2"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "比的后项相当于除数，不能为0。",
+          "originalReference": "正确。a:b＝a÷b。",
+          "stem": "比的后项相当于除数，不能为0。",
+          "kind": "trueFalse",
+          "reference": "正确。a:b＝a÷b。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "4:2比值是2，也可以写成2:1。",
+          "originalReference": "×",
+          "stem": "4:2的比值是2，也可以把这个比值写成2:1。",
+          "kind": "trueFalse",
+          "reference": "错误。4:2可化简为比2:1，但比值是数2；比与比值不能混为一谈。",
+          "adjustment": "明确“写成2:1”指比值，避免把正确化简比误判为错误。",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "比的前项、后项同时加同一个数，比值一定不变。",
+          "originalReference": "错误。例如1:2加1变为2:3，1/2不等于2/3。",
+          "stem": "比的前项、后项同时加同一个数，比值一定不变。",
+          "kind": "trueFalse",
+          "reference": "错误。例如1:2加1变为2:3，1/2不等于2/3。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "用“每份量”的方法按比分配，先求总份数。",
+          "originalReference": "正确。再求总量÷总份数。",
+          "stem": "用“每份量”的方法按比分配，先求总份数。",
+          "kind": "trueFalse",
+          "reference": "正确。再求总量÷总份数。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "2:3可以写成2/3。",
+          "originalReference": "正确。可用分数形式表示比；若求比值，计算结果也是数2/3，但题意要区分。",
+          "stem": "比2:3可以用分数形式2/3来表示这个比。",
+          "kind": "trueFalse",
+          "reference": "正确。可用分数形式表示比；若求比值，计算结果也是数2/3，但题意要区分。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "一块地共80平方米，按3:5分给甲乙，甲（）平方米，乙（）平方米。",
+          "originalReference": "总8份，每份10平方米，甲30、乙50。",
+          "stem": "一块地共80平方米，按3:5分给甲乙，甲（）平方米，乙（）平方米。",
+          "kind": "fillBlank",
+          "reference": "总8份，每份10平方米，甲30、乙50。",
+          "adjustment": "",
+          "answers": [
+            [
+              "30"
+            ],
+            [
+              "50"
+            ]
+          ]
+        }
+      ],
+      "sourceText": "## ✅第五单元 比的认识\n\n### 知识点\n\n1. 两个数相除又叫两个数的**比**；$a:b=a÷b=\\frac{a}{b}(b≠0)$\n2. 比的各部分：前项、比号、后项；比值=前项÷后项。\n3. **比的基本性质**：前项和后项同时乘或除以相同不为0的数(d=2r，r=\\frac{d}{2})比值不变(d=2r，r=\\frac{d}{2})用来化简比。\n4. 按比分配：先求总份数(d=2r，r=\\frac{d}{2})求出每份数量(d=2r，r=\\frac{d}{2})再分别求出各部分。\n\n### 单元自测\n\n一、填空（每空4分(d=2r，r=\\frac{d}{2})共32分）\n\n1. $(3÷5=)$（）:（）=$\\frac{(\\ \\ )}{(\\ \\ )}$\n2. $(12:18)$化简最简整数比是（）(d=2r，r=\\frac{d}{2})比值（）。\n3. 甲:乙=(2:3)(d=2r，r=\\frac{d}{2})总和是50(d=2r，r=\\frac{d}{2})甲是（）(d=2r，r=\\frac{d}{2})乙是（）。\n4. 比的（）不能为0。\n5. $(0.4:0.8)$最简整数比（）。\n\n二、判断（每题6分(d=2r，r=\\frac{d}{2})共30分）\n\n1. 比的后项相当于除数(d=2r，r=\\frac{d}{2})不能为0。（）\n2. $(4:2)$比值是2(d=2r，r=\\frac{d}{2})也可以写成2:1。（）\n3. 比的前项后项同时加同一个数(d=2r，r=\\frac{d}{2})比值不变。（）\n4. 按比分配(d=2r，r=\\frac{d}{2})先算总份数。（）\n5. $(2:3)$可以写成$\\frac{2}{3}$。（）\n\n三、应用题（38分）\n一块地共80平方米(d=2r，r=\\frac{d}{2})按3:5分给甲乙两人(d=2r，r=\\frac{d}{2})甲乙各分得多少平方米？\n\n第五单元参考答案\n一、1.3\\(d=2r，r=\\frac{d}{2}\\)5\\(d=2r，r=\\frac{d}{2}\\)$\\frac{3}{5}$；2.\\(2:3\\)\\(d=2r，r=\\frac{d}{2}\\)$\\frac{2}{3}$；3.20\\(d=2r，r=\\frac{d}{2}\\)30；4.后项；5.1:2\n二、√\\(d=2r，r=\\frac{d}{2}\\)×\\(d=2r，r=\\frac{d}{2}\\)×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\n三、总份数：$3+5=8$；每份：$80÷8=10$\n甲：$10×3=30\\mathrm{m^2}$；乙：$10×5=50\\mathrm{m^2}$\n答：甲30平方米\\(d=2r，r=\\frac{d}{2}\\)乙50平方米。\n\n"
+    },
+    {
+      "topicKey": "direction-distance",
+      "title": "第六单元 确定位置",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "按方位确定位置，三要素为观测点、（）、（）（按通常叙述顺序填）。",
+          "originalReference": "方向；距离",
+          "stem": "按方位确定位置，三要素为观测点、（）、（）（按通常叙述顺序填）。",
+          "kind": "fillBlank",
+          "reference": "方向；距离",
+          "adjustment": "",
+          "answers": [
+            [
+              "方向"
+            ],
+            [
+              "距离"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "小红在第3列第5行，数对为（）（按列、行填写）。",
+          "originalReference": "(3,5)",
+          "stem": "小红在第3列第5行，数对为（）（按列、行填写）。",
+          "kind": "fillBlank",
+          "reference": "(3,5)",
+          "adjustment": "",
+          "answers": [
+            [
+              "(3,5)",
+              "（3，5）",
+              "(3，5)",
+              "（3,5）",
+              "3,5",
+              "3，5"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "A在B北偏西40°、距离100米，B在A（）偏（）40°、距离100米。",
+          "originalReference": "南；东",
+          "stem": "A在B北偏西40°、距离100米，B在A（）偏（）40°、距离100米。",
+          "kind": "fillBlank",
+          "reference": "南；东",
+          "adjustment": "",
+          "answers": [
+            [
+              "南"
+            ],
+            [
+              "东"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "描述方向，角度从（）或南开始量。",
+          "originalReference": "北",
+          "stem": "本题采用“北或南偏东或西”的描述方式，角度从（）或南开始量。",
+          "kind": "fillBlank",
+          "reference": "北",
+          "adjustment": "限定本题表达方式；也可用东偏北等其他明确基准。",
+          "answers": [
+            [
+              "北",
+              "正北"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "固定观测点，只知道方向就能确定唯一位置。",
+          "originalReference": "错误。还需要距离。",
+          "stem": "固定观测点，只知道方向就能确定唯一位置。",
+          "kind": "trueFalse",
+          "reference": "错误。还需要距离。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 6,
+          "originalStem": "同一张位置图中，（2，4）和（4，2）不是同一个位置。",
+          "originalReference": "正确。列与行不同。",
+          "stem": "同一张位置图中，（2，4）和（4，2）不是同一个位置。",
+          "kind": "trueFalse",
+          "reference": "正确。列与行不同。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "A到B与B到A的直线距离相同。",
+          "originalReference": "正确。方向相反，两点间距离不变。",
+          "stem": "A到B与B到A的直线距离相同。",
+          "kind": "trueFalse",
+          "reference": "正确。方向相反，两点间距离不变。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "东偏北30°也可以说成北偏东60°。",
+          "originalReference": "正确。东与北相差90°，两种计角基准不同。",
+          "stem": "东偏北30°也可以说成北偏东60°。",
+          "kind": "trueFalse",
+          "reference": "正确。东与北相差90°，两种计角基准不同。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "学校在公园南偏东35°、距离400米，请描述公园相对于学校的位置。",
+          "originalReference": "公园在学校北偏西35°、距离400米。",
+          "stem": "学校在公园南偏东35°、距离400米，请描述公园相对于学校的位置。",
+          "kind": "shortAnswer",
+          "reference": "公园在学校北偏西35°、距离400米。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## ✅第六单元 确定位置\n\n### 知识点\n\n1. 确定位置：观测点+方向+距离。\n2. 描述：北/南偏东、西多少度(d=2r，r=\\frac{d}{2})加上距离。\n3. 位置相对性：A在B的北偏东30°(d=2r，r=\\frac{d}{2})则B在A南偏西30°(d=2r，r=\\frac{d}{2})距离不变。\n4. 用数对确定位置：（列(d=2r，r=\\frac{d}{2})行）。\n\n### 单元自测\n\n一、填空（每空6分(d=2r，r=\\frac{d}{2})共30分）\n\n1. 确定位置三要素：观测点、（）、（）。\n2. 小红在教室第3列第5行(d=2r，r=\\frac{d}{2})数对记作（）。\n3. A在B北偏西40°(d=2r，r=\\frac{d}{2})距离100米；B在A（）偏（）40°(d=2r，r=\\frac{d}{2})距离100米。\n4. 描述方向(d=2r，r=\\frac{d}{2})角度从（）或南开始量。\n\n二、判断（每题8分(d=2r，r=\\frac{d}{2})共32分）\n\n1. 只知道方向就能确定位置。（）\n2. 数对（2,4）和（4,2）不是同一个位置。（）\n3. 两地相对位置(d=2r，r=\\frac{d}{2})距离不变。（）\n4. 东偏北30°(d=2r，r=\\frac{d}{2})也可以说成北偏东60°。（）\n\n三、简答（38分）\n学校在公园南偏东35°(d=2r，r=\\frac{d}{2})距离400米。描述公园相对于学校的位置。\n\n第六单元参考答案\n一、1.方向\\(d=2r，r=\\frac{d}{2}\\)距离；2.(3,5)；3.南\\(d=2r，r=\\frac{d}{2}\\)东；4.北\n二、×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\n三、公园在学校北偏西35°\\(d=2r，r=\\frac{d}{2}\\)距离400米。\n\n"
+    },
+    {
+      "topicKey": "gomoku",
+      "title": "数学好玩：五子棋",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "棋子在第5列第4行，数对为（）。",
+          "originalReference": "(5,4)",
+          "stem": "棋子在第5列第4行，数对为（）。",
+          "kind": "fillBlank",
+          "reference": "(5,4)",
+          "adjustment": "",
+          "answers": [
+            [
+              "(5,4)",
+              "（5，4）",
+              "(5，4)",
+              "（5,4）",
+              "5,4",
+              "5，4"
+            ]
+          ]
+        }
+      ],
+      "sourceText": "## ✅数学好玩：五子棋\n\n### 知识点\n\n体会坐标、行列、策略推理；利用数对描述棋子位置(d=2r，r=\\frac{d}{2})逻辑推理(d=2r，r=\\frac{d}{2})寻找获胜路线。\n\n1. 用数对记录棋子坐标。\n2. 观察横、竖、斜向连续棋子(d=2r，r=\\frac{d}{2})寻找获胜策略。\n\n自测：棋子在第5列第4行(d=2r，r=\\frac{d}{2})数对记作（(d=2r，r=\\frac{d}{2})）。\n\n数学好玩参考答案\n(5,4)\n\n"
+    },
+    {
+      "topicKey": "percent-convert",
+      "title": "第七单元 百分数的认识与应用（一）",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "百分数表示（）。",
+          "originalReference": "表示一个数相当于另一个数的百分之几，是两个量的比率。意思正确即可，不要求与示例字句相同。",
+          "stem": "用自己的话说明百分数表示什么。",
+          "kind": "shortAnswer",
+          "reference": "表示一个数相当于另一个数的百分之几，是两个量的比率。意思正确即可，不要求与示例字句相同。",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "originalStem": "0.65＝（）%；3/4＝（）%。",
+          "originalReference": "65；75",
+          "stem": "0.65＝（）%；3/4＝（）%。",
+          "kind": "fillBlank",
+          "reference": "65；75",
+          "adjustment": "",
+          "answers": [
+            [
+              "65"
+            ],
+            [
+              "75"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "25%化成小数为（），化成最简分数为（）（分数用a/b）。",
+          "originalReference": "0.25；1/4",
+          "stem": "25%化成小数为（），化成最简分数为（）（分数用a/b）。",
+          "kind": "fillBlank",
+          "reference": "0.25；1/4",
+          "adjustment": "",
+          "answers": [
+            [
+              "0.25"
+            ],
+            [
+              "1/4"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "某班出勤48人、缺勤2人，出勤率为（）%。",
+          "originalReference": "48÷（48＋2）×100%＝96%。",
+          "stem": "某班出勤48人、缺勤2人，出勤率为（）%。",
+          "kind": "fillBlank",
+          "reference": "48÷（48＋2）×100%＝96%。",
+          "adjustment": "",
+          "answers": [
+            [
+              "96"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "80的30%是（）。",
+          "originalReference": "24",
+          "stem": "80的30%是（）。",
+          "kind": "fillBlank",
+          "reference": "24",
+          "adjustment": "",
+          "answers": [
+            [
+              "24"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "40是50的（）%。",
+          "originalReference": "80",
+          "stem": "40是50的（）%。",
+          "kind": "fillBlank",
+          "reference": "80",
+          "adjustment": "",
+          "answers": [
+            [
+              "80"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "百分数可以带单位。",
+          "originalReference": "错误。百分数表示比率，如20%；求某长度的20%后得到的长度才带单位。",
+          "stem": "表示比率的百分数可以像具体数量一样直接带米、千克等单位。",
+          "kind": "trueFalse",
+          "reference": "错误。百分数表示比率，如20%；求某长度的20%后得到的长度才带单位。",
+          "adjustment": "明确比率与计算得到的具体数量的区别。",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "100%＝1。",
+          "originalReference": "正确。100/100＝1。",
+          "stem": "100%＝1。",
+          "kind": "trueFalse",
+          "reference": "正确。100/100＝1。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "发芽率最大是100%。",
+          "originalReference": "正确。发芽粒数不超过试验种子总数。",
+          "stem": "同一批种子总数大于0，每粒最多计发芽一次，发芽率不超过100%。",
+          "kind": "trueFalse",
+          "reference": "正确。发芽粒数不超过试验种子总数。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "0.08＝8%。",
+          "originalReference": "正确。0.08＝8/100。",
+          "stem": "0.08＝8%。",
+          "kind": "trueFalse",
+          "reference": "正确。0.08＝8/100。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "百分之二十写作20%。",
+          "originalReference": "正确。表示20/100。",
+          "stem": "百分之二十写作20%。",
+          "kind": "trueFalse",
+          "reference": "正确。表示20/100。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 12,
+          "originalStem": "全班50人，42人参加运动会，参加人数占全班百分之几？",
+          "originalReference": "42÷50×100%＝84%。",
+          "stem": "全班50人，42人参加运动会，参加人数占全班百分之几？（只填数值，单位：%）",
+          "kind": "calculation",
+          "reference": "42÷50×100%＝84%。",
+          "adjustment": "",
+          "value": 84
+        }
+      ],
+      "sourceText": "## ✅第七单元 百分数的认识与应用（一）\n\n### 知识点\n\n1. 百分数：表示一个数占另一个数百分之几(d=2r，r=\\frac{d}{2})又叫百分率、百分比；不带单位。\n2. 百分数、分数、小数互化。\n3. 求百分率：部分÷总量×100%（出勤率、合格率、发芽率）。\n4. 求一个数是另一个数百分之几(d=2r，r=\\frac{d}{2})用除法。\n5. 求一个数的百分之几是多少(d=2r，r=\\frac{d}{2})用乘法。\n\n### 单元自测\n\n一、填空（每空4分(d=2r，r=\\frac{d}{2})共32分）\n\n1. 百分数表示（）。\n2. 0.65=（）%；$\\frac{3}{4}=$（）%。\n3. 25%化小数（）(d=2r，r=\\frac{d}{2})化分数（）。\n4. 出勤48人(d=2r，r=\\frac{d}{2})缺勤2人(d=2r，r=\\frac{d}{2})出勤率（）%。\n5. 80的30%是（）。\n6. 40是50的（）%。\n\n二、判断（每题6分(d=2r，r=\\frac{d}{2})共30分）\n\n1. 百分数可以带单位。（）\n2. 100%=1。（）\n3. 发芽率最大是100%。（）\n4. 0.08=8%。（）\n5. 百分之二十写作20%。（）\n\n三、应用题（38分）\n全班50人(d=2r，r=\\frac{d}{2})42人参加运动会(d=2r，r=\\frac{d}{2})参加人数占全班百分之几？\n\n第七单元参考答案\n一、1.一个数是另一个数的百分之几；2.65\\(d=2r，r=\\frac{d}{2}\\)75；3.0.25\\(d=2r，r=\\frac{d}{2}\\)$\\frac{1}{4}$；4.96；5.24；6.80\n二、×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\n三、$42÷50×100\\%=84\\%$\n答：参加人数占全班84%。\n\n"
+    },
+    {
+      "topicKey": "views",
+      "title": "第八单元 观察物体（二）",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "通常说的三向视图包括（）、（）、左面（按此教材顺序填）。",
+          "originalReference": "正面；上面",
+          "stem": "通常说的三向视图包括（）、（）、左面（按此教材顺序填）。",
+          "kind": "fillBlank",
+          "reference": "正面；上面",
+          "adjustment": "",
+          "answers": [
+            [
+              "正面"
+            ],
+            [
+              "上面"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "站得越高，观察范围越（）。",
+          "originalReference": "大",
+          "stem": "在开阔无遮挡、其他观察条件相同的通常情形下，观察点升高，可观察范围一般越（）。",
+          "kind": "fillBlank",
+          "reference": "大",
+          "adjustment": "补充环境与其他条件，不把经验规律用于任意遮挡环境。",
+          "answers": [
+            [
+              "大",
+              "广"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "同一物体从不同方向观察，形状（）相同。",
+          "originalReference": "不一定",
+          "stem": "同一物体从不同方向观察，形状（）相同。",
+          "kind": "fillBlank",
+          "reference": "不一定",
+          "adjustment": "",
+          "answers": [
+            [
+              "不一定"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "从正面看到正方形，立体图形一定是正方体。",
+          "originalReference": "错误。前后摆两个正方体等其他立体也能有相同正视图。",
+          "stem": "从正面看到正方形，立体图形一定是正方体。",
+          "kind": "trueFalse",
+          "reference": "错误。前后摆两个正方体等其他立体也能有相同正视图。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "originalStem": "两个立体图形正面视图一样，立体图形不一定一样。",
+          "originalReference": "正确。隐藏深度方向可能不同。",
+          "stem": "两个立体图形正面视图一样，立体图形不一定一样。",
+          "kind": "trueFalse",
+          "reference": "正确。隐藏深度方向可能不同。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "离障碍物越近，看到范围越小。",
+          "originalReference": "√",
+          "stem": "固定观察点，障碍物遮挡的视线角度越大，能看到的后方景物范围通常越小。",
+          "kind": "trueFalse",
+          "reference": "正确。更多视线被遮挡。距离改变的效果还取决于障碍和目标的高度、位置。",
+          "adjustment": "原结论缺少场景条件，不可普遍成立；改为固定观察点比较遮挡角度与可见范围。",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "观察不对称立体，左视图和右视图一定完全一样。",
+          "originalReference": "错误。对向观察可能呈左右镜像，不能保证完全相同。",
+          "stem": "观察不对称立体，左视图和右视图一定完全一样。",
+          "kind": "trueFalse",
+          "reference": "错误。对向观察可能呈左右镜像，不能保证完全相同。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "用3个小正方体搭立体图形，从正面看是2个正方形，说一说有几种搭法。",
+          "originalReference": "多种搭法，底层2个，第3个可以放在底层任意一个正方体后方。",
+          "stem": "在桌面一层2×2的四个格子（1，1）、（2，1）、（1，2）、（2，2）中放3个小正方体，每格最多1块。从行号较小一侧看，列向右增加。要求正面为水平相邻2个正方形，有几种占格搭法？画出或说明，旋转和翻转后的方案不合并。",
+          "kind": "shortAnswer",
+          "reference": "共4种：分别空出（1，1）、（2，1）、（1，2）、（2，2），其余3格各放1块。四种都为L形，都占两列，固定正视图为水平2格。",
+          "adjustment": "原题无图、未规定2格形状、层数、深度或计数等价规则，无法确定完整数量；补充一层2×2格、固定方向、不合并旋转翻转条件，改为4种的可核对任务。"
+        }
+      ],
+      "sourceText": "## ✅第八单元 观察物体（二）\n\n### 知识点\n\n1. 根据从正面、上面、左面看到的平面图形(d=2r，r=\\frac{d}{2})还原立体图形。\n2. 从不同方向观察立体图形(d=2r，r=\\frac{d}{2})看到形状可能不同。\n3. 根据观察到的图形(d=2r，r=\\frac{d}{2})判断小正方体数量范围。\n4. 观察范围：观察点越高(d=2r，r=\\frac{d}{2})观察范围越大；离物体越近(d=2r，r=\\frac{d}{2})看到物体越大。\n\n### 单元自测\n\n一、填空（每空8分(d=2r，r=\\frac{d}{2})共32分）\n\n1. 观察立体图形(d=2r，r=\\frac{d}{2})一般从（）、（）、左面三个方向观察。\n2. 站得越高(d=2r，r=\\frac{d}{2})观察范围越（）。\n3. 同一个物体(d=2r，r=\\frac{d}{2})从不同方向观察(d=2r，r=\\frac{d}{2})形状（）相同。\n\n二、判断（每题10分(d=2r，r=\\frac{d}{2})共40分）\n\n1. 从正面看到正方形(d=2r，r=\\frac{d}{2})立体图形一定是正方体。（）\n2. 两个立体图形(d=2r，r=\\frac{d}{2})正面视图一样(d=2r，r=\\frac{d}{2})立体图形不一定一样。（）\n3. 离障碍物越近(d=2r，r=\\frac{d}{2})看到范围越小。（）\n4. 观察物体(d=2r，r=\\frac{d}{2})左面看到图形和右面一定一样。（）\n\n三、简答（28分）\n用3个小正方体搭立体图形(d=2r，r=\\frac{d}{2})从正面看是2个正方形(d=2r，r=\\frac{d}{2})说一说有几种搭法。\n\n第八单元参考答案\n一、1.正面\\(d=2r，r=\\frac{d}{2}\\)上面；2.大；3.不一定\n二、×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)×\n三、多种搭法\\(d=2r，r=\\frac{d}{2}\\)底层2个\\(d=2r，r=\\frac{d}{2}\\)第3个可以放在底层任意一个正方体后方。\n\n"
+    },
+    {
+      "topicKey": "sector-chart",
+      "title": "第九单元 数据的表示和分析（三）",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "扇形统计图反映（）和整体之间的关系。",
+          "originalReference": "部分",
+          "stem": "扇形统计图反映（）和整体之间的关系。",
+          "kind": "fillBlank",
+          "reference": "部分",
+          "adjustment": "",
+          "answers": [
+            [
+              "部分",
+              "各部分"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "想直接比较各类数量多少，通常选（）统计图。",
+          "originalReference": "条形",
+          "stem": "想直接比较各类数量多少，通常选（）统计图。",
+          "kind": "fillBlank",
+          "reference": "条形",
+          "adjustment": "",
+          "answers": [
+            [
+              "条形"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "想看数量随时间增减变化，通常选（）统计图。",
+          "originalReference": "折线",
+          "stem": "想看数量随时间增减变化，通常选（）统计图。",
+          "kind": "fillBlank",
+          "reference": "折线",
+          "adjustment": "",
+          "answers": [
+            [
+              "折线"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "扇形统计图，所有部分百分比之和是（）。",
+          "originalReference": "100%",
+          "stem": "扇形图各部分互不重叠且完整覆盖整体，未四舍五入的精确百分比之和为（）（带百分号）。",
+          "kind": "fillBlank",
+          "reference": "100%",
+          "adjustment": "明确完整分类、精确比例；图上四舍五入标签可能存在微小舍入误差。",
+          "answers": [
+            [
+              "100%",
+              "100％"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "扇形统计图可以看出每个部分具体数量。",
+          "originalReference": "×",
+          "stem": "扇形图只给各部分百分比、未给总量或具体数量，也能算出每部分数量。",
+          "kind": "trueFalse",
+          "reference": "错误。需要总量才能用总量×比例求具体数量。",
+          "adjustment": "限定只给比例的图；若给总量或数量标签，原笼统否定不成立。",
+          "correctValue": false
+        },
+        {
+          "number": 6,
+          "originalStem": "扇形图完整、不重叠各部分的精确比例总和是100%。",
+          "originalReference": "正确。所有部分合起来为整体。",
+          "stem": "扇形图完整、不重叠各部分的精确比例总和是100%。",
+          "kind": "trueFalse",
+          "reference": "正确。所有部分合起来为整体。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "表示一年逐月平均气温变化，通常适合折线图。",
+          "originalReference": "正确。可显示时间变化趋势。",
+          "stem": "表示一年逐月平均气温变化，通常适合折线图。",
+          "kind": "trueFalse",
+          "reference": "正确。可显示时间变化趋势。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "表示各类水果占同一批水果总重量的比例，适合扇形图。",
+          "originalReference": "正确。展示部分与整体关系。",
+          "stem": "表示各类水果占同一批水果总重量的比例，适合扇形图。",
+          "kind": "trueFalse",
+          "reference": "正确。展示部分与整体关系。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "共有图书200本，故事书占40%，故事书多少本？",
+          "originalReference": "200×40%＝80本。",
+          "stem": "共有图书200本，故事书占40%，故事书多少本？（只填数值，单位：本）",
+          "kind": "calculation",
+          "reference": "200×40%＝80本。",
+          "adjustment": "",
+          "value": 80
+        }
+      ],
+      "sourceText": "## ✅第九单元 数据的表示和分析（三）\n\n### 知识点\n\n1. 扇形统计图：表示各部分占总量的百分比(d=2r，r=\\frac{d}{2})能看出部分与整体关系。\n2. 条形统计图：清楚看出数量多少；折线统计图：看增减变化。\n3. 选择合适统计图：\n\n- 看占比 → 扇形图；看数量多少→条形；看变化趋势→折线。\n\n4. 读懂图表(d=2r，r=\\frac{d}{2})提取信息(d=2r，r=\\frac{d}{2})计算各部分数量。\n\n### 单元自测\n\n一、填空（每空8分(d=2r，r=\\frac{d}{2})共32分）\n\n1. 扇形统计图反映（）和整体之间关系。\n2. 想看出数量多少(d=2r，r=\\frac{d}{2})选（）统计图。\n3. 想看出数量增减变化(d=2r，r=\\frac{d}{2})选（）统计图。\n4. 扇形统计图(d=2r，r=\\frac{d}{2})所有部分百分比之和是（）。\n\n二、判断（每题10分(d=2r，r=\\frac{d}{2})共40分）\n\n1. 扇形统计图可以看出每个部分具体数量。（）\n2. 扇形图总和是100%。（）\n3. 统计一年气温变化适合折线图。（）\n4. 统计各类水果占总重量百分比(d=2r，r=\\frac{d}{2})用扇形统计图。（）\n\n三、应用题（28分）\n总共有图书200本(d=2r，r=\\frac{d}{2})故事书占40%(d=2r，r=\\frac{d}{2})故事书多少本？\n\n第九单元参考答案\n一、1.部分；2.条形；3.折线；4.100%\n二、×\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\\(d=2r，r=\\frac{d}{2}\\)√\n三、$200×40\\%=80$本\n答：故事书80本。\n\n"
+    },
+    {
+      "topicKey": "nutrition",
+      "title": "综合实践：制订营养食谱",
+      "sourceScoring": "原稿分值保留于sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "食物总重500克，碳水占60%，碳水（）克。",
+          "originalReference": "300",
+          "stem": "模拟食物总质量500克，碳水化合物质量占60%，碳水化合物有（）克。",
+          "kind": "fillBlank",
+          "reference": "300",
+          "adjustment": "明确为模拟数据的质量占比，不是能量占比，也不把该比例作为实际食谱标准。",
+          "answers": [
+            [
+              "300"
+            ]
+          ]
+        }
+      ],
+      "sourceText": "## ✅综合实践：制订营养食谱\n\n### 知识点\n\n收集各类食物营养占比(d=2r，r=\\frac{d}{2})结合百分数计算每日营养摄入量；读懂扇形统计图(d=2r，r=\\frac{d}{2})搭配均衡食谱。\n自测：食物总重500克(d=2r，r=\\frac{d}{2})碳水占60%(d=2r，r=\\frac{d}{2})碳水（）克。\n\n综合实践参考答案\n300\n\n"
+    }
+  ]
+}

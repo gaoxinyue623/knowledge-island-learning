@@ -85,7 +85,7 @@ function savePreferences() {
           <h2>帮助与隐私</h2>
           <details open>
             <summary>怎样修改年级或教材？</summary>
-            <p>在“我的学习设置”中修改地区、年级或单科教材，并按页面提示确认。</p>
+            <p>在“我的学习设置”中修改年级、课本册次或单科教材版本，并按页面提示确认。</p>
             <RouterLink class="personal-text-link" to="/curriculum-settings"
               >打开我的学习设置 →</RouterLink
             >
@@ -98,7 +98,7 @@ function savePreferences() {
           <details>
             <summary>资料保存在哪里？</summary>
             <p>
-              昵称、装扮、偏好和学习记录保存在当前浏览器中。更换设备或浏览器不会自动同步；清除网站数据可能丢失这些记录。
+              登录后，昵称、装扮、偏好和学习记录会自动同步到账号。换设备后登录同一账号即可继续；离线记录需联网并完成同步后再清除浏览器数据。
             </p>
           </details>
           <details>

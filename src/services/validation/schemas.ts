@@ -74,7 +74,7 @@ export const questionAnswerRuleSchema = z.union([
         blankId: z.string().min(1),
         acceptedAnswers: z.array(z.string()).min(1),
         normalization: z
-          .enum(['NONE', 'TRIM', 'CASE_INSENSITIVE', 'SIMPLIFIED_CHINESE'])
+          .enum(['NONE', 'TRIM', 'CASE_INSENSITIVE', 'SIMPLIFIED_CHINESE', 'ENGLISH_TEXT'])
           .optional(),
       }),
     ),
@@ -205,6 +205,20 @@ export const questionSchema = z.object({
   snapshotAt: z.string().optional(),
   snapshotSource: z.string().optional(),
   questionVersion: z.number().int().positive().optional(),
+  pictureWriting: z
+    .object({
+      lineCount: z.union([z.literal(4), z.literal(5), z.literal(6)]),
+      choices: z
+        .array(
+          z.object({
+            mediaAssetId: z.string().min(1),
+            title: z.string().min(1),
+            prompt: z.string().min(1),
+          }),
+        )
+        .min(1),
+    })
+    .optional(),
   hints: z.array(questionHintSchema),
   explanation: questionExplanationSchema,
   answerRule: questionAnswerRuleSchema,
@@ -224,7 +238,7 @@ export const questionSchema = z.object({
 
 export const studentCurriculumProfileSchema = z.object({
   studentId: z.string().min(1),
-  regionId: z.string().min(1),
+  regionId: z.string().min(1).optional(),
   gradeId: z.string().min(1),
   semesterId: z.string().min(1),
   chineseTextbookVersionId: z.string().min(1).nullable(),

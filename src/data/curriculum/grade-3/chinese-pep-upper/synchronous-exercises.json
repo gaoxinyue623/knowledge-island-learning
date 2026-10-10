@@ -1,0 +1,1937 @@
+{
+  "title": "2022新课标 三年级上册语文全单元同步配套练习题（含答案）",
+  "sourceNote": "题目及原始参考答案来自用户本次提供材料；已校正明显拼音、答案和空格位置错误，逐题保留原题与调整说明。未导入目录中的古诗及尚无教材正文的推荐书目作为拓展；开放表达、组词、语义概括与翻译对照参考答案，不自动判分。",
+  "units": [
+    {
+      "number": 1,
+      "title": "第1单元 同步练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "zǎo chen（_______）",
+          "kind": "fillBlank",
+          "reference": "早晨",
+          "originalStem": "zǎo chen（_______）",
+          "originalReference": "早晨",
+          "answers": [["早晨"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "chuān dài（_______）",
+          "kind": "fillBlank",
+          "reference": "穿戴",
+          "originalStem": "chuān dài（_______）",
+          "originalReference": "穿戴",
+          "answers": [["穿戴"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "xiān yàn（_______）",
+          "kind": "fillBlank",
+          "reference": "鲜艳",
+          "originalStem": "xiān yàn（_______）",
+          "originalReference": "鲜艳",
+          "answers": [["鲜艳"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "fú zhuāng（_______）",
+          "kind": "fillBlank",
+          "reference": "服装",
+          "originalStem": "fú zhuāng（_______）",
+          "originalReference": "服装",
+          "answers": [["服装"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "dǎ bàn（_______）",
+          "kind": "fillBlank",
+          "reference": "打扮",
+          "originalStem": "dǎ bàn（_______）",
+          "originalReference": "打扮",
+          "answers": [["打扮"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "dú shū（_______）",
+          "kind": "fillBlank",
+          "reference": "读书",
+          "originalStem": "dú shū（_______）",
+          "originalReference": "读书",
+          "answers": [["读书"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "ān jìng（_______）",
+          "kind": "fillBlank",
+          "reference": "安静",
+          "originalStem": "jìng ān（_______）",
+          "originalReference": "安静",
+          "answers": [["安静"]],
+          "adjustment": "原拼音顺序 jìng ān 与安静不符，改为 ān jìng。"
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "tíng xià（_______）",
+          "kind": "fillBlank",
+          "reference": "停下",
+          "originalStem": "tíng xià（_______）",
+          "originalReference": "停下",
+          "answers": [["停下"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "huāng yě（_______）",
+          "kind": "fillBlank",
+          "reference": "荒野",
+          "originalStem": "huāng yě（_______）",
+          "originalReference": "荒野",
+          "answers": [["荒野"]]
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "dí zi（_______）",
+          "kind": "fillBlank",
+          "reference": "笛子",
+          "originalStem": "dí zi（_______）",
+          "originalReference": "笛子",
+          "answers": [["笛子"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "kuáng huān（_______）",
+          "kind": "fillBlank",
+          "reference": "狂欢",
+          "originalStem": "kuáng huān（_______）",
+          "originalReference": "狂欢",
+          "answers": [["狂欢"]]
+        },
+        {
+          "number": 12,
+          "section": "一、看拼音，写词语",
+          "stem": "fá zhàn（_______）",
+          "kind": "fillBlank",
+          "reference": "罚站",
+          "originalStem": "fá zhàn（_______）",
+          "originalReference": "处罚",
+          "answers": [["罚站"]],
+          "adjustment": "原参考答案“处罚”与 fá zhàn 不符，校正为“罚站”。"
+        },
+        {
+          "number": 13,
+          "section": "二、选择正确读音",
+          "stem": "放假（jiǎ / jià）",
+          "kind": "singleChoice",
+          "reference": "jià",
+          "originalStem": "放假（jiǎ / jià）",
+          "originalReference": "jià",
+          "options": ["jiǎ", "jià"],
+          "correctOptionKey": "B"
+        },
+        {
+          "number": 14,
+          "section": "二、选择正确读音",
+          "stem": "真假（jiǎ / jià）",
+          "kind": "singleChoice",
+          "reference": "jiǎ",
+          "originalStem": "真假（jiǎ / jià）",
+          "originalReference": "jiǎ",
+          "options": ["jiǎ", "jià"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 15,
+          "section": "二、选择正确读音",
+          "stem": "衣裳（shang / cháng）",
+          "kind": "singleChoice",
+          "reference": "shang",
+          "originalStem": "衣裳（shang / cháng）",
+          "originalReference": "shang",
+          "options": ["shang", "cháng"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 16,
+          "section": "二、选择正确读音",
+          "stem": "操场（chǎng / cháng）",
+          "kind": "singleChoice",
+          "reference": "chǎng",
+          "originalStem": "操场（chǎng / cháng）",
+          "originalReference": "chǎng",
+          "options": ["chǎng", "cháng"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 17,
+          "section": "二、选择正确读音",
+          "stem": "背诵（bēi / bèi）",
+          "kind": "singleChoice",
+          "reference": "bèi",
+          "originalStem": "背诵（bēi / bèi）",
+          "originalReference": "bèi",
+          "options": ["bēi", "bèi"],
+          "correctOptionKey": "B"
+        },
+        {
+          "number": 18,
+          "section": "二、选择正确读音",
+          "stem": "背着（bēi / bèi）",
+          "kind": "singleChoice",
+          "reference": "bēi",
+          "originalStem": "背着（bēi / bèi）",
+          "originalReference": "bēi",
+          "options": ["bēi", "bèi"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 19,
+          "section": "三、选词填空（安静、宁静、热闹）",
+          "stem": "上课了，教室里十分（_______）。",
+          "kind": "fillBlank",
+          "reference": "安静",
+          "originalStem": "上课了，教室里十分（_______）。",
+          "originalReference": "安静",
+          "answers": [["安静"]]
+        },
+        {
+          "number": 20,
+          "section": "三、选词填空（安静、宁静、热闹）",
+          "stem": "下课了，校园里瞬间变得（_______）起来。",
+          "kind": "fillBlank",
+          "reference": "热闹",
+          "originalStem": "下课了，校园里瞬间变得（_______）起来。",
+          "originalReference": "热闹",
+          "answers": [["热闹"]]
+        },
+        {
+          "number": 21,
+          "section": "三、选词填空（安静、宁静、热闹）",
+          "stem": "夜晚的山村格外（_______）。",
+          "kind": "fillBlank",
+          "reference": "宁静",
+          "originalStem": "夜晚的山村格外（_______）。",
+          "originalReference": "宁静",
+          "answers": [["宁静"]]
+        },
+        {
+          "number": 22,
+          "section": "四、句子练习",
+          "stem": "同学们向小鸟打招呼，向老师问好，向国旗敬礼。（仿写排比句）",
+          "kind": "shortAnswer",
+          "reference": "示例：我们向太阳微笑，向清风招手，向花草问好。",
+          "originalStem": "同学们向小鸟打招呼，向老师问好，向国旗敬礼。（仿写排比句）",
+          "originalReference": "示例：我们向太阳微笑，向清风招手，向花草问好。"
+        },
+        {
+          "number": 23,
+          "section": "四、句子练习",
+          "stem": "孙中山想：这样糊里糊涂地背，有什么用呢？（改为陈述句）",
+          "kind": "shortAnswer",
+          "reference": "孙中山想：这样糊里糊涂地背，没有什么用。",
+          "originalStem": "孙中山想：这样糊里糊涂地背，有什么用呢？（改为陈述句）",
+          "originalReference": "孙中山想：这样糊里糊涂地背，没有什么用。"
+        },
+        {
+          "number": 24,
+          "section": "五、根据课文内容填空",
+          "stem": "《大青树下的小学》描写了一所________小学欢乐祥和的校园生活，体现了各民族儿童________的美好情谊。",
+          "kind": "shortAnswer",
+          "reference": "边疆；团结友爱",
+          "originalStem": "《大青树下的小学》描写了一所________边疆小学欢乐祥和的校园生活，体现了各民族儿童________的美好情谊。",
+          "originalReference": "边疆；团结友爱",
+          "adjustment": "删除第一空后重复的“边疆”；美好情谊允许合理概括，改为对照参考答案。"
+        },
+        {
+          "number": 25,
+          "section": "五、根据课文内容填空",
+          "stem": "《花的学校》的作者是________（国家）的________，课文运用________的修辞手法，写出了花儿的活泼可爱。",
+          "kind": "fillBlank",
+          "reference": "印度；泰戈尔；拟人",
+          "originalStem": "《花的学校》的作者是________（国家）的________，课文运用________的修辞手法，写出了花儿的活泼可爱。",
+          "originalReference": "印度；泰戈尔；拟人",
+          "answers": [["印度"], ["泰戈尔"], ["拟人"]]
+        },
+        {
+          "number": 26,
+          "section": "五、根据课文内容填空",
+          "stem": "不懂就要问。为了________，就是________也值得。",
+          "kind": "fillBlank",
+          "reference": "弄清楚道理；挨打",
+          "originalStem": "不懂就要问。为了________，就是________也值得。",
+          "originalReference": "弄清楚道理；挨打",
+          "answers": [["弄清楚道理"], ["挨打"]]
+        },
+        {
+          "number": 27,
+          "section": "五、根据课文内容填空",
+          "stem": "《所见》：描写牧童想要捕蝉的诗句是：________，________。",
+          "kind": "fillBlank",
+          "reference": "意欲捕鸣蝉，忽然闭口立",
+          "originalStem": "《所见》：描写牧童想要捕蝉的诗句是：________，________。",
+          "originalReference": "意欲捕鸣蝉，忽然闭口立",
+          "answers": [
+            ["意欲捕鸣蝉", "意欲捕鸣蝉，", "意欲捕鸣蝉。", "意欲捕鸣蝉,", "意欲捕鸣蝉."],
+            ["忽然闭口立", "忽然闭口立，", "忽然闭口立。", "忽然闭口立,", "忽然闭口立."]
+          ],
+          "scope": "SUPPLEMENTARY",
+          "explanation": "本题为拓展古诗练习，该诗未包含在本次已导入的课文目录中。"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "第2单元 同步练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "hán lěng（_______）",
+          "kind": "fillBlank",
+          "reference": "寒冷",
+          "originalStem": "hán lěng（_______）",
+          "originalReference": "寒冷",
+          "answers": [["寒冷"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "xiǎo jìng（_______）",
+          "kind": "fillBlank",
+          "reference": "小径",
+          "originalStem": "jìng xiá（_______）",
+          "originalReference": "小径",
+          "answers": [["小径"]],
+          "adjustment": "原拼音 jìng xiá 与“小径”不符，改为 xiǎo jìng。"
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "xié miàn（_______）",
+          "kind": "fillBlank",
+          "reference": "斜面",
+          "originalStem": "xié miàn（_______）",
+          "originalReference": "斜面",
+          "answers": [["斜面"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "shuāng xuě（_______）",
+          "kind": "fillBlank",
+          "reference": "霜雪",
+          "originalStem": "shuāng xuě（_______）",
+          "originalReference": "霜雪",
+          "answers": [["霜雪"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "zèng sòng（_______）",
+          "kind": "fillBlank",
+          "reference": "赠送",
+          "originalStem": "zèng sòng（_______）",
+          "originalReference": "赠送",
+          "answers": [["赠送"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "jú huā（_______）",
+          "kind": "fillBlank",
+          "reference": "菊花",
+          "originalStem": "jú huā（_______）",
+          "originalReference": "菊花",
+          "answers": [["菊花"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "cán yè（_______）",
+          "kind": "fillBlank",
+          "reference": "残叶",
+          "originalStem": "cán yè（_______）",
+          "originalReference": "残叶",
+          "answers": [["残叶"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "jūn zǐ（_______）",
+          "kind": "fillBlank",
+          "reference": "君子",
+          "originalStem": "jūn zǐ（_______）",
+          "originalReference": "君子",
+          "answers": [["君子"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "pū lù（_______）",
+          "kind": "fillBlank",
+          "reference": "铺路",
+          "originalStem": "pū lù（_______）",
+          "originalReference": "铺路",
+          "answers": [["铺路"]]
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "ní tǔ（_______）",
+          "kind": "fillBlank",
+          "reference": "泥土",
+          "originalStem": "ní tǔ（_______）",
+          "originalReference": "泥土",
+          "answers": [["泥土"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "jīng yíng（_______）",
+          "kind": "fillBlank",
+          "reference": "晶莹",
+          "originalStem": "jīng yíng（_______）",
+          "originalReference": "晶莹",
+          "answers": [["晶莹"]]
+        },
+        {
+          "number": 12,
+          "section": "一、看拼音，写词语",
+          "stem": "yìn jì（_______）",
+          "kind": "fillBlank",
+          "reference": "印记",
+          "originalStem": "yìn jì（_______）",
+          "originalReference": "印记",
+          "answers": [["印记"]]
+        },
+        {
+          "number": 13,
+          "section": "一、看拼音，写词语",
+          "stem": "guī zé（_______）",
+          "kind": "fillBlank",
+          "reference": "规则",
+          "originalStem": "guī zé（_______）",
+          "originalReference": "规则",
+          "answers": [["规则"]]
+        },
+        {
+          "number": 14,
+          "section": "一、看拼音，写词语",
+          "stem": "líng luàn（_______）",
+          "kind": "fillBlank",
+          "reference": "凌乱",
+          "originalStem": "líng luàn（_______）",
+          "originalReference": "凌乱",
+          "answers": [["凌乱"]]
+        },
+        {
+          "number": 15,
+          "section": "一、看拼音，写词语",
+          "stem": "piāo dàng（_______）",
+          "kind": "fillBlank",
+          "reference": "飘荡",
+          "originalStem": "piāo dàng（_______）",
+          "originalReference": "飘荡",
+          "answers": [["飘荡"]]
+        },
+        {
+          "number": 16,
+          "section": "一、看拼音，写词语",
+          "stem": "fēng shōu（_______）",
+          "kind": "fillBlank",
+          "reference": "丰收",
+          "originalStem": "fēng shōu（_______）",
+          "originalReference": "丰收",
+          "answers": [["丰收"]]
+        },
+        {
+          "number": 17,
+          "section": "二、辨字组词",
+          "stem": "径（_______）",
+          "kind": "shortAnswer",
+          "reference": "小径",
+          "originalStem": "径（_______）",
+          "originalReference": "小径"
+        },
+        {
+          "number": 18,
+          "section": "二、辨字组词",
+          "stem": "霜（_______）",
+          "kind": "shortAnswer",
+          "reference": "霜降",
+          "originalStem": "霜（_______）",
+          "originalReference": "霜降"
+        },
+        {
+          "number": 19,
+          "section": "二、辨字组词",
+          "stem": "残（_______）",
+          "kind": "shortAnswer",
+          "reference": "残枝",
+          "originalStem": "残（_______）",
+          "originalReference": "残枝"
+        },
+        {
+          "number": 20,
+          "section": "二、辨字组词",
+          "stem": "棕（_______）",
+          "kind": "shortAnswer",
+          "reference": "棕红",
+          "originalStem": "棕（_______）",
+          "originalReference": "棕红"
+        },
+        {
+          "number": 21,
+          "section": "二、辨字组词",
+          "stem": "经（_______）",
+          "kind": "shortAnswer",
+          "reference": "经过",
+          "originalStem": "经（_______）",
+          "originalReference": "经过"
+        },
+        {
+          "number": 22,
+          "section": "二、辨字组词",
+          "stem": "露（_______）",
+          "kind": "shortAnswer",
+          "reference": "露水",
+          "originalStem": "露（_______）",
+          "originalReference": "露水"
+        },
+        {
+          "number": 23,
+          "section": "二、辨字组词",
+          "stem": "钱（_______）",
+          "kind": "shortAnswer",
+          "reference": "金钱",
+          "originalStem": "钱（_______）",
+          "originalReference": "金钱"
+        },
+        {
+          "number": 24,
+          "section": "二、辨字组词",
+          "stem": "综（_______）",
+          "kind": "shortAnswer",
+          "reference": "综合",
+          "originalStem": "综（_______）",
+          "originalReference": "综合"
+        },
+        {
+          "number": 25,
+          "section": "三、补全秋天四字词语",
+          "stem": "秋（___）气（___）",
+          "kind": "fillBlank",
+          "reference": "高；爽",
+          "originalStem": "秋（___）气（___）",
+          "originalReference": "高；爽",
+          "answers": [["高"], ["爽"]]
+        },
+        {
+          "number": 26,
+          "section": "三、补全秋天四字词语",
+          "stem": "天（___）云（___）",
+          "kind": "fillBlank",
+          "reference": "高；淡",
+          "originalStem": "天（___）云（___）",
+          "originalReference": "高；淡",
+          "answers": [["高"], ["淡"]]
+        },
+        {
+          "number": 27,
+          "section": "三、补全秋天四字词语",
+          "stem": "秋（___）习（___）",
+          "kind": "fillBlank",
+          "reference": "风；习",
+          "originalStem": "秋（___）习（___）",
+          "originalReference": "风；习",
+          "answers": [["风"], ["习"]]
+        },
+        {
+          "number": 28,
+          "section": "三、补全秋天四字词语",
+          "stem": "层（___）尽（___）",
+          "kind": "fillBlank",
+          "reference": "林；染",
+          "originalStem": "层（___）尽（___）",
+          "originalReference": "林；染",
+          "answers": [["林"], ["染"]]
+        },
+        {
+          "number": 29,
+          "section": "三、补全秋天四字词语",
+          "stem": "五（___）丰（___）",
+          "kind": "fillBlank",
+          "reference": "谷；登",
+          "originalStem": "五（___）丰（___）",
+          "originalReference": "谷；登",
+          "answers": [["谷"], ["登"]]
+        },
+        {
+          "number": 30,
+          "section": "三、补全秋天四字词语",
+          "stem": "果（___）累（___）",
+          "kind": "fillBlank",
+          "reference": "实；累",
+          "originalStem": "果（___）累（___）",
+          "originalReference": "实；累",
+          "answers": [["实"], ["累"]]
+        },
+        {
+          "number": 31,
+          "section": "四、诗句默写与理解",
+          "stem": "《山行》：赞美深秋枫林美景的诗句：________，________。",
+          "kind": "fillBlank",
+          "reference": "停车坐爱枫林晚，霜叶红于二月花",
+          "originalStem": "《山行》：赞美深秋枫林美景的诗句：________，________。",
+          "originalReference": "停车坐爱枫林晚，霜叶红于二月花",
+          "answers": [
+            [
+              "停车坐爱枫林晚",
+              "停车坐爱枫林晚，",
+              "停车坐爱枫林晚。",
+              "停车坐爱枫林晚,",
+              "停车坐爱枫林晚."
+            ],
+            [
+              "霜叶红于二月花",
+              "霜叶红于二月花，",
+              "霜叶红于二月花。",
+              "霜叶红于二月花,",
+              "霜叶红于二月花."
+            ]
+          ],
+          "scope": "UNIT_SYNC",
+          "explanation": "对照诗句，检查字词和顺序。"
+        },
+        {
+          "number": 32,
+          "section": "四、诗句默写与理解",
+          "stem": "《赠刘景文》：点明秋天是最佳景致的诗句：________，________。",
+          "kind": "fillBlank",
+          "reference": "一年好景君须记，最是橙黄橘绿时",
+          "originalStem": "《赠刘景文》：点明秋天是最佳景致的诗句：________，________。",
+          "originalReference": "一年好景君须记，最是橙黄橘绿时",
+          "answers": [
+            [
+              "一年好景君须记",
+              "一年好景君须记，",
+              "一年好景君须记。",
+              "一年好景君须记,",
+              "一年好景君须记."
+            ],
+            [
+              "最是橙黄橘绿时",
+              "最是橙黄橘绿时，",
+              "最是橙黄橘绿时。",
+              "最是橙黄橘绿时,",
+              "最是橙黄橘绿时."
+            ]
+          ],
+          "scope": "SUPPLEMENTARY",
+          "explanation": "本题为拓展古诗练习，该诗未包含在本次已导入的课文目录中。"
+        },
+        {
+          "number": 33,
+          "section": "四、诗句默写与理解",
+          "stem": "《望洞庭》：运用比喻写洞庭湖夜景的诗句：________，________。",
+          "kind": "fillBlank",
+          "reference": "遥望洞庭山水翠，白银盘里一青螺",
+          "originalStem": "《望洞庭》：运用比喻写洞庭湖夜景的诗句：________，________。",
+          "originalReference": "遥望洞庭山水翠，白银盘里一青螺",
+          "answers": [
+            [
+              "遥望洞庭山水翠",
+              "遥望洞庭山水翠，",
+              "遥望洞庭山水翠。",
+              "遥望洞庭山水翠,",
+              "遥望洞庭山水翠."
+            ],
+            [
+              "白银盘里一青螺",
+              "白银盘里一青螺，",
+              "白银盘里一青螺。",
+              "白银盘里一青螺,",
+              "白银盘里一青螺."
+            ]
+          ],
+          "scope": "UNIT_SYNC",
+          "explanation": "对照诗句，检查字词和顺序。"
+        },
+        {
+          "number": 34,
+          "section": "五、阅读理解（课内片段）",
+          "stem": "秋天的雨，有一盒五彩缤纷的颜料。你看，它把黄色给了银杏树，黄黄的叶子像一把把小扇子，扇哪扇哪，扇走了夏天的炎热。它把红色给了枫树，红红的枫叶像一枚枚邮票，飘哇飘哇，邮来了秋天的凉爽。\n1.片段中描写的颜色有________、________。",
+          "kind": "shortAnswer",
+          "reference": "黄色、红色（顺序不限）",
+          "originalStem": "秋天的雨，有一盒五彩缤纷的颜料。你看，它把黄色给了银杏树，黄黄的叶子像一把把小扇子，扇哪扇哪，扇走了夏天的炎热。它把红色给了枫树，红红的枫叶像一枚枚邮票，飘哇飘哇，邮来了秋天的凉爽。\n1.片段中描写的颜色有________、________。",
+          "originalReference": "黄色、红色（顺序不限）",
+          "explanation": "黄色和红色都应写到；不因两种颜色的填写顺序不同判错。"
+        },
+        {
+          "number": 35,
+          "section": "五、阅读理解（课内片段）",
+          "stem": "秋天的雨，有一盒五彩缤纷的颜料。你看，它把黄色给了银杏树，黄黄的叶子像一把把小扇子，扇哪扇哪，扇走了夏天的炎热。它把红色给了枫树，红红的枫叶像一枚枚邮票，飘哇飘哇，邮来了秋天的凉爽。\n2.摘录片段中的两个比喻句，并说说分别把什么比作什么。",
+          "kind": "shortAnswer",
+          "reference": "黄黄的叶子像一把把小扇子……；红红的枫叶像一枚枚邮票……。分别把银杏叶比作小扇子、枫叶比作邮票。",
+          "originalStem": "秋天的雨，有一盒五彩缤纷的颜料。你看，它把黄色给了银杏树，黄黄的叶子像一把把小扇子，扇哪扇哪，扇走了夏天的炎热。它把红色给了枫树，红红的枫叶像一枚枚邮票，飘哇飘哇，邮来了秋天的凉爽。\n用“____”画出片段中的比喻句，这句话把________比作________。",
+          "originalReference": "黄黄的叶子像一把把小扇子……；红红的枫叶像一枚枚邮票……。分别把银杏叶比作小扇子、枫叶比作邮票。",
+          "adjustment": "片段含两个比喻句；屏幕练习改为摘录并分别说明。"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "第3单元 同步练习（阅读策略单元）",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "dòng xué（_______）",
+          "kind": "fillBlank",
+          "reference": "洞穴",
+          "originalStem": "dòng xué（_______）",
+          "originalReference": "洞穴",
+          "answers": [["洞穴"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "zhǔn bèi（_______）",
+          "kind": "fillBlank",
+          "reference": "准备",
+          "originalStem": "zhǔn bèi（_______）",
+          "originalReference": "准备",
+          "answers": [["准备"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "bào yǔ（_______）",
+          "kind": "fillBlank",
+          "reference": "暴雨",
+          "originalStem": "bào yǔ（_______）",
+          "originalReference": "暴雨",
+          "answers": [["暴雨"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "qiáng bì（_______）",
+          "kind": "fillBlank",
+          "reference": "墙壁",
+          "originalStem": "qiáng bì（_______）",
+          "originalReference": "墙壁",
+          "answers": [["墙壁"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "jī è（_______）",
+          "kind": "fillBlank",
+          "reference": "饥饿",
+          "originalStem": "è dù（_______）",
+          "originalReference": "饥饿",
+          "answers": [["饥饿"]],
+          "adjustment": "原拼音 è dù 与“饥饿”不符，改为 jī è。"
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "zhī zhū（_______）",
+          "kind": "fillBlank",
+          "reference": "蜘蛛",
+          "originalStem": "zhī zhū（_______）",
+          "originalReference": "蜘蛛",
+          "answers": [["蜘蛛"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "piào liang（_______）",
+          "kind": "fillBlank",
+          "reference": "漂亮",
+          "originalStem": "piào liang（_______）",
+          "originalReference": "漂亮",
+          "answers": [["漂亮"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "shài tài yáng（_______）",
+          "kind": "fillBlank",
+          "reference": "晒太阳",
+          "originalStem": "shài tài yáng（_______）",
+          "originalReference": "晒太阳",
+          "answers": [["晒太阳"]]
+        },
+        {
+          "number": 9,
+          "section": "二、多音字",
+          "stem": "倒下 中“倒”的读音是？",
+          "kind": "singleChoice",
+          "reference": "dǎo",
+          "originalStem": "倒下（____）",
+          "originalReference": "dǎo",
+          "options": ["dǎo", "dào"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 10,
+          "section": "二、多音字",
+          "stem": "倒车 中“倒”的读音是？",
+          "kind": "singleChoice",
+          "reference": "dào",
+          "originalStem": "倒车（____）",
+          "originalReference": "dào",
+          "options": ["dǎo", "dào"],
+          "correctOptionKey": "B"
+        },
+        {
+          "number": 11,
+          "section": "二、多音字",
+          "stem": "打倒 中“倒”的读音是？",
+          "kind": "singleChoice",
+          "reference": "dǎo",
+          "originalStem": "打倒（____）",
+          "originalReference": "dǎo",
+          "options": ["dǎo", "dào"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 12,
+          "section": "二、多音字",
+          "stem": "长大 中“长”的读音是？",
+          "kind": "singleChoice",
+          "reference": "zhǎng",
+          "originalStem": "长大（____）",
+          "originalReference": "zhǎng",
+          "options": ["cháng", "zhǎng"],
+          "correctOptionKey": "B"
+        },
+        {
+          "number": 13,
+          "section": "二、多音字",
+          "stem": "长短 中“长”的读音是？",
+          "kind": "singleChoice",
+          "reference": "cháng",
+          "originalStem": "长短（____）",
+          "originalReference": "cháng",
+          "options": ["cháng", "zhǎng"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 14,
+          "section": "二、多音字",
+          "stem": "长发 中“长”的读音是？",
+          "kind": "singleChoice",
+          "reference": "cháng",
+          "originalStem": "长发（____）",
+          "originalReference": "cháng",
+          "options": ["cháng", "zhǎng"],
+          "correctOptionKey": "A"
+        },
+        {
+          "number": 15,
+          "section": "三、课文内容判断",
+          "stem": "《总也倒不了的老屋》中，老屋帮助了小猫、老母鸡和小蜘蛛。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "《总也倒不了的老屋》中，老屋帮助了小猫、老母鸡和小蜘蛛。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": ""
+        },
+        {
+          "number": 16,
+          "section": "三、课文内容判断",
+          "stem": "《犟龟》中的小乌龟因为固执、不听劝告，最终没有参加婚礼。",
+          "kind": "trueFalse",
+          "reference": "×",
+          "originalStem": "《犟龟》中的小乌龟因为固执、不听劝告，最终没有参加婚礼。",
+          "originalReference": "×",
+          "correctValue": false,
+          "explanation": "小乌龟坚持前进，最终参加了狮王二十九世的婚礼。"
+        },
+        {
+          "number": 17,
+          "section": "三、课文内容判断",
+          "stem": "《小狗学叫》是一篇童话，故事有多种结局，充满想象。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "《小狗学叫》是一篇童话，故事有多种结局，充满想象。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": "提供的概要说明课文有三种结局；结局正文尚未提供，本题不推断具体结局。"
+        },
+        {
+          "number": 18,
+          "section": "四、口语交际：名字里的故事",
+          "stem": "简单写一写自己名字的含义或由来（30字左右）；也可以用虚构名字练习。",
+          "kind": "shortAnswer",
+          "reference": "示例：我的名字叫李明轩，妈妈希望我光明磊落、气宇轩昂，做一个正直大方的人。",
+          "originalStem": "简单写一写自己名字的含义或由来（30字左右）",
+          "originalReference": "示例：我的名字叫李明轩，妈妈希望我光明磊落、气宇轩昂，做一个正直大方的人。",
+          "adjustment": "允许用虚构名字表达，答案仅作示例。"
+        },
+        {
+          "number": 19,
+          "section": "五、习作小练笔：续写故事",
+          "stem": "老屋一直站在原地听小蜘蛛讲故事，这天，又有小动物来求助老屋……请简单续写两三句话。",
+          "kind": "shortAnswer",
+          "reference": "示例：一只迷路的小刺猬来到老屋门前，请求暂住一晚。老屋温柔地答应了，继续默默守护着小动物们。",
+          "originalStem": "老屋一直站在原地听小蜘蛛讲故事，这天，又有小动物来求助老屋……请简单续写两三句话。",
+          "originalReference": "示例：一只迷路的小刺猬来到老屋门前，请求暂住一晚。老屋温柔地答应了，继续默默守护着小动物们。"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "第4单元 同步练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "bǎo hú lu（_______）",
+          "kind": "fillBlank",
+          "reference": "宝葫芦",
+          "originalStem": "bǎo hú lu（_______）",
+          "originalReference": "宝葫芦",
+          "answers": [["宝葫芦"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "téng màn（_______）",
+          "kind": "fillBlank",
+          "reference": "藤蔓",
+          "originalStem": "téng màn（_______）",
+          "originalReference": "藤蔓",
+          "answers": [["藤蔓"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "xiōng è（_______）",
+          "kind": "fillBlank",
+          "reference": "凶恶",
+          "originalStem": "xiōng è（_______）",
+          "originalReference": "凶恶",
+          "answers": [["凶恶"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "tǎo yàn（_______）",
+          "kind": "fillBlank",
+          "reference": "讨厌",
+          "originalStem": "tǎo yàn（_______）",
+          "originalReference": "讨厌",
+          "answers": [["讨厌"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "lǚ xíng（_______）",
+          "kind": "fillBlank",
+          "reference": "旅行",
+          "originalStem": "lǚ xíng（_______）",
+          "originalReference": "旅行",
+          "answers": [["旅行"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "tōu tōu（_______）",
+          "kind": "fillBlank",
+          "reference": "偷偷",
+          "originalStem": "tōu tōu（_______）",
+          "originalReference": "偷偷",
+          "answers": [["偷偷"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "jiù mìng（_______）",
+          "kind": "fillBlank",
+          "reference": "救命",
+          "originalStem": "jiù mìng（_______）",
+          "originalReference": "救命",
+          "answers": [["救命"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "gān jìng（_______）",
+          "kind": "fillBlank",
+          "reference": "干净",
+          "originalStem": "gān jìng（_______）",
+          "originalReference": "干净",
+          "answers": [["干净"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "wèi kǒu（_______）",
+          "kind": "fillBlank",
+          "reference": "胃口",
+          "originalStem": "wèi kǒu（_______）",
+          "originalReference": "胃口",
+          "answers": [["胃口"]]
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "gāng cái（_______）",
+          "kind": "fillBlank",
+          "reference": "刚才",
+          "originalStem": "gāng cái（_______）",
+          "originalReference": "刚才",
+          "answers": [["刚才"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "lèi shuǐ（_______）",
+          "kind": "fillBlank",
+          "reference": "泪水",
+          "originalStem": "lèi shuǐ（_______）",
+          "originalReference": "泪水",
+          "answers": [["泪水"]]
+        },
+        {
+          "number": 12,
+          "section": "二、近义词、反义词填空",
+          "stem": "近义词：急忙—（_______）",
+          "kind": "shortAnswer",
+          "reference": "连忙",
+          "originalStem": "近义词：急忙—（_______）",
+          "originalReference": "连忙"
+        },
+        {
+          "number": 13,
+          "section": "二、近义词、反义词填空",
+          "stem": "近义词：勇敢—（_______）",
+          "kind": "shortAnswer",
+          "reference": "英勇",
+          "originalStem": "近义词：勇敢—（_______）",
+          "originalReference": "英勇"
+        },
+        {
+          "number": 14,
+          "section": "二、近义词、反义词填空",
+          "stem": "近义词：依旧—（_______）",
+          "kind": "shortAnswer",
+          "reference": "仍然",
+          "originalStem": "近义词：依旧—（_______）",
+          "originalReference": "仍然"
+        },
+        {
+          "number": 15,
+          "section": "二、近义词、反义词填空",
+          "stem": "反义词：危险—（_______）",
+          "kind": "shortAnswer",
+          "reference": "安全",
+          "originalStem": "反义词：危险—（_______）",
+          "originalReference": "安全"
+        },
+        {
+          "number": 16,
+          "section": "二、近义词、反义词填空",
+          "stem": "反义词：难过—（_______）",
+          "kind": "shortAnswer",
+          "reference": "开心",
+          "originalStem": "反义词：难过—（_______）",
+          "originalReference": "开心"
+        },
+        {
+          "number": 17,
+          "section": "二、近义词、反义词填空",
+          "stem": "反义词：懒惰—（_______）",
+          "kind": "shortAnswer",
+          "reference": "勤劳",
+          "originalStem": "反义词：懒惰—（_______）",
+          "originalReference": "勤劳"
+        },
+        {
+          "number": 18,
+          "section": "三、课文内容填空",
+          "stem": "《宝葫芦的秘密》中，王葆希望拥有宝葫芦是因为________。",
+          "kind": "shortAnswer",
+          "reference": "想要什么就有什么，不用自己努力。",
+          "originalStem": "《宝葫芦的秘密》中，王葆希望拥有宝葫芦是因为________。",
+          "originalReference": "想要什么就有什么，不用自己努力。"
+        },
+        {
+          "number": 19,
+          "section": "三、课文内容填空",
+          "stem": "根据《在牛肚子里旅行》的表述：牛肚子里一共有____个胃，前三个胃是________，第四个胃是________。",
+          "kind": "fillBlank",
+          "reference": "四；贮藏食物；管消化",
+          "originalStem": "牛肚子里一共有____个胃，前三个胃是________，第四个胃是________。",
+          "originalReference": "四；贮藏食物；管消化",
+          "answers": [
+            ["四", "4"],
+            ["贮藏食物", "贮藏食物的"],
+            ["管消化", "管消化的"]
+          ],
+          "adjustment": "明确按课文表述作答。"
+        },
+        {
+          "number": 20,
+          "section": "三、课文内容填空",
+          "stem": "《一块奶酪》中的蚂蚁队长________、________，是一只以身作则的队长。",
+          "kind": "shortAnswer",
+          "reference": "公正无私、遵守纪律。",
+          "originalStem": "《一块奶酪》中的蚂蚁队长________、________，是一只以身作则的队长。",
+          "originalReference": "公正无私、遵守纪律。"
+        },
+        {
+          "number": 21,
+          "section": "四、童话积累（拓展）",
+          "stem": "请列举三部童话名著：《________》《________》《________》。",
+          "kind": "shortAnswer",
+          "reference": "参考：《安徒生童话》《格林童话》《稻草人》。",
+          "originalStem": "快乐读书吧推荐童话名著：《________》《________》《________》。",
+          "originalReference": "安徒生童话 格林童话 稻草人",
+          "scope": "SUPPLEMENTARY",
+          "adjustment": "已导入快乐读书吧仅有标题，尚无推荐书目正文；作为拓展积累，不断言本册原文推荐。"
+        },
+        {
+          "number": 22,
+          "section": "五、句子改写",
+          "stem": "红头被大黄牛吞进了肚子里。（改为“把”字句）",
+          "kind": "shortAnswer",
+          "reference": "大黄牛把红头吞进了肚子里。",
+          "originalStem": "红头被大黄牛吞进了肚子里。（改为“把”字句）",
+          "originalReference": "大黄牛把红头吞进了肚子里。"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "第5单元 同步练习（习作专项单元）",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "dā chuán（_______）",
+          "kind": "fillBlank",
+          "reference": "搭船",
+          "originalStem": "dā chuán（_______）",
+          "originalReference": "搭船",
+          "answers": [["搭船"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "fù qīn（_______）",
+          "kind": "fillBlank",
+          "reference": "父亲",
+          "originalStem": "fù qīn（_______）",
+          "originalReference": "父亲",
+          "answers": [["父亲"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "shā zi（_______）",
+          "kind": "fillBlank",
+          "reference": "沙子",
+          "originalStem": "shā zi（_______）",
+          "originalReference": "沙子",
+          "answers": [["沙子"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "xiǎng shēng（_______）",
+          "kind": "fillBlank",
+          "reference": "响声",
+          "originalStem": "xiǎng shēng（_______）",
+          "originalReference": "响声",
+          "answers": [["响声"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "yǔ máo（_______）",
+          "kind": "fillBlank",
+          "reference": "羽毛",
+          "originalStem": "yǔ máo（_______）",
+          "originalReference": "羽毛",
+          "answers": [["羽毛"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "cuì lǜ（_______）",
+          "kind": "fillBlank",
+          "reference": "翠绿",
+          "originalStem": "cuì lǜ（_______）",
+          "originalReference": "翠绿",
+          "answers": [["翠绿"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "zuǐ ba（_______）",
+          "kind": "fillBlank",
+          "reference": "嘴巴",
+          "originalStem": "zuǐ ba（_______）",
+          "originalReference": "嘴巴",
+          "answers": [["嘴巴"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "qiāo qiāo（_______）",
+          "kind": "fillBlank",
+          "reference": "悄悄",
+          "originalStem": "qiāo qiāo（_______）",
+          "originalReference": "悄悄",
+          "answers": [["悄悄"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "pú gōng yīng（_______）",
+          "kind": "fillBlank",
+          "reference": "蒲公英",
+          "originalStem": "pú gōng yīng（_______）",
+          "originalReference": "蒲公英",
+          "answers": [["蒲公英"]]
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "shèng kāi（_______）",
+          "kind": "fillBlank",
+          "reference": "盛开",
+          "originalStem": "shèng kāi（_______）",
+          "originalReference": "盛开",
+          "answers": [["盛开"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "wán shuǎ（_______）",
+          "kind": "fillBlank",
+          "reference": "玩耍",
+          "originalStem": "wán shuǎ（_______）",
+          "originalReference": "玩耍",
+          "answers": [["玩耍"]]
+        },
+        {
+          "number": 12,
+          "section": "一、看拼音，写词语",
+          "stem": "guān chá（_______）",
+          "kind": "fillBlank",
+          "reference": "观察",
+          "originalStem": "guān chá（_______）",
+          "originalReference": "观察",
+          "answers": [["观察"]]
+        },
+        {
+          "number": 13,
+          "section": "二、选词填空（观察、观赏、仰望）",
+          "stem": "我仔细（_______）蒲公英的变化。",
+          "kind": "fillBlank",
+          "reference": "观察",
+          "originalStem": "我仔细（_______）蒲公英的变化。",
+          "originalReference": "观察",
+          "answers": [["观察"]]
+        },
+        {
+          "number": 14,
+          "section": "二、选词填空（观察、观赏、仰望）",
+          "stem": "周末，我们去公园（_______）美丽的鲜花。",
+          "kind": "fillBlank",
+          "reference": "观赏",
+          "originalStem": "周末，我们去公园（_______）美丽的鲜花。",
+          "originalReference": "观赏",
+          "answers": [["观赏"]]
+        },
+        {
+          "number": 15,
+          "section": "二、选词填空（观察、观赏、仰望）",
+          "stem": "我抬头（_______）漫天的星星。",
+          "kind": "fillBlank",
+          "reference": "仰望",
+          "originalStem": "我抬头（_______）漫天的星星。",
+          "originalReference": "仰望",
+          "answers": [["仰望"]]
+        },
+        {
+          "number": 16,
+          "section": "三、课文内容理解",
+          "stem": "《搭船的鸟》细致描写了翠鸟的________和________的动作，体现了翠鸟的灵动可爱。",
+          "kind": "fillBlank",
+          "reference": "外形；捕鱼",
+          "originalStem": "《搭船的鸟》细致描写了翠鸟的________和________的动作，体现了翠鸟的灵动可爱。",
+          "originalReference": "外形；捕鱼",
+          "answers": [
+            ["外形", "外貌"],
+            ["捕鱼", "捉鱼"]
+          ]
+        },
+        {
+          "number": 17,
+          "section": "三、课文内容理解",
+          "stem": "蒲公英的花朵________时，草地是金色的；花朵________时，草地是绿色的。",
+          "kind": "fillBlank",
+          "reference": "张开；合拢",
+          "originalStem": "蒲公英的花朵________时，草地是金色的；花朵________时，草地是绿色的。",
+          "originalReference": "张开；合拢",
+          "answers": [
+            ["张开", "开放"],
+            ["合拢", "合上"]
+          ]
+        },
+        {
+          "number": 18,
+          "section": "四、习作小练笔",
+          "stem": "仿照课文，写一处你观察过的景物或小动物，抓住外形、动作特点，50字左右。",
+          "kind": "shortAnswer",
+          "reference": "示例：我家的小猫浑身毛茸茸的，眼睛圆圆的。它走路轻轻的，最喜欢追着毛线球跑来跑去，活泼又可爱。",
+          "originalStem": "仿照课文，写一处你观察过的景物或小动物，抓住外形、动作特点，50字左右。",
+          "originalReference": "示例：我家的小猫浑身毛茸茸的，眼睛圆圆的。它走路轻轻的，最喜欢追着毛线球跑来跑去，活泼又可爱。"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "第6单元 同步练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "duàn kāi（_______）",
+          "kind": "fillBlank",
+          "reference": "断开",
+          "originalStem": "duàn kāi（_______）",
+          "originalReference": "断开",
+          "answers": [["断开"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "gū fān（_______）",
+          "kind": "fillBlank",
+          "reference": "孤帆",
+          "originalStem": "gū fān（_______）",
+          "originalReference": "孤帆",
+          "answers": [["孤帆"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "yáo yuǎn（_______）",
+          "kind": "fillBlank",
+          "reference": "遥远",
+          "originalStem": "yáo yuǎn（_______）",
+          "originalReference": "遥远",
+          "answers": [["遥远"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "fù ráo（_______）",
+          "kind": "fillBlank",
+          "reference": "富饶",
+          "originalStem": "fù ráo（_______）",
+          "originalReference": "富饶",
+          "answers": [["富饶"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "hǎi bīn（_______）",
+          "kind": "fillBlank",
+          "reference": "海滨",
+          "originalStem": "hǎi bīn（_______）",
+          "originalReference": "海滨",
+          "answers": [["海滨"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "yú mín（_______）",
+          "kind": "fillBlank",
+          "reference": "渔民",
+          "originalStem": "yú mín（_______）",
+          "originalReference": "渔民",
+          "answers": [["渔民"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "zhěng jié（_______）",
+          "kind": "fillBlank",
+          "reference": "整洁",
+          "originalStem": "zhěng jié（_______）",
+          "originalReference": "整洁",
+          "answers": [["整洁"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "nǎo dai（_______）",
+          "kind": "fillBlank",
+          "reference": "脑袋",
+          "originalStem": "nǎo dai（_______）",
+          "originalReference": "脑袋",
+          "answers": [["脑袋"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "yán shí（海底礁石）（_______）",
+          "kind": "fillBlank",
+          "reference": "岩石",
+          "originalStem": "yán shí（_______）",
+          "originalReference": "岩石",
+          "answers": [["岩石"]],
+          "adjustment": "yán shí 可对应“岩石”或“严实”；补充语义限定，避免同音词误判。"
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "xiǎn de（_______）",
+          "kind": "fillBlank",
+          "reference": "显得",
+          "originalStem": "xiǎn de（_______）",
+          "originalReference": "显得",
+          "answers": [["显得"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "guāng xiàn（_______）",
+          "kind": "fillBlank",
+          "reference": "光线",
+          "originalStem": "guāng xiàn（_______）",
+          "originalReference": "光线",
+          "answers": [["光线"]]
+        },
+        {
+          "number": 12,
+          "section": "一、看拼音，写词语",
+          "stem": "bǎo kù（_______）",
+          "kind": "fillBlank",
+          "reference": "宝库",
+          "originalStem": "bǎo kù（_______）",
+          "originalReference": "宝库",
+          "answers": [["宝库"]]
+        },
+        {
+          "number": 13,
+          "section": "二、补全词语",
+          "stem": "五（___）十（___）",
+          "kind": "fillBlank",
+          "reference": "五光十色",
+          "originalStem": "五（___）十（___）",
+          "originalReference": "五光十色",
+          "answers": [["光"], ["色"]]
+        },
+        {
+          "number": 14,
+          "section": "二、补全词语",
+          "stem": "层（___）尽（___）",
+          "kind": "fillBlank",
+          "reference": "层林尽染",
+          "originalStem": "层（___）林（___）",
+          "originalReference": "层林尽染",
+          "answers": [["林"], ["染"]],
+          "adjustment": "原空格位置与参考成语不符，按参考成语校正题干。"
+        },
+        {
+          "number": 15,
+          "section": "二、补全词语",
+          "stem": "五（___）缤（___）",
+          "kind": "fillBlank",
+          "reference": "五彩缤纷",
+          "originalStem": "五（___）缤（___）",
+          "originalReference": "五彩缤纷",
+          "answers": [["彩"], ["纷"]]
+        },
+        {
+          "number": 16,
+          "section": "二、补全词语",
+          "stem": "流（___）溢（___）",
+          "kind": "fillBlank",
+          "reference": "流光溢彩",
+          "originalStem": "（___）光（___）色",
+          "originalReference": "流光溢彩",
+          "answers": [["光"], ["彩"]],
+          "adjustment": "原空格位置与参考成语不符，按参考成语校正题干。"
+        },
+        {
+          "number": 17,
+          "section": "二、补全词语",
+          "stem": "（___）群（___）队",
+          "kind": "fillBlank",
+          "reference": "成群结队",
+          "originalStem": "（___）群（___）队",
+          "originalReference": "成群结队",
+          "answers": [["成"], ["结"]]
+        },
+        {
+          "number": 18,
+          "section": "二、补全词语",
+          "stem": "物产（___）（___）",
+          "kind": "fillBlank",
+          "reference": "物产丰富",
+          "originalStem": "物产（___）（___）",
+          "originalReference": "物产丰富",
+          "answers": [["丰"], ["富"]]
+        },
+        {
+          "number": 19,
+          "section": "二、选词造句",
+          "stem": "从补全的词语中选择一个造句。",
+          "kind": "shortAnswer",
+          "reference": "示例：秋天的花园五彩缤纷，好看极了。",
+          "originalStem": "从补全的词语中选择一个造句。",
+          "originalReference": "示例：秋天的花园五彩缤纷，好看极了。"
+        },
+        {
+          "number": 20,
+          "section": "三、课文内容填空",
+          "stem": "西沙群岛________、________，是我国的美丽海岛。",
+          "kind": "shortAnswer",
+          "reference": "风景优美、物产丰富。（顺序不限）",
+          "originalStem": "西沙群岛________、________，是我国的美丽海岛。",
+          "originalReference": "风景优美、物产丰富。（顺序不限）"
+        },
+        {
+          "number": 21,
+          "section": "三、课文内容填空",
+          "stem": "海滨小城的特点是________、________。",
+          "kind": "shortAnswer",
+          "reference": "美丽、整洁。（顺序不限）",
+          "originalStem": "海滨小城的特点是________、________。",
+          "originalReference": "美丽、整洁。（顺序不限）"
+        },
+        {
+          "number": 22,
+          "section": "三、课文内容填空",
+          "stem": "小兴安岭一年四季________，是一座美丽的________，也是一座巨大的________。",
+          "kind": "fillBlank",
+          "reference": "景色诱人；大花园；宝库",
+          "originalStem": "小兴安岭一年四季________，是一座美丽的________，也是一座巨大的________。",
+          "originalReference": "景色诱人；大花园；宝库",
+          "answers": [["景色诱人"], ["大花园"], ["宝库"]]
+        },
+        {
+          "number": 23,
+          "section": "三、课文内容填空",
+          "stem": "香港被称为________，是璀璨的明珠。",
+          "kind": "fillBlank",
+          "reference": "东方之珠",
+          "originalStem": "香港被称为________，是璀璨的明珠。",
+          "originalReference": "东方之珠",
+          "answers": [["东方之珠"]]
+        },
+        {
+          "number": 24,
+          "section": "四、阅读理解",
+          "stem": "《富饶的西沙群岛》中“西沙群岛的海里一半是水，一半是鱼”这句话的意思是（____）。",
+          "kind": "singleChoice",
+          "reference": "B",
+          "originalStem": "《富饶的西沙群岛》中“西沙群岛的海里一半是水，一半是鱼”这句话的意思是（____）。",
+          "originalReference": "B",
+          "options": ["海里水和鱼各占一半", "海里的鱼非常多", "西沙群岛只有鱼和水"],
+          "correctOptionKey": "B",
+          "explanation": "这是夸张表达，强调鱼非常多，不表示水和鱼各占一半。"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "第7单元 同步练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "měi miào（_______）",
+          "kind": "fillBlank",
+          "reference": "美妙",
+          "originalStem": "měi miào（_______）",
+          "originalReference": "美妙",
+          "answers": [["美妙"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "yǎn zòu（_______）",
+          "kind": "fillBlank",
+          "reference": "演奏",
+          "originalStem": "yǎn zòu（_______）",
+          "originalReference": "演奏",
+          "answers": [["演奏"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "gǎn shòu（_______）",
+          "kind": "fillBlank",
+          "reference": "感受",
+          "originalStem": "gǎn shòu（_______）",
+          "originalReference": "感受",
+          "answers": [["感受"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "jī dòng（_______）",
+          "kind": "fillBlank",
+          "reference": "激动",
+          "originalStem": "jī dòng（_______）",
+          "originalReference": "激动",
+          "answers": [["激动"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "dī shuǐ（_______）",
+          "kind": "fillBlank",
+          "reference": "滴水",
+          "originalStem": "dī shuǐ（_______）",
+          "originalReference": "滴水",
+          "answers": [["滴水"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "qiāo dǎ（_______）",
+          "kind": "fillBlank",
+          "reference": "敲打",
+          "originalStem": "qiāo dǎ（_______）",
+          "originalReference": "敲打",
+          "answers": [["敲打"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "míng jiào（_______）",
+          "kind": "fillBlank",
+          "reference": "鸣叫",
+          "originalStem": "míng jiào（_______）",
+          "originalReference": "鸣叫",
+          "answers": [["鸣叫"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "wēn róu（_______）",
+          "kind": "fillBlank",
+          "reference": "温柔",
+          "originalStem": "wēn róu（_______）",
+          "originalReference": "温柔",
+          "answers": [["温柔"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "chí xù（_______）",
+          "kind": "fillBlank",
+          "reference": "持续",
+          "originalStem": "chí xù（_______）",
+          "originalReference": "持续",
+          "answers": [["持续"]]
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "liè rén（_______）",
+          "kind": "fillBlank",
+          "reference": "猎人",
+          "originalStem": "liè rén（_______）",
+          "originalReference": "猎人",
+          "answers": [["猎人"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "wù méng méng（_______）",
+          "kind": "fillBlank",
+          "reference": "雾蒙蒙",
+          "originalStem": "wù méng méng（_______）",
+          "originalReference": "雾蒙蒙",
+          "answers": [["雾蒙蒙"]]
+        },
+        {
+          "number": 12,
+          "section": "二、诗句默写",
+          "stem": "《鹿柴》：以声衬静的诗句：________，________。",
+          "kind": "fillBlank",
+          "reference": "空山不见人，但闻人语响",
+          "originalStem": "《鹿柴》：以声衬静的诗句：________，________。",
+          "originalReference": "空山不见人，但闻人语响",
+          "answers": [
+            ["空山不见人", "空山不见人，", "空山不见人。", "空山不见人,", "空山不见人."],
+            ["但闻人语响", "但闻人语响，", "但闻人语响。", "但闻人语响,", "但闻人语响."]
+          ],
+          "scope": "UNIT_SYNC",
+          "explanation": "对照诗句，检查字词和顺序。"
+        },
+        {
+          "number": 13,
+          "section": "二、诗句默写",
+          "stem": "《望天门山》：两岸青山相对出，________。",
+          "kind": "fillBlank",
+          "reference": "孤帆一片日边来",
+          "originalStem": "《望天门山》：两岸青山相对出，________。",
+          "originalReference": "孤帆一片日边来",
+          "answers": [
+            [
+              "孤帆一片日边来",
+              "孤帆一片日边来，",
+              "孤帆一片日边来。",
+              "孤帆一片日边来,",
+              "孤帆一片日边来."
+            ]
+          ],
+          "scope": "UNIT_SYNC",
+          "explanation": "对照诗句，检查字词和顺序。"
+        },
+        {
+          "number": 14,
+          "section": "二、诗句默写",
+          "stem": "《饮湖上初晴后雨》：________，淡妆浓抹总相宜。",
+          "kind": "fillBlank",
+          "reference": "欲把西湖比西子",
+          "originalStem": "《饮湖上初晴后雨》：________，淡妆浓抹总相宜。",
+          "originalReference": "欲把西湖比西子",
+          "answers": [
+            [
+              "欲把西湖比西子",
+              "欲把西湖比西子，",
+              "欲把西湖比西子。",
+              "欲把西湖比西子,",
+              "欲把西湖比西子."
+            ]
+          ],
+          "scope": "UNIT_SYNC",
+          "explanation": "对照诗句，检查字词和顺序。"
+        },
+        {
+          "number": 15,
+          "section": "三、课文内容填空",
+          "stem": "大自然的音乐家是________和________，大自然的歌手是________。",
+          "kind": "shortAnswer",
+          "reference": "风和水（顺序不限）；动物。",
+          "originalStem": "大自然的音乐家是________和________，大自然的歌手是________。",
+          "originalReference": "风和水（顺序不限）；动物。"
+        },
+        {
+          "number": 16,
+          "section": "三、课文内容填空",
+          "stem": "大自然是一本________的大画册，是一部________的大书。",
+          "kind": "fillBlank",
+          "reference": "看不完；读不完",
+          "originalStem": "大自然是一本________的大画册，是一部________的大书。",
+          "originalReference": "看不完；读不完",
+          "answers": [["看不完"], ["读不完"]]
+        },
+        {
+          "number": 17,
+          "section": "四、口语交际：身边的小事",
+          "stem": "写一件身边的文明或不文明小事，并说说你的看法。",
+          "kind": "shortAnswer",
+          "reference": "示例：我看到有人随手乱扔垃圾，这是不文明的行为。我们要爱护环境，自觉垃圾分类。",
+          "originalStem": "写一件身边的文明或不文明小事，并说说你的看法。",
+          "originalReference": "示例：我看到有人随手乱扔垃圾，这是不文明的行为。我们要爱护环境，自觉垃圾分类。"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "第8单元 同步练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、看拼音，写词语",
+          "stem": "sī mǎ guāng（_______）",
+          "kind": "fillBlank",
+          "reference": "司马光",
+          "originalStem": "sī mǎ guāng（_______）",
+          "originalReference": "司马光",
+          "answers": [["司马光"]]
+        },
+        {
+          "number": 2,
+          "section": "一、看拼音，写词语",
+          "stem": "tíng yuàn（_______）",
+          "kind": "fillBlank",
+          "reference": "庭院",
+          "originalStem": "tíng yuàn（_______）",
+          "originalReference": "庭院",
+          "answers": [["庭院"]]
+        },
+        {
+          "number": 3,
+          "section": "一、看拼音，写词语",
+          "stem": "diē dǎo（_______）",
+          "kind": "fillBlank",
+          "reference": "跌倒",
+          "originalStem": "diē dǎo（_______）",
+          "originalReference": "跌倒",
+          "answers": [["跌倒"]]
+        },
+        {
+          "number": 4,
+          "section": "一、看拼音，写词语",
+          "stem": "qì dí（_______）",
+          "kind": "fillBlank",
+          "reference": "汽笛",
+          "originalStem": "qì dí（_______）",
+          "originalReference": "汽笛",
+          "answers": [["汽笛"]]
+        },
+        {
+          "number": 5,
+          "section": "一、看拼音，写词语",
+          "stem": "zhàn dòu（_______）",
+          "kind": "fillBlank",
+          "reference": "战斗",
+          "originalStem": "zhàn dòu（_______）",
+          "originalReference": "战斗",
+          "answers": [["战斗"]]
+        },
+        {
+          "number": 6,
+          "section": "一、看拼音，写词语",
+          "stem": "liè shì（_______）",
+          "kind": "fillBlank",
+          "reference": "烈士",
+          "originalStem": "liè shì（_______）",
+          "originalReference": "烈士",
+          "answers": [["烈士"]]
+        },
+        {
+          "number": 7,
+          "section": "一、看拼音，写词语",
+          "stem": "xuè yè（_______）",
+          "kind": "fillBlank",
+          "reference": "血液",
+          "originalStem": "xuè yè（_______）",
+          "originalReference": "血液",
+          "answers": [["血液"]]
+        },
+        {
+          "number": 8,
+          "section": "一、看拼音，写词语",
+          "stem": "zhèn dì（_______）",
+          "kind": "fillBlank",
+          "reference": "阵地",
+          "originalStem": "zhèn dì（_______）",
+          "originalReference": "阵地",
+          "answers": [["阵地"]]
+        },
+        {
+          "number": 9,
+          "section": "一、看拼音，写词语",
+          "stem": "gǎn jī（_______）",
+          "kind": "fillBlank",
+          "reference": "感激",
+          "originalStem": "gǎn jī（_______）",
+          "originalReference": "感激",
+          "answers": [["感激"]]
+        },
+        {
+          "number": 10,
+          "section": "一、看拼音，写词语",
+          "stem": "chéng shí（_______）",
+          "kind": "fillBlank",
+          "reference": "诚实",
+          "originalStem": "chéng shí（_______）",
+          "originalReference": "诚实",
+          "answers": [["诚实"]]
+        },
+        {
+          "number": 11,
+          "section": "一、看拼音，写词语",
+          "stem": "kěn dìng（_______）",
+          "kind": "fillBlank",
+          "reference": "肯定",
+          "originalStem": "kěn dìng（_______）",
+          "originalReference": "肯定",
+          "answers": [["肯定"]]
+        },
+        {
+          "number": 12,
+          "section": "二、文言文翻译",
+          "stem": "群儿戏于庭，一儿登瓮，足跌没水中。",
+          "kind": "shortAnswer",
+          "reference": "一群孩子在庭院里玩耍，一个孩子爬上水缸，失足掉进水里。",
+          "originalStem": "群儿戏于庭，一儿登瓮，足跌没水中。",
+          "originalReference": "一群孩子在庭院里玩耍，一个孩子爬上水缸，失足掉进水里。"
+        },
+        {
+          "number": 13,
+          "section": "三、课文内容判断",
+          "stem": "司马光砸缸救人，体现了他聪明机智、沉着冷静。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "司马光砸缸救人，体现了他聪明机智、沉着冷静。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": ""
+        },
+        {
+          "number": 14,
+          "section": "三、课文内容判断",
+          "stem": "童第周刻苦学习，为自己、为中国人争气。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "童第周刻苦学习，为自己、为中国人争气。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": ""
+        },
+        {
+          "number": 15,
+          "section": "三、课文内容判断",
+          "stem": "白求恩大夫在危险中坚守阵地，连续工作五十个小时。",
+          "kind": "trueFalse",
+          "reference": "×（六十九小时）",
+          "originalStem": "白求恩大夫在危险中坚守阵地，连续工作五十个小时。",
+          "originalReference": "×（六十九小时）",
+          "correctValue": false,
+          "explanation": "提供的课文写明连续工作六十九个小时。"
+        },
+        {
+          "number": 16,
+          "section": "三、课文内容判断",
+          "stem": "赵一曼十分节俭、关爱战士，舍己为人。",
+          "kind": "trueFalse",
+          "reference": "√",
+          "originalStem": "赵一曼十分节俭、关爱战士，舍己为人。",
+          "originalReference": "√",
+          "correctValue": true,
+          "explanation": ""
+        },
+        {
+          "number": 17,
+          "section": "四、习作小练笔：那次经历真难忘",
+          "stem": "简单写写一次难忘的经历，交代清楚事情经过和心情（60字左右）。",
+          "kind": "shortAnswer",
+          "reference": "示例：上次和同学爬山的经历让我很难忘。虽然爬山很累，但我们互相鼓励、坚持登顶，看到了最美的风景，我明白了坚持就是胜利。",
+          "originalStem": "简单写写一次难忘的经历，交代清楚事情经过和心情（60字左右）。",
+          "originalReference": "示例：上次和同学爬山的经历让我很难忘。虽然爬山很累，但我们互相鼓励、坚持登顶，看到了最美的风景，我明白了坚持就是胜利。"
+        }
+      ]
+    }
+  ]
+}

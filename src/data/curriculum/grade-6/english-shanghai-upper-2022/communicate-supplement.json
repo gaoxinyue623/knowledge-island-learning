@@ -1,0 +1,94 @@
+{
+  "updatedAt": "2026-10-10T02:28:09.000Z",
+  "sourceSha256": "00a284ec028957f3b32197cfceaef305522228eefa74ddc85408a2ef0ca28fc8",
+  "sourceNote": "按用户标注的沪教牛津（深圳用）六上2022课标修订版补充稿保存Listen、Speak、Write；未对照出版社原书逐页核验，未提供教材原版录音。补充稿Unit 4—6主题与现有目录不同，用户明确确认按指定编号作为补充材料展示，保留原目录及主题核对说明。",
+  "nodes": [
+    {
+      "number": 1,
+      "title": "Why do people move to new places?",
+      "listen": "Marta moved to China five years ago. Her parents came here to study Chinese. Marta likes living in China. She can speak Chinese now. It’s easy for her to talk with Chinese friends. She loves Chinese food too.",
+      "questions": [
+        "When did Marta move to China?",
+        "Why did she move here?",
+        "What can Marta do now?"
+      ],
+      "speak": "A: Why do people move to new places?\nB: People move for new jobs. Some people move for better schools and hospitals.\nA: Where do you want to move?\nB: I want to move to Sanya because the weather is warm. When I move there, I can go to the beach every weekend.",
+      "frames": "People move for … / I want to move to … because … When I move there, I can …",
+      "write": "Write about your ideal place to live.\nI want to move to ______. I want to live there because ______. I can ______ there. I will make new friends.",
+      "originalUnitTitle": "Unit 1 Why do people move to new places? 人们为什么搬到新地方？",
+      "topicMismatch": false,
+      "notes": []
+    },
+    {
+      "number": 2,
+      "title": "Art around us",
+      "listen": "1. Lin likes butterfly art from Mexico. She likes the bright colours.\n2. Angel loves Chinese murals from Mogao Grottoes. They are beautiful and full of stories.\n3. Vivian likes beetle paintings from Russia. They are special.\n4. Justin likes truck art from the US. The paintings on the trucks are amazing.",
+      "questions": [],
+      "speak": "A: What kind of art do you like?\nB: I like Chinese paper-cutting.\nA: Why do you like it?\nB: Because it has beautiful patterns.\nA: What art do you want to make?\nB: I want to make paper-cutting. It’s fun.",
+      "frames": "… likes … because … / What kind of art do you like? Why?",
+      "write": "Write about your favourite art.\nMy favourite art is ______. I like it because ______. I want to make ______.",
+      "originalUnitTitle": "Unit 2 Why do we make art? 我们为什么创作艺术？",
+      "topicMismatch": false,
+      "notes": []
+    },
+    {
+      "number": 3,
+      "title": "Brave people",
+      "listen": "News reporter: There was a fire in a building. Li Jie saw the fire. He called 119 quickly. He told people to leave the building. Many people got out safely. The firemen put out the fire. Li Jie was very brave.",
+      "questions": [
+        "What happened in the building?",
+        "What did Li Jie do?",
+        "Why was Li Jie brave?"
+      ],
+      "speak": "A: What did Li Jie do?\nB: He saw a fire. He called 119 and told people to leave.\nA: Was he brave?\nB: Yes, he was. He helped many people.\nA: Who is your brave person?\nB: My mum. She helps people.",
+      "frames": "What did … do? / … was brave because …",
+      "write": "Write about a brave person.\n______ is brave. He/She ______. He/She helped ______. I want to be like him/her.",
+      "originalUnitTitle": "Unit 3 How should we protect ourselves? 我们应该如何保护自己？",
+      "topicMismatch": false,
+      "notes": []
+    },
+    {
+      "number": 4,
+      "title": "Healthy living",
+      "listen": "Tom has a good healthy life. He gets up early every morning. He does exercise for 30 minutes. He eats fruit and vegetables every day. He never eats too much sweet food. He goes to bed before ten o’clock. He is strong and healthy.",
+      "questions": [],
+      "speak": "A: What should we do to keep healthy?\nB: We should do exercise every day. We should eat plenty of fruit.\nA: What shouldn’t we do?\nB: We shouldn’t eat too much candy. We shouldn’t stay up late.",
+      "frames": "We should … / We shouldn’t … / To keep healthy, we can …",
+      "write": "Write your healthy rules.\nTo keep healthy, I should ______. I shouldn’t ______. I will have a healthy life.",
+      "originalUnitTitle": "Unit 4 What makes things move? 是什么让物体运动？",
+      "topicMismatch": true,
+      "notes": [
+        "补充稿Unit 4题名为“Healthy living”，现有目录为“Unit 4 What makes things move? 是什么让物体运动？”。用户明确确认按指定编号作为补充材料展示，原目录主题的Communicate听说写正文仍待核对与补充。"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Animals in danger",
+      "listen": "Many wild animals are in danger. Pandas have no bamboo to eat. Tigers lose their homes. People cut down forests. We must help them. We can plant more trees. We should not buy things made of animal parts.",
+      "questions": [],
+      "speak": "A: What animals are in danger?\nB: Pandas and tigers are in danger.\nA: Why are they in danger?\nB: Because people cut down forests. They lose their homes.\nA: What can we do to help them?\nB: We can plant trees. We should protect forests.",
+      "frames": "… are in danger because … / We can … to help them.",
+      "write": "Write about animals in danger.\n______ are in danger. They lose their homes. We can ______. We should protect them.",
+      "originalUnitTitle": "Unit 5 How do inventions change our lives? 发明如何改变我们的生活？",
+      "topicMismatch": true,
+      "notes": [
+        "补充稿Unit 5题名为“Animals in danger”，现有目录为“Unit 5 How do inventions change our lives? 发明如何改变我们的生活？”。用户明确确认按指定编号作为补充材料展示，原目录主题的Communicate听说写正文仍待核对与补充。"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "E-friends",
+      "listen": "Kitty wants an e-friend in the US. She wants to know about her e-friend’s family, school life and hobbies. Joe has an e-friend in the UK. They talk about football. Alice’s e-friend is in Australia. They talk about books and films.",
+      "questions": [],
+      "speak": "A: Would you like to have an e-friend in other countries?\nB: Yes. I’d like to have an e-friend in Canada.\nA: What would you like to know about your e-friend?\nB: I’d like to know about his hobbies and favourite subjects.",
+      "frames": "Would you like to …? / I’d like to … / What would you like to know?",
+      "write": "Write an email to your new e-friend.\nDear friend,\nMy name is ______. I am ______ years old. I am from China. I like ______. Please tell me about yourself.\nYours,",
+      "originalUnitTitle": "Unit 6 What is a city? 什么是城市？",
+      "topicMismatch": true,
+      "notes": [
+        "补充稿Unit 6题名为“E-friends”，现有目录为“Unit 6 What is a city? 什么是城市？”。用户明确确认按指定编号作为补充材料展示，原目录主题的Communicate听说写正文仍待核对与补充。"
+      ]
+    }
+  ],
+  "placementConfirmedByUser": true
+}

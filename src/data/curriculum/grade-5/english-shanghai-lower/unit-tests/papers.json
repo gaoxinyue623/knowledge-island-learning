@@ -1,0 +1,356 @@
+{
+  "title": "沪教牛津五年级下册配套练习",
+  "sourceSha256": "08bc1c75453c620182f012b4abb599535d70d4381fc508c111ab773db6a6ca47",
+  "sourceNote": "用户提供的12组小练习，共24题；Unit 4、10第一题的shtu分别更正为am、is；Unit 3第一题、Unit 10第二题增加限定条件消除双答案，原题原答及说明保留。",
+  "notice": "按题核对答案，不折算百分制。笔误和歧义题已在解析中注明修订原因。",
+  "papers": [
+    {
+      "topicKey": "1",
+      "title": "Unit 1 小练习",
+      "sourceText": "1. This umbrella is ____. (mine / my)\n2. —Are those crayons theirs? —Yes, ____. (they are / it is)\n✅答案：1.mine 2.they are",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "This umbrella is ____.",
+          "originalStem": "This umbrella is ____. (mine / my)",
+          "originalReference": "mine",
+          "kind": "singleChoice",
+          "options": ["mine", "my"],
+          "correctIndex": 0,
+          "reference": "A. mine",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "—Are those crayons theirs? —Yes, ____.",
+          "originalStem": "—Are those crayons theirs? —Yes, ____. (they are / it is)",
+          "originalReference": "they are",
+          "kind": "singleChoice",
+          "options": ["they are", "it is"],
+          "correctIndex": 0,
+          "reference": "A. they are",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "2",
+      "title": "Unit 2 小练习",
+      "sourceText": "1. I like the study ____ it is quiet. (because / so)\n2. —____ do you like the dining room? —Because it is bright. (Why / What)\n✅答案：1.because 2.Why",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "I like the study ____ it is quiet.",
+          "originalStem": "I like the study ____ it is quiet. (because / so)",
+          "originalReference": "because",
+          "kind": "singleChoice",
+          "options": ["because", "so"],
+          "correctIndex": 0,
+          "reference": "A. because",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "—____ do you like the dining room? —Because it is bright.",
+          "originalStem": "—____ do you like the dining room? —Because it is bright. (Why / What)",
+          "originalReference": "Why",
+          "kind": "singleChoice",
+          "options": ["Why", "What"],
+          "correctIndex": 0,
+          "reference": "A. Why",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "3",
+      "title": "Unit 3 小练习",
+      "sourceText": "1. I ____ (will / won’t) be tall in the future.\n2. She ____ wear glasses. (won’t / don’t)\n✅答案：1.will 2.won’t",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "填入表示“将会”的词，表达肯定预测：\nI ____ be tall in the future.",
+          "originalStem": "I ____ (will / won’t) be tall in the future.",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "won’t"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": "原题 will 与 won’t 均可构成合法句子；补充“表达肯定预测”条件，使来稿参考答案 will 唯一。"
+        },
+        {
+          "number": 2,
+          "stem": "She ____ wear glasses.",
+          "originalStem": "She ____ wear glasses. (won’t / don’t)",
+          "originalReference": "won’t",
+          "kind": "singleChoice",
+          "options": ["won’t", "don’t"],
+          "correctIndex": 0,
+          "reference": "A. won’t",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "4",
+      "title": "Unit 4 小练习",
+      "sourceText": "1. I ____ (am / is) going to buy a storybook.\n2. He ____ going to read a magazine. (is / are)\n✅答案：shtu 2.is",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "I ____ going to buy a storybook.",
+          "originalStem": "I ____ (am / is) going to buy a storybook.",
+          "originalReference": "shtu",
+          "kind": "singleChoice",
+          "options": ["am", "is"],
+          "correctIndex": 0,
+          "reference": "A. am",
+          "adjustment": "来稿答案为“shtu”，根据主语和句型更正为am；原答保留。"
+        },
+        {
+          "number": 2,
+          "stem": "He ____ going to read a magazine.",
+          "originalStem": "He ____ going to read a magazine. (is / are)",
+          "originalReference": "is",
+          "kind": "singleChoice",
+          "options": ["is", "are"],
+          "correctIndex": 0,
+          "reference": "A. is",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "5",
+      "title": "Unit 5 小练习",
+      "sourceText": "1. —What ____ you going to do this weekend? —I am going to row a boat. (are / is)\n2. She ____ going to see a film. (is / am)\n✅答案：1.are 2.is",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "—What ____ you going to do this weekend? —I am going to row a boat.",
+          "originalStem": "—What ____ you going to do this weekend? —I am going to row a boat. (are / is)",
+          "originalReference": "are",
+          "kind": "singleChoice",
+          "options": ["are", "is"],
+          "correctIndex": 0,
+          "reference": "A. are",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "She ____ going to see a film.",
+          "originalStem": "She ____ going to see a film. (is / am)",
+          "originalReference": "is",
+          "kind": "singleChoice",
+          "options": ["is", "am"],
+          "correctIndex": 0,
+          "reference": "A. is",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "6",
+      "title": "Unit 6 小练习",
+      "sourceText": "1. We ____ stay in a hotel. (will / are)\n2. —How long ____ you stay there? —For 5 days. (will / are)\n✅答案：1.will 2.will",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "We ____ stay in a hotel.",
+          "originalStem": "We ____ stay in a hotel. (will / are)",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "are"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "—How long ____ you stay there? —For 5 days.",
+          "originalStem": "—How long ____ you stay there? —For 5 days. (will / are)",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "are"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "7",
+      "title": "Unit 7 小练习",
+      "sourceText": "1. ____ (First / Finally), we meet parents at the gate.\n2. They ____ listen to the choir in the hall. (will / are)\n✅答案：1.First 2.will",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "____, we meet parents at the gate.",
+          "originalStem": "____ (First / Finally), we meet parents at the gate.",
+          "originalReference": "First",
+          "kind": "singleChoice",
+          "options": ["First", "Finally"],
+          "correctIndex": 0,
+          "reference": "A. First",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "They ____ listen to the choir in the hall.",
+          "originalStem": "They ____ listen to the choir in the hall. (will / are)",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "are"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "8",
+      "title": "Unit 8 小练习",
+      "sourceText": "1. ____ coat do you want, the black one or red one? (Which / What)\n2. I’ll try ____ the sweater. (on / in)\n✅答案：1.Which 2.on",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "____ coat do you want, the black one or red one?",
+          "originalStem": "____ coat do you want, the black one or red one? (Which / What)",
+          "originalReference": "Which",
+          "kind": "singleChoice",
+          "options": ["Which", "What"],
+          "correctIndex": 0,
+          "reference": "A. Which",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "I’ll try ____ the sweater.",
+          "originalStem": "I’ll try ____ the sweater. (on / in)",
+          "originalReference": "on",
+          "kind": "singleChoice",
+          "options": ["on", "in"],
+          "correctIndex": 0,
+          "reference": "A. on",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "9",
+      "title": "Unit 9 小练习",
+      "sourceText": "1. You ____ drink lots of water. (should / shouldn’t)\n2. You ____ watch TV too long. (shouldn’t / should)\n✅答案：1.should 2.shouldn’t",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "You ____ drink lots of water.",
+          "originalStem": "You ____ drink lots of water. (should / shouldn’t)",
+          "originalReference": "should",
+          "kind": "singleChoice",
+          "options": ["should", "shouldn’t"],
+          "correctIndex": 0,
+          "reference": "A. should",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "You ____ watch TV too long.",
+          "originalStem": "You ____ watch TV too long. (shouldn’t / should)",
+          "originalReference": "shouldn’t",
+          "kind": "singleChoice",
+          "options": ["shouldn’t", "should"],
+          "correctIndex": 0,
+          "reference": "A. shouldn’t",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "10",
+      "title": "Unit 10 小练习",
+      "sourceText": "1. Paper ____ a great invention. (is / are)\n2. I ____ invent a flying bike. (am going to / will)\n✅答案：shtu 2.am going to",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "Paper ____ a great invention.",
+          "originalStem": "Paper ____ a great invention. (is / are)",
+          "originalReference": "shtu",
+          "kind": "singleChoice",
+          "options": ["is", "are"],
+          "correctIndex": 0,
+          "reference": "A. is",
+          "adjustment": "来稿答案为“shtu”，根据主语和句型更正为is；原答保留。"
+        },
+        {
+          "number": 2,
+          "stem": "按照课文中乔使用的 be going to 句型填空：\nI ____ invent a flying bike.",
+          "originalStem": "I ____ invent a flying bike. (am going to / will)",
+          "originalReference": "am going to",
+          "kind": "singleChoice",
+          "options": ["am going to", "will"],
+          "correctIndex": 0,
+          "reference": "A. am going to",
+          "adjustment": "原题 am going to 与 will 均可构成合法句子；限定使用课文的 be going to 句型，使来稿参考答案唯一。"
+        }
+      ]
+    },
+    {
+      "topicKey": "11",
+      "title": "Unit 11 小练习",
+      "sourceText": "1. Spring Festival ____ in Jan or Feb. (comes / come)\n2. People ____ mooncakes at Mid-Autumn Festival. (eat / eats)\n✅答案：1.comes 2.eat",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "Spring Festival ____ in Jan or Feb.",
+          "originalStem": "Spring Festival ____ in Jan or Feb. (comes / come)",
+          "originalReference": "comes",
+          "kind": "singleChoice",
+          "options": ["comes", "come"],
+          "correctIndex": 0,
+          "reference": "A. comes",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "People ____ mooncakes at Mid-Autumn Festival.",
+          "originalStem": "People ____ mooncakes at Mid-Autumn Festival. (eat / eats)",
+          "originalReference": "eat",
+          "kind": "singleChoice",
+          "options": ["eat", "eats"],
+          "correctIndex": 0,
+          "reference": "A. eat",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "12",
+      "title": "Unit 12 小练习",
+      "sourceText": "1. The giant ____ a wall. (build / builds)\n2. Children come ____ a hole. (through / on)\n✅答案：1.builds 2.through",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "The giant ____ a wall.",
+          "originalStem": "The giant ____ a wall. (build / builds)",
+          "originalReference": "builds",
+          "kind": "singleChoice",
+          "options": ["build", "builds"],
+          "correctIndex": 1,
+          "reference": "B. builds",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "Children come ____ a hole.",
+          "originalStem": "Children come ____ a hole. (through / on)",
+          "originalReference": "through",
+          "kind": "singleChoice",
+          "options": ["through", "on"],
+          "correctIndex": 0,
+          "reference": "A. through",
+          "adjustment": ""
+        }
+      ]
+    }
+  ]
+}

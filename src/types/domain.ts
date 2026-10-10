@@ -339,6 +339,11 @@ export interface QuestionSentenceToken {
   sortOrder: number
 }
 
+export interface PictureWritingPrompt {
+  lineCount: 4 | 5 | 6
+  choices: { mediaAssetId: Id; title: string; prompt: string }[]
+}
+
 export interface QuestionBase {
   id: Id
   questionType: QuestionType
@@ -357,6 +362,7 @@ export interface QuestionBase {
   estimatedSeconds: number
   tags: string[]
   media: QuestionMedia[]
+  pictureWriting?: PictureWritingPrompt
   gradeId?: Id
   semesterId?: Id
   subjectId?: Id
@@ -386,7 +392,7 @@ export interface FillBlankAnswerRule {
   blanks: Array<{
     blankId: string
     acceptedAnswers: string[]
-    normalization?: 'NONE' | 'TRIM' | 'CASE_INSENSITIVE' | 'SIMPLIFIED_CHINESE'
+    normalization?: 'NONE' | 'TRIM' | 'CASE_INSENSITIVE' | 'SIMPLIFIED_CHINESE' | 'ENGLISH_TEXT'
   }>
 }
 
@@ -536,7 +542,8 @@ export interface MapNode {
 
 export interface StudentCurriculumProfile {
   studentId: Id
-  regionId: Id
+  /** Legacy profile metadata; textbook selection no longer uses a region. */
+  regionId?: Id
   gradeId: Id
   semesterId: Id
   chineseTextbookVersionId: Id | null
@@ -547,7 +554,8 @@ export interface StudentCurriculumProfile {
 }
 
 export interface ResolveAvailableTextbooksInput {
-  regionId: Id
+  /** Optional compatibility metadata for older callers. */
+  regionId?: Id
   gradeId: Id
   semesterId: Id
 }

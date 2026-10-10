@@ -1,4 +1,30 @@
+import { gradeSixEnglishLowerBundles } from '@/data/curriculum/grade-6/english-shanghai-lower'
+import { gradeSixEnglishUpperBundles } from '@/data/curriculum/grade-6/english-shanghai-upper-2022'
+import { gradeFourEnglishUpperUnitTestBundles } from '@/data/curriculum/grade-4/english-shanghai-upper-2022/unit-tests'
+import { gradeFiveEnglishLowerUnitTestBundles } from '@/data/curriculum/grade-5/english-shanghai-lower/unit-tests'
+import { gradeFiveEnglishUpperUnitTestBundles } from '@/data/curriculum/grade-5/english-shanghai-upper-2022/unit-tests'
+import { gradeFourEnglishLowerUnitTestBundles } from '@/data/curriculum/grade-4/english-shanghai-lower-2022/unit-tests'
+import { gradeThreeEnglishLowerUnitTestBundles } from '@/data/curriculum/grade-3/english-shanghai-lower-2022/unit-tests'
+import { gradeThreeEnglishUpperBundles } from '@/data/curriculum/grade-3/english-shanghai-upper-2022'
+import { gradeSixBnuLowerUnitTestBundles } from '@/data/curriculum/grade-6/math-bnu-lower-2013/unit-tests'
+import { gradeSixBnuUnitTestBundles } from '@/data/curriculum/grade-6/math-bnu-upper-2022/unit-tests'
+import { gradeFiveBnuLowerUnitTestBundles } from '@/data/curriculum/grade-5/math-bnu-lower-2013/unit-tests'
+import { gradeFiveBnuUnitTestBundles } from '@/data/curriculum/grade-5/math-bnu-upper/unit-tests'
+import { gradeFourBnuLowerUnitTestBundles } from '@/data/curriculum/grade-4/math-bnu-lower/unit-tests'
+import { gradeFourBnuUnitTestBundles } from '@/data/curriculum/grade-4/math-bnu-upper-2022/unit-tests'
+import { bnuUnitTestBundles } from '@/data/curriculum/grade-3/bnu-unit-tests'
+import { gradeSixChinese2019LowerBundles } from '@/data/curriculum/grade-6/chinese-pep-lower-2019'
+import { gradeFiveChineseLowerBundles } from '@/data/curriculum/grade-5/chinese-pep-lower'
+import { gradeFiveChineseBundles } from '@/data/curriculum/grade-5/chinese-pep-upper'
+import { gradeSixChineseBundles } from '@/data/curriculum/grade-6/chinese-pep-upper'
+import { gradeSixChinese2019Bundles } from '@/data/curriculum/grade-6/chinese-pep-upper-2019'
+import { gradeFourChineseLowerBundles } from '@/data/curriculum/grade-4/chinese-pep-lower'
+import { gradeFourChineseBundles } from '@/data/curriculum/grade-4/chinese-pep-upper'
+import { gradeThreeChineseLowerSyncBundles } from '@/data/curriculum/grade-3/chinese-pep-lower/synchronousExercises'
+import { gradeThreeChineseSyncBundles } from '@/data/curriculum/grade-3/chinese-pep-upper/synchronousExercises'
 import { approvedLocalBundles } from '@/data/content-expansion/localBundles'
+import { shenzhenEnglishLowerSyncBundles } from '@/data/curriculum/grade-2/shenzhen-english-lower/synchronousExercises'
+import { bnuMathLowerBundles } from '@/data/curriculum/grade-2/bnu-lower'
 import {
   candidateContentExpansionBundles,
   candidateG2ShenzhenMathUpperContentExpansionBundles,
@@ -96,6 +122,32 @@ export class StaticContentExpansionRepository implements ContentExpansionReposit
       ...candidateG1ShenzhenEnglishContentExpansionBundles,
       ...candidateG1ShenzhenEnglishLowerContentExpansionBundles,
       ...candidateG2ShenzhenEnglishUpperContentExpansionBundles,
+      ...bnuMathLowerBundles,
+      ...gradeFourBnuLowerUnitTestBundles,
+      ...gradeFiveBnuUnitTestBundles,
+      ...gradeFiveBnuLowerUnitTestBundles,
+      ...gradeSixBnuUnitTestBundles,
+      ...gradeSixBnuLowerUnitTestBundles,
+      ...gradeFourBnuUnitTestBundles,
+      ...bnuUnitTestBundles,
+      ...gradeFourEnglishUpperUnitTestBundles,
+      ...gradeFiveEnglishLowerUnitTestBundles,
+      ...gradeSixEnglishLowerBundles,
+      ...gradeSixEnglishUpperBundles,
+      ...gradeFiveEnglishUpperUnitTestBundles,
+      ...gradeFourEnglishLowerUnitTestBundles,
+      ...gradeThreeEnglishLowerUnitTestBundles,
+      ...gradeThreeEnglishUpperBundles,
+      ...shenzhenEnglishLowerSyncBundles,
+      ...gradeThreeChineseSyncBundles,
+      ...gradeThreeChineseLowerSyncBundles,
+      ...gradeFourChineseBundles,
+      ...gradeFourChineseLowerBundles,
+      ...gradeFiveChineseBundles,
+      ...gradeSixChineseBundles,
+      ...gradeSixChinese2019Bundles,
+      ...gradeSixChinese2019LowerBundles,
+      ...gradeFiveChineseLowerBundles,
     ],
   ) {
     this.goldenBundles = bundles.map(copyBundle)

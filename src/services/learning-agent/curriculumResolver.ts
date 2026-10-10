@@ -26,7 +26,7 @@ export class CurriculumResolver {
       !profileId ||
       profile.studentId !== profileId ||
       !profile.confirmedAt ||
-      !profile.regionId ||
+      (snapshot.dataset === 'demo' && !profile.regionId) ||
       selected !== textbookId ||
       c.textbook.id !== textbookId ||
       profile.gradeId !== c.textbook.gradeId ||
@@ -37,17 +37,21 @@ export class CurriculumResolver {
       c.publisher?.id !== c.textbook.publisherId
     )
       throw new Error('AGENT_CURRICULUM_CONTEXT_MISMATCH')
-    const relation = snapshot.regionTextbookRelations.find(
-      (r) =>
-        // Formal profiles explicitly select any released textbook in onboarding.
-        // Region is personal context, not a restriction on that selection.
-        (snapshot.dataset === 'profile' || r.regionId === profile.regionId) &&
-        r.textbookVersionId === textbookId &&
-        r.effectiveFrom <= now.slice(0, 10) &&
-        (!r.effectiveTo || r.effectiveTo >= now.slice(0, 10)) &&
-        isCurriculumRecordReadable(r, policy),
+    // Regional adoption is checked only by the isolated legacy demo dataset.
+    const relation =
+      snapshot.dataset === 'demo' &&
+      snapshot.regionTextbookRelations.find(
+        (r) =>
+          r.regionId === profile.regionId &&
+          r.textbookVersionId === textbookId &&
+          r.effectiveFrom <= now.slice(0, 10) &&
+          (!r.effectiveTo || r.effectiveTo >= now.slice(0, 10)) &&
+          isCurriculumRecordReadable(r, policy),
+      )
+    if (
+      (snapshot.dataset === 'demo' && !relation) ||
+      !isCurriculumRecordReadable(c.textbook, policy)
     )
-    if (!relation || !isCurriculumRecordReadable(c.textbook, policy))
       throw new Error('AGENT_CURRICULUM_GUARD')
     if ([c.grade, c.semester, c.subject, c.publisher!].some((r) => r.status !== 'ACTIVE'))
       throw new Error('AGENT_CATALOG_INACTIVE')

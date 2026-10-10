@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import type {
   Id,
   LearningMapProgressRecord,
@@ -23,8 +24,8 @@ interface StorageLike {
 }
 
 function browserStorage(): StorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function parseRecords(value: unknown): LearningMapProgressRecord[] | null {
@@ -62,7 +63,9 @@ function parseRecords(value: unknown): LearningMapProgressRecord[] | null {
   return records
 }
 
-export function parseLearningMapProgressStoragePayload(value: unknown): LearningMapProgressStoragePayload | null {
+export function parseLearningMapProgressStoragePayload(
+  value: unknown,
+): LearningMapProgressStoragePayload | null {
   if (!value) return null
   try {
     const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value
@@ -127,7 +130,9 @@ export function createLearningMapProgressStorage(
         (scope.profileId ?? 'local-profile') === 'local-profile' &&
         (scope.dataset ?? 'profile') === 'profile'
       ) {
-        const legacy = parseLearningMapProgressStoragePayload(storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null)
+        const legacy = parseLearningMapProgressStoragePayload(
+          storage?.getItem(LEARNING_MAP_PROGRESS_STORAGE_KEY) ?? null,
+        )
         if (legacy?.textbookId === textbookId) {
           save(textbookId, legacy.records, scope)
           return legacy.records

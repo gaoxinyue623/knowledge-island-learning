@@ -166,6 +166,8 @@ export function buildQuestionCoverageReport(input: {
   contentSources: readonly ContentSource[]
   mediaAssets: readonly MediaAsset[]
   minimumQuestionsPerKnowledgePoint?: number
+  /** Full released IDs for validation, independent of required practice coverage. */
+  referenceKnowledgePointIds?: ReadonlySet<string>
 }): QuestionCoverageReport {
   const minimum = input.minimumQuestionsPerKnowledgePoint ?? 5
   const knowledgePointIds = new Set(input.knowledgePoints.map((point) => point.id))
@@ -183,7 +185,7 @@ export function buildQuestionCoverageReport(input: {
       (mapping) => mapping.questionId === question.id,
     )
     const questionValidation = validateQuestion(question, {
-      knowledgePointIds,
+      knowledgePointIds: input.referenceKnowledgePointIds ?? knowledgePointIds,
       questionIds,
       questionKnowledgePoints: input.questionKnowledgePoints,
       mediaAssetIds: new Set(input.mediaAssets.map((asset) => asset.id)),

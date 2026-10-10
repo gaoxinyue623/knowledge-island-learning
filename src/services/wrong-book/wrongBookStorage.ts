@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 import type { WrongBookStoragePayload, WrongQuestionRecord } from '@/types'
@@ -48,8 +49,8 @@ export const wrongBookStoragePayloadSchema = z.object({
 })
 
 function browserStorage(): WrongBookStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function cloneRecord(record: WrongQuestionRecord): WrongQuestionRecord {

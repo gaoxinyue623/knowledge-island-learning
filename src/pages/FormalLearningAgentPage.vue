@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import FormalAiPractice from '@/components/knowledge-point/FormalAiPractice.vue'
 import AppButton from '@/components/common/AppButton.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
@@ -12,6 +13,17 @@ import {
   saveFormalAgentLaunch,
 } from '@/services/learning-agent'
 import type { LearningAgentDecisionResult } from '@/types/learning-agent'
+import {
+  recoverFormalRun,
+  startFormalRun,
+  bindFormalRun,
+  type FormalStudyRun,
+  type FormalAgentLaunch,
+} from '@/services/learning-agent/formalAgentLaunchStorage'
+import { productionCurriculumIndex } from '@/data/curriculum/production'
+import { accountState, syncAccount } from '@/services/account/accountService'
+import { questionSessionStorage } from '@/services/question-engine'
+import { difficultyLevel } from '@/services/learning-agent/questionSelection'
 import type { SubjectCode } from '@/types'
 
 const route = useRoute()
@@ -27,21 +39,52 @@ const subjectOptions: Array<{ value: SubjectCode; label: string }> = [
   { value: 'ENGLISH', label: '英语' },
 ]
 const selectedSubject = ref<SubjectCode>('MATH')
+const run = ref<FormalStudyRun | null>(null)
+const resume = ref<FormalAgentLaunch | null>(null)
+const taskLimit = ref(3)
+const starting = ref(false)
+const adviceRefreshing = ref(false)
+const aiKnowledgePointId = ref('')
+const aiDifficulty = ref(0.4)
+const aiMessage = ref('')
+const runSummary = computed(() => {
+  const ids = new Set(run.value?.completedLaunchIds ?? [])
+  const sessions = questionSessionStorage
+    .loadAll()
+    .filter((s) => [...ids].some((id) => s.id.endsWith(id)))
+  const attempts = sessions.flatMap((s) =>
+    s.attempts.filter(
+      (a) => a.submitted && ['correct', 'incorrect'].includes(a.result?.status ?? ''),
+    ),
+  )
+  return {
+    total: attempts.length,
+    correct: attempts.filter((a) => a.result?.status === 'correct').length,
+  }
+})
+const newTaskId = ref('')
 const launchId = computed(() => {
   const decisionId = result.value?.decision?.decisionId
-  return decisionId ? `formal:${decisionId}` : ''
+  return resume.value?.id ?? (decisionId ? `formal:${decisionId}:${newTaskId.value}` : '')
 })
-const target = computed(() => result.value?.context?.mapNodes.find(
-  (node) => node.knowledgePointId === result.value?.decision?.targetKnowledgePointId && node.status !== 'locked',
-) ?? null)
+const target = computed(
+  () =>
+    result.value?.context?.mapNodes.find(
+      (node) =>
+        node.knowledgePointId === result.value?.decision?.targetKnowledgePointId &&
+        node.status !== 'locked',
+    ) ?? null,
+)
 const textbookId = computed(() => {
   const profile = curriculum.curriculumProfile
   if (!profile) return ''
-  return {
-    MATH: profile.mathTextbookVersionId,
-    CHINESE: profile.chineseTextbookVersionId,
-    ENGLISH: profile.englishTextbookVersionId,
-  }[selectedSubject.value] ?? ''
+  return (
+    {
+      MATH: profile.mathTextbookVersionId,
+      CHINESE: profile.chineseTextbookVersionId,
+      ENGLISH: profile.englishTextbookVersionId,
+    }[selectedSubject.value] ?? ''
+  )
 })
 const availableSubjects = computed(() =>
   subjectOptions.filter(({ value }) => {
@@ -71,21 +114,58 @@ async function load() {
   loading.value = true
   error.value = ''
   result.value = null
+  aiMessage.value = ''
   try {
-    if (!profileId.value || !textbookId.value)
-      throw new Error('请先完成教材选择，再使用正式 Agent。')
+    if (!profileId.value || !textbookId.value) throw new Error('请先完成教材选择，再查看学习建议。')
+    const restored = recoverFormalRun(profileId.value, textbookId.value, taskLimit.value)
+    run.value = restored.run
+    resume.value = restored.launch
+    newTaskId.value = crypto.randomUUID()
     result.value = await runtimeLearningAgentDecisionService.prepare(
       profileId.value,
       textbookId.value,
     )
     if (result.value.status !== 'READY' || !result.value.decision || !result.value.context)
-      throw new Error('当前学习资料尚未满足正式 Agent 的使用条件。')
+      throw new Error(
+        result.value.validation?.checks.some((c) => c.code === 'AGENT_NO_AVAILABLE_KNOWLEDGE_POINT')
+          ? '当前知识点还没有已审核练习，可以先回教材继续学习。'
+          : '当前学习资料还不足以生成建议，请先完成教材选择。',
+      )
+    if (resume.value) {
+      result.value.decision = resume.value.decision
+      result.value.activityPlan = resume.value.decision.recommendedActivity
+    }
     if (!target.value?.unitId || !target.value.lessonId)
       throw new Error('当前建议暂时找不到对应课程，请重新选择学科。')
+    aiKnowledgePointId.value = target.value.knowledgePointId
+    aiDifficulty.value = result.value.activityPlan?.difficulty ?? 0.4
   } catch (caught) {
-    error.value = caught instanceof Error ? caught.message : '正式 Agent 暂时无法读取学习状态。'
+    error.value = caught instanceof Error ? caught.message : '暂时无法读取学习状态，请稍后重试。'
   } finally {
     loading.value = false
+  }
+}
+
+async function refreshAdvice() {
+  aiMessage.value = 'AI 练习结果已保存。'
+  if (resume.value) {
+    aiMessage.value += '下一小段会参考这次练习调整。'
+    return
+  }
+  adviceRefreshing.value = true
+  const activeProfile = profileId.value,
+    book = textbookId.value
+  try {
+    const next = await runtimeLearningAgentDecisionService.prepare(activeProfile, book)
+    if (activeProfile !== profileId.value || book !== textbookId.value) return
+    if (next.status !== 'READY' || !next.decision || !next.context)
+      throw new Error('暂时无法更新下一步建议，可稍后重新读取。')
+    result.value = next
+    aiMessage.value += '下一步建议已更新。'
+  } catch (caught) {
+    aiMessage.value += caught instanceof Error ? caught.message : '建议暂时无法刷新。'
+  } finally {
+    adviceRefreshing.value = false
   }
 }
 
@@ -105,36 +185,61 @@ async function selectSubject(value: string) {
   await load()
 }
 
-function startPractice() {
-  const current = result.value
-  const context = target.value
-  const decision = current?.decision
-  if (!current || current.status !== 'READY' || !context?.unitId || !context.lessonId || !decision || !launchId.value) return
-  const launch = {
-    id: launchId.value,
-    profileId: profileId.value,
-    textbookId: textbookId.value,
-    decision,
-    createdAt: new Date().toISOString(),
-  }
-  if (!saveFormalAgentLaunch(launch)) {
-    error.value = '练习绑定暂时无法保存，请重新试一次。'
-    return
-  }
-  void router.push({
-    path: '/assessment',
-    query: {
+async function startPractice() {
+  if (starting.value || adviceRefreshing.value) return
+  starting.value = true
+  try {
+    const current = result.value
+    const context = target.value
+    const decision = current?.decision
+    if (
+      !current ||
+      current.status !== 'READY' ||
+      !context?.unitId ||
+      !context.lessonId ||
+      !decision ||
+      !launchId.value
+    )
+      return
+    const launch = resume.value ?? {
+      id: launchId.value,
+      profileId: profileId.value,
       textbookId: textbookId.value,
-      unitId: context.unitId,
-      lessonId: context.lessonId,
-      knowledgePointId: context.knowledgePointId,
-      source: decision.action === 'REVIEW' ? 'wrong_book' : 'lesson_practice',
-      agentLaunchId: launchId.value,
-      agentSubject: selectedSubject.value,
-      sessionScope: launchId.value,
-      returnTo: '/learning-agent',
-    },
-  })
+      decision,
+      createdAt: new Date().toISOString(),
+    }
+    if (!saveFormalAgentLaunch(launch)) {
+      error.value = '练习绑定暂时无法保存，请重新试一次。'
+      return
+    }
+    if (!resume.value) {
+      if (!run.value || run.value.status === 'completed')
+        run.value = startFormalRun(profileId.value, textbookId.value, taskLimit.value)
+      bindFormalRun(run.value, launch)
+    }
+    if (accountState.username) {
+      await syncAccount()
+      if (accountState.conflict) return
+    }
+    await router.push({
+      path: '/assessment',
+      query: {
+        textbookId: textbookId.value,
+        unitId: context.unitId,
+        lessonId: context.lessonId,
+        knowledgePointId: context.knowledgePointId,
+        source: decision.action === 'REVIEW' ? 'wrong_book' : 'lesson_practice',
+        agentLaunchId: launchId.value,
+        agentSubject: selectedSubject.value,
+        sessionScope: launchId.value,
+        returnTo: '/learning-agent',
+      },
+    })
+  } catch (caught) {
+    error.value = caught instanceof Error ? caught.message : '任务暂时无法保存。'
+  } finally {
+    starting.value = false
+  }
 }
 
 onMounted(() => {
@@ -144,19 +249,35 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppShell show-bottom-nav context="Agent 学习建议">
+  <AppShell show-bottom-nav context="学习建议">
     <main class="formal-agent-page content-container">
       <header class="formal-agent-page__header">
         <p class="formal-agent-page__eyebrow">正式学习路径</p>
         <h1>今天先学什么？</h1>
-        <p>Agent 读取你的正式学习记录，给出下一步练习建议。</p>
+        <p>每完成一小段，会根据最新答案调整下一步。可以随时离开，登录同一账号继续。</p>
+        <p v-if="run">
+          本次学习已完成 {{ run.completedLaunchIds.length }} / {{ run.taskLimit }} 小段{{
+            run.status === 'completed' ? '，本次安排完成啦！' : ''
+          }}
+        </p>
+        <p v-if="runSummary.total" role="status">
+          本次已答 {{ runSummary.total }} 题，答对
+          {{ runSummary.correct }} 题。下一步会根据这些答案调整。
+        </p>
+        <label v-if="!run || run.status === 'completed'"
+          >本次学习量<select v-model.number="taskLimit">
+            <option :value="1">1 小段</option>
+            <option :value="3">3 小段</option>
+            <option :value="5">5 小段</option>
+          </select></label
+        >
       </header>
       <label class="formal-agent-page__subject" for="formal-agent-subject">
         <span>学习科目</span>
         <select
           id="formal-agent-subject"
           :value="selectedSubject"
-          :disabled="loading"
+          :disabled="loading || adviceRefreshing || starting"
           aria-label="学习科目"
           @change="selectSubject(($event.target as HTMLSelectElement).value)"
         >
@@ -166,43 +287,79 @@ onMounted(() => {
         </select>
       </label>
       <AppLoading v-if="loading" label="正在读取学习状态" />
+      <RouterLink v-if="!loading && error" to="/learning-map">回教材继续学习 →</RouterLink>
       <AppErrorState
-        v-else-if="error"
-        title="正式 Agent 暂时不可用"
+        v-if="!loading && error"
+        title="学习建议暂时不可用"
         :description="error"
         @retry="load"
       />
-      <template v-else-if="result?.decision && result.context && result.activityPlan">
+      <template
+        v-if="!loading && !error && result?.decision && result.context && result.activityPlan"
+      >
         <section class="formal-agent-page__decision" aria-labelledby="agent-decision-title">
           <div>
-            <p class="formal-agent-page__eyebrow">{{ result.context.currentLearning.lessonId }}</p>
+            <p class="formal-agent-page__eyebrow">
+              {{ resume ? '继续上次的探索' : '根据最近的学习表现' }}
+            </p>
             <h2 id="agent-decision-title">
               {{ actionLabels[result.decision.action] ?? result.decision.action }}
             </h2>
             <p>{{ result.decision.reasons[0]?.message ?? '根据最近学习证据安排下一步。' }}</p>
           </div>
-          <div class="formal-agent-page__confidence" aria-label="决策置信度">
+          <div class="formal-agent-page__confidence" aria-label="学习证据充分度">
             <strong>{{ Math.round(result.decision.confidence * 100) }}%</strong>
-            <span>决策置信度</span>
+            <span>学习证据充分度</span>
           </div>
         </section>
         <section class="formal-agent-page__plan" aria-label="练习计划">
           <div>
-            <span>目标知识点</span><strong>{{ target?.knowledgePointId }}</strong>
+            <span>目标知识点</span
+            ><strong>{{
+              productionCurriculumIndex.knowledgePoints.find(
+                (p) => p.id === target?.knowledgePointId,
+              )?.name ?? '下一小步'
+            }}</strong>
           </div>
           <div>
             <span>预计题量</span
             ><strong>{{ result.activityPlan.estimatedQuestionCount }} 题</strong>
           </div>
           <div>
-            <span>难度</span><strong>{{ result.activityPlan.difficulty }} / 5</strong>
+            <span>难度</span
+            ><strong
+              >{{
+                (
+                  result.activityPlan.actualDifficulty ??
+                  difficultyLevel(result.activityPlan.difficulty)
+                ).toFixed(1)
+              }}
+              / 5</strong
+            >
           </div>
+          <p v-if="result.activityPlan.selectionNote">{{ result.activityPlan.selectionNote }}</p>
         </section>
+        <FormalAiPractice
+          v-if="target"
+          :textbook-id="textbookId"
+          :knowledge-point-id="aiKnowledgePointId"
+          :difficulty="aiDifficulty"
+          @completed="refreshAdvice"
+        />
+        <p v-if="aiMessage" role="status">{{ aiMessage }}</p>
+        <p v-if="adviceRefreshing" role="status">正在根据 AI 练习更新下一步……</p>
         <p class="formal-agent-page__notice" role="status">
-          本次练习只使用已审核题目；提交后才会更新正式学习记录。
+          下方“开始正式练习”使用已审核题库；提交后才会更新课程学习记录。
         </p>
-        <AppButton size="lg" full-width icon-right="arrow-right" @click="startPractice"
-          >开始正式练习</AppButton
+        <AppButton
+          size="lg"
+          full-width
+          icon-right="arrow-right"
+          :disabled="starting || adviceRefreshing"
+          @click="startPractice"
+          >{{
+            resume ? '继续上次练习' : run?.status === 'active' ? '继续下一小段' : '开始正式练习'
+          }}</AppButton
         >
       </template>
     </main>

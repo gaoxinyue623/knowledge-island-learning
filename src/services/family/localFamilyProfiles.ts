@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 export const FAMILY_PROFILE_REGISTRY_KEY = 'knowledge-island.family-profiles.v1'
 
 export interface LocalFamilyProfile {
@@ -30,11 +31,16 @@ export function parseLocalFamilyProfileRegistry(value: unknown): LocalFamilyProf
   if (!value || typeof value !== 'object') return null
   const candidate = value as Record<string, unknown>
   if (candidate.schemaVersion !== 1 || !Array.isArray(candidate.profiles)) return null
-  if (candidate.activeProfileId !== null && typeof candidate.activeProfileId !== 'string') return null
+  if (candidate.activeProfileId !== null && typeof candidate.activeProfileId !== 'string')
+    return null
   if (!candidate.profiles.every(validProfile)) return null
   const profiles = candidate.profiles.map((profile) => ({ ...profile }))
   if (new Set(profiles.map((profile) => profile.id)).size !== profiles.length) return null
-  if (candidate.activeProfileId && !profiles.some((profile) => profile.id === candidate.activeProfileId)) return null
+  if (
+    candidate.activeProfileId &&
+    !profiles.some((profile) => profile.id === candidate.activeProfileId)
+  )
+    return null
   return { schemaVersion: 1, activeProfileId: candidate.activeProfileId, profiles }
 }
 
@@ -64,7 +70,9 @@ export function createLocalFamilyProfileRepository(storage: FamilyProfileStorage
         const raw = storage.getItem(FAMILY_PROFILE_REGISTRY_KEY)
         if (raw === null) return 'absent'
         return parseLocalFamilyProfileRegistry(JSON.parse(raw)) ? 'valid' : 'invalid'
-      } catch { return 'invalid' }
+      } catch {
+        return 'invalid'
+      }
     },
     read,
     write,
@@ -83,8 +91,11 @@ export function createLocalFamilyProfileRepository(storage: FamilyProfileStorage
 }
 
 function browserStorage(): FamilyProfileStorage | null {
-  try { return typeof window === 'undefined' ? null : window.localStorage }
-  catch { return null }
+  try {
+    return typeof window === 'undefined' ? null : accountStorage
+  } catch {
+    return null
+  }
 }
 
 export const localFamilyProfileRepository = createLocalFamilyProfileRepository(browserStorage())

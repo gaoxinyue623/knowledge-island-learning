@@ -1,0 +1,27 @@
+{
+  "url": "/curriculum/grade-4/math-bnu-upper-2022/unit-tests/coordinate-xiaoming-xiaohong.png",
+  "width": 1536,
+  "height": 1024,
+  "sha256": "d7e79503d0f5a73b0e8110c6014aa7ad874901408d0b457496c879f37e2dcb34",
+  "generatedAt": "2026-10-10",
+  "generator": "built-in image_gen",
+  "prompt": "Use case: scientific-educational\nAsset type: a clear PNG picture for a Chinese grade-four mathematics question about row and column locations.\nPrimary request: A precise classroom location diagram matching this problem: columns increase toward the right; Xiaoming is in column 3 row 2, Xiaohong is one column immediately to his right in the same row. The pupil must determine Xiaohong's column and row. Do not print the answer.\nComposition: landscape 3:2, white background, generous margins, a large six-column by four-row rectangular table of equal square cells. Use EXACTLY 6 columns and EXACTLY 4 rows (7 vertical boundary lines and 5 horizontal boundary lines). Show column numbers 1, 2, 3, 4, 5, 6 above the centers of their columns from left to right. Show row numbers on the left aligned with row centers, from TOP to BOTTOM 4, 3, 2, 1. The second row from the bottom is row 2.\nPlace a small blue dot centered in column 3, row 2, with the clearly legible name 小明 immediately above it INSIDE the same cell. Place a small coral/red dot centered in column 4, row 2, with the clearly legible name 小红 immediately above it INSIDE the same cell. Both dots must be on exactly the same horizontal line. All other cells empty. Avoid icons, people, desks, room context, or decorative objects that might obscure counting.\nAbove the table, add a horizontal RIGHT-pointing arrow with the caption 列号向右递增. Left of the table, add an UPWARD-pointing arrow with caption 行号向上递增. Set the title above all other elements: 用数对确定位置.\nStyle: crisp simple elementary textbook line diagram, black or dark gray table outlines, readable large simplified Chinese sans-serif text, numbers large enough to count on a phone, subtle pale background highlight for the two occupied cells only. Minimal and mathematically exact.\nText allowed (verbatim) only: 用数对确定位置, 列号向右递增, 行号向上递增, 小明, 小红, and axis numbers 1 through 6.\nConstraints: absolutely no coordinate pairs like (3,2) or (4,2), no answer text, no equations, no watermark, no repeated/dropped axis numbers, no diagonal perspective. Xiaoming strictly third column second row from bottom; Xiaohong strictly fourth column second row from bottom.",
+  "knowledgePointId": "G4_BNU_MATH_S1_2022_KP_12",
+  "description": "六列四行的位置表。列号从左向右1—6，行号从下向上1—4；小明在第3列第2行，小红在第4列第2行，两人同一行且相邻。两组递增方向箭头正确；图中未直接标注数对答案。",
+  "validation": {
+    "columns": 6,
+    "rows": 4,
+    "xiaoming": {
+      "column": 3,
+      "row": 2
+    },
+    "xiaohong": {
+      "column": 4,
+      "row": 2
+    },
+    "columnDirection": "LEFT_TO_RIGHT",
+    "rowDirection": "BOTTOM_TO_TOP",
+    "review": "已目视核对编号、人物所在格、同行相邻关系及箭头方向。"
+  },
+  "questionId": "G4_BNU_MATH_S1_2022_KP_12_SYNC_V1_07"
+}

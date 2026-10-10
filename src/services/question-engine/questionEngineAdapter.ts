@@ -193,6 +193,14 @@ export async function adaptQuestionToViewModel(
     stem: question.stem.map((block) => ({ ...block })),
     options: answerOptionModels(question, draft, submitted),
     media: await mediaViewModels(question, contentApi),
+    ...(question.pictureWriting
+      ? {
+          pictureWriting: {
+            ...question.pictureWriting,
+            choices: question.pictureWriting.choices.map((choice) => ({ ...choice })),
+          },
+        }
+      : {}),
     answerDraft: draft,
     submitted,
     ...(attempt?.result ? { result: attempt.result } : {}),
@@ -416,7 +424,45 @@ export class QuestionEngineAdapter {
       }
     }
 
-    const definition = await this.repository.getAssessmentDefinition(context, dataset)
+    let definition = await this.repository.getAssessmentDefinition(context, dataset)
+    let isUnitOnlyRetry = false
+    // An explicit wrong-book retry may target a unit-only question without reopening the full sheet.
+    if (definition && !options.selectedQuestionIds && options.reviewQuestionId) {
+      const retry = await this.repository.getQuestionById(options.reviewQuestionId, dataset)
+      if (retry?.tags.includes('unit-sync-only') && definition.questionIds.includes(retry.id)) {
+        definition = { ...definition, questionIds: [retry.id] }
+        isUnitOnlyRetry = true
+      }
+    }
+    if (definition && options.selectedQuestionIds) {
+      const ids = options.selectedQuestionIds
+      if (
+        !ids.length ||
+        ids.length > 50 ||
+        new Set(ids).size !== ids.length ||
+        ids.some((id) => !definition!.questionIds.includes(id))
+      )
+        return {
+          definition: null,
+          questions: [],
+          issue: 'QUESTION_NOT_AVAILABLE',
+          message: '这次练习的题目已变化，请重新获取学习建议。',
+          diagnostics: [],
+        }
+      definition = { ...definition, questionIds: [...ids] }
+    }
+    // Unit review sets have their own explicit launch; ordinary lesson practice stays scoped.
+    if (definition && !options.selectedQuestionIds && !isUnitOnlyRetry) {
+      const candidates = await this.repository.getQuestionsByIds(definition.questionIds, dataset)
+      const unitOnlyIds = new Set(
+        candidates.filter((q) => q.tags.includes('unit-sync-only')).map((q) => q.id),
+      )
+      definition = {
+        ...definition,
+        questionIds: definition.questionIds.filter((id) => !unitOnlyIds.has(id)),
+      }
+      if (!definition.questionIds.length) definition = null
+    }
     if (!definition) {
       return {
         definition: null,

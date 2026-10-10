@@ -43,11 +43,22 @@ afterEach(() => vi.restoreAllMocks())
 
 it('keeps a current course revision when practice and appendix blocks are present', async () => {
   const subject = productionCurriculumIndex.subjects.find((item) => item.code === 'CHINESE')!
-  const textbook = productionCurriculumIndex.textbooks.find((book) => book.subjectId === subject.id)!
-  const unit = productionCurriculumIndex.units.find((item) => item.textbookVersionId === textbook.id)!
+  const textbook = productionCurriculumIndex.textbooks.find(
+    (book) => book.subjectId === subject.id,
+  )!
+  const unit = productionCurriculumIndex.units.find(
+    (item) => item.textbookVersionId === textbook.id,
+  )!
   const lesson = productionCurriculumIndex.lessons.find((item) => item.unitId === unit.id)!
-  const relation = productionCurriculumIndex.lessonKnowledgePointRelations.find((item) => item.lessonId === lesson.id)!
-  const context = { textbookId: textbook.id, unitId: unit.id, lessonId: lesson.id, knowledgePointId: relation.knowledgePointId }
+  const relation = productionCurriculumIndex.lessonKnowledgePointRelations.find(
+    (item) => item.lessonId === lesson.id,
+  )!
+  const context = {
+    textbookId: textbook.id,
+    unitId: unit.id,
+    lessonId: lesson.id,
+    knowledgePointId: relation.knowledgePointId,
+  }
   const href = `/knowledge-point/${relation.knowledgePointId}?${new URLSearchParams(context)}`
   const baseline = await resolveCurrentQuestRevision(href)
   expect(baseline).not.toBeNull()
@@ -58,9 +69,19 @@ it('keeps a current course revision when practice and appendix blocks are presen
     ...original,
     source: {
       ...source,
-      blocks: [...source.blocks,
-        { ...first, id: 'excluded-practice', stepType: 'practice', block: { type: 'TEXT', text: '不会进入课文的练习答案。' } },
-        { ...first, id: 'excluded-appendix', block: { type: 'TEXT', text: '附录：不会进入课文的词语。' } },
+      blocks: [
+        ...source.blocks,
+        {
+          ...first,
+          id: 'excluded-practice',
+          stepType: 'practice',
+          block: { type: 'TEXT', text: '不会进入课文的练习答案。' },
+        },
+        {
+          ...first,
+          id: 'excluded-appendix',
+          block: { type: 'TEXT', text: '附录：不会进入课文的词语。' },
+        },
       ],
     },
   })
@@ -137,13 +158,21 @@ describe('spaced review evidence', () => {
     expect(service.listDue('student-a', new Date('2026-09-30T10:00:00.000Z'))).toHaveLength(0)
     service.record({ ...base, attemptId: 'one', completedAt: '2026-09-02T10:00:00.000Z' })
     service.record({ ...base, attemptId: 'same-day', completedAt: '2026-09-02T16:00:00.000Z' })
-    expect(service.listDue('student-a', new Date('2026-09-03T16:00:00.000Z'))[0]?.completedIndependentRounds).toBe(1)
+    expect(
+      service.listDue('student-a', new Date('2026-09-03T16:00:00.000Z'))[0]
+        ?.completedIndependentRounds,
+    ).toBe(1)
   })
 
   it('keeps profiles isolated and never carries a changed revision forward', () => {
     const service = createSpacedReviewService(new MemoryStorage())
     service.record({ ...base, attemptId: 'one', completedAt: '2026-09-01T10:00:00.000Z' })
-    service.record({ ...base, profileId: 'student-b', attemptId: 'other', completedAt: '2026-09-01T10:00:00.000Z' })
+    service.record({
+      ...base,
+      profileId: 'student-b',
+      attemptId: 'other',
+      completedAt: '2026-09-01T10:00:00.000Z',
+    })
     expect(service.listDue('student-b', new Date('2026-09-02T10:00:00.000Z'))).toHaveLength(1)
     expect(
       service.listDue('student-a', new Date('2026-09-02T10:00:00.000Z'), {
@@ -156,14 +185,20 @@ describe('spaced review evidence', () => {
     const service = createSpacedReviewService(new MemoryStorage())
     service.record({ ...base, attemptId: 'one', completedAt: '2026-09-01T10:00:00.000Z' })
     service.record({ ...base, attemptId: 'early', completedAt: '2026-09-01T18:00:00.000Z' })
-    expect(service.listDue('student-a', new Date('2026-09-02T10:00:00.000Z'))[0]?.completedIndependentRounds).toBe(1)
+    expect(
+      service.listDue('student-a', new Date('2026-09-02T10:00:00.000Z'))[0]
+        ?.completedIndependentRounds,
+    ).toBe(1)
     service.record({
       ...base,
       attemptId: 'helped',
       completedAt: '2026-09-02T10:00:00.000Z',
       stages: [{ ...base.stages[0], firstAttempt: 'hint_used', usedHint: true }],
     })
-    expect(service.listDue('student-a', new Date('2026-09-03T10:00:00.000Z'))[0]?.completedIndependentRounds).toBe(0)
+    expect(
+      service.listDue('student-a', new Date('2026-09-03T10:00:00.000Z'))[0]
+        ?.completedIndependentRounds,
+    ).toBe(0)
   })
 
   it('fails closed for damaged records and storage failures', () => {
@@ -172,9 +207,20 @@ describe('spaced review evidence', () => {
     storage.setItem('knowledge-island.spaced-review.v1:student-a', '{bad')
     expect(service.listDue('student-a', new Date())).toEqual([])
     expect(service.getLastWarning()).toContain('无法读取')
-    const broken = { getItem: () => null, setItem: () => { throw new Error('full') } }
+    const broken = {
+      getItem: () => null,
+      setItem: () => {
+        throw new Error('full')
+      },
+    }
     const unavailable = createSpacedReviewService(broken)
-    expect(unavailable.record({ ...base, attemptId: 'cannot-save', completedAt: '2026-09-01T10:00:00.000Z' })).toBe(false)
+    expect(
+      unavailable.record({
+        ...base,
+        attemptId: 'cannot-save',
+        completedAt: '2026-09-01T10:00:00.000Z',
+      }),
+    ).toBe(false)
     expect(unavailable.getLastWarning()).toContain('无法保存')
   })
 

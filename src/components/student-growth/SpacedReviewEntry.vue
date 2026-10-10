@@ -26,7 +26,12 @@ defineEmits<{ launch: [item: SpacedReviewDue] }>()
             }}
           </span>
         </div>
-        <AppButton size="sm" variant="secondary" icon-right="arrow-right" @click="$emit('launch', item)">
+        <AppButton
+          size="sm"
+          variant="secondary"
+          icon-right="arrow-right"
+          @click="$emit('launch', item)"
+        >
           开始复习
         </AppButton>
       </li>

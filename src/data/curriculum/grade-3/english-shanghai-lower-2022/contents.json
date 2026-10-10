@@ -1,0 +1,699 @@
+{
+  "title": "沪教牛津英语三年级下册（2022新版）",
+  "publisher": "上海教育出版社",
+  "sourceNote": "按用户提供的三年级下册（深圳宝安）双语文本整理，年份和页码沿用来稿，未对照出版社原书逐页核验。保留词汇、音标、Reading、中文翻译、Grammar、Sounds字母范围及Project；Sounds仅提供字母范围，无原版示范音频。配套题单独收录，基础题和口语提示为项目原创。",
+  "sourceSha256": "fd70135a373ef7b56aa2cadeb6529e4ddf5d40ed6e6a9147bb01948267cd60b2",
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 How do we spend our free time?",
+      "page": 1,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "read",
+          "phonetic": "/riːd/",
+          "chinese": "阅读"
+        },
+        {
+          "english": "sing",
+          "phonetic": "/sɪŋ/",
+          "chinese": "唱歌"
+        },
+        {
+          "english": "paint",
+          "phonetic": "/peɪnt/",
+          "chinese": "画画"
+        },
+        {
+          "english": "dance",
+          "phonetic": "/dɑːns/",
+          "chinese": "跳舞"
+        },
+        {
+          "english": "swim",
+          "phonetic": "/swɪm/",
+          "chinese": "游泳"
+        },
+        {
+          "english": "play basketball",
+          "phonetic": "/pleɪ ˈbɑːskɪtbɔːl/",
+          "chinese": "打篮球"
+        },
+        {
+          "english": "play ping-pong",
+          "phonetic": "/pleɪ ˈpɪŋ pɒŋ/",
+          "chinese": "打乒乓球"
+        },
+        {
+          "english": "play football",
+          "phonetic": "/pleɪ ˈfʊtbɔːl/",
+          "chinese": "踢足球"
+        }
+      ],
+      "aliases": [],
+      "sounds": "p, b",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "What are your hobbies?",
+          "english": "Hello children! Welcome to our centre. Let’s talk about hobbies. What do you like doing in your free time?\nI like music. I like singing and dancing. This is me in my dance class. Look at my purple skirt!\nI like reading. I like painting too. This is me in my favourite park.\nI’m good at sport. I like playing ping-pong and riding my bike. This is me on my bike.\nI like sport. I swim a lot. I play basketball too. This is me at the basketball court.",
+          "chinese": "孩子们好！欢迎来到活动中心。我们聊聊爱好吧。空闲的时候你喜欢做什么？\n我喜欢音乐。我喜欢唱歌跳舞。这是我在舞蹈课上，看我的紫色短裙！\n我喜欢阅读，也喜欢画画。这是我在最喜欢的公园里。\n我擅长运动。我喜欢打乒乓球和骑自行车。这是骑车的我。\n我喜欢运动。我经常游泳，也打篮球。这是我在篮球场。"
+        }
+      ],
+      "sentencePattern": "What do you like doing?\nI like …(doing)",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I like reading.",
+      "questions": [
+        {
+          "stem": "“read”在本单元中的中文意思是什么？",
+          "options": ["阅读", "唱歌", "画画"],
+          "correctIndex": 0,
+          "explanation": "read 的意思是“阅读”。"
+        },
+        {
+          "stem": "What do you like ____?",
+          "options": ["doing", "do", "does"],
+          "correctIndex": 0,
+          "explanation": "询问爱好用 What do you like doing?"
+        },
+        {
+          "stem": "课文中的紫色衣物是什么？",
+          "options": ["A skirt.", "A cap.", "A coat."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 A skirt."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 How do we make friends?",
+      "page": 11,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "play a game",
+          "phonetic": "/pleɪ ə ɡeɪm/",
+          "chinese": "玩游戏"
+        },
+        {
+          "english": "take a photo",
+          "phonetic": "/teɪk ə ˈfəʊtəʊ/",
+          "chinese": "拍照"
+        },
+        {
+          "english": "row a boat",
+          "phonetic": "/rəʊ ə bəʊt/",
+          "chinese": "划船"
+        },
+        {
+          "english": "tell a story",
+          "phonetic": "/tel ə ˈstɔːri/",
+          "chinese": "讲故事"
+        }
+      ],
+      "aliases": [],
+      "sounds": "t, d",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "At the beach",
+          "english": "Hi there! My name is Danna.\nWow! Your sandcastle looks great!\nThank you.\nI’m Lanlan. That’s my brother.\nDo you like playing with sand?\nYes, I do.\nGreat! You can play with me.\nCome on, Kaikai. Meet my new friend.\nLanlan, this is Kaikai.\nHello, Kaikai. Let’s play together!",
+          "chinese": "嗨！我叫丹丹。\n哇！你的沙堡看起来太棒啦！\n谢谢你。\n我是兰兰。那是我的哥哥。\n你喜欢玩沙子吗？\n是的，我喜欢。\n太好了！你可以和我一起玩。\n快来，凯凯。认识一下我的新朋友。\n兰兰，这是凯凯。\n你好，凯凯。我们一起玩吧！"
+        }
+      ],
+      "sentencePattern": "Do you like …?\nYes, I do. / No, I don’t.",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I like playing a game.",
+      "questions": [
+        {
+          "stem": "“play a game”在本单元中的中文意思是什么？",
+          "options": ["玩游戏", "拍照", "划船"],
+          "correctIndex": 0,
+          "explanation": "play a game 的意思是“玩游戏”。"
+        },
+        {
+          "stem": "Do you like playing games?",
+          "options": ["Yes, I do.", "Yes, I am.", "Yes, I can."],
+          "correctIndex": 0,
+          "explanation": "Do you like…? 的肯定答句是 Yes, I do."
+        },
+        {
+          "stem": "课文中大家一起玩什么？",
+          "options": ["Sand.", "Snow.", "Cards."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 Sand."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What do we wear?",
+      "page": 21,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "sweater",
+          "phonetic": "/ˈswetə(r)/",
+          "chinese": "毛衣"
+        },
+        {
+          "english": "T-shirt",
+          "phonetic": "/ˈtiː ʃɜːt/",
+          "chinese": "T恤衫"
+        },
+        {
+          "english": "skirt",
+          "phonetic": "/skɜːt/",
+          "chinese": "短裙"
+        },
+        {
+          "english": "dress",
+          "phonetic": "/dres/",
+          "chinese": "连衣裙"
+        },
+        {
+          "english": "shirt",
+          "phonetic": "/ʃɜːt/",
+          "chinese": "衬衫"
+        },
+        {
+          "english": "trousers",
+          "phonetic": "/ˈtraʊzəz/",
+          "chinese": "长裤"
+        },
+        {
+          "english": "shorts",
+          "phonetic": "/ʃɔːts/",
+          "chinese": "短裤"
+        },
+        {
+          "english": "coat",
+          "phonetic": "/kəʊt/",
+          "chinese": "外套"
+        },
+        {
+          "english": "cap",
+          "phonetic": "/kæp/",
+          "chinese": "帽子"
+        },
+        {
+          "english": "shoes",
+          "phonetic": "/ʃuːz/",
+          "chinese": "鞋子"
+        }
+      ],
+      "aliases": [],
+      "sounds": "k, g",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "What do students wear?",
+          "english": "It is sunny today. I wear my T-shirt and shorts.\nIt is rainy today. I wear my coat and shoes.\nIt is cold today. I wear my sweater and trousers.\nIt is windy today. I wear my cap.\nWhat do you wear on a sunny day?",
+          "chinese": "今天天气晴朗。我穿T恤和短裤。\n今天下雨。我穿外套和鞋子。\n今天很冷。我穿毛衣和长裤。\n今天刮风。我戴上帽子。\n晴天的时候你穿什么？"
+        }
+      ],
+      "sentencePattern": "What do you wear on a sunny / … day?\nI wear …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I wear my coat.",
+      "questions": [
+        {
+          "stem": "“sweater”在本单元中的中文意思是什么？",
+          "options": ["毛衣", "T恤衫", "短裙"],
+          "correctIndex": 0,
+          "explanation": "sweater 的意思是“毛衣”。"
+        },
+        {
+          "stem": "What do you wear on a cold day?",
+          "options": ["I wear a sweater.", "I can hear a bee.", "There is a lake."],
+          "correctIndex": 0,
+          "explanation": "询问衣着用 I wear…回答。"
+        },
+        {
+          "stem": "课文中冷天穿什么？",
+          "options": ["A sweater and trousers.", "A T-shirt and shorts.", "A dress and a cap."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 A sweater and trousers."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 What sounds can we hear?",
+      "page": 31,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "grass",
+          "phonetic": "/ɡrɑːs/",
+          "chinese": "草"
+        },
+        {
+          "english": "river",
+          "phonetic": "/ˈrɪvə(r)/",
+          "chinese": "小河"
+        },
+        {
+          "english": "hear",
+          "phonetic": "/hɪə(r)/",
+          "chinese": "听见"
+        },
+        {
+          "english": "bird",
+          "phonetic": "/bɜːd/",
+          "chinese": "鸟"
+        },
+        {
+          "english": "duck",
+          "phonetic": "/dʌk/",
+          "chinese": "鸭子"
+        },
+        {
+          "english": "bee",
+          "phonetic": "/biː/",
+          "chinese": "蜜蜂"
+        },
+        {
+          "english": "lake",
+          "phonetic": "/leɪk/",
+          "chinese": "湖"
+        }
+      ],
+      "aliases": [],
+      "sounds": "m, n",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "What’s outside?",
+          "english": "What can you hear?\nI can hear a bird. Tweet, tweet!\nI can hear a duck. Quack, quack!\nI can hear a bee. Buzz, buzz!\nI can hear the river.\nWhat can you hear? Can you hear the wind?",
+          "chinese": "你能听见什么？\n我能听见小鸟。啾啾！\n我能听见鸭子。嘎嘎！\n我能听见蜜蜂。嗡嗡！\n我能听见小河的声音。\n你能听见什么？你能听见风声吗？"
+        }
+      ],
+      "sentencePattern": "What can you hear?\nI can hear …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I can hear a bird.",
+      "questions": [
+        {
+          "stem": "“grass”在本单元中的中文意思是什么？",
+          "options": ["草", "小河", "听见"],
+          "correctIndex": 0,
+          "explanation": "grass 的意思是“草”。"
+        },
+        {
+          "stem": "What can you hear?",
+          "options": ["I can hear a duck.", "I wear a coat.", "I like reading."],
+          "correctIndex": 0,
+          "explanation": "问听到什么，用 I can hear…回答。"
+        },
+        {
+          "stem": "课文中哪种动物发出 Buzz, buzz 的声音？",
+          "options": ["A bee.", "A duck.", "A bird."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 A bee."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 Where can we see colours?",
+      "page": 41,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "pink",
+          "phonetic": "/pɪŋk/",
+          "chinese": "粉色"
+        },
+        {
+          "english": "blue",
+          "phonetic": "/bluː/",
+          "chinese": "蓝色"
+        },
+        {
+          "english": "red",
+          "phonetic": "/red/",
+          "chinese": "红色"
+        },
+        {
+          "english": "brown",
+          "phonetic": "/braʊn/",
+          "chinese": "棕色"
+        },
+        {
+          "english": "black",
+          "phonetic": "/blæk/",
+          "chinese": "黑色"
+        },
+        {
+          "english": "white",
+          "phonetic": "/waɪt/",
+          "chinese": "白色"
+        },
+        {
+          "english": "purple",
+          "phonetic": "/ˈpɜːpl/",
+          "chinese": "紫色"
+        },
+        {
+          "english": "green",
+          "phonetic": "/ɡriːn/",
+          "chinese": "绿色"
+        },
+        {
+          "english": "orange",
+          "phonetic": "/ˈɒrɪndʒ/",
+          "chinese": "橙色"
+        },
+        {
+          "english": "yellow",
+          "phonetic": "/ˈjeləʊ/",
+          "chinese": "黄色"
+        }
+      ],
+      "aliases": [],
+      "sounds": "l, r",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Who’s in the tree? Colours of the sky",
+          "english": "Look! There is a bird in the tree. It is red.\nLook at the sky. There is a sun. It is orange.\nThere are clouds. They are white.\nThere are flowers. They are pink and purple.\nThere is a frog. It is green.",
+          "chinese": "看！树上有一只小鸟。它是红色的。\n看天空。有太阳，是橙色的。\n有云朵，它们是白色的。\n有花朵，它们是粉色和紫色的。\n有一只青蛙，它是绿色的。"
+        }
+      ],
+      "sentencePattern": "There is …（单数）\nThere are …（复数）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "There is a red bird.",
+      "questions": [
+        {
+          "stem": "“pink”在本单元中的中文意思是什么？",
+          "options": ["粉色", "蓝色", "红色"],
+          "correctIndex": 0,
+          "explanation": "pink 的意思是“粉色”。"
+        },
+        {
+          "stem": "____ a frog.",
+          "options": ["There is", "There are", "They are"],
+          "correctIndex": 0,
+          "explanation": "a frog 是单数，使用 There is。"
+        },
+        {
+          "stem": "课文中的青蛙是什么颜色？",
+          "options": ["Green.", "Red.", "White."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 Green."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 What are our homes like?",
+      "page": 51,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "kitchen",
+          "phonetic": "/ˈkɪtʃɪn/",
+          "chinese": "厨房"
+        },
+        {
+          "english": "bathroom",
+          "phonetic": "/ˈbɑːθruːm/",
+          "chinese": "浴室"
+        },
+        {
+          "english": "bedroom",
+          "phonetic": "/ˈbedruːm/",
+          "chinese": "卧室"
+        },
+        {
+          "english": "dining room",
+          "phonetic": "/ˈdaɪnɪŋ ruːm/",
+          "chinese": "餐厅"
+        },
+        {
+          "english": "living room",
+          "phonetic": "/ˈlɪvɪŋ ruːm/",
+          "chinese": "客厅"
+        },
+        {
+          "english": "study",
+          "phonetic": "/ˈstʌdi/",
+          "chinese": "书房"
+        },
+        {
+          "english": "desk",
+          "phonetic": "/desk/",
+          "chinese": "书桌"
+        },
+        {
+          "english": "chair",
+          "phonetic": "/tʃeə(r)/",
+          "chinese": "椅子"
+        },
+        {
+          "english": "sofa",
+          "phonetic": "/ˈsəʊfə/",
+          "chinese": "沙发"
+        }
+      ],
+      "aliases": [],
+      "sounds": "f, v",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Our homes",
+          "english": "This is my home.\nWhat is in the living room? There is a sofa.\nWhat is in the bedroom? There is a desk and a chair.\nWhat is in the kitchen? There is a table.\nThere are many books in my study.\nI love my home.",
+          "chinese": "这是我的家。\n客厅里有什么？有一张沙发。\n卧室里有什么？有一张书桌和一把椅子。\n厨房里有什么？有一张餐桌。\n我的书房里有很多书。\n我爱我的家。"
+        }
+      ],
+      "sentencePattern": "What is in …?\nThere is / are …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "There is a sofa.",
+      "questions": [
+        {
+          "stem": "“kitchen”在本单元中的中文意思是什么？",
+          "options": ["厨房", "浴室", "卧室"],
+          "correctIndex": 0,
+          "explanation": "kitchen 的意思是“厨房”。"
+        },
+        {
+          "stem": "What is in the living room?",
+          "options": ["There is a sofa.", "I wear shoes.", "I can swim."],
+          "correctIndex": 0,
+          "explanation": "按课文，客厅里有一张沙发。"
+        },
+        {
+          "stem": "课文中的书房有什么？",
+          "options": ["Many books.", "Many shoes.", "Many birds."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 Many books."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Unit 7 What do we do at school?",
+      "page": 61,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "classroom",
+          "phonetic": "/ˈklɑːsruːm/",
+          "chinese": "教室"
+        },
+        {
+          "english": "computer room",
+          "phonetic": "/kəmˈpjuːtə ruːm/",
+          "chinese": "电脑室"
+        },
+        {
+          "english": "toilet",
+          "phonetic": "/ˈtɔɪlət/",
+          "chinese": "厕所"
+        },
+        {
+          "english": "sports ground",
+          "phonetic": "/spɔːts ɡraʊnd/",
+          "chinese": "运动场"
+        },
+        {
+          "english": "library",
+          "phonetic": "/ˈlaɪbrəri/",
+          "chinese": "图书馆"
+        },
+        {
+          "english": "office",
+          "phonetic": "/ˈɒfɪs/",
+          "chinese": "办公室"
+        }
+      ],
+      "aliases": [],
+      "sounds": "s, z",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Nini’s new school",
+          "english": "Welcome to my new school.\nIs there a library in your school?\nYes, there is. We read books there.\nAre there any computer rooms?\nYes, there are.\nIs there a sports ground?\nNo, there isn’t. But we have a big playground.",
+          "chinese": "欢迎来到我的新学校。\n你们学校有图书馆吗？\n是的，有。我们在那里看书。\n有电脑室吗？\n是的，有。\n有运动场吗？\n不，没有。但是我们有一个大操场。"
+        }
+      ],
+      "sentencePattern": "Is there …? Yes, there is. / No, there isn’t.\nAre there …? Yes, there are. / No, there aren’t.",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "There is a library.",
+      "questions": [
+        {
+          "stem": "“classroom”在本单元中的中文意思是什么？",
+          "options": ["教室", "电脑室", "厕所"],
+          "correctIndex": 0,
+          "explanation": "classroom 的意思是“教室”。"
+        },
+        {
+          "stem": "Are there any computer rooms?",
+          "options": ["Yes, there are.", "Yes, there is.", "Yes, I do."],
+          "correctIndex": 0,
+          "explanation": "Are there…? 用 Yes, there are. 回答。"
+        },
+        {
+          "stem": "根据课文，学校有哪种阅读场所？",
+          "options": ["A library.", "A museum.", "A cinema."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 A library."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Unit 8 What do you do on Children’s Day?",
+      "page": 71,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "Children’s Day",
+          "phonetic": "/ˈtʃɪldrənz deɪ/",
+          "chinese": "儿童节"
+        },
+        {
+          "english": "go to the beach",
+          "phonetic": "/ɡəʊ tuː ðə biːtʃ/",
+          "chinese": "去海滩"
+        },
+        {
+          "english": "go to the cinema",
+          "phonetic": "/ɡəʊ tuː ðə ˈsɪnəmə/",
+          "chinese": "去电影院"
+        },
+        {
+          "english": "go to the park",
+          "phonetic": "/ɡəʊ tuː ðə pɑːk/",
+          "chinese": "去公园"
+        },
+        {
+          "english": "go to the zoo",
+          "phonetic": "/ɡəʊ tuː ðə zuː/",
+          "chinese": "去动物园"
+        },
+        {
+          "english": "go to the museum",
+          "phonetic": "/ɡəʊ tuː ðə mjuˈziːəm/",
+          "chinese": "去博物馆"
+        }
+      ],
+      "aliases": [],
+      "sounds": "h",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Children’s Day survey",
+          "english": "Hi, I’m Haohao. I do a survey about Children’s Day.\nWhat do you do on Children’s Day?\nI go to the museum.\nThree classmates go to the zoo on Children’s Day.\nFour classmates go to the cinema.\nThree classmates go to the museum.\nWe all have fun on Children’s Day!",
+          "chinese": "大家好，我是浩浩。我在做一份关于儿童节的调查。\n儿童节你做什么？\n我去博物馆。\n三位同学儿童节去动物园。\n四位同学去电影院。\n三位同学去博物馆。\n我们儿童节都玩得很开心！"
+        }
+      ],
+      "sentencePattern": "Review（全册句型复习）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I go to the museum.",
+      "questions": [
+        {
+          "stem": "“Children’s Day”在本单元中的中文意思是什么？",
+          "options": ["儿童节", "去海滩", "去电影院"],
+          "correctIndex": 0,
+          "explanation": "Children’s Day 的意思是“儿童节”。"
+        },
+        {
+          "stem": "What do you do on Children’s Day?",
+          "options": ["I go to the museum.", "It is purple.", "There is a chair."],
+          "correctIndex": 0,
+          "explanation": "用 I go to…回答去哪里。"
+        },
+        {
+          "stem": "根据调查，多少位同学去电影院？",
+          "options": ["Four.", "Three.", "Two."],
+          "correctIndex": 0,
+          "explanation": "根据本单元提供的 Reading 文本，答案是 Four."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Project 1 Make a hobby poster",
+      "page": 81,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a hobby poster",
+          "english": "Make a hobby poster",
+          "chinese": "制作爱好海报，写下自己喜欢做的事。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作爱好海报，写下自己喜欢做的事。",
+      "sentenceAnswer": "I like reading.",
+      "questions": []
+    },
+    {
+      "number": 10,
+      "title": "Project 2 Make a school poster",
+      "page": 83,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a school poster",
+          "english": "Make a school poster",
+          "chinese": "制作学校海报，画出学校场地。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作学校海报，画出学校场地。",
+      "sentenceAnswer": "There is a library.",
+      "questions": []
+    },
+    {
+      "number": 11,
+      "title": "本册综合小练习",
+      "page": 0,
+      "kind": "review",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "sections": [
+        {
+          "kind": "review",
+          "title": "本册综合小练习",
+          "english": "",
+          "chinese": "复习 There is / There are、爱好与衣着问答。在配套练习入口完成附件提供的全册综合小练习。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "完成综合练习，核对答案并回顾相关单元。",
+      "sentenceAnswer": "",
+      "questions": []
+    }
+  ]
+}

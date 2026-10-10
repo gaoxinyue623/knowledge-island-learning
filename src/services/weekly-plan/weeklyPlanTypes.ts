@@ -1,4 +1,8 @@
-import type { DailyLearningTask, DailyLearningTaskAction, DailyLearningTaskStatus } from '@/types/home'
+import type {
+  DailyLearningTask,
+  DailyLearningTaskAction,
+  DailyLearningTaskStatus,
+} from '@/types/home'
 
 export const WEEKLY_PLAN_SCHEMA_VERSION = 1 as const
 export const WEEKLY_PLAN_STORAGE_KEY = 'knowledge-island.weekly-learning-plans'

@@ -1,0 +1,486 @@
+{
+  "title": "沪教牛津四年级下册配套练习",
+  "sourceSha256": "6716c5ca7b42f7b09fd78877acca4e00237ba866d34c3eff7232fede77f322b6",
+  "sourceNote": "用户提供的一课一练和综合小练习，完整原稿留存；配对题拆为逐项选择，不自加分值。",
+  "notice": "按题核对答案，不按百分制折算。英汉配对已拆为逐项选择，填空按题目要求填写。",
+  "papers": [
+    {
+      "topicKey": "1",
+      "title": "Unit1",
+      "sourceText": "### 单词\nget up /ɡet ʌp/ 起床\nhave breakfast /hæv ˈbrekfəst/ 吃早餐\ngo to school /ɡəʊ tuː skuːl/ 去上学\nhave lunch /hæv lʌntʃ/ 吃午饭\ngo home /ɡəʊ həʊm/ 回家\nhave dinner /hæv ˈdɪnə(r)/ 吃晚饭\ngo to bed /ɡəʊ tuː bed/ 上床睡觉\n### 练习题\n一、写出动词第三人称单数\n1. get →____ 2. have →____ 3. go →____\n二、单项选择\n1. He ____ up at 7:00.\nA. get B. gets C. getting\n2. —What time ____ she go to bed?\nA. do B. does C. is\n✅答案：一、1.gets 2.has 3.goes；二、1.B 2.B",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "写出动词第三人称单数：get →____",
+          "originalStem": "写出动词第三人称单数：get →____",
+          "originalReference": "gets",
+          "kind": "fillBlank",
+          "reference": "gets",
+          "answers": [["gets"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "写出动词第三人称单数：have →____",
+          "originalStem": "写出动词第三人称单数：have →____",
+          "originalReference": "has",
+          "kind": "fillBlank",
+          "reference": "has",
+          "answers": [["has"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "写出动词第三人称单数：go →____",
+          "originalStem": "写出动词第三人称单数：go →____",
+          "originalReference": "goes",
+          "kind": "fillBlank",
+          "reference": "goes",
+          "answers": [["goes"]],
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "He ____ up at 7:00.",
+          "originalStem": "He ____ up at 7:00.",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["get", "gets", "getting"],
+          "correctIndex": 1,
+          "reference": "B. gets",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "What time ____ she go to bed?",
+          "originalStem": "What time ____ she go to bed?",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["do", "does", "is"],
+          "correctIndex": 1,
+          "reference": "B. does",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "2",
+      "title": "Unit2",
+      "sourceText": "### 单词\nChinese /ˌtʃaɪˈniːz/ 语文\nMaths /mæθs/ 数学\nEnglish /ˈɪŋɡlɪʃ/ 英语\nPE /ˌpiː ˈiː/ 体育\nMusic /ˈmjuːzɪk/ 音乐\nArt /ɑːt/ 美术\nIT /ˌaɪ ˈtiː/ 信息技术\nScience /ˈsaɪəns/ 科学\n### 练习题\n一、英汉配对\n1. Science A.美术 2. Art B.科学 3. PE C.信息技术 4. IT D.体育\n二、单项选择\n1. —Does he like Maths? —____\nA. Yes, he like. B. Yes, he does. C. No, he isn’t.\n✅答案：一、1-B，2-A，3-D，4-C；二、B",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "英汉配对：Science",
+          "originalStem": "英汉配对：Science",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["美术", "科学", "信息技术", "体育"],
+          "correctIndex": 1,
+          "reference": "B. 科学",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "英汉配对：Art",
+          "originalStem": "英汉配对：Art",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["美术", "科学", "信息技术", "体育"],
+          "correctIndex": 0,
+          "reference": "A. 美术",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "英汉配对：PE",
+          "originalStem": "英汉配对：PE",
+          "originalReference": "D",
+          "kind": "singleChoice",
+          "options": ["美术", "科学", "信息技术", "体育"],
+          "correctIndex": 3,
+          "reference": "D. 体育",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "英汉配对：IT",
+          "originalStem": "英汉配对：IT",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["美术", "科学", "信息技术", "体育"],
+          "correctIndex": 2,
+          "reference": "C. 信息技术",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "—Does he like Maths?\n—____",
+          "originalStem": "—Does he like Maths?\n—____",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["Yes, he like.", "Yes, he does.", "No, he isn’t."],
+          "correctIndex": 1,
+          "reference": "B. Yes, he does.",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "3",
+      "title": "Unit3",
+      "sourceText": "### 单词\nfirefighter /ˈfaɪəfaɪtə(r)/ 消防员\npolice officer /pəˈliːs ˈɒfɪsə(r)/ 警察\nfarmer /ˈfɑːmə(r)/ 农民\nteacher /ˈtiːtʃə(r)/ 老师\ndoctor /ˈdɒktə(r)/ 医生\nbus driver /bʌs ˈdraɪvə(r)/ 公交车司机\n### 练习题\n一、看中文写单词\n1.消防员________ 2.医生________ 3.农民________\n二、单项选择\n1. —What does your father do? —He is a ____.\nA. firefighter B. farm C. drive\n✅答案：一、1.firefighter 2.doctor 3.farmer；二、A",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "看中文写单词：消防员 ____",
+          "originalStem": "看中文写单词：消防员 ____",
+          "originalReference": "firefighter",
+          "kind": "fillBlank",
+          "reference": "firefighter",
+          "answers": [["firefighter"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "看中文写单词：医生 ____",
+          "originalStem": "看中文写单词：医生 ____",
+          "originalReference": "doctor",
+          "kind": "fillBlank",
+          "reference": "doctor",
+          "answers": [["doctor"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "看中文写单词：农民 ____",
+          "originalStem": "看中文写单词：农民 ____",
+          "originalReference": "farmer",
+          "kind": "fillBlank",
+          "reference": "farmer",
+          "answers": [["farmer"]],
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "—What does your father do?\n—He is a ____.",
+          "originalStem": "—What does your father do?\n—He is a ____.",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["firefighter", "farm", "drive"],
+          "correctIndex": 0,
+          "reference": "A. firefighter",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "4",
+      "title": "Unit4",
+      "sourceText": "### 单词\ntriangle /ˈtraɪæŋɡl/ 三角铁\nviolin /ˌvaɪəˈlɪn/ 小提琴\npiano /piˈænəʊ/ 钢琴\nguitar /ɡɪˈtɑː(r)/ 吉他\nerhu /ˈɜːhuː/ 二胡\nflute /fluːt/ 长笛\npipa /ˈpiːpɑː/ 琵琶\ndrum /drʌm/ 鼓\n### 练习题\n一、选出不同类\n1. A. drum B. violin C. music\n2. A. erhu B. pipa C. paint\n二、单项选择\n1. I ____ the drum now.\nA. play B. am playing C. plays\n✅答案：一、1.C 2.C；二、B",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "选出不同类的一项。",
+          "originalStem": "选出不同类的一项。",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["drum", "violin", "music"],
+          "correctIndex": 2,
+          "reference": "C. music",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "选出不同类的一项。",
+          "originalStem": "选出不同类的一项。",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["erhu", "pipa", "paint"],
+          "correctIndex": 2,
+          "reference": "C. paint",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "I ____ the drum now.",
+          "originalStem": "I ____ the drum now.",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["play", "am playing", "plays"],
+          "correctIndex": 1,
+          "reference": "B. am playing",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "5",
+      "title": "Unit5",
+      "sourceText": "### 单词\nphoto /ˈfəʊtəʊ/ 照片\npaper-cut /ˈpeɪpə kʌt/ 剪纸\npainting /ˈpeɪntɪŋ/ 绘画作品\ncircle /ˈsɜːkl/ 圆形\ntriangle /ˈtraɪæŋɡl/ 三角形\nsquare /skweə(r)/ 正方形\nrectangle /ˈrektæŋɡl/ 长方形\nstar /stɑː(r)/ 星形\n### 练习题\n一、中文写英文\n1.正方形________ 2.圆形________ 3.剪纸________\n二、单项选择\n1. —Are you drawing? —____\nA. Yes, I do. B. Yes, I am. C. Yes, I can.\n✅答案：一、1.square 2.circle 3.paper-cut；二、B",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "中文写英文：正方形 ____",
+          "originalStem": "中文写英文：正方形 ____",
+          "originalReference": "square",
+          "kind": "fillBlank",
+          "reference": "square",
+          "answers": [["square"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "中文写英文：圆形 ____",
+          "originalStem": "中文写英文：圆形 ____",
+          "originalReference": "circle",
+          "kind": "fillBlank",
+          "reference": "circle",
+          "answers": [["circle"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "中文写英文：剪纸 ____",
+          "originalStem": "中文写英文：剪纸 ____",
+          "originalReference": "paper-cut",
+          "kind": "fillBlank",
+          "reference": "paper-cut",
+          "answers": [["paper-cut"]],
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "—Are you drawing?\n—____",
+          "originalStem": "—Are you drawing?\n—____",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["Yes, I do.", "Yes, I am.", "Yes, I can."],
+          "correctIndex": 1,
+          "reference": "B. Yes, I am.",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "6",
+      "title": "Unit6",
+      "sourceText": "### 单词\nday /deɪ/ 白天；天\nnight /naɪt/ 夜晚\nsecond /ˈsekənd/ 秒\nminute /ˈmɪnɪt/ 分钟\nhour /ˈaʊə(r)/ 小时\nmonth /mʌnθ/ 月份\nyear /jɪə(r)/ 年\n### 练习题\n一、英汉连线\n1. minute A.小时 2. hour B.分钟 3. second C.年 4. year D.秒\n二、单项选择\n1. —What is he doing? —He ____.\nA. read B. reads C. is reading\n✅答案：一、1-B，2-A，3-D，4-C；二、C",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "英汉配对：minute",
+          "originalStem": "英汉配对：minute",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["小时", "分钟", "年", "秒"],
+          "correctIndex": 1,
+          "reference": "B. 分钟",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "英汉配对：hour",
+          "originalStem": "英汉配对：hour",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["小时", "分钟", "年", "秒"],
+          "correctIndex": 0,
+          "reference": "A. 小时",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "英汉配对：second",
+          "originalStem": "英汉配对：second",
+          "originalReference": "D",
+          "kind": "singleChoice",
+          "options": ["小时", "分钟", "年", "秒"],
+          "correctIndex": 3,
+          "reference": "D. 秒",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "英汉配对：year",
+          "originalStem": "英汉配对：year",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["小时", "分钟", "年", "秒"],
+          "correctIndex": 2,
+          "reference": "C. 年",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "—What is he doing?\n—He ____.",
+          "originalStem": "—What is he doing?\n—He ____.",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["read", "reads", "is reading"],
+          "correctIndex": 2,
+          "reference": "C. is reading",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "7",
+      "title": "Unit7",
+      "sourceText": "### 单词\nliquid /ˈlɪkwɪd/ 液体\nsolid /ˈsɒlɪd/ 固体\ngas /ɡæs/ 气体\nsugar /ˈʃʊɡə(r)/ 糖\nsalt /sɔːlt/ 盐\ncream /kriːm/ 奶油\nmelt /melt/ 融化\n### 练习题\n一、看英文写中文\n1. liquid ____ 2. solid ____ 3. melt ____\n二、单项选择\n1. —____ we make ice cream? —OK.\nA. Shall B. Are C. Do\n✅答案：一、1液体 2固体 3融化；二、A",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "看英文写中文：liquid ____",
+          "originalStem": "看英文写中文：liquid ____",
+          "originalReference": "液体",
+          "kind": "fillBlank",
+          "reference": "液体",
+          "answers": [["液体"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "看英文写中文：solid ____",
+          "originalStem": "看英文写中文：solid ____",
+          "originalReference": "固体",
+          "kind": "fillBlank",
+          "reference": "固体",
+          "answers": [["固体"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "看英文写中文：melt ____",
+          "originalStem": "看英文写中文：melt ____",
+          "originalReference": "融化",
+          "kind": "fillBlank",
+          "reference": "融化",
+          "answers": [["融化"]],
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "—____ we make ice cream?\n—OK.",
+          "originalStem": "—____ we make ice cream?\n—OK.",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["Shall", "Are", "Do"],
+          "correctIndex": 0,
+          "reference": "A. Shall",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "8",
+      "title": "Unit8",
+      "sourceText": "### 单词\ntake turns /teɪk tɜːnz/ 轮流\npolite /pəˈlaɪt/ 有礼貌的\nshare /ʃeə(r)/ 分享\nknock /nɒk/ 敲门\n### 练习题\n一、英汉配对\n1. share A.轮流 2. take turns B.敲门 3. knock C.分享\n二、情景选择\nWait for your turn. We should ____.\nA. take turns B. share C. knock\n✅答案：一、1-C，2-A，3-B；二、A",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "英汉配对：share",
+          "originalStem": "英汉配对：share",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["轮流", "敲门", "分享"],
+          "correctIndex": 2,
+          "reference": "C. 分享",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "英汉配对：take turns",
+          "originalStem": "英汉配对：take turns",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["轮流", "敲门", "分享"],
+          "correctIndex": 0,
+          "reference": "A. 轮流",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "英汉配对：knock",
+          "originalStem": "英汉配对：knock",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["轮流", "敲门", "分享"],
+          "correctIndex": 1,
+          "reference": "B. 敲门",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "Wait for your turn. We should ____.",
+          "originalStem": "Wait for your turn. We should ____.",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["take turns", "share", "knock"],
+          "correctIndex": 0,
+          "reference": "A. take turns",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "11",
+      "title": "本册综合小练习",
+      "sourceText": "一、用所给词适当形式填空\n1. He ____ (get) up at 7.\n2. I ____ (draw) now.\n二、问答匹配\n1. What does she do? A. Yes, he does.\n2. Does he like Music? B. She is a teacher.\n3. What are you doing? C. I am reading.\n✅综合练习答案：一、1.gets 2.am drawing；二、1-B，2-A，3-C",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "用所给词适当形式填空：He ____ (get) up at 7.",
+          "originalStem": "用所给词适当形式填空：He ____ (get) up at 7.",
+          "originalReference": "gets",
+          "kind": "fillBlank",
+          "reference": "gets",
+          "answers": [["gets"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "用所给词适当形式填空：I ____ (draw) now.",
+          "originalStem": "用所给词适当形式填空：I ____ (draw) now.",
+          "originalReference": "am drawing",
+          "kind": "fillBlank",
+          "reference": "am drawing",
+          "answers": [["am drawing"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "问答匹配：What does she do?",
+          "originalStem": "问答匹配：What does she do?",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["Yes, he does.", "She is a teacher.", "I am reading."],
+          "correctIndex": 1,
+          "reference": "B. She is a teacher.",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "问答匹配：Does he like Music?",
+          "originalStem": "问答匹配：Does he like Music?",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["Yes, he does.", "She is a teacher.", "I am reading."],
+          "correctIndex": 0,
+          "reference": "A. Yes, he does.",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "问答匹配：What are you doing?",
+          "originalStem": "问答匹配：What are you doing?",
+          "originalReference": "C",
+          "kind": "singleChoice",
+          "options": ["Yes, he does.", "She is a teacher.", "I am reading."],
+          "correctIndex": 2,
+          "reference": "C. I am reading.",
+          "adjustment": ""
+        }
+      ]
+    }
+  ]
+}

@@ -79,6 +79,7 @@ it('submits answers, advances to the next question and returns to the selected s
       { path: '/assessment', component: QuestionEnginePage },
       { path: '/learning-agent', component: { template: '<p>Agent</p>' } },
       { path: '/lesson', component: { template: '<p>Lesson</p>' } },
+      { path: '/learning-map', component: { template: '<p>Map</p>' } },
     ],
   })
   await router.push({
@@ -125,7 +126,7 @@ it('submits answers, advances to the next question and returns to the selected s
     expect(store.currentQuestionIndex).toBe(1)
     await wrapper
       .findAll('a')
-      .find((link) => link.text() === '返回 Agent 学习建议')!
+      .find((link) => link.text() === '返回学习建议')!
       .trigger('click')
     await flushPromises()
     expect(router.currentRoute.value.fullPath).toBe('/learning-agent?subject=MATH')

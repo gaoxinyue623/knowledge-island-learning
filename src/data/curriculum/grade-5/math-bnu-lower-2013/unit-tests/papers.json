@@ -1,0 +1,1201 @@
+{
+  "title": "北师大五年级下册数学2013版单元自测",
+  "sourceSha256": "ce24950b7f7de5bbc2b42e992e5e9f78df76a3b1c7147cdacd480bdba438bed0",
+  "sourceNote": "用户标注2013版的附件全文原样归档，逐单元保留原文；公式、条件与概念修订有记录，未核定教材页码。",
+  "notice": "原稿部分分值与题量不一致，按实际题目统计，不换算为100分。分数题按题面用最简a/b填写，整数直接填写。过程、公式、简答和拓展题由老师或家长核对；提交后可查看参考解法。",
+  "papers": [
+    {
+      "topicKey": "fraction-add",
+      "title": "第一单元 分数加减法",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "计算1/4＋2/5，要先（），再计算。",
+          "originalReference": "通分",
+          "stem": "计算1/4＋2/5，要先（），再计算。",
+          "kind": "fillBlank",
+          "reference": "通分",
+          "adjustment": "",
+          "answers": [
+            [
+              "通分"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "3/8化成小数是（）；0.35化成最简分数是（）（分数用a/b表示）。",
+          "originalReference": "0.375；7/20",
+          "stem": "3/8化成小数是（）；0.35化成最简分数是（）（分数用a/b表示）。",
+          "kind": "fillBlank",
+          "reference": "0.375；7/20",
+          "adjustment": "",
+          "answers": [
+            [
+              "0.375"
+            ],
+            [
+              "7/20"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "5/6－1/3＝（）；1/4＋3/8＝（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "originalReference": "1/2；5/8",
+          "stem": "5/6－1/3＝（）；1/4＋3/8＝（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1/2；5/8",
+          "adjustment": "",
+          "answers": [
+            [
+              "1/2"
+            ],
+            [
+              "5/8"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "比较大小：$\\frac{3}{4}(\\frac{3}{4}(\\frac{2}{3}〇\\frac{3}{4})0.7)0.7$；$\\frac{2}{3}(\\frac{3}{4}(\\frac{2}{3}〇\\frac{3}{4})0.7)\\frac{3}{4}$。",
+          "originalReference": "3/4＝0.75＞0.7；2/3＝8/12＜9/12＝3/4。",
+          "stem": "比较大小，依次填＜、＞或＝：3/4（）0.7；2/3（）3/4。",
+          "kind": "fillBlank",
+          "reference": "3/4＝0.75＞0.7；2/3＝8/12＜9/12＝3/4。",
+          "adjustment": "依据原数值及答案恢复被重复公式破坏的两个比较式。",
+          "answers": [
+            [
+              "＞",
+              ">"
+            ],
+            [
+              "＜",
+              "<"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "2/7＋4/9＋5/9＝2/7＋（4/9＋5/9），用了加法（）律。",
+          "originalReference": "结合",
+          "stem": "2/7＋4/9＋5/9＝2/7＋（4/9＋5/9），用了加法（）律。",
+          "kind": "fillBlank",
+          "reference": "结合",
+          "adjustment": "",
+          "answers": [
+            [
+              "结合",
+              "结合律"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "计算：3/4＋1/6",
+          "originalReference": "9/12＋2/12＝11/12。",
+          "stem": "计算：3/4＋1/6，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "9/12＋2/12＝11/12。",
+          "adjustment": "",
+          "answers": [
+            [
+              "11/12"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "计算：7/8－2/3",
+          "originalReference": "21/24－16/24＝5/24。",
+          "stem": "计算：7/8－2/3，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "21/24－16/24＝5/24。",
+          "adjustment": "",
+          "answers": [
+            [
+              "5/24"
+            ]
+          ]
+        },
+        {
+          "number": 8,
+          "originalStem": "计算：5/6－1/4＋1/3",
+          "originalReference": "10/12－3/12＋4/12＝11/12。",
+          "stem": "计算：5/6－1/4＋1/3，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "10/12－3/12＋4/12＝11/12。",
+          "adjustment": "",
+          "answers": [
+            [
+              "11/12"
+            ]
+          ]
+        },
+        {
+          "number": 9,
+          "originalStem": "计算：1－（2/5＋1/4）",
+          "originalReference": "1－（8/20＋5/20）＝7/20。",
+          "stem": "计算：1－（2/5＋1/4），结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1－（8/20＋5/20）＝7/20。",
+          "adjustment": "",
+          "answers": [
+            [
+              "7/20"
+            ]
+          ]
+        },
+        {
+          "number": 10,
+          "originalStem": "用简便方法计算5/12＋3/7＋7/12，写出过程。",
+          "originalReference": "（5/12＋7/12）＋3/7＝1＋3/7＝10/7，写作带分数1又3/7也正确。",
+          "stem": "用简便方法计算5/12＋3/7＋7/12，写出过程。",
+          "kind": "shortAnswer",
+          "reference": "（5/12＋7/12）＋3/7＝1＋3/7＝10/7，写作带分数1又3/7也正确。",
+          "adjustment": ""
+        },
+        {
+          "number": 11,
+          "originalStem": "简便计算：9/10－2/7－5/7",
+          "originalReference": "9/10－（2/7＋5/7）＝9/10－1＝－1/10。此题涉及负数，作为拓展由老师或家长核对，不自动判分。",
+          "stem": "拓展题：用简便方法计算9/10－2/7－5/7，结果可能为负数，写出过程。",
+          "kind": "shortAnswer",
+          "reference": "9/10－（2/7＋5/7）＝9/10－1＝－1/10。此题涉及负数，作为拓展由老师或家长核对，不自动判分。",
+          "adjustment": "保留原式与正确负数答案，注明超出本单元非负分数范围，改为拓展人工核对。"
+        },
+        {
+          "number": 12,
+          "originalStem": "一根绳子，第一次用去2/5，第二次用去1/4，一共用去几分之几？还剩几分之几？",
+          "originalReference": "13/20；7/20",
+          "stem": "一根绳子，两次分别用去全长的2/5和1/4，一共用去全长的（），还剩全长的（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "13/20；7/20",
+          "adjustment": "明确两次分率均以全长为单位1。",
+          "answers": [
+            [
+              "13/20"
+            ],
+            [
+              "7/20"
+            ]
+          ]
+        }
+      ],
+      "sourceText": "## 第一单元 分数加减法\n\n一、填空（每空3分，共30分）\n\n1. 计算$\\frac{1}{4}+\\frac{2}{5}$，要先（），再计算。\n2. $\\frac{3}{8}$化成小数是（）；0.35化成分数是（）。\n3. $\\frac{5}{6}-\\frac{1}{3}=$（）；$\\frac{1}{4}+\\frac{3}{8}=$（）。\n4. 比较大小：$\\frac{3}{4}(\\frac{3}{4}(\\frac{2}{3}〇\\frac{3}{4})0.7)0.7$；$\\frac{2}{3}(\\frac{3}{4}(\\frac{2}{3}〇\\frac{3}{4})0.7)\\frac{3}{4}$。\n5. $\\frac{2}{7}+\\frac{4}{9}+\\frac{5}{9}=\\frac{2}{7}+(\\frac{4}{9}+\\frac{5}{9})$用了加法（）律。\n\n二、计算（每题8分，共32分）\n$\\frac{3}{4}+\\frac{1}{6}$　　$\\frac{7}{8}-\\frac{2}{3}$\n$\\frac{5}{6}-\\frac{1}{4}+\\frac{1}{3}$　　$1-(\\frac{2}{5}+\\frac{1}{4})$\n\n三、简便计算（每题9分，共18分）\n$\\frac{5}{12}+\\frac{3}{7}+\\frac{7}{12}$　　$\\frac{9}{10}-\\frac{2}{7}-\\frac{5}{7}$\n\n四、解决问题（20分）\n一根绳子，第一次用去$\\frac{2}{5}$，第二次用去$\\frac{1}{4}$，一共用去几分之几？还剩几分之几？\n\n第一单元参考答案\n一、1.通分；2.0.375，$\\frac{7}{20}$；3.$\\frac{1}{2}$，$\\frac{5}{8}$；4.＞，＜；5.结合\n二、$\\frac{11}{12}$；$\\frac{5}{24}$；$\\frac{11}{12}$；$\\frac{7}{20}$\n三、$(\\frac{5}{12}+\\frac{7}{12})+\\frac{3}{7}=1\\frac{3}{7}$；$\\frac{9}{10}-(\\frac{2}{7}+\\frac{5}{7})=\\frac{9}{10}-1=-\\frac{1}{10}$\n四、一共：$\\frac{2}{5}+\\frac{1}{4}=\\frac{13}{20}$；剩下：$1-\\frac{13}{20}=\\frac{7}{20}$\n答：一共用去$\\frac{13}{20}$，还剩$\\frac{7}{20}$。\n\n"
+    },
+    {
+      "topicKey": "cuboid-features",
+      "title": "第二单元 长方体（一）",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "长方体有（）个面、（）条棱、（）个顶点。",
+          "originalReference": "6；12；8",
+          "stem": "长方体有（）个面、（）条棱、（）个顶点。",
+          "kind": "fillBlank",
+          "reference": "6；12；8",
+          "adjustment": "",
+          "answers": [
+            [
+              "6",
+              "六"
+            ],
+            [
+              "12",
+              "十二"
+            ],
+            [
+              "8",
+              "八"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "正方体(\\boldsymbol{(\\mathrm{L})=棱长×12})总和=(\\boldsymbol{(\\mathrm{L})=棱长×12})×（）。",
+          "originalReference": "12",
+          "stem": "正方体棱长总和＝棱长×（）。",
+          "kind": "fillBlank",
+          "reference": "12",
+          "adjustment": "将反复嵌入的公式乱码恢复为“棱长”。",
+          "answers": [
+            [
+              "12",
+              "十二"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "长方体长5厘米、宽3厘米、高2厘米，棱长总和（）厘米。",
+          "originalReference": "（5＋3＋2）×4＝40厘米。",
+          "stem": "长方体长5厘米、宽3厘米、高2厘米，棱长总和（）厘米。",
+          "kind": "fillBlank",
+          "reference": "（5＋3＋2）×4＝40厘米。",
+          "adjustment": "",
+          "answers": [
+            [
+              "40"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "正方体(\\boldsymbol{(\\mathrm{L})=棱长×12})4dm，表面积（）dm²。",
+          "originalReference": "6×4²＝96平方分米。",
+          "stem": "正方体棱长4分米，表面积（）平方分米。",
+          "kind": "fillBlank",
+          "reference": "6×4²＝96平方分米。",
+          "adjustment": "将损坏文字恢复为棱长4分米。",
+          "answers": [
+            [
+              "96"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "长方体表面积公式：（）。",
+          "originalReference": "S＝2（ab＋ah＋bh）。接受2ab＋2ah＋2bh等价形式。",
+          "stem": "长方体长a、宽b、高h，写出表面积公式。",
+          "kind": "shortAnswer",
+          "reference": "S＝2（ab＋ah＋bh）。接受2ab＋2ah＋2bh等价形式。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "originalStem": "无盖长方体鱼缸忽略厚度与损耗，计算所需玻璃面积只算（）个面。",
+          "originalReference": "底面与四侧面。",
+          "stem": "无盖长方体鱼缸忽略厚度与损耗，计算所需玻璃面积只算（）个面。",
+          "kind": "fillBlank",
+          "reference": "底面与四侧面。",
+          "adjustment": "",
+          "answers": [
+            [
+              "5",
+              "五"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "正方体是特殊的长方体。",
+          "originalReference": "正确。正方体具有长方体全部特征。",
+          "stem": "正方体是特殊的长方体。",
+          "kind": "trueFalse",
+          "reference": "正确。正方体具有长方体全部特征。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "长方体6个面一定都是长方形。",
+          "originalReference": "×",
+          "stem": "长方体6个面一定都是长、宽不相等的长方形。",
+          "kind": "trueFalse",
+          "reference": "错误。长方体可以有正方形面；正方形本身也属于特殊长方形。",
+          "adjustment": "原题在包含正方形的长方形定义下应为真，与原答案冲突；明确限定非正方形长方形以保留原题判断意图。",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "长方体相对的4条(\\boldsymbol{(\\mathrm{L})=棱长×12})度相等。",
+          "originalReference": "正确。长、宽、高三个方向分别各有4条等长棱。",
+          "stem": "长方体中沿同一方向的4条棱长度相等。",
+          "kind": "trueFalse",
+          "reference": "正确。长、宽、高三个方向分别各有4条等长棱。",
+          "adjustment": "恢复棱长度文字并明确按同一方向分组。",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "正方体6个面面积相等。",
+          "originalReference": "正确。6个面是全等正方形。",
+          "stem": "正方体6个面面积相等。",
+          "kind": "trueFalse",
+          "reference": "正确。6个面是全等正方形。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "把长方体展开，只能得到一种展开图。",
+          "originalReference": "错误。沿不同棱剪开可以得到不同展开图。",
+          "stem": "把长方体展开，只能得到一种展开图。",
+          "kind": "trueFalse",
+          "reference": "错误。沿不同棱剪开可以得到不同展开图。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 12,
+          "originalStem": "求通风管表面积，不用算左右两个面。",
+          "originalReference": "正确。需按实际开口位置排除相应两个面。",
+          "stem": "一根长方体通风管只有左、右两个端面开口，求四壁材料面积时不算这两个端面。",
+          "kind": "trueFalse",
+          "reference": "正确。需按实际开口位置排除相应两个面。",
+          "adjustment": "明确左右为两个开口端面，否则开口方向不确定。",
+          "correctValue": true
+        },
+        {
+          "number": 13,
+          "originalStem": "长方体长6米、宽4米、高3米，完整表面积是多少平方米？",
+          "originalReference": "（6×4＋6×3＋4×3）×2＝108。",
+          "stem": "长方体长6米、宽4米、高3米，完整表面积是多少平方米？（只填数值，单位：平方米）",
+          "kind": "calculation",
+          "reference": "（6×4＋6×3＋4×3）×2＝108。",
+          "adjustment": "",
+          "value": 108
+        },
+        {
+          "number": 14,
+          "originalStem": "正方体礼盒，(\\boldsymbol{(\\mathrm{L})=棱长×12})20cm，包装这个礼盒，至少需要多少平方厘米包装纸？",
+          "originalReference": "6×20×20＝2400平方厘米。",
+          "stem": "正方体礼盒棱长20厘米，六个面都包装，忽略接缝、重叠和损耗，理论上至少需多少平方厘米纸？（只填数值，单位：平方厘米）",
+          "kind": "calculation",
+          "reference": "6×20×20＝2400平方厘米。",
+          "adjustment": "恢复棱长20厘米，并明确理论面积忽略接缝损耗。",
+          "value": 2400
+        }
+      ],
+      "sourceText": "## 第二单元 长方体（一）\n\n一、填空（每空4分，共32分）\n\n1. 长方体有（）个面，（）条棱，（）个顶点。\n2. 正方体(\\boldsymbol{(\\mathrm{L})=棱长×12})总和=(\\boldsymbol{(\\mathrm{L})=棱长×12})×（）。\n3. 长方体长5cm，宽3cm，高2cm，(\\boldsymbol{(\\mathrm{L})=棱长×12})总和（）cm。\n4. 正方体(\\boldsymbol{(\\mathrm{L})=棱长×12})4dm，表面积（）$\\mathrm{dm^2}$。\n5. 长方体表面积公式：（）。\n6. 无盖鱼缸，计算表面积只算（）个面。\n\n二、判断（每题5分，共30分）\n\n1. 正方体是特殊的长方体。（）\n2. 长方体6个面一定都是长方形。（）\n3. 长方体相对的4条(\\boldsymbol{(\\mathrm{L})=棱长×12})度相等。（）\n4. 正方体6个面面积相等。（）\n5. 把长方体展开，只能得到一种展开图。（）\n6. 求通风管表面积，不用算左右两个面。（）\n\n三、计算表面积（18分）\n长方体长6m，宽4m，高3m，求表面积。\n\n四、解决问题（20分）\n正方体礼盒，(\\boldsymbol{(\\mathrm{L})=棱长×12})20cm，包装这个礼盒，至少需要多少平方厘米包装纸？\n\n第二单元参考答案\n一、1.6，12，8；2.12；3.40；4.96；5.$\\(\\boldsymbol{S=(ab+ah+bh)×2}\\)$；6.5\n二、√，×，√，√，×，√\n三、$(6×4+6×3+4×3)×2=108$（平方米）\n四、$6×20×20=2400\\mathrm{cm^2}$\n答：至少需要2400平方厘米包装纸。\n\n"
+    },
+    {
+      "topicKey": "fraction-multiply",
+      "title": "第三单元 分数乘法",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "口算：2/3×6",
+          "originalReference": "4",
+          "stem": "口算：2/3×6，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "4",
+          "adjustment": "",
+          "answers": [
+            [
+              "4"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "口算：3/4×1/2",
+          "originalReference": "3/8",
+          "stem": "口算：3/4×1/2，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/8",
+          "adjustment": "",
+          "answers": [
+            [
+              "3/8"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "口算：5/8×4/15",
+          "originalReference": "1/6",
+          "stem": "口算：5/8×4/15，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1/6",
+          "adjustment": "",
+          "answers": [
+            [
+              "1/6"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "口算：8×3/4",
+          "originalReference": "6",
+          "stem": "口算：8×3/4，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "6",
+          "adjustment": "",
+          "answers": [
+            [
+              "6"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "口算：4/7×7/4",
+          "originalReference": "1",
+          "stem": "口算：4/7×7/4，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1",
+          "adjustment": "",
+          "answers": [
+            [
+              "1"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "计算：5/12×9/10",
+          "originalReference": "3/8",
+          "stem": "计算：5/12×9/10，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/8",
+          "adjustment": "",
+          "answers": [
+            [
+              "3/8"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "计算：7/18×6/7",
+          "originalReference": "1/3",
+          "stem": "计算：7/18×6/7，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1/3",
+          "adjustment": "",
+          "answers": [
+            [
+              "1/3"
+            ]
+          ]
+        },
+        {
+          "number": 8,
+          "originalStem": "计算：24×5/16",
+          "originalReference": "15/2",
+          "stem": "计算：24×5/16，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "15/2",
+          "adjustment": "",
+          "answers": [
+            [
+              "15/2"
+            ]
+          ]
+        },
+        {
+          "number": 9,
+          "originalStem": "计算：3/5×10/21",
+          "originalReference": "2/7",
+          "stem": "计算：3/5×10/21，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "2/7",
+          "adjustment": "",
+          "answers": [
+            [
+              "2/7"
+            ]
+          ]
+        },
+        {
+          "number": 10,
+          "originalStem": "4/9的倒数是（）；（）的倒数是1。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "originalReference": "9/4；1",
+          "stem": "4/9的倒数是（）；（）的倒数是1。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "9/4；1",
+          "adjustment": "",
+          "answers": [
+            [
+              "9/4"
+            ],
+            [
+              "1"
+            ]
+          ]
+        },
+        {
+          "number": 11,
+          "originalStem": "求12的2/3是多少，列式（）。",
+          "originalReference": "12×2/3＝8。分率乘在前面写作（2/3）×12也正确。",
+          "stem": "求12的2/3是多少，请列式并说明。",
+          "kind": "shortAnswer",
+          "reference": "12×2/3＝8。分率乘在前面写作（2/3）×12也正确。",
+          "adjustment": ""
+        },
+        {
+          "number": 12,
+          "originalStem": "果园有果树120棵，苹果树占3/5，苹果树有多少棵？",
+          "originalReference": "120×3/5＝72棵。",
+          "stem": "果园有果树120棵，苹果树占3/5，苹果树有多少棵？（只填数值，单位：棵）",
+          "kind": "calculation",
+          "reference": "120×3/5＝72棵。",
+          "adjustment": "",
+          "value": 72
+        }
+      ],
+      "sourceText": "## 第三单元 分数乘法\n\n一、口算（每题3分，共15分）\n$\\frac{2}{3}×6=$　$\\frac{3}{4}×\\frac{1}{2}=$　$\\frac{5}{8}×\\frac{4}{15}=$　$8×\\frac{3}{4}=$　$\\frac{4}{7}×\\frac{7}{4}=$\n\n二、计算（每题8分，共32分）\n$\\frac{5}{12}×\\frac{9}{10}$　　$\\frac{7}{18}×\\frac{6}{7}$\n$24×\\frac{5}{16}$　　$\\frac{3}{5}×\\frac{10}{21}$\n\n三、填空（20分）\n\n1. $\\frac{4}{9}$的倒数是（）；（）的倒数是1。\n2. 求12的$\\frac{2}{3}$是多少，列式（）。\n\n四、解决问题（33分）\n果园一共有果树120棵，苹果树占$\\frac{3}{5}$，苹果树多少棵？\n\n第三单元参考答案\n一、4；$\\frac{3}{8}$；$\\frac{1}{6}$；6；1\n二、$\\frac{3}{8}$；$\\frac{1}{3}$；$\\frac{15}{2}$；$\\frac{2}{7}$\n三、1.$\\frac{9}{4}$，1；2.$12×\\frac{2}{3}$\n四、$120×\\frac{3}{5}=72$（棵）\n答：苹果树72棵。\n\n"
+    },
+    {
+      "topicKey": "volume-units",
+      "title": "第四单元 长方体（二）",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "物体所占空间大小叫（）。",
+          "originalReference": "体积",
+          "stem": "物体所占空间大小叫（）。",
+          "kind": "fillBlank",
+          "reference": "体积",
+          "adjustment": "",
+          "answers": [
+            [
+              "体积"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "1.2立方米＝（）立方分米；3500立方厘米＝（）立方分米。",
+          "originalReference": "1200；3.5",
+          "stem": "1.2立方米＝（）立方分米；3500立方厘米＝（）立方分米。",
+          "kind": "fillBlank",
+          "reference": "1200；3.5",
+          "adjustment": "",
+          "answers": [
+            [
+              "1200"
+            ],
+            [
+              "3.5"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "2.4L＝（）mL；400mL＝（）L（原稿单位公式嵌套）",
+          "originalReference": "2400；0.4",
+          "stem": "2.4升＝（）毫升；400毫升＝（）升。",
+          "kind": "fillBlank",
+          "reference": "2400；0.4",
+          "adjustment": "将升毫升的嵌套LaTeX恢复为中文单位。",
+          "answers": [
+            [
+              "2400"
+            ],
+            [
+              "0.4"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "长方体体积公式（）；正方体体积公式（）。",
+          "originalReference": "长方体V＝abh；正方体V＝a³。接受a×b×h、a×a×a等价写法。",
+          "stem": "写出长方体体积公式（长a、宽b、高h）和正方体体积公式（棱长a）。",
+          "kind": "shortAnswer",
+          "reference": "长方体V＝abh；正方体V＝a³。接受a×b×h、a×a×a等价写法。",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "originalStem": "长方体底面积20平方厘米，高4厘米，体积（）立方厘米。",
+          "originalReference": "80",
+          "stem": "长方体底面积20平方厘米，高4厘米，体积（）立方厘米。",
+          "kind": "fillBlank",
+          "reference": "80",
+          "adjustment": "",
+          "answers": [
+            [
+              "80"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "容积一定小于体积。",
+          "originalReference": "√",
+          "stem": "有壁厚的普通长方体容器，其内腔容积小于按外部长、宽、高算出的外部体积。",
+          "kind": "trueFalse",
+          "reference": "正确。内部尺寸小于外部尺寸。这里的外部体积不是容器材料本身体积；理想零厚度容器不能套用严格小于。",
+          "adjustment": "限定同一有壁厚容器、内腔容积与外部体积，消除比较对象歧义。",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "正方体(\\boldsymbol{(\\mathrm{L})=棱长×12})扩大2倍，体积扩大8倍。",
+          "originalReference": "正确。V＝a³，三个方向都乘2，2³＝8。",
+          "stem": "正方体棱长扩大到原来的2倍，体积扩大到原来的8倍。",
+          "kind": "trueFalse",
+          "reference": "正确。V＝a³，三个方向都乘2，2³＝8。",
+          "adjustment": "恢复棱长并将“扩大2倍”明确为扩大到2倍。",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "dm³和L单位相等。",
+          "originalReference": "正确。同一体积量的两种单位表示。",
+          "stem": "1立方分米等于1升。",
+          "kind": "trueFalse",
+          "reference": "正确。同一体积量的两种单位表示。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "体积单位比面积单位大。",
+          "originalReference": "错误。体积与面积度量不同的量，不能这样直接比较。",
+          "stem": "体积单位比面积单位大。",
+          "kind": "trueFalse",
+          "reference": "错误。体积与面积度量不同的量，不能这样直接比较。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "排水法可以测石块体积。",
+          "originalReference": "正确。增加的液体读数体积等于石块体积。",
+          "stem": "石块不溶于水、不吸水，完全浸没且无气泡、无溢出时，可以用排水法测它的体积。",
+          "kind": "trueFalse",
+          "reference": "正确。增加的液体读数体积等于石块体积。",
+          "adjustment": "补充完全浸没、无溢出等适用条件。",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "一个长方体水箱，长8dm，宽5dm，高3dm，水箱容积多少升？",
+          "originalReference": "8×5×3＝120立方分米＝120升。",
+          "stem": "一个长方体水箱内部长8分米、宽5分米、高3分米，容积多少升？（只填数值，单位：升）",
+          "kind": "calculation",
+          "reference": "8×5×3＝120立方分米＝120升。",
+          "adjustment": "补充给定的是内部尺寸。",
+          "value": 120
+        }
+      ],
+      "sourceText": "## 第四单元 长方体（二）\n\n一、填空（每空4分，共32分）\n\n1. 物体所占空间大小叫（）。\n2. $1.2\\mathrm{m^3}=$（）$\\mathrm{dm^3}$；$3500\\mathrm{cm^3}=$（）$\\mathrm{dm^3}$\n3. $2.4\\mathrm{(\\mathrm{L})}=$（）$\\mathrm{(\\mathrm{m(\\mathrm{L})})}$；$400\\mathrm{(\\mathrm{m(\\mathrm{L})})}=$（）$\\mathrm{(\\mathrm{L})}$\n4. 长方体体积公式（）；正方体体积公式（）。\n5. 长方体底面积$20\\mathrm{cm^2}$，高4cm，体积（）$\\mathrm{cm^3}$。\n\n二、判断（每题6分，共30分）\n\n1. 容积一定小于体积。（）\n2. 正方体(\\boldsymbol{(\\mathrm{L})=棱长×12})扩大2倍，体积扩大8倍。（）\n3. $\\mathrm{dm^3}$和(\\mathrm{L})单位相等。（）\n4. 体积单位比面积单位大。（）\n5. 排水法可以测石块体积。（）\n\n三、应用题（38分）\n一个长方体水箱，长8dm，宽5dm，高3dm，水箱容积多少升？\n\n第四单元参考答案\n一、1.体积；2.1200，3.5；3.2400，0.4；4.$\\(\\boldsymbol{V=abh}\\)$，$V=a^3$；5.80\n二、√，√，√，×，√\n三、$8×5×3=120\\mathrm{dm^3}=120$升\n答：容积120升。\n\n"
+    },
+    {
+      "topicKey": "fraction-divide",
+      "title": "第五单元 分数除法",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "除以不为0的数等于乘它的（）。",
+          "originalReference": "倒数",
+          "stem": "除以不为0的数等于乘它的（）。",
+          "kind": "fillBlank",
+          "reference": "倒数",
+          "adjustment": "",
+          "answers": [
+            [
+              "倒数"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "4/5÷2＝4/5×（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "originalReference": "1/2",
+          "stem": "4/5÷2＝4/5×（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "1/2",
+          "adjustment": "",
+          "answers": [
+            [
+              "1/2"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "3/7÷3/4",
+          "originalReference": "3/7×4/3＝4/7。",
+          "stem": "3/7÷(3/4)，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/7×4/3＝4/7。",
+          "adjustment": "",
+          "answers": [
+            [
+              "4/7"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "已知一个数的2/3是10，这个数是（）。",
+          "originalReference": "15",
+          "stem": "已知一个数的2/3是10，这个数是（）。",
+          "kind": "fillBlank",
+          "reference": "15",
+          "adjustment": "",
+          "answers": [
+            [
+              "15"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "5/6÷1/3，商比5/6（）。",
+          "originalReference": "大",
+          "stem": "5/6÷(1/3)，商比5/6（）。",
+          "kind": "fillBlank",
+          "reference": "大",
+          "adjustment": "",
+          "answers": [
+            [
+              "大",
+              "更大"
+            ]
+          ]
+        },
+        {
+          "number": 6,
+          "originalStem": "计算：6/7÷3",
+          "originalReference": "2/7",
+          "stem": "计算：6/7÷3，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "2/7",
+          "adjustment": "",
+          "answers": [
+            [
+              "2/7"
+            ]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "计算：5/8÷5/12",
+          "originalReference": "3/2",
+          "stem": "计算：5/8÷(5/12)，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "3/2",
+          "adjustment": "",
+          "answers": [
+            [
+              "3/2"
+            ]
+          ]
+        },
+        {
+          "number": 8,
+          "originalStem": "计算：12÷3/4",
+          "originalReference": "16",
+          "stem": "计算：12÷(3/4)，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "16",
+          "adjustment": "",
+          "answers": [
+            [
+              "16"
+            ]
+          ]
+        },
+        {
+          "number": 9,
+          "originalStem": "计算：8/9÷2/3",
+          "originalReference": "4/3",
+          "stem": "计算：8/9÷(2/3)，结果为（）。（分数填最简分数a/b；大于1的分数填假分数，整数直接填写。）",
+          "kind": "fillBlank",
+          "reference": "4/3",
+          "adjustment": "",
+          "answers": [
+            [
+              "4/3"
+            ]
+          ]
+        },
+        {
+          "number": 10,
+          "originalStem": "一条路，修了3/4，正好修了60米，这条路全长多少米？",
+          "originalReference": "设全长x米，（3/4）x＝60，x＝60÷3/4＝80。检验80×3/4＝60。",
+          "stem": "一条路修了全长的3/4，正好60米，求全长，写出列式或列方程过程。",
+          "kind": "shortAnswer",
+          "reference": "设全长x米，（3/4）x＝60，x＝60÷(3/4)＝80。检验80×3/4＝60。",
+          "adjustment": "恢复原参考方程中x附近的公式乱码，并明确分率以全长为单位1。"
+        }
+      ],
+      "sourceText": "## 第五单元 分数除法\n\n一、填空（每空4分，共24分）\n\n1. 除以不为0的数等于乘它的（）。\n2. $\\frac{4}{5}÷2=\\frac{4}{5}×$（）。\n3. $\\frac{3}{7}÷\\frac{3}{4}=$（）。\n4. 已知一个数的$\\frac{2}{3}$是10，这个数是（）。\n5. $\\frac{5}{6}÷\\frac{1}{3}$，商比原数（）。\n\n二、计算（每题9分，共36分）\n$\\frac{6}{7}÷3$　　$\\frac{5}{8}÷\\frac{5}{12}$\n$12÷\\frac{3}{4}$　　$\\frac{8}{9}÷\\frac{2}{3}$\n\n三、应用题（40分）\n一条路，修了$\\frac{3}{4}$，正好修了60米，这条路全长多少米？\n\n第五单元参考答案\n一、1.倒数；2.$\\frac{1}{2}$；3.$\\frac{4}{7}$；4.15；5.大\n二、$\\frac{2}{7}$；$\\frac{3}{2}$；16；$\\frac{4}{3}$\n三、解：设全长$x$米。$\\frac{3}{4}\\(x=\\)60$，$\\(x=\\)80$\n答：全长80米。\n\n"
+    },
+    {
+      "topicKey": "direction-distance",
+      "title": "第六单元 确定位置",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "以确定的观测点为中心、统一方位，确定物体位置需要（）和（）两个条件（按描述先后填）。",
+          "originalReference": "方向；距离",
+          "stem": "以确定的观测点为中心、统一方位，确定物体位置需要（）和（）两个条件（按描述先后填）。",
+          "kind": "fillBlank",
+          "reference": "方向；距离",
+          "adjustment": "",
+          "answers": [
+            [
+              "方向"
+            ],
+            [
+              "距离"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "小明在学校北偏东30°、距离200米；学校在小明（）偏（）30°、距离200米。",
+          "originalReference": "南；西",
+          "stem": "小明在学校北偏东30°、距离200米；学校在小明（）偏（）30°、距离200米。",
+          "kind": "fillBlank",
+          "reference": "南；西",
+          "adjustment": "",
+          "answers": [
+            [
+              "南"
+            ],
+            [
+              "西"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "观测点不同，描述的位置（）。",
+          "originalReference": "不同",
+          "stem": "同一目标相对于不同观测点，用方向与距离组成的完整描述会（）。",
+          "kind": "fillBlank",
+          "reference": "不同",
+          "adjustment": "明确同一目标和完整方向距离组合；不意味着方向、距离各自都必然改变。",
+          "answers": [
+            [
+              "不同",
+              "变化",
+              "改变",
+              "发生变化"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "固定观测点，只说方向就能确定唯一位置。",
+          "originalReference": "错误。同一方向射线上还有不同距离的点。",
+          "stem": "固定观测点，只说方向就能确定唯一位置。",
+          "kind": "trueFalse",
+          "reference": "错误。同一方向射线上还有不同距离的点。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "originalStem": "北偏西40°也可以说成西偏北50°。",
+          "originalReference": "正确。北与西夹角90°，40°＋50°＝90°。",
+          "stem": "北偏西40°也可以说成西偏北50°。",
+          "kind": "trueFalse",
+          "reference": "正确。北与西夹角90°，40°＋50°＝90°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "两地相对位置，距离不变。",
+          "originalReference": "正确。两点间距离相同。",
+          "stem": "A到B与B到A的直线距离相同。",
+          "kind": "trueFalse",
+          "reference": "正确。两点间距离相同。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "角度不同，位置不同。",
+          "originalReference": "√",
+          "stem": "同一观测点、同一北向基准和向东偏转侧，两个目标距离都为200米，偏转角度不同，则位置不同。",
+          "kind": "trueFalse",
+          "reference": "正确。正距离相同而实际方向不同，位置不同。",
+          "adjustment": "补充同一观测点、同一计角基准及正距离；北偏西40°和西偏北50°是不同角度表述但同一方向，不能笼统判断。",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "图书馆在广场南偏西25°、距离300米。说出广场相对于图书馆的位置。",
+          "originalReference": "广场在图书馆北偏东25°、距离300米。观测点换为图书馆，方向反向，距离相同。",
+          "stem": "图书馆在广场南偏西25°、距离300米。说出广场相对于图书馆的位置。",
+          "kind": "shortAnswer",
+          "reference": "广场在图书馆北偏东25°、距离300米。观测点换为图书馆，方向反向，距离相同。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第六单元 确定位置\n\n一、填空（每空6分，共30分）\n\n1. 确定物体位置需要（）和（）两个条件。\n2. 小明在学校北偏东30°，距离200米；学校在小明（）偏（）30°，距离200米。\n3. 观测点不同，描述的位置（）。\n\n二、判断（每题8分，共32分）\n\n1. 只说方向就能确定位置。（）\n2. 北偏西40°，也可以说成西偏北50°。（）\n3. 两地相对位置，距离不变。（）\n4. 角度不同，位置不同。（）\n\n三、简答（38分）\n图书馆在广场南偏西25°，距离300米。请说出广场相对于图书馆的位置。\n\n第六单元参考答案\n一、1.方向，距离；2.南，西；3.不同\n二、×，√，√，√\n三、广场在图书馆北偏东25°，距离300米。\n\n"
+    },
+    {
+      "topicKey": "equation-solve",
+      "title": "第七单元 用方程解决问题",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "相遇问题：（）×相遇时间=总路程。",
+          "originalReference": "速度和",
+          "stem": "两车沿同一路线从两端同时相向匀速行驶、中途不停，首次相遇前：（）×相遇时间＝初始总路程。",
+          "kind": "fillBlank",
+          "reference": "速度和",
+          "adjustment": "补充同时、相向、匀速、无停留条件。",
+          "answers": [
+            [
+              "速度和",
+              "两车速度和",
+              "两车的速度和"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "甲数是乙数3倍，乙数为x，甲数为（），两数和为（）（写最简字母式）。",
+          "originalReference": "3x；4x",
+          "stem": "甲数是乙数3倍，乙数为x，甲数为（），两数和为（）（写最简字母式）。",
+          "kind": "fillBlank",
+          "reference": "3x；4x",
+          "adjustment": "",
+          "answers": [
+            [
+              "3x"
+            ],
+            [
+              "4x"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "3x＋12＝36，x＝（）。",
+          "originalReference": "8",
+          "stem": "3x＋12＝36，x＝（）。",
+          "kind": "fillBlank",
+          "reference": "8",
+          "adjustment": "",
+          "answers": [
+            [
+              "8"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "$5x-2(x=)18$，$(x=)$（）。",
+          "originalReference": "6",
+          "stem": "5x－2x＝18，x＝（）。",
+          "kind": "fillBlank",
+          "reference": "6",
+          "adjustment": "恢复破损方程5x－2x＝18。",
+          "answers": [
+            [
+              "6"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "4x＋16＝48",
+          "originalReference": "4x＝32，x＝8。把解代入原式，左右相等。",
+          "stem": "解方程并检验：4x＋16＝48",
+          "kind": "shortAnswer",
+          "reference": "4x＝32，x＝8。把解代入原式，左右相等。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "originalStem": "$7x-2(x=)35$",
+          "originalReference": "5x＝35，x＝7。把解代入原式，左右相等。",
+          "stem": "解方程并检验：7x－2x＝35",
+          "kind": "shortAnswer",
+          "reference": "5x＝35，x＝7。把解代入原式，左右相等。",
+          "adjustment": "恢复破损方程7x－2x＝35。"
+        },
+        {
+          "number": 7,
+          "originalStem": "2x＋3×5＝29",
+          "originalReference": "2x＋15＝29，2x＝14，x＝7。把解代入原式，左右相等。",
+          "stem": "解方程并检验：2x＋3×5＝29",
+          "kind": "shortAnswer",
+          "reference": "2x＋15＝29，2x＝14，x＝7。把解代入原式，左右相等。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "3（x＋2）＝24",
+          "originalReference": "x＋2＝8，x＝6。把解代入原式，左右相等。",
+          "stem": "解方程并检验：3（x＋2）＝24",
+          "kind": "shortAnswer",
+          "reference": "x＋2＝8，x＝6。把解代入原式，左右相等。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "甲乙两车相距360km，同时相向开出，甲车每小时65km，乙车每小时55km，多久相遇？",
+          "originalReference": "设x小时相遇，（65＋55）x＝360，120x＝360，x＝3。检验195＋165＝360千米。",
+          "stem": "甲乙两车相距360千米，从同一路线两端同时相向匀速开出，速度分别65、55千米/时，中途不停，多久首次相遇？列方程解答。",
+          "kind": "shortAnswer",
+          "reference": "设x小时相遇，（65＋55）x＝360，120x＝360，x＝3。检验195＋165＝360千米。",
+          "adjustment": "明确匀速、同一路线、中途不停、首次相遇；恢复答案中的方程乱码。"
+        }
+      ],
+      "sourceText": "## 第七单元 用方程解决问题\n\n一、填空（每空4分，共24分）\n\n1. 相遇问题：（）×相遇时间=总路程。\n2. 甲数是乙数3倍，乙数$x$，甲数（），两数和（）。\n3. $(3x+12=36)$，$(x=)$（）。\n4. $5x-2(x=)18$，$(x=)$（）。\n\n二、解方程（每题9分，共36分）\n$(4x+16=48)$　　$7x-2(x=)35$\n$(2x+3×5=29)$　　$(3(x+2)=24)$\n\n三、应用题（40分）\n甲乙两车相距360km，同时相向开出，甲车每小时65km，乙车每小时55km，多久相遇？\n\n第七单元参考答案\n一、1.速度和；2.$3x$，$4x$；3.8；4.6\n二、$\\(x=\\)8$；$\\(x=\\)7$；$\\(x=\\)7$；$\\(x=\\)6$\n三、解：设$x$小时相遇。\n$(65+55)\\(x=\\)360$，$120\\(x=\\)360$，$\\(x=\\)3$\n答：3小时相遇。\n\n"
+    },
+    {
+      "topicKey": "nets",
+      "title": "数学好玩",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "把两个相同长方体包装，把（）面叠在一起，最省包装纸。",
+          "originalReference": "最大",
+          "stem": "两个相同长方体沿一个完整面贴合，外层紧贴包装且忽略接缝损耗，把（）面贴在一起最省纸。",
+          "kind": "fillBlank",
+          "reference": "最大",
+          "adjustment": "明确两盒完整面贴合与理论外露面积条件；不能无条件推广到任意多个盒子。",
+          "answers": [
+            [
+              "最大",
+              "面积最大",
+              "面积最大的"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "不计平移、旋转、翻面等，正方体展开图共有（）种基本类型。",
+          "originalReference": "11",
+          "stem": "不计平移、旋转、翻面等，正方体展开图共有（）种基本类型。",
+          "kind": "fillBlank",
+          "reference": "11",
+          "adjustment": "",
+          "answers": [
+            [
+              "11",
+              "十一"
+            ]
+          ]
+        }
+      ],
+      "sourceText": "## 数学好玩\n\n1. 把两个相同长方体包装，把（）面叠在一起，最省包装纸。（50分）\n2. 正方体展开图，一共（）种基本类型。（50分）\n\n数学好玩参考答案\n1.最大；2.11\n\n"
+    },
+    {
+      "topicKey": "double-bar",
+      "title": "第八单元 数据的表示和分析",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "复式折线统计图能看出数据的（）变化。",
+          "originalReference": "增减",
+          "stem": "复式折线统计图能看出数据的（）变化。",
+          "kind": "fillBlank",
+          "reference": "增减",
+          "adjustment": "",
+          "answers": [
+            [
+              "增减",
+              "增加和减少"
+            ]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "平均数＝（）÷总份数。",
+          "originalReference": "总数量",
+          "stem": "平均数＝（）÷总份数。",
+          "kind": "fillBlank",
+          "reference": "总数量",
+          "adjustment": "",
+          "answers": [
+            [
+              "总数量",
+              "总数",
+              "总和",
+              "数据总和"
+            ]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "复式统计图要加（），区分两组数据。",
+          "originalReference": "图例",
+          "stem": "复式统计图要加（），区分两组数据。",
+          "kind": "fillBlank",
+          "reference": "图例",
+          "adjustment": "",
+          "answers": [
+            [
+              "图例"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "平均数容易受（）数据影响。",
+          "originalReference": "极端",
+          "stem": "平均数容易受（）数据影响。",
+          "kind": "fillBlank",
+          "reference": "极端",
+          "adjustment": "",
+          "answers": [
+            [
+              "极端",
+              "极端值",
+              "特别大或特别小"
+            ]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "复式条形统计图可以对比两组数据数量。",
+          "originalReference": "正确。根据图例、同一单位与刻度比较。",
+          "stem": "复式条形统计图可以对比两组数据数量。",
+          "kind": "trueFalse",
+          "reference": "正确。根据图例、同一单位与刻度比较。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "平均数一定是这组数据中的一个数。",
+          "originalReference": "错误。1、2的平均数为1.5，不在原数据中。",
+          "stem": "平均数一定是这组数据中的一个数。",
+          "kind": "trueFalse",
+          "reference": "错误。1、2的平均数为1.5，不在原数据中。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "折线统计图可以看出数据的增减趋势。",
+          "originalReference": "正确。按顺序连接的数据点可反映变化。",
+          "stem": "折线统计图可以看出数据的增减趋势。",
+          "kind": "trueFalse",
+          "reference": "正确。按顺序连接的数据点可反映变化。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "两组数据必须用复式图。",
+          "originalReference": "错误。可以根据目的选择表格、分别画图或复式图。",
+          "stem": "两组数据必须用复式图。",
+          "kind": "trueFalse",
+          "reference": "错误。可以根据目的选择表格、分别画图或复式图。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "5名同学分数85、92、88、90、95，平均分是多少？",
+          "originalReference": "（85＋92＋88＋90＋95）÷5＝450÷5＝90。",
+          "stem": "5名同学分数85、92、88、90、95，平均分是多少？（只填数值，单位：分）",
+          "kind": "calculation",
+          "reference": "（85＋92＋88＋90＋95）÷5＝450÷5＝90。",
+          "adjustment": "",
+          "value": 90
+        }
+      ],
+      "sourceText": "## 第八单元 数据的表示和分析\n\n一、填空（每空8分，共32分）\n\n1. 复式折线统计图，能看出数据的（）变化。\n2. 平均数=（）÷总份数。\n3. 复式统计图要加（），区分两组数据。\n4. 平均数容易受（）数据影响。\n\n二、判断（每题10分，共40分）\n\n1. 复式条形统计图可以对比两组数据数量。（）\n2. 平均数一定是这组数据中的一个数。（）\n3. 折线统计图可以看增减趋势。（）\n4. 两组数据必须用复式图。（）\n\n三、应用题（28分）\n5名同学分数：85、92、88、90、95，求平均分。\n\n第八单元参考答案\n一、1.增减；2.总数量；3.图例；4.极端\n二、√，×，√，×\n三、$(85+92+88+90+95)÷5=90$分\n答：平均分90分。\n"
+    }
+  ]
+}

@@ -26,7 +26,9 @@ function launchContextFromHref(courseHref: string): LessonLaunchContext | null {
   }
 }
 
-function readableBlocks(source: Awaited<ReturnType<typeof lessonPlayerRepository.getLessonPlayerSource>>['source']): LessonContentBlockViewModel[] {
+function readableBlocks(
+  source: Awaited<ReturnType<typeof lessonPlayerRepository.getLessonPlayerSource>>['source'],
+): LessonContentBlockViewModel[] {
   if (!source) return []
   return source.blocks.map((record) => ({
     id: record.id,
@@ -54,7 +56,8 @@ export async function resolveCurrentQuestRevision(courseHref: string): Promise<{
     contentExpansionRepository.getBundle(context.knowledgePointId, 'profile'),
   ])
   const source = sourceResult.source
-  if (!source || !bundle || source.context.knowledgePointId !== context.knowledgePointId) return null
+  if (!source || !bundle || source.context.knowledgePointId !== context.knowledgePointId)
+    return null
   const text = questReadingText(readableBlocks(source))
   const quest = createReadingQuest({ bundle, title: source.lesson.title, text })
   return quest ? { questId: quest.id, contentRevision: questContentRevision(quest) } : null

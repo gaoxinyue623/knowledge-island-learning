@@ -1,0 +1,573 @@
+{
+  "title": "深圳专用二年级下册英语口语交际 全单元同步练习题（含答案）",
+  "sourceNote": "题目与原始参考答案来自用户本次提供的同步练习；自动评分规则、常见等价表达与解析由项目补充。原始题干与必要调整分别保留。",
+  "corePatterns": [
+    "—What would you like? —I’d like some … It’s yummy.",
+    "—What do you do to keep clean? —I wash my face/brush my teeth.",
+    "—What club are you in? —I’m in the … Club. I …",
+    "—Can it …? —Yes, it can. / No, it can’t.",
+    "—Who is your hero? —My hero is … He/She is helpful.",
+    "—Why should we be honest? —Because people will trust us."
+  ],
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 What is fun about food? 美食专项练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "米饭 __________",
+          "kind": "fillBlank",
+          "reference": "rice",
+          "answers": [["rice"]]
+        },
+        {
+          "number": 2,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "鱼丸 __________",
+          "kind": "fillBlank",
+          "reference": "fish balls",
+          "answers": [["fish balls"]]
+        },
+        {
+          "number": 3,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "粥 __________",
+          "kind": "fillBlank",
+          "reference": "congee",
+          "answers": [["congee"]]
+        },
+        {
+          "number": 4,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "蛋糕 __________",
+          "kind": "fillBlank",
+          "reference": "cake",
+          "answers": [["cake"]]
+        },
+        {
+          "number": 5,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "面包 __________",
+          "kind": "fillBlank",
+          "reference": "bread",
+          "answers": [["bread"]]
+        },
+        {
+          "number": 6,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "包子 __________",
+          "kind": "fillBlank",
+          "reference": "baozi",
+          "answers": [["baozi"]]
+        },
+        {
+          "number": 7,
+          "section": "一、汉译英（重点单词听写）",
+          "stem": "点心 __________",
+          "kind": "fillBlank",
+          "reference": "dim sum",
+          "answers": [["dim sum"]]
+        },
+        {
+          "number": 8,
+          "section": "二、单项选择",
+          "stem": "I’d like some __________. It’s yummy.",
+          "kind": "singleChoice",
+          "reference": "B",
+          "options": ["book", "congee", "pen"],
+          "correctOptionKey": "B",
+          "explanation": "食物 congee 是粥，book 和 pen 不是食物。"
+        },
+        {
+          "number": 9,
+          "section": "二、单项选择",
+          "stem": "There __________ lots of food.",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["is", "are", "am"],
+          "correctOptionKey": "A",
+          "explanation": "food 在这里为不可数名词，用 There is。"
+        },
+        {
+          "number": 10,
+          "section": "二、单项选择",
+          "stem": "I like dim sum __________.",
+          "kind": "singleChoice",
+          "reference": "B",
+          "options": ["good", "best", "very"],
+          "correctOptionKey": "B",
+          "explanation": "like ... best 表示最喜欢。"
+        },
+        {
+          "number": 11,
+          "section": "三、情景对话（选择正确答句）",
+          "stem": "What would you like?",
+          "kind": "singleChoice",
+          "reference": "B",
+          "options": ["I like rice.", "I’d like some cake."],
+          "correctOptionKey": "B",
+          "explanation": "询问想要什么，用 I’d like ... 回答。"
+        },
+        {
+          "number": 12,
+          "section": "四、句子仿写",
+          "stem": "例：I like fish balls and rice.\n仿写：I like __________ and __________.",
+          "kind": "shortAnswer",
+          "reference": "示例：I like congee and baozi.",
+          "explanation": "这道题可有不同表达。请对照参考答案，检查句意和语法；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 How can we keep clean? 卫生习惯专项练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、英译汉+汉译英",
+          "stem": "wash hands __________",
+          "kind": "fillBlank",
+          "reference": "洗手",
+          "answers": [["洗手"]]
+        },
+        {
+          "number": 2,
+          "section": "一、英译汉+汉译英",
+          "stem": "brush teeth __________",
+          "kind": "fillBlank",
+          "reference": "刷牙",
+          "answers": [["刷牙"]]
+        },
+        {
+          "number": 3,
+          "section": "一、英译汉+汉译英",
+          "stem": "wash face __________",
+          "kind": "fillBlank",
+          "reference": "洗脸",
+          "answers": [["洗脸"]]
+        },
+        {
+          "number": 4,
+          "section": "一、英译汉+汉译英",
+          "stem": "干净的 __________",
+          "kind": "fillBlank",
+          "reference": "clean",
+          "answers": [["clean"]]
+        },
+        {
+          "number": 5,
+          "section": "一、英译汉+汉译英",
+          "stem": "爪子 __________",
+          "kind": "fillBlank",
+          "reference": "paws",
+          "answers": [["paws"]]
+        },
+        {
+          "number": 6,
+          "section": "二、单项选择",
+          "stem": "__________ your hands after you play.",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["Wash", "Washes", "Washing"],
+          "correctOptionKey": "A",
+          "explanation": "祈使句以动词原形 Wash 开头。"
+        },
+        {
+          "number": 7,
+          "section": "二、单项选择",
+          "stem": "I __________ my teeth every day.",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["brush", "brushes", "brushing"],
+          "correctOptionKey": "A",
+          "explanation": "主语是 I，一般现在时用 brush。"
+        },
+        {
+          "number": 8,
+          "section": "三、连词成句",
+          "stem": "do / you / clean / what / to / keep / every day ( ? )\n请写出完整问句。",
+          "kind": "fillBlank",
+          "reference": "What do you do to keep clean every day?",
+          "answers": [
+            ["What do you do to keep clean every day?", "What do you do to keep clean every day"]
+          ],
+          "explanation": "疑问词 What 开头，do you do 接在后面，再写 to keep clean every day。"
+        },
+        {
+          "number": 9,
+          "section": "四、情景问答",
+          "stem": "—What do you do to keep clean every day?\n—________________________________________",
+          "kind": "shortAnswer",
+          "reference": "示例：I wash my face and brush my teeth.",
+          "explanation": "这道题可有不同表达。请对照参考答案，检查句意和语法；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What do you do in school clubs? 校园社团专项练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、单词填空",
+          "stem": "剪纸 __________",
+          "kind": "fillBlank",
+          "reference": "paper-cutting",
+          "answers": [["paper-cutting", "paper cutting"]]
+        },
+        {
+          "number": 2,
+          "section": "一、单词填空",
+          "stem": "舞狮 __________",
+          "kind": "fillBlank",
+          "reference": "lion dance",
+          "answers": [["lion dance"]]
+        },
+        {
+          "number": 3,
+          "section": "一、单词填空",
+          "stem": "踢毽子 __________",
+          "kind": "fillBlank",
+          "reference": "kick shuttlecocks",
+          "answers": [["kick shuttlecocks", "kick a shuttlecock"]]
+        },
+        {
+          "number": 4,
+          "section": "一、单词填空",
+          "stem": "社团 __________",
+          "kind": "fillBlank",
+          "reference": "club",
+          "answers": [["club"]]
+        },
+        {
+          "number": 5,
+          "section": "二、单项选择",
+          "stem": "I’m in the Paper-cutting Club. I __________ paper-cutting.",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["do", "does", "doing"],
+          "correctOptionKey": "A",
+          "explanation": "主语 I 后用动词原形 do。"
+        },
+        {
+          "number": 6,
+          "section": "二、单项选择",
+          "stem": "Do you want to __________ the lion dance?",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["do", "does", "doing"],
+          "correctOptionKey": "A",
+          "explanation": "want to 后面接动词原形 do。"
+        },
+        {
+          "number": 7,
+          "section": "三、情景匹配",
+          "stem": "What club are you in?",
+          "kind": "singleChoice",
+          "reference": "B",
+          "options": ["Yes, I do.", "I’m in the Drama Club."],
+          "correctOptionKey": "B",
+          "explanation": "问哪个社团，要回答社团名称。"
+        },
+        {
+          "number": 8,
+          "section": "三、情景匹配",
+          "stem": "Do you like paper-cutting?",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["Yes, I do.", "I’m in the Drama Club."],
+          "correctOptionKey": "A",
+          "explanation": "Do you ...? 可以用 Yes, I do. 回答。"
+        },
+        {
+          "number": 9,
+          "section": "四、句子仿写",
+          "stem": "例：I do paper-cutting in the club.\n仿写：I _______________ in the club.",
+          "kind": "shortAnswer",
+          "reference": "示例：I kick shuttlecocks in the club.",
+          "explanation": "这道题可有不同表达。请对照参考答案，检查句意和语法；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 How are people and animals different? 人与动物专项练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、单词英汉互译",
+          "stem": "wing __________",
+          "kind": "fillBlank",
+          "reference": "翅膀",
+          "answers": [["翅膀"]]
+        },
+        {
+          "number": 2,
+          "section": "一、单词英汉互译",
+          "stem": "tail __________",
+          "kind": "fillBlank",
+          "reference": "尾巴",
+          "answers": [["尾巴"]]
+        },
+        {
+          "number": 3,
+          "section": "一、单词英汉互译",
+          "stem": "fly __________",
+          "kind": "fillBlank",
+          "reference": "飞",
+          "answers": [["飞", "飞行"]]
+        },
+        {
+          "number": 4,
+          "section": "一、单词英汉互译",
+          "stem": "run __________",
+          "kind": "fillBlank",
+          "reference": "跑",
+          "answers": [["跑", "跑步"]]
+        },
+        {
+          "number": 5,
+          "section": "一、单词英汉互译",
+          "stem": "swim __________",
+          "kind": "fillBlank",
+          "reference": "游泳",
+          "answers": [["游泳"]]
+        },
+        {
+          "number": 6,
+          "section": "一、单词英汉互译",
+          "stem": "climb __________",
+          "kind": "fillBlank",
+          "reference": "爬",
+          "answers": [["爬", "攀爬", "爬树"]]
+        },
+        {
+          "number": 7,
+          "section": "二、判断句子正(T)误(F)",
+          "stem": "请按本单元课文判断：\nBirds have wings. They can fly.",
+          "kind": "trueFalse",
+          "reference": "T",
+          "correctValue": true,
+          "explanation": "按本单元课文描述，小鸟有翅膀、会飞。本题判断是否符合课文，不推断每种鸟都能飞。",
+          "originalStem": "Birds have wings. They can fly."
+        },
+        {
+          "number": 8,
+          "section": "二、判断句子正(T)误(F)",
+          "stem": "请按本单元课文判断：\nI have wings. I can fly.",
+          "kind": "trueFalse",
+          "reference": "F",
+          "correctValue": false,
+          "explanation": "课文中的人没有翅膀，不能飞。",
+          "originalStem": "I have wings. I can fly."
+        },
+        {
+          "number": 9,
+          "section": "二、判断句子正(T)误(F)",
+          "stem": "请按本单元课文判断：\nFish have tails. They can swim.",
+          "kind": "trueFalse",
+          "reference": "T",
+          "correctValue": true,
+          "explanation": "本单元课文描述鱼儿有尾巴，会游泳。",
+          "originalStem": "Fish have tails. They can swim."
+        },
+        {
+          "number": 10,
+          "section": "三、句型转换",
+          "stem": "It can run.（改为一般疑问句）\n—__________ it __________?\n—Yes, it can. / No, it can’t.",
+          "kind": "fillBlank",
+          "reference": "Can; run",
+          "answers": [["Can"], ["run"]],
+          "explanation": "把情态动词 Can 放在句首，run 仍用原形。"
+        },
+        {
+          "number": 11,
+          "section": "四、情景问答",
+          "stem": "—Can a fish fly?\n—________________________________________",
+          "kind": "shortAnswer",
+          "reference": "参考表达：No, it can’t. It can swim.",
+          "explanation": "这道题可有不同表达。请对照参考答案，检查句意和语法；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 Who is your hero? 榜样英雄专项练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、单词听写",
+          "stem": "英雄 __________",
+          "kind": "fillBlank",
+          "reference": "hero",
+          "answers": [["hero"]]
+        },
+        {
+          "number": 2,
+          "section": "一、单词听写",
+          "stem": "乐于助人的 __________",
+          "kind": "fillBlank",
+          "reference": "helpful",
+          "answers": [["helpful"]]
+        },
+        {
+          "number": 3,
+          "section": "一、单词听写",
+          "stem": "善良的 __________",
+          "kind": "fillBlank",
+          "reference": "kind",
+          "answers": [["kind"]]
+        },
+        {
+          "number": 4,
+          "section": "一、单词听写",
+          "stem": "温暖的 __________",
+          "kind": "fillBlank",
+          "reference": "warm",
+          "answers": [["warm"]]
+        },
+        {
+          "number": 5,
+          "section": "一、单词听写",
+          "stem": "修理 __________",
+          "kind": "fillBlank",
+          "reference": "fix",
+          "answers": [["fix"]]
+        },
+        {
+          "number": 6,
+          "section": "二、单项选择",
+          "stem": "My hero is my mum. She is __________.",
+          "kind": "singleChoice",
+          "reference": "B",
+          "options": ["help", "helpful", "helping"],
+          "correctOptionKey": "B",
+          "explanation": "形容词 helpful 表示乐于助人的。"
+        },
+        {
+          "number": 7,
+          "section": "二、单项选择",
+          "stem": "Mr Song can __________ things.",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["fix", "fixes", "fixing"],
+          "correctOptionKey": "A",
+          "explanation": "情态动词 can 后用动词原形 fix。"
+        },
+        {
+          "number": 8,
+          "section": "三、连词成句",
+          "stem": "hero / is / who / your ( ? )\n请写出完整问句。",
+          "kind": "fillBlank",
+          "reference": "Who is your hero?",
+          "answers": [["Who is your hero?", "Who is your hero"]],
+          "explanation": "问谁是英雄，用 Who is your hero?。"
+        },
+        {
+          "number": 9,
+          "section": "四、仿写句子",
+          "stem": "例：My hero is my teacher. She is warm and nice.\n仿写：My hero is __________. He/She is __________.",
+          "kind": "shortAnswer",
+          "reference": "示例：My hero is my dad. He is helpful.",
+          "explanation": "这道题可有不同表达。请对照参考答案，检查句意和语法；不自动判分。"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 Why should we be honest? 诚实主题专项练习",
+      "questions": [
+        {
+          "number": 1,
+          "section": "一、英汉互译",
+          "stem": "honest __________",
+          "kind": "fillBlank",
+          "reference": "诚实的",
+          "answers": [["诚实的", "诚实"]]
+        },
+        {
+          "number": 2,
+          "section": "一、英汉互译",
+          "stem": "lie __________",
+          "kind": "fillBlank",
+          "reference": "谎言；说谎",
+          "answers": [["谎言；说谎", "谎言;说谎", "谎言", "说谎", "谎话"]]
+        },
+        {
+          "number": 3,
+          "section": "一、英汉互译",
+          "stem": "trust __________",
+          "kind": "fillBlank",
+          "reference": "信任",
+          "answers": [["信任", "信赖"]]
+        },
+        {
+          "number": 4,
+          "section": "一、英汉互译",
+          "stem": "农场 __________",
+          "kind": "fillBlank",
+          "reference": "farm",
+          "answers": [["farm"]]
+        },
+        {
+          "number": 5,
+          "section": "一、英汉互译",
+          "stem": "绵羊 __________",
+          "kind": "fillBlank",
+          "reference": "sheep",
+          "answers": [["sheep"]]
+        },
+        {
+          "number": 6,
+          "section": "一、英汉互译",
+          "stem": "狼 __________",
+          "kind": "fillBlank",
+          "reference": "wolf",
+          "answers": [["wolf"]]
+        },
+        {
+          "number": 7,
+          "section": "二、单项选择",
+          "stem": "请选择表示原因的连接词：\nWe should be honest __________ people will trust us.",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["because", "so", "but"],
+          "correctOptionKey": "A",
+          "explanation": "本题限定表示原因，选择 because。原题未限定时，so 也可构成表示结果或目的的通顺表达，因此补充题干条件以避免误判。",
+          "originalStem": "We should be honest __________ people will trust us.",
+          "adjustment": "补充“选择表示原因的连接词”限定；原始参考答案 A 保留。"
+        },
+        {
+          "number": 8,
+          "section": "二、单项选择",
+          "stem": "Don’t tell __________.",
+          "kind": "singleChoice",
+          "reference": "B",
+          "options": ["truth", "lies", "honest"],
+          "correctOptionKey": "B",
+          "explanation": "tell lies 表示说谎，Don’t tell lies. 表示不要说谎。"
+        },
+        {
+          "number": 9,
+          "section": "三、问答匹配",
+          "stem": "Why should we be honest?",
+          "kind": "singleChoice",
+          "reference": "A",
+          "options": ["Because people will trust us.", "I like honest people."],
+          "correctOptionKey": "A",
+          "explanation": "Why 问原因，Because ... 回答原因。"
+        },
+        {
+          "number": 10,
+          "section": "四、句子翻译",
+          "stem": "诚实可以获得别人的信任。\n________________________________________",
+          "kind": "shortAnswer",
+          "reference": "参考译文：Honest people can get others’ trust.",
+          "explanation": "这道题可有不同表达。请对照参考答案，检查句意和语法；不自动判分。"
+        }
+      ]
+    }
+  ]
+}

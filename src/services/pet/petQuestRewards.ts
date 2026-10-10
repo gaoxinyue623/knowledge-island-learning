@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import type { ReadingPracticeQuest, ReadingQuest } from '@/types/reading-quest'
 import {
   readQuestProgress,
@@ -66,7 +67,7 @@ export function settleQuestPetReward(
     return Promise.resolve()
   let source: PetLearningSource | null
   try {
-    source = questPetSource(window.localStorage, profileId, quest)
+    source = questPetSource(accountStorage, profileId, quest)
   } catch {
     return Promise.resolve()
   }

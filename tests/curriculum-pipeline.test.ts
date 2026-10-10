@@ -274,7 +274,14 @@ describe('validation and route guard', () => {
       '湖北省',
       '深圳市',
     ])
-    expect(curriculumData.grades.map((grade) => grade.id)).toEqual(['GRADE_1', 'GRADE_2'])
+    expect(curriculumData.grades.map((grade) => grade.id)).toEqual([
+      'GRADE_1',
+      'GRADE_2',
+      'GRADE_3',
+      'GRADE_4',
+      'GRADE_5',
+      'GRADE_6',
+    ])
     expect(curriculumData.semesters.map((semester) => semester.id)).toEqual([
       'SEMESTER_UPPER',
       'SEMESTER_LOWER',

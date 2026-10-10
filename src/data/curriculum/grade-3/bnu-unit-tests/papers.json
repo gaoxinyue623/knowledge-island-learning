@@ -1,0 +1,1089 @@
+{
+  "title": "北师大三年级上下册2022新课标修订单元自测题（用户提供）",
+  "sourceSha256": "7a589c2a0bbd66506b7a413b6847f4ce9aad286978c561a71fe79ac117b12f74",
+  "sourceNote": "上下册分别关联既有教材单元。原稿保留；比较题乱码按答案还原，歧义条件已补足并逐题记录。原稿多组题数、每题分值与小计不一致，不宣称系统试卷为100分。计算过程、公式表达、画图口述由人工核对；数值应用题仅核对最终数值，不代表已审核列式过程。",
+  "notice": "原稿分值与题量有不一致之处，本测验按实际题目统计，不换算为100分。自动题仅核对所填答案；列式、计算过程、画图和口述请对照参考答案，由老师或家长核对。",
+  "papers": [
+    {
+      "semester": "UPPER",
+      "topicKey": "multiply-mix",
+      "title": "第一单元 混合运算（自测）",
+      "sourceText": "## 第一单元 混合运算（自测）\n\n一、填空（每空3分，共18分）\n\n1. 在没有括号的算式里，有乘法和加减法，先算（），再算（）。\n2. 计算$(24-18)×5$，先算（）法，再算（）法。\n3. $(30+6×4)$，先算（），结果是（）。\n\n二、脱式计算（每题6分，共36分）\n$(7+5×8)$　　$42-18÷3$　　$(36-12)÷4$\n$6×9-20$　　$(45÷5+12)$　　$8×(14-7)$\n\n三、解决问题（共46分）\n\n1. 商店每支钢笔8元，小明买3支，付30元，应找回多少元？（15分）\n2. 一共有40个苹果，已经拿走16个，剩下的平均分给4个小朋友，每人分几个？（15分）\n3. 综合算式：5乘6的积减去12，得数是多少？（16分）\n\n上册第一单元答案\n一、1.乘法，加减法；2.减，乘；3.$6×4$，54\n二、\n$\\(7+5×8\\)=7+40=47$\n$42-18÷3=42-6=36$\n$(36-12)÷4=24÷4=6$\n$6×9-20=54-20=34$\n$\\(45÷5+12\\)=9+12=21$\n$8×(14-7)=8×7=56$\n三、\n1.$30-3×8=6$（元）答：找回6元\n2.$(40-16)÷4=6$（个）答：每人6个\n3.$5×6-12=18$",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、填空：没有括号的算式中，有乘法和加减法，先算（），再算（）。",
+          "kind": "fillBlank",
+          "reference": "乘法；加减法",
+          "adjustment": "",
+          "answers": [
+            ["乘法", "乘"],
+            ["加减法", "加法和减法", "加减"]
+          ]
+        },
+        {
+          "number": 2,
+          "stem": "一、填空：计算（24－18）×5，先算（）法，再算（）法。",
+          "kind": "fillBlank",
+          "reference": "减；乘",
+          "adjustment": "",
+          "answers": [
+            ["减", "减法"],
+            ["乘", "乘法"]
+          ]
+        },
+        {
+          "number": 3,
+          "stem": "一、填空：计算30＋6×4，先算（），结果是（）。",
+          "kind": "fillBlank",
+          "reference": "6×4；54",
+          "adjustment": "",
+          "answers": [["6×4", "6*4", "6乘4", "乘法"], ["54"]]
+        },
+        {
+          "number": 4,
+          "stem": "二、脱式计算，写出过程：7＋5×8",
+          "kind": "shortAnswer",
+          "reference": "7＋40＝47",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "二、脱式计算，写出过程：42－18÷3",
+          "kind": "shortAnswer",
+          "reference": "42－6＝36",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "stem": "二、脱式计算，写出过程：（36－12）÷4",
+          "kind": "shortAnswer",
+          "reference": "24÷4＝6",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "stem": "二、脱式计算，写出过程：6×9－20",
+          "kind": "shortAnswer",
+          "reference": "54－20＝34",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "stem": "二、脱式计算，写出过程：45÷5＋12",
+          "kind": "shortAnswer",
+          "reference": "9＋12＝21",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "stem": "二、脱式计算，写出过程：8×（14－7）",
+          "kind": "shortAnswer",
+          "reference": "8×7＝56",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "stem": "三、商店每支钢笔8元，小明买3支，付30元，应找回多少元？（填写数值，单位：元）",
+          "kind": "calculation",
+          "reference": "6元",
+          "adjustment": "",
+          "value": 6
+        },
+        {
+          "number": 11,
+          "stem": "三、一共有40个苹果，拿走16个，剩下的平均分给4个小朋友，每人分几个？（填写数值，单位：个）",
+          "kind": "calculation",
+          "reference": "6个",
+          "adjustment": "",
+          "value": 6
+        },
+        {
+          "number": 12,
+          "stem": "三、列综合算式：5乘6的积减去12，得数是多少？",
+          "kind": "shortAnswer",
+          "reference": "5×6－12＝18。",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "mm-dm",
+      "title": "第二单元 测量（二）（自测）",
+      "sourceText": "## 第二单元 测量（二）（自测）\n\n一、单位填空（每空3分，共24分）\n\n1. 课桌高约7（）；一枚硬币厚约2（）\n2. 学校跑道一圈400米，跑（）圈是1千米。\n3. $3\\mathrm{分米}=(\\quad)\\mathrm{厘米}$；$5\\mathrm{厘米}=(\\quad)\\mathrm{毫米}$\n$2000\\mathrm{米}=(\\quad)\\mathrm{千米}$；$1\\mathrm{米}=(\\quad)\\mathrm{分米}$\n\n二、比大小（＞＜＝，每题4分，共20分）\n4分米(3.2(0.7(5.5〇5.3)0.9)2.9)40毫米　　1千米(3.2(0.7(5.5〇5.3)0.9)2.9)999米\n50毫米(3.2(0.7(5.5〇5.3)0.9)2.9)5厘米　　30分米(3.2(0.7(5.5〇5.3)0.9)2.9)3米　　6厘米(3.2(0.7(5.5〇5.3)0.9)2.9)70毫米\n\n三、单位换算计算（每题6分，共24分）\n$1\\mathrm{千米}-400\\mathrm{米}=$\n$2\\mathrm{分米}+8\\mathrm{分米}=$（）米\n$45\\mathrm{毫米}+15\\mathrm{毫米}=$（）厘米\n$1\\mathrm{米}-3\\mathrm{分米}=$（）分米\n\n四、解决问题（32分）\n一根彩带长2米，剪掉6分米，还剩多少分米？\n\n上册第二单元答案\n一、1.分米，毫米；2.2圈半；3.30，50，2，10\n二、＞；＞；＝；＝；＜\n三、600米；1米；6厘米；7分米\n四、2米=20分米，$20-6=14$分米",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、课桌高约7（）；一枚硬币厚约2（）。",
+          "kind": "fillBlank",
+          "reference": "分米；毫米",
+          "adjustment": "",
+          "answers": [
+            ["分米", "dm"],
+            ["毫米", "mm"]
+          ]
+        },
+        {
+          "number": 2,
+          "stem": "一、学校跑道一圈400米，跑（）圈是1千米。",
+          "kind": "fillBlank",
+          "reference": "2.5",
+          "adjustment": "",
+          "answers": [["2.5", "2圈半", "两圈半", "二圈半", "2又1/2"]]
+        },
+        {
+          "number": 3,
+          "stem": "一、3分米＝（）厘米；5厘米＝（）毫米；2000米＝（）千米；1米＝（）分米。",
+          "kind": "fillBlank",
+          "reference": "30；50；2；10",
+          "adjustment": "",
+          "answers": [["30"], ["50"], ["2"], ["10"]]
+        },
+        {
+          "number": 4,
+          "stem": "二、比较大小，填＞、＜或＝：4分米（）40毫米",
+          "kind": "fillBlank",
+          "reference": ">",
+          "adjustment": "原稿比较符号位置出现嵌套乱码，依据两侧数值和所附答案恢复为空格。",
+          "answers": [[">", "＞"]]
+        },
+        {
+          "number": 5,
+          "stem": "二、比较大小，填＞、＜或＝：1千米（）999米",
+          "kind": "fillBlank",
+          "reference": ">",
+          "adjustment": "原稿比较符号位置出现嵌套乱码，依据两侧数值和所附答案恢复为空格。",
+          "answers": [[">", "＞"]]
+        },
+        {
+          "number": 6,
+          "stem": "二、比较大小，填＞、＜或＝：50毫米（）5厘米",
+          "kind": "fillBlank",
+          "reference": "=",
+          "adjustment": "原稿比较符号位置出现嵌套乱码，依据两侧数值和所附答案恢复为空格。",
+          "answers": [["=", "＝"]]
+        },
+        {
+          "number": 7,
+          "stem": "二、比较大小，填＞、＜或＝：30分米（）3米",
+          "kind": "fillBlank",
+          "reference": "=",
+          "adjustment": "原稿比较符号位置出现嵌套乱码，依据两侧数值和所附答案恢复为空格。",
+          "answers": [["=", "＝"]]
+        },
+        {
+          "number": 8,
+          "stem": "二、比较大小，填＞、＜或＝：6厘米（）70毫米",
+          "kind": "fillBlank",
+          "reference": "<",
+          "adjustment": "原稿比较符号位置出现嵌套乱码，依据两侧数值和所附答案恢复为空格。",
+          "answers": [["<", "＜"]]
+        },
+        {
+          "number": 9,
+          "stem": "三、1千米－400米＝？（填写数值，单位：米）",
+          "kind": "calculation",
+          "reference": "600米",
+          "adjustment": "",
+          "value": 600
+        },
+        {
+          "number": 10,
+          "stem": "三、2分米＋8分米＝多少米？（填写数值，单位：米）",
+          "kind": "calculation",
+          "reference": "1米",
+          "adjustment": "",
+          "value": 1
+        },
+        {
+          "number": 11,
+          "stem": "三、45毫米＋15毫米＝多少厘米？（填写数值，单位：厘米）",
+          "kind": "calculation",
+          "reference": "6厘米",
+          "adjustment": "",
+          "value": 6
+        },
+        {
+          "number": 12,
+          "stem": "三、1米－3分米＝多少分米？（填写数值，单位：分米）",
+          "kind": "calculation",
+          "reference": "7分米",
+          "adjustment": "",
+          "value": 7
+        },
+        {
+          "number": 13,
+          "stem": "四、一根彩带长2米，剪掉6分米，还剩多少分米？（填写数值，单位：分米）",
+          "kind": "calculation",
+          "reference": "14分米",
+          "adjustment": "",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "big-add-subtract",
+      "title": "第三单元 大数加与减（二）（自测）",
+      "sourceText": "## 第三单元 大数加与减（二）（自测）\n\n一、竖式计算（带★验算，每题8分，共40分）\n$(348+256=)$　　$720-185=$\n$(254+136+207=)$　　$800-245-155=$\n★$612-238=$\n\n二、填空（每空4分，共20分）\n\n1. 三位数加减混合，没有括号，按（）顺序计算。\n2. 验算减法，可以用（）+差=被减数。\n\n三、应用题（40分）\n\n1. 书店原有图书480本，卖出165本，又购进220本，现在有多少本？\n2. 里程表：周一读数235，周二读数392，周二行驶多少千米？\n\n上册第三单元答案\n一、604；535；597；400；374\n二、1.从左往右；2.减数\n三、1.$480-165+220=535$本；2.$392-235=157$千米",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、在纸上列竖式，写下计算过程或关键步骤：348＋256",
+          "kind": "shortAnswer",
+          "reference": "604",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "一、在纸上列竖式，写下计算过程或关键步骤：720－185",
+          "kind": "shortAnswer",
+          "reference": "535",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "一、在纸上列竖式，写下计算过程或关键步骤：254＋136＋207",
+          "kind": "shortAnswer",
+          "reference": "597",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "一、在纸上列竖式，写下计算过程或关键步骤：800－245－155",
+          "kind": "shortAnswer",
+          "reference": "400",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "一、在纸上列竖式，写下计算过程或关键步骤：612－238（请验算）",
+          "kind": "shortAnswer",
+          "reference": "374；验算374＋238＝612。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "stem": "二、三位数加减混合，没有括号，按（）顺序计算。",
+          "kind": "fillBlank",
+          "reference": "从左往右",
+          "adjustment": "",
+          "answers": [["从左往右", "从左到右", "自左向右"]]
+        },
+        {
+          "number": 7,
+          "stem": "二、验算减法，可以用（）＋差＝被减数。",
+          "kind": "fillBlank",
+          "reference": "减数",
+          "adjustment": "",
+          "answers": [["减数"]]
+        },
+        {
+          "number": 8,
+          "stem": "三、书店原有图书480本，卖出165本，又购进220本，现在有多少本？（填写数值，单位：本）",
+          "kind": "calculation",
+          "reference": "535本",
+          "adjustment": "",
+          "value": 535
+        },
+        {
+          "number": 9,
+          "stem": "三、里程表在周二出发前读数为235千米，周二结束读数为392千米，周二行驶多少千米？（填写数值，单位：千米）",
+          "kind": "calculation",
+          "reference": "157千米",
+          "adjustment": "把周一、周二读数明确为周二出发前和结束后的累计读数，避免测量时点歧义。",
+          "value": 157
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "observe-one",
+      "title": "第四单元 我们生活的空间（一）（自测）",
+      "sourceText": "## 第四单元 我们生活的空间（一）（自测）\n\n1. 观察正方体，最多能看到（）个面。（15分）\n2. 从上面看一个圆柱，看到的图形是（）。（15分）\n3. 判断：从不同方向观察同一个物体，看到形状一定不同。（）（20分）\n4. 连线题：一个长方体，正面看到长方形，侧面看到窄长方形，上面看到大长方形。（口述：区分正面、侧面、上面视图）（25分）\n5. 观察：从侧面看球，看到的是（）。（25分）\n\n上册第四单元答案\n1.3；2.圆；3.×；5.圆形",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 从外部观察不透明正方体，最多能同时看到几个面？（填写数值，单位：个）",
+          "kind": "calculation",
+          "reference": "3个",
+          "adjustment": "补充普通外部观察、不透明物体的条件。",
+          "value": 3
+        },
+        {
+          "number": 2,
+          "stem": "2. 一个圆柱直立放置，沿轴线从正上方看，看到的轮廓是（）。",
+          "kind": "fillBlank",
+          "reference": "圆",
+          "adjustment": "补充圆柱直立及观察方向。",
+          "answers": [["圆", "圆形"]]
+        },
+        {
+          "number": 3,
+          "stem": "3. 从不同方向观察同一个物体，看到的形状一定不同。",
+          "kind": "trueFalse",
+          "reference": "错误",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 4,
+          "stem": "4. 观察一个长方体盒子，口述正面、侧面、上面的视图，并说明每次从哪里看。原稿未提供连线配图，可使用实际盒子完成。",
+          "kind": "shortAnswer",
+          "reference": "根据实际盒子的摆放说明视图；三个方向通常看到长方形，具体宽窄大小由尺寸和朝向决定，不固定判某面最大。",
+          "adjustment": "原稿无配图、无尺寸，且无第4题标准答案，改为原稿允许的口述观察，不自动判分。"
+        },
+        {
+          "number": 5,
+          "stem": "5. 从侧面观察球，看到的轮廓是（）。",
+          "kind": "fillBlank",
+          "reference": "圆",
+          "adjustment": "",
+          "answers": [["圆", "圆形"]]
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "shapes",
+      "title": "第五单元 认识图形（自测）",
+      "sourceText": "## 第五单元 认识图形（自测）\n\n一、填空（每空4分，共32分）\n1.长方形有（）条边，对边（），（）个直角。\n2.正方形四条边都（），4个角都是（）角。\n3.比直角小的角叫（），比直角大的叫（）。\n4.平行四边形对边（）。\n\n二、判断（每题5分，共30分）\n1.正方形是特殊的长方形。（）\n2.平行四边形有4个直角。（）\n3.锐角一定小于钝角。（）\n\n三、画图：画一个长方形和一个平行四边形（38分）\n\n上册第五单元答案\n一、1.4，相等，4；2.相等，直；3.锐角，钝角；4.相等\n二、√，×，√",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、长方形有（）条边，对边（），（）个直角。",
+          "kind": "fillBlank",
+          "reference": "4；相等；4",
+          "adjustment": "",
+          "answers": [["4", "四"], ["相等"], ["4", "四"]]
+        },
+        {
+          "number": 2,
+          "stem": "一、正方形四条边都（），4个角都是（）角。",
+          "kind": "fillBlank",
+          "reference": "相等；直",
+          "adjustment": "",
+          "answers": [["相等"], ["直", "直角"]]
+        },
+        {
+          "number": 3,
+          "stem": "一、比直角小的角叫（）；比直角大且小于平角的角叫（）。",
+          "kind": "fillBlank",
+          "reference": "锐角；钝角",
+          "adjustment": "补充“小于平角”，避免把平角或优角归为钝角。",
+          "answers": [
+            ["锐角", "锐"],
+            ["钝角", "钝"]
+          ]
+        },
+        {
+          "number": 4,
+          "stem": "一、平行四边形对边（）。",
+          "kind": "fillBlank",
+          "reference": "相等",
+          "adjustment": "",
+          "answers": [["相等"]]
+        },
+        {
+          "number": 5,
+          "stem": "二、正方形是特殊的长方形。",
+          "kind": "trueFalse",
+          "reference": "正确",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "stem": "二、所有平行四边形都有4个直角。",
+          "kind": "trueFalse",
+          "reference": "错误",
+          "adjustment": "用“所有”明确全称判断；部分特殊平行四边形确实有4个直角。",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "stem": "二、锐角一定小于钝角。",
+          "kind": "trueFalse",
+          "reference": "正确",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "stem": "三、在纸上画一个长方形和一个没有直角的平行四边形，并写出你检查边和角的方法。",
+          "kind": "shortAnswer",
+          "reference": "长方形对边相等、有4个直角；所画的一般平行四边形两组对边分别平行且相等。由老师或家长查看纸上图形。",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "combinations",
+      "title": "数学好玩：搭配中的学问（自测）",
+      "sourceText": "## 数学好玩：搭配中的学问\n\n1. 2件上衣，3条裤子，一共有（）种搭配。（30分）\n2. 3个人握手，每两人握一次，一共握（）次。（30分）\n3. 早餐：包子、馒头；饮品：牛奶、豆浆。选一种主食一种饮料，几种搭配？（40分）\n\n上册数学好玩答案\n1.6；2.3；3.4种",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 2件不同上衣、3条不同裤子，每次各选一件，有多少种搭配？（填写数值，单位：种）",
+          "kind": "calculation",
+          "reference": "6种",
+          "adjustment": "",
+          "value": 6
+        },
+        {
+          "number": 2,
+          "stem": "2. 3个人握手，每两人握一次，一共几次？（填写数值，单位：次）",
+          "kind": "calculation",
+          "reference": "3次",
+          "adjustment": "",
+          "value": 3
+        },
+        {
+          "number": 3,
+          "stem": "3. 主食有包子、馒头，饮品有牛奶、豆浆，各选一种，有几种搭配？（填写数值，单位：种）",
+          "kind": "calculation",
+          "reference": "4种",
+          "adjustment": "",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "applications",
+      "title": "第六单元 乘除法的应用（二）（自测）",
+      "sourceText": "## 第六单元 乘除法的应用（二）\n\n一、填空（每空4分，24分）\n\n1. 求一个数是另一个数几倍，用（）法；求一个数的几倍是多少，用（）法。\n2. 24是4的（）倍；7的5倍是（）。\n\n二、列式计算（每题12分，36分）\n\n1. 36里面有几个9？\n2. 8的6倍是多少？\n3. 甲数是42，乙数是6，甲数是乙数几倍？\n\n三、应用题（40分）\n果园桃树有9棵，梨树是桃树4倍，梨树多少棵？\n\n上册第六单元答案\n一、除，乘；6，35\n二、$36÷9=4$；$8×6=48$；$42÷6=7$\n三、$9×4=36$棵",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、求一个数是另一个数的几倍，用（）法；求一个数的几倍是多少，用（）法。",
+          "kind": "fillBlank",
+          "reference": "除；乘",
+          "adjustment": "",
+          "answers": [
+            ["除", "除法"],
+            ["乘", "乘法"]
+          ]
+        },
+        {
+          "number": 2,
+          "stem": "一、24是4的（）倍；7的5倍是（）。",
+          "kind": "fillBlank",
+          "reference": "6；35",
+          "adjustment": "",
+          "answers": [["6"], ["35"]]
+        },
+        {
+          "number": 3,
+          "stem": "二、列式计算：36里面有几个9？",
+          "kind": "shortAnswer",
+          "reference": "36÷9＝4。",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "二、列式计算：8的6倍是多少？",
+          "kind": "shortAnswer",
+          "reference": "8×6＝48。",
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "二、列式计算：甲数42，乙数6，甲数是乙数的几倍？",
+          "kind": "shortAnswer",
+          "reference": "42÷6＝7。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "stem": "三、果园桃树有9棵，梨树是桃树的4倍，梨树有多少棵？（填写数值，单位：棵）",
+          "kind": "calculation",
+          "reference": "36棵",
+          "adjustment": "",
+          "value": 36
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "decimal-reading",
+      "title": "第七单元 认识小数（自测）",
+      "sourceText": "## 第七单元 认识小数\n\n一、填空（每空3分，30分）\n\n1. 5元6角=（）元；2米4分米=（）米\n2. $(4.8)$元=（）元（）角；$(1.2)$米=（）米（）分米\n\n二、比较大小（每题4分，20分）\n$3.2(3.2(0.7(5.5〇5.3)0.9)2.9)2.9$　$0.7(3.2(0.7(5.5〇5.3)0.9)2.9)0.9$　$5.5(3.2(0.7(5.5〇5.3)0.9)2.9)5.3$\n\n三、计算（每题8分，32分）\n$(3.2+1.5=)$　$7.8-4.3=$\n\n四、应用题（18分）\n一支铅笔$(1.2)$元，一块橡皮$(0.5)$元，一共多少钱？\n\n上册第七单元答案\n一、5.6；2.4；4元8角；1米2分米\n二、＞，＜，＞\n三、4.7；3.5\n四、$\\(1.2\\)+\\(0.5\\)=1.7$元",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、5元6角＝（）元；2米4分米＝（）米。",
+          "kind": "fillBlank",
+          "reference": "5.6；2.4",
+          "adjustment": "",
+          "answers": [["5.6"], ["2.4"]]
+        },
+        {
+          "number": 2,
+          "stem": "一、4.8元＝（）元（）角；1.2米＝（）米（）分米。",
+          "kind": "fillBlank",
+          "reference": "4；8；1；2",
+          "adjustment": "",
+          "answers": [["4"], ["8"], ["1"], ["2"]]
+        },
+        {
+          "number": 3,
+          "stem": "二、比较大小：3.2（）2.9",
+          "kind": "fillBlank",
+          "reference": ">",
+          "adjustment": "依据两侧小数和原答案删除比较位置的嵌套乱码。",
+          "answers": [[">", "＞"]]
+        },
+        {
+          "number": 4,
+          "stem": "二、比较大小：0.7（）0.9",
+          "kind": "fillBlank",
+          "reference": "<",
+          "adjustment": "依据两侧小数和原答案删除比较位置的嵌套乱码。",
+          "answers": [["<", "＜"]]
+        },
+        {
+          "number": 5,
+          "stem": "二、比较大小：5.5（）5.3",
+          "kind": "fillBlank",
+          "reference": ">",
+          "adjustment": "依据两侧小数和原答案删除比较位置的嵌套乱码。",
+          "answers": [[">", "＞"]]
+        },
+        {
+          "number": 6,
+          "stem": "三、3.2＋1.5＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "4.7",
+          "adjustment": "",
+          "value": 4.7
+        },
+        {
+          "number": 7,
+          "stem": "三、7.8－4.3＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "3.5",
+          "adjustment": "",
+          "value": 3.5
+        },
+        {
+          "number": 8,
+          "stem": "四、一支铅笔1.2元，一块橡皮0.5元，一共多少钱？（填写数值，单位：元）",
+          "kind": "calculation",
+          "reference": "1.7元",
+          "adjustment": "",
+          "value": 1.7
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "survey",
+      "title": "第八单元 调查与记录（自测）",
+      "sourceText": "## 第八单元 调查与记录\n\n1. 记录数据，可以画（）字，方便计数。（25分）\n2. 统计班级同学最喜欢水果，收集数据之后，要进行（）。（25分）\n3. 统计表：苹果8人，香蕉5人，橘子10人。最喜欢（）人数最多。（25分）\n4. 喜欢苹果和香蕉一共多少人？（25分）\n\n上册第八单元答案\n1.正；2.整理；3.橘子；4.$8+5=13$人",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 记录数据，可以画（）字，方便计数。",
+          "kind": "fillBlank",
+          "reference": "正",
+          "adjustment": "",
+          "answers": [["正"]]
+        },
+        {
+          "number": 2,
+          "stem": "2. 统计同学最喜欢的水果，收集数据之后，要进行（）。",
+          "kind": "fillBlank",
+          "reference": "整理",
+          "adjustment": "",
+          "answers": [["整理", "分类整理", "数据整理", "分类和整理"]]
+        },
+        {
+          "number": 3,
+          "stem": "3. 苹果8人，香蕉5人，橘子10人，喜欢（）的人数最多。",
+          "kind": "fillBlank",
+          "reference": "橘子",
+          "adjustment": "",
+          "answers": [["橘子", "橘"]]
+        },
+        {
+          "number": 4,
+          "stem": "4. 每人只选一种水果，苹果8人、香蕉5人，喜欢这两种水果的一共多少人？（填写数值，单位：人）",
+          "kind": "calculation",
+          "reference": "13人",
+          "adjustment": "",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "semester": "UPPER",
+      "topicKey": "calendar",
+      "title": "综合实践：探索年月日的秘密（自测）",
+      "sourceText": "## 综合实践：探索年月日的秘密\n\n1.一年（）个月，大月（）天，小月（）天。（24分）\n2.大月有：1、3、5、7、（）、（）、12月。（24分）\n3.平年2月（）天，全年（）天；闰年2月（）天。（28分）\n4.判断：8月是大月。（）（24分）\n\n上册综合实践答案\n1.12，31，30；2.8，10；3.28，365，29；4.√",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 一年（）个月，大月（）天，小月（）天。",
+          "kind": "fillBlank",
+          "reference": "12；31；30",
+          "adjustment": "",
+          "answers": [["12"], ["31"], ["30"]]
+        },
+        {
+          "number": 2,
+          "stem": "2. 大月有：1、3、5、7、（）、（）、12月。",
+          "kind": "fillBlank",
+          "reference": "8；10",
+          "adjustment": "",
+          "answers": [["8"], ["10"]]
+        },
+        {
+          "number": 3,
+          "stem": "3. 平年2月（）天，全年（）天；闰年2月（）天。",
+          "kind": "fillBlank",
+          "reference": "28；365；29",
+          "adjustment": "",
+          "answers": [["28"], ["365"], ["29"]]
+        },
+        {
+          "number": 4,
+          "stem": "4. 8月是大月。",
+          "kind": "trueFalse",
+          "reference": "正确",
+          "adjustment": "",
+          "correctValue": true
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "mental-multiplication",
+      "title": "第一单元 整数乘法（一）（自测）",
+      "sourceText": "## 第一单元 整数乘法（一）\n\n一、口算（每题3分，共30分）\n$(20×30=)$　$(12×3=)$　$(15×20=)$　$(24×2=)$　$(30×14=)$\n\n二、竖式计算（每题8分，共32分）\n$(23×12=)$　$(34×21=)$　$(18×22=)$　$(45×11=)$\n\n三、估算（每题6分，共18分）\n$(29×31≈)$　$(42×18≈)$　$(51×22≈)$\n\n四、解决问题（20分）\n一箱牛奶24盒，13箱一共有多少盒？\n\n下册第一单元答案\n一、600；36；300；48；420\n二、276；714；396；495\n三、900；800；1000\n四、$24×13=312$盒",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、口算：20×30＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "600",
+          "adjustment": "",
+          "value": 600
+        },
+        {
+          "number": 2,
+          "stem": "一、口算：12×3＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "36",
+          "adjustment": "",
+          "value": 36
+        },
+        {
+          "number": 3,
+          "stem": "一、口算：15×20＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "300",
+          "adjustment": "",
+          "value": 300
+        },
+        {
+          "number": 4,
+          "stem": "一、口算：24×2＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "48",
+          "adjustment": "",
+          "value": 48
+        },
+        {
+          "number": 5,
+          "stem": "一、口算：30×14＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "420",
+          "adjustment": "",
+          "value": 420
+        },
+        {
+          "number": 6,
+          "stem": "二、在纸上列竖式，写出关键计算过程：23×12",
+          "kind": "shortAnswer",
+          "reference": "23×2＝46，23×10＝230，合计276。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "stem": "二、在纸上列竖式，写出关键计算过程：34×21",
+          "kind": "shortAnswer",
+          "reference": "34×1＝34，34×20＝680，合计714。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "stem": "二、在纸上列竖式，写出关键计算过程：18×22",
+          "kind": "shortAnswer",
+          "reference": "18×2＝36，18×20＝360，合计396。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "stem": "二、在纸上列竖式，写出关键计算过程：45×11",
+          "kind": "shortAnswer",
+          "reference": "45×1＝45，45×10＝450，合计495。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "stem": "三、按指定整十数估算：29×31（把两个因数分别看成30、30）（填写数值）",
+          "kind": "calculation",
+          "reference": "900",
+          "adjustment": "明确采用的整十数估算方法；原开放估算可能有其他合理结果。",
+          "value": 900
+        },
+        {
+          "number": 11,
+          "stem": "三、按指定整十数估算：42×18（把两个因数分别看成40、20）（填写数值）",
+          "kind": "calculation",
+          "reference": "800",
+          "adjustment": "明确采用的整十数估算方法；原开放估算可能有其他合理结果。",
+          "value": 800
+        },
+        {
+          "number": 12,
+          "stem": "三、按指定整十数估算：51×22（把两个因数分别看成50、20）（填写数值）",
+          "kind": "calculation",
+          "reference": "1000",
+          "adjustment": "明确采用的整十数估算方法；原开放估算可能有其他合理结果。",
+          "value": 1000
+        },
+        {
+          "number": 13,
+          "stem": "四、一箱牛奶24盒，13箱共有多少盒？（填写数值，单位：盒）",
+          "kind": "calculation",
+          "reference": "312盒",
+          "adjustment": "",
+          "value": 312
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "symmetry",
+      "title": "第二单元 图形的运动（二）（自测）",
+      "sourceText": "## 第二单元 图形的运动（二）\n\n一、填空（每空5分，共30分）\n\n1. 对折后两边完全重合的图形叫（）图形，折痕是（）。\n2. 电梯上下属于（）；风车转动属于（）。\n\n二、判断（每题6分，共30分）\n\n1. 钟面上指针旋转。（）\n2. 拉开抽屉是旋转。（）\n3. 正方形有4条对称轴。（）\n\n三、分类：平移/旋转（40分）\n推拉窗户、钟表指针、汽车直行、转方向盘\n\n下册第二单元答案\n一、轴对称，对称轴；平移，旋转\n二、√，×，√\n三、平移：推拉窗户、汽车直行；旋转：钟表指针、转方向盘",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、沿某直线对折后两边完全重合的图形叫（）图形，折痕所在直线是（）。",
+          "kind": "fillBlank",
+          "reference": "轴对称；对称轴",
+          "adjustment": "",
+          "answers": [["轴对称", "轴对称图形"], ["对称轴"]]
+        },
+        {
+          "number": 2,
+          "stem": "一、电梯沿直线上下运动属于（）；风车叶片转动属于（）。",
+          "kind": "fillBlank",
+          "reference": "平移；旋转",
+          "adjustment": "",
+          "answers": [["平移"], ["旋转"]]
+        },
+        {
+          "number": 3,
+          "stem": "二、钟面上指针的运动是旋转。",
+          "kind": "trueFalse",
+          "reference": "正确",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 4,
+          "stem": "二、把抽屉沿直线拉开是旋转。",
+          "kind": "trueFalse",
+          "reference": "错误",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "stem": "二、正方形有4条对称轴。",
+          "kind": "trueFalse",
+          "reference": "正确",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "stem": "三、分类填平移或旋转：推拉窗户沿轨道移动（）；钟表指针转动（）；汽车车身沿直线前进（）；转动方向盘（）。",
+          "kind": "fillBlank",
+          "reference": "平移；旋转；平移；旋转",
+          "adjustment": "明确汽车车身运动，避免与车轮旋转混淆。",
+          "answers": [["平移"], ["旋转"], ["平移"], ["旋转"]]
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "perimeter-meaning",
+      "title": "第三单元 周长（自测）",
+      "sourceText": "## 第三单元 周长\n\n一、填空（每空4分，20分）\n长方形周长公式：（）；正方形周长公式：（）。\n\n二、计算周长（每题15分，30分）\n1.长方形长8cm，宽5cm，周长？\n2.正方形边长6分米，周长？\n\n三、应用题（50分）\n一块长方形菜地，长10米，宽6米，围篱笆，篱笆长多少米？\n\n下册第三单元答案\n一、$周长=(长+宽)×2$；$周长=边长×4$\n二、$(8+5)×2=26\\mathrm{cm}$；$6×4=24$分米\n三、$(10+6)×2=32$米",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、写出长方形周长公式和正方形周长公式。",
+          "kind": "shortAnswer",
+          "reference": "长方形周长＝（长＋宽）×2，也可写长×2＋宽×2；正方形周长＝边长×4。",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "二、长方形长8厘米、宽5厘米，周长是多少？（填写数值，单位：厘米）",
+          "kind": "calculation",
+          "reference": "26厘米",
+          "adjustment": "",
+          "value": 26
+        },
+        {
+          "number": 3,
+          "stem": "二、正方形边长6分米，周长是多少？（填写数值，单位：分米）",
+          "kind": "calculation",
+          "reference": "24分米",
+          "adjustment": "",
+          "value": 24
+        },
+        {
+          "number": 4,
+          "stem": "三、长方形菜地长10米、宽6米，沿边界围一整圈且不留门，篱笆长多少米？（填写数值，单位：米）",
+          "kind": "calculation",
+          "reference": "32米",
+          "adjustment": "",
+          "value": 32
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "division-method",
+      "title": "第四单元 整数除法（一）（自测）",
+      "sourceText": "## 第四单元 整数除法（一）\n\n一、口算（每题4分，24分）\n$(48÷2=)$　$(66÷3=)$　$(84÷4=)$　$(0÷9=)$\n\n二、竖式计算（带★验算，每题10分，40分）\n$(78÷3=)$　★$(95÷4=)$\n\n三、填空（每空6分，18分）\n\n1. 除法中，（）＜除数。\n2. 验算有余数除法：（）×除数+余数=被除数\n\n四、应用题（18分）\n72块糖，平均分给3个小朋友，每人几块？\n\n下册第四单元答案\n一、24；22；21；0\n二、26；$23\\cdots\\cdots3$\n三、余数；商\n四、$72÷3=24$块",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "一、口算：48÷2＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "24",
+          "adjustment": "",
+          "value": 24
+        },
+        {
+          "number": 2,
+          "stem": "一、口算：66÷3＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "22",
+          "adjustment": "",
+          "value": 22
+        },
+        {
+          "number": 3,
+          "stem": "一、口算：84÷4＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "21",
+          "adjustment": "",
+          "value": 21
+        },
+        {
+          "number": 4,
+          "stem": "一、口算：0÷9＝？（填写数值）",
+          "kind": "calculation",
+          "reference": "0",
+          "adjustment": "",
+          "value": 0
+        },
+        {
+          "number": 5,
+          "stem": "二、在纸上列竖式计算78÷3，写出关键计算过程。",
+          "kind": "shortAnswer",
+          "reference": "78÷3＝26；先分十位：7个十÷3得2个十，剩1个十，与8个一合为18个一，再除以3得6。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "stem": "二、在纸上列竖式计算95÷4，并验算。",
+          "kind": "shortAnswer",
+          "reference": "95÷4＝23……3；23×4＋3＝95，并且3＜4。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "stem": "三、有余数除法中，（）必须小于除数。",
+          "kind": "fillBlank",
+          "reference": "余数",
+          "adjustment": "",
+          "answers": [["余数"]]
+        },
+        {
+          "number": 8,
+          "stem": "三、有余数除法验算：（）×除数＋余数＝被除数。",
+          "kind": "fillBlank",
+          "reference": "商",
+          "adjustment": "",
+          "answers": [["商"]]
+        },
+        {
+          "number": 9,
+          "stem": "四、72块糖平均分给3个小朋友，每人多少块？（填写数值，单位：块）",
+          "kind": "calculation",
+          "reference": "24块",
+          "adjustment": "",
+          "value": 24
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "hands-on",
+      "title": "第五单元 动手做（自测）",
+      "sourceText": "## 第五单元 动手做\n\n1. 把一个正方形剪成2个相同长方形，两个长方形周长之和比原来正方形周长（变大/变小）（40分）\n2. 用4根小棒拼长方形，需要（）组长短一样小棒。（30分）\n3. 方格纸上画一个边长4格的正方形（30分）\n\n下册第五单元答案\n1.变大；2.2",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 将正方形沿中线剪成两个相同长方形，两个长方形周长之和比原正方形周长（变大/变小）。",
+          "kind": "fillBlank",
+          "reference": "变大",
+          "adjustment": "",
+          "answers": [["变大"]]
+        },
+        {
+          "number": 2,
+          "stem": "2. 用4根小棒拼长方形，需要（）组等长的小棒，每组2根。",
+          "kind": "fillBlank",
+          "reference": "2",
+          "adjustment": "明确每组2根，对应两组对边。",
+          "answers": [["2", "两", "二"]]
+        },
+        {
+          "number": 3,
+          "stem": "3. 在方格纸上画一个边长4格的正方形，再说明你怎样检查。",
+          "kind": "shortAnswer",
+          "reference": "四条边各长4格、4个角均为直角；由老师或家长核对纸上图形。",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "book-order",
+      "title": "数学好玩：图书排序（自测）",
+      "sourceText": "## 数学好玩：图书排序\n\n1. 把3本书按顺序排列，一共有（）种排法。（50分）\n2. 按从大到小排序：25、18、36、9（50分）\n\n下册数学好玩答案\n1.6；2.36＞25＞18＞9",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 把3本不同的书排成一行，有多少种排法？（填写数值，单位：种）",
+          "kind": "calculation",
+          "reference": "6种",
+          "adjustment": "补充书本不同、排成一行，以明确排列情境。",
+          "value": 6
+        },
+        {
+          "number": 2,
+          "stem": "2. 按从大到小顺序填写：25、18、36、9。第一（）第二（）第三（）第四（）。",
+          "kind": "fillBlank",
+          "reference": "36；25；18；9",
+          "adjustment": "",
+          "answers": [["36"], ["25"], ["18"], ["9"]]
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "repeat-pattern",
+      "title": "第六单元 关系与规律（自测）",
+      "sourceText": "## 第六单元 关系与规律\n\n1.找规律填数：2，4，6，8，（），（）（30分）\n2. 图形：△○□△○□△○（），（）（30分）\n3. 数列：3、6、12、24、（）（40分）\n\n下册第六单元答案\n1.10，12；2.□，△；3.48",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 按每次加2的规律填数：2，4，6，8，（），（）。",
+          "kind": "fillBlank",
+          "reference": "10；12",
+          "adjustment": "明确本题采用每次加2的规则，避免有限数列规则歧义。",
+          "answers": [["10"], ["12"]]
+        },
+        {
+          "number": 2,
+          "stem": "2. 按△○□循环排列：△○□△○□△○（）（）。",
+          "kind": "fillBlank",
+          "reference": "□；△",
+          "adjustment": "",
+          "answers": [
+            ["□", "正方形", "方形"],
+            ["△", "三角形"]
+          ]
+        },
+        {
+          "number": 3,
+          "stem": "3. 按后一个数是前一个数2倍的规则填数：3、6、12、24、（）。",
+          "kind": "fillBlank",
+          "reference": "48",
+          "adjustment": "明确翻倍规则。",
+          "answers": [["48"]]
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "tally-data",
+      "title": "第七单元 数据的整理与表示（自测）",
+      "sourceText": "## 第七单元 数据的整理与表示\n\n1.记录数据常用画（）字。（25分）\n2.条形统计图，一格代表2人，5格代表（）人。（25分）\n3.统计：跑步12人，跳绳8人，打球6人。总共有多少人？（50分）\n\n下册第七单元答案\n1.正；2.10；3.$12+8+6=26$人",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 记录数据常用画（）字。",
+          "kind": "fillBlank",
+          "reference": "正",
+          "adjustment": "",
+          "answers": [["正"]]
+        },
+        {
+          "number": 2,
+          "stem": "2. 条形统计图每格代表2人，5格代表多少人？（填写数值，单位：人）",
+          "kind": "calculation",
+          "reference": "10人",
+          "adjustment": "",
+          "value": 10
+        },
+        {
+          "number": 3,
+          "stem": "3. 每人只选一种运动，跑步12人、跳绳8人、打球6人，一共多少人？（填写数值，单位：人）",
+          "kind": "calculation",
+          "reference": "26人",
+          "adjustment": "补充每人只选一种，保证人数可直接相加。",
+          "value": 26
+        }
+      ]
+    },
+    {
+      "semester": "LOWER",
+      "topicKey": "travel-plan",
+      "title": "综合实践：制订我的家庭旅行计划（自测）",
+      "sourceText": "## 综合实践：制订我的家庭旅行计划\n\n1. 出行3天，每天餐费80元，一共餐费多少元？（50分）\n2. 路程240千米，分3段走完，平均每段多少千米？（50分）\n\n下册综合实践答案\n1.$80×3=240$元；2.$240÷3=80$千米",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "1. 出行3天，每天餐费80元，一共餐费多少元？（填写数值，单位：元）",
+          "kind": "calculation",
+          "reference": "240元",
+          "adjustment": "",
+          "value": 240
+        },
+        {
+          "number": 2,
+          "stem": "2. 路程240千米，平均分3段走完，每段多少千米？（填写数值，单位：千米）",
+          "kind": "calculation",
+          "reference": "80千米",
+          "adjustment": "",
+          "value": 80
+        }
+      ]
+    }
+  ]
+}

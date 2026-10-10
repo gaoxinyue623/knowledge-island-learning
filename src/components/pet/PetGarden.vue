@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
+import PetCompanion from './PetCompanion.vue'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { usePetStore } from '@/stores/petStore'
 import {
@@ -11,6 +11,7 @@ import {
   petStages,
   petCompanions,
   petDecorations,
+  type PetFoodId,
 } from '@/services/pet/petPolicy'
 import PetCollection from './PetCollection.vue'
 import PetCloudPanel from './PetCloudPanel.vue'
@@ -20,8 +21,8 @@ const pet = usePetStore()
 const { profileId } = useLearningProfile()
 const name = ref('团团'),
   renameOpen = ref(false),
-  historyLimit = ref(8),
-  affection = ref(false)
+  historyLimit = ref(8)
+const companion = ref<InstanceType<typeof PetCompanion> | null>(null)
 const characterId = computed(
   () => petCompanions.find((p) => p.id === pet.summary.activePetId)?.characterId,
 )
@@ -30,7 +31,6 @@ watch(
   () => pet.summary.activePetId,
   () => {
     renameOpen.value = false
-    affection.value = false
   },
 )
 const stage = computed(() => petStages[pet.summary.stageIndex]!)
@@ -48,11 +48,24 @@ watch(
     name.value = '团团'
     renameOpen.value = false
     historyLimit.value = 8
-    affection.value = false
     void pet.sync(id)
   },
   { immediate: true },
 )
+async function feed(foodId: PetFoodId) {
+  const petId = pet.summary.activePetId
+  const currentProfile = profileId.value
+  const currentCompanion = companion.value
+  if (!petId) return
+  const saved = await pet.act({ kind: 'feed-pet', petId, foodId })
+  if (
+    saved &&
+    currentProfile === profileId.value &&
+    petId === pet.summary.activePetId &&
+    currentCompanion === companion.value
+  )
+    companion.value?.interact('feed', petFoods.find((food) => food.id === foodId)?.symbol)
+}
 async function saveName() {
   if (!name.value.trim() || name.value.trim().length > 12) return
   if (
@@ -132,21 +145,14 @@ function dateLabel(at: string) {
         >
           <span class="pet-scene-cloud pet-scene-cloud--one" aria-hidden="true">☁</span
           ><span class="pet-scene-cloud pet-scene-cloud--two" aria-hidden="true">☁</span>
-          <div
-            :key="pet.feedAnimation"
-            class="pet-character"
-            :class="{ 'pet-character--fed': pet.feedAnimation > 0 }"
-          >
-            <span class="pet-character-crown" aria-hidden="true">{{
-              pet.summary.name ? stage.symbol : '🌱'
-            }}</span>
-            <KnowledgeDangoPlaceholder
-              size="lg"
-              :character-id="characterId"
-              :state="affection ? 'happy' : 'idle'"
-              :label="pet.summary.name ?? '等待领养的团子'"
-            />
-          </div>
+          <PetCompanion
+            :key="`${profileId}:${pet.summary.activePetId ?? 'new'}`"
+            ref="companion"
+            :character-id="characterId"
+            :name="pet.summary.name ?? '等待领养的团子'"
+            :crown="pet.summary.name ? stage.symbol : '🌱'"
+            :disabled="disabled || !pet.summary.name"
+          />
           <span v-if="ornament" class="pet-scene-ornament" :aria-label="ornament.name">{{
             ornament.symbol
           }}</span>
@@ -199,9 +205,23 @@ function dateLabel(at: string) {
             </p>
             <p>累计喂养 {{ pet.summary.feedCount }} 次 · 离开时会休息，不掉级。</p>
             <div class="pet-actions">
-              <button type="button" class="pet-button" @click="affection = !affection">
-                摸摸伙伴</button
-              ><button
+              <button
+                type="button"
+                class="pet-button"
+                :disabled="disabled"
+                @click="companion?.interact('pet')"
+              >
+                摸摸伙伴
+              </button>
+              <button
+                type="button"
+                class="pet-button pet-button--light"
+                :disabled="disabled"
+                @click="companion?.interact('play')"
+              >
+                陪它玩
+              </button>
+              <button
                 type="button"
                 class="pet-button pet-button--light"
                 :disabled="disabled"
@@ -210,7 +230,6 @@ function dateLabel(at: string) {
                 修改名字
               </button>
             </div>
-            <p v-if="affection" role="status">“见到你就很开心！今天有什么新发现？”</p>
           </template>
         </div>
       </div>
@@ -245,11 +264,13 @@ function dateLabel(at: string) {
                 class="pet-button"
                 type="button"
                 :aria-label="`喂食${food.name}`"
-                :disabled="disabled || !pet.summary.name || !pet.summary.inventory[food.id]"
-                @click="
-                  pet.summary.activePetId &&
-                  pet.act({ kind: 'feed-pet', petId: pet.summary.activePetId, foodId: food.id })
+                :disabled="
+                  disabled ||
+                  !pet.summary.name ||
+                  !pet.summary.inventory[food.id] ||
+                  companion?.reaction === 'feed'
                 "
+                @click="feed(food.id)"
               >
                 喂给{{ pet.summary.name ?? '伙伴' }}
               </button>
@@ -307,7 +328,7 @@ function dateLabel(at: string) {
             符合来源规则且成功保存的学习才会结算。旧课程奖励按原完成日期结算；没有日期的旧思维记录和闯关记录按首次结算日计算。超过当天额度的部分不在次日补发，重玩、换题版本和重复刷新不会重复领取。同一知识点的课程、练习和闯关是不同完成目标，各自只领一次。
           </p>
           <p>
-            积分用于陪伴和喂养，不代表学科掌握程度；教材成长能量在下方单独展示。积分、背包和宠物保存在这个浏览器，可在下方由家长登录，备份或恢复宠物小屋。
+            积分用于陪伴和喂养，不代表学科掌握程度；教材成长能量在下方单独展示。积分、背包和宠物自动保存到当前账号，换设备登录后可以继续陪伴。
           </p>
         </details>
       </section>

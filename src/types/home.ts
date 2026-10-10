@@ -111,7 +111,6 @@ export interface DailyPlanStoragePayload {
 export interface HomeProfileViewModel {
   profileId: Id
   displayName: string
-  regionName: string
   gradeName: string
   semesterName: string
 }

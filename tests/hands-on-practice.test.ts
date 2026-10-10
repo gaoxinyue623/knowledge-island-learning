@@ -244,7 +244,7 @@ describe('Source evidence and ordering with explanation', () => {
       expect(createReadingQuest(input)).toEqual(original)
     }
     expect(math).toBeGreaterThan(0)
-    expect(english).toBe(38)
+    expect(english).toBe(114)
     expect(Object.keys(coverage).length).toBeGreaterThan(2)
     expect(JSON.stringify(bundles)).toBe(before)
     console.info('Hands-on coverage', { math, english, chinese: coverage })

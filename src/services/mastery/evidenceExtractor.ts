@@ -99,6 +99,11 @@ export function extractLearningEvidenceFromAttempt(
     diagnostics.push(`MASTERY_QUESTION_ORPHAN: ${input.attempt.questionId}`)
     return { evidence: [], diagnostics }
   }
+  // A unit sheet is linked to a launch lesson for navigation, not as evidence of that lesson's mastery.
+  if (input.question.tags.includes('unit-sync-only')) {
+    diagnostics.push(`MASTERY_UNIT_SYNC_SCOPE_IGNORED: ${input.question.id}`)
+    return { evidence: [], diagnostics }
+  }
   if (!input.mappings.length) {
     diagnostics.push(`MASTERY_MAPPING_MISSING: ${input.attempt.questionId}`)
     return { evidence: [], diagnostics }

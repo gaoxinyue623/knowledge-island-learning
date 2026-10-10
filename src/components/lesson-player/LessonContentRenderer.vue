@@ -8,6 +8,7 @@ import ExampleBlock from './ExampleBlock.vue'
 import ExplanationBlock from './ExplanationBlock.vue'
 import InteractiveBlock from './InteractiveBlock.vue'
 import IntroBlock from './IntroBlock.vue'
+import LiteracyTableBlock from './LiteracyTableBlock.vue'
 import MediaBlock from './MediaBlock.vue'
 import PracticeBlock from './PracticeBlock.vue'
 import ReadingTextBlock from './ReadingTextBlock.vue'
@@ -54,8 +55,9 @@ const sortedBlocks = computed(() =>
 <template>
   <div class="lesson-content-renderer" aria-live="polite">
     <template v-for="block in sortedBlocks" :key="block.id">
+      <LiteracyTableBlock v-if="block.literacyTable" :table="block.literacyTable" />
       <ReadingTextBlock
-        v-if="props.presentation === 'reading' && readingTypes.has(block.type)"
+        v-else-if="props.presentation === 'reading' && readingTypes.has(block.type)"
         :block="block"
       />
       <PracticeBlock

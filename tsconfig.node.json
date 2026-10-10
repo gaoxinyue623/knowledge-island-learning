@@ -22,6 +22,9 @@
     "scripts/real-llm-evaluate.ts",
     "scripts/real-llm-review.ts",
     "scripts/generate-tts.ts",
-    "server/**/*.ts"
+    "server/**/*.ts",
+    "scripts/dev-all.ts",
+    "scripts/curriculum-catalog-audit.ts",
+    "scripts/textbook-verification-audit.ts"
   ]
 }

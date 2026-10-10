@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Id } from '@/types'
@@ -14,9 +15,19 @@ export const characterOptions = [
   { id: 'sunshine-character', name: '阳光团子', color: '#ffe098', shadow: '#b78636' },
   { id: 'berry-character', name: '莓果团子', color: '#f3bbd0', shadow: '#b97596' },
 ] as const
-export function isValidStudentProfilePayload(value: unknown): value is { version: 1; profile: StudentBasicProfile; characterId: Id } {
+export function isValidStudentProfilePayload(
+  value: unknown,
+): value is { version: 1; profile: StudentBasicProfile; characterId: Id } {
   const saved = value as { version?: unknown; profile?: StudentBasicProfile; characterId?: unknown }
-  return saved?.version === 1 && typeof saved.profile?.id === 'string' && typeof saved.profile.displayName === 'string' && Boolean(saved.profile.displayName.trim()) && saved.profile.displayName.length <= 20 && typeof saved.characterId === 'string' && characterOptions.some((option) => option.id === saved.characterId)
+  return (
+    saved?.version === 1 &&
+    typeof saved.profile?.id === 'string' &&
+    typeof saved.profile.displayName === 'string' &&
+    Boolean(saved.profile.displayName.trim()) &&
+    saved.profile.displayName.length <= 20 &&
+    typeof saved.characterId === 'string' &&
+    characterOptions.some((option) => option.id === saved.characterId)
+  )
 }
 
 export const useStudentStore = defineStore('student', () => {
@@ -24,12 +35,11 @@ export const useStudentStore = defineStore('student', () => {
   const characterId = ref<Id | null>(null)
   const warning = ref<string | null>(null)
   try {
-    if (!recoverActiveProfileJournal(window.localStorage)) throw new Error('Pending profile activation')
-    const raw = window.localStorage.getItem(STUDENT_STORAGE_KEY)
+    if (!recoverActiveProfileJournal(accountStorage)) throw new Error('Pending profile activation')
+    const raw = accountStorage.getItem(STUDENT_STORAGE_KEY)
     if (raw) {
       const saved = JSON.parse(raw)
-      if (!isValidStudentProfilePayload(saved))
-        throw new Error()
+      if (!isValidStudentProfilePayload(saved)) throw new Error()
       profile.value = saved.profile
       characterId.value = saved.characterId
     }
@@ -49,7 +59,7 @@ export const useStudentStore = defineStore('student', () => {
     }
     const nextProfile = { id, displayName: name }
     try {
-      window.localStorage.setItem(
+      accountStorage.setItem(
         STUDENT_STORAGE_KEY,
         JSON.stringify({ version: 1, profile: nextProfile, characterId: character }),
       )
@@ -74,7 +84,7 @@ export const useStudentStore = defineStore('student', () => {
   }
   function clearProfile() {
     try {
-      window.localStorage.removeItem(STUDENT_STORAGE_KEY)
+      accountStorage.removeItem(STUDENT_STORAGE_KEY)
     } catch {
       warning.value = '个人资料无法清除，请重试。'
       return

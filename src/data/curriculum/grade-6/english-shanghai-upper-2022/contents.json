@@ -1,0 +1,1247 @@
+{
+  "title": "沪教版英语六年级上册（2022课标修订）",
+  "publisher": "上海教育出版社",
+  "sourceSha256": "3e1c2078c92a0a278c6a0beec3c6667782685d11dafbc5ecf57520509fc37aca",
+  "sourceNote": "用户提供的2022课标修订版六上双语文本；版本与页码按来稿登记，未对照出版社原书逐页核验。6个Unit的主阅读、拓展阅读及5个册末板块已提供；Communicate只有活动标题，未提供听力正文及录音。Unit页码未提供。基础练习由项目原创编写；开放作品及自查清单不自动判分。",
+  "wordLists": [
+    {
+      "unit": 1,
+      "words": [
+        {
+          "english": "meet the neighbours",
+          "phonetic": "/miːt ðə ˈneɪbəz/",
+          "chinese": "认识邻居",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "make new friends",
+          "phonetic": "/meɪk njuː frendz/",
+          "chinese": "交新朋友",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "go ice skating",
+          "phonetic": "/ɡəʊ aɪs ˈskeɪtɪŋ/",
+          "chinese": "去滑冰",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "throw snowballs",
+          "phonetic": "/θrəʊ ˈsnəʊbɔːlz/",
+          "chinese": "扔雪球",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "move",
+          "phonetic": "/muːv/",
+          "chinese": "搬家；移动",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "join",
+          "phonetic": "/dʒɔɪn/",
+          "chinese": "加入",
+          "partOfSpeech": "v."
+        }
+      ]
+    },
+    {
+      "unit": 2,
+      "words": [
+        {
+          "english": "ink painting",
+          "phonetic": "/ɪŋk ˈpeɪntɪŋ/",
+          "chinese": "水墨画",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "oil painting",
+          "phonetic": "/ɔɪl ˈpeɪntɪŋ/",
+          "chinese": "油画",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "artist",
+          "phonetic": "/ˈɑːtɪst/",
+          "chinese": "艺术家",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "paintbrush",
+          "phonetic": "/ˈpeɪntbrʌʃ/",
+          "chinese": "画笔",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "paint",
+          "phonetic": "/peɪnt/",
+          "chinese": "绘画；涂色",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "express",
+          "phonetic": "/ɪkˈspres/",
+          "chinese": "表达",
+          "partOfSpeech": "v."
+        }
+      ]
+    },
+    {
+      "unit": 3,
+      "words": [
+        {
+          "english": "warm up",
+          "phonetic": "/wɔːm ʌp/",
+          "chinese": "热身",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "get hurt",
+          "phonetic": "/ɡet hɜːt/",
+          "chinese": "受伤",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "call for help",
+          "phonetic": "/kɔːl fɔː help/",
+          "chinese": "呼救",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "break",
+          "phonetic": "/breɪk/",
+          "chinese": "（使）折断；打破",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "helmet",
+          "phonetic": "/ˈhelmɪt/",
+          "chinese": "头盔",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "pad",
+          "phonetic": "/pæd/",
+          "chinese": "护垫；护具",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "ambulance",
+          "phonetic": "/ˈæmbjələns/",
+          "chinese": "救护车",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "first aid",
+          "phonetic": "/fɜːst eɪd/",
+          "chinese": "急救",
+          "partOfSpeech": ""
+        }
+      ]
+    },
+    {
+      "unit": 4,
+      "words": [
+        {
+          "english": "push",
+          "phonetic": "/pʊʃ/",
+          "chinese": "推",
+          "partOfSpeech": "v. & n."
+        },
+        {
+          "english": "pull",
+          "phonetic": "/pʊl/",
+          "chinese": "拉",
+          "partOfSpeech": "v. & n."
+        },
+        {
+          "english": "heavy",
+          "phonetic": "/ˈhevi/",
+          "chinese": "重的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "light",
+          "phonetic": "/laɪt/",
+          "chinese": "轻的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "easy",
+          "phonetic": "/ˈiːzi/",
+          "chinese": "容易的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "difficult",
+          "phonetic": "/ˈdɪfɪkəlt/",
+          "chinese": "困难的",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "force",
+          "phonetic": "/fɔːs/",
+          "chinese": "力；力量",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "movement",
+          "phonetic": "/ˈmuːvmənt/",
+          "chinese": "运动",
+          "partOfSpeech": "n."
+        }
+      ]
+    },
+    {
+      "unit": 5,
+      "words": [
+        {
+          "english": "slide",
+          "phonetic": "/slaɪd/",
+          "chinese": "滑梯",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "seesaw",
+          "phonetic": "/ˈsiːsɔː/",
+          "chinese": "跷跷板",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "lever",
+          "phonetic": "/ˈlevə(r)/",
+          "chinese": "杠杆",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "wheel",
+          "phonetic": "/wiːl/",
+          "chinese": "轮子",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "invention",
+          "phonetic": "/ɪnˈvenʃn/",
+          "chinese": "发明",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "simple machine",
+          "phonetic": "/ˈsɪmpl məˈʃiːn/",
+          "chinese": "简单机械",
+          "partOfSpeech": ""
+        }
+      ]
+    },
+    {
+      "unit": 6,
+      "words": [
+        {
+          "english": "shopping centre",
+          "phonetic": "/ˈʃɒpɪŋ ˈsentə(r)/",
+          "chinese": "购物中心",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "art gallery",
+          "phonetic": "/ɑːt ˈɡæləri/",
+          "chinese": "美术馆",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "amusement park",
+          "phonetic": "/əˈmjuːzmənt pɑːk/",
+          "chinese": "游乐园",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "historic building",
+          "phonetic": "/hɪˈstɒrɪk ˈbɪldɪŋ/",
+          "chinese": "历史建筑",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "modern building",
+          "phonetic": "/ˈmɒdn ˈbɪldɪŋ/",
+          "chinese": "现代建筑",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "capital",
+          "phonetic": "/ˈkæpɪtl/",
+          "chinese": "首都",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "megacity",
+          "phonetic": "/ˈmeɡəsɪti/",
+          "chinese": "超大城市",
+          "partOfSpeech": "n."
+        }
+      ]
+    }
+  ],
+  "reviewReferences": [
+    {
+      "title": "NHS：Nosebleed",
+      "url": "https://www.nhs.uk/conditions/nosebleed/"
+    },
+    {
+      "title": "NHS：Sprains and strains",
+      "url": "https://www.nhs.uk/conditions/sprains-and-strains/"
+    },
+    {
+      "title": "WHO：Rabies",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/rabies"
+    },
+    {
+      "title": "NHS 111 Wales：Sprains and strains",
+      "url": "https://111.wales.nhs.uk/Sprainsandstrains/"
+    },
+    {
+      "title": "NHS：Animal and human bites",
+      "url": "https://www.nhs.uk/conditions/animal-and-human-bites/"
+    }
+  ],
+  "units": [
+    {
+      "number": 1,
+      "kind": "unit",
+      "title": "Unit 1 Why do people move to new places? 人们为什么搬到新地方？",
+      "page": 0,
+      "words": [
+        {
+          "english": "meet the neighbours",
+          "chinese": "认识邻居",
+          "phonetic": "/miːt ðə ˈneɪbəz/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "make new friends",
+          "chinese": "交新朋友",
+          "phonetic": "/meɪk njuː frendz/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "go ice skating",
+          "chinese": "去滑冰",
+          "phonetic": "/ɡəʊ aɪs ˈskeɪtɪŋ/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "throw snowballs",
+          "chinese": "扔雪球",
+          "phonetic": "/θrəʊ ˈsnəʊbɔːlz/",
+          "partOfSpeech": ""
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "move",
+          "phonetic": "/muːv/",
+          "chinese": "搬家；移动",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "join",
+          "phonetic": "/dʒɔɪn/",
+          "chinese": "加入",
+          "partOfSpeech": "v."
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "Postcards to a friend（写给朋友的明信片） / Postcard 1",
+          "english": "Dear Tom,\nMy family moved here to Shenyang last week. Everything is new here. Today was a cold winter day. I got up early in the morning. I made a snowman. Then I met my neighbours. We played together. We threw snowballs at each other. In the afternoon, we went ice skating. It was fun.\nLove, Rongrong",
+          "chinese": "亲爱的汤姆，我们家上周搬到沈阳。这里一切都是新的。今天是寒冷冬日。我早早起床堆雪人，然后认识了邻居，一起玩耍、打雪仗。下午我们去滑冰，非常好玩。——蓉蓉",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "Postcards to a friend（写给朋友的明信片） / Postcard 2",
+          "english": "Dear Tom,\nWe moved to Shanghai one month ago. Before that, we lived in a small town. Now we live in a big flat. My parents have new jobs here. I joined a new school and made new friends. I like my new home.\nLove, Mike",
+          "chinese": "亲爱的汤姆，我们一个月前搬到上海。之前住在小镇。现在住在大公寓。爸爸妈妈在这里有新工作。我进了新学校，交到新朋友。我喜欢新家。——迈克",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Moving from here ... to there!（从这里搬到那里！）",
+          "english": "Every day, people move to new places. Why do people move? Let’s look at three important reasons.\nCities often have more businesses, so there are more jobs for people. In 2001, around 38 percent of people in China lived in cities. In 2022, that number was around 65 percent.\nLast year, my parents found new jobs in Chengdu, so we moved here. I’m in a new school, and I like my new friends.\nSome people may move to be closer to better services, such as hospitals and schools.\nSome people may move for more space. When I was three, my parents sold our flat in London and bought a house outside the city. There’s lots of space to play football here.\nPeople may also move to learn about another country.",
+          "chinese": "每天都有人搬到新地方。人们为什么搬家？有3个主要原因。城市商业更多，因此工作机会更多。2001年，中国大约38%人口住在城市；2022年，这个数字约65%。去年，我父母在成都找到新工作，我们就搬来了。我在新学校，交到好朋友。有些人搬家，是为了离医院、学校等更好的公共服务更近。有些人搬家，想要更大空间。我三岁时，爸妈卖掉伦敦公寓，在城外买房子，这里有很大空间踢足球。也有人搬家，去了解另一个国家。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "ai, ay",
+      "soundExamples": "ai /eɪ/ rain\nay /eɪ/ play",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "Mike moved to ...\nI joined ...",
+      "grammarNote": "一般过去时：描述过去发生的动作。动词变过去式：move→moved；join→joined",
+      "sentencePrompt": "用过去时介绍一次搬家或加入新学校的经历。",
+      "sentenceAnswer": "I moved to a new town last year.",
+      "communicate": [
+        {
+          "kind": "Listening",
+          "title": "Marta’s life in China（玛尔塔在中国的生活）"
+        },
+        {
+          "kind": "Speaking",
+          "title": "Where you want to move（你想搬到哪里）"
+        },
+        {
+          "kind": "Writing",
+          "title": "Moving to a new place（搬到新地方）"
+        }
+      ],
+      "reviewNotes": [
+        "来稿 Extend 开头写 three important reasons，但后文还提到了解另一个国家；保留原文，不据此设置原因数量题。"
+      ],
+      "questions": [
+        {
+          "stem": "meet the neighbours 的意思是什么？",
+          "options": [
+            "认识邻居",
+            "扔雪球",
+            "油画"
+          ],
+          "correctIndex": 0,
+          "explanation": "meet the neighbours 意为认识邻居。"
+        },
+        {
+          "stem": "表示过去搬到上海，选择正确句子。",
+          "options": [
+            "Mike moved to Shanghai.",
+            "Mike move to Shanghai.",
+            "Mike moving to Shanghai."
+          ],
+          "correctIndex": 0,
+          "explanation": "过去发生的动作使用 moved。"
+        },
+        {
+          "stem": "根据明信片，谁一个月前搬到了上海？",
+          "options": [
+            "Mike.",
+            "Rongrong.",
+            "Tom."
+          ],
+          "correctIndex": 0,
+          "explanation": "第二封明信片由 Mike 写，他说 We moved to Shanghai one month ago。"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "kind": "unit",
+      "title": "Unit 2 Why do we make art? 我们为什么创作艺术？",
+      "page": 0,
+      "words": [
+        {
+          "english": "ink painting",
+          "chinese": "水墨画",
+          "phonetic": "/ɪŋk ˈpeɪntɪŋ/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "oil painting",
+          "chinese": "油画",
+          "phonetic": "/ɔɪl ˈpeɪntɪŋ/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "artist",
+          "chinese": "艺术家",
+          "phonetic": "/ˈɑːtɪst/",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "paintbrush",
+          "chinese": "画笔",
+          "phonetic": "/ˈpeɪntbrʌʃ/",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "paint",
+          "phonetic": "/peɪnt/",
+          "chinese": "绘画；涂色",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "express",
+          "phonetic": "/ɪkˈspres/",
+          "chinese": "表达",
+          "partOfSpeech": "v."
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "The power of art（艺术的力量）",
+          "english": "Art can be very powerful. Artists try to express themselves and touch people’s hearts.\nSome paintings look real and some don’t. But all paintings show the painters’ feelings.\nXu Beihong was a Chinese artist. He did ink painting. He liked to paint proud animals, such as lions and horses. He wanted people to cheer up and be brave.\nVincent van Gogh was a Dutch artist. He did oil painting. He is famous for using bright colours. Look at the sunflowers in this painting. How does it make you feel? Vincent van Gogh painted flowers in bright colours.\nArtists show us the world in their eyes. We can always feel the power of a good work of art.",
+          "chinese": "艺术拥有强大力量。艺术家努力表达自我，触动人心。有些画写实，有些不是，但所有画作都表达画家的情感。徐悲鸿是中国艺术家，画水墨画。他喜欢画雄狮、骏马这类昂扬的动物，希望人们振作、勇敢。文森特·梵高是荷兰艺术家，画油画。他以明亮色彩闻名。看看这幅画里的向日葵。它带给你什么感受？梵高用鲜亮色彩描绘花朵。艺术家向我们展示他们眼中的世界。我们总能感受到优秀艺术作品的力量。",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Artists in my family（我家的艺术家）",
+          "english": "Anyone can be an artist and make art from anything.\nI made something beautiful with just a ball of string. I glued the string in a circle and added a head and a tail. I painted it yellow, blue and green. Now look, it’s a beautiful snail.\nMy grandma makes art too. She uses old paper and bottles. She reuses old things. It teaches people to protect our earth.",
+          "chinese": "任何人都可以成为艺术家，万物皆可创作。我只用一团绳子做出漂亮作品。我把绳子粘成圆圈，加上头和尾巴，涂上黄、蓝、绿色。你看，一只漂亮蜗牛。奶奶也创作艺术。她用旧纸、旧瓶子创作，废物再利用，提醒大家保护地球。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "oy, oi",
+      "soundExamples": "oy /ɔɪ/ boy\noi /ɔɪ/ oil",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "Vincent van Gogh was ...\nHe did ...\nHe painted ...",
+      "grammarNote": "一般过去时：be动词was；实义动词过去式 did / painted",
+      "sentencePrompt": "用一般过去时介绍一位你了解的艺术家。",
+      "sentenceAnswer": "Xu Beihong was a Chinese artist.",
+      "communicate": [
+        {
+          "kind": "Listening",
+          "title": "Types of art children like（孩子们喜欢的艺术类型）"
+        },
+        {
+          "kind": "Speaking",
+          "title": "Why people make art（人们为什么创作艺术）"
+        },
+        {
+          "kind": "Writing",
+          "title": "An art form（一种艺术形式）"
+        }
+      ],
+      "reviewNotes": [],
+      "questions": [
+        {
+          "stem": "ink painting 的意思是什么？",
+          "options": [
+            "水墨画",
+            "画笔",
+            "滑梯"
+          ],
+          "correctIndex": 0,
+          "explanation": "ink painting 意为水墨画。"
+        },
+        {
+          "stem": "描述梵高过去的身份，选择正确句子。",
+          "options": [
+            "Vincent van Gogh was an artist.",
+            "Vincent van Gogh were an artist.",
+            "Vincent van Gogh be an artist."
+          ],
+          "correctIndex": 0,
+          "explanation": "单数主语过去的状态使用 was。"
+        },
+        {
+          "stem": "根据课文，奶奶用什么创作艺术？",
+          "options": [
+            "Old paper and bottles.",
+            "Only new paintbrushes.",
+            "Snowballs."
+          ],
+          "correctIndex": 0,
+          "explanation": "Extend 写到 She uses old paper and bottles。"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "kind": "unit",
+      "title": "Unit 3 How should we protect ourselves? 我们应该如何保护自己？",
+      "page": 0,
+      "words": [
+        {
+          "english": "warm up",
+          "chinese": "热身",
+          "phonetic": "/wɔːm ʌp/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "get hurt",
+          "chinese": "受伤",
+          "phonetic": "/ɡet hɜːt/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "call for help",
+          "chinese": "呼救",
+          "phonetic": "/kɔːl fɔː help/",
+          "partOfSpeech": ""
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "break",
+          "phonetic": "/breɪk/",
+          "chinese": "（使）折断；打破",
+          "partOfSpeech": "v."
+        },
+        {
+          "english": "helmet",
+          "phonetic": "/ˈhelmɪt/",
+          "chinese": "头盔",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "pad",
+          "phonetic": "/pæd/",
+          "chinese": "护垫；护具",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "ambulance",
+          "phonetic": "/ˈæmbjələns/",
+          "chinese": "救护车",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "first aid",
+          "phonetic": "/fɜːst eɪd/",
+          "chinese": "急救",
+          "partOfSpeech": ""
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "Student breaks arm while skateboarding（学生滑滑板摔断胳膊）",
+          "english": "Yesterday afternoon, Wang Hao, a 12-year-old boy from our school, broke his arm at the skate park. He was playing games with his friends. He tripped over a small stone on the path. Wang Hao got hurt and broke his arm. Luckily, he did not get more hurt because he wore a helmet and pads.\nXu Li, a friend of Wang Hao, called an ambulance. The ambulance arrived soon.\nHere are some safety tips for skateboarding.\nFirst, do warm-up exercises.\nNext, wear a helmet and pads.\nThen, watch out for stones on the path.\nFinally, call for help when you get hurt.",
+          "chinese": "昨天下午，我校12岁男孩王浩在滑板公园摔断胳膊。他正和朋友玩游戏，被路上一块小石头绊倒。王浩受伤，胳膊骨折。幸运的是，他佩戴头盔和护垫，没有受更重的伤。王浩的朋友徐丽拨打救护车电话，救护车很快赶到。滑板安全小贴士：首先，热身；其次，戴好头盔护具；然后，留意路上石块；最后，受伤时呼救。",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Health and safety tips for kids: first aid skills（儿童健康安全小贴士：急救技能） / Nosebleed",
+          "english": "Sit down and lean forward. Pinch the soft part of your nose just above your nostrils for 10 to 15 minutes without letting go. Breathe through your mouth. Tell an adult. If bleeding continues after 10 to 15 minutes or is heavy, get urgent medical help.",
+          "chinese": "流鼻血：坐下并身体前倾。捏住鼻孔上方柔软的鼻部，持续10至15分钟，不要中途松手；用嘴呼吸。告诉成人。如果持续出血超过10至15分钟或出血很多，应立即就医。",
+          "excludeFromSpeech": true
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Health and safety tips for kids: first aid skills（儿童健康安全小贴士：急救技能） / Ankle injury",
+          "english": "Tell an adult. Rest and protect your ankle. Put a cold pack wrapped in a cloth on it for up to 20 minutes. Raise it. Do not force your shoe off. Get medical help if it is very painful, badly swollen, looks deformed, numb, or hard to move.",
+          "chinese": "脚踝受伤：告诉成人。让脚踝休息并加以保护。用布包裹冷敷袋，每次冷敷不超过20分钟；并抬高脚踝。不要强行脱鞋。如果疼痛很重、肿胀明显、外形异常、麻木或难以活动，应就医。",
+          "excludeFromSpeech": true
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Health and safety tips for kids: first aid skills（儿童健康安全小贴士：急救技能） / Animal bite",
+          "english": "Tell an adult at once. Wash the bite or scratch with soap and running water for at least 15 minutes, then cover it with a clean dressing. Get medical help promptly so a health professional can assess the wound and rabies risk.",
+          "chinese": "动物咬伤或抓伤：马上告诉成人。用肥皂和流动清水冲洗伤口至少15分钟，再用干净敷料覆盖。尽快就医，请医务人员评估伤口及狂犬病风险。",
+          "excludeFromSpeech": true
+        }
+      ],
+      "sounds": "ou",
+      "soundExamples": "ou /aʊ/ house",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "First, ... Next, ... Then, ... Finally, ...",
+      "grammarNote": "顺序连接词，描述事情先后顺序",
+      "sentencePrompt": "用 First、Next、Then、Finally 描述上学前的准备顺序。",
+      "sentenceAnswer": "First, I get up. Next, I have breakfast. Then, I pack my bag. Finally, I go to school.",
+      "communicate": [
+        {
+          "kind": "Listening",
+          "title": "A brave boy in a fire（火灾里勇敢的男孩）"
+        },
+        {
+          "kind": "Speaking",
+          "title": "Protecting yourself（保护自己）"
+        },
+        {
+          "kind": "Writing",
+          "title": "Dealing with a fire（应对火灾）"
+        }
+      ],
+      "reviewNotes": [
+        "以下急救短文按权威健康指南整理，属于项目修订内容，不标作出版社原文；不用于自动跟读或操作判分。儿童遇到受伤情况应先告诉成人。",
+        "流鼻血：NHS 建议坐下前倾，捏住鼻孔上方持续10至15分钟；持续出血或出血很多应及时就医。https://www.nhs.uk/conditions/nosebleed/",
+        "脚踝扭伤：NHS Wales 建议保护、休息、隔布冷敷每次不超过20分钟并抬高；严重疼痛、变形、麻木等情况需紧急评估。https://111.wales.nhs.uk/Sprainsandstrains/",
+        "动物咬伤或抓伤：WHO 建议对可能有狂犬病风险的暴露立即用肥皂和水冲洗至少15分钟并就医；NHS 说明需由医务人员评估伤口和破伤风、狂犬病等风险。https://www.who.int/news-room/fact-sheets/detail/rabies https://www.nhs.uk/conditions/animal-and-human-bites/"
+      ],
+      "questions": [
+        {
+          "stem": "call for help 的意思是什么？",
+          "options": [
+            "呼救",
+            "交朋友",
+            "热身"
+          ],
+          "correctIndex": 0,
+          "explanation": "call for help 意为呼救。"
+        },
+        {
+          "stem": "按主课文顺序，First 后面接哪个连接词？",
+          "options": [
+            "Next.",
+            "Yesterday.",
+            "Because."
+          ],
+          "correctIndex": 0,
+          "explanation": "顺序连接词为 First, Next, Then, Finally。"
+        },
+        {
+          "stem": "根据滑板报道，谁叫了救护车？",
+          "options": [
+            "Xu Li.",
+            "Lu Ban.",
+            "Mike."
+          ],
+          "correctIndex": 0,
+          "explanation": "原文 Xu Li, a friend of Wang Hao, called an ambulance。"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "kind": "unit",
+      "title": "Unit 4 What makes things move? 是什么让物体运动？",
+      "page": 0,
+      "words": [
+        {
+          "english": "push",
+          "chinese": "推",
+          "phonetic": "/pʊʃ/",
+          "partOfSpeech": "v. & n."
+        },
+        {
+          "english": "pull",
+          "chinese": "拉",
+          "phonetic": "/pʊl/",
+          "partOfSpeech": "v. & n."
+        },
+        {
+          "english": "heavy",
+          "chinese": "重的",
+          "phonetic": "/ˈhevi/",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "light",
+          "chinese": "轻的",
+          "phonetic": "/laɪt/",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "easy",
+          "chinese": "容易的",
+          "phonetic": "/ˈiːzi/",
+          "partOfSpeech": "adj."
+        },
+        {
+          "english": "difficult",
+          "chinese": "困难的",
+          "phonetic": "/ˈdɪfɪkəlt/",
+          "partOfSpeech": "adj."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "force",
+          "phonetic": "/fɔːs/",
+          "chinese": "力；力量",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "movement",
+          "phonetic": "/ˈmuːvmənt/",
+          "chinese": "运动",
+          "partOfSpeech": "n."
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "Forces and movement（力与运动）",
+          "english": "A force can change how something moves. A push or a pull is a force. A push can move an object away from us; a pull can bring it towards us. If we throw the same ball in similar conditions, a stronger throw can make it travel farther. On the same surface, a heavier object is usually harder to move than a lighter one.",
+          "chinese": "力可以改变物体的运动。推或拉都是一种力。推可以使物体远离我们，拉可以使物体靠近我们。在条件相近时，用更大的力扔同一个球，球可能飞得更远。在同一表面上，较重的物体通常比轻的物体更难移动。",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Two stubborn little goats（两只倔强的小羊）",
+          "english": "Two little goats were on a narrow bridge. One goat wanted to go east. The other wanted to go west. They met in the middle of the bridge. Neither of them wanted to move. They pushed each other. Both fell into the river.",
+          "chinese": "两只小羊在窄桥上。一只向东，一只向西。它们在桥中间相遇，谁都不肯让路。它们互相推，双双掉进河里。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "gh",
+      "soundExamples": "gh /f/ enough",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "A push / pull is a force.\nA force can make ... move.",
+      "grammarNote": "push 和 pull 可作名词或动词；can 后接动词原形。",
+      "sentencePrompt": "用 push、pull 或 force 说明生活中怎样移动一种物品。",
+      "sentenceAnswer": "We pull a suitcase to move it.",
+      "communicate": [
+        {
+          "kind": "Listening",
+          "title": "Forces you use to move things（移动物体用到的力）"
+        },
+        {
+          "kind": "Speaking",
+          "title": "Forces you use in your daily life（生活中的推力拉力）"
+        },
+        {
+          "kind": "Writing",
+          "title": "Forces you use in your daily life（写作：生活中的力）"
+        }
+      ],
+      "reviewNotes": [],
+      "questions": [
+        {
+          "stem": "pull 的意思是什么？",
+          "options": [
+            "拉",
+            "推",
+            "轻的"
+          ],
+          "correctIndex": 0,
+          "explanation": "pull 是拉，push 是推。"
+        },
+        {
+          "stem": "根据课文，在同一表面上，哪种物体通常更难移动？",
+          "options": [
+            "A heavier object.",
+            "A lighter object.",
+            "A flower."
+          ],
+          "correctIndex": 0,
+          "explanation": "课文说明，在同一表面上，较重的物体通常比轻的物体更难移动。"
+        },
+        {
+          "stem": "根据课文，推会使物体向哪个方向移动？",
+          "options": [
+            "Away from us.",
+            "Towards us.",
+            "Always upwards."
+          ],
+          "correctIndex": 0,
+          "explanation": "原文 When we push, it moves people or things away from us。"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "kind": "unit",
+      "title": "Unit 5 How do inventions change our lives? 发明如何改变我们的生活？",
+      "page": 0,
+      "words": [
+        {
+          "english": "slide",
+          "chinese": "滑梯",
+          "phonetic": "/slaɪd/",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "seesaw",
+          "chinese": "跷跷板",
+          "phonetic": "/ˈsiːsɔː/",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "watch",
+          "chinese": "手表；观看",
+          "phonetic": "",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "lever",
+          "chinese": "杠杆",
+          "phonetic": "/ˈlevə(r)/",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "wheel",
+          "chinese": "轮子",
+          "phonetic": "/wiːl/",
+          "partOfSpeech": "n."
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "invention",
+          "phonetic": "/ɪnˈvenʃn/",
+          "chinese": "发明",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "simple machine",
+          "phonetic": "/ˈsɪmpl məˈʃiːn/",
+          "chinese": "简单机械",
+          "partOfSpeech": ""
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "Simple machines in our daily lives（日常生活中的简单机械）",
+          "english": "What are simple machines? They are the most basic inventions. They make our lives easier, and we use them every day.\nThe lever: A seesaw is a lever. Two children sit at opposite ends of it. They go up and down. A lever can help us lift heavy things.\nThe wheel: We use wheels every day on cars, trucks and bicycles. Wheels help us move things easily.\nPeople invented a lot of things to make travel easy. Bicycles, cars and trains help people travel fast on land. Boats and ships help people travel on water. Hot air balloons and planes help people travel in the sky.",
+          "chinese": "什么是简单机械？它们是最基础的发明，让我们生活更轻松，我们每天都在用。杠杆：跷跷板就是杠杆。两个孩子坐在两端，一上一下。杠杆可以帮我们抬起重物。轮子：汽车、卡车、自行车都有轮子。轮子方便我们移动物体。人类发明很多东西方便出行。自行车、汽车、火车帮助人们在陆地快速出行；船在水上出行；热气球、飞机在空中出行。",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "Lu Ban and the saw（鲁班和锯子）",
+          "english": "One day, Lu Ban went to cut trees. He touched a leaf and hurt his finger.\nLu Ban thought, “How could such a small leaf hurt my finger?” He looked at the leaf carefully. There were many teeth on the leaf, and the teeth were sharp.\n“Could I make a tool with teeth like these? It could cut things easily,” Lu Ban said to himself.\nSoon Lu Ban made a saw. It was the first saw in the world. People are still using it today.\nLu Ban was not the only ancient Chinese inventor. Other ancient Chinese people invented many great things, such as paper.",
+          "chinese": "一天鲁班上山砍树。他碰到一片叶子，划伤手指。鲁班心想：小小的叶子怎么能割破手指？他仔细观察叶子，叶子边缘有很多锋利小齿。鲁班自言自语：能不能做出带这种齿的工具？它可以轻松切割东西。很快鲁班造出锯子。这是世界上第一把锯，人们至今还在使用。鲁班不是中国古代唯一发明家，古人还发明了纸等伟大物品。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "ow",
+      "soundExamples": "ow /əʊ/ snow",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "A lever can help us ...\nWe use ... to ...",
+      "grammarNote": "use + 工具/物品 + to + 动词原形，说明用途；can 后接动词原形。",
+      "sentencePrompt": "用 use ... to ... 或 can help ... 介绍一种简单机械的用途。",
+      "sentenceAnswer": "A lever can help us lift heavy things.",
+      "communicate": [
+        {
+          "kind": "Listening",
+          "title": "Building a tree house（搭建树屋）"
+        },
+        {
+          "kind": "Speaking",
+          "title": "The most important invention（最重要的发明）"
+        },
+        {
+          "kind": "Writing",
+          "title": "An invention you like（你喜欢的一项发明）"
+        }
+      ],
+      "reviewNotes": [
+        "Lu Ban and the saw 按来稿作为故事阅读；不将“世界第一把锯子”的叙述设置为历史事实判断题。"
+      ],
+      "questions": [
+        {
+          "stem": "lever 的意思是什么？",
+          "options": [
+            "杠杆",
+            "轮子",
+            "购物中心"
+          ],
+          "correctIndex": 0,
+          "explanation": "lever 意为杠杆。"
+        },
+        {
+          "stem": "根据课文，杠杆可以帮助我们做什么？",
+          "options": [
+            "Lift heavy things.",
+            "Make a flower grow.",
+            "Stop a river."
+          ],
+          "correctIndex": 0,
+          "explanation": "课文说 A lever can help us lift heavy things。"
+        },
+        {
+          "stem": "在鲁班的故事里，什么启发了他制作带齿的工具？",
+          "options": [
+            "The sharp teeth on a leaf.",
+            "A new watch.",
+            "A city brochure."
+          ],
+          "correctIndex": 0,
+          "explanation": "故事写鲁班观察叶片边缘的小齿，想到制作类似的工具。"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "kind": "unit",
+      "title": "Unit 6 What is a city? 什么是城市？",
+      "page": 0,
+      "words": [
+        {
+          "english": "shopping centre",
+          "chinese": "购物中心",
+          "phonetic": "/ˈʃɒpɪŋ ˈsentə(r)/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "art gallery",
+          "chinese": "美术馆",
+          "phonetic": "/ɑːt ˈɡæləri/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "amusement park",
+          "chinese": "游乐园",
+          "phonetic": "/əˈmjuːzmənt pɑːk/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "historic building",
+          "chinese": "历史建筑",
+          "phonetic": "/hɪˈstɒrɪk ˈbɪldɪŋ/",
+          "partOfSpeech": ""
+        },
+        {
+          "english": "modern building",
+          "chinese": "现代建筑",
+          "phonetic": "/ˈmɒdn ˈbɪldɪŋ/",
+          "partOfSpeech": ""
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "capital",
+          "phonetic": "/ˈkæpɪtl/",
+          "chinese": "首都",
+          "partOfSpeech": "n."
+        },
+        {
+          "english": "megacity",
+          "phonetic": "/ˈmeɡəsɪti/",
+          "chinese": "超大城市",
+          "partOfSpeech": "n."
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "scope": "Explore",
+          "title": "Beijing: a big-city snapshot（北京：一座大城市掠影）",
+          "english": "Beijing is a very old city with a history of more than 3 000 years. It has been the capital of China for hundreds of years. You can enjoy seeing Beijing's historic buildings. You can learn about China's history at the Palace Museum. Many emperors lived there. Outside the city, you can see the Great Wall. People built it thousands of years ago.\nToday, Beijing is one of the most modern cities in the world. There are new roads, tall modern buildings and big shopping centres.\nBeijing is a mix of old and new. Nobody can be bored in Beijing!",
+          "chinese": "北京是一座古老城市，拥有三千多年历史，数百年来都是中国首都。你可以欣赏北京的历史建筑，在故宫了解中国历史，很多帝王曾居住于此。城外可以看见长城，数千年前人们修建了它。如今北京是世界最现代化城市之一，有崭新道路、高大现代楼宇和大型购物中心。北京融合古老与现代。没有人会在北京感到无聊！",
+          "excludeFromSpeech": false
+        },
+        {
+          "kind": "story",
+          "scope": "Extend",
+          "title": "From town to megacity（从小城镇到超大城市）",
+          "english": "Cities are usually near rivers or lakes. Rivers give people food and water. They are also useful for ships.\nGuangzhou sits by the Pearl River. The river helps ships carry goods. Paris sits by the Seine River. Mexico City had a lake long ago. The lake kept the city safe.\nWhat can we do in a city? We can visit museums, go to libraries, watch shows and go to amusement parks.",
+          "chinese": "城市大多临近河湖。河流给人们提供食物和水源，也方便船只通行。广州坐落在珠江边，珠江方便船只运送货物。巴黎在塞纳河畔。墨西哥城很久以前有湖泊，湖泊守护这座城市。我们可以在城市做什么？参观博物馆、去图书馆、看演出、逛游乐园。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "ear",
+      "soundExamples": "ear /ɪə/ near",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "... is near ...\n... sits by ...\n... runs through ...",
+      "grammarNote": "near、by 表示靠近；run through 表示流经。",
+      "sentencePrompt": "介绍一座城市与附近河流或湖泊的位置关系。",
+      "sentenceAnswer": "Guangzhou sits by the Pearl River.",
+      "communicate": [
+        {
+          "kind": "Listening",
+          "title": "Cities that are near water（临水的城市）"
+        },
+        {
+          "kind": "Speaking",
+          "title": "What you can do in a city（你可以在城市做什么）"
+        },
+        {
+          "kind": "Writing",
+          "title": "The city you live in or like（你居住或喜欢的城市）"
+        }
+      ],
+      "reviewNotes": [],
+      "questions": [
+        {
+          "stem": "historic building 的意思是什么？",
+          "options": [
+            "历史建筑",
+            "游乐园",
+            "现代建筑"
+          ],
+          "correctIndex": 0,
+          "explanation": "historic building 意为历史建筑。"
+        },
+        {
+          "stem": "选择正确的否定代词句子。",
+          "options": [
+            "Nobody is in the room.",
+            "Nobody are in the room.",
+            "Nobody am in the room."
+          ],
+          "correctIndex": 0,
+          "explanation": "nobody 作主语时，be 动词使用单数 is。"
+        },
+        {
+          "stem": "根据 Extend，广州位于哪条河边？",
+          "options": [
+            "The Pearl River.",
+            "The Seine River.",
+            "The Thames."
+          ],
+          "correctIndex": 0,
+          "explanation": "原文 Guangzhou sits by the Pearl River。"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "kind": "project",
+      "title": "Project 1 Our new home poster 我们的新家海报",
+      "page": 73,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "project",
+          "scope": "Appendix",
+          "title": "Project 1 Our new home poster 我们的新家海报",
+          "english": "Project 1：Our new home poster 我们的新家海报\n\nAim：Make a poster about moving to a new place.\n目标：制作一张关于搬到新地方的海报。\n\nStep 1 Think and collect\n\nWork in groups. Think about these questions:\n\n1. Why do people move to new places?\n2. What can you see and do in the new place?\n3. How do people feel when they move?\n\nCollect photos or draw pictures of houses, neighbourhoods, parks or people.\n\nStep 2 Make your poster\n\n1. Put your pictures on the poster.\n2. Write short captions for your pictures.\nUse words and sentences from Unit 1.\nExample:\nWe moved to a new town.\nWe meet new neighbours and make new friends.\nWe can go ice skating here.\n\nStep 3 Show and share\n\nPresent your poster to the class.\nTell your classmates about your poster.\nListen to other groups’ presentations.",
+          "chinese": "项目1：我们的新家海报\n目标：制作一张关于搬迁到新地方的海报。\n步骤1 思考与收集\n小组合作，思考问题：\n\n1. 人们为什么搬到新地方？\n2. 在新地方你能看到什么、做什么？\n3. 搬家的时候人们感受如何？\n收集照片或者画房屋、社区、公园、人物的图画。\n\n步骤2 制作海报\n\n1. 把图画贴到海报上。\n2. 为图片写简短说明文字，使用Unit1学过的词句。\n示例：我们搬到一座新小镇。我们认识新邻居，结交新朋友。在这里我们可以滑冰。\n\n步骤3 展示分享\n向全班展示海报，给同学介绍你的海报。聆听其他小组的展示。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "",
+      "grammarNote": "",
+      "sentencePrompt": "制作搬到新地方的海报，向同学介绍作品。",
+      "sentenceAnswer": "",
+      "communicate": [],
+      "reviewNotes": [],
+      "questions": []
+    },
+    {
+      "number": 8,
+      "kind": "project",
+      "title": "Project 2 A city brochure 一座城市宣传小册子",
+      "page": 75,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "project",
+          "scope": "Appendix",
+          "title": "Project 2 A city brochure 一座城市宣传小册子",
+          "english": "Project 2：A city brochure 一座城市宣传小册子\n\nAim：Make a brochure about a city.\n目标：制作一份城市宣传手册。\n\nStep 1 Choose a city\n\nWork in groups. Choose a city you like. It can be a Chinese city or a foreign city.\n\nStep 2 Find information\n\nFind information about your city:\n\n- historic buildings\n- modern buildings\n- shopping centres\n- amusement parks\n- art galleries\n\nYou can read books, search online or ask people. Write down key information.\n\nStep 3 Make your brochure\n\nYour brochure has 3 parts:\n\n1. Cover: city name + picture\n2. Page 1: old places in the city\n3. Page 2: new places and fun things to do\nUse words and grammar from Unit 6.\n\nStep 4 Present your brochure\n\nShow your brochure to the class.\nTell your classmates what visitors can do in this city.",
+          "chinese": "项目2：城市宣传手册\n目标：制作一份城市宣传小册子。\n步骤1 选择一座城市\n小组合作，挑选一座你喜欢的城市，可以是中国城市，也可以是国外城市。\n\n步骤2 查找资料\n搜集这座城市的信息：历史建筑、现代建筑、购物中心、游乐园、美术馆。\n可以看书、上网搜索或者询问他人，记下关键信息。\n\n步骤3 制作手册\n手册分为3部分：\n\n1. 封面：城市名称 + 配图\n2. 第1页：城市里的古迹\n3. 第2页：现代化场所和好玩的活动\n使用Unit6学到的单词和语法。\n\n步骤4 展示手册\n向全班展示手册，告诉同学们游客在这座城市可以做什么。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "",
+      "grammarNote": "",
+      "sentencePrompt": "小组制作城市宣传手册，介绍古迹与现代场所。",
+      "sentenceAnswer": "",
+      "communicate": [],
+      "reviewNotes": [],
+      "questions": []
+    },
+    {
+      "number": 9,
+      "kind": "appendix",
+      "title": "Unit checklist 单元自查清单",
+      "page": 77,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Unit checklist 单元自查清单",
+          "english": "单元自查清单\n\nRead and tick ✅ what you can do.\n阅读，在你能做到的项目打勾。\n\nUnit 1\n\n☐ I can talk about moving to new places.\n☐ I can read postcards.\n☐ I can use the past tense of regular verbs.\n☐ I can pronounce /eɪ/ (ai, ay) correctly.\n\nUnit 2\n\n☐ I can talk about art.\n☐ I can read about artists.\n☐ I can use was, did and past forms of verbs.\n☐ I can pronounce /ɔɪ/ (oy, oi) correctly.\n\nUnit 3\n\n☐ I can talk about safety and first aid.\n☐ I can read safety tips.\n☐ I can use First, Next, Then, Finally.\n☐ I can pronounce /aʊ/ (ou) correctly.\n\nUnit 4\n\n☐ I can talk about push and pull.\n☐ I can read about forces.\n☐ I can use comparative and superlative adjectives.\n☐ I can pronounce /f/ (gh) correctly.\n\nUnit 5\n\n☐ I can talk about inventions and simple machines.\n☐ I can read the story of Lu Ban.\n☐ I can use comparative and superlative adverbs.\n☐ I can pronounce /əʊ/ (ow) correctly.\n\nUnit 6\n\n☐ I can talk about cities.\n☐ I can read about Beijing.\n☐ I can use nothing, no one, nobody.\n☐ I can pronounce /ɪə/ (ear) correctly.",
+          "chinese": "阅读并在你掌握的项目打勾。\nUnit1\n✅ 我可以谈论搬到新地方\n✅ 我能阅读明信片\n✅ 我会使用规则动词一般过去式\n✅ 我能正确读 /eɪ/ (ai, ay)\n\nUnit2\n✅ 我可以谈论艺术\n✅ 我能阅读关于艺术家的文章\n✅ 我会使用was，did和动词过去式\n✅ 我能正确读 /ɔɪ/ (oy, oi)\n\nUnit3\n✅ 我可以谈论安全与急救\n✅ 我能阅读安全提示\n✅ 我会使用First, Next, Then, Finally（首先、接着、然后、最后）\n✅ 我能正确读 /aʊ/ (ou)\n\nUnit4\n✅ 我可以谈论推力与拉力\n✅ 我能阅读关于力的文章\n✅ 我会使用形容词比较级、最高级\n✅ 我能正确读 /f/ (gh)\n\nUnit5\n✅ 我可以谈论发明与简单机械\n✅ 我能阅读鲁班的故事\n✅ 我会使用副词比较级、最高级\n✅ 我能正确读 /əʊ/ (ow)\n\nUnit6\n✅ 我可以谈论城市\n✅ 我能阅读关于北京的短文\n✅ 我会使用nothing, no one, nobody这类否定代词\n✅ 我能正确读 /ɪə/ (ear)",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "",
+      "grammarNote": "",
+      "sentencePrompt": "按24项自查目标检查掌握情况，由自己、老师或家长核对。",
+      "sentenceAnswer": "",
+      "communicate": [],
+      "reviewNotes": [],
+      "questions": []
+    },
+    {
+      "number": 10,
+      "kind": "appendix",
+      "title": "Word list 单词总表",
+      "page": 78,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Word list 单词总表",
+          "english": "单词总表（按单元排序，音标+中文释义）\n\nUnit 1\n\nmeet the neighbours /miːt ðə ˈneɪbəz/ 认识邻居\nmake new friends /meɪk njuː frendz/ 交新朋友\ngo ice skating /ɡəʊ aɪs ˈskeɪtɪŋ/ 去滑冰\nthrow snowballs /θrəʊ ˈsnəʊbɔːlz/ 扔雪球\nmove /muːv/ v. 搬家；移动\njoin /dʒɔɪn/ v. 加入\n\nUnit 2\n\nink painting /ɪŋk ˈpeɪntɪŋ/ 水墨画\noil painting /ɔɪl ˈpeɪntɪŋ/ 油画\nartist /ˈɑːtɪst/ n. 艺术家\npaintbrush /ˈpeɪntbrʌʃ/ n. 画笔\npaint /peɪnt/ v. 绘画；涂色\nexpress /ɪkˈspres/ v. 表达\n\nUnit 3\n\nwarm up /wɔːm ʌp/ 热身\nget hurt /ɡet hɜːt/ 受伤\ncall for help /kɔːl fɔː help/ 呼救\nbreak /breɪk/ v.（使）折断；打破\nhelmet /ˈhelmɪt/ n. 头盔\npad /pæd/ n. 护垫；护具\nambulance /ˈæmbjələns/ n. 救护车\nfirst aid /fɜːst eɪd/ 急救\n\nUnit 4\n\npush /pʊʃ/ v. & n. 推\npull /pʊl/ v. & n. 拉\nheavy /ˈhevi/ adj. 重的\nlight /laɪt/ adj. 轻的\neasy /ˈiːzi/ adj. 容易的\ndifficult /ˈdɪfɪkəlt/ adj. 困难的\nforce /fɔːs/ n. 力；力量\nmovement /ˈmuːvmənt/ n. 运动\n\nUnit 5\n\nslide /slaɪd/ n. 滑梯\nseesaw /ˈsiːsɔː/ n. 跷跷板\nlever /ˈlevə(r)/ n. 杠杆\nwheel /wiːl/ n. 轮子\ninvention /ɪnˈvenʃn/ n. 发明\nsimple machine /ˈsɪmpl məˈʃiːn/ 简单机械\n\nUnit 6\n\nshopping centre /ˈʃɒpɪŋ ˈsentə(r)/ 购物中心\nart gallery /ɑːt ˈɡæləri/ 美术馆\namusement park /əˈmjuːzmənt pɑːk/ 游乐园\nhistoric building /hɪˈstɒrɪk ˈbɪldɪŋ/ 历史建筑\nmodern building /ˈmɒdn ˈbɪldɪŋ/ 现代建筑\ncapital /ˈkæpɪtl/ n. 首都\nmegacity /ˈmeɡəsɪti/ n. 超大城市",
+          "chinese": "按单元排序的单词、音标、词性和中文释义。",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "",
+      "grammarNote": "",
+      "sentencePrompt": "复习按单元整理的41个词条、音标和中文释义。",
+      "sentenceAnswer": "",
+      "communicate": [],
+      "reviewNotes": [],
+      "questions": []
+    },
+    {
+      "number": 11,
+      "kind": "appendix",
+      "title": "Grammar review table 语法总表",
+      "page": 81,
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sections": [
+        {
+          "kind": "review",
+          "scope": "Appendix",
+          "title": "Grammar review table 语法总表",
+          "english": "语法要点：一般过去时（规则动词）   Past simple (regular verbs)   描述过去发生的动作\n例句：Mike moved to Shanghai.   I joined a new school.   move → moved   join → joined\n\n语法要点：一般过去时：was / did / 动词过去式   Past simple: was, did, past verbs   描述过去的状态、动作\n例句：Vincent van Gogh was an artist.   He did oil painting.   He painted sunflowers.\n\n语法要点：顺序连接词   Sequence words   First, Next, Then, Finally   描述事件先后顺序\n例句：First, warm up.   Next, wear your helmet.   Then, watch out for stones.   Finally, call for help.\n\n语法要点：形容词比较级 & 最高级   Adjective comparative & superlative   两者对比 / 三者及以上对比\n例句：A heavier object is usually harder to move than a lighter one.   The heaviest box is the hardest to move.   heavy → heavier → heaviest   light → lighter → lightest\n\n语法要点：用 use ... to ... 或 can help ... 表达用途   Describing what a tool is used for\n例句：We use wheels to move things.   A lever can help us lift heavy things.\n\n语法要点：否定代词   Negative pronouns   nothing / no one / nobody   表示没有事物、没有人\n例句：Nobody can be bored in Beijing.",
+          "chinese": "1. 一般过去时（规则动词）：描述过去发生的动作，动词词尾+ed\n2. was / did 一般过去式：描述过去状态与动作；was是am/is过去式，did是do过去式\n3. 顺序连接词 First首先，Next接着，Then然后，Finally最后，用来描述步骤\n4. 形容词比较级与最高级：比较两者或三者及以上。例：A heavier object is usually harder to move than a lighter one. The heaviest box is the hardest to move.\n5. 用 use ... to ... 或 can help ... 表达工具用途。例：We use wheels to move things. A lever can help us lift heavy things.\n6. 否定代词 nothing没有东西；no one / nobody没有人，本身带否定含义，句子不再加not",
+          "excludeFromSpeech": false
+        }
+      ],
+      "sounds": "",
+      "soundExamples": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sentencePattern": "",
+      "grammarNote": "",
+      "sentencePrompt": "复习六项语法要点、例句与中文说明。",
+      "sentenceAnswer": "",
+      "communicate": [],
+      "reviewNotes": [],
+      "questions": []
+    }
+  ]
+}

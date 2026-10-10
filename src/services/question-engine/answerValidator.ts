@@ -22,7 +22,7 @@ function result(
         ? '回答正确'
         : status === 'incorrect'
           ? '再看看解析'
-          : '此题当前不支持自动评分',
+          : '开放表达，请对照参考答案',
   }
 }
 
@@ -38,9 +38,18 @@ function optionKeysForIds(question: Question, optionIds: readonly string[]): str
 
 function normalizeText(
   value: string,
-  policy: 'NONE' | 'TRIM' | 'CASE_INSENSITIVE' | 'SIMPLIFIED_CHINESE' = 'TRIM',
+  policy: 'NONE' | 'TRIM' | 'CASE_INSENSITIVE' | 'SIMPLIFIED_CHINESE' | 'ENGLISH_TEXT' = 'TRIM',
 ): string {
   if (policy === 'NONE') return value
+  if (policy === 'ENGLISH_TEXT')
+    return value
+      .normalize('NFKC')
+      .replace(/[‘’]/g, "'")
+      .replace(/[‐‑–—]/g, '-')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([?.!,])/g, '$1')
+      .trim()
+      .toLowerCase()
   const trimmed = value.trim()
   return policy === 'CASE_INSENSITIVE' ? trimmed.toLocaleLowerCase() : trimmed
 }

@@ -20,7 +20,6 @@ const curriculumStore = useCurriculumStore()
 const presentation = ref<CurriculumPresentation | null>(null)
 const error = ref<string | null>(null)
 const switchDialogOpen = ref(false)
-const switchKind = ref<'region' | 'grade' | null>(null)
 
 const subjectLabels: Record<SubjectCode, string> = {
   CHINESE: '语文',
@@ -42,19 +41,15 @@ async function loadSettings() {
   }
 }
 
-function requestSwitch(kind: 'region' | 'grade') {
-  switchKind.value = kind
+function requestSwitch() {
   switchDialogOpen.value = true
 }
 
 function confirmSwitch() {
-  const kind = switchKind.value
   switchDialogOpen.value = false
-  switchKind.value = null
-  if (!kind) return
   curriculumStore.beginEdit()
   router.push({
-    path: kind === 'region' ? '/onboarding/region' : '/onboarding/grade',
+    path: '/onboarding/grade',
     query: { from: 'settings' },
   })
 }
@@ -74,7 +69,7 @@ onMounted(() => void loadSettings())
       <header class="curriculum-page__header">
         <p class="curriculum-eyebrow">PROFILE / SETTINGS</p>
         <h1>我的学习设置</h1>
-        <p>各科教材可自主选择，不受地区限制。更换年级或教材需要确认，历史学习记录会保留。</p>
+        <p>先选择年级和课本册次，再按版本选择各科教材。更换年级或教材后，历史学习记录会保留。</p>
       </header>
       <AppLoading v-if="curriculumStore.loading" label="正在读取学习设置" />
       <AppErrorState
@@ -85,24 +80,20 @@ onMounted(() => void loadSettings())
       />
       <template v-else-if="presentation">
         <section class="curriculum-profile-grid" aria-label="课程基础设置">
-          <CurriculumProfileCard label="学习地区" :value="presentation.regionName" icon="map-pin" />
           <CurriculumProfileCard
             label="当前年级"
             :value="presentation.gradeName"
             icon="book-open"
           />
           <CurriculumProfileCard
-            label="当前学期"
+            label="课本册次"
             :value="presentation.semesterName"
             icon="book-open"
           />
         </section>
         <div class="curriculum-settings-actions">
-          <AppButton variant="secondary" icon-left="map-pin" @click="requestSwitch('region')"
-            >修改学习地区</AppButton
-          >
-          <AppButton variant="secondary" icon-left="book-open" @click="requestSwitch('grade')"
-            >修改年级</AppButton
+          <AppButton variant="secondary" icon-left="book-open" @click="requestSwitch"
+            >修改年级和册次</AppButton
           >
         </div>
         <section class="curriculum-settings-subjects" aria-labelledby="subject-settings-title">
@@ -144,12 +135,8 @@ onMounted(() => void loadSettings())
       </template>
       <CurriculumSwitchDialog
         :open="switchDialogOpen"
-        :title="switchKind === 'region' ? '要更换学习地区吗？' : '要更换年级吗？'"
-        :description="
-          switchKind === 'region'
-            ? '地区仅作为个人学习资料，更换地区不会清空已选教材，也不会限制可选版本。'
-            : '更换年级后，会重新查询三科课本；历史学习记录不会删除。'
-        "
+        title="要更换年级或册次吗？"
+        description="更换后，会重新查询三科课本；历史学习记录不会删除。"
         @close="switchDialogOpen = false"
         @confirm="confirmSwitch"
       />

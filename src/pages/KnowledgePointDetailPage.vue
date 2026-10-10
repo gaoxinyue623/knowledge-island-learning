@@ -1,8 +1,103 @@
 <script setup lang="ts">
+import {
+  G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeFourEnglishUpperDefinitions,
+  gradeFourEnglishUpperReadingOnlyIds,
+} from '@/data/curriculum/grade-4/english-shanghai-upper-2022'
+import {
+  G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeFiveEnglishLowerDefinitions,
+  gradeFiveEnglishLowerProjectIds,
+} from '@/data/curriculum/grade-5/english-shanghai-lower'
+import {
+  G6_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeSixEnglishLowerDefinitions,
+  gradeSixEnglishLowerProjectIds,
+} from '@/data/curriculum/grade-6/english-shanghai-lower'
+import {
+  G6_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeSixEnglishUpperDefinitions,
+  gradeSixEnglishUpperProjectIds,
+} from '@/data/curriculum/grade-6/english-shanghai-upper-2022'
+import {
+  G5_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeFiveEnglishUpperDefinitions,
+  gradeFiveEnglishUpperProjectIds,
+} from '@/data/curriculum/grade-5/english-shanghai-upper-2022'
+import {
+  G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeFourEnglishLowerDefinitions,
+  gradeFourEnglishLowerProjectIds,
+} from '@/data/curriculum/grade-4/english-shanghai-lower-2022'
+import {
+  G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeThreeEnglishLowerDefinitions,
+  gradeThreeEnglishLowerProjectIds,
+} from '@/data/curriculum/grade-3/english-shanghai-lower-2022'
+import {
+  G3_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeThreeEnglishUpperDefinitions,
+  gradeThreeEnglishUpperProjectIds,
+} from '@/data/curriculum/grade-3/english-shanghai-upper-2022'
+import { G6_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-6/math-bnu-lower-2013'
+import { G6_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-6/math-bnu-upper-2022'
+import { G5_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-5/math-bnu-lower-2013'
+import { G5_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-5/math-bnu-upper'
+import { G4_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-4/math-bnu-lower'
+import { G4_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-4/math-bnu-upper-2022'
+import { G3_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-3/math-bnu-lower-2022'
+import { G3_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-3/math-bnu-upper-2022'
+import {
+  G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID,
+  gradeSixChinese2019LowerReadingOnlyIds,
+  gradeSixChinese2019LowerAppendixIds,
+} from '@/data/curriculum/grade-6/chinese-pep-lower-2019'
+import {
+  G6_PEP_CHINESE_2019_S1_TEXTBOOK_ID,
+  gradeSixChinese2019ReadingOnlyIds,
+  gradeSixChinese2019AppendixIds,
+} from '@/data/curriculum/grade-6/chinese-pep-upper-2019'
+import {
+  G6_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeSixChineseReadingOnlyIds,
+  gradeSixChineseAppendixIds,
+} from '@/data/curriculum/grade-6/chinese-pep-upper'
+import {
+  G5_PEP_CHINESE_S2_TEXTBOOK_ID,
+  gradeFiveChineseLowerReadingOnlyIds,
+  gradeFiveChineseLowerAppendixIds,
+} from '@/data/curriculum/grade-5/chinese-pep-lower'
+import {
+  G5_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeFiveChineseReadingOnlyIds,
+  gradeFiveChineseAppendixIds,
+} from '@/data/curriculum/grade-5/chinese-pep-upper'
+import {
+  G4_PEP_CHINESE_S2_TEXTBOOK_ID,
+  gradeFourChineseLowerReadingOnlyIds,
+  gradeFourChineseLowerAppendixIds,
+} from '@/data/curriculum/grade-4/chinese-pep-lower'
+import {
+  G4_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeFourChineseReadingOnlyIds,
+  gradeFourChineseAppendixIds,
+} from '@/data/curriculum/grade-4/chinese-pep-upper'
+import {
+  G3_PEP_CHINESE_S2_TEXTBOOK_ID,
+  gradeThreeChineseLowerReadingOnlyIds,
+} from '@/data/curriculum/grade-3/chinese-pep-lower'
+import { G3_PEP_CHINESE_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-3/chinese-pep-upper'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import FormalAiPractice from '@/components/knowledge-point/FormalAiPractice.vue'
+import { englishSyncSourceSheet } from '@/data/curriculum/grade-2/shenzhen-english-lower/synchronousExercises'
+import { G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-2/shenzhen-english-lower'
+import {
+  synchronousPracticeForLesson,
+  synchronousPracticeNotice,
+} from '@/services/curriculum/synchronousPractice'
 import AppButton from '@/components/common/AppButton.vue'
 import AppEmptyState from '@/components/common/AppEmptyState.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
@@ -92,6 +187,114 @@ let loadToken = 0
 
 const isDevRoute = computed(() => route.path.startsWith('/dev/knowledge-point'))
 const knowledgePointId = computed(() => String(route.params.knowledgePointId ?? ''))
+const isEnglishReview = computed(
+  () =>
+    (context.value?.textbookId === G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID &&
+      knowledgePointId.value === 'G4_SHANGHAI_ENGLISH_S1_KP_09') ||
+    (context.value?.textbookId === G5_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID &&
+      knowledgePointId.value === 'G5_SHANGHAI_ENGLISH_S1_KP_11') ||
+    (context.value?.textbookId === G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID &&
+      knowledgePointId.value === 'G4_SHANGHAI_ENGLISH_S2_KP_11') ||
+    (context.value?.textbookId === G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID &&
+      knowledgePointId.value === 'G3_SHANGHAI_ENGLISH_S2_KP_11'),
+)
+const isEnglishDirectoryOnly = computed(
+  () =>
+    context.value?.textbookId === G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID &&
+    gradeFiveEnglishLowerDefinitions.some(
+      (d) =>
+        d.kind === 'directory' &&
+        d.missingSections.length > 0 &&
+        d.knowledgePointId === knowledgePointId.value,
+    ),
+)
+const isEnglishModuleReview = computed(
+  () =>
+    context.value?.textbookId === G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID &&
+    gradeFiveEnglishLowerDefinitions.some(
+      (d) =>
+        d.sections.some((s) => s.kind === 'revision') &&
+        d.knowledgePointId === knowledgePointId.value,
+    ),
+)
+const isEnglishAppendix = computed(
+  () =>
+    (context.value?.textbookId === G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID &&
+      gradeFiveEnglishLowerDefinitions.some(
+        (d) => d.moduleNumber === 5 && d.knowledgePointId === knowledgePointId.value,
+      )) ||
+    (context.value?.textbookId === G6_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID &&
+      gradeSixEnglishLowerDefinitions.some(
+        (d) => d.kind === 'appendix' && d.knowledgePointId === knowledgePointId.value,
+      )) ||
+    (context.value?.textbookId === G6_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID &&
+      gradeSixEnglishUpperDefinitions.some(
+        (d) => d.kind === 'appendix' && d.knowledgePointId === knowledgePointId.value,
+      )),
+)
+const isEnglishProject = computed(
+  () =>
+    [
+      G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+      G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+      G6_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+      G6_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+      G5_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+      G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+      G3_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+      G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+    ].includes(context.value?.textbookId ?? '') &&
+    [
+      ...gradeFourEnglishUpperDefinitions,
+      ...gradeFiveEnglishLowerDefinitions,
+      ...gradeSixEnglishLowerDefinitions,
+      ...gradeSixEnglishUpperDefinitions,
+      ...gradeFiveEnglishUpperDefinitions,
+      ...gradeFourEnglishLowerDefinitions,
+      ...gradeThreeEnglishUpperDefinitions,
+      ...gradeThreeEnglishLowerDefinitions,
+    ].some((d) => d.kind === 'project' && d.knowledgePointId === knowledgePointId.value),
+)
+const isImportedOpenActivity = computed(
+  () =>
+    [
+      ...gradeFourEnglishUpperReadingOnlyIds,
+      ...gradeFiveEnglishLowerProjectIds,
+      ...gradeSixEnglishLowerProjectIds,
+      ...gradeSixEnglishUpperProjectIds,
+      ...gradeFiveEnglishUpperProjectIds,
+      ...gradeFourEnglishLowerProjectIds,
+      ...gradeThreeEnglishLowerProjectIds,
+      ...gradeThreeEnglishUpperProjectIds,
+      ...gradeFourChineseReadingOnlyIds,
+      ...gradeFourChineseLowerReadingOnlyIds,
+      ...gradeFiveChineseReadingOnlyIds,
+      ...gradeSixChineseReadingOnlyIds,
+      ...gradeSixChinese2019ReadingOnlyIds,
+      ...gradeSixChinese2019LowerReadingOnlyIds,
+      ...gradeFiveChineseLowerReadingOnlyIds,
+    ].includes(knowledgePointId.value) &&
+    ![
+      ...gradeFourChineseAppendixIds,
+      ...gradeFourChineseLowerAppendixIds,
+      ...gradeFiveChineseAppendixIds,
+      ...gradeSixChineseAppendixIds,
+      ...gradeSixChinese2019AppendixIds,
+      ...gradeSixChinese2019LowerAppendixIds,
+      ...gradeFiveChineseLowerAppendixIds,
+    ].includes(knowledgePointId.value),
+)
+const isLiteracyAppendix = computed(
+  () =>
+    gradeThreeChineseLowerReadingOnlyIds.includes(knowledgePointId.value) ||
+    gradeFourChineseAppendixIds.includes(knowledgePointId.value) ||
+    gradeFourChineseLowerAppendixIds.includes(knowledgePointId.value) ||
+    gradeFiveChineseAppendixIds.includes(knowledgePointId.value) ||
+    gradeSixChineseAppendixIds.includes(knowledgePointId.value) ||
+    gradeSixChinese2019AppendixIds.includes(knowledgePointId.value) ||
+    gradeSixChinese2019LowerAppendixIds.includes(knowledgePointId.value) ||
+    gradeFiveChineseLowerAppendixIds.includes(knowledgePointId.value),
+)
 
 function queryString(key: string): string | null {
   const value = route.query[key]
@@ -176,6 +379,14 @@ const nodeProgress = computed(() => lessonProgress.value.progress)
 const isFormalPilot = computed(() => isPilotTextbook(context.value?.textbookId))
 const isEnglishSubject = computed(() => isEnglishPilotTextbook(context.value?.textbookId))
 const isMathSubject = computed(() => isMathPilotTextbook(context.value?.textbookId))
+const synchronousPractice = computed(() => synchronousPracticeForLesson(context.value))
+const unitPracticeNotice = computed(() => synchronousPracticeNotice(synchronousPractice.value))
+const visiblePracticeSets = computed(() => {
+  const sets = [...(expansionBundle.value?.practiceSets ?? [])]
+  if (synchronousPractice.value && !sets.some((p) => p.id === synchronousPractice.value!.id))
+    sets.unshift(synchronousPractice.value)
+  return sets
+})
 const masteryRecord = computed(() => masteryStore.getByKnowledgePoint(knowledgePointId.value))
 const canShowDetail = computed(
   () =>
@@ -291,12 +502,72 @@ function sourceNotice(): string {
     return '这是开发样本，用来验证详情页和挑战组件，不代表正式教材内容。'
   if (viewModel.value?.flags.isSample) return '这是示例内容，只用于开发验证。'
   if (isFormalPilot.value) {
+    if (context.value?.textbookId === G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID)
+      return '2019版六年级下册已接入本次提供的17篇课文、习作例文、综合性学习材料、古诗词诵读及字词表。内容按来稿展示，未独立核对出版社原版。理解题为项目原创，开放活动不自动判分。'
+    if (context.value?.textbookId === G6_PEP_CHINESE_2019_S1_TEXTBOOK_ID)
+      return '六年级上册2019版已接入第1—8单元所提供内容及字词表。第六单元已更正为18《古诗三首》、19《只有一个地球》、20《青山不老》、21《三黑和土地》；第17项《盼》引用本版第15课，供习作阅读。理解题为原创配套内容，导语、习作、口语交际、园地和附录不自动判分。'
+    if (context.value?.textbookId === G6_PEP_CHINESE_S1_TEXTBOOK_ID)
+      return '六年级上册2022版已接入附件提供的八个单元、习作例文和字词表。按附件顺序学习，理解题为原创配套内容；第22课已按提供的三页教材图片补齐并校正。开放栏目和字词附录不自动判分。2022年份沿用用户标注；来稿目录与人教社2022年同步字词手册的公开目录不同，仍需对照原书版权页和目录核对版次。'
+    if (context.value?.textbookId === G5_PEP_CHINESE_S2_TEXTBOOK_ID)
+      return '2019版五年级下册已接入附件提供的八个单元和字词附录，并补入习作例文、口语交际和习作正文。快乐读书吧已按两张教材图片补齐；2019年份由用户明确确认。理解题为原创配套内容；综合性学习、开放栏目和字词附录不自动判分，尚缺的材料或图片已有说明。'
+    if (context.value?.textbookId === G5_PEP_CHINESE_S1_TEXTBOOK_ID)
+      return '五年级上册已接入附件提供的八个单元、习作例文和字词表，按附件篇目顺序学习。理解题为原创配套内容；导语、开放栏目和字词附录不自动判分，字词表数量差异已注明。'
+    if (context.value?.textbookId === G4_PEP_CHINESE_S2_TEXTBOOK_ID)
+      return '四年级下册已接入附件提供的八个单元、习作例文及字词附录。理解题为原创配套内容；开放栏目和字词附录不自动判分，文本疑点在对应内容中注明。'
+    if (context.value?.textbookId === G4_PEP_CHINESE_S1_TEXTBOOK_ID)
+      return '四年级上册已接入第一至第八单元及字词附录，按附件提供的篇目和文本学习。课文理解题为原创配套内容，口语交际、习作、园地、读书吧和字词附录不自动判分。'
+    if (context.value?.textbookId === G4_BNU_MATH_S2_TEXTBOOK_ID)
+      return '四年级下册按本次提供的知识点整理，包含六个单元、数学好玩和总复习，并配有单元同步自测。讲解与基础题为原创配套；竖式、解方程过程、画图等由老师或家长核对。来稿未注明年份及页码。'
+    if (context.value?.textbookId === G5_BNU_MATH_S1_TEXTBOOK_ID)
+      return '五年级上册按本次提供的知识点整理，包含八个单元、两项综合实践、数学好玩和总复习，并配有11组单元自测。讲解与基础题为原创配套；竖式、解方程过程、公式表达、画图等由老师或家长核对。来稿未注明年份及页码。'
+    if (context.value?.textbookId === G5_BNU_MATH_S2_TEXTBOOK_ID)
+      return '五年级下册按用户标注的北师大2013版知识点整理，包含八个单元、数学好玩和总复习，并配有9组单元自测。讲解与基础题为原创配套；过程、公式、简答及拓展题由老师或家长核对。版本年份来自附件，来稿未提供页码。'
+    if (context.value?.textbookId === G6_BNU_MATH_S1_TEXTBOOK_ID)
+      return '六年级上册按用户标注的北师大2022新课标修订版知识点整理，包含九个单元、两项综合实践、数学好玩和总复习，并配有12组单元自测。讲解与基础题为原创配套；过程、公式及开放任务由老师或家长核对。版本年份来自附件，来稿未提供页码。'
+    if (context.value?.textbookId === G6_BNU_MATH_S2_TEXTBOOK_ID)
+      return '六年级下册按用户标注的北师大2013版知识点整理，包含四个单元、数学好玩、整理与复习、总复习，并配有5组单元自测。讲解与基础题为原创配套；公式、解题过程及开放回答由老师或家长核对。版本年份来自用户提供材料，未提供页码。'
+    if (context.value?.textbookId === G4_BNU_MATH_S1_TEXTBOOK_ID)
+      return '四年级上册按提供的2022新课标修订知识点整理，包含八个单元、编码、数图形、导航实践和总复习。专题配有原创讲解与练习；画图、设计和数据采集不自动判分，专题标题不代表教材原有课名。'
+    if (context.value?.textbookId === G3_BNU_MATH_S2_TEXTBOOK_ID)
+      return '三年级下册按提供的2022新课标修订知识点整理，包含七个单元、综合实践、图书排序和总复习。学习专题配有原创讲解与练习；操作和表达活动不自动判分，专题标题不代表教材原有课名。'
+    if (context.value?.textbookId === G3_BNU_MATH_S1_TEXTBOOK_ID)
+      return '本册按提供的2022新课标修订目录与知识重点整理，包含八个单元、综合实践、数学好玩和总复习。展示知识提要与原创配套讲解、练习；操作和表达活动不自动判分。'
     if (isMathSubject.value)
-      return '已接入北师大版一年级上下册、二年级上册数学知识讲解与原创拓展练习。先理解方法，再动手闯关。'
+      return '已接入所选北师大版数学教材的知识讲解与原创配套练习。先理解方法，再动手闯关；二年级下册按所选旧版或新版目录学习。'
+    if (context.value?.textbookId === G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID)
+      return '《英语口语交际》二年级下册按用户目录登记为广东省2025复审版·深圳2026春，已接入六个单元及补充栏目。Unit 5 Extend已调整为身边的英雄，Unit 6 Chant已调整为农场与狼的歌谣；Unit 2语音例词疑点在对应页注明。基础练习为项目原创，活动任务不自动判分。'
+    if (context.value?.textbookId === G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID)
+      return '本册按用户提供的沪教牛津四年级上册2022版双语文本整理，词汇、音标、句型与配套题已接入。两个Project已接入：Places near my home与A fancy party，包含思考、制作、示范介绍和课堂分享；开放作品不自动判分，基础闯关为项目原创。'
+    if (context.value?.textbookId === G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID)
+      return '本册登记为沪教牛津五年级下册（三年级起点·2013版），年份由用户明确确认。已补入Unit 10—12的句型和语音示例、Revision 1—3的复习提要与任务、Project 1—4及四个附录栏目。Project 1—3按最新来稿展示变化、假期计划和校园开放日；双语课文和原有练习保留，基础闯关为项目原创。'
+    if (context.value?.textbookId === G6_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID)
+      return '本册按用户明确确认登记为沪教牛津六年级下册（三年级起点·2013版，深圳用）。4个Module、12个Unit、4个Project及6个附录已接入；Unit 12句子语调规则、4个示例句和3个练习句已补齐，升降调以文字标记为准。跟读为设备合成语音；错位原句附核对说明，基础训练与补充表达为项目原创，未独立核对出版社原页。'
+    if (context.value?.textbookId === G6_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID)
+      return '本册按来稿登记为沪教版六年级上册2022课标修订版。Unit 1—6已加入用户提供的Communicate听力文本、口语对话与写作任务，可听读并进行开放表达。Unit 4—6已按最新修正稿替换为力与运动、简易发明和临水城市，并展示填空答案与匹配。单元页码和原版录音未提供；基础练习为项目原创，开放表达由老师或家长核对，未独立核对出版社原页。'
+    if (context.value?.textbookId === G5_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID)
+      return '本册按用户提供的沪教牛津五年级上册2022版双语文本整理，词汇、音标、句型、语音栏目、Project与配套题已接入。基础闯关为项目原创；来稿未提供原版示范音频。'
+    if (context.value?.textbookId === G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID)
+      return isEnglishProject.value
+        ? '用学过的词句制作作息或职业海报并交流，作品不自动判分。'
+        : '本册按用户提供的沪教牛津四年级下册2022版文本整理，保留词汇音标、双语课文、句型与语音栏目。用户配套练习在独立入口完成，基础闯关为项目原创。 已新增独立12单元Phonics附录和完整Intonation示范，补充稿目录与当前8单元不同；跟读使用设备语音，语调以↗、↘标记为准。'
+    if (context.value?.textbookId === G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID)
+      return isEnglishProject.value
+        ? '运用已学词句制作海报并交流，作品不自动判分。'
+        : '本册按用户提供的沪教牛津2022版下册文本整理，保留音标、双语课文、句型和Sounds字母范围。配套练习在单独入口完成，基础闯关为项目原创。综合练习栏目可直接打开配套练习。'
+    if (context.value?.textbookId === G3_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID)
+      return isEnglishProject.value
+        ? '运用已学英语制作作品并交流。本栏目为开放活动，不自动判分。'
+        : '本册按用户提供的沪教牛津2022版双语文本学习，年份和页码沿用来稿。词汇、课文与中文翻译已接入，配套练习为项目原创。'
     if (isEnglishSubject.value) {
       return '已接入沪教版英语课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
     }
-    return '已接入人教版语文一、二年级课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
+    if (context.value?.textbookId === G3_PEP_CHINESE_S2_TEXTBOOK_ID)
+      return isLiteracyAppendix.value
+        ? '三张字词表已按8页教材图片补齐，保留原图课号、语文园地分组和条目顺序。识字表逐字标注拼音，蓝色为图片中的多音字；写字表250字，词语表271词。可展开原图对照。'
+        : '本册按附件提供的单元顺序与文本学习，标题调整已有说明。阅读练习为原创配套内容，开放表达不自动判分。'
+    if (context.value?.textbookId === G3_PEP_CHINESE_S1_TEXTBOOK_ID)
+      return '本册按已导入的目录和文本学习，口语交际、习作、语文园地及快乐读书吧已补入用户提供内容；《小狗学叫》保留原概要并追加三个结局。阅读练习为原创配套内容，开放表达不自动判分。'
+    return '已接入人教版语文课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
   }
   if (viewModel.value?.flags.isUnverified) {
     return '当前内容已经接入课程库，但仍需完成内容审核；正式教材原文需要在获得授权后开放。'
@@ -393,17 +664,38 @@ function openLesson(): void {
   })
 }
 
-function openAssessment(): void {
-  if (!context.value || practiceAvailable.value !== true) return
+function openAssessment(practiceSetId?: string): void {
+  const fixedPractice =
+    typeof practiceSetId === 'string' && practiceSetId === synchronousPractice.value?.id
+      ? synchronousPractice.value
+      : null
+  if (!context.value || (!fixedPractice && practiceAvailable.value !== true)) return
   void router.push({
     path: isDevRoute.value ? '/dev/question-engine' : '/assessment',
     query: {
       ...context.value,
+      ...(fixedPractice
+        ? {
+            textbookId: fixedPractice.textbookId,
+            unitId: fixedPractice.unitId,
+            lessonId: fixedPractice.lessonId,
+            knowledgePointId: fixedPractice.knowledgePointId,
+          }
+        : {}),
       source: isDevRoute.value ? 'dev' : 'lesson_practice',
+      ...(typeof practiceSetId === 'string' && practiceSetId === synchronousPractice.value?.id
+        ? { practiceSetId }
+        : {}),
+      ...(fixedPractice
+        ? {
+            syncReturnLessonId: context.value.lessonId,
+            syncReturnKnowledgePointId: context.value.knowledgePointId,
+          }
+        : {}),
       ...(isDevRoute.value ? { dataset: dataset.value } : {}),
       returnTo: detailPath.value,
       lessonReturnTo: returnPath.value,
-      ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
+      ...(mapNodeId.value && !fixedPractice ? { mapNodeId: mapNodeId.value } : {}),
     },
   })
 }
@@ -580,7 +872,13 @@ watch(
               v-if="practiceAvailable === false && !readingQuest"
               class="knowledge-detail__practice-note"
             >
-              正式练习题正在准备中，可以先完成下面的知识挑战。
+              {{
+                isImportedOpenActivity
+                  ? '本栏目供阅读、交流和写作，可按提示完成开放活动。'
+                  : isLiteracyAppendix
+                    ? '这是全册字词附录，可按表认读、书写和复习。'
+                    : '正式练习题正在准备中，可以先完成下面的知识挑战。'
+              }}
             </p>
             <p v-if="nodeStatus === 'locked'" class="knowledge-detail__locked-note" role="status">
               先完成前置知识，就能解锁完整学习。当前页面可以先阅读，不会自动改变地图进度。
@@ -606,6 +904,9 @@ watch(
           <LessonReadingPanel
             :key="`${profileId}:${knowledgePointId}`"
             :blocks="contentBlocks"
+            :heading="
+              isLiteracyAppendix ? '字词附录' : isImportedOpenActivity ? '栏目内容' : undefined
+            "
             :muted="preferencesStore.preferences.muted"
             :subject="isMathSubject ? 'math' : isEnglishSubject ? 'english' : 'chinese'"
             :show-diagnostics="isDevRoute"
@@ -617,11 +918,33 @@ watch(
                 <template v-if="isMathSubject">
                   根据本课知识提要学习方法，再用下面的原创闯关练习试一试。图示帮助理解，开放探究鼓励不同解法。
                 </template>
+                <template v-else-if="isEnglishProject">
+                  按活动要求制作作品，用学过的英语介绍；完成后请同伴或家长一起核对表达。
+                </template>
+                <template v-else-if="isEnglishModuleReview">
+                  按模块复习提要回顾词汇、句型和语音，完成所列交流任务；请同伴、老师或家长核对。
+                </template>
+                <template v-else-if="isEnglishReview">
+                  点击下方配套练习入口，完成本册综合小练习并核对答案。
+                </template>
+                <template v-else-if="isEnglishAppendix">
+                  阅读册末材料，复习单词、语法或完成自查；由老师、家长或自己核对。
+                </template>
+                <template v-else-if="isEnglishDirectoryOnly">
+                  来稿仅提供栏目名称和页码，正文尚未提供。
+                </template>
                 <template v-else-if="isEnglishSubject">
                   这里是已接入的英语学习文本和配套练习，先听读，再完成单词拼写和句子介绍。
                 </template>
+                <template v-else-if="isLiteracyAppendix">
+                  这里是全册字词附录，按附件中的标题分组查阅，读一读、写一写，标记还不熟悉的字词。
+                </template>
                 <template v-else>
-                  这里是已接入的课文原文和配套学习内容，读一读，再完成下面的挑战。
+                  {{
+                    context?.textbookId === G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID
+                      ? '这里展示所提供的学习文本，请留意各课的来源说明，再完成配套活动。'
+                      : '这里是已接入的课文原文和配套学习内容，读一读，再完成下面的挑战。'
+                  }}
                 </template>
               </template>
               <template v-else>
@@ -629,6 +952,11 @@ watch(
               </template>
             </template>
           </LessonReadingPanel>
+          <FormalAiPractice
+            v-if="!isDevRoute && context"
+            :textbook-id="context.textbookId"
+            :knowledge-point-id="context.knowledgePointId"
+          />
 
           <section
             id="knowledge-challenges"
@@ -660,7 +988,25 @@ watch(
             />
             <p v-else class="knowledge-detail__section-intro">
               <template v-if="isFormalPilot">
-                <template v-if="isEnglishSubject">
+                <template v-if="isLiteracyAppendix">
+                  选出需要巩固的字词，记录自己的发现或疑问。此处为开放表达，不自动判分。
+                </template>
+                <template v-else-if="isEnglishProject">
+                  展示你的作品，说说选择这些词句的理由。作品没有唯一答案，不自动判分。
+                </template>
+                <template v-else-if="isEnglishModuleReview">
+                  按复习提要练习问答、表达和语音，记录自己的发现或疑问；此处为开放复习，不自动判分。
+                </template>
+                <template v-else-if="isEnglishReview">
+                  点击下方配套练习入口，完成本册综合小练习并核对答案。
+                </template>
+                <template v-else-if="isEnglishAppendix">
+                  阅读册末材料，复习单词、语法或完成自查；由老师、家长或自己核对。
+                </template>
+                <template v-else-if="isEnglishDirectoryOnly">
+                  来稿仅提供栏目名称和页码，正文尚未提供。
+                </template>
+                <template v-else-if="isEnglishSubject">
                   这里包含单词拼写、句子介绍和听读表达。先读出答案，再查看提示和参考思路；不会直接修改掌握度。
                 </template>
                 <template v-else>
@@ -739,7 +1085,7 @@ watch(
           </section>
 
           <section
-            v-if="expansionBundle?.practiceSets.length"
+            v-if="visiblePracticeSets.length"
             class="knowledge-detail__panel knowledge-detail__practice"
             aria-labelledby="knowledge-practice-title"
           >
@@ -748,10 +1094,10 @@ watch(
                 <p class="curriculum-eyebrow">练一练，记得更牢</p>
                 <h2 id="knowledge-practice-title">练习集合</h2>
               </div>
-              <span>{{ expansionBundle.practiceSets.length }} 组</span>
+              <span>{{ visiblePracticeSets.length }} 组</span>
             </div>
             <div class="knowledge-detail__practice-list">
-              <article v-for="practice in expansionBundle.practiceSets" :key="practice.id">
+              <article v-for="practice in visiblePracticeSets" :key="practice.id">
                 <span>{{ practiceModeLabel(practice.mode) }}</span>
                 <strong>{{ practice.title }}</strong>
                 <small
@@ -759,8 +1105,28 @@ watch(
                     practice.difficultyRange.max
                   }}</small
                 >
+                <template v-if="practice.id === synchronousPractice?.id">
+                  <small
+                    >{{ synchronousPractice.autoCount }} 题自动判分 ·
+                    {{ synchronousPractice.manualCount }} 题对照参考答案</small
+                  >
+                  <small v-if="unitPracticeNotice">{{ unitPracticeNotice }}</small>
+                  <AppButton
+                    :disabled="nodeStatus === 'locked'"
+                    @click="openAssessment(practice.id)"
+                    >开始单元同步练习</AppButton
+                  >
+                </template>
               </article>
             </div>
+            <details v-if="synchronousPractice && isEnglishSubject">
+              <summary>本册核心句型 · 背诵与默写</summary>
+              <ol>
+                <li v-for="pattern in englishSyncSourceSheet.corePatterns" :key="pattern">
+                  {{ pattern }}
+                </li>
+              </ol>
+            </details>
           </section>
 
           <ReadingEntry

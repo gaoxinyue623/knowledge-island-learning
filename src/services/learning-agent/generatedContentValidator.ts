@@ -14,7 +14,7 @@ const schema = z.object({
   requestId: z.string(),
   sourceType: z.literal('AI_GENERATED_SUPPLEMENT'),
   curriculum: z.object({
-    regionId: z.string(),
+    regionId: z.string().optional(),
     grade: z.string(),
     semester: z.string(),
     subject: z.string(),

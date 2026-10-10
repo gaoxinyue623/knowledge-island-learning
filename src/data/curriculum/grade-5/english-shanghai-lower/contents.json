@@ -1,0 +1,1494 @@
+{
+  "title": "沪教牛津英语五年级下册（三年级起点）",
+  "publisher": "上海教育出版社",
+  "sourceNote": "按用户提供的三年级起点五年级下册文本整理，页码沿用来稿，来稿未注明年份，未对照出版社原书逐页核验。保留单词音标、Listen and say、中文翻译、核心句型和Sounds；缺少正文的复习及附录仅保留目录。项目任务按来稿展示；原创基础题和补充口语表达另作标注，未提供原版示范音频。",
+  "sourceSha256": "08bc1c75453c620182f012b4abb599535d70d4381fc508c111ab773db6a6ca47",
+  "modules": [
+    {
+      "number": 1,
+      "title": "Module 1 Changes and differences",
+      "page": 2
+    },
+    {
+      "number": 2,
+      "title": "Module 2 Work and play",
+      "page": 24
+    },
+    {
+      "number": 3,
+      "title": "Module 3 Things we do",
+      "page": 46
+    },
+    {
+      "number": 4,
+      "title": "Module 4 Things we enjoy",
+      "page": 68
+    },
+    {
+      "number": 5,
+      "title": "册末附录",
+      "page": 88
+    }
+  ],
+  "units": [
+    {
+      "number": 1,
+      "moduleNumber": 1,
+      "title": "Unit 1 Tidy up!",
+      "page": 2,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "tidy",
+          "phonetic": "/ˈtaɪdi/",
+          "chinese": "整理；整洁的"
+        },
+        {
+          "english": "let",
+          "phonetic": "/let/",
+          "chinese": "让"
+        },
+        {
+          "english": "sock",
+          "phonetic": "/sɒk/",
+          "chinese": "短袜"
+        },
+        {
+          "english": "yours",
+          "phonetic": "/jɔːz/",
+          "chinese": "你的；你们的（名词性物主代词）"
+        },
+        {
+          "english": "cap",
+          "phonetic": "/kæp/",
+          "chinese": "帽子"
+        },
+        {
+          "english": "mine",
+          "phonetic": "/maɪn/",
+          "chinese": "我的"
+        },
+        {
+          "english": "crayon",
+          "phonetic": "/ˈkreɪɒn/",
+          "chinese": "蜡笔"
+        },
+        {
+          "english": "umbrella",
+          "phonetic": "/ʌmˈbrelə/",
+          "chinese": "雨伞"
+        },
+        {
+          "english": "hers",
+          "phonetic": "/hɜːz/",
+          "chinese": "她的"
+        },
+        {
+          "english": "theirs",
+          "phonetic": "/ðeəz/",
+          "chinese": "他们的；她们的；它们的"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ar (car), ue (blue), oo (school)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Tidy up!",
+          "english": "Sally: Look at your bedroom. What a mess! Let’s tidy it up.\nPeter: Sure, Sally.\nSally: Whose socks are those? Are they yours, Peter?\nPeter: No, they aren’t. They’re Paul’s.\nSally: Can you put them on his bed?\nPeter: Sure.\nSally: Whose cap is this?\nPeter: It’s mine.\nSally: There’s a T-shirt. Is this yours too, Peter?\nPeter: No. It’s Paul’s.\nSally: Can you put it on his bed?\nPeter: Sure.\nPeter: The room is now clean and tidy. Thank you for your help, Sally.\nSally: You’re welcome, Peter.",
+          "chinese": "萨莉：看看你的卧室，一团糟！我们来整理一下吧。\n彼得：好的，萨莉。\n萨莉：那些是谁的袜子？是你的吗，彼得？\n彼得：不是，是保罗的。\n萨莉：你可以把袜子放到他床上吗？\n彼得：好的。\n萨莉：这是谁的帽子？\n彼得：是我的。\n萨莉：这里有一件T恤。这也是你的吗，彼得？\n彼得：不是，是保罗的。\n萨莉：你把它放到他床上好吗？\n彼得：没问题。\n彼得：房间现在干净整齐了。谢谢你帮忙，萨莉。\n萨莉：不客气，彼得。"
+        }
+      ],
+      "sentencePattern": "—Are they yours?\n—No, they aren’t.",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "The cap is mine.",
+      "questions": [
+        {
+          "stem": "“tidy”在本单元中的意思是什么？",
+          "options": [
+            "整理；整洁的",
+            "让",
+            "短袜"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 tidy 表示“整理；整洁的”。"
+        },
+        {
+          "stem": "—Are these socks yours? —No, ____.",
+          "options": [
+            "they aren’t",
+            "it isn’t",
+            "they isn’t"
+          ],
+          "correctIndex": 0,
+          "explanation": "socks 是复数，否定答句为 No, they aren’t."
+        },
+        {
+          "stem": "根据课文，那些袜子是谁的？",
+          "options": [
+            "Paul’s.",
+            "Peter’s.",
+            "Sally’s."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 Paul’s."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "moduleNumber": 1,
+      "title": "Unit 2 Our new home",
+      "page": 8,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "why",
+          "phonetic": "/waɪ/",
+          "chinese": "为什么"
+        },
+        {
+          "english": "because",
+          "phonetic": "/bɪˈkɒz/",
+          "chinese": "因为"
+        },
+        {
+          "english": "study",
+          "phonetic": "/ˈstʌdi/",
+          "chinese": "书房；学习"
+        },
+        {
+          "english": "dining room",
+          "phonetic": "/ˈdaɪnɪŋ ruːm/",
+          "chinese": "餐厅"
+        },
+        {
+          "english": "change",
+          "phonetic": "/tʃeɪndʒ/",
+          "chinese": "改变"
+        },
+        {
+          "english": "place",
+          "phonetic": "/pleɪs/",
+          "chinese": "地方"
+        },
+        {
+          "english": "every",
+          "phonetic": "/ˈevri/",
+          "chinese": "每一个"
+        },
+        {
+          "english": "then",
+          "phonetic": "/ðen/",
+          "chinese": "然后"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ir (skirt), ur (purse), au (Laura), oor (floor)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Our new home",
+          "english": "Sally and her dad are at their new home.\nDad: Do you like our new home, Sally?\nSally: Yes. I like the living room.\nDad: Why do you like it?\nSally: Because it’s so big. What about you, Dad?\nDad: I like the study.\nSally: Why do you like it?\nDad: Because it’s quiet. I can read and write there.\nSally: Where are Peter and Paul?\nDad: They’re in the garden. They like our new home too. Do you know why?\nSally: Why?\nDad: Because they can play in the garden all day!",
+          "chinese": "萨莉和爸爸在新家。\n爸爸：萨莉，你喜欢我们的新家吗？\n萨莉：喜欢。我喜欢客厅。\n爸爸：你为什么喜欢客厅？\n萨莉：因为它很大。你呢，爸爸？\n爸爸：我喜欢书房。\n萨莉：你为什么喜欢书房？\n爸爸：因为很安静，我可以在那里读书写字。\n萨莉：彼得和保罗在哪里？\n爸爸：他们在花园。他们也喜欢新家。你知道为什么吗？\n萨莉：为什么？\n爸爸：因为他们可以一整天都在花园玩耍！"
+        }
+      ],
+      "sentencePattern": "—Why do you like it?\n—Because it’s so big.",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "I like the study because it is quiet.",
+      "questions": [
+        {
+          "stem": "“why”在本单元中的意思是什么？",
+          "options": [
+            "为什么",
+            "因为",
+            "书房；学习"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 why 表示“为什么”。"
+        },
+        {
+          "stem": "—____ do you like the study? —Because it’s quiet.",
+          "options": [
+            "Why",
+            "Who",
+            "Where"
+          ],
+          "correctIndex": 0,
+          "explanation": "Why 询问原因，Because 回答原因。"
+        },
+        {
+          "stem": "根据课文，爸爸为什么喜欢书房？",
+          "options": [
+            "Because it’s quiet.",
+            "Because it’s noisy.",
+            "Because it’s small."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 Because it’s quiet."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "moduleNumber": 1,
+      "title": "Unit 3 In the future",
+      "page": 14,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "future",
+          "phonetic": "/ˈfjuːtʃə(r)/",
+          "chinese": "将来"
+        },
+        {
+          "english": "stand",
+          "phonetic": "/stænd/",
+          "chinese": "站"
+        },
+        {
+          "english": "machine",
+          "phonetic": "/məˈʃiːn/",
+          "chinese": "机器"
+        },
+        {
+          "english": "will",
+          "phonetic": "/wɪl/",
+          "chinese": "将，会"
+        },
+        {
+          "english": "exercise",
+          "phonetic": "/ˈeksəsaɪz/",
+          "chinese": "锻炼；练习"
+        },
+        {
+          "english": "early",
+          "phonetic": "/ˈɜːli/",
+          "chinese": "早的"
+        },
+        {
+          "english": "hard",
+          "phonetic": "/hɑːd/",
+          "chinese": "努力地；困难的"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ee (bee), ea (tea), eer (deer), ear (tear)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "In the future",
+          "english": "Kitty wants to know about her future. She stands in front of a magic machine and takes a photo.\nKitty looks at her photo. There are some words on the back.\nIn fifteen years…\n• You will not wear glasses.\n• You will have big and beautiful eyes.\n• You will live in Beijing.\n• You will be a teacher.\n• You will love your job.\nKitty: This is me in the future! I won’t wear glasses. I’ll have big and beautiful eyes. I’ll live in Beijing and I’ll be a teacher.",
+          "chinese": "基蒂想知道自己的未来。她站在一台神奇机器前拍了一张照片。\n基蒂看着照片，背面写着一些文字。\n十五年后……\n你不会戴眼镜。\n你会拥有一双漂亮的大眼睛。\n你会住在北京。\n你会成为一名老师。\n你会热爱你的工作。\n基蒂：这就是未来的我！我不用戴眼镜，会有一双漂亮的大眼睛。我会住在北京，成为一名老师。"
+        }
+      ],
+      "sentencePattern": "I’ll be a teacher.\nI won’t wear glasses.",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "I’ll be a teacher.",
+      "questions": [
+        {
+          "stem": "“future”在本单元中的意思是什么？",
+          "options": [
+            "将来",
+            "站",
+            "机器"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 future 表示“将来”。"
+        },
+        {
+          "stem": "I’ll be a teacher. 中 I’ll 的完整形式是什么？",
+          "options": [
+            "I will",
+            "I am",
+            "I do"
+          ],
+          "correctIndex": 0,
+          "explanation": "I’ll 是 I will 的缩写，表示将来。"
+        },
+        {
+          "stem": "照片背面的文字预测 Kitty 将做什么工作？",
+          "options": [
+            "A teacher.",
+            "A doctor.",
+            "A farmer."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 A teacher."
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "moduleNumber": 1,
+      "title": "Revision 1 复习1",
+      "page": 20,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Revision 1 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Revision 1 复习1",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 14,
+      "moduleNumber": 1,
+      "title": "Project 1 项目1",
+      "page": 22,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 1 项目1",
+          "english": "",
+          "chinese": "制作未来的自己海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作未来的自己海报；使用本册学过的词句介绍作品。",
+      "sentenceAnswer": "I’ll be a teacher.",
+      "questions": []
+    },
+    {
+      "number": 4,
+      "moduleNumber": 2,
+      "title": "Unit 4 Reading is fun",
+      "page": 24,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "storybook",
+          "phonetic": "/ˈstɔːribʊk/",
+          "chinese": "故事书"
+        },
+        {
+          "english": "buy",
+          "phonetic": "/baɪ/",
+          "chinese": "买"
+        },
+        {
+          "english": "story",
+          "phonetic": "/ˈstɔːri/",
+          "chinese": "故事"
+        },
+        {
+          "english": "dictionary",
+          "phonetic": "/ˈdɪkʃənri/",
+          "chinese": "词典"
+        },
+        {
+          "english": "magazine",
+          "phonetic": "/ˌmæɡəˈziːn/",
+          "chinese": "杂志"
+        },
+        {
+          "english": "newspaper",
+          "phonetic": "/ˈnjuːzpeɪpə(r)/",
+          "chinese": "报纸"
+        },
+        {
+          "english": "week",
+          "phonetic": "/wiːk/",
+          "chinese": "星期"
+        },
+        {
+          "english": "student",
+          "phonetic": "/ˈstjuːdnt/",
+          "chinese": "学生"
+        }
+      ],
+      "aliases": [],
+      "sounds": "i (five), ie (pie)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Reading is fun",
+          "english": "Ms Guo: What do you like reading, children?\nKitty: I like reading storybooks. I’m going to read a story every day.\nAlice: I like reading magazines.\nPeter: I like reading newspapers.\nJoe: I like reading dictionaries.\nMs Guo: That sounds great! Reading is fun.",
+          "chinese": "郭老师：孩子们，你们喜欢读什么？\n基蒂：我喜欢故事书。我打算每天读一个故事。\n爱丽丝：我喜欢杂志。\n彼得：我喜欢报纸。\n乔：我喜欢词典。\n郭老师：听起来很棒！阅读很有趣。"
+        }
+      ],
+      "sentencePattern": "I’m going to read a story every day.",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "I’m going to read a story every day.",
+      "questions": [
+        {
+          "stem": "“storybook”在本单元中的意思是什么？",
+          "options": [
+            "故事书",
+            "买",
+            "故事"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 storybook 表示“故事书”。"
+        },
+        {
+          "stem": "He ____ going to read a story.",
+          "options": [
+            "is",
+            "am",
+            "are"
+          ],
+          "correctIndex": 0,
+          "explanation": "主语 He 对应 is，be going to 后接动词原形。"
+        },
+        {
+          "stem": "根据课文，Alice 喜欢读什么？",
+          "options": [
+            "Magazines.",
+            "Newspapers.",
+            "Dictionaries."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 Magazines."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "moduleNumber": 2,
+      "title": "Unit 5 At the weekend",
+      "page": 30,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "weekend",
+          "phonetic": "/ˌwiːkˈend/",
+          "chinese": "周末"
+        },
+        {
+          "english": "stay",
+          "phonetic": "/steɪ/",
+          "chinese": "停留，待"
+        },
+        {
+          "english": "film",
+          "phonetic": "/fɪlm/",
+          "chinese": "电影"
+        },
+        {
+          "english": "boat",
+          "phonetic": "/bəʊt/",
+          "chinese": "小船"
+        },
+        {
+          "english": "plan",
+          "phonetic": "/plæn/",
+          "chinese": "计划"
+        },
+        {
+          "english": "tomorrow",
+          "phonetic": "/təˈmɒrəʊ/",
+          "chinese": "明天"
+        },
+        {
+          "english": "build",
+          "phonetic": "/bɪld/",
+          "chinese": "建造"
+        },
+        {
+          "english": "next",
+          "phonetic": "/nekst/",
+          "chinese": "下一个"
+        },
+        {
+          "english": "cry",
+          "phonetic": "/kraɪ/",
+          "chinese": "哭"
+        },
+        {
+          "english": "until",
+          "phonetic": "/ʌnˈtɪl/",
+          "chinese": "直到"
+        }
+      ],
+      "aliases": [],
+      "sounds": "o (Flo), oa (goat), oe (Joe)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "At the weekend",
+          "english": "Ms Guo: Children, what are you going to do this weekend?\nJoe: I’m going to stay at home and watch TV with my grandparents.\nPeter: I’m going to play football on Sunday. It’s my favourite sport.\nJill: I’m going to see a film with my parents on Saturday afternoon.\nKitty: I’m going to row a boat and fly a kite in the park on Sunday.\nAlice: I don’t have any plans for the weekend.\nKitty: Do you want to come with me, Alice?\nAlice: Sure. Thank you, Kitty.",
+          "chinese": "郭老师：孩子们，这个周末你们打算做什么？\n乔：我打算待在家里和爷爷奶奶看电视。\n彼得：周日我打算踢足球，这是我最喜欢的运动。\n吉尔：周六下午我要和爸爸妈妈去看电影。\n基蒂：周日我打算去公园划船、放风筝。\n爱丽丝：我周末还没有计划。\n基蒂：爱丽丝，要不要和我一起？\n爱丽丝：好呀，谢谢你，基蒂。"
+        }
+      ],
+      "sentencePattern": "What are you going to do this weekend?",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "I’m going to row a boat.",
+      "questions": [
+        {
+          "stem": "“weekend”在本单元中的意思是什么？",
+          "options": [
+            "周末",
+            "停留，待",
+            "电影"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 weekend 表示“周末”。"
+        },
+        {
+          "stem": "—What ____ you going to do this weekend?",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ],
+          "correctIndex": 0,
+          "explanation": "询问 you 的计划，使用 are you going to…。"
+        },
+        {
+          "stem": "根据课文，谁周六下午和父母去看电影？",
+          "options": [
+            "Jill.",
+            "Joe.",
+            "Peter."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 Jill."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "moduleNumber": 2,
+      "title": "Unit 6 Holidays",
+      "page": 36,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "holiday",
+          "phonetic": "/ˈhɒlədeɪ/",
+          "chinese": "假期"
+        },
+        {
+          "english": "clear",
+          "phonetic": "/klɪə(r)/",
+          "chinese": "清澈的"
+        },
+        {
+          "english": "seafood",
+          "phonetic": "/ˈsiːfuːd/",
+          "chinese": "海鲜"
+        },
+        {
+          "english": "hotel",
+          "phonetic": "/həʊˈtel/",
+          "chinese": "酒店"
+        },
+        {
+          "english": "island",
+          "phonetic": "/ˈaɪlənd/",
+          "chinese": "岛屿"
+        }
+      ],
+      "aliases": [],
+      "sounds": "oy (toy), oi (noise)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Holidays",
+          "english": "Mum and Dad, what are we going to do this summer?\nDad: Let’s go to Sanya. It’s a wonderful place for a holiday.\nKitty: Great! How do we get there?\nDad: We get there by plane.\nBen: Where will we stay?\nMum: We’ll stay in a hotel by the sea.\nKitty: How long will we stay in Sanya?\nDad: We’ll stay there for five days.\nMum: Sanya has beautiful beaches with clear water. We’ll go swimming there. We’ll also have seafood. The seafood there tastes great!",
+          "chinese": "爸爸妈妈，今年夏天我们要做什么？\n爸爸：我们去三亚吧，那是度假的好地方。\n基蒂：太棒了！我们怎么去那里？\n爸爸：坐飞机去。\n本：我们住在哪里？\n妈妈：我们住在海边的酒店。\n基蒂：我们会在三亚待多久？\n爸爸：待五天。\n妈妈：三亚有美丽的海滩，海水清澈。我们去那里游泳，还可以吃海鲜。那里的海鲜味道很棒！"
+        }
+      ],
+      "sentencePattern": "Where will we stay?\nHow long will we stay in Sanya?",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "We’ll stay in a hotel.",
+      "questions": [
+        {
+          "stem": "“holiday”在本单元中的意思是什么？",
+          "options": [
+            "假期",
+            "清澈的",
+            "海鲜"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 holiday 表示“假期”。"
+        },
+        {
+          "stem": "—How long will we stay there?",
+          "options": [
+            "For five days.",
+            "By plane.",
+            "In a hotel."
+          ],
+          "correctIndex": 0,
+          "explanation": "How long 询问时长，用 For five days 回答。"
+        },
+        {
+          "stem": "根据课文，一家人怎样去三亚？",
+          "options": [
+            "By plane.",
+            "By bus.",
+            "By boat."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 By plane."
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "moduleNumber": 2,
+      "title": "Revision 2 复习2",
+      "page": 42,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Revision 2 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Revision 2 复习2",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 16,
+      "moduleNumber": 2,
+      "title": "Project 2 项目2",
+      "page": 44,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 2 项目2",
+          "english": "",
+          "chinese": "制作阅读海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作阅读海报；使用本册学过的词句介绍作品。",
+      "sentenceAnswer": "I like reading storybooks.",
+      "questions": []
+    },
+    {
+      "number": 7,
+      "moduleNumber": 3,
+      "title": "Unit 7 Open Day",
+      "page": 46,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "meet",
+          "phonetic": "/miːt/",
+          "chinese": "迎接；遇见"
+        },
+        {
+          "english": "school gate",
+          "phonetic": "/skuːl ɡeɪt/",
+          "chinese": "校门"
+        },
+        {
+          "english": "art room",
+          "phonetic": "/ɑːt ruːm/",
+          "chinese": "美术室"
+        },
+        {
+          "english": "hall",
+          "phonetic": "/hɔːl/",
+          "chinese": "礼堂"
+        },
+        {
+          "english": "finally",
+          "phonetic": "/ˈfaɪnəli/",
+          "chinese": "最后"
+        },
+        {
+          "english": "meeting room",
+          "phonetic": "/ˈmiːtɪŋ ruːm/",
+          "chinese": "会议室"
+        },
+        {
+          "english": "show",
+          "phonetic": "/ʃəʊ/",
+          "chinese": "展示"
+        }
+      ],
+      "aliases": [],
+      "sounds": "air (hair), are (Clare), ear (bear)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [
+        "来稿句型“First, they’ll visit our classroom.”作为句型示例保留；主课文顺序是先到校门见面，再参观教室。"
+      ],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Open Day",
+          "english": "Ms Guo: Children, your parents will come to our school on Open Day.\nKitty: What will they do first?\nMs Guo: First, they’ll meet us at the school gate.\nAlice: What will they do next?\nMs Guo: Next, they’ll visit our classroom.\nKitty: Then what will they do?\nMs Guo: Then they’ll look at our projects in the art room.\nAlice: After that, they’ll listen to the school choir in the hall.\nKitty: Finally, they’ll have tea and cakes with our teachers in the meeting room.",
+          "chinese": "郭老师：孩子们，开放日你们的爸爸妈妈会来学校。\n基蒂：他们首先会做什么？\n郭老师：首先，在校门口和我们碰面。\n爱丽丝：接下来做什么？\n郭老师：接下来参观我们的教室。\n基蒂：然后呢？\n郭老师：然后去美术室看我们的作品。\n爱丽丝：在那之后，他们会在礼堂听学校合唱团演唱。\n基蒂：最后呢？\n郭老师：最后，他们会在会议室和老师们喝茶、吃点心。"
+        }
+      ],
+      "sentencePattern": "First, they’ll visit our classroom.",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "First, they’ll meet us at the school gate.",
+      "questions": [
+        {
+          "stem": "“meet”在本单元中的意思是什么？",
+          "options": [
+            "迎接；遇见",
+            "校门",
+            "美术室"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 meet 表示“迎接；遇见”。"
+        },
+        {
+          "stem": "根据主课文，父母首先会在哪里与大家见面？",
+          "options": [
+            "At the school gate.",
+            "In the meeting room.",
+            "In the art room."
+          ],
+          "correctIndex": 0,
+          "explanation": "主课文 First, they’ll meet us at the school gate. 后面才参观教室。"
+        },
+        {
+          "stem": "根据课文，最后父母会到哪里喝茶、吃点心？",
+          "options": [
+            "The meeting room.",
+            "The school gate.",
+            "The garden."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 The meeting room."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "moduleNumber": 3,
+      "title": "Unit 8 Buying clothes",
+      "page": 52,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "which",
+          "phonetic": "/wɪtʃ/",
+          "chinese": "哪一个"
+        },
+        {
+          "english": "trousers",
+          "phonetic": "/ˈtraʊzəz/",
+          "chinese": "裤子"
+        },
+        {
+          "english": "sweater",
+          "phonetic": "/ˈswetə(r)/",
+          "chinese": "毛衣"
+        },
+        {
+          "english": "coat",
+          "phonetic": "/kəʊt/",
+          "chinese": "外套"
+        },
+        {
+          "english": "shoe",
+          "phonetic": "/ʃuː/",
+          "chinese": "鞋子"
+        },
+        {
+          "english": "only",
+          "phonetic": "/ˈəʊnli/",
+          "chinese": "仅仅"
+        },
+        {
+          "english": "smile",
+          "phonetic": "/smaɪl/",
+          "chinese": "微笑"
+        },
+        {
+          "english": "money",
+          "phonetic": "/ˈmʌni/",
+          "chinese": "钱"
+        },
+        {
+          "english": "keep",
+          "phonetic": "/kiːp/",
+          "chinese": "保留；保持"
+        },
+        {
+          "english": "laugh",
+          "phonetic": "/lɑːf/",
+          "chinese": "大笑"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ou (mouse), ow (owl)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Buying clothes",
+          "english": "Mrs Li: Which dress do you like, the blue one or the pink one?\nKitty: I like the pink one. Pink is my favourite colour. I like the blue one too. It’s beautiful.\nMrs Li: You can try both on.\nKitty: OK.\nMrs Li: Which pair of trousers do you like, the white one or the brown one?\nKitty: I like the brown one.\nMrs Li: Here you are. It’s your size.\nKitty: OK. I’ll try on the trousers.",
+          "chinese": "李太太：你喜欢哪条连衣裙，蓝色的还是粉色的？\n基蒂：我喜欢粉色那条。粉色是我最喜欢的颜色。蓝色这条我也喜欢，很漂亮。\n李太太：两条都可以试穿。\n基蒂：好。\n李太太：你喜欢哪条裤子，白色还是棕色？\n基蒂：棕色的。\n李太太：给你，这是你的尺码。\n基蒂：好，我试一下这条裤子。"
+        }
+      ],
+      "sentencePattern": "Which dress do you like, the blue one or the pink one?",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "I like the pink one.",
+      "questions": [
+        {
+          "stem": "“which”在本单元中的意思是什么？",
+          "options": [
+            "哪一个",
+            "裤子",
+            "毛衣"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 which 表示“哪一个”。"
+        },
+        {
+          "stem": "I’ll try ____ the trousers.",
+          "options": [
+            "on",
+            "in",
+            "at"
+          ],
+          "correctIndex": 0,
+          "explanation": "try on 表示试穿衣服。"
+        },
+        {
+          "stem": "根据课文，Kitty 选择哪条裤子？",
+          "options": [
+            "The brown one.",
+            "The white one.",
+            "The blue one."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 The brown one."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "moduleNumber": 3,
+      "title": "Unit 9 Seeing the doctor",
+      "page": 58,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "ill",
+          "phonetic": "/ɪl/",
+          "chinese": "生病的"
+        },
+        {
+          "english": "headache",
+          "phonetic": "/ˈhedeɪk/",
+          "chinese": "头痛"
+        },
+        {
+          "english": "fever",
+          "phonetic": "/ˈfiːvə(r)/",
+          "chinese": "发烧"
+        },
+        {
+          "english": "should",
+          "phonetic": "/ʃʊd/",
+          "chinese": "应该"
+        },
+        {
+          "english": "medicine",
+          "phonetic": "/ˈmedsn/",
+          "chinese": "药"
+        },
+        {
+          "english": "rest",
+          "phonetic": "/rest/",
+          "chinese": "休息"
+        },
+        {
+          "english": "toothache",
+          "phonetic": "/ˈtuːθeɪk/",
+          "chinese": "牙痛"
+        },
+        {
+          "english": "present",
+          "phonetic": "/ˈpreznt/",
+          "chinese": "礼物"
+        },
+        {
+          "english": "world",
+          "phonetic": "/wɜːld/",
+          "chinese": "世界"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ay (May), ai (wait)",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Seeing the doctor",
+          "english": "Kitty is not feeling well. She is ill. Her mum takes her to the hospital.\nDoctor: What’s wrong with you?\nKitty: I have a headache.\nMum: She has a fever too.\nDoctor: Let me have a look. Open your mouth and say “Ah…”\nKitty: Ah…\nDoctor: You have a cold. You should take some medicine. You should also drink a lot of water. You shouldn’t go to bed late. Have a good rest and you’ll get well soon.",
+          "chinese": "基蒂感觉不舒服，她生病了。妈妈带她去医院。\n医生：你哪里不舒服？\n基蒂：我头痛。\n妈妈：她还发烧。\n医生：我看看。张开嘴说“啊……”\n基蒂：啊……\n医生：你感冒了。你应该吃点药，还要多喝温水。不要晚睡。好好休息，很快就会好起来。"
+        }
+      ],
+      "sentencePattern": "You should take some medicine.\nYou shouldn’t go to bed late.",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "You shouldn’t go to bed late.",
+      "questions": [
+        {
+          "stem": "“ill”在本单元中的意思是什么？",
+          "options": [
+            "生病的",
+            "头痛",
+            "发烧"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 ill 表示“生病的”。"
+        },
+        {
+          "stem": "You ____ go to bed late.",
+          "options": [
+            "shouldn’t",
+            "should",
+            "are"
+          ],
+          "correctIndex": 0,
+          "explanation": "shouldn’t go to bed late 表示不应该晚睡，是课文句型。"
+        },
+        {
+          "stem": "根据课文，Kitty 向医生说自己哪里不舒服？",
+          "options": [
+            "She has a headache.",
+            "She has a toothache.",
+            "She has a sore leg."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 She has a headache."
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "moduleNumber": 3,
+      "title": "Revision 3 复习3",
+      "page": 64,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Revision 3 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Revision 3 复习3",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 18,
+      "moduleNumber": 3,
+      "title": "Project 3 项目3",
+      "page": 66,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 3 项目3",
+          "english": "",
+          "chinese": "制作健康小贴士海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作健康小贴士海报；使用本册学过的词句介绍作品。",
+      "sentenceAnswer": "You shouldn’t go to bed late.",
+      "questions": []
+    },
+    {
+      "number": 10,
+      "moduleNumber": 4,
+      "title": "Unit 10 Great inventions",
+      "page": 68,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "invention",
+          "phonetic": "/ɪnˈvenʃn/",
+          "chinese": "发明物"
+        },
+        {
+          "english": "watch",
+          "phonetic": "/wɒtʃ/",
+          "chinese": "手表；观看"
+        },
+        {
+          "english": "anywhere",
+          "phonetic": "/ˈeniweə(r)/",
+          "chinese": "任何地方"
+        },
+        {
+          "english": "travel",
+          "phonetic": "/ˈtrævl/",
+          "chinese": "旅行"
+        },
+        {
+          "english": "invent",
+          "phonetic": "/ɪnˈvent/",
+          "chinese": "发明"
+        },
+        {
+          "english": "myself",
+          "phonetic": "/maɪˈself/",
+          "chinese": "我自己"
+        },
+        {
+          "english": "camera",
+          "phonetic": "/ˈkæmərə/",
+          "chinese": "照相机"
+        }
+      ],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Sounds",
+        "Key patterns"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Great inventions",
+          "english": "Ms Guo: Do you know any great inventions in the world?\nKitty: I think paper is a great invention. People can write on it.\nAlice: I think the watch is a great invention. People can tell the time anywhere.\nPeter: I think the car is a great invention. People can travel from one place to another very fast.\nJoe: I think … Well, I’m going to invent something myself.\nMs Guo: Great! What are you going to invent?\nJoe: I’m going to invent a flying bike!",
+          "chinese": "郭老师：你们知道世界上有哪些伟大发明吗？\n基蒂：我认为纸是伟大发明，人们可以在纸上写字。\n爱丽丝：手表是伟大发明，人们随时随地都能看时间。\n彼得：汽车是伟大发明，人们可以快速从一个地方去往另一个地方。\n乔：我觉得……我打算自己发明一样东西。\n郭老师：太棒啦！你打算发明什么？\n乔：我要发明一辆会飞的自行车！"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "I’m going to invent a flying bike.",
+      "questions": [
+        {
+          "stem": "“invention”在本单元中的意思是什么？",
+          "options": [
+            "发明物",
+            "手表；观看",
+            "任何地方"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 invention 表示“发明物”。"
+        },
+        {
+          "stem": "根据乔的话，哪句使用了 be going to 表达发明计划？",
+          "options": [
+            "I’m going to invent a flying bike.",
+            "I will invent a flying bike.",
+            "I invent a flying bike."
+          ],
+          "correctIndex": 0,
+          "explanation": "指定使用 be going to，课文中乔说 I’m going to invent a flying bike!"
+        },
+        {
+          "stem": "根据课文，手表让人们可以做什么？",
+          "options": [
+            "Tell the time anywhere.",
+            "Fly to school.",
+            "Write on paper."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 Tell the time anywhere."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "moduleNumber": 4,
+      "title": "Unit 11 Chinese festivals",
+      "page": 74,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "festival",
+          "phonetic": "/ˈfestɪvl/",
+          "chinese": "节日"
+        },
+        {
+          "english": "important",
+          "phonetic": "/ɪmˈpɔːtnt/",
+          "chinese": "重要的"
+        },
+        {
+          "english": "call",
+          "phonetic": "/kɔːl/",
+          "chinese": "称作；打电话"
+        },
+        {
+          "english": "end",
+          "phonetic": "/end/",
+          "chinese": "结束"
+        },
+        {
+          "english": "village",
+          "phonetic": "/ˈvɪlɪdʒ/",
+          "chinese": "村庄"
+        },
+        {
+          "english": "last",
+          "phonetic": "/lɑːst/",
+          "chinese": "持续"
+        }
+      ],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Sounds",
+        "Key patterns"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "dialogue",
+          "title": "Chinese festivals",
+          "english": "Ms Guo: The Spring Festival is an important Chinese festival. It’s also called Chinese New Year. It comes in January or February.\nKitty: What do people do at this festival?\nMs Guo: People get together with their families. They eat dumplings.\nAlice: What other important festivals do we have?\nMs Guo: We have the Dragon Boat Festival. It comes in May or June. People have dragon boat races and eat zongzi.\nKitty: We also have the Mid-Autumn Festival. It comes in September or October. People look at the moon and eat mooncakes.",
+          "chinese": "郭老师：春节是中国重要节日，也叫中国新年，在一月或二月。\n基蒂：人们在这个节日做什么？\n郭老师：全家团聚，吃饺子。\n爱丽丝：我们还有什么重要节日？\n郭老师：端午节，在五六月。人们赛龙舟，吃粽子。\n基蒂：我们还有中秋节，在九十月。人们赏月，吃月饼。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "They eat dumplings.",
+      "questions": [
+        {
+          "stem": "“festival”在本单元中的意思是什么？",
+          "options": [
+            "节日",
+            "重要的",
+            "称作；打电话"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 festival 表示“节日”。"
+        },
+        {
+          "stem": "People ____ mooncakes at the Mid-Autumn Festival.",
+          "options": [
+            "eat",
+            "eats",
+            "eating"
+          ],
+          "correctIndex": 0,
+          "explanation": "主语 People 是复数，一般现在时用 eat。"
+        },
+        {
+          "stem": "根据课文，人们在端午节吃什么？",
+          "options": [
+            "Zongzi.",
+            "Mooncakes.",
+            "Cakes."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 Zongzi."
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "moduleNumber": 4,
+      "title": "Unit 12 The giant’s garden",
+      "page": 80,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "wall",
+          "phonetic": "/wɔːl/",
+          "chinese": "墙"
+        },
+        {
+          "english": "kind",
+          "phonetic": "/kaɪnd/",
+          "chinese": "友善的"
+        },
+        {
+          "english": "through",
+          "phonetic": "/θruː/",
+          "chinese": "穿过"
+        }
+      ],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Sounds",
+        "Key patterns"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "The giant’s garden",
+          "english": "A giant lives in a big house with a beautiful garden. Children like to play in the garden. They have a lot of fun there.\nThe giant goes away. When he comes back, he sees the children in his garden. He is very angry.\nGiant: This is my garden! You can’t play here.\nHe builds a high wall around the garden. Spring does not come to the giant’s garden. It is always winter there.\nOne morning, the giant hears some lovely sounds. He sees some beautiful flowers too. The giant is very happy.\nGiant: Hooray! Spring is here!\nThe giant finds some children in his garden. They are coming through a hole. They bring Spring to his garden!\nThe giant knocks down the wall around his garden.\nGiant: Children, you can play in my garden any time.",
+          "chinese": "巨人住在一栋大房子里，房子配有美丽花园。孩子们喜欢在花园玩耍，玩得很开心。\n巨人外出，回来的时候看见孩子们在花园里，他非常生气。\n巨人：这是我的花园！你们不能在这里玩。\n他在花园四周筑起高墙。春天再也不来巨人的花园，那里永远是冬天。\n一天早上，巨人听见悦耳的声音，还看见了美丽的花朵。巨人十分开心。\n巨人：太好了！春天来了！\n巨人看见花园里有几个孩子，他们从墙洞里钻进来，是他们把春天带进花园！\n巨人推倒了围墙。\n巨人：孩子们，你们随时都可以来我的花园玩耍。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "用本单元词句和同伴交流。",
+      "sentenceAnswer": "Children can play in my garden.",
+      "questions": [
+        {
+          "stem": "“wall”在本单元中的意思是什么？",
+          "options": [
+            "墙",
+            "友善的",
+            "穿过"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元中 wall 表示“墙”。"
+        },
+        {
+          "stem": "The giant ____ a high wall around the garden.",
+          "options": [
+            "builds",
+            "build",
+            "building"
+          ],
+          "correctIndex": 0,
+          "explanation": "The giant 是第三人称单数，用 builds。"
+        },
+        {
+          "stem": "根据故事，巨人最后对围墙做了什么？",
+          "options": [
+            "He knocks it down.",
+            "He makes it higher.",
+            "He paints it blue."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元主课文，答案是 He knocks it down."
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "moduleNumber": 4,
+      "title": "Project 4",
+      "page": 86,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Project 4 任务正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Project 4",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 20,
+      "moduleNumber": 5,
+      "title": "Word list 1",
+      "page": 88,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Word list 1 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Word list 1",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 21,
+      "moduleNumber": 5,
+      "title": "Word list 2",
+      "page": 91,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Word list 2 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Word list 2",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 22,
+      "moduleNumber": 5,
+      "title": "Daily expressions",
+      "page": 94,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Daily expressions 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Daily expressions",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 23,
+      "moduleNumber": 5,
+      "title": "Proper nouns",
+      "page": 94,
+      "kind": "directory",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "missingSections": [
+        "Proper nouns 正文"
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "kind": "directory",
+          "title": "Proper nouns",
+          "english": "",
+          "chinese": "来稿仅提供栏目名称和页码，未提供正文。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "来稿仅提供栏目名称和页码，未提供正文。",
+      "sentenceAnswer": "",
+      "questions": []
+    }
+  ]
+}

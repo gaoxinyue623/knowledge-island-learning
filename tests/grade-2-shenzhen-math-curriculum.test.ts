@@ -1,3 +1,4 @@
+import { G2_BNU_MATH_S2_TEXTBOOK_IDS } from '@/data/curriculum/grade-2/bnu-lower'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -103,9 +104,10 @@ describe('Shenzhen BNU grade 2 math upper curriculum', () => {
       ).toEqual([bookId])
     }
     expect(
-      (await service.resolveAvailableTextbooks({ ...context, semesterId: 'SEMESTER_LOWER' })).math
-        .availableTextbooks,
-    ).toEqual([])
+      (
+        await service.resolveAvailableTextbooks({ ...context, semesterId: 'SEMESTER_LOWER' })
+      ).math.availableTextbooks.map((book) => book.id),
+    ).toEqual([...G2_BNU_MATH_S2_TEXTBOOK_IDS])
     const gradeOne = await service.resolveAvailableTextbooks({
       ...context,
       gradeId: G1_PEP_CHINESE_GRADE_ID,

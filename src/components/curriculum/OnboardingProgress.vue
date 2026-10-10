@@ -4,12 +4,16 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const steps = ['地区', '年级', '教材', '角色']
+const steps = ['年级', '教材版本', '角色']
 </script>
 
 <template>
-  <div class="onboarding-progress" role="status" :aria-label="`当前步骤 ${props.step} / 4`">
-    <span class="onboarding-progress__count">{{ props.step }} / 4</span>
+  <div
+    class="onboarding-progress"
+    role="status"
+    :aria-label="`当前步骤 ${props.step} / ${steps.length}`"
+  >
+    <span class="onboarding-progress__count">{{ props.step }} / {{ steps.length }}</span>
     <span class="onboarding-progress__steps">{{ steps.join(' · ') }}</span>
   </div>
 </template>

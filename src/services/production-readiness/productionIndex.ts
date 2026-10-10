@@ -157,10 +157,6 @@ export function buildProductionIndex(
     ...lessonKnowledgePointRelations.map((relation) => relation.sourceId),
     ...knowledgePrerequisites.map((relation) => relation.sourceId),
   ])
-  const sourceReferences = dataset.sourceReferences.filter(
-    (source) => sourceIds.has(source.id) && isProductionSourceReference(source),
-  )
-
   const contents = dataset.contents.filter(
     (content) =>
       finalKnowledgePointIds.has(content.knowledgePointId) && isProductionContentRecord(content),
@@ -186,10 +182,23 @@ export function buildProductionIndex(
       finalKnowledgePointIds.has(mapping.knowledgePointId) &&
       isProductionQuestionMapping(mapping),
   )
+  const referencedMediaIds = new Set([
+    ...collectContentMediaIds(contents),
+    ...collectQuestionMediaIds(questions),
+  ])
   const contentSourceIds = new Set([
+    ...dataset.mediaAssets
+      .filter((asset) => referencedMediaIds.has(asset.id))
+      .map((asset) => asset.sourceId),
     ...contents.map((content) => content.sourceId),
     ...questions.map((question) => question.sourceId),
+    ...questionKnowledgePoints.map((mapping) => mapping.sourceId),
   ])
+  const sourceReferences = dataset.sourceReferences.filter(
+    (source) =>
+      (sourceIds.has(source.id) || contentSourceIds.has(source.id)) &&
+      isProductionSourceReference(source),
+  )
   const contentSources = dataset.contentSources.filter(
     (source) => contentSourceIds.has(source.id) && isProductionContentSource(source),
   )

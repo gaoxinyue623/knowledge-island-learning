@@ -60,17 +60,26 @@ watch(
   },
 )
 
-const viewModel = computed(() => (plan.value ? resolveWeeklyPlan(plan.value, props.dailyPlan) : null))
-const activeDay = computed(() => viewModel.value?.days.find((day) => day.weekday === selectedDay.value))
+const viewModel = computed(() =>
+  plan.value ? resolveWeeklyPlan(plan.value, props.dailyPlan) : null,
+)
+const activeDay = computed(() =>
+  viewModel.value?.days.find((day) => day.weekday === selectedDay.value),
+)
 const isToday = computed(() => activeDay.value?.dateKey === props.dailyPlan?.dateKey)
 const availableTasks = computed(() =>
-  isToday.value
-    ? (props.dailyPlan?.tasks.filter((task) => task.status === 'pending') ?? [])
-    : [],
+  isToday.value ? (props.dailyPlan?.tasks.filter((task) => task.status === 'pending') ?? []) : [],
 )
-const selectedTaskIds = computed(() => new Set(availableTasks.value
-  .filter((task) => activeDay.value?.taskReferences.some((reference) => sameWeeklyTask(reference, task)))
-  .map((task) => task.id)))
+const selectedTaskIds = computed(
+  () =>
+    new Set(
+      availableTasks.value
+        .filter((task) =>
+          activeDay.value?.taskReferences.some((reference) => sameWeeklyTask(reference, task)),
+        )
+        .map((task) => task.id),
+    ),
+)
 const selectedCount = computed(() => activeDay.value?.taskReferences.length ?? 0)
 const completedCount = computed(() => activeDay.value?.completedCount ?? 0)
 const targetCount = computed(() => activeDay.value?.targetCount ?? 0)
@@ -103,7 +112,9 @@ function toggleTask(task: DailyLearningTask): void {
     targetCount: activeDay.value.targetCount,
     tasks: availableTasks.value.filter((candidate) => next.has(candidate.id)),
     retainedTaskReferences: activeDay.value.taskReferences.filter(
-      (reference) => reference.status !== 'pending' || !availableTasks.value.some((task) => sameWeeklyTask(reference, task)),
+      (reference) =>
+        reference.status !== 'pending' ||
+        !availableTasks.value.some((task) => sameWeeklyTask(reference, task)),
     ),
   })
 }
@@ -149,7 +160,11 @@ const carryOver = computed(() =>
   <section v-if="!profileId" class="weekly-plan-card" aria-label="本周学习计划不可用">
     <p class="weekly-plan-card__message" role="status">请选择学习档案后，再安排本周学习。</p>
   </section>
-  <section v-else-if="viewModel && activeDay" class="weekly-plan-card" aria-labelledby="weekly-plan-title">
+  <section
+    v-else-if="viewModel && activeDay"
+    class="weekly-plan-card"
+    aria-labelledby="weekly-plan-title"
+  >
     <header class="weekly-plan-card__header">
       <div>
         <p class="weekly-plan-card__eyebrow">本周学习计划</p>
@@ -208,7 +223,9 @@ const carryOver = computed(() =>
 
       <div v-if="isToday && targetCount" class="weekly-plan-card__choices">
         <h4>从今天真实可用的任务中选择</h4>
-        <p v-if="!availableTasks.length">今天暂时没有可选任务；你仍可保留目标，稍后刷新首页再选。</p>
+        <p v-if="!availableTasks.length">
+          今天暂时没有可选任务；你仍可保留目标，稍后刷新首页再选。
+        </p>
         <label v-for="task in availableTasks" :key="task.id" class="weekly-plan-card__task-choice">
           <input
             :checked="selectedTaskIds.has(task.id)"
@@ -223,7 +240,11 @@ const carryOver = computed(() =>
         到这一天时，会从当天真实生成的学习任务中选择；现在只设定学习量，不预设完成结果。
       </p>
 
-      <ul v-if="activeDay.taskReferences.length" class="weekly-plan-card__selected" aria-label="已选任务">
+      <ul
+        v-if="activeDay.taskReferences.length"
+        class="weekly-plan-card__selected"
+        aria-label="已选任务"
+      >
         <li v-for="task in activeDay.taskReferences" :key="task.id">
           <div>
             <strong>{{ task.title }}</strong>
@@ -232,7 +253,12 @@ const carryOver = computed(() =>
             <span v-else-if="task.canContinue">可跨日继续</span>
             <span v-else>待继续</span>
           </div>
-          <AppButton v-if="task.status === 'pending'" variant="ghost" size="sm" @click="openTask(task)">
+          <AppButton
+            v-if="task.status === 'pending'"
+            variant="ghost"
+            size="sm"
+            @click="openTask(task)"
+          >
             继续
           </AppButton>
         </li>
@@ -243,40 +269,162 @@ const carryOver = computed(() =>
         <p>这些内容可以任选一项继续，不会加入今天的目标或累计成欠账。</p>
         <ul class="weekly-plan-card__selected">
           <li v-for="task in carryOver.value" :key="`${task.id}:${task.selectedAt}`">
-            <div><strong>{{ task.title }}</strong><span>可跨周继续</span></div>
+            <div>
+              <strong>{{ task.title }}</strong
+              ><span>可跨周继续</span>
+            </div>
             <AppButton variant="ghost" size="sm" @click="openTask(task)">继续</AppButton>
           </li>
         </ul>
       </div>
-      <p v-else-if="carryOver.warning" class="weekly-plan-card__message" role="status">{{ carryOver.warning }}</p>
+      <p v-else-if="carryOver.warning" class="weekly-plan-card__message" role="status">
+        {{ carryOver.warning }}
+      </p>
     </div>
   </section>
 </template>
 
 <style scoped>
-.weekly-plan-card { display: grid; gap: 1rem; padding: 1.25rem; border: 1px solid var(--color-border, #d7ded9); border-radius: 1rem; background: var(--color-surface, #fff); }
-.weekly-plan-card__header, .weekly-plan-card__day-summary, .weekly-plan-card__selected li { display: flex; gap: 1rem; justify-content: space-between; align-items: flex-start; }
-.weekly-plan-card h2, .weekly-plan-card h3, .weekly-plan-card h4, .weekly-plan-card p { margin: 0; }
-.weekly-plan-card__header p { margin-top: .35rem; color: var(--color-text-muted, #57665e); }
-.weekly-plan-card__eyebrow { color: var(--color-primary, #1d7a55) !important; font-size: .82rem; font-weight: 700; }
-.weekly-plan-card__message { padding: .65rem .8rem; border-radius: .65rem; background: #fff7dc; color: #6d4d00; }
-.weekly-plan-card__days { display: grid; grid-template-columns: repeat(7, minmax(3.8rem, 1fr)); gap: .4rem; overflow-x: auto; }
-.weekly-plan-card__day { min-height: 3.75rem; display: grid; gap: .2rem; place-items: center; padding: .4rem; border: 1px solid var(--color-border, #d7ded9); border-radius: .65rem; background: transparent; color: inherit; cursor: pointer; }
-.weekly-plan-card__day--active { border-color: var(--color-primary, #1d7a55); background: #e8f6ef; }
-.weekly-plan-card__day small { color: var(--color-text-muted, #57665e); }
-.weekly-plan-card__day-detail { display: grid; gap: 1rem; }
-.weekly-plan-card__day-summary .app-progress { min-width: 9rem; }
-.weekly-plan-card__target { display: flex; flex-wrap: wrap; gap: .5rem; padding: .75rem; border: 1px solid var(--color-border, #d7ded9); border-radius: .75rem; }
-.weekly-plan-card__target legend { padding: 0 .25rem; font-weight: 700; }
-.weekly-plan-card__target label, .weekly-plan-card__task-choice { min-height: 2.75rem; display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .65rem; border-radius: .5rem; cursor: pointer; }
-.weekly-plan-card__target label:has(input:checked), .weekly-plan-card__task-choice:has(input:checked) { background: #e8f6ef; }
-.weekly-plan-card__choices { display: grid; gap: .45rem; }
-.weekly-plan-card__task-choice { border: 1px solid var(--color-border, #d7ded9); }
-.weekly-plan-card__hint { color: var(--color-text-muted, #57665e); }
-.weekly-plan-card__selected { display: grid; gap: .5rem; padding: 0; margin: 0; list-style: none; }
-.weekly-plan-card__carry-over { display: grid; gap: .5rem; padding-top: .25rem; border-top: 1px solid var(--color-border, #d7ded9); }
-.weekly-plan-card__selected li { align-items: center; padding: .75rem; border-radius: .7rem; background: #f6f8f7; }
-.weekly-plan-card__selected strong, .weekly-plan-card__selected span { display: block; }
-.weekly-plan-card__selected span { margin-top: .2rem; color: var(--color-text-muted, #57665e); font-size: .9rem; }
-@media (max-width: 560px) { .weekly-plan-card__header, .weekly-plan-card__day-summary { flex-direction: column; } .weekly-plan-card__day-summary .app-progress { width: 100%; } }
+.weekly-plan-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border, #d7ded9);
+  border-radius: 1rem;
+  background: var(--color-surface, #fff);
+}
+.weekly-plan-card__header,
+.weekly-plan-card__day-summary,
+.weekly-plan-card__selected li {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.weekly-plan-card h2,
+.weekly-plan-card h3,
+.weekly-plan-card h4,
+.weekly-plan-card p {
+  margin: 0;
+}
+.weekly-plan-card__header p {
+  margin-top: 0.35rem;
+  color: var(--color-text-muted, #57665e);
+}
+.weekly-plan-card__eyebrow {
+  color: var(--color-primary, #1d7a55) !important;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.weekly-plan-card__message {
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.65rem;
+  background: #fff7dc;
+  color: #6d4d00;
+}
+.weekly-plan-card__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(3.8rem, 1fr));
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+.weekly-plan-card__day {
+  min-height: 3.75rem;
+  display: grid;
+  gap: 0.2rem;
+  place-items: center;
+  padding: 0.4rem;
+  border: 1px solid var(--color-border, #d7ded9);
+  border-radius: 0.65rem;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.weekly-plan-card__day--active {
+  border-color: var(--color-primary, #1d7a55);
+  background: #e8f6ef;
+}
+.weekly-plan-card__day small {
+  color: var(--color-text-muted, #57665e);
+}
+.weekly-plan-card__day-detail {
+  display: grid;
+  gap: 1rem;
+}
+.weekly-plan-card__day-summary .app-progress {
+  min-width: 9rem;
+}
+.weekly-plan-card__target {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border, #d7ded9);
+  border-radius: 0.75rem;
+}
+.weekly-plan-card__target legend {
+  padding: 0 0.25rem;
+  font-weight: 700;
+}
+.weekly-plan-card__target label,
+.weekly-plan-card__task-choice {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.weekly-plan-card__target label:has(input:checked),
+.weekly-plan-card__task-choice:has(input:checked) {
+  background: #e8f6ef;
+}
+.weekly-plan-card__choices {
+  display: grid;
+  gap: 0.45rem;
+}
+.weekly-plan-card__task-choice {
+  border: 1px solid var(--color-border, #d7ded9);
+}
+.weekly-plan-card__hint {
+  color: var(--color-text-muted, #57665e);
+}
+.weekly-plan-card__selected {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.weekly-plan-card__carry-over {
+  display: grid;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--color-border, #d7ded9);
+}
+.weekly-plan-card__selected li {
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 0.7rem;
+  background: #f6f8f7;
+}
+.weekly-plan-card__selected strong,
+.weekly-plan-card__selected span {
+  display: block;
+}
+.weekly-plan-card__selected span {
+  margin-top: 0.2rem;
+  color: var(--color-text-muted, #57665e);
+  font-size: 0.9rem;
+}
+@media (max-width: 560px) {
+  .weekly-plan-card__header,
+  .weekly-plan-card__day-summary {
+    flex-direction: column;
+  }
+  .weekly-plan-card__day-summary .app-progress {
+    width: 100%;
+  }
+}
 </style>

@@ -1,0 +1,131 @@
+{
+  "updatedAt": "2026-10-10T10:00:00.000Z",
+  "sourceSha256": "dcef3ed7b22cac45291c0ceda442d4fa75801654fcbec01797cfb5f4a79fc83e",
+  "sourceNote": "用户提供的12单元语音稿与当前8单元正文目录不同，按来稿单独接入语音附录。字音、chant及语调示例照来稿保存；版次沿用用户标注，未独立核验教材原版。原版音频未提供，设备合成语音不保证还原标记语调。",
+  "units": [
+    {
+      "number": 12,
+      "title": "Phonics补充（来稿12单元）",
+      "page": 0,
+      "kind": "appendix",
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "",
+      "intonation": "",
+      "notes": [
+        "来稿标注沪教牛津四年级下册2022新版；当前项目原稿为8个Unit，本补充稿为12个Unit，标题及语音分组不同。保留来稿分组，独立附录展示，不按相同课号绑定原单元。",
+        "拼音、韵文与语调示例按来稿保存，未独立对照出版社原书。",
+        "原版示范音频未提供；可用设备合成语音跟读，升降调以文字符号为准。"
+      ],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 1 Touch and feel",
+          "english": "Module 1 Using my five senses\nUnit 1 Touch and feel\n字母组合与音值：ch /tʃ/\nWord list\nchick, chair, Charlie, watch\nChant\nChick, chick, sits on a chair. Charlie, Charlie, touches the chair.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 2 Smell and taste",
+          "english": "Unit 2 Smell and taste\n字母组合与音值：sh /ʃ/\nWord list\nship, shop, fish, wash\nChant\nSh, sh, sh. The ship is in the shop. Fish, fish, fresh fish.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 3 Look and see",
+          "english": "Unit 3 Look and see\n字母组合与音值：ph /f/；wh /w/\nWord list\nph: photo, phone\nwh: whale, wheel\nChant\nTake a photo. Look at the whale. Phone the whale, it’s big and pale.\nRevision 1 Phonics 小结：ch /tʃ/，sh /ʃ/，ph /f/，wh /w/",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 4 Subjects",
+          "english": "Module 2 My favourite things\nUnit 4 Subjects\n字母组合与音值：ck /k/\nWord list\nclock, rock, Jack, tick\nChant\nJack is sitting on a rock. His clock goes tick-tock. “It's six o'clock! It's six o'clock!” says the chick in the clock.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 5 Music",
+          "english": "Unit 5 Music\n字母组合与音值：cr /kr/；gr /gr/\nWord list\ncr: crab, crayon, cross\ngr: grass, great, grow\nChant\nCrab, crab, on the grass. Great crayon, draw and cross.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 6 Shopping",
+          "english": "Unit 6 Shopping\n字母组合与音值：tr /tr/；dr /dr/\nWord list\ntr: tree, train, triangle\ndr: draw, dream, drink\nChant\nTrain on the track. Draw a tree and drink.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 7 My day",
+          "english": "Module 3 My colourful life\nUnit 7 My day\n字母组合与音值：ff /f/\nWord list\nturn off, take off, cuff\nChant\nTurn off the light. Take off the coat. Ff, ff, off we go.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 8 Days of the week",
+          "english": "Unit 8 Days of the week\n字母组合与音值：pl /pl/；gl /gl/\nWord list\npl: plant, plate, plane\ngl: glove, glass, glad\nChant\nPlant a plant. Glove and glass. Glad to see the plane pass.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 9 A friend in Australia",
+          "english": "Module 4 Things we enjoy\nUnit 9 A friend in Australia\n字母组合与音值：sp /sp/；st /st/\nWord list\nsp: sport, space, special\nst: star, student, stone\nChant\nSport in space. Star is bright. Special student, day and night.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 10 My garden",
+          "english": "Unit 10 My garden\n字母组合与音值：sm /sm/；sl /sl/\nWord list\nsm: smile, smoke, small\nsl: slide, slow, slim\nChant\nSmall smile, slow slide. Slim snake, glides and hides.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 11 Mother’s Day",
+          "english": "Unit 11 Mother’s Day\n字母组合与音值：br /br/；pr /pr/\nWord list\nbr: brown, brush, branch\npr: pray, prize, pretty\nChant\nBrush the branch. Pretty prize. Brown bird, quickly flies.",
+          "chinese": ""
+        },
+        {
+          "kind": "appendix",
+          "title": "来稿 Unit 12 The ugly duckling",
+          "english": "Unit 12 The ugly duckling\n字母组合与音值：tw /tw/；qu /kw/\nWord list\ntw: twin, twelve, twist\nqu: queen, quick, quiet\nChant\nTwelve twins, quick and quiet. Queen waves, twist and try it.",
+          "chinese": ""
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "按来稿分组练习例词和韵文，观察字母组合与发音。",
+      "sentenceAnswer": "",
+      "questions": []
+    },
+    {
+      "number": 13,
+      "title": "Intonation语调示范（↗升调·↘降调）",
+      "page": 0,
+      "kind": "appendix",
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "",
+      "intonation": "",
+      "notes": [
+        "来稿标注沪教牛津四年级下册2022新版；当前项目原稿为8个Unit，本补充稿为12个Unit，标题及语音分组不同。保留来稿分组，独立附录展示，不按相同课号绑定原单元。",
+        "拼音、韵文与语调示例按来稿保存，未独立对照出版社原书。",
+        "原版示范音频未提供；可用设备合成语音跟读，升降调以文字符号为准。"
+      ],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "appendix",
+          "title": "语调规则与完整示范",
+          "english": "符号说明：↗ Rising tone 升调；↘ Falling tone 降调。\n一般疑问句句末升调；陈述句、特殊疑问句句末降调；选择疑问句前面选项升调，最后一项降调。\n示范句子\nIs it soft ↗?\nIt is soft ↘.\nDo you like music ↗?\nYes, I do ↘.\nWhat subject do you like ↘?\nI like Art ↘.\nIs it strawberry juice ↗ or watermelon juice ↘?\nWhen do you get up ↘?\nI get up at seven o’clock ↘.\n学习要求\nListen and repeat，留意语调变化。\n一般疑问句，句末读升调 ↗，表达疑问。\n陈述句、特殊疑问句，句末读降调 ↘。\n选择疑问句：前面选项升调，最后一项降调。",
+          "chinese": ""
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "观察↗、↘语调标记，尝试朗读完整示范句并比较语气。",
+      "sentenceAnswer": "",
+      "questions": []
+    }
+  ]
+}

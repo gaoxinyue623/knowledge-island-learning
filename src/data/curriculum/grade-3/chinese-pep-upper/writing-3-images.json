@@ -1,0 +1,31 @@
+{
+  "mode": "built-in image_gen",
+  "prompts": [
+    "Use case: illustration-story. A single landscape 3:2 children's textbook companion illustration, warm hand-painted watercolor and colored-pencil, clear gentle outlines, Chinese primary-school classroom, nine-year-old Chinese children, soft cream paper tones, green chalkboard, pale wooden desks, daylight. Consistent cast: Xiaohong girl black twin ponytails wearing coral red long-sleeved top, Xiaojun boy short black hair wearing sky-blue sweatshirt, Li Xiaoming boy neat short black hair wearing mustard-yellow sweatshirt. No uniform logos. No title, watermark or textbook branding. This is an original companion asset inspired by a written scene, not a reproduction of a textbook illustration. Leave readable generous white speech bubbles in upper half; use crisp accurate simplified Chinese text. Do not add birthday party preparations or resolve the story. Scene 1: school break. Xiaohong and Xiaojun stand in a cheerful small group beside desks, smiling, sharing birthday experiences; two other classmates listen. Li Xiaoming can be a small background figure seated quietly at a separate desk. Xiaohong speech bubble exactly: “我上个星期过九岁生日，妈妈给我买了一个很大的生日蛋糕。” Xiaojun speech bubble exactly: “我也刚刚过了九岁生日，生日那天是我们全家人一起过的。” Show interaction and relaxed happy body language. Single scene only.",
+    "Use case: illustration-story. A single landscape 3:2 children's textbook companion illustration, warm hand-painted watercolor and colored-pencil, clear gentle outlines, Chinese primary-school classroom, nine-year-old Chinese children, soft cream paper tones, green chalkboard, pale wooden desks, daylight. Consistent cast: Xiaohong girl black twin ponytails wearing coral red long-sleeved top, Xiaojun boy short black hair wearing sky-blue sweatshirt, Li Xiaoming boy neat short black hair wearing mustard-yellow sweatshirt. No uniform logos. No title, watermark or textbook branding. This is an original companion asset inspired by a written scene, not a reproduction of a textbook illustration. Leave readable generous white speech bubbles in upper half; use crisp accurate simplified Chinese text. Do not add birthday party preparations or resolve the story. Scene 2: focus on Li Xiaoming sitting alone at his classroom desk, shoulders drooping slightly, head lowered, quiet disappointed expression, hands resting near a closed exercise book. A few classmates chat happily in the distant background, no teasing. One thought bubble pointing to Li Xiaoming exactly: “我也快过生日了，但是爸爸妈妈都在外地工作……” Frame empathetically, not melodramatic. Single scene only.",
+    "Use case: illustration-story. A single landscape 3:2 children's textbook companion illustration, warm hand-painted watercolor and colored-pencil, clear gentle outlines, Chinese primary-school classroom, nine-year-old Chinese children, soft cream paper tones, green chalkboard, pale wooden desks, daylight. Consistent cast: Xiaohong girl black twin ponytails wearing coral red long-sleeved top, Xiaojun boy short black hair wearing sky-blue sweatshirt, Li Xiaoming boy neat short black hair wearing mustard-yellow sweatshirt. No uniform logos. No title, watermark or textbook branding. This is an original companion asset inspired by a written scene, not a reproduction of a textbook illustration. Leave readable generous white speech bubbles in upper half; use crisp accurate simplified Chinese text. Do not add birthday party preparations or resolve the story. Scene 3: Xiaohong and Xiaojun lean toward each other beside a desk, whisper kindly and secretly plan how to help Li Xiaoming, one holds a hand near mouth. Their gaze turns toward Li Xiaoming seated quietly at a desk in the background. One speech bubble from the two classmates exactly: “李晓明的爸爸妈妈在外地工作，我们可以……” Their expressions are caring and thoughtful. No cake, decorations, gifts or ending; preserve open continuation. Single scene only."
+  ],
+  "images": [
+    {
+      "scene": 1,
+      "url": "/curriculum/grade-3/chinese-pep-upper/continue-story/scene-1.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4294a8247f119bb28dc68668e260116730331f8e7132ae3c9e5f3e710cc43e04"
+    },
+    {
+      "scene": 2,
+      "url": "/curriculum/grade-3/chinese-pep-upper/continue-story/scene-2.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "de1d9a1bfb4bf2203cb0126a5069f7bac63d1c8952edd1e28928bbb22315f545"
+    },
+    {
+      "scene": 3,
+      "url": "/curriculum/grade-3/chinese-pep-upper/continue-story/scene-3.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e9924611ae3958e1386a1c0be5a7f07c74d629d14d3495349c1cdfe249159ba1"
+    }
+  ]
+}

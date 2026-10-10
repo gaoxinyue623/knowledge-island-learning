@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import type { StudentCurriculumProfile } from '@/types'
 
 import { storagePayloadSchema } from '@/services/validation/schemas'
@@ -18,8 +19,8 @@ export interface CurriculumProfileRepository {
 }
 
 function getDefaultStorage(): StorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 export function createCurriculumProfileRepository(

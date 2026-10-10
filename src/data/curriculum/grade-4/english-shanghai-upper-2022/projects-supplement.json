@@ -1,0 +1,158 @@
+{
+  "updatedAt": "2026-10-10T09:40:00.000Z",
+  "sourceSha256": "22fffc30449b694c9cc8a84ae7782b05734328d5768ad223d675b6071617d147",
+  "sourceNote": "按用户提供的两个Project完整任务文本接入，2022新版及P81、P83沿用来稿，未独立对照出版社原版。配套词汇英文来自用户，中文释义为项目整理；示范介绍与个人作品区分，开放任务不自动判分。",
+  "units": [
+    {
+      "number": 10,
+      "title": "Project 1 Places near my home",
+      "page": 81,
+      "kind": "project",
+      "words": [
+        {
+          "english": "park",
+          "phonetic": "",
+          "chinese": "公园"
+        },
+        {
+          "english": "supermarket",
+          "phonetic": "",
+          "chinese": "超市"
+        },
+        {
+          "english": "school",
+          "phonetic": "",
+          "chinese": "学校"
+        },
+        {
+          "english": "bakery",
+          "phonetic": "",
+          "chinese": "面包店"
+        },
+        {
+          "english": "library",
+          "phonetic": "",
+          "chinese": "图书馆"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "",
+      "intonation": "",
+      "notes": [
+        "内容及页码按用户补充稿接入，未独立核对出版社原页。",
+        "Introduce为教材来稿示范表达，实际作品按个人或小组情况介绍。",
+        "配套词汇中文释义由项目整理，来稿未提供音标。"
+      ],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Think（想一想）",
+          "english": "1. Where is your home?\nI live in a flat / a house. It’s in the city / in the country.\n2. What is around your home? Is there a park, a school, a supermarket or a bakery near your home?\n3. What can you see and do in these places?\nI can do sport in the park.\nI can go shopping in the supermarket.\n4. What’s your favourite place near your home? Why?",
+          "chinese": ""
+        },
+        {
+          "kind": "project",
+          "title": "Make（制作任务）",
+          "english": "Things you need: paper, pencil, crayons\nStep 1 Draw your home.\nStep 2 Draw roads and places on your map.\nStep 3 Write the names of the places. (park, school, supermarket, bakery…)",
+          "chinese": ""
+        },
+        {
+          "kind": "project",
+          "title": "Introduce（示范介绍）",
+          "english": "This is a map of places near my home. I live in a flat. There is a park, a school and a supermarket near my home. I like the park best. I often do sport there. I can see birds and trees.",
+          "chinese": ""
+        },
+        {
+          "kind": "project",
+          "title": "Share（课堂分享）",
+          "english": "Show your map to your classmates. Ask and answer questions.",
+          "chinese": ""
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "依次完成 Think、Make、Introduce、Share，用英语介绍自己的地图并与同学交流。",
+      "sentenceAnswer": "This is a map of places near my home. I live in a flat. There is a park, a school and a supermarket near my home. I like the park best. I often do sport there. I can see birds and trees.",
+      "questions": []
+    },
+    {
+      "number": 11,
+      "title": "Project 2 A fancy party",
+      "page": 83,
+      "kind": "project",
+      "words": [
+        {
+          "english": "cake",
+          "phonetic": "",
+          "chinese": "蛋糕"
+        },
+        {
+          "english": "juice",
+          "phonetic": "",
+          "chinese": "果汁"
+        },
+        {
+          "english": "cookie",
+          "phonetic": "",
+          "chinese": "曲奇饼干"
+        },
+        {
+          "english": "game",
+          "phonetic": "",
+          "chinese": "游戏"
+        },
+        {
+          "english": "hat",
+          "phonetic": "",
+          "chinese": "帽子"
+        },
+        {
+          "english": "poster",
+          "phonetic": "",
+          "chinese": "海报"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "",
+      "intonation": "",
+      "notes": [
+        "内容及页码按用户补充稿接入，未独立核对出版社原页。",
+        "Introduce为教材来稿示范表达，实际作品按个人或小组情况介绍。",
+        "配套词汇中文释义由项目整理，来稿未提供音标。"
+      ],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Think（想一想）",
+          "english": "Plan a fancy party for your class. Discuss these questions:\n1. When is the party?\n2. Where is the party?\n3. What food and drinks do we need?\n4. What games can we play?\n5. What can we wear at the party?",
+          "chinese": ""
+        },
+        {
+          "kind": "project",
+          "title": "Make（制作任务）",
+          "english": "Things you need: paper, colour pencils\nStep 1 Make a party poster.\nStep 2 Draw food, drinks and games on your poster.\nStep 3 Write down party information (time, place).",
+          "chinese": ""
+        },
+        {
+          "kind": "project",
+          "title": "Introduce（示范介绍）",
+          "english": "This is our party poster. Our fancy party is on Friday afternoon. It’s in our classroom. We have juice and cakes. We can play “Guess who”. We can wear our nice clothes.",
+          "chinese": ""
+        },
+        {
+          "kind": "project",
+          "title": "Share（课堂分享）",
+          "english": "Show your poster to the class. Vote for your favourite party plan.",
+          "chinese": ""
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "小组依次完成 Think、Make、Introduce、Share，制作派对海报，介绍计划并评选喜欢的方案。",
+      "sentenceAnswer": "This is our party poster. Our fancy party is on Friday afternoon. It’s in our classroom. We have juice and cakes. We can play “Guess who”. We can wear our nice clothes.",
+      "questions": []
+    }
+  ]
+}

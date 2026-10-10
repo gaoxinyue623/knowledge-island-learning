@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-10-10T04:01:54.870Z",
+  "mode": "built-in image_gen",
+  "referenceRole": "用户附件仅用作画风和四格构图参考；独立生成四组故事素材，不是原题配图。",
+  "basePrompt": "Use case: illustration-story. Generate an original primary-school picture-writing asset. Reference image is only a style/composition reference, not a reproduction. Warm watercolor with colored pencil, expressive cute anthropomorphic animals, soft forest/classroom colors. Single landscape 3:2 image composed of four equal story panels in a clear 2x2 grid, thin borders and narrow white gutters, read top-left then top-right then bottom-left then bottom-right. Consistent character appearance and props across all four panels. No text, no captions, no numerals, no letters, no watermarks, no logos. Art only; the app will provide title and writing lines. Keep each scene clearly readable by a third-grade child. The final panel leaves room to imagine dialogue and what happens next.",
+  "images": [
+    {
+      "key": "monkey-corn",
+      "title": "小猴子丢玉米",
+      "prompt": "A small brown monkey without clothes. Panel 1: sunny woodland beside a corn patch, monkey happily holding one yellow ear of corn with green husk. Panel 2: beside a stream, distracted monkey puts the corn down on a flat gray stone and leans forward to watch a fish. Panel 3: monkey sees a butterfly and runs after it toward a meadow, leaving the corn behind out of view. Panel 4: later monkey returns to the same identifiable stream stone, the stone is EMPTY, corn has disappeared; monkey looks puzzled and worried with empty hands, wondering what to do. Critical: corn is visibly on stone in panel2, absent in panel4, no new corn anywhere in panel4. Theme concentration and avoiding distraction; do not show how it disappears or provide a fixed resolution.",
+      "description": "小猴子拿着玉米，随后把玉米放在溪边石头上看鱼，又追着蝴蝶离开，回来发现石头上已没有玉米。",
+      "writingPrompt": "小猴子发现玉米不见了，它会怎么想、怎么做？把前面的经过写清楚，再续写它的行动。",
+      "mediaAssetId": "G3_PEP_CHINESE_S2_U2_PICTURE_1",
+      "url": "/curriculum/grade-3/chinese-pep-lower/picture-writing/monkey-corn.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "d32c60b66ea79a8b120fb4d152e11aa16c4233377c3c67c61319bdd3987c69ee"
+    },
+    {
+      "key": "bear-rabbit",
+      "title": "小熊送小白兔回家",
+      "prompt": "Small brown bear in yellow shirt and blue shorts, small white rabbit in pink shirt and pale blue trousers. Panel 1: rainy woodland bus shelter, rabbit alone worried without umbrella. Panel2: friendly bear arrives carrying an open red umbrella and gestures to share it with rabbit. Panel3: bear and rabbit walk together under the SAME large red umbrella along a puddled forest path, both sheltered. Panel4: reach a small cozy cottage gate, rabbit turns to bear gratefully, bear still holds the red umbrella, warm porch light; leave their dialogue and next act of kindness to the student. Theme mutual help, kindness.",
+      "description": "小白兔在雨中等待，小熊邀请它共撑一把红伞，两人一起走过小路，来到小白兔家门前。",
+      "writingPrompt": "小白兔到家后会对小熊说什么？接下来还可能发生什么？试着写出人物的动作和对话。",
+      "mediaAssetId": "G3_PEP_CHINESE_S2_U2_PICTURE_2",
+      "url": "/curriculum/grade-3/chinese-pep-lower/picture-writing/bear-rabbit.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "f9d1da2f3def460e0da7faa82b50217328ae6e9ffd48340c89c9537501986a50"
+    },
+    {
+      "key": "squirrel-peanuts",
+      "title": "小松鼠种花生",
+      "prompt": "Cute orange squirrel with large fluffy tail and cream belly; friendly small brown hedgehog. Panel1: spring vegetable garden, squirrel plants shelled peanut seeds in shallow holes with a tiny spade, seed bag nearby. Panel2: seedlings emerge, squirrel carefully removes weeds and waters, shows diligent repeated care. Panel3: summertime squirrel and hedgehog cooperate to water and loosen soil around leafy peanut plants. Panel4: autumn, the two begin gently lifting ONE mature peanut plant, show a few peanut pods ATTACHED TO ROOTS BELOW THE SOIL, both pleasantly surprised, empty basket nearby waiting to be filled; leave the harvest and sharing to students. Critical peanuts grow underground on roots, NEVER dangling on above-ground branches. No text.",
+      "description": "小松鼠播种花生，照料幼苗，与小刺猬一起松土，秋天开始挖出长在地下的花生。",
+      "writingPrompt": "小松鼠和小刺猬接下来怎样收获、分享花生？回想它们之前做了哪些努力，把故事接着写下去。",
+      "mediaAssetId": "G3_PEP_CHINESE_S2_U2_PICTURE_3",
+      "url": "/curriculum/grade-3/chinese-pep-lower/picture-writing/squirrel-peanuts.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "720aebd8b3e84933dcaa690a61164e3b6c95c2959d5d81f6b2292c8b31e29b55"
+    },
+    {
+      "key": "dog-handwriting",
+      "title": "小狗认真练字",
+      "prompt": "Cute white-and-tan puppy with floppy brown ears wearing sky-blue cardigan, friendly young woman teacher wearing pink cardigan, deer classmate in coral top. Bright primary-school classroom. Panel1: puppy seated at desk looking at deer classmate neatly writing in squared practice notebook, puppy notebook has simple irregular pen strokes, puppy curious. Panel2: puppy politely asks teacher for help, teacher gently demonstrates relaxed correct pencil grip in puppy's notebook. Panel3: puppy practices attentively alone at desk by window, good upright posture, pencil held in front paw like a hand, squared practice notebook showing cleaner short NONLETTER strokes, clock and daylight imply time spent. Panel4: teacher and deer classmate smile as puppy proudly shows progress in notebook, leave dialogue and next study plan open. No actual writing, letters, Chinese characters or caption text anywhere, only abstract pen strokes.",
+      "description": "小狗观察同学练字，向老师请教握笔方法，专心练习，最后向老师和同学展示进步。",
+      "writingPrompt": "小狗进步后会怎样感谢老师、继续学习？把练字经过和后续打算写成一个连贯的故事。",
+      "mediaAssetId": "G3_PEP_CHINESE_S2_U2_PICTURE_4",
+      "url": "/curriculum/grade-3/chinese-pep-lower/picture-writing/dog-handwriting.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "582096262674e2eb81fa8541cf936d5d684afb8ea0b91b8e796c24fb4549728f"
+    }
+  ]
+}

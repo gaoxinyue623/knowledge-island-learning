@@ -39,7 +39,7 @@ async function loadHome() {
   error.value = null
   learningStrategyStore.clear()
   if (!curriculumStore.curriculumProfile) {
-    error.value = '还没有完成学习配置，请先完成地区、年级和教材选择。'
+    error.value = '还没有完成学习配置，请先选择年级和教材版本。'
     return
   }
   try {
@@ -100,10 +100,9 @@ onMounted(() => void loadHome())
         <header class="home-placeholder__header">
           <p class="curriculum-eyebrow">HOME · PHASE 11 LEARNING STRATEGY</p>
           <h1>准备好探索你的知识岛了吗？</h1>
-          <p>你的地区、年级和三科教材已经准备好。先看一眼当前学习建议，再进入知识岛。</p>
+          <p>你的年级和教材已经准备好。先看一眼当前学习建议，再进入知识岛。</p>
         </header>
         <CurriculumSummary
-          :region-name="presentation.regionName"
           :grade-name="presentation.gradeName"
           :semester-name="presentation.semesterName"
           :textbooks="presentation.textbooks"

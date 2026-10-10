@@ -1,3 +1,4 @@
+import { accountPetDatabaseName, notifyAccountChange } from '../account/storage'
 import { freshPetAccount, PetDataError, validatePetAccount, type PetAccount } from './petPolicy'
 
 export const PET_DATABASE_NAME = 'knowledge-island.pet.v1'
@@ -9,7 +10,7 @@ export interface PetRepository {
 }
 export function createPetRepository(
   factory: () => IDBFactory | undefined = () => globalThis.indexedDB,
-  databaseName = PET_DATABASE_NAME,
+  databaseName: string | (() => string) = PET_DATABASE_NAME,
 ): PetRepository {
   function open(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
@@ -18,7 +19,10 @@ export function createPetRepository(
         return reject(
           new PetDataError('浏览器暂不支持宠物存储。学习仍可继续，请使用支持本地数据库的浏览器。'),
         )
-      const request = api.open(databaseName, 2)
+      const request = api.open(
+        typeof databaseName === 'function' ? databaseName() : databaseName,
+        2,
+      )
       let cancelled = false
       request.onupgradeneeded = () => {
         if (!request.result.objectStoreNames.contains('accounts'))
@@ -47,14 +51,19 @@ export function createPetRepository(
         const request = transaction.objectStore('accounts').get(profileId)
         request.onsuccess = () => {
           try {
-            resolve(request.result === undefined ? null : validatePetAccount(request.result, profileId))
+            resolve(
+              request.result === undefined ? null : validatePetAccount(request.result, profileId),
+            )
           } catch (error) {
             reject(error)
           } finally {
             database.close()
           }
         }
-        request.onerror = () => { database.close(); reject(new PetDataError('宠物记录暂时无法读取，请重试。')) }
+        request.onerror = () => {
+          database.close()
+          reject(new PetDataError('宠物记录暂时无法读取，请重试。'))
+        }
       })
     },
     async putNewProfile(profileId, account) {
@@ -66,12 +75,23 @@ export function createPetRepository(
         const request = store.get(profileId)
         request.onsuccess = () => {
           try {
-            if (request.result !== undefined) throw new PetDataError('目标档案已存在，未覆盖原宠物记录。')
+            if (request.result !== undefined)
+              throw new PetDataError('目标档案已存在，未覆盖原宠物记录。')
             store.put(validatePetAccount(account, profileId))
-          } catch (error) { failure = error; transaction.abort() }
+          } catch (error) {
+            failure = error
+            transaction.abort()
+          }
         }
-        transaction.oncomplete = () => { database.close(); resolve() }
-        transaction.onabort = () => { database.close(); reject(failure ?? new PetDataError('宠物记录没有保存。')) }
+        transaction.oncomplete = () => {
+          notifyAccountChange()
+          database.close()
+          resolve()
+        }
+        transaction.onabort = () => {
+          database.close()
+          reject(failure ?? new PetDataError('宠物记录没有保存。'))
+        }
       })
     },
     async deleteProfile(profileId) {
@@ -79,8 +99,15 @@ export function createPetRepository(
       return new Promise<void>((resolve, reject) => {
         const transaction = database.transaction('accounts', 'readwrite')
         transaction.objectStore('accounts').delete(profileId)
-        transaction.oncomplete = () => { database.close(); resolve() }
-        transaction.onabort = () => { database.close(); reject(new PetDataError('宠物记录没有清理。')) }
+        transaction.oncomplete = () => {
+          notifyAccountChange()
+          database.close()
+          resolve()
+        }
+        transaction.onabort = () => {
+          database.close()
+          reject(new PetDataError('宠物记录没有清理。'))
+        }
       })
     },
     async update(profileId, change) {
@@ -108,6 +135,7 @@ export function createPetRepository(
           }
         }
         transaction.oncomplete = () => {
+          notifyAccountChange()
           database.close()
           resolve(next!)
         }
@@ -126,4 +154,6 @@ export function createPetRepository(
     },
   }
 }
-export const petRepository = createPetRepository()
+export const petRepository = createPetRepository(undefined, () =>
+  accountPetDatabaseName(PET_DATABASE_NAME),
+)

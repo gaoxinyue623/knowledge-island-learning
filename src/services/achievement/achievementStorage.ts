@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 import type { AchievementStoragePayload, AchievementUnlock } from '@/types'
@@ -44,8 +45,8 @@ export const achievementStoragePayloadSchema = z
   .strict()
 
 function browserStorage(): AchievementStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function cloneUnlock(unlock: AchievementUnlock): AchievementUnlock {

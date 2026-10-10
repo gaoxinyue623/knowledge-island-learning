@@ -1,0 +1,1083 @@
+{
+  "title": "北师大四年级上册数学单元自测",
+  "sourceSha256": "4671e576fc4de2bb7e3366099818fbf05c323a6ddba14619b53550759bf66f00",
+  "sourceNote": "用户2026-10-09会话提供的单元自测，已归档原题、原答案及数学条件修订，不代表出版社原题核验。",
+  "notice": "原稿部分分值小计与题量不一致，本测验按实际题目统计，不换算为100分。自动题核对所填答案；公式表达、简便计算、竖式过程、画图及简答请提交后对照参考答案，由老师或家长核对。",
+  "papers": [
+    {
+      "topicKey": "place-value",
+      "title": "第一单元 认识更大的数",
+      "sourceScoring": "填空每空3分共30分；判断每题4分共20分；按要求写数每题10分共20分；解决问题30分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "每相邻两个计数单位之间的进率是（），这种计数方法叫（）。",
+          "originalReference": "10；十进制计数法",
+          "stem": "每相邻两个计数单位之间的进率是（），这种计数方法叫（）。",
+          "kind": "fillBlank",
+          "reference": "10；十进制计数法",
+          "adjustment": "",
+          "answers": [
+            ["10", "十"],
+            ["十进制计数法", "十进制"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "从右边起，第（）位是万位，第（）位是亿位。",
+          "originalReference": "5；9",
+          "stem": "从右边起，第（）位是万位，第（）位是亿位。",
+          "kind": "fillBlank",
+          "reference": "5；9",
+          "adjustment": "",
+          "answers": [
+            ["5", "五"],
+            ["9", "九"]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "3060080读作（）；五千零九万写作（）。",
+          "originalReference": "三百零六万零八十；50090000",
+          "stem": "3060080读作（）；五千零九万写作（）。",
+          "kind": "fillBlank",
+          "reference": "三百零六万零八十；50090000",
+          "adjustment": "",
+          "answers": [["三百零六万零八十"], ["50090000"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "把960000改写成以“万”为单位的数是（）。",
+          "originalReference": "960000＝96万。",
+          "stem": "把960000改写成以“万”为单位的数是（）。",
+          "kind": "fillBlank",
+          "reference": "960000＝96万。",
+          "adjustment": "",
+          "answers": [["96万"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "省略万位后面的尾数，456720≈（）万。",
+          "originalReference": "46",
+          "stem": "用四舍五入省略万位后面的尾数：456720≈（）万。",
+          "kind": "fillBlank",
+          "reference": "46",
+          "adjustment": "",
+          "answers": [["46"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "比较大小：320800〇328000；100000〇99999",
+          "originalReference": "＜；＞",
+          "stem": "比较大小，依次填＜、＞或＝：320800（）328000；100000（）99999。",
+          "kind": "fillBlank",
+          "reference": "＜；＞",
+          "adjustment": "",
+          "answers": [
+            ["＜", "<"],
+            ["＞", ">"]
+          ]
+        },
+        {
+          "number": 7,
+          "originalStem": "万、十万、百万、千万是数位。",
+          "originalReference": "×",
+          "stem": "万、十万、百万、千万是数位。",
+          "kind": "trueFalse",
+          "reference": "错误。它们是计数单位，万位、十万位等才是数位。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "读数时，每级末尾的0都不读。",
+          "originalReference": "√",
+          "stem": "读整数时，每级末尾的0都不读。",
+          "kind": "trueFalse",
+          "reference": "正确。每级末尾的0不读，其他位置的0按读数规则处理。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "近似数一定比原数小。",
+          "originalReference": "×",
+          "stem": "近似数一定比原数小。",
+          "kind": "trueFalse",
+          "reference": "错误。四舍五入可能进一，也可能舍去。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "99999的近似数是10万。",
+          "originalReference": "√",
+          "stem": "99999四舍五入到万位，近似数是10万。",
+          "kind": "trueFalse",
+          "reference": "正确。千位是9，向万位进1得到10万。",
+          "adjustment": "原题未说明保留位，补充四舍五入到万位。",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "一个八位数的最高位是千万位。",
+          "originalReference": "√",
+          "stem": "一个八位数的最高位是千万位。",
+          "kind": "trueFalse",
+          "reference": "正确。从个位起第八位是千万位。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 12,
+          "originalStem": "用四舍五入求近似数：684200≈（）万。",
+          "originalReference": "684200≈68万。",
+          "stem": "用四舍五入求近似数：684200≈（）万。",
+          "kind": "fillBlank",
+          "reference": "684200≈68万。",
+          "adjustment": "",
+          "answers": [["68"]]
+        },
+        {
+          "number": 13,
+          "originalStem": "把7200000000改写成以“亿”为单位的数：（）。",
+          "originalReference": "7200000000＝72亿。",
+          "stem": "把7200000000改写成以“亿”为单位的数：（）。",
+          "kind": "fillBlank",
+          "reference": "7200000000＝72亿。",
+          "adjustment": "",
+          "answers": [["72亿"]]
+        },
+        {
+          "number": 14,
+          "originalStem": "一个数四舍五入到万位约是28万，这个数最大是多少？最小是多少？",
+          "originalReference": "最大284999，最小275000。275000进到28万，284999舍为28万；285000将进到29万。",
+          "stem": "一个非负整数四舍五入到万位约是28万，这个整数最大是（），最小是（）。",
+          "kind": "fillBlank",
+          "reference": "最大284999，最小275000。275000进到28万，284999舍为28万；285000将进到29万。",
+          "adjustment": "补充整数范围；若允许小数，“最大”无法取到284999。",
+          "answers": [["284999"], ["275000"]]
+        }
+      ],
+      "sourceText": "## 第一单元 认识更大的数\n\n原稿分值：填空每空3分共30分；判断每题4分共20分；按要求写数每题10分共20分；解决问题30分。\n\n1. 每相邻两个计数单位之间的进率是（），这种计数方法叫（）。\n原参考答案：10；十进制计数法\n\n2. 从右边起，第（）位是万位，第（）位是亿位。\n原参考答案：5；9\n\n3. 3060080读作（）；五千零九万写作（）。\n原参考答案：三百零六万零八十；50090000\n\n4. 把960000改写成以“万”为单位的数是（）。\n原参考答案：960000＝96万。\n\n5. 省略万位后面的尾数，456720≈（）万。\n原参考答案：46\n\n6. 比较大小：320800〇328000；100000〇99999\n原参考答案：＜；＞\n\n7. 万、十万、百万、千万是数位。\n原参考答案：×\n\n8. 读数时，每级末尾的0都不读。\n原参考答案：√\n\n9. 近似数一定比原数小。\n原参考答案：×\n\n10. 99999的近似数是10万。\n原参考答案：√\n\n11. 一个八位数的最高位是千万位。\n原参考答案：√\n\n12. 用四舍五入求近似数：684200≈（）万。\n原参考答案：684200≈68万。\n\n13. 把7200000000改写成以“亿”为单位的数：（）。\n原参考答案：7200000000＝72亿。\n\n14. 一个数四舍五入到万位约是28万，这个数最大是多少？最小是多少？\n原参考答案：最大284999，最小275000。275000进到28万，284999舍为28万；285000将进到29万。"
+    },
+    {
+      "topicKey": "codes",
+      "title": "综合实践：编码",
+      "sourceScoring": "填空每空8分共40分；简答每题30分共60分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "身份证号码一共有（）位数字。",
+          "originalReference": "18个字符，末位可能为X。",
+          "stem": "我国现行公民身份号码共有（）个字符，最后一位校验码可能是数字或X。",
+          "kind": "fillBlank",
+          "reference": "18个字符，末位可能为X。",
+          "adjustment": "更正“18位数字”为18个字符，末位校验码可为X；不要求输入真实号码。",
+          "answers": [["18", "十八"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "身份证中，第7位到第14位代表（）。",
+          "originalReference": "出生日期",
+          "stem": "现行18位公民身份号码中，第7位到第14位表示（）。",
+          "kind": "fillBlank",
+          "reference": "出生日期",
+          "adjustment": "",
+          "answers": [["出生日期", "出生年月日"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "邮政编码是用来给（）编码。",
+          "originalReference": "投递区域",
+          "stem": "邮政编码用来给（）编码。",
+          "kind": "fillBlank",
+          "reference": "投递区域",
+          "adjustment": "",
+          "answers": [["投递区域", "邮政投递区域", "邮政区域", "邮递区域"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "学号编码可以包含年级、班级、（）等信息。",
+          "originalReference": "序号",
+          "stem": "学号编码可以包含年级、班级、（）等信息。",
+          "kind": "fillBlank",
+          "reference": "序号",
+          "adjustment": "",
+          "answers": [["序号", "学生序号", "学生编号"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "学校编码规则：2026代表入学年份，03代表3班，15代表序号。学号20260315表示什么？",
+          "originalReference": "2026年入学，3班，序号15号学生。",
+          "stem": "学校约定：学号前4位是入学年份，接着2位是班级，最后2位是序号。模拟学号20260315表示什么？",
+          "kind": "shortAnswer",
+          "reference": "2026年入学，3班，序号15号学生。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "originalStem": "请设计一个简单的班级同学编号，说明编码含义。",
+          "originalReference": "示例：40108，4代表四年级，01代表1班，08代表8号（合理即可）",
+          "stem": "请设计一个模拟班级同学编号，说明每段编码含义，不填写真实身份信息。",
+          "kind": "shortAnswer",
+          "reference": "示例：40108，4代表四年级，01代表1班，08代表8号。规则清楚、编号不冲突即可。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 综合实践：编码\n\n原稿分值：填空每空8分共40分；简答每题30分共60分。\n\n1. 身份证号码一共有（）位数字。\n原参考答案：18个字符，末位可能为X。\n\n2. 身份证中，第7位到第14位代表（）。\n原参考答案：出生日期\n\n3. 邮政编码是用来给（）编码。\n原参考答案：投递区域\n\n4. 学号编码可以包含年级、班级、（）等信息。\n原参考答案：序号\n\n5. 学校编码规则：2026代表入学年份，03代表3班，15代表序号。学号20260315表示什么？\n原参考答案：2026年入学，3班，序号15号学生。\n\n6. 请设计一个简单的班级同学编号，说明编码含义。\n原参考答案：示例：40108，4代表四年级，01代表1班，08代表8号（合理即可）"
+    },
+    {
+      "topicKey": "lines",
+      "title": "第二单元 线与角",
+      "sourceScoring": "填空每空3分共30分；判断每题4分共20分；量角计算每题10分共20分；画图30分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "线段有（）个端点，射线有（）个端点，直线（）端点。",
+          "originalReference": "2；1；没有",
+          "stem": "线段有（）个端点，射线有（）个端点，直线（）端点。",
+          "kind": "fillBlank",
+          "reference": "2；1；没有",
+          "adjustment": "",
+          "answers": [
+            ["2", "两", "二"],
+            ["1", "一"],
+            ["没有", "无", "没有端点"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "两条直线相交成直角，这两条直线互相（）。",
+          "originalReference": "垂直",
+          "stem": "两条直线相交成直角，这两条直线互相（）。",
+          "kind": "fillBlank",
+          "reference": "垂直",
+          "adjustment": "",
+          "answers": [["垂直"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "角的大小与（）有关，和边的长短无关。",
+          "originalReference": "两条边开口大小",
+          "stem": "角的大小与（）有关，和画出的边的长短无关。",
+          "kind": "fillBlank",
+          "reference": "两条边开口大小",
+          "adjustment": "",
+          "answers": [
+            [
+              "两条边开口大小",
+              "两边的开口大小",
+              "开口大小",
+              "两条边的张开程度",
+              "张口大小",
+              "张开的大小"
+            ]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "直角＝（）°，平角＝（）°，周角＝（）°。",
+          "originalReference": "90；180；360",
+          "stem": "直角＝（）°，平角＝（）°，周角＝（）°。",
+          "kind": "fillBlank",
+          "reference": "90；180；360",
+          "adjustment": "",
+          "answers": [["90"], ["180"], ["360"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "小于90°的角叫（）；大于90°小于180°的角叫（）。",
+          "originalReference": "锐角；钝角",
+          "stem": "大于0°且小于90°的角叫（）；大于90°且小于180°的角叫（）。",
+          "kind": "fillBlank",
+          "reference": "锐角；钝角",
+          "adjustment": "补充锐角大于0°的范围。",
+          "answers": [["锐角"], ["钝角"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "直线比射线长。",
+          "originalReference": "×",
+          "stem": "直线比射线长。",
+          "kind": "trueFalse",
+          "reference": "错误。二者都无限延伸，不能比较完整长度。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "永不相交的两条直线互相平行。",
+          "originalReference": "√",
+          "stem": "同一平面内，永不相交的两条直线互相平行。",
+          "kind": "trueFalse",
+          "reference": "正确。判断平行必须限定同一平面。",
+          "adjustment": "补充同一平面的必要条件。",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "周角就是一条射线。",
+          "originalReference": "×",
+          "stem": "周角就是一条射线。",
+          "kind": "trueFalse",
+          "reference": "错误。周角表示旋转一周形成的360°角，两边重合，但不能把角等同于射线。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "用放大镜看角，角度不变。",
+          "originalReference": "√",
+          "stem": "用放大镜正对着看平面上画出的角，只放大图形、不改变张口，角的度数不变。",
+          "kind": "trueFalse",
+          "reference": "正确。放大后的边长可以变化，角度仍不变。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "钝角一定大于锐角。",
+          "originalReference": "√",
+          "stem": "钝角一定大于锐角。",
+          "kind": "trueFalse",
+          "reference": "正确。钝角大于90°，锐角小于90°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "已知∠1=35°，它的余角是多少度？",
+          "originalReference": "90°－35°＝55°。",
+          "stem": "∠1＝35°，另一个角与它合起来为90°（两角互为余角），另一个角是多少度？（只填数值，单位：度）",
+          "kind": "calculation",
+          "reference": "90°－35°＝55°。",
+          "adjustment": "解释余角，避免依赖未在提要中介绍的术语。",
+          "value": 55
+        },
+        {
+          "number": 12,
+          "originalStem": "∠1＝120°，它与另一个角组成平角，另一个角是多少度？",
+          "originalReference": "180°－120°＝60°。",
+          "stem": "∠1＝120°，它与另一个角组成平角，另一个角是多少度？（只填数值，单位：度）",
+          "kind": "calculation",
+          "reference": "180°－120°＝60°。",
+          "adjustment": "",
+          "value": 60
+        },
+        {
+          "number": 13,
+          "originalStem": "画一条长4厘米线段。",
+          "originalReference": "画图略",
+          "stem": "在纸上画一条长4厘米的线段，标出两个端点，并记录你的检查方法。",
+          "kind": "shortAnswer",
+          "reference": "用直尺核对两个端点间距离为4厘米；有两个端点。由老师或家长查看实际图形。",
+          "adjustment": ""
+        },
+        {
+          "number": 14,
+          "originalStem": "画一个120°的角。",
+          "originalReference": "画图略",
+          "stem": "在纸上画一个120°的角，标出顶点和度数，并说明量角器如何对齐。",
+          "kind": "shortAnswer",
+          "reference": "中心对顶点，零刻度线对一边，从对应0°起标120°后画另一条射线；用量角器复核，所得角为钝角。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第二单元 线与角\n\n原稿分值：填空每空3分共30分；判断每题4分共20分；量角计算每题10分共20分；画图30分。\n\n1. 线段有（）个端点，射线有（）个端点，直线（）端点。\n原参考答案：2；1；没有\n\n2. 两条直线相交成直角，这两条直线互相（）。\n原参考答案：垂直\n\n3. 角的大小与（）有关，和边的长短无关。\n原参考答案：两条边开口大小\n\n4. 直角＝（）°，平角＝（）°，周角＝（）°。\n原参考答案：90；180；360\n\n5. 小于90°的角叫（）；大于90°小于180°的角叫（）。\n原参考答案：锐角；钝角\n\n6. 直线比射线长。\n原参考答案：×\n\n7. 永不相交的两条直线互相平行。\n原参考答案：√\n\n8. 周角就是一条射线。\n原参考答案：×\n\n9. 用放大镜看角，角度不变。\n原参考答案：√\n\n10. 钝角一定大于锐角。\n原参考答案：√\n\n11. 已知∠1=35°，它的余角是多少度？\n原参考答案：90°－35°＝55°。\n\n12. ∠1＝120°，它与另一个角组成平角，另一个角是多少度？\n原参考答案：180°－120°＝60°。\n\n13. 画一条长4厘米线段。\n原参考答案：画图略\n\n14. 画一个120°的角。\n原参考答案：画图略"
+    },
+    {
+      "topicKey": "written-multiply",
+      "title": "第三单元 整数乘法（二）",
+      "sourceScoring": "口算每题3分共15分；竖式每题8分共32分；估算每题7分共21分；解决问题32分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "口算：120×30＝？",
+          "originalReference": "3600",
+          "stem": "口算：120×30＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "3600",
+          "adjustment": "",
+          "value": 3600
+        },
+        {
+          "number": 2,
+          "originalStem": "口算：25×40＝？",
+          "originalReference": "1000",
+          "stem": "口算：25×40＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "1000",
+          "adjustment": "",
+          "value": 1000
+        },
+        {
+          "number": 3,
+          "originalStem": "口算：106×2＝？",
+          "originalReference": "212",
+          "stem": "口算：106×2＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "212",
+          "adjustment": "",
+          "value": 212
+        },
+        {
+          "number": 4,
+          "originalStem": "口算：30×150＝？",
+          "originalReference": "4500",
+          "stem": "口算：30×150＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "4500",
+          "adjustment": "",
+          "value": 4500
+        },
+        {
+          "number": 5,
+          "originalStem": "口算：24×30＝？",
+          "originalReference": "720",
+          "stem": "口算：24×30＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "720",
+          "adjustment": "",
+          "value": 720
+        },
+        {
+          "number": 6,
+          "originalStem": "竖式计算：132×24",
+          "originalReference": "132×4＝528，132×20＝2640，合计3168",
+          "stem": "在纸上列竖式计算132×24，记录关键步骤。",
+          "kind": "shortAnswer",
+          "reference": "132×4＝528，132×20＝2640，合计3168。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "originalStem": "竖式计算：208×35",
+          "originalReference": "208×5＝1040，208×30＝6240，合计7280",
+          "stem": "在纸上列竖式计算208×35，记录关键步骤。",
+          "kind": "shortAnswer",
+          "reference": "208×5＝1040，208×30＝6240，合计7280。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "竖式计算：260×40",
+          "originalReference": "260×4＝1040，再乘10得到10400",
+          "stem": "在纸上列竖式计算260×40，记录关键步骤。",
+          "kind": "shortAnswer",
+          "reference": "260×4＝1040，再乘10得到10400。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "竖式计算：315×18",
+          "originalReference": "315×8＝2520，315×10＝3150，合计5670",
+          "stem": "在纸上列竖式计算315×18，记录关键步骤。",
+          "kind": "shortAnswer",
+          "reference": "315×8＝2520，315×10＝3150，合计5670。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "估算：203×41≈",
+          "originalReference": "8000",
+          "stem": "估算203×41，按200×40估算约是多少？（只填数值）",
+          "kind": "calculation",
+          "reference": "8000",
+          "adjustment": "估算方法不唯一，明确本题取近似值的方法，避免将其他合理估算判错。",
+          "value": 8000
+        },
+        {
+          "number": 11,
+          "originalStem": "估算：58×302≈",
+          "originalReference": "18000",
+          "stem": "估算58×302，按60×300估算约是多少？（只填数值）",
+          "kind": "calculation",
+          "reference": "18000",
+          "adjustment": "估算方法不唯一，明确本题取近似值的方法，避免将其他合理估算判错。",
+          "value": 18000
+        },
+        {
+          "number": 12,
+          "originalStem": "估算：49×210≈",
+          "originalReference": "10000",
+          "stem": "估算49×210，按50×200估算约是多少？（只填数值）",
+          "kind": "calculation",
+          "reference": "10000",
+          "adjustment": "估算方法不唯一，明确本题取近似值的方法，避免将其他合理估算判错。",
+          "value": 10000
+        },
+        {
+          "number": 13,
+          "originalStem": "一套课外书135元，四年级购买26套，需要多少元？",
+          "originalReference": "135×26＝3510元。",
+          "stem": "一套课外书135元，四年级购买26套，需要多少元？（只填数值，单位：元）",
+          "kind": "calculation",
+          "reference": "135×26＝3510元。",
+          "adjustment": "",
+          "value": 3510
+        }
+      ],
+      "sourceText": "## 第三单元 整数乘法（二）\n\n原稿分值：口算每题3分共15分；竖式每题8分共32分；估算每题7分共21分；解决问题32分。\n\n1. 口算：120×30＝？\n原参考答案：3600\n\n2. 口算：25×40＝？\n原参考答案：1000\n\n3. 口算：106×2＝？\n原参考答案：212\n\n4. 口算：30×150＝？\n原参考答案：4500\n\n5. 口算：24×30＝？\n原参考答案：720\n\n6. 竖式计算：132×24\n原参考答案：132×4＝528，132×20＝2640，合计3168\n\n7. 竖式计算：208×35\n原参考答案：208×5＝1040，208×30＝6240，合计7280\n\n8. 竖式计算：260×40\n原参考答案：260×4＝1040，再乘10得到10400\n\n9. 竖式计算：315×18\n原参考答案：315×8＝2520，315×10＝3150，合计5670\n\n10. 估算：203×41≈\n原参考答案：8000\n\n11. 估算：58×302≈\n原参考答案：18000\n\n12. 估算：49×210≈\n原参考答案：10000\n\n13. 一套课外书135元，四年级购买26套，需要多少元？\n原参考答案：135×26＝3510元。"
+    },
+    {
+      "topicKey": "coordinate",
+      "title": "第四单元 我们生活的空间（二）",
+      "sourceScoring": "填空每空6分共36分；判断每题8分共24分；看图回答40分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "数对（5，3）表示第（）列、第（）行。",
+          "originalReference": "5；3",
+          "stem": "数对（5，3）表示第（）列、第（）行。",
+          "kind": "fillBlank",
+          "reference": "5；3",
+          "adjustment": "",
+          "answers": [
+            ["5", "五"],
+            ["3", "三"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "用数对确定位置时，先写（），再写（）。",
+          "originalReference": "列；行",
+          "stem": "用数对确定位置时，先写（），再写（）。",
+          "kind": "fillBlank",
+          "reference": "列；行",
+          "adjustment": "",
+          "answers": [
+            ["列", "列数", "列号"],
+            ["行", "行数", "行号"]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "东和北之间方向叫（）；东和南之间叫（）。",
+          "originalReference": "东北；东南",
+          "stem": "东和北之间的正中方向叫（）；东和南之间的正中方向叫（）。",
+          "kind": "fillBlank",
+          "reference": "东北；东南",
+          "adjustment": "",
+          "answers": [
+            ["东北", "东北方向"],
+            ["东南", "东南方向"]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "同一张位置图中，数对（2，4）和（4，2）表示同一个位置。",
+          "originalReference": "×",
+          "stem": "同一张位置图中，数对（2，4）和（4，2）表示同一个位置。",
+          "kind": "trueFalse",
+          "reference": "错误。列与行互换后，位置不同。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "originalStem": "描述路线，要说清方向和距离。",
+          "originalReference": "√",
+          "stem": "描述路线，要说清方向和距离。",
+          "kind": "trueFalse",
+          "reference": "正确。并说清起点及各段的先后顺序。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "西北方向也叫北偏西。",
+          "originalReference": "√",
+          "stem": "西北方向可以准确表示为北偏西45°。",
+          "kind": "trueFalse",
+          "reference": "正确。西北位于正北与正西的正中间。",
+          "adjustment": "“北偏西”还需指定角度，改为北偏西45°，保留原题识别西北方向的意图。",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "看图回答：小明位置（3,2），小红在小明右边一列，同一行，小红数对是？",
+          "originalReference": "（4，2）。",
+          "stem": "约定列号向右递增。小明在（3，2），小红在他右边一列、同一行。小红在第（）列、第（）行。",
+          "kind": "fillBlank",
+          "reference": "（4，2）。",
+          "adjustment": "原稿未附图，但文字条件足够；补充列号递增方向并拆成列、行两空。",
+          "answers": [["4"], ["2"]]
+        }
+      ],
+      "sourceText": "## 第四单元 我们生活的空间（二）\n\n原稿分值：填空每空6分共36分；判断每题8分共24分；看图回答40分。\n\n1. 数对（5，3）表示第（）列、第（）行。\n原参考答案：5；3\n\n2. 用数对确定位置时，先写（），再写（）。\n原参考答案：列；行\n\n3. 东和北之间方向叫（）；东和南之间叫（）。\n原参考答案：东北；东南\n\n4. 同一张位置图中，数对（2，4）和（4，2）表示同一个位置。\n原参考答案：×\n\n5. 描述路线，要说清方向和距离。\n原参考答案：√\n\n6. 西北方向也叫北偏西。\n原参考答案：√\n\n7. 看图回答：小明位置（3,2），小红在小明右边一列，同一行，小红数对是？\n原参考答案：（4，2）。"
+    },
+    {
+      "topicKey": "addition-laws",
+      "title": "第五单元 运算律",
+      "sourceScoring": "填空每空4分共24分；简便计算每题10分共40分；解决问题36分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "加法交换律：a+b=（）",
+          "originalReference": "b+a",
+          "stem": "补全加法交换律：a＋b＝？",
+          "kind": "shortAnswer",
+          "reference": "b＋a。",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "originalStem": "乘法结合律：(a×b)×c=（）",
+          "originalReference": "a×(b×c)",
+          "stem": "补全乘法结合律：（a×b）×c＝？",
+          "kind": "shortAnswer",
+          "reference": "a×（b×c）。",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "originalStem": "乘法分配律：(a+b)×c=（）",
+          "originalReference": "a×c+b×c",
+          "stem": "补全乘法分配律：（a＋b）×c＝？",
+          "kind": "shortAnswer",
+          "reference": "a×c＋b×c。两项交换顺序也等价。",
+          "adjustment": "公式表达支持人工核对等价写法，不用单一字符串判分。"
+        },
+        {
+          "number": 4,
+          "originalStem": "25×17×4＝25×4×17，运用了乘法（）律。",
+          "originalReference": "交换",
+          "stem": "25×17×4＝25×4×17，运用了乘法（）律。",
+          "kind": "fillBlank",
+          "reference": "交换",
+          "adjustment": "",
+          "answers": [["交换", "交换律"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "（20＋4）×25＝20×25＋4×25，运用了乘法（）律。",
+          "originalReference": "分配",
+          "stem": "（20＋4）×25＝20×25＋4×25，运用了乘法（）律。",
+          "kind": "fillBlank",
+          "reference": "分配",
+          "adjustment": "",
+          "answers": [["分配", "分配律"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "136＋78＋64＝78＋（136＋64），运用了加法交换律和（）律。",
+          "originalReference": "结合",
+          "stem": "136＋78＋64＝78＋（136＋64），运用了加法交换律和（）律。",
+          "kind": "fillBlank",
+          "reference": "结合",
+          "adjustment": "",
+          "answers": [["结合", "结合律"]]
+        },
+        {
+          "number": 7,
+          "originalStem": "简便计算：25×36",
+          "originalReference": "25×36＝25×4×9＝900。",
+          "stem": "用简便方法计算，写出过程：25×36",
+          "kind": "shortAnswer",
+          "reference": "25×36＝25×4×9＝900。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "简便计算：125×（8＋80）",
+          "originalReference": "125×8＋125×80＝1000＋10000＝11000。",
+          "stem": "用简便方法计算，写出过程：125×（8＋80）",
+          "kind": "shortAnswer",
+          "reference": "125×8＋125×80＝1000＋10000＝11000。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "简便计算：47＋135＋53",
+          "originalReference": "（47＋53）＋135＝100＋135＝235。",
+          "stem": "用简便方法计算，写出过程：47＋135＋53",
+          "kind": "shortAnswer",
+          "reference": "（47＋53）＋135＝100＋135＝235。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "简便计算：36×99＋36",
+          "originalReference": "36×（99＋1）＝3600。",
+          "stem": "用简便方法计算，写出过程：36×99＋36",
+          "kind": "shortAnswer",
+          "reference": "36×（99＋1）＝3600。",
+          "adjustment": ""
+        },
+        {
+          "number": 11,
+          "originalStem": "商店运来25箱饮料，每箱24瓶，每瓶4元。一共可以卖多少钱？（简便计算）",
+          "originalReference": "25×24×4＝25×4×24＝2400元。",
+          "stem": "商店运来25箱饮料，每箱24瓶，每瓶4元。全部按此价格售出可卖多少元？请用简便方法列式并写出过程。",
+          "kind": "shortAnswer",
+          "reference": "25×24×4＝25×4×24＝2400元。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第五单元 运算律\n\n原稿分值：填空每空4分共24分；简便计算每题10分共40分；解决问题36分。\n\n1. 加法交换律：a+b=（）\n原参考答案：b+a\n\n2. 乘法结合律：(a×b)×c=（）\n原参考答案：a×(b×c)\n\n3. 乘法分配律：(a+b)×c=（）\n原参考答案：a×c+b×c\n\n4. 25×17×4＝25×4×17，运用了乘法（）律。\n原参考答案：交换\n\n5. （20＋4）×25＝20×25＋4×25，运用了乘法（）律。\n原参考答案：分配\n\n6. 136＋78＋64＝78＋（136＋64），运用了加法交换律和（）律。\n原参考答案：结合\n\n7. 简便计算：25×36\n原参考答案：25×36＝25×4×9＝900。\n\n8. 简便计算：125×（8＋80）\n原参考答案：125×8＋125×80＝1000＋10000＝11000。\n\n9. 简便计算：47＋135＋53\n原参考答案：（47＋53）＋135＝100＋135＝235。\n\n10. 简便计算：36×99＋36\n原参考答案：36×（99＋1）＝3600。\n\n11. 商店运来25箱饮料，每箱24瓶，每瓶4元。一共可以卖多少钱？（简便计算）\n原参考答案：25×24×4＝25×4×24＝2400元。"
+    },
+    {
+      "topicKey": "count-figures",
+      "title": "数学好玩：数图形的学问",
+      "sourceScoring": "三题分别35分、35分、30分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "一条线段上有4个端点，一共有几条线段？",
+          "originalReference": "3＋2＋1＝6条。",
+          "stem": "一条直线上标有4个不同的点，以其中任意两个点为端点，共可数出几条线段？（只填数值，单位：条）",
+          "kind": "calculation",
+          "reference": "3＋2＋1＝6条。",
+          "adjustment": "线段本身只有两个端点，将“4个端点”改为4个不同的点。",
+          "value": 6
+        },
+        {
+          "number": 2,
+          "originalStem": "一个角里面画2条射线，一共多少个角？",
+          "originalReference": "包括原角两边共4条射线，每两条组成一个角，3＋2＋1＝6个。",
+          "stem": "在一个小于180°且大于0°的角内部，从同一顶点再画2条不同的射线（均不与原边重合）。任取其中两条射线组成小于180°的角，共有几个？（只填数值，单位：个）",
+          "kind": "calculation",
+          "reference": "包括原角两边共4条射线，每两条组成一个角，3＋2＋1＝6个。",
+          "adjustment": "明确共同顶点、两条不同内射线及角范围，消除计数歧义。",
+          "value": 6
+        },
+        {
+          "number": 3,
+          "originalStem": "数长方形：一行有3个小长方形，一共可以数出多少长方形？",
+          "originalReference": "占1格3个，占2格2个，占3格1个，总共6个。",
+          "stem": "3个小长方形紧挨着排成一行，上下边对齐，形成1行3列的完整网格，一共可数出几个长方形（包括跨格的大长方形）？（只填数值，单位：个）",
+          "kind": "calculation",
+          "reference": "占1格3个，占2格2个，占3格1个，总共6个。",
+          "adjustment": "未提供图，明确一行三列完整网格及包含跨格图形。",
+          "value": 6
+        }
+      ],
+      "sourceText": "## 数学好玩：数图形的学问\n\n原稿分值：三题分别35分、35分、30分。\n\n1. 一条线段上有4个端点，一共有几条线段？\n原参考答案：3＋2＋1＝6条。\n\n2. 一个角里面画2条射线，一共多少个角？\n原参考答案：包括原角两边共4条射线，每两条组成一个角，3＋2＋1＝6个。\n\n3. 数长方形：一行有3个小长方形，一共可以数出多少长方形？\n原参考答案：占1格3个，占2格2个，占3格1个，总共6个。"
+    },
+    {
+      "topicKey": "quadrilaterals",
+      "title": "第六单元 图形的奥秘",
+      "sourceScoring": "填空每空5分共30分；判断每题6分共30分；画图40分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "平行四边形有（）组对边互相平行；梯形有（）组对边互相平行。",
+          "originalReference": "2；1",
+          "stem": "平行四边形有（）组对边互相平行；梯形只有（）组对边互相平行。",
+          "kind": "fillBlank",
+          "reference": "2；1",
+          "adjustment": "",
+          "answers": [
+            ["2", "两", "二"],
+            ["1", "一"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "平行四边形容易（），具有不稳定性。",
+          "originalReference": "变形",
+          "stem": "用四根木条活动连接成的平行四边形框架容易（），具有不稳定性。",
+          "kind": "fillBlank",
+          "reference": "变形",
+          "adjustment": "",
+          "answers": [["变形", "发生变形"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "从平行四边形一条边上一点向对边引垂线，垂线段叫平行四边形的（）。",
+          "originalReference": "高",
+          "stem": "从平行四边形一条边上的一点向对边所在直线作垂线，两条对边所在直线间的垂线段叫作对应底的（）。",
+          "kind": "fillBlank",
+          "reference": "高",
+          "adjustment": "补充对边所在直线，允许高落在延长线上。",
+          "answers": [["高"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "梯形互相平行的一组对边分别叫上底和（），不平行的两边叫腰。",
+          "originalReference": "下底",
+          "stem": "梯形互相平行的一组对边分别叫上底和（），不平行的两边叫腰。",
+          "kind": "fillBlank",
+          "reference": "下底",
+          "adjustment": "",
+          "answers": [["下底"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "（）梯形的两条腰长度相等。",
+          "originalReference": "等腰",
+          "stem": "（）梯形的两条腰长度相等。",
+          "kind": "fillBlank",
+          "reference": "等腰",
+          "adjustment": "",
+          "answers": [["等腰"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "长方形是特殊的平行四边形。",
+          "originalReference": "√",
+          "stem": "长方形是特殊的平行四边形。",
+          "kind": "trueFalse",
+          "reference": "正确。长方形两组对边分别平行。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "有一组对边平行的四边形是梯形。",
+          "originalReference": "×",
+          "stem": "只要有一组对边平行，一个四边形就一定是梯形。",
+          "kind": "trueFalse",
+          "reference": "错误。必须只有一组对边平行；有两组平行的平行四边形也符合“有一组”。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "平行四边形四条边一定相等。",
+          "originalReference": "×",
+          "stem": "平行四边形四条边一定相等。",
+          "kind": "trueFalse",
+          "reference": "错误。平行四边形对边相等，但相邻边不一定相等。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "梯形有无数条高。",
+          "originalReference": "√",
+          "stem": "梯形两条平行底边所在直线之间可以作无数条高。",
+          "kind": "trueFalse",
+          "reference": "正确。沿底边取不同位置作垂线，可得到无数条等长的高。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "正方形是特殊的长方形。",
+          "originalReference": "√",
+          "stem": "正方形是特殊的长方形。",
+          "kind": "trueFalse",
+          "reference": "正确。它有四个直角，并且四边相等。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "画一个平行四边形，并画出它的一条高。",
+          "originalReference": "画图略",
+          "stem": "在纸上画一个平行四边形，指定底，画出对应的一条高，标出直角并说明检查方法。",
+          "kind": "shortAnswer",
+          "reference": "两组对边分别平行，高垂直于所选底边所在直线；用三角尺核对直角。高可能落在边的延长线上。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第六单元 图形的奥秘\n\n原稿分值：填空每空5分共30分；判断每题6分共30分；画图40分。\n\n1. 平行四边形有（）组对边互相平行；梯形有（）组对边互相平行。\n原参考答案：2；1\n\n2. 平行四边形容易（），具有不稳定性。\n原参考答案：变形\n\n3. 从平行四边形一条边上一点向对边引垂线，垂线段叫平行四边形的（）。\n原参考答案：高\n\n4. 梯形互相平行的一组对边分别叫上底和（），不平行的两边叫腰。\n原参考答案：下底\n\n5. （）梯形的两条腰长度相等。\n原参考答案：等腰\n\n6. 长方形是特殊的平行四边形。\n原参考答案：√\n\n7. 有一组对边平行的四边形是梯形。\n原参考答案：×\n\n8. 平行四边形四条边一定相等。\n原参考答案：×\n\n9. 梯形有无数条高。\n原参考答案：√\n\n10. 正方形是特殊的长方形。\n原参考答案：√\n\n11. 画一个平行四边形，并画出它的一条高。\n原参考答案：画图略"
+    },
+    {
+      "topicKey": "travel",
+      "title": "第七单元 运用数量关系解决问题",
+      "sourceScoring": "写公式每空6分共18分；填空每题8分共32分；应用题每题25分共50分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "补全公式：路程＝（）×（）。",
+          "originalReference": "速度，时间",
+          "stem": "补全公式：路程＝（）×（）。",
+          "kind": "shortAnswer",
+          "reference": "速度×时间（时间×速度也正确，单位须匹配）。",
+          "adjustment": "接受乘法交换后的等价顺序，由人工核对公式表达。"
+        },
+        {
+          "number": 2,
+          "originalStem": "补全公式：总价＝（）×（）。",
+          "originalReference": "单价，数量",
+          "stem": "补全公式：总价＝（）×（）。",
+          "kind": "shortAnswer",
+          "reference": "单价×数量（数量×单价也正确）。",
+          "adjustment": "接受乘法交换后的等价顺序，由人工核对公式表达。"
+        },
+        {
+          "number": 3,
+          "originalStem": "汽车速度80千米/时，行驶4小时，路程是多少？",
+          "originalReference": "80×4＝320千米。",
+          "stem": "汽车速度80千米/时，行驶4小时，路程是多少？（只填数值，单位：千米）",
+          "kind": "calculation",
+          "reference": "80×4＝320千米。",
+          "adjustment": "",
+          "value": 320
+        },
+        {
+          "number": 4,
+          "originalStem": "一件商品单价35元，买12件，总价是多少？",
+          "originalReference": "35×12＝420元。",
+          "stem": "一件商品单价35元，买12件，总价是多少？（只填数值，单位：元）",
+          "kind": "calculation",
+          "reference": "35×12＝420元。",
+          "adjustment": "",
+          "value": 420
+        },
+        {
+          "number": 5,
+          "originalStem": "路程300千米，5小时走完，平均速度是多少？",
+          "originalReference": "300÷5＝60千米/时。",
+          "stem": "路程300千米，5小时走完，平均速度是多少？（只填数值，单位：千米/时）",
+          "kind": "calculation",
+          "reference": "300÷5＝60千米/时。",
+          "adjustment": "",
+          "value": 60
+        },
+        {
+          "number": 6,
+          "originalStem": "总价240元，单价40元，可以买几件？",
+          "originalReference": "240÷40＝6件。",
+          "stem": "总价240元，单价40元，可以买几件？（只填数值，单位：件）",
+          "kind": "calculation",
+          "reference": "240÷40＝6件。",
+          "adjustment": "",
+          "value": 6
+        },
+        {
+          "number": 7,
+          "originalStem": "甲乙两地相距450千米，货车以50千米/时匀速行驶，不另计停留，需要几小时到达？",
+          "originalReference": "450÷50＝9小时。",
+          "stem": "甲乙两地相距450千米，货车以50千米/时匀速行驶，不另计停留，需要几小时到达？（只填数值，单位：小时）",
+          "kind": "calculation",
+          "reference": "450÷50＝9小时。",
+          "adjustment": "",
+          "value": 9
+        },
+        {
+          "number": 8,
+          "originalStem": "笔记本每本12元，全班45人每人一本，共要花多少元？",
+          "originalReference": "12×45＝540元。",
+          "stem": "笔记本每本12元，全班45人每人一本，共要花多少元？（只填数值，单位：元）",
+          "kind": "calculation",
+          "reference": "12×45＝540元。",
+          "adjustment": "",
+          "value": 540
+        }
+      ],
+      "sourceText": "## 第七单元 运用数量关系解决问题\n\n原稿分值：写公式每空6分共18分；填空每题8分共32分；应用题每题25分共50分。\n\n1. 补全公式：路程＝（）×（）。\n原参考答案：速度，时间\n\n2. 补全公式：总价＝（）×（）。\n原参考答案：单价，数量\n\n3. 汽车速度80千米/时，行驶4小时，路程是多少？\n原参考答案：80×4＝320千米。\n\n4. 一件商品单价35元，买12件，总价是多少？\n原参考答案：35×12＝420元。\n\n5. 路程300千米，5小时走完，平均速度是多少？\n原参考答案：300÷5＝60千米/时。\n\n6. 总价240元，单价40元，可以买几件？\n原参考答案：240÷40＝6件。\n\n7. 甲乙两地相距450千米，货车以50千米/时匀速行驶，不另计停留，需要几小时到达？\n原参考答案：450÷50＝9小时。\n\n8. 笔记本每本12元，全班45人每人一本，共要花多少元？\n原参考答案：12×45＝540元。"
+    },
+    {
+      "topicKey": "bar-chart",
+      "title": "第八单元 数据的表示和分析（一）",
+      "sourceScoring": "填空每空6分共30分；判断每题8分共32分；解决问题38分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "平均数＝（）÷（）。",
+          "originalReference": "总数量；总份数",
+          "stem": "平均数＝（）÷（）。",
+          "kind": "fillBlank",
+          "reference": "总数量；总份数",
+          "adjustment": "",
+          "answers": [
+            ["总数量", "总数", "总和", "数据总和"],
+            ["总份数", "份数", "数据个数", "个数"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "5名同学分数90、92、88、90、95，总分（），平均分（）。",
+          "originalReference": "总分455分，平均455÷5＝91分。",
+          "stem": "5名同学分数90、92、88、90、95，总分（），平均分（）。",
+          "kind": "fillBlank",
+          "reference": "总分455分，平均455÷5＝91分。",
+          "adjustment": "",
+          "answers": [["455"], ["91"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "条形统计图可以清楚看出数量的（）。",
+          "originalReference": "多少",
+          "stem": "条形统计图可以清楚看出数量的（）。",
+          "kind": "fillBlank",
+          "reference": "多少",
+          "adjustment": "",
+          "answers": [["多少", "大小"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "平均数一定是这组数据里的某个数。",
+          "originalReference": "×",
+          "stem": "平均数一定是这组数据里的某个数。",
+          "kind": "trueFalse",
+          "reference": "错误。例如3和5的平均数4，并不在原数据中。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "originalStem": "平均数代表一组数据的整体水平。",
+          "originalReference": "√",
+          "stem": "平均数代表一组数据的整体水平。",
+          "kind": "trueFalse",
+          "reference": "正确。它反映整体水平，不表示每个数都等于它。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "条形统计图一格只能代表1个单位。",
+          "originalReference": "×",
+          "stem": "条形统计图一格只能代表1个单位。",
+          "kind": "trueFalse",
+          "reference": "错误。可按数据大小设置每格代表2、5、10等，刻度应统一。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "一组数据，有的数大于平均数，有的小于平均数。",
+          "originalReference": "√",
+          "stem": "任意一组数据中，一定有数大于平均数，也一定有数小于平均数。",
+          "kind": "trueFalse",
+          "reference": "错误。若所有数据相同，例如5、5、5，每个数都等于平均数5；只有数据不全相同时才必有大于和小于平均数的数。",
+          "adjustment": "原答案√缺少“数据不全相同”前提。明确检验“任意一组”的说法，并更正为×，用全相等数据反例说明。",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "4名同学体重32、34、30、36千克，平均体重是多少？",
+          "originalReference": "（32＋34＋30＋36）÷4＝132÷4＝33千克。",
+          "stem": "4名同学体重32、34、30、36千克，平均体重是多少？（只填数值，单位：千克）",
+          "kind": "calculation",
+          "reference": "（32＋34＋30＋36）÷4＝132÷4＝33千克。",
+          "adjustment": "",
+          "value": 33
+        }
+      ],
+      "sourceText": "## 第八单元 数据的表示和分析（一）\n\n原稿分值：填空每空6分共30分；判断每题8分共32分；解决问题38分。\n\n1. 平均数＝（）÷（）。\n原参考答案：总数量；总份数\n\n2. 5名同学分数90、92、88、90、95，总分（），平均分（）。\n原参考答案：总分455分，平均455÷5＝91分。\n\n3. 条形统计图可以清楚看出数量的（）。\n原参考答案：多少\n\n4. 平均数一定是这组数据里的某个数。\n原参考答案：×\n\n5. 平均数代表一组数据的整体水平。\n原参考答案：√\n\n6. 条形统计图一格只能代表1个单位。\n原参考答案：×\n\n7. 一组数据，有的数大于平均数，有的小于平均数。\n原参考答案：√\n\n8. 4名同学体重32、34、30、36千克，平均体重是多少？\n原参考答案：（32＋34＋30＋36）÷4＝132÷4＝33千克。"
+    },
+    {
+      "topicKey": "navigation",
+      "title": "综合实践：导航给的时间准吗",
+      "sourceScoring": "两题各50分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "汽车路程180千米，速度60千米/时，预计行驶多久？",
+          "originalReference": "180÷60＝3小时。",
+          "stem": "路程180千米，按60千米/时匀速行驶，暂不计停留，预计行驶多久？（只填数值，单位：小时）",
+          "kind": "calculation",
+          "reference": "180÷60＝3小时。",
+          "adjustment": "",
+          "value": 3
+        },
+        {
+          "number": 2,
+          "originalStem": "实际行驶用了4小时，分析可能是什么原因比预估时间更长？",
+          "originalReference": "堵车、红绿灯多、限速、路上停车等（合理即可）",
+          "stem": "同一路线预计3小时，实际用了4小时，请分析可能比预估更久的原因。",
+          "kind": "shortAnswer",
+          "reference": "可能因堵车、红绿灯等待、限速、路上停车等。说明合理原因即可，仅凭总用时不能确定实际发生了哪种情况。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 综合实践：导航给的时间准吗\n\n原稿分值：两题各50分。\n\n1. 汽车路程180千米，速度60千米/时，预计行驶多久？\n原参考答案：180÷60＝3小时。\n\n2. 实际行驶用了4小时，分析可能是什么原因比预估时间更长？\n原参考答案：堵车、红绿灯多、限速、路上停车等（合理即可）"
+    }
+  ]
+}

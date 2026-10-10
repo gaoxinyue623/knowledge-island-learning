@@ -1,0 +1,589 @@
+{
+  "title": "沪教牛津英语三年级上册·2022版",
+  "publisher": "上海教育出版社",
+  "sourceNote": "用户提供的沪教牛津三年级上册双语文本；2022年份与页码按用户标注，未对照出版社原书。保留提供的英文、中文译文和词句；不声称已收录整册所有栏目。中文family译文中兄弟姐妹的长幼为来稿表述，英文brother/sister本身不限定长幼。配套问题和口语提示由项目原创，两个Project不自动评分。",
+  "sourceSha256": "3f96372346e926ef540ecad37ed50b7f8c8ae63e3965026c1a7def40f9795aac",
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 How do we feel?",
+      "page": 5,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "happy",
+          "chinese": "开心的"
+        },
+        {
+          "english": "sad",
+          "chinese": "难过的"
+        },
+        {
+          "english": "angry",
+          "chinese": "生气的"
+        },
+        {
+          "english": "tired",
+          "chinese": "累的"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "How are you?",
+          "english": "Good morning, boys and girls! How are you? —Not so good. I’m cold. —OK, Wen Jie. Let’s close the window. —I’m sad. I can’t find my pencil. —Look, Jia Li. Here’s a pencil. —What about you two? —I’m happy. —I’m happy too! —Well, let’s start again. How are you? —Fine, thank you. —Phew! Now please look at the blackboard.",
+          "chinese": "早上好，同学们！你们好吗？ ——不太好。我很冷。 ——好的，文杰。我们把窗户关上。 ——我很难过。我找不到我的铅笔。 ——看，佳丽。这有一支铅笔。 ——你们两个呢？ ——我很开心。 ——我也很开心！ ——好了，我们重新开始。你们好吗？ ——很好，谢谢你。 ——呼！现在请看黑板。"
+        }
+      ],
+      "sentencePattern": "How are you? I am …（happy/sad/angry/tired）",
+      "sentencePrompt": "用本单元词汇说说你此刻的感受。",
+      "sentenceAnswer": "I am happy.",
+      "questions": [
+        {
+          "stem": "哪个词表示“累的”？",
+          "options": ["tired", "happy", "angry"],
+          "correctIndex": 0,
+          "explanation": "tired表示累的。"
+        },
+        {
+          "stem": "How are you? 可以怎样回答？",
+          "options": ["I am happy.", "It is a cat.", "This is my father."],
+          "correctIndex": 0,
+          "explanation": "用I am加感受回答。"
+        },
+        {
+          "stem": "Jia Li找不到什么？",
+          "options": ["a pencil", "a bike", "a cake"],
+          "correctIndex": 0,
+          "explanation": "原文I can’t find my pencil.说明找不到铅笔。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 What’s interesting about families?",
+      "page": 15,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "grandfather",
+          "chinese": "爷爷/外公"
+        },
+        {
+          "english": "grandmother",
+          "chinese": "奶奶/外婆"
+        },
+        {
+          "english": "father",
+          "chinese": "爸爸"
+        },
+        {
+          "english": "mother",
+          "chinese": "妈妈"
+        },
+        {
+          "english": "sister",
+          "chinese": "姐妹"
+        },
+        {
+          "english": "brother",
+          "chinese": "兄弟"
+        },
+        {
+          "english": "me",
+          "chinese": "我"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Families",
+          "english": "This is my family. Look! He is my grandfather. She is my grandmother. This is my father. This is my mother. This is my brother and this is my sister. Who is he? He is my father. Who is she? She is my mother.",
+          "chinese": "这是我的家庭。 看！他是我的爷爷。 她是我的奶奶。 这是我的爸爸。这是我的妈妈。 这是我的弟弟，这是我的妹妹。 他是谁？他是我的爸爸。 她是谁？她是我的妈妈。"
+        }
+      ],
+      "sentencePattern": "This is my family. Who is he/she? He/She is …",
+      "sentencePrompt": "选择一位家人，用This is my…介绍。",
+      "sentenceAnswer": "This is my mother.",
+      "questions": [
+        {
+          "stem": "brother可以表示什么？",
+          "options": ["哥哥或弟弟", "爸爸", "姐妹"],
+          "correctIndex": 0,
+          "explanation": "brother本身不限定哥哥或弟弟；中文译文中的弟弟是来稿表述。"
+        },
+        {
+          "stem": "Who is she? 可以回答？",
+          "options": ["She is my mother.", "He is my father.", "I am tired."],
+          "correctIndex": 0,
+          "explanation": "she对应女性代词。"
+        },
+        {
+          "stem": "Families中，Who is he? 后的回答是？",
+          "options": ["He is my father.", "He is my teacher.", "He is my brother."],
+          "correctIndex": 0,
+          "explanation": "按照给出的Reading文本作答。"
+        }
+      ],
+      "aliases": [
+        {
+          "english": "grandpa",
+          "chinese": "爷爷/外公"
+        },
+        {
+          "english": "grandma",
+          "chinese": "奶奶/外婆"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What do we look like?",
+      "page": 25,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "head",
+          "chinese": "头"
+        },
+        {
+          "english": "hair",
+          "chinese": "头发"
+        },
+        {
+          "english": "eye",
+          "chinese": "眼睛"
+        },
+        {
+          "english": "ear",
+          "chinese": "耳朵"
+        },
+        {
+          "english": "nose",
+          "chinese": "鼻子"
+        },
+        {
+          "english": "mouth",
+          "chinese": "嘴巴"
+        },
+        {
+          "english": "face",
+          "chinese": "脸"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Minmin’s haircut",
+          "english": "Look at your hair, Minmin. It’s too long. But I like it. Minmin, I can’t see your eyes. Now sit on this chair, please. Look! Do you like your haircut? Oh! I have short hair. I like my haircut, Mum. You look great! Thanks, Mum.",
+          "chinese": "看看你的头发，敏敏。它太长了。 但是我喜欢它。 敏敏，我看不见你的眼睛。现在请坐在椅子上。 看！你喜欢你的新发型吗？ 哦！我有短头发了。 妈妈，我喜欢我的发型。 你看起来很棒！ 谢谢妈妈。"
+        }
+      ],
+      "sentencePattern": "I have …（I have long hair. I have big eyes.）",
+      "sentencePrompt": "用I have描述自己的头发或眼睛。",
+      "sentenceAnswer": "I have short hair.",
+      "questions": [
+        {
+          "stem": "hair是什么意思？",
+          "options": ["头发", "鼻子", "嘴巴"],
+          "correctIndex": 0,
+          "explanation": "hair表示头发。"
+        },
+        {
+          "stem": "哪个句子表示“我有大眼睛”？",
+          "options": ["I have big eyes.", "I am big eyes.", "I can big eyes."],
+          "correctIndex": 0,
+          "explanation": "用have表示具有外貌特征。"
+        },
+        {
+          "stem": "理发后Minmin说自己有什么头发？",
+          "options": ["short hair", "long hair", "no hair"],
+          "correctIndex": 0,
+          "explanation": "原文Oh! I have short hair.。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 How do we have fun?",
+      "page": 35,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "skip",
+          "chinese": "跳绳"
+        },
+        {
+          "english": "run",
+          "chinese": "跑步"
+        },
+        {
+          "english": "fly a kite",
+          "chinese": "放风筝"
+        },
+        {
+          "english": "skateboard",
+          "chinese": "滑滑板"
+        },
+        {
+          "english": "ride a bike",
+          "chinese": "骑自行车"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "In the park",
+          "english": "We are in the park. I can skip. I can run. I can fly a kite. He can skateboard. She can ride a bike. I can skip. But I can’t skateboard.",
+          "chinese": "我们在公园里。 我会跳绳。 我会跑步。 我会放风筝。 他会滑滑板。 她会骑自行车。 我会跳绳。但是我不会滑滑板。"
+        }
+      ],
+      "sentencePattern": "I / He / She can … I / He / She can’t …",
+      "sentencePrompt": "说一个你会做和一个暂时不会做的活动。",
+      "sentenceAnswer": "I can run.",
+      "questions": [
+        {
+          "stem": "fly a kite表示？",
+          "options": ["放风筝", "骑自行车", "跳绳"],
+          "correctIndex": 0,
+          "explanation": "kite是风筝，fly a kite放风筝。"
+        },
+        {
+          "stem": "He can后面接哪个形式？",
+          "options": ["run", "runs", "running"],
+          "correctIndex": 0,
+          "explanation": "can后接动词原形。"
+        },
+        {
+          "stem": "文中的“I”说自己不会什么？",
+          "options": ["skateboard", "skip", "run"],
+          "correctIndex": 0,
+          "explanation": "But I can’t skateboard.明确不会滑滑板。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 What do we eat?",
+      "page": 45,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "milk",
+          "chinese": "牛奶"
+        },
+        {
+          "english": "juice",
+          "chinese": "果汁"
+        },
+        {
+          "english": "apple",
+          "chinese": "苹果"
+        },
+        {
+          "english": "banana",
+          "chinese": "香蕉"
+        },
+        {
+          "english": "grape",
+          "chinese": "葡萄"
+        },
+        {
+          "english": "tomato",
+          "chinese": "番茄"
+        },
+        {
+          "english": "carrot",
+          "chinese": "胡萝卜"
+        },
+        {
+          "english": "fish",
+          "chinese": "鱼"
+        },
+        {
+          "english": "meat",
+          "chinese": "肉"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "A funny food face",
+          "english": "Look! A funny food face. I like apples. I like bananas. What do you like? I like milk. I like juice. Do you like fish? Yes, I do. Do you like meat? No, I don’t.",
+          "chinese": "看！一张有趣的食物脸蛋。 我喜欢苹果。我喜欢香蕉。 你喜欢什么？ 我喜欢牛奶。我喜欢果汁。 你喜欢鱼吗？ 是的，我喜欢。 你喜欢肉吗？ 不，我不喜欢。"
+        }
+      ],
+      "sentencePattern": "What do you like? I like … Do you like …? Yes, I do. / No, I don’t.",
+      "sentencePrompt": "和同伴用Do you like询问食物喜好，按自己的实际情况回答。",
+      "sentenceAnswer": "I like apples.",
+      "questions": [
+        {
+          "stem": "carrot表示哪种食物？",
+          "options": ["胡萝卜", "番茄", "葡萄"],
+          "correctIndex": 0,
+          "explanation": "carrot是胡萝卜。"
+        },
+        {
+          "stem": "Do you like fish? 的肯定回答是？",
+          "options": ["Yes, I do.", "Yes, I am.", "Yes, it is."],
+          "correctIndex": 0,
+          "explanation": "do问句用do答。"
+        },
+        {
+          "stem": "课文中Do you like meat? 的回答是？",
+          "options": ["No, I don’t.", "Yes, I do.", "It is sunny."],
+          "correctIndex": 0,
+          "explanation": "依据原文的否定回答，不评价个人食物喜好。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 What do we like about small animals?",
+      "page": 55,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "squirrel",
+          "chinese": "松鼠"
+        },
+        {
+          "english": "rabbit",
+          "chinese": "兔子"
+        },
+        {
+          "english": "cat",
+          "chinese": "猫"
+        },
+        {
+          "english": "mouse",
+          "chinese": "老鼠"
+        },
+        {
+          "english": "dog",
+          "chinese": "狗"
+        },
+        {
+          "english": "frog",
+          "chinese": "青蛙"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Coco’s day in the park",
+          "english": "I’m Coco. I’m in the park. What is it? It is a rabbit. It can jump. Look! What are they? They are squirrels. They can climb. I like rabbits. I like squirrels.",
+          "chinese": "我是可可。我在公园里。 它是什么？它是一只兔子。 它会跳。 看！它们是什么？它们是松鼠。 它们会爬树。 我喜欢兔子。我喜欢松鼠。"
+        }
+      ],
+      "sentencePattern": "What is it? It is … What are they? They are …",
+      "sentencePrompt": "选一种小动物，说出名称和一种本领。",
+      "sentenceAnswer": "It is a rabbit.",
+      "questions": [
+        {
+          "stem": "squirrel是什么动物？",
+          "options": ["松鼠", "青蛙", "老鼠"],
+          "correctIndex": 0,
+          "explanation": "squirrel是松鼠。"
+        },
+        {
+          "stem": "What are they? 应怎样回答？",
+          "options": ["They are rabbits.", "It is a rabbit.", "I am a rabbit."],
+          "correctIndex": 0,
+          "explanation": "they are对应复数。"
+        },
+        {
+          "stem": "课文说松鼠会什么？",
+          "options": ["climb", "ride a bike", "skateboard"],
+          "correctIndex": 0,
+          "explanation": "They are squirrels. They can climb.。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 7,
+      "title": "Unit 7 What do we know about weather?",
+      "page": 65,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "sunny",
+          "chinese": "晴朗的"
+        },
+        {
+          "english": "sun",
+          "chinese": "太阳"
+        },
+        {
+          "english": "cloudy",
+          "chinese": "多云的"
+        },
+        {
+          "english": "cloud",
+          "chinese": "云"
+        },
+        {
+          "english": "rainy",
+          "chinese": "下雨的"
+        },
+        {
+          "english": "rain",
+          "chinese": "雨"
+        },
+        {
+          "english": "windy",
+          "chinese": "刮风的"
+        },
+        {
+          "english": "wind",
+          "chinese": "风"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "We like different weather",
+          "english": "How is the weather? It is sunny. I like the sun. It is cloudy. I like clouds. It is rainy. I like rain. It is windy. I like wind. I like sunny days.",
+          "chinese": "天气怎么样？ 天气晴朗。我喜欢太阳。 多云。我喜欢云朵。 下雨了。我喜欢雨。 刮风了。我喜欢风。 我喜欢晴天。"
+        }
+      ],
+      "sentencePattern": "How is the weather? It is …",
+      "sentencePrompt": "描述窗外的天气；下面只是一句参考表达。",
+      "sentenceAnswer": "It is sunny.",
+      "questions": [
+        {
+          "stem": "windy表示什么天气？",
+          "options": ["刮风的", "多云的", "下雨的"],
+          "correctIndex": 0,
+          "explanation": "windy是形容词，wind是名词。"
+        },
+        {
+          "stem": "How is the weather? 可以回答？",
+          "options": ["It is cloudy.", "It is cloud.", "I have cloudy."],
+          "correctIndex": 0,
+          "explanation": "描述天气用形容词cloudy。"
+        },
+        {
+          "stem": "Reading最后一句说喜欢什么日子？",
+          "options": ["sunny days", "snowy days", "birthdays"],
+          "correctIndex": 0,
+          "explanation": "最后一句I like sunny days.。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 8,
+      "title": "Unit 8 Why do we like birthdays?",
+      "page": 75,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "cake",
+          "chinese": "蛋糕"
+        },
+        {
+          "english": "candle",
+          "chinese": "蜡烛"
+        },
+        {
+          "english": "gift",
+          "chinese": "礼物"
+        },
+        {
+          "english": "toy plane",
+          "chinese": "玩具飞机"
+        },
+        {
+          "english": "doll",
+          "chinese": "洋娃娃"
+        },
+        {
+          "english": "card",
+          "chinese": "卡片"
+        },
+        {
+          "english": "noodles",
+          "chinese": "面条"
+        }
+      ],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Taotao’s birthday",
+          "english": "Today is Taotao’s birthday. Happy birthday, Taotao! Come and see your gifts. I have a gift for you. Do you like it? Yes. What a lovely card! Thank you, Lele! Wow! I love this toy plane! Thank you, Mum and Dad. Let’s eat the cake. Let’s light the candles.",
+          "chinese": "今天是涛涛的生日。 生日快乐，涛涛！ 来看看你的礼物。 我有一份礼物送给你。你喜欢吗？ 喜欢。多好看的卡片！谢谢你乐乐！ 哇！我喜欢这个玩具飞机！谢谢爸爸妈妈。 我们吃蛋糕吧。我们点蜡烛。"
+        }
+      ],
+      "sentencePattern": "Review（复习全部单元句型）",
+      "sentencePrompt": "用本册学过的句型介绍你喜欢的一种生日礼物。",
+      "sentenceAnswer": "I like this toy plane.",
+      "questions": [
+        {
+          "stem": "candle表示？",
+          "options": ["蜡烛", "礼物", "面条"],
+          "correctIndex": 0,
+          "explanation": "candle是蜡烛。"
+        },
+        {
+          "stem": "祝别人生日快乐应说？",
+          "options": ["Happy birthday!", "Good night!", "I am cold."],
+          "correctIndex": 0,
+          "explanation": "Happy birthday是生日祝福。"
+        },
+        {
+          "stem": "课文中Taotao感谢Lele送的是什么？",
+          "options": ["a card", "a toy plane", "a doll"],
+          "correctIndex": 0,
+          "explanation": "What a lovely card! Thank you, Lele!。"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "number": 9,
+      "title": "Project 1 Make a feelings poster",
+      "page": 85,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a feelings poster",
+          "english": "Make a feelings poster",
+          "chinese": "制作情绪海报，画出开心、难过、生气、疲惫的表情，标注单词。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作情绪海报，画出开心、难过、生气、疲惫的表情，标注单词。",
+      "sentenceAnswer": "完成后请同伴或家长查看作品，交流你的表达。",
+      "questions": []
+    },
+    {
+      "number": 10,
+      "title": "Project 2 Make a family book",
+      "page": 87,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a family book",
+          "english": "Make a family book",
+          "chinese": "制作家庭小书，介绍家人。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作家庭小书，介绍家人。",
+      "sentenceAnswer": "完成后请同伴或家长查看作品，交流你的表达。",
+      "questions": []
+    }
+  ]
+}

@@ -39,7 +39,7 @@ const props = defineProps<Props>()
       </span>
     </div>
     <p v-if="props.result.status === 'manual_review_required'" class="question-feedback__copy">
-      你的回答已经保存。本阶段不会使用 AI 自动判分。
+      你的回答已经保存。请对照下面的参考表达检查，也可以请老师或家长帮你看看。
     </p>
     <p v-else-if="props.result.status === 'incorrect'" class="question-feedback__copy">
       先看看下面的解析，再带着方法继续前进。

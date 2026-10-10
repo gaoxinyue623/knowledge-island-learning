@@ -105,7 +105,14 @@ export function createLearningAgentServer(options: LearningAgentServerOptions = 
       } catch {
         configured = false
       }
-      return send(res, 200, { ok: true, service: 'learning-agent', enabled, configured, provider, model })
+      return send(res, 200, {
+        ok: true,
+        service: 'learning-agent',
+        enabled,
+        configured,
+        provider,
+        model,
+      })
     }
     if (path !== '/api/agent/questions') return send(res, 404, { error: 'AGENT_NOT_FOUND' })
     if (!enabled || !localAgentRequestAllowed(req, origins))

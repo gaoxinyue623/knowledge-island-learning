@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { notifyPetLearningChanged } from '@/services/pet/petNotifications'
 import { z } from 'zod'
 
@@ -69,8 +70,8 @@ export const rewardEventStoragePayloadSchema = z
   .strict()
 
 function browserStorage(): RewardEventStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function cloneEvent(event: RewardEvent): RewardEvent {

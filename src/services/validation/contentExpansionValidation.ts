@@ -293,14 +293,19 @@ const recordBaseSchema = z.object({
   isSample: z.boolean(),
 })
 
-export const practiceSetSchema = recordBaseSchema.extend({
-  title: z.string().min(1),
-  mode: z.enum(['basic', 'reinforce', 'application']),
-  templateIds: z.array(z.string().min(1)).min(1),
-  fixedQuestionIds: z.array(z.string().min(1)).optional(),
-  targetCount: z.number().int().positive(),
-  difficultyRange: z.object({ min: activityDifficultySchema, max: activityDifficultySchema }),
-})
+export const practiceSetSchema = recordBaseSchema
+  .extend({
+    title: z.string().min(1),
+    mode: z.enum(['basic', 'reinforce', 'application']),
+    templateIds: z.array(z.string().min(1)),
+    fixedQuestionIds: z.array(z.string().min(1)).optional(),
+    targetCount: z.number().int().positive(),
+    difficultyRange: z.object({ min: activityDifficultySchema, max: activityDifficultySchema }),
+  })
+  .refine((record) => record.templateIds.length > 0 || Boolean(record.fixedQuestionIds?.length), {
+    message: '练习集合需要模板或固定题目。',
+    path: ['templateIds'],
+  })
 
 export const extensionActivitySchema = recordBaseSchema.extend({
   title: z.string().min(1),

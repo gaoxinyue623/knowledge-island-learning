@@ -3,7 +3,6 @@ import AppIcon from '@/components/common/AppIcon.vue'
 import type { SubjectCode, TextbookDisplay } from '@/types'
 
 interface Props {
-  regionName: string
   gradeName: string
   semesterName: string
   textbooks: Partial<Record<SubjectCode, TextbookDisplay | null>>
@@ -24,15 +23,11 @@ const labels: Record<SubjectCode, string> = { CHINESE: '语文', MATH: '数学',
     </div>
     <dl class="curriculum-summary__context">
       <div>
-        <dt>学习地区</dt>
-        <dd>{{ props.regionName }}</dd>
-      </div>
-      <div>
         <dt>年级</dt>
         <dd>{{ props.gradeName }}</dd>
       </div>
       <div>
-        <dt>学期</dt>
+        <dt>课本册次</dt>
         <dd>{{ props.semesterName }}</dd>
       </div>
     </dl>

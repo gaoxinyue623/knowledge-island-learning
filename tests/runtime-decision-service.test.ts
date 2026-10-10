@@ -59,14 +59,59 @@ function reviewedProfileSnapshot(): LearningAgentSnapshot {
 }
 
 describe('runtime learning-agent decision boundary', () => {
-  it('accepts an explicitly selected reviewed textbook from another region', async () => {
+  it('keeps the decision stable across reloads without changed facts and changes it after AI mistakes', async () => {
+    const s = reviewedProfileSnapshot()
+    const service = new RuntimeLearningAgentDecisionService({ load: async () => s })
+    const first = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', {
+      now: AGENT_SIMULATION_TIME,
+    })
+    const next = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', {
+      now: new Date(Date.parse(AGENT_SIMULATION_TIME) + 1000).toISOString(),
+    })
+    expect(first.decision?.decisionId).toBe(next.decision?.decisionId)
+    const target = first.decision!.sourceKnowledgePointId
+    s.aiSignals = Array.from({ length: 10 }, (_, i) => ({
+      id: `ai:${i}`,
+      sessionId: 'ai-session',
+      questionId: `ai-q:${i}`,
+      profileId: 'AGENT_STUDENT',
+      textbookId: 'AGENT_TEXTBOOK',
+      knowledgePointId: target,
+      correct: false,
+      occurredAt: new Date(Date.parse(AGENT_SIMULATION_TIME) + i).toISOString(),
+      difficulty: 1,
+      stem: '练习',
+      answer: '0',
+      expected: '1',
+      explanation: '方法',
+      resolved: false,
+    }))
+    const changed = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', {
+      now: AGENT_SIMULATION_TIME,
+    })
+    expect(changed.decision?.action).toBe('SIMPLIFY')
+    expect(changed.decision?.evidenceRefs).toContain('ai:9')
+    expect(changed.decision?.decisionId).not.toBe(first.decision?.decisionId)
+  })
+
+  it('accepts a reviewed textbook without region metadata or regional adoption records', async () => {
     const snapshot = reviewedProfileSnapshot()
     snapshot.profile.regionId = 'ANOTHER_REGION'
     const service = new RuntimeLearningAgentDecisionService({ load: async () => snapshot })
-    const result = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', { now: AGENT_SIMULATION_TIME })
+    const result = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', {
+      now: AGENT_SIMULATION_TIME,
+    })
     expect(result.status).toBe('READY')
+    delete snapshot.profile.regionId
     snapshot.regionTextbookRelations = []
-    const blocked = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', { now: AGENT_SIMULATION_TIME })
+    const withoutRegion = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', {
+      now: AGENT_SIMULATION_TIME,
+    })
+    expect(withoutRegion.status).toBe('READY')
+    snapshot.curriculum.textbook.verificationStatus = 'REJECTED'
+    const blocked = await service.prepare('AGENT_STUDENT', 'AGENT_TEXTBOOK', {
+      now: AGENT_SIMULATION_TIME,
+    })
     expect(blocked.status).toBe('BLOCKED')
     expect(blocked.validation.checks.at(-1)?.code).toBe('AGENT_CURRICULUM_GUARD')
   })

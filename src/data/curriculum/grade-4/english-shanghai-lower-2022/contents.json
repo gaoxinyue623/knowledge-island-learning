@@ -1,0 +1,685 @@
+{
+  "title": "沪教牛津英语四年级下册（2022新版）",
+  "publisher": "上海教育出版社",
+  "sourceNote": "按用户提供的四年级下册双语文本整理，年份和页码沿用来稿，未对照出版社原书逐页核验。保留词汇、音标、Reading、中文翻译、Grammar、Phonics及Project；Phonics仅提供字母组合，Intonation仅提供栏目名称，未提供原版示范音频。配套题单独收录，基础题和口语提示为项目原创。",
+  "sourceSha256": "6716c5ca7b42f7b09fd78877acca4e00237ba866d34c3eff7232fede77f322b6",
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 What is your daily schedule?",
+      "page": 1,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "get up",
+          "phonetic": "/ɡet ʌp/",
+          "chinese": "起床"
+        },
+        {
+          "english": "have breakfast",
+          "phonetic": "/hæv ˈbrekfəst/",
+          "chinese": "吃早餐"
+        },
+        {
+          "english": "go to school",
+          "phonetic": "/ɡəʊ tuː skuːl/",
+          "chinese": "去上学"
+        },
+        {
+          "english": "have lunch",
+          "phonetic": "/hæv lʌntʃ/",
+          "chinese": "吃午饭"
+        },
+        {
+          "english": "go home",
+          "phonetic": "/ɡəʊ həʊm/",
+          "chinese": "回家"
+        },
+        {
+          "english": "have dinner",
+          "phonetic": "/hæv ˈdɪnə(r)/",
+          "chinese": "吃晚饭"
+        },
+        {
+          "english": "go to bed",
+          "phonetic": "/ɡəʊ tuː bed/",
+          "chinese": "上床睡觉"
+        }
+      ],
+      "aliases": [],
+      "sounds": "pl, bl",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Li Ming’s and Li Liang’s day",
+          "english": "This is Li Ming’s day.\nHe gets up at seven o’clock.\nHe has breakfast at seven thirty.\nHe goes to school at eight o’clock.\nHe has lunch at twelve.\nHe goes home at four thirty.\nHe has dinner at six.\nHe goes to bed at nine.\nThis is Li Liang’s day.\nHe gets up at six thirty.\nHe reads books before breakfast.",
+          "chinese": "这是李明的一天。\n他七点起床。\n七点半吃早餐。\n八点去上学。\n十二点吃午饭。\n四点半回家。\n六点吃晚饭。\n九点上床睡觉。\n这是李亮的一天。\n他六点半起床。\n早餐前看书。"
+        }
+      ],
+      "sentencePattern": "What time does he/she …?\nHe/She … at …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "He gets up at seven.",
+      "questions": [
+        {
+          "stem": "“get up”在本单元中的意思是什么？",
+          "options": ["起床", "吃早餐", "去上学"],
+          "correctIndex": 0,
+          "explanation": "本单元中 get up 表示“起床”。"
+        },
+        {
+          "stem": "What time ____ she go to bed?",
+          "options": ["does", "do", "is"],
+          "correctIndex": 0,
+          "explanation": "主语 she 对应 does，后面的动词用原形。"
+        },
+        {
+          "stem": "根据课文，李亮什么时候起床？",
+          "options": ["At six thirty.", "At seven o’clock.", "At eight o’clock."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 At six thirty."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 What do we like about school?",
+      "page": 11,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "Chinese",
+          "phonetic": "/ˌtʃaɪˈniːz/",
+          "chinese": "语文"
+        },
+        {
+          "english": "Maths",
+          "phonetic": "/mæθs/",
+          "chinese": "数学"
+        },
+        {
+          "english": "English",
+          "phonetic": "/ˈɪŋɡlɪʃ/",
+          "chinese": "英语"
+        },
+        {
+          "english": "PE",
+          "phonetic": "/ˌpiː ˈiː/",
+          "chinese": "体育"
+        },
+        {
+          "english": "Music",
+          "phonetic": "/ˈmjuːzɪk/",
+          "chinese": "音乐"
+        },
+        {
+          "english": "Art",
+          "phonetic": "/ɑːt/",
+          "chinese": "美术"
+        },
+        {
+          "english": "IT",
+          "phonetic": "/ˌaɪ ˈtiː/",
+          "chinese": "信息技术"
+        },
+        {
+          "english": "Science",
+          "phonetic": "/ˈsaɪəns/",
+          "chinese": "科学"
+        }
+      ],
+      "aliases": [],
+      "sounds": "fl, cl",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "We all like our school!",
+          "english": "Hello, everyone!\nI’m Tom. I like PE. I like playing ball games.\nI’m Amy. I like Art. I like drawing pictures.\nI’m Joe. I like Science. I like doing experiments.\nI’m Alice. I like Chinese. I like reading stories.\nDoes Tom like Maths? No, he doesn’t.\nDoes Amy like Art? Yes, she does.",
+          "chinese": "大家好！\n我是汤姆。我喜欢体育。我喜欢球类运动。\n我是艾米。我喜欢美术。我喜欢画画。\n我是乔。我喜欢科学。我喜欢做实验。\n我是爱丽丝。我喜欢语文。我喜欢读故事。\n汤姆喜欢数学吗？不，他不喜欢。\n艾米喜欢美术吗？是的，她喜欢。"
+        }
+      ],
+      "sentencePattern": "Does he/she have …?\nDoes he/she like (doing) …?\nYes, he/she does. / No, he/she doesn’t.",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "He likes PE.",
+      "questions": [
+        {
+          "stem": "“Chinese”在本单元中的意思是什么？",
+          "options": ["语文", "数学", "英语"],
+          "correctIndex": 0,
+          "explanation": "本单元中 Chinese 表示“语文”。"
+        },
+        {
+          "stem": "Does Amy like Art?",
+          "options": ["Yes, she does.", "Yes, she is.", "Yes, she do."],
+          "correctIndex": 0,
+          "explanation": "Does she…? 的肯定答句是 Yes, she does."
+        },
+        {
+          "stem": "根据课文，谁喜欢做实验？",
+          "options": ["Joe.", "Tom.", "Alice."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Joe."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What’s great about jobs?",
+      "page": 21,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "firefighter",
+          "phonetic": "/ˈfaɪəfaɪtə(r)/",
+          "chinese": "消防员"
+        },
+        {
+          "english": "police officer",
+          "phonetic": "/pəˈliːs ˈɒfɪsə(r)/",
+          "chinese": "警察"
+        },
+        {
+          "english": "farmer",
+          "phonetic": "/ˈfɑːmə(r)/",
+          "chinese": "农民"
+        },
+        {
+          "english": "teacher",
+          "phonetic": "/ˈtiːtʃə(r)/",
+          "chinese": "老师"
+        },
+        {
+          "english": "doctor",
+          "phonetic": "/ˈdɒktə(r)/",
+          "chinese": "医生"
+        },
+        {
+          "english": "bus driver",
+          "phonetic": "/bʌs ˈdraɪvə(r)/",
+          "chinese": "公交车司机"
+        }
+      ],
+      "aliases": [],
+      "sounds": "br",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "A dentist comes to school!",
+          "english": "Look! This is Mr Brown. He is a dentist.\nWhat do dentists do?\nThey help people take care of their teeth.\nWhat does he do every day?\nHe checks people’s teeth.\nWhat do farmers do? They grow food.\nWhat does a bus driver do? He drives the bus.",
+          "chinese": "看！这是布朗先生。他是一名牙医。\n牙医是做什么的？\n他们帮助人们爱护牙齿。\n他每天做什么？\n他检查人们的牙齿。\n农民是做什么的？他们种植粮食。\n公交车司机做什么？他开公交车。"
+        }
+      ],
+      "sentencePattern": "What do they do? They are …\nWhat does he/she do? He/She is a …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "She is a doctor.",
+      "questions": [
+        {
+          "stem": "“firefighter”在本单元中的意思是什么？",
+          "options": ["消防员", "警察", "农民"],
+          "correctIndex": 0,
+          "explanation": "本单元中 firefighter 表示“消防员”。"
+        },
+        {
+          "stem": "What does your father do?",
+          "options": ["He is a doctor.", "He are a doctor.", "He am a doctor."],
+          "correctIndex": 0,
+          "explanation": "询问职业，用 He is a…回答。"
+        },
+        {
+          "stem": "根据课文，牙医帮助人们照顾什么？",
+          "options": ["Their teeth.", "Their toys.", "Their plants."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Their teeth."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 How can we make music?",
+      "page": 31,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "triangle",
+          "phonetic": "/ˈtraɪæŋɡl/",
+          "chinese": "三角铁"
+        },
+        {
+          "english": "violin",
+          "phonetic": "/ˌvaɪəˈlɪn/",
+          "chinese": "小提琴"
+        },
+        {
+          "english": "piano",
+          "phonetic": "/piˈænəʊ/",
+          "chinese": "钢琴"
+        },
+        {
+          "english": "guitar",
+          "phonetic": "/ɡɪˈtɑː(r)/",
+          "chinese": "吉他"
+        },
+        {
+          "english": "erhu",
+          "phonetic": "/ˈɜːhuː/",
+          "chinese": "二胡"
+        },
+        {
+          "english": "flute",
+          "phonetic": "/fluːt/",
+          "chinese": "长笛"
+        },
+        {
+          "english": "pipa",
+          "phonetic": "/ˈpiːpɑː/",
+          "chinese": "琵琶"
+        },
+        {
+          "english": "drum",
+          "phonetic": "/drʌm/",
+          "chinese": "鼓"
+        }
+      ],
+      "aliases": [],
+      "sounds": "cr, gr",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Let’s make music!",
+          "english": "Listen! We are making music.\nI am playing the drum.\nShe is playing the violin.\nHe is playing the triangle.\nLook! Peter isn’t playing the piano.\nHe is playing the guitar.\nWe are having fun.",
+          "chinese": "听！我们正在创作音乐。\n我正在打鼓。\n她正在拉小提琴。\n他正在敲三角铁。\n看！彼得没有弹钢琴。\n他正在弹吉他。\n我们玩得很开心。"
+        }
+      ],
+      "sentencePattern": "I am (doing) …  We are (doing) …\nHe / She isn’t (doing) …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I am playing the drum.",
+      "questions": [
+        {
+          "stem": "“triangle”在本单元中的意思是什么？",
+          "options": ["三角铁", "小提琴", "钢琴"],
+          "correctIndex": 0,
+          "explanation": "本单元中 triangle 表示“三角铁”。"
+        },
+        {
+          "stem": "She ____ the violin now.",
+          "options": ["is playing", "play", "plays"],
+          "correctIndex": 0,
+          "explanation": "now 表示此时正在进行的动作，使用 is playing。"
+        },
+        {
+          "stem": "根据课文，Peter 正在演奏什么？",
+          "options": ["The guitar.", "The piano.", "The erhu."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 The guitar."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 How do we make art?",
+      "page": 41,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "photo",
+          "phonetic": "/ˈfəʊtəʊ/",
+          "chinese": "照片"
+        },
+        {
+          "english": "paper-cut",
+          "phonetic": "/ˈpeɪpə kʌt/",
+          "chinese": "剪纸"
+        },
+        {
+          "english": "painting",
+          "phonetic": "/ˈpeɪntɪŋ/",
+          "chinese": "绘画作品"
+        },
+        {
+          "english": "circle",
+          "phonetic": "/ˈsɜːkl/",
+          "chinese": "圆形"
+        },
+        {
+          "english": "triangle",
+          "phonetic": "/ˈtraɪæŋɡl/",
+          "chinese": "三角形"
+        },
+        {
+          "english": "square",
+          "phonetic": "/skweə(r)/",
+          "chinese": "正方形"
+        },
+        {
+          "english": "rectangle",
+          "phonetic": "/ˈrektæŋɡl/",
+          "chinese": "长方形"
+        },
+        {
+          "english": "star",
+          "phonetic": "/stɑː(r)/",
+          "chinese": "星形"
+        }
+      ],
+      "aliases": [],
+      "sounds": "sp, st",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Shapes in art",
+          "english": "Look at this painting.\nAre you drawing a picture?\nYes, I am. I’m drawing shapes.\nThis is a circle. That is a square.\nIs she making a paper-cut?\nYes, she is.\nLook! There are triangles and stars in her paper-cut.",
+          "chinese": "看这幅画。\n你正在画画吗？\n是的。我正在画各种形状。\n这是圆形。那是正方形。\n她正在做剪纸吗？\n是的。\n看！她的剪纸里面有三角形和星星。"
+        }
+      ],
+      "sentencePattern": "Are you (doing) …? Yes, I am. / No, I’m not.\nIs he/she (doing) …? Yes, he/she is. / No, he/she isn’t.",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I am making a paper-cut.",
+      "questions": [
+        {
+          "stem": "“photo”在本单元中的意思是什么？",
+          "options": ["照片", "剪纸", "绘画作品"],
+          "correctIndex": 0,
+          "explanation": "本单元中 photo 表示“照片”。"
+        },
+        {
+          "stem": "Are you drawing?",
+          "options": ["Yes, I am.", "Yes, I do.", "Yes, I can."],
+          "correctIndex": 0,
+          "explanation": "Are you…? 用 Yes, I am. 回答。"
+        },
+        {
+          "stem": "根据课文，剪纸中有哪些形状？",
+          "options": ["Triangles and stars.", "Circles and rectangles.", "Squares and circles."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Triangles and stars."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 How do we measure time?",
+      "page": 51,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "day",
+          "phonetic": "/deɪ/",
+          "chinese": "白天；天"
+        },
+        {
+          "english": "night",
+          "phonetic": "/naɪt/",
+          "chinese": "夜晚"
+        },
+        {
+          "english": "second",
+          "phonetic": "/ˈsekənd/",
+          "chinese": "秒"
+        },
+        {
+          "english": "minute",
+          "phonetic": "/ˈmɪnɪt/",
+          "chinese": "分钟"
+        },
+        {
+          "english": "hour",
+          "phonetic": "/ˈaʊə(r)/",
+          "chinese": "小时"
+        },
+        {
+          "english": "month",
+          "phonetic": "/mʌnθ/",
+          "chinese": "月份"
+        },
+        {
+          "english": "year",
+          "phonetic": "/jɪə(r)/",
+          "chinese": "年"
+        }
+      ],
+      "aliases": [],
+      "sounds": "tr, dr",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "What time is it?",
+          "english": "Look at the clock. What time is it?\nIt’s ten o’clock.\nWhat are you doing? I’m reading a book.\nWhat is he doing? He is drawing.\nOne minute is sixty seconds.\nOne hour is sixty minutes.\nTwenty-four hours make a day.",
+          "chinese": "看这个钟。几点了？\n十点。\n你正在做什么？我正在看书。\n他正在做什么？他正在画画。\n一分钟等于六十秒。\n一小时等于六十分钟。\n一天有二十四小时。"
+        }
+      ],
+      "sentencePattern": "What are you doing?\nWhat is he/she doing?",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I am reading at night.",
+      "questions": [
+        {
+          "stem": "“day”在本单元中的意思是什么？",
+          "options": ["白天；天", "夜晚", "秒"],
+          "correctIndex": 0,
+          "explanation": "本单元中 day 表示“白天；天”。"
+        },
+        {
+          "stem": "What is he doing?",
+          "options": ["He is drawing.", "He draw.", "He drawing."],
+          "correctIndex": 0,
+          "explanation": "询问正在做什么，使用 is + 动词-ing。"
+        },
+        {
+          "stem": "根据课文，一分钟等于多少秒？",
+          "options": ["Sixty.", "Twenty-four.", "Ten."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Sixty."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Unit 7 How do things change?",
+      "page": 61,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "liquid",
+          "phonetic": "/ˈlɪkwɪd/",
+          "chinese": "液体"
+        },
+        {
+          "english": "solid",
+          "phonetic": "/ˈsɒlɪd/",
+          "chinese": "固体"
+        },
+        {
+          "english": "gas",
+          "phonetic": "/ɡæs/",
+          "chinese": "气体"
+        },
+        {
+          "english": "sugar",
+          "phonetic": "/ˈʃʊɡə(r)/",
+          "chinese": "糖"
+        },
+        {
+          "english": "salt",
+          "phonetic": "/sɔːlt/",
+          "chinese": "盐"
+        },
+        {
+          "english": "cream",
+          "phonetic": "/kriːm/",
+          "chinese": "奶油"
+        },
+        {
+          "english": "melt",
+          "phonetic": "/melt/",
+          "chinese": "融化"
+        }
+      ],
+      "aliases": [],
+      "sounds": "fr",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Let’s make ice cream!",
+          "english": "Shall we make ice cream?\nYes! Let’s do it.\nWe have cream, sugar and fruit.\nCream is liquid. When it is cold, it becomes solid.\nLet’s mix the things together.\nLet’s put it in the fridge.\nWait! It will change.",
+          "chinese": "我们做冰淇淋好吗？\n好！我们来做。\n我们准备奶油、糖和水果。\n奶油是液体。变冷之后，它会变成固体。\n我们把材料混合在一起。\n放进冰箱。\n等等！它会发生变化。"
+        }
+      ],
+      "sentencePattern": "Shall we …?\nLet’s …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "Let’s mix the cream.",
+      "questions": [
+        {
+          "stem": "“liquid”在本单元中的意思是什么？",
+          "options": ["液体", "固体", "气体"],
+          "correctIndex": 0,
+          "explanation": "本单元中 liquid 表示“液体”。"
+        },
+        {
+          "stem": "____ we make ice cream?",
+          "options": ["Shall", "Are", "Does"],
+          "correctIndex": 0,
+          "explanation": "Shall we…? 用来提出建议。"
+        },
+        {
+          "stem": "根据课文，混合的材料要放到哪里？",
+          "options": ["In the fridge.", "On the bus.", "In the classroom."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 In the fridge."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Unit 8 How do people get along with each other?",
+      "page": 71,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "take turns",
+          "phonetic": "/teɪk tɜːnz/",
+          "chinese": "轮流"
+        },
+        {
+          "english": "polite",
+          "phonetic": "/pəˈlaɪt/",
+          "chinese": "有礼貌的"
+        },
+        {
+          "english": "share",
+          "phonetic": "/ʃeə(r)/",
+          "chinese": "分享"
+        },
+        {
+          "english": "knock",
+          "phonetic": "/nɒk/",
+          "chinese": "敲门"
+        }
+      ],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "语调练习",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Poems about being polite",
+          "english": "Share your toys.\nTake your turns.\nKnock at the door.\nBe polite.\nSay “please”. Say “thank you”.\nGood friends are nice to each other.",
+          "chinese": "分享你的玩具。\n学会轮流。\n进门先敲门。\n做有礼貌的孩子。\n说“请”，说“谢谢你”。\n好朋友之间互相友善相待。"
+        }
+      ],
+      "sentencePattern": "Review（全册句型复习）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "We take turns.",
+      "questions": [
+        {
+          "stem": "“take turns”在本单元中的意思是什么？",
+          "options": ["轮流", "有礼貌的", "分享"],
+          "correctIndex": 0,
+          "explanation": "本单元中 take turns 表示“轮流”。"
+        },
+        {
+          "stem": "等待轮到自己时应该怎样做？",
+          "options": ["Take turns.", "Push others.", "Shout at others."],
+          "correctIndex": 0,
+          "explanation": "take turns 表示轮流，是课文提倡的礼貌行为。"
+        },
+        {
+          "stem": "根据课文，进门前应该做什么？",
+          "options": ["Knock at the door.", "Share your toys.", "Play the drum."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Knock at the door."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Project 1 Make a daily schedule poster",
+      "page": 81,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a daily schedule poster",
+          "english": "Make a daily schedule poster",
+          "chinese": "制作每日作息海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作每日作息海报，用已学词句向同伴介绍。",
+      "sentenceAnswer": "I get up at seven.",
+      "questions": []
+    },
+    {
+      "number": 10,
+      "title": "Project 2 Make a job poster",
+      "page": 83,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a job poster",
+          "english": "Make a job poster",
+          "chinese": "职业介绍海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "职业介绍海报，用已学词句向同伴介绍。",
+      "sentenceAnswer": "She is a doctor.",
+      "questions": []
+    },
+    {
+      "number": 11,
+      "title": "本册综合小练习",
+      "page": 0,
+      "kind": "review",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "sections": [
+        {
+          "kind": "review",
+          "title": "本册综合小练习",
+          "english": "",
+          "chinese": "复习日常作息、职业、喜好和正在进行的动作。在配套练习入口完成所提供的综合小练习。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "完成综合练习，核对答案并回顾相关单元。",
+      "sentenceAnswer": "",
+      "questions": []
+    }
+  ]
+}

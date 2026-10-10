@@ -38,13 +38,14 @@ export function buildEnglishReadingSegments(
     if (!readingTypes.has(block.type)) continue
     let section: EnglishReadingSection = 'dialogue'
     const blockStart = segments.length
+    const isSuppliedDialogue = /^主课文 Listen and say/m.test(block.content ?? '')
     const lines = [block.content ?? '', ...(block.paragraphs ?? []), ...(block.bullets ?? [])]
       .join('\n')
       .split(/\r?\n/)
     for (const [lineIndex, raw] of lines.entries()) {
       const line = raw.trim()
       if (!line || line === block.title) continue
-      if (/^核心句型|^课后练习|^附录/.test(line)) break
+      if (/^核心句型|^项目整理句型|^课后练习|^附录/.test(line)) break
       if (/^核心单词/.test(line) && segments.length > blockStart) break
       if (/^(?:Unit\s*\d+|Module\s*\d+|Page\s*\d+|Revision\s*\d+)/i.test(line)) {
         if (/单词/.test(line)) section = 'words'
@@ -74,10 +75,10 @@ export function buildEnglishReadingSegments(
       if (han.test(vocabulary[0] ?? '')) continue
       const parts = vocabulary.split(section === 'words' ? /[,，、；]/ : /[，、；]/)
       for (const [partIndex, part] of parts.entries()) {
-        let text = part.replace(/^\s*(?:\d+[.)]\s*|[—–-]\s*)/, '').trim()
-        if (han.test(text[0] ?? '') || !/^[A-Za-z“"‘]/.test(text)) continue
+        let text = part.replace(/^\s*(?:\d+[.)]\s*|[—–•-]\s*)/, '').trim()
+        if (han.test(text[0] ?? '') || !/^[A-Za-z“"‘0-9]/.test(text)) continue
         let speaker: string | undefined
-        const role = text.match(/^([A-Za-z][A-Za-z ’'-]{0,30})\s*[:：]\s*/)
+        const role = text.match(/^([A-Za-z][A-Za-z0-9 &’'-]{0,30})\s*[:：]\s*/)
         if (role) {
           speaker = role[1]
           text = text.slice(role[0].length)
@@ -88,7 +89,15 @@ export function buildEnglishReadingSegments(
           text = text.slice(0, chineseStart).replace(/\s*\d+\s*$/, '')
           if (chinese.startsWith('恤')) text = text.replace(/\s*T$/, '')
         }
-        text = text.replace(/[（(\s]+$/, '').trim()
+        // Phonetics remain visible in vocabulary but are not spoken as prose.
+        if (section === 'words') text = text.replace(/\s*\/[^/\n]+\/\s*/g, ' ').trim()
+        text = text
+          .replace(/[↗↘]/g, '')
+          .replace(/\s+([.!?])/g, '$1')
+          .replace(/[（(\s]+$/, '')
+          .trim()
+        // Ellipses in the supplied dialogue are pauses, not blank sentence frames.
+        if (isSuppliedDialogue) text = text.replace(/…|\.{3}/g, ' ').trim()
         // Blank sentence frames are prompts, not finished sentences to model aloud.
         if (/_{2,}|\.{3}|…/.test(text)) continue
         for (const [sentenceIndex, sentence] of splitSentences(text).entries()) {

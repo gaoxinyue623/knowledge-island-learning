@@ -79,19 +79,27 @@ describe('AI question generation, validation, repair and fallback', () => {
   it('keeps the selected v4 prompt and 4096 budget across chunks and repairs', async () => {
     const { snapshot, request } = fixture(2)
     let calls = 0
-    const runtime = new LLMRuntime(new MockLLMProvider((input) => {
-      expect(input.maxOutputTokens).toBe(4096)
-      expect(input.temperature).toBe(0)
-      expect(input.systemPrompt).toContain('七个字段')
-      expect(input.systemPrompt).not.toContain('错题变式是独立的新题')
-      calls++
-      return { questions: [calls === 1 ? dto(52, 27, { expectedAnswer: 99 }) : calls === 2 ? dto() : dto(63, 28)] }
-    }))
+    const runtime = new LLMRuntime(
+      new MockLLMProvider((input) => {
+        expect(input.maxOutputTokens).toBe(4096)
+        expect(input.temperature).toBe(0)
+        expect(input.systemPrompt).toContain('七个字段')
+        expect(input.systemPrompt).not.toContain('错题变式是独立的新题')
+        calls++
+        return {
+          questions: [
+            calls === 1 ? dto(52, 27, { expectedAnswer: 99 }) : calls === 2 ? dto() : dto(63, 28),
+          ],
+        }
+      }),
+    )
     const batch = await new AIQuestionGenerator(runtime, snapshot, 1, '4', 0).generate(request)
     expect(batch.validation.status).toBe('VALID')
     expect(batch.generator.promptVersion).toBe('4')
     expect(batch.telemetry?.usage.map((entry) => entry.promptId)).toEqual([
-      'question-generation.user.v4', 'question-generation.repair.v4', 'question-generation.user.v4',
+      'question-generation.user.v4',
+      'question-generation.repair.v4',
+      'question-generation.user.v4',
     ])
     expect(calls).toBe(3)
   })
@@ -378,9 +386,7 @@ describe('AI question generation, validation, repair and fallback', () => {
       call += 1
       return {
         questions:
-          call === 1
-            ? [dto(48, 27, { difficulty: 0.4 })]
-            : [dto(42, 17, { difficulty: 0.4 })],
+          call === 1 ? [dto(48, 27, { difficulty: 0.4 })] : [dto(42, 17, { difficulty: 0.4 })],
       }
     }, snapshot).generate(request)
     expect(batch.validation.status).toBe('VALID')

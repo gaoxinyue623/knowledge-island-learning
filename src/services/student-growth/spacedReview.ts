@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 /**
@@ -69,14 +70,14 @@ function dayKey(value: string): string {
     month: '2-digit',
     day: '2-digit',
   }).formatToParts(new Date(value))
-  const field = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value
+  const field = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value
   return `${field('year')}-${field('month')}-${field('day')}`
 }
 
 function isIndependent(attempt: SpacedReviewEvidence): boolean {
   return attempt.stages.every(
-    (stage) =>
-      stage.firstAttempt === 'independent' && !stage.usedHint && !stage.hadIncorrectAnswer,
+    (stage) => stage.firstAttempt === 'independent' && !stage.usedHint && !stage.hadIncorrectAnswer,
   )
 }
 
@@ -96,8 +97,13 @@ export function projectSpacedReviewEvidence(
 ): SpacedReviewProjection | null {
   if (!attempts.length) return null
   const days = new Map<string, SpacedReviewEvidence[]>()
-  for (const attempt of [...attempts].sort((left, right) => left.completedAt.localeCompare(right.completedAt)))
-    days.set(dayKey(attempt.completedAt), [...(days.get(dayKey(attempt.completedAt)) ?? []), attempt])
+  for (const attempt of [...attempts].sort((left, right) =>
+    left.completedAt.localeCompare(right.completedAt),
+  ))
+    days.set(dayKey(attempt.completedAt), [
+      ...(days.get(dayKey(attempt.completedAt)) ?? []),
+      attempt,
+    ])
   let independentLevel = 0
   let nextDueAt: string | null = null
   let last: SpacedReviewEvidence | null = null
@@ -129,11 +135,17 @@ export function projectSpacedReviewEvidence(
 
 /** Keeps review links inside the application's existing knowledge-point surface. */
 export function createReviewLaunchHref(courseHref: string, attemptId: string): string | null {
-  if (!attemptId || !/^\/knowledge-point\/[^/?#]+(?:\?[^#]*)?(?:#knowledge-challenges)?$/.test(courseHref))
+  if (
+    !attemptId ||
+    !/^\/knowledge-point\/[^/?#]+(?:\?[^#]*)?(?:#knowledge-challenges)?$/.test(courseHref)
+  )
     return null
   try {
     const url = new URL(courseHref, 'https://knowledge-island.local')
-    if (url.origin !== 'https://knowledge-island.local' || !url.pathname.startsWith('/knowledge-point/'))
+    if (
+      url.origin !== 'https://knowledge-island.local' ||
+      !url.pathname.startsWith('/knowledge-point/')
+    )
       return null
     url.searchParams.set('reviewAttempt', attemptId)
     url.hash = 'knowledge-challenges'
@@ -153,7 +165,8 @@ export function createSpacedReviewService(storage: SpacedReviewStorage | undefin
       const raw = storage.getItem(key(profileId))
       if (!raw) return []
       const payload = payloadSchema.parse(JSON.parse(raw))
-      if (payload.attempts.some((attempt) => attempt.profileId !== profileId)) throw new Error('Scope')
+      if (payload.attempts.some((attempt) => attempt.profileId !== profileId))
+        throw new Error('Scope')
       return payload.attempts
     } catch {
       lastWarning = '间隔复习记录暂时无法读取，原记录已保留，本次不会据此安排复习。'
@@ -163,13 +176,17 @@ export function createSpacedReviewService(storage: SpacedReviewStorage | undefin
 
   function record(input: SpacedReviewEvidence): boolean {
     const evidence = evidenceSchema.safeParse(input)
-    const stagesValid = evidence.success && new Set(evidence.data.stages.map((stage) => stage.stageId)).size === evidence.data.stages.length && evidence.data.stages.every((stage) =>
-      stage.firstAttempt === 'independent'
-        ? !stage.usedHint && !stage.hadIncorrectAnswer
-        : stage.firstAttempt === 'hint_used'
-          ? stage.usedHint && !stage.hadIncorrectAnswer
-          : stage.hadIncorrectAnswer,
-    )
+    const stagesValid =
+      evidence.success &&
+      new Set(evidence.data.stages.map((stage) => stage.stageId)).size ===
+        evidence.data.stages.length &&
+      evidence.data.stages.every((stage) =>
+        stage.firstAttempt === 'independent'
+          ? !stage.usedHint && !stage.hadIncorrectAnswer
+          : stage.firstAttempt === 'hint_used'
+            ? stage.usedHint && !stage.hadIncorrectAnswer
+            : stage.hadIncorrectAnswer,
+      )
     if (!evidence.success || !stagesValid || !createReviewLaunchHref(input.courseHref, 'check')) {
       lastWarning = '本次复习证据格式无效，未写入记录。'
       return false
@@ -209,7 +226,9 @@ export function createSpacedReviewService(storage: SpacedReviewStorage | undefin
     const records = load(profileId)
     if (!records) return []
     const latestRevisionByQuest = new Map<string, string>()
-    for (const record of [...records].sort((left, right) => left.completedAt.localeCompare(right.completedAt)))
+    for (const record of [...records].sort((left, right) =>
+      left.completedAt.localeCompare(right.completedAt),
+    ))
       latestRevisionByQuest.set(record.questId, record.contentRevision)
     const groups = new Map<string, SpacedReviewEvidence[]>()
     for (const record of records) {
@@ -242,7 +261,7 @@ export function createSpacedReviewService(storage: SpacedReviewStorage | undefin
 
 function browserStorage(): SpacedReviewStorage | undefined {
   try {
-    return typeof window === 'undefined' ? undefined : window.localStorage
+    return typeof window === 'undefined' ? undefined : accountStorage
   } catch {
     return undefined
   }

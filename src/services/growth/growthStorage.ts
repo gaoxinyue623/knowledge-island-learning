@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 import type {
@@ -80,8 +81,8 @@ export const growthStoragePayloadSchema = z
   .strict()
 
 function browserStorage(): GrowthStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 function cloneBalance(balance: KnowledgeEnergyBalance): KnowledgeEnergyBalance {

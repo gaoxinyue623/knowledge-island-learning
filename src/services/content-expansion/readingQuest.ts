@@ -1,9 +1,108 @@
+import {
+  G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeFourEnglishUpperDefinitions,
+} from '@/data/curriculum/grade-4/english-shanghai-upper-2022'
+import {
+  G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeFiveEnglishLowerDefinitions,
+} from '@/data/curriculum/grade-5/english-shanghai-lower'
+import {
+  G6_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeSixEnglishLowerDefinitions,
+} from '@/data/curriculum/grade-6/english-shanghai-lower'
+import {
+  G6_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeSixEnglishUpperDefinitions,
+} from '@/data/curriculum/grade-6/english-shanghai-upper-2022'
+import {
+  G5_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeFiveEnglishUpperDefinitions,
+} from '@/data/curriculum/grade-5/english-shanghai-upper-2022'
+import {
+  G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeFourEnglishLowerDefinitions,
+} from '@/data/curriculum/grade-4/english-shanghai-lower-2022'
+import {
+  G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
+  gradeThreeEnglishLowerDefinitions,
+} from '@/data/curriculum/grade-3/english-shanghai-lower-2022'
+import { createGradeFourEnglishUpperQuest } from './gradeFourEnglishUpperQuest'
+import { createGradeFiveEnglishLowerQuest } from './gradeFiveEnglishLowerQuest'
+import { createGradeSixEnglishLowerQuest } from './gradeSixEnglishLowerQuest'
+import { createGradeSixEnglishUpperQuest } from './gradeSixEnglishUpperQuest'
+import { createGradeFiveEnglishUpperQuest } from './gradeFiveEnglishUpperQuest'
+import { createGradeFourEnglishLowerQuest } from './gradeFourEnglishLowerQuest'
+import { createGradeThreeEnglishLowerQuest } from './gradeThreeEnglishLowerQuest'
+import {
+  G3_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
+  gradeThreeEnglishUpperDefinitions,
+} from '@/data/curriculum/grade-3/english-shanghai-upper-2022'
+import { createGradeThreeEnglishUpperQuest } from './gradeThreeEnglishUpperQuest'
+import { createGradeSixBnuMathLowerQuest } from './gradeSixBnuMathLowerQuest'
+import { createGradeSixBnuMathQuest } from './gradeSixBnuMathQuest'
+import { createGradeFiveBnuMathLowerQuest } from './gradeFiveBnuMathLowerQuest'
+import { createGradeFiveBnuMathQuest } from './gradeFiveBnuMathQuest'
+import { createGradeFourBnuMathLowerQuest } from './gradeFourBnuMathLowerQuest'
+import { createGradeFourBnuMathQuest } from './gradeFourBnuMathQuest'
+import { createGradeThreeBnuMathLowerQuest } from './gradeThreeBnuMathLowerQuest'
+import { createGradeThreeBnuMathQuest } from './gradeThreeBnuMathQuest'
+import {
+  G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID,
+  gradeSixChinese2019LowerDefinitions,
+} from '@/data/curriculum/grade-6/chinese-pep-lower-2019'
+import { createGradeSixChinese2019LowerQuest } from './gradeSixChinese2019LowerQuest'
+import {
+  G6_PEP_CHINESE_2019_S1_TEXTBOOK_ID,
+  gradeSixChinese2019Definitions,
+} from '@/data/curriculum/grade-6/chinese-pep-upper-2019'
+import { createGradeSixChinese2019Quest } from './gradeSixChinese2019Quest'
+import {
+  G6_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeSixChineseDefinitions,
+} from '@/data/curriculum/grade-6/chinese-pep-upper'
+import { createGradeSixChineseQuest } from './gradeSixChineseQuest'
+import {
+  G5_PEP_CHINESE_S2_TEXTBOOK_ID,
+  gradeFiveChineseLowerDefinitions,
+} from '@/data/curriculum/grade-5/chinese-pep-lower'
+import { createGradeFiveChineseLowerQuest } from './gradeFiveChineseLowerQuest'
+import {
+  G5_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeFiveChineseDefinitions,
+} from '@/data/curriculum/grade-5/chinese-pep-upper'
+import { createGradeFiveChineseQuest } from './gradeFiveChineseQuest'
+import {
+  G4_PEP_CHINESE_S2_TEXTBOOK_ID,
+  gradeFourChineseLowerDefinitions,
+} from '@/data/curriculum/grade-4/chinese-pep-lower'
+import { createGradeFourChineseLowerQuest } from './gradeFourChineseLowerQuest'
+import {
+  G4_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeFourChineseDefinitions,
+} from '@/data/curriculum/grade-4/chinese-pep-upper'
+import { createGradeFourChineseQuest } from './gradeFourChineseQuest'
+import {
+  G3_PEP_CHINESE_S2_TEXTBOOK_ID,
+  gradeThreeChineseLowerDefinitions,
+} from '@/data/curriculum/grade-3/chinese-pep-lower'
+import { createGradeThreeChineseLowerQuest } from './gradeThreeChineseLowerQuest'
+import {
+  G3_PEP_CHINESE_S1_TEXTBOOK_ID,
+  gradeThreeChineseDefinitions,
+} from '@/data/curriculum/grade-3/chinese-pep-upper'
+import { createGradeThreeChineseQuest } from './gradeThreeChineseQuest'
 import { questContentRevision } from './questProgressStorage'
 import { approveLocalRecords, isLocallyApproved } from '../../data/curriculum/localApproval'
 import { readingQuestionSeeds } from '@/data/content-expansion/reading-quest-seeds'
 import { createMathQuest } from './mathQuest'
 import { createEarlyMathQuest } from './earlyMathQuest'
 import { createLowerMathQuest } from './lowerMathQuest'
+import { createShenzhenEnglishLowerQuest } from './shenzhenEnglishLowerQuest'
+import {
+  G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID,
+  shenzhenEnglishLowerDefinitions,
+} from '@/data/curriculum/grade-2/shenzhen-english-lower'
+import { createBnuLowerMathQuest } from './bnuLowerMathQuest'
 import { productionConfig } from '@/config/production'
 import {
   gradeOneShenzhenEnglishUpperKnowledgePoints,
@@ -29,7 +128,37 @@ import type {
 } from '@/types'
 import type { QuestActivityStage, QuestQuestionStage, ReadingQuest } from '@/types/reading-quest'
 
-const englishDefinitions = new Map([
+interface EnglishPracticeDefinition {
+  words: ReadonlyArray<{ english: string; chinese: string }>
+  sentencePrompt: string
+  sentenceAnswer: string
+}
+const englishDefinitions = new Map<string, EnglishPracticeDefinition>([
+  ...gradeFourEnglishUpperDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, { ...d, words: [...d.words, ...d.readingWords] }] as const),
+  ...gradeFiveEnglishLowerDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, d] as const),
+  ...gradeSixEnglishLowerDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, { ...d, words: [...d.words, ...d.readingWords] }] as const),
+  ...gradeSixEnglishUpperDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, { ...d, words: [...d.words, ...d.readingWords] }] as const),
+  ...gradeFiveEnglishUpperDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, d] as const),
+  ...gradeFourEnglishLowerDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, d] as const),
+  ...gradeThreeEnglishLowerDefinitions
+    .filter((d) => d.kind === 'unit')
+    .map((d) => [d.knowledgePointId, d] as const),
+  ...gradeThreeEnglishUpperDefinitions
+    .filter((d) => d.kind !== 'project')
+    .map((d) => [d.knowledgePointId, d] as const),
+  ...shenzhenEnglishLowerDefinitions.map((d) => [d.knowledgePointId, d] as const),
   ...gradeOneShenzhenEnglishUpperKnowledgePoints.map(
     (kp, i) => [kp.id, gradeOneShenzhenEnglishUpperLessonPracticeDefinitions[i]] as const,
   ),
@@ -210,9 +339,112 @@ function createReadingQuestDraft(input: {
     bundle.learningContent.lessonId !== bundle.lessonId
   )
     return null
+  if (
+    bundle.textbookId === G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID ||
+    gradeFourEnglishUpperDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFourEnglishUpperQuest(bundle)
+  if (
+    bundle.textbookId === G5_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID ||
+    gradeFiveEnglishLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFiveEnglishLowerQuest(bundle)
+  if (
+    bundle.textbookId === G6_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID ||
+    gradeSixEnglishLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeSixEnglishLowerQuest(bundle)
+  if (
+    bundle.textbookId === G6_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID ||
+    gradeSixEnglishUpperDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeSixEnglishUpperQuest(bundle)
+  if (
+    bundle.textbookId === G5_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID ||
+    gradeFiveEnglishUpperDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFiveEnglishUpperQuest(bundle)
+  if (
+    bundle.textbookId === G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID ||
+    gradeFourEnglishLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFourEnglishLowerQuest(bundle)
+  if (
+    bundle.textbookId === G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID ||
+    gradeThreeEnglishLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeThreeEnglishLowerQuest(bundle)
+  if (
+    bundle.textbookId === G3_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID ||
+    gradeThreeEnglishUpperDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeThreeEnglishUpperQuest(bundle)
+  if (
+    bundle.textbookId === G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID ||
+    shenzhenEnglishLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createShenzhenEnglishLowerQuest(bundle)
+  if (
+    bundle.textbookId === G3_PEP_CHINESE_S1_TEXTBOOK_ID ||
+    gradeThreeChineseDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeThreeChineseQuest(bundle)
+  if (
+    bundle.textbookId === G3_PEP_CHINESE_S2_TEXTBOOK_ID ||
+    gradeThreeChineseLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeThreeChineseLowerQuest(bundle)
+  if (
+    bundle.textbookId === G4_PEP_CHINESE_S1_TEXTBOOK_ID ||
+    gradeFourChineseDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFourChineseQuest(bundle)
+  if (
+    bundle.textbookId === G4_PEP_CHINESE_S2_TEXTBOOK_ID ||
+    gradeFourChineseLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFourChineseLowerQuest(bundle)
+  if (
+    bundle.textbookId === G5_PEP_CHINESE_S1_TEXTBOOK_ID ||
+    gradeFiveChineseDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFiveChineseQuest(bundle)
+  if (
+    bundle.textbookId === G5_PEP_CHINESE_S2_TEXTBOOK_ID ||
+    gradeFiveChineseLowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeFiveChineseLowerQuest(bundle)
+  if (
+    bundle.textbookId === G6_PEP_CHINESE_S1_TEXTBOOK_ID ||
+    gradeSixChineseDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeSixChineseQuest(bundle)
+  if (
+    bundle.textbookId === G6_PEP_CHINESE_2019_S1_TEXTBOOK_ID ||
+    gradeSixChinese2019Definitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeSixChinese2019Quest(bundle)
+  if (
+    bundle.textbookId === G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID ||
+    gradeSixChinese2019LowerDefinitions.some((d) => d.knowledgePointId === bundle.knowledgePointId)
+  )
+    return createGradeSixChinese2019LowerQuest(bundle)
   const english = englishDefinitions.get(bundle.knowledgePointId)
   if (bundle.textbookId.includes('BNU_MATH'))
-    return createLowerMathQuest(bundle) ?? createEarlyMathQuest(bundle) ?? createMathQuest(bundle)
+    return (
+      createGradeFourBnuMathLowerQuest(bundle) ??
+      createGradeFiveBnuMathQuest(bundle) ??
+      createGradeFiveBnuMathLowerQuest(bundle) ??
+      createGradeSixBnuMathQuest(bundle) ??
+      createGradeSixBnuMathLowerQuest(bundle) ??
+      createGradeFourBnuMathQuest(bundle) ??
+      createGradeThreeBnuMathLowerQuest(bundle) ??
+      createGradeThreeBnuMathQuest(bundle) ??
+      createBnuLowerMathQuest(bundle) ??
+      createLowerMathQuest(bundle) ??
+      createEarlyMathQuest(bundle) ??
+      createMathQuest(bundle)
+    )
   if (!english && !bundle.textbookId.includes('CHINESE')) return null
   const text = plainText(input.text, title)
   const quest: ReadingQuest = {

@@ -16,8 +16,6 @@ import {
 import { PET_ACCOUNT_CHANGED } from '@/services/pet/petNotifications'
 const pet = usePetStore()
 const username = ref<string | null>(null),
-  loginName = ref(''),
-  password = ref(''),
   busy = ref(false),
   message = ref('')
 const backups = ref<CloudBackupInfo[]>([]),
@@ -67,26 +65,19 @@ async function run(action: (version: number) => Promise<void>) {
     busy.value = false
   }
 }
-async function connect(mode: 'session' | 'register' | 'login') {
+async function connect() {
   await run(async (version) => {
     const result = z
       .object({ username: z.string().nullable() })
-      .parse(
-        await petCloudRequest(
-          mode,
-          mode === 'session' ? 'GET' : 'POST',
-          mode === 'session' ? undefined : { username: loginName.value, password: password.value },
-        ),
-      )
-    password.value = ''
+      .parse(await petCloudRequest('session'))
     if (version !== generation) return
     username.value = result.username
     if (result.username) {
-      const list = await listCloudBackups(username.value!)
+      const list = await listCloudBackups(result.username)
       if (version !== generation) return
       backups.value = list
-      message.value = '已连接。可备份本机小屋，或选择云端备份先查看。'
-    } else message.value = '服务已连接，请登录或注册家长账号。'
+      message.value = '独立备份已加载，日常宠物记录由账号自动同步。'
+    } else message.value = '请前往统一登录页登录账号。'
   })
 }
 async function refresh() {
@@ -160,71 +151,22 @@ async function restore() {
     }
   })
 }
-async function logout() {
-  await run(async (version) => {
-    await petCloudRequest('logout', 'POST', undefined, username.value!)
-    if (version === generation) {
-      username.value = null
-      backups.value = []
-      selected.value = ''
-      preview.value = null
-      message.value = '已退出账号，本机宠物小屋仍保留。'
-    }
-  })
-}
 </script>
 <template>
   <details class="pet-cloud-panel">
-    <summary>家长账号 · 备份与恢复</summary>
+    <summary>独立宠物备份与恢复</summary>
     <p>
       由家长管理。备份包含积分、食物、伙伴、装饰和成长流水；教材进度、错题本和学习设置暂不包含。
     </p>
     <template v-if="!username">
-      <p>账号无需真实姓名或邮箱。请妥善保存密码，当前尚无找回密码功能。</p>
-      <form class="pet-name-form" @submit.prevent="connect('login')">
-        <label for="pet-account-name">家长账号（4～32位字母、数字或下划线）</label>
-        <input
-          id="pet-account-name"
-          v-model="loginName"
-          autocomplete="username"
-          minlength="4"
-          maxlength="32"
-          pattern="[A-Za-z0-9_]{4,32}"
-          required
-          :disabled="disabled"
-        />
-        <label for="pet-account-password">密码（10～128个字符）</label>
-        <input
-          id="pet-account-password"
-          v-model="password"
-          type="password"
-          autocomplete="current-password"
-          minlength="10"
-          maxlength="128"
-          required
-          :disabled="disabled"
-        />
-        <button type="submit" class="pet-button" :disabled="disabled">登录</button>
-        <button
-          type="button"
-          class="pet-button pet-button--light"
-          :disabled="disabled || loginName.length < 4 || password.length < 10"
-          @click="connect('register')"
-        >
-          注册家长账号
-        </button>
-        <button
-          type="button"
-          class="pet-button pet-button--light"
-          :disabled="disabled"
-          @click="connect('session')"
-        >
-          恢复登录状态
-        </button>
-      </form>
+      <p>当前宠物已随账号自动同步。这里可以读取以前的独立备份，或另存一份宠物小屋。</p>
+      <button type="button" class="pet-button" :disabled="disabled" @click="connect()">
+        加载独立备份
+      </button>
+      <RouterLink to="/account">账号与同步</RouterLink>
     </template>
     <template v-else>
-      <p>当前账号：{{ username }}。登录不会自动上传或覆盖本机记录。</p>
+      <p>当前账号：{{ username }}。日常记录自动同步，以下是独立备份。</p>
       <div class="pet-actions">
         <button
           type="button"
@@ -232,15 +174,9 @@ async function logout() {
           :disabled="disabled"
           @click="refresh"
         >
-          刷新备份</button
-        ><button
-          type="button"
-          class="pet-button pet-button--light"
-          :disabled="disabled"
-          @click="logout"
-        >
-          退出账号
+          刷新备份
         </button>
+        <RouterLink to="/account">账号与同步</RouterLink>
       </div>
       <label for="pet-backup-select">选择备份</label>
       <select id="pet-backup-select" v-model="selected" :disabled="disabled">
@@ -284,7 +220,7 @@ async function logout() {
           恢复到当前小屋
         </button>
       </div>
-      <p>换设备时先恢复再学习；离开设备前更新备份。离线时可继续学习，但不会自动上传。</p>
+      <p>换设备登录后自动恢复账号数据；独立备份需要手动更新。</p>
     </template>
     <p v-if="message" role="status" class="pet-notice">{{ message }}</p>
   </details>

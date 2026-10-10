@@ -23,8 +23,8 @@ import { createReadingQuest } from '@/services/content-expansion/readingQuest'
 const policy = resolveProductionConfig({ isProduction: true })
 describe('released local curriculum runtime', () => {
   it('exposes all owner-approved local textbooks under strict production guards', async () => {
-    expect(productionCurriculumIndex.textbooks).toHaveLength(11)
-    expect(productionCurriculumIndex.lessons).toHaveLength(357)
+    expect(productionCurriculumIndex.textbooks).toHaveLength(40)
+    expect(productionCurriculumIndex.lessons).toHaveLength(1245)
     const service = new MockCurriculumService({ data: approvedCurriculum, accessPolicy: policy })
     expect((await service.getRegions()).length).toBeGreaterThan(0)
     const contents = new MockLearningContentRepository({

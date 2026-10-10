@@ -1,14 +1,15 @@
+import { accountState } from '@/services/account/accountService'
+import { safeAccountReturn } from '@/services/account/contract'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 import CharacterSetupPage from '@/pages/onboarding/CharacterSetupPage.vue'
 import GradeSelectPage from '@/pages/onboarding/GradeSelectPage.vue'
 import OnboardingWelcomePage from '@/pages/onboarding/OnboardingWelcomePage.vue'
-import RegionSelectPage from '@/pages/onboarding/RegionSelectPage.vue'
 import TextbookConfirmPage from '@/pages/onboarding/TextbookConfirmPage.vue'
 import { productionConfig } from '@/config/production'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { pinia } from '@/stores/pinia'
-import { getOnboardingRedirect } from './guard'
+import { getOnboardingDraftRedirect, getOnboardingRedirect } from './guard'
 
 // Keep the onboarding shell eager, but load product and developer surfaces on
 // demand so the first route does not pay for every feature bundle.
@@ -39,6 +40,41 @@ const TextbookSubjectSelectPage = () => import('@/pages/curriculum/TextbookSubje
 
 const routes: RouteRecordRaw[] = [
   {
+    path: '/recover',
+    component: () => import('@/pages/auth/RecoverPage.vue'),
+    meta: { title: '找回密码', public: true, hideBottomNav: true },
+  },
+  {
+    path: '/account/security',
+    component: () => import('@/pages/AccountSecurityPage.vue'),
+    meta: { title: '账号安全', parentOnly: true },
+  },
+  {
+    path: '/feedback',
+    component: () => import('@/pages/FeedbackPage.vue'),
+    meta: { title: '问题与建议' },
+  },
+  {
+    path: '/feedback/manage',
+    component: () => import('@/pages/FeedbackManagePage.vue'),
+    meta: { title: '反馈处理', parentOnly: true },
+  },
+  {
+    path: '/login',
+    component: () => import('@/pages/auth/AuthPage.vue'),
+    meta: { title: '登录知识岛', hideBottomNav: true, public: true },
+  },
+  {
+    path: '/register',
+    component: () => import('@/pages/auth/AuthPage.vue'),
+    meta: { title: '注册知识岛', hideBottomNav: true, public: true },
+  },
+  {
+    path: '/account',
+    component: () => import('@/pages/AccountPage.vue'),
+    meta: { title: '账号与同步', studentOnly: true },
+  },
+  {
     path: '/:pathMatch(.*)*',
     component: () => import('@/pages/NotFoundPage.vue'),
     meta: { title: '页面未找到' },
@@ -51,8 +87,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/onboarding/region',
-    component: RegionSelectPage,
-    meta: { title: '选择学习地区', hideBottomNav: true },
+    redirect: (to) => ({ path: '/onboarding/grade', query: to.query }),
   },
   {
     path: '/onboarding/grade',
@@ -165,6 +200,11 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '错题本', studentOnly: true },
   },
   {
+    path: '/ai-review/:sessionId',
+    component: () => import('@/pages/AiReviewPage.vue'),
+    meta: { title: 'AI 错题再练', studentOnly: true },
+  },
+  {
     path: '/review-queue',
     component: ReviewQueuePage,
     meta: { title: '待巩固', studentOnly: true },
@@ -192,7 +232,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/family',
     component: () => import('@/pages/FamilyProfilesPage.vue'),
-    meta: { title: '家庭学习档案', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '家庭学习档案', parentOnly: true, requiresOnboarding: true, studentOnly: true },
   },
   {
     path: '/profile',
@@ -212,18 +252,19 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/parent',
     component: ParentDashboardPage,
-    meta: { title: '本机学习报告', hideBottomNav: true },
+    meta: { title: '本机学习报告', parentOnly: true, hideBottomNav: true },
   },
   {
     path: '/curriculum-settings',
     component: CurriculumSettingsPage,
-    meta: { title: '我的学习设置', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '我的学习设置', parentOnly: true, requiresOnboarding: true, studentOnly: true },
   },
   {
     path: '/curriculum-settings/textbook/:subjectCode',
     component: TextbookSubjectSelectPage,
     meta: {
       title: '更换教材版本',
+      parentOnly: true,
       requiresOnboarding: true,
       studentOnly: true,
       hideBottomNav: true,
@@ -232,7 +273,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/settings',
     component: () => import('@/pages/SettingsPage.vue'),
-    meta: { title: '通用设置', requiresOnboarding: true, studentOnly: true },
+    meta: { title: '通用设置', parentOnly: true, requiresOnboarding: true, studentOnly: true },
   },
   {
     path: '/dev/ui',
@@ -328,7 +369,7 @@ const routes: RouteRecordRaw[] = [
     path: '/learning-agent',
     component: FormalLearningAgentPage,
     meta: {
-      title: 'Agent 学习建议',
+      title: '学习建议',
       requiresOnboarding: true,
       studentOnly: true,
       hideBottomNav: true,
@@ -369,7 +410,18 @@ router.beforeEach((to) => {
     document.title = `${to.meta.title} · 知识岛`
   }
 
+  if (!to.meta.devOnly) {
+    if ((!accountState.ready || !accountState.username) && !to.meta.public)
+      return { path: '/login', query: { redirect: to.fullPath } }
+    if (accountState.ready && accountState.username && to.meta.public)
+      return accountState.conflict ? '/account' : safeAccountReturn(to.query.redirect)
+    if (accountState.conflict && to.path !== '/account' && !to.meta.public) return '/account'
+  }
+  if (to.meta.public) return true
+
   const curriculumStore = useCurriculumStore(pinia)
+  const draftRedirect = getOnboardingDraftRedirect(to.path, curriculumStore)
+  if (draftRedirect) return { path: draftRedirect, query: to.query, replace: true }
   const onboardingRedirect = getOnboardingRedirect(
     to.path,
     Boolean(to.meta.requiresOnboarding),

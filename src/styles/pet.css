@@ -132,21 +132,6 @@
   top: 40px;
   font-size: 3rem;
 }
-.pet-character {
-  position: relative;
-  padding-top: 20px;
-}
-.pet-character-crown {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.6rem;
-  z-index: 1;
-}
-.pet-character--fed {
-  animation: pet-bounce 0.65s ease-out;
-}
 .pet-scene-caption {
   display: grid;
   justify-items: center;
@@ -299,18 +284,6 @@
 .pet-muted {
   color: #68735e;
 }
-@keyframes pet-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  35% {
-    transform: translateY(-18px) rotate(-4deg);
-  }
-  65% {
-    transform: translateY(-8px) rotate(3deg);
-  }
-}
 @media (max-width: 760px) {
   .pet-home-layout {
     grid-template-columns: 1fr;
@@ -335,11 +308,6 @@
   }
   .pet-home-scene {
     min-height: 280px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pet-character--fed {
-    animation: none;
   }
 }
 

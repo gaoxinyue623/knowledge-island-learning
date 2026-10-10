@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 export interface LearningSyncBinding {
   profileId: string
   username: string
@@ -12,7 +13,7 @@ const prefix = 'knowledge-island.learning-sync-binding.v1:'
 function storage(): Storage | null {
   if (typeof window === 'undefined') return null
   try {
-    return window.localStorage
+    return accountStorage
   } catch {
     return null
   }
@@ -27,17 +28,17 @@ function valid(value: unknown): value is LearningSyncBinding {
   const item = value as Partial<LearningSyncBinding>
   return Boolean(
     typeof item.profileId === 'string' &&
-      item.profileId.length > 0 &&
-      typeof item.username === 'string' &&
-      item.username.length > 0 &&
-      typeof item.cloudProfileId === 'string' &&
-      item.cloudProfileId.length > 0 &&
-      typeof item.revision === 'number' &&
-      Number.isInteger(item.revision) &&
-      item.revision > 0 &&
-      item.enabled === true &&
-      typeof item.updatedAt === 'string' &&
-      Number.isFinite(Date.parse(item.updatedAt)),
+    item.profileId.length > 0 &&
+    typeof item.username === 'string' &&
+    item.username.length > 0 &&
+    typeof item.cloudProfileId === 'string' &&
+    item.cloudProfileId.length > 0 &&
+    typeof item.revision === 'number' &&
+    Number.isInteger(item.revision) &&
+    item.revision > 0 &&
+    item.enabled === true &&
+    typeof item.updatedAt === 'string' &&
+    Number.isFinite(Date.parse(item.updatedAt)),
   )
 }
 

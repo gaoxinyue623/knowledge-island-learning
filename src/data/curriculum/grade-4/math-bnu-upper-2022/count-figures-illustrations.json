@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-10-10",
+  "connectedAt": "2026-10-10",
+  "knowledgePointId": "G4_BNU_MATH_S1_2022_KP_17",
+  "sourceNote": "按用户提供的数图形的学问任务描述生成；AI配套素材，非教材原图。两张独立黑白配图均保留对应的线段示意，不含答案。",
+  "assets": [
+    {
+      "title": "鼹鼠钻洞",
+      "questionIds": ["G4_BNU_MATH_S1_2022_KP_17_Q1", "G4_BNU_MATH_S1_2022_KP_17_SYNC_V1_01"],
+      "url": "/curriculum/grade-4/math-bnu-upper-2022/count-figures/mole-tunnels.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "7a78ef8cc464ccb919956010a65b9e7bb39b892b1f9062ceaa5f8f43c03798bd"
+    },
+    {
+      "title": "菜地旅行",
+      "questionIds": ["G4_BNU_MATH_S1_2022_KP_17_Q2"],
+      "url": "/curriculum/grade-4/math-bnu-upper-2022/count-figures/vegetable-stations.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "305795a403cee33d8bf75f850d820645e30276951c8869e813201c65561a5801"
+    }
+  ]
+}

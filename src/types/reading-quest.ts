@@ -59,7 +59,7 @@ export type ReadingQuestStage = QuestQuestionStage | QuestActivityStage
 export interface ReadingPracticeQuest {
   id: string
   stages: ReadingQuestStage[]
-  subject?: 'MATH'
+  subject?: 'MATH' | 'ENGLISH'
   training?: { variantIndex: number; variantCount: number }
 }
 

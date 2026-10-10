@@ -1,0 +1,3717 @@
+{
+  "sourceSha256": "c36e46823861da57a7126ec83d732ff12c6a71a90b23755b154b57b4e4a323fa",
+  "sourceNote": "按用户补充附件接入识字表、写字表和词语表，保留原有课号、分组、拼音和重复项；与既有课文目录分开查阅，不作出版社原件认证。",
+  "tables": [
+    {
+      "unit": 8,
+      "key": "appendix-recognition",
+      "title": "识字表（会认·含拼音）",
+      "kind": "appendix",
+      "number": null,
+      "optional": false,
+      "originalHeading": "识字表（生字表一，会认，200 字，带拼音）",
+      "importNotes": [
+        "附件标题标注200字，实际有307条字音记录（286个不重复汉字）；重复字、读音及原有分组均按附件保留，不按标称字数删补。 本表课号、部分篇目与已导入的课文目录不同，作为全册附录独立查阅，不自动对应单篇课文；尚未与出版社原件核对。"
+      ],
+      "text": "1. 古诗三首：鸳 yuān、鸯 yāng、惠 huì、崇 chóng、豚 tún、减 jiǎn\n2. 燕子：凑 còu、伶 líng、俐 lì、翼 yì、漾 yàng、倦 juàn、闲 xián、散 sǎn、纤 xiān、杆 gān、痕 hén\n3. 荷花：挨āi、蓬 péng、胀 zhàng、翩 piān、蹈 dǎo\n4. 昆虫备忘录：录 lù、凡 fán、距 jù、款 kuǎn、绸 chóu、膜 mó、瞎 xiā、益 yì、约 yuē、蚂 mà、斑 bān\n语文园地一：援 yuán、掷 zhì、捞 lāo、缚 fù、缭 liáo、络 luò、资 zī、贡 gòng、贷 dài\n5. 守株待兔：宋 sòng、耕 gēng、释 shì、冀 jì\n6. 陶罐和铁罐：陶 táo、罐 guàn、骄 jiāo、谦 qiān、虚 xū、懦 nuò、弱 ruò、恼 nǎo、讶 yà、代 dài、价 jià\n7. 鹿角和鹿腿：称 chèn、禁 jīn、皱 zhòu、配 pèi、怨 yuàn、狮 shī、逼 bī、撒 sā\n8. 池子与河流：滔 tāo、涯 yá、妇 fù、碌 lù、遵 zūn、循 xún、尊 zūn、验 yàn\n9. 古诗三首：屠 tú、苏 sū、魂 hún、牧 mù、兄 xiōng、倍 bèi\n10. 纸的发明：创 chuàng、存 cún、普 pǔ、制 zhì、蔡 cài、伦 lún、累 lěi、切 qiē、便 pián、鲜 xiǎn、欧ōu、洲 zhōu、社 shè\n11. 赵州桥：县 xiàn、拱 gǒng、济 jì、匠 jiàng、计 jì、横 héng、史 shǐ、爪 zhǎo、智 zhì、慧 huì、历 lì\n12. 一幅名扬中外的画：择 zé、宫 gōng、摊 tān、贩 fàn、吏 lì、驴 lǘ、乘 shèng、笼 lóng、栏 lán、貌 mào\n语文园地三：税 shuì、档 dàng、咖 kā、啡 fēi、阅 yuè、废 fèi、贸 mào\n13. 花钟：芬 fēn、芳 fāng、燥 zào、适 shì、雅 yǎ、吻 wěn、组 zǔ\n14. 蜜蜂：概 gài、阻 zǔ、测 cè、括 kuò、误 wù、逆 nì、途 tú、陌 mò、超 chāo\n15. 小虾：隙 xì、掀 xiān、稍 shāo、逐 zhú、末 mò、搏 bó、较 jiào、腹 fù\n语文园地四：醋 cù、煎 jiān、蒸 zhēng、爆 bào、炖 dùn、炸 zhá、煮 zhǔ\n16. 宇宙的另一边：秘 mì、密 mì、栋 dòng、梯 tī、铃 líng、乘 chéng、绪 xù、篇 piān\n17. 我变成了一棵树：狐 hú、狸 lí、丁 dīng、零 líng、巧 qiǎo、克 kè、肠 cháng、继 jì、续 xù、抬 tái、秘 mì、密 mì\n语文园地五：邢 xíng、款 kuǎn、榨 zhà、廊 láng、婴 yīng、灼 zhuó\n18. 童年的水墨画：墨 mò、竿 gān、腾 téng、碎 suì、拨 bō、浪 làng、葫 hú、爽 shuǎng、蘑 mó、菇 gū\n19. 剃头大师：胆 dǎn、鬼 guǐ、骂 mà、仇 chóu、差 chà、付 fù、倍 bèi、虽 suī、件 jiàn\n20. 肥皂泡：廊 láng、碗 wǎn、若 ruò、透 tòu、娇 jiāo、扯 chě、仰 yǎng、串 chuàn、越 yuè、婴 yīng、希 xī\n21. 我不能失信：耀 yào、庆 qìng、盼 pàn、叠 dié、歉 qiàn\n语文园地六：脆 cuì、薄 báo、扯 chě、仰 yǎng、婴 yīng、灼 zhuó\n22. 我们奇妙的世界：呈 chéng、幻 huàn、蜡 là、烛 zhú、诱 yòu、润 rùn、芒 máng、剑 jiàn、普 pǔ、通 tōng、模 mó、型 xíng\n23. 海底世界：宁 níng、官 guān、汪 wāng、险 xiǎn、参 shēn、攻 gōng、推 tuī、迅 xùn、速 sù、退 tuì、铁 tiě\n24. 火烧云：必 bì、胡 hú、灿 càn、骑 qí、秒 miǎo、凶 xiōng、猛 měng、庙 miào、威 wēi、武 wǔ、镇 zhèn\n语文园地七：灿 càn、芒 máng、模 mú、镇 zhèn、耀 yào、险 xiǎn\n25. 慢性子裁缝和急性子顾客：卷 juǎn、缝 féng、箱 xiāng、夸 kuā、歪 wāi、承 chéng、袖 xiù、衬 chèn、衫 shān、负 fù、泄 xiè、艺 yì\n26. 方帽子店：蕉 jiāo、筒 tǒng、董 dǒng、嚷 rǎng、溜 liū、筒 tǒng、扣 kòu、蕉 jiāo\n27. 漏：婆 pó、脊 jǐ、颠 diān、旋 xuán、纵 zòng、贼 zéi、莫 mò、厉 lì、抱 bào、粘 zhān、胶 jiāo\n28. 枣核：核 hé、妻 qī、爹 diē、罢 bà、勤 qín、困 kùn、牲 shēng、畜 chù、善 shàn、罢 bà\n语文园地八：咳 ké、嗽 sòu、呕ǒu、吐 tǔ、唠 láo、叨 dāo、嘀 dí、咕 gū",
+      "sourceNote": "附件标题标注200字，实际有307条字音记录（286个不重复汉字）；重复字、读音及原有分组均按附件保留，不按标称字数删补。 本表课号、部分篇目与已导入的课文目录不同，作为全册附录独立查阅，不自动对应单篇课文；尚未与出版社原件核对。",
+      "questions": [],
+      "tableKind": "recognition",
+      "declaredCount": 200,
+      "entryCount": 307,
+      "uniqueCharacterCount": 286,
+      "groups": [
+        {
+          "heading": "1. 古诗三首",
+          "lessonNumber": 1,
+          "lessonTitle": "古诗三首",
+          "entries": [
+            {
+              "character": "鸳",
+              "pinyin": "yuān",
+              "raw": "鸳 yuān"
+            },
+            {
+              "character": "鸯",
+              "pinyin": "yāng",
+              "raw": "鸯 yāng"
+            },
+            {
+              "character": "惠",
+              "pinyin": "huì",
+              "raw": "惠 huì"
+            },
+            {
+              "character": "崇",
+              "pinyin": "chóng",
+              "raw": "崇 chóng"
+            },
+            {
+              "character": "豚",
+              "pinyin": "tún",
+              "raw": "豚 tún"
+            },
+            {
+              "character": "减",
+              "pinyin": "jiǎn",
+              "raw": "减 jiǎn"
+            }
+          ]
+        },
+        {
+          "heading": "2. 燕子",
+          "lessonNumber": 2,
+          "lessonTitle": "燕子",
+          "entries": [
+            {
+              "character": "凑",
+              "pinyin": "còu",
+              "raw": "凑 còu"
+            },
+            {
+              "character": "伶",
+              "pinyin": "líng",
+              "raw": "伶 líng"
+            },
+            {
+              "character": "俐",
+              "pinyin": "lì",
+              "raw": "俐 lì"
+            },
+            {
+              "character": "翼",
+              "pinyin": "yì",
+              "raw": "翼 yì"
+            },
+            {
+              "character": "漾",
+              "pinyin": "yàng",
+              "raw": "漾 yàng"
+            },
+            {
+              "character": "倦",
+              "pinyin": "juàn",
+              "raw": "倦 juàn"
+            },
+            {
+              "character": "闲",
+              "pinyin": "xián",
+              "raw": "闲 xián"
+            },
+            {
+              "character": "散",
+              "pinyin": "sǎn",
+              "raw": "散 sǎn"
+            },
+            {
+              "character": "纤",
+              "pinyin": "xiān",
+              "raw": "纤 xiān"
+            },
+            {
+              "character": "杆",
+              "pinyin": "gān",
+              "raw": "杆 gān"
+            },
+            {
+              "character": "痕",
+              "pinyin": "hén",
+              "raw": "痕 hén"
+            }
+          ]
+        },
+        {
+          "heading": "3. 荷花",
+          "lessonNumber": 3,
+          "lessonTitle": "荷花",
+          "entries": [
+            {
+              "character": "挨",
+              "pinyin": "āi",
+              "raw": "挨āi"
+            },
+            {
+              "character": "蓬",
+              "pinyin": "péng",
+              "raw": "蓬 péng"
+            },
+            {
+              "character": "胀",
+              "pinyin": "zhàng",
+              "raw": "胀 zhàng"
+            },
+            {
+              "character": "翩",
+              "pinyin": "piān",
+              "raw": "翩 piān"
+            },
+            {
+              "character": "蹈",
+              "pinyin": "dǎo",
+              "raw": "蹈 dǎo"
+            }
+          ]
+        },
+        {
+          "heading": "4. 昆虫备忘录",
+          "lessonNumber": 4,
+          "lessonTitle": "昆虫备忘录",
+          "entries": [
+            {
+              "character": "录",
+              "pinyin": "lù",
+              "raw": "录 lù"
+            },
+            {
+              "character": "凡",
+              "pinyin": "fán",
+              "raw": "凡 fán"
+            },
+            {
+              "character": "距",
+              "pinyin": "jù",
+              "raw": "距 jù"
+            },
+            {
+              "character": "款",
+              "pinyin": "kuǎn",
+              "raw": "款 kuǎn"
+            },
+            {
+              "character": "绸",
+              "pinyin": "chóu",
+              "raw": "绸 chóu"
+            },
+            {
+              "character": "膜",
+              "pinyin": "mó",
+              "raw": "膜 mó"
+            },
+            {
+              "character": "瞎",
+              "pinyin": "xiā",
+              "raw": "瞎 xiā"
+            },
+            {
+              "character": "益",
+              "pinyin": "yì",
+              "raw": "益 yì"
+            },
+            {
+              "character": "约",
+              "pinyin": "yuē",
+              "raw": "约 yuē"
+            },
+            {
+              "character": "蚂",
+              "pinyin": "mà",
+              "raw": "蚂 mà"
+            },
+            {
+              "character": "斑",
+              "pinyin": "bān",
+              "raw": "斑 bān"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地一",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地一",
+          "entries": [
+            {
+              "character": "援",
+              "pinyin": "yuán",
+              "raw": "援 yuán"
+            },
+            {
+              "character": "掷",
+              "pinyin": "zhì",
+              "raw": "掷 zhì"
+            },
+            {
+              "character": "捞",
+              "pinyin": "lāo",
+              "raw": "捞 lāo"
+            },
+            {
+              "character": "缚",
+              "pinyin": "fù",
+              "raw": "缚 fù"
+            },
+            {
+              "character": "缭",
+              "pinyin": "liáo",
+              "raw": "缭 liáo"
+            },
+            {
+              "character": "络",
+              "pinyin": "luò",
+              "raw": "络 luò"
+            },
+            {
+              "character": "资",
+              "pinyin": "zī",
+              "raw": "资 zī"
+            },
+            {
+              "character": "贡",
+              "pinyin": "gòng",
+              "raw": "贡 gòng"
+            },
+            {
+              "character": "贷",
+              "pinyin": "dài",
+              "raw": "贷 dài"
+            }
+          ]
+        },
+        {
+          "heading": "5. 守株待兔",
+          "lessonNumber": 5,
+          "lessonTitle": "守株待兔",
+          "entries": [
+            {
+              "character": "宋",
+              "pinyin": "sòng",
+              "raw": "宋 sòng"
+            },
+            {
+              "character": "耕",
+              "pinyin": "gēng",
+              "raw": "耕 gēng"
+            },
+            {
+              "character": "释",
+              "pinyin": "shì",
+              "raw": "释 shì"
+            },
+            {
+              "character": "冀",
+              "pinyin": "jì",
+              "raw": "冀 jì"
+            }
+          ]
+        },
+        {
+          "heading": "6. 陶罐和铁罐",
+          "lessonNumber": 6,
+          "lessonTitle": "陶罐和铁罐",
+          "entries": [
+            {
+              "character": "陶",
+              "pinyin": "táo",
+              "raw": "陶 táo"
+            },
+            {
+              "character": "罐",
+              "pinyin": "guàn",
+              "raw": "罐 guàn"
+            },
+            {
+              "character": "骄",
+              "pinyin": "jiāo",
+              "raw": "骄 jiāo"
+            },
+            {
+              "character": "谦",
+              "pinyin": "qiān",
+              "raw": "谦 qiān"
+            },
+            {
+              "character": "虚",
+              "pinyin": "xū",
+              "raw": "虚 xū"
+            },
+            {
+              "character": "懦",
+              "pinyin": "nuò",
+              "raw": "懦 nuò"
+            },
+            {
+              "character": "弱",
+              "pinyin": "ruò",
+              "raw": "弱 ruò"
+            },
+            {
+              "character": "恼",
+              "pinyin": "nǎo",
+              "raw": "恼 nǎo"
+            },
+            {
+              "character": "讶",
+              "pinyin": "yà",
+              "raw": "讶 yà"
+            },
+            {
+              "character": "代",
+              "pinyin": "dài",
+              "raw": "代 dài"
+            },
+            {
+              "character": "价",
+              "pinyin": "jià",
+              "raw": "价 jià"
+            }
+          ]
+        },
+        {
+          "heading": "7. 鹿角和鹿腿",
+          "lessonNumber": 7,
+          "lessonTitle": "鹿角和鹿腿",
+          "entries": [
+            {
+              "character": "称",
+              "pinyin": "chèn",
+              "raw": "称 chèn"
+            },
+            {
+              "character": "禁",
+              "pinyin": "jīn",
+              "raw": "禁 jīn"
+            },
+            {
+              "character": "皱",
+              "pinyin": "zhòu",
+              "raw": "皱 zhòu"
+            },
+            {
+              "character": "配",
+              "pinyin": "pèi",
+              "raw": "配 pèi"
+            },
+            {
+              "character": "怨",
+              "pinyin": "yuàn",
+              "raw": "怨 yuàn"
+            },
+            {
+              "character": "狮",
+              "pinyin": "shī",
+              "raw": "狮 shī"
+            },
+            {
+              "character": "逼",
+              "pinyin": "bī",
+              "raw": "逼 bī"
+            },
+            {
+              "character": "撒",
+              "pinyin": "sā",
+              "raw": "撒 sā"
+            }
+          ]
+        },
+        {
+          "heading": "8. 池子与河流",
+          "lessonNumber": 8,
+          "lessonTitle": "池子与河流",
+          "entries": [
+            {
+              "character": "滔",
+              "pinyin": "tāo",
+              "raw": "滔 tāo"
+            },
+            {
+              "character": "涯",
+              "pinyin": "yá",
+              "raw": "涯 yá"
+            },
+            {
+              "character": "妇",
+              "pinyin": "fù",
+              "raw": "妇 fù"
+            },
+            {
+              "character": "碌",
+              "pinyin": "lù",
+              "raw": "碌 lù"
+            },
+            {
+              "character": "遵",
+              "pinyin": "zūn",
+              "raw": "遵 zūn"
+            },
+            {
+              "character": "循",
+              "pinyin": "xún",
+              "raw": "循 xún"
+            },
+            {
+              "character": "尊",
+              "pinyin": "zūn",
+              "raw": "尊 zūn"
+            },
+            {
+              "character": "验",
+              "pinyin": "yàn",
+              "raw": "验 yàn"
+            }
+          ]
+        },
+        {
+          "heading": "9. 古诗三首",
+          "lessonNumber": 9,
+          "lessonTitle": "古诗三首",
+          "entries": [
+            {
+              "character": "屠",
+              "pinyin": "tú",
+              "raw": "屠 tú"
+            },
+            {
+              "character": "苏",
+              "pinyin": "sū",
+              "raw": "苏 sū"
+            },
+            {
+              "character": "魂",
+              "pinyin": "hún",
+              "raw": "魂 hún"
+            },
+            {
+              "character": "牧",
+              "pinyin": "mù",
+              "raw": "牧 mù"
+            },
+            {
+              "character": "兄",
+              "pinyin": "xiōng",
+              "raw": "兄 xiōng"
+            },
+            {
+              "character": "倍",
+              "pinyin": "bèi",
+              "raw": "倍 bèi"
+            }
+          ]
+        },
+        {
+          "heading": "10. 纸的发明",
+          "lessonNumber": 10,
+          "lessonTitle": "纸的发明",
+          "entries": [
+            {
+              "character": "创",
+              "pinyin": "chuàng",
+              "raw": "创 chuàng"
+            },
+            {
+              "character": "存",
+              "pinyin": "cún",
+              "raw": "存 cún"
+            },
+            {
+              "character": "普",
+              "pinyin": "pǔ",
+              "raw": "普 pǔ"
+            },
+            {
+              "character": "制",
+              "pinyin": "zhì",
+              "raw": "制 zhì"
+            },
+            {
+              "character": "蔡",
+              "pinyin": "cài",
+              "raw": "蔡 cài"
+            },
+            {
+              "character": "伦",
+              "pinyin": "lún",
+              "raw": "伦 lún"
+            },
+            {
+              "character": "累",
+              "pinyin": "lěi",
+              "raw": "累 lěi"
+            },
+            {
+              "character": "切",
+              "pinyin": "qiē",
+              "raw": "切 qiē"
+            },
+            {
+              "character": "便",
+              "pinyin": "pián",
+              "raw": "便 pián"
+            },
+            {
+              "character": "鲜",
+              "pinyin": "xiǎn",
+              "raw": "鲜 xiǎn"
+            },
+            {
+              "character": "欧",
+              "pinyin": "ōu",
+              "raw": "欧ōu"
+            },
+            {
+              "character": "洲",
+              "pinyin": "zhōu",
+              "raw": "洲 zhōu"
+            },
+            {
+              "character": "社",
+              "pinyin": "shè",
+              "raw": "社 shè"
+            }
+          ]
+        },
+        {
+          "heading": "11. 赵州桥",
+          "lessonNumber": 11,
+          "lessonTitle": "赵州桥",
+          "entries": [
+            {
+              "character": "县",
+              "pinyin": "xiàn",
+              "raw": "县 xiàn"
+            },
+            {
+              "character": "拱",
+              "pinyin": "gǒng",
+              "raw": "拱 gǒng"
+            },
+            {
+              "character": "济",
+              "pinyin": "jì",
+              "raw": "济 jì"
+            },
+            {
+              "character": "匠",
+              "pinyin": "jiàng",
+              "raw": "匠 jiàng"
+            },
+            {
+              "character": "计",
+              "pinyin": "jì",
+              "raw": "计 jì"
+            },
+            {
+              "character": "横",
+              "pinyin": "héng",
+              "raw": "横 héng"
+            },
+            {
+              "character": "史",
+              "pinyin": "shǐ",
+              "raw": "史 shǐ"
+            },
+            {
+              "character": "爪",
+              "pinyin": "zhǎo",
+              "raw": "爪 zhǎo"
+            },
+            {
+              "character": "智",
+              "pinyin": "zhì",
+              "raw": "智 zhì"
+            },
+            {
+              "character": "慧",
+              "pinyin": "huì",
+              "raw": "慧 huì"
+            },
+            {
+              "character": "历",
+              "pinyin": "lì",
+              "raw": "历 lì"
+            }
+          ]
+        },
+        {
+          "heading": "12. 一幅名扬中外的画",
+          "lessonNumber": 12,
+          "lessonTitle": "一幅名扬中外的画",
+          "entries": [
+            {
+              "character": "择",
+              "pinyin": "zé",
+              "raw": "择 zé"
+            },
+            {
+              "character": "宫",
+              "pinyin": "gōng",
+              "raw": "宫 gōng"
+            },
+            {
+              "character": "摊",
+              "pinyin": "tān",
+              "raw": "摊 tān"
+            },
+            {
+              "character": "贩",
+              "pinyin": "fàn",
+              "raw": "贩 fàn"
+            },
+            {
+              "character": "吏",
+              "pinyin": "lì",
+              "raw": "吏 lì"
+            },
+            {
+              "character": "驴",
+              "pinyin": "lǘ",
+              "raw": "驴 lǘ"
+            },
+            {
+              "character": "乘",
+              "pinyin": "shèng",
+              "raw": "乘 shèng"
+            },
+            {
+              "character": "笼",
+              "pinyin": "lóng",
+              "raw": "笼 lóng"
+            },
+            {
+              "character": "栏",
+              "pinyin": "lán",
+              "raw": "栏 lán"
+            },
+            {
+              "character": "貌",
+              "pinyin": "mào",
+              "raw": "貌 mào"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地三",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地三",
+          "entries": [
+            {
+              "character": "税",
+              "pinyin": "shuì",
+              "raw": "税 shuì"
+            },
+            {
+              "character": "档",
+              "pinyin": "dàng",
+              "raw": "档 dàng"
+            },
+            {
+              "character": "咖",
+              "pinyin": "kā",
+              "raw": "咖 kā"
+            },
+            {
+              "character": "啡",
+              "pinyin": "fēi",
+              "raw": "啡 fēi"
+            },
+            {
+              "character": "阅",
+              "pinyin": "yuè",
+              "raw": "阅 yuè"
+            },
+            {
+              "character": "废",
+              "pinyin": "fèi",
+              "raw": "废 fèi"
+            },
+            {
+              "character": "贸",
+              "pinyin": "mào",
+              "raw": "贸 mào"
+            }
+          ]
+        },
+        {
+          "heading": "13. 花钟",
+          "lessonNumber": 13,
+          "lessonTitle": "花钟",
+          "entries": [
+            {
+              "character": "芬",
+              "pinyin": "fēn",
+              "raw": "芬 fēn"
+            },
+            {
+              "character": "芳",
+              "pinyin": "fāng",
+              "raw": "芳 fāng"
+            },
+            {
+              "character": "燥",
+              "pinyin": "zào",
+              "raw": "燥 zào"
+            },
+            {
+              "character": "适",
+              "pinyin": "shì",
+              "raw": "适 shì"
+            },
+            {
+              "character": "雅",
+              "pinyin": "yǎ",
+              "raw": "雅 yǎ"
+            },
+            {
+              "character": "吻",
+              "pinyin": "wěn",
+              "raw": "吻 wěn"
+            },
+            {
+              "character": "组",
+              "pinyin": "zǔ",
+              "raw": "组 zǔ"
+            }
+          ]
+        },
+        {
+          "heading": "14. 蜜蜂",
+          "lessonNumber": 14,
+          "lessonTitle": "蜜蜂",
+          "entries": [
+            {
+              "character": "概",
+              "pinyin": "gài",
+              "raw": "概 gài"
+            },
+            {
+              "character": "阻",
+              "pinyin": "zǔ",
+              "raw": "阻 zǔ"
+            },
+            {
+              "character": "测",
+              "pinyin": "cè",
+              "raw": "测 cè"
+            },
+            {
+              "character": "括",
+              "pinyin": "kuò",
+              "raw": "括 kuò"
+            },
+            {
+              "character": "误",
+              "pinyin": "wù",
+              "raw": "误 wù"
+            },
+            {
+              "character": "逆",
+              "pinyin": "nì",
+              "raw": "逆 nì"
+            },
+            {
+              "character": "途",
+              "pinyin": "tú",
+              "raw": "途 tú"
+            },
+            {
+              "character": "陌",
+              "pinyin": "mò",
+              "raw": "陌 mò"
+            },
+            {
+              "character": "超",
+              "pinyin": "chāo",
+              "raw": "超 chāo"
+            }
+          ]
+        },
+        {
+          "heading": "15. 小虾",
+          "lessonNumber": 15,
+          "lessonTitle": "小虾",
+          "entries": [
+            {
+              "character": "隙",
+              "pinyin": "xì",
+              "raw": "隙 xì"
+            },
+            {
+              "character": "掀",
+              "pinyin": "xiān",
+              "raw": "掀 xiān"
+            },
+            {
+              "character": "稍",
+              "pinyin": "shāo",
+              "raw": "稍 shāo"
+            },
+            {
+              "character": "逐",
+              "pinyin": "zhú",
+              "raw": "逐 zhú"
+            },
+            {
+              "character": "末",
+              "pinyin": "mò",
+              "raw": "末 mò"
+            },
+            {
+              "character": "搏",
+              "pinyin": "bó",
+              "raw": "搏 bó"
+            },
+            {
+              "character": "较",
+              "pinyin": "jiào",
+              "raw": "较 jiào"
+            },
+            {
+              "character": "腹",
+              "pinyin": "fù",
+              "raw": "腹 fù"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地四",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地四",
+          "entries": [
+            {
+              "character": "醋",
+              "pinyin": "cù",
+              "raw": "醋 cù"
+            },
+            {
+              "character": "煎",
+              "pinyin": "jiān",
+              "raw": "煎 jiān"
+            },
+            {
+              "character": "蒸",
+              "pinyin": "zhēng",
+              "raw": "蒸 zhēng"
+            },
+            {
+              "character": "爆",
+              "pinyin": "bào",
+              "raw": "爆 bào"
+            },
+            {
+              "character": "炖",
+              "pinyin": "dùn",
+              "raw": "炖 dùn"
+            },
+            {
+              "character": "炸",
+              "pinyin": "zhá",
+              "raw": "炸 zhá"
+            },
+            {
+              "character": "煮",
+              "pinyin": "zhǔ",
+              "raw": "煮 zhǔ"
+            }
+          ]
+        },
+        {
+          "heading": "16. 宇宙的另一边",
+          "lessonNumber": 16,
+          "lessonTitle": "宇宙的另一边",
+          "entries": [
+            {
+              "character": "秘",
+              "pinyin": "mì",
+              "raw": "秘 mì"
+            },
+            {
+              "character": "密",
+              "pinyin": "mì",
+              "raw": "密 mì"
+            },
+            {
+              "character": "栋",
+              "pinyin": "dòng",
+              "raw": "栋 dòng"
+            },
+            {
+              "character": "梯",
+              "pinyin": "tī",
+              "raw": "梯 tī"
+            },
+            {
+              "character": "铃",
+              "pinyin": "líng",
+              "raw": "铃 líng"
+            },
+            {
+              "character": "乘",
+              "pinyin": "chéng",
+              "raw": "乘 chéng"
+            },
+            {
+              "character": "绪",
+              "pinyin": "xù",
+              "raw": "绪 xù"
+            },
+            {
+              "character": "篇",
+              "pinyin": "piān",
+              "raw": "篇 piān"
+            }
+          ]
+        },
+        {
+          "heading": "17. 我变成了一棵树",
+          "lessonNumber": 17,
+          "lessonTitle": "我变成了一棵树",
+          "entries": [
+            {
+              "character": "狐",
+              "pinyin": "hú",
+              "raw": "狐 hú"
+            },
+            {
+              "character": "狸",
+              "pinyin": "lí",
+              "raw": "狸 lí"
+            },
+            {
+              "character": "丁",
+              "pinyin": "dīng",
+              "raw": "丁 dīng"
+            },
+            {
+              "character": "零",
+              "pinyin": "líng",
+              "raw": "零 líng"
+            },
+            {
+              "character": "巧",
+              "pinyin": "qiǎo",
+              "raw": "巧 qiǎo"
+            },
+            {
+              "character": "克",
+              "pinyin": "kè",
+              "raw": "克 kè"
+            },
+            {
+              "character": "肠",
+              "pinyin": "cháng",
+              "raw": "肠 cháng"
+            },
+            {
+              "character": "继",
+              "pinyin": "jì",
+              "raw": "继 jì"
+            },
+            {
+              "character": "续",
+              "pinyin": "xù",
+              "raw": "续 xù"
+            },
+            {
+              "character": "抬",
+              "pinyin": "tái",
+              "raw": "抬 tái"
+            },
+            {
+              "character": "秘",
+              "pinyin": "mì",
+              "raw": "秘 mì"
+            },
+            {
+              "character": "密",
+              "pinyin": "mì",
+              "raw": "密 mì"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地五",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地五",
+          "entries": [
+            {
+              "character": "邢",
+              "pinyin": "xíng",
+              "raw": "邢 xíng"
+            },
+            {
+              "character": "款",
+              "pinyin": "kuǎn",
+              "raw": "款 kuǎn"
+            },
+            {
+              "character": "榨",
+              "pinyin": "zhà",
+              "raw": "榨 zhà"
+            },
+            {
+              "character": "廊",
+              "pinyin": "láng",
+              "raw": "廊 láng"
+            },
+            {
+              "character": "婴",
+              "pinyin": "yīng",
+              "raw": "婴 yīng"
+            },
+            {
+              "character": "灼",
+              "pinyin": "zhuó",
+              "raw": "灼 zhuó"
+            }
+          ]
+        },
+        {
+          "heading": "18. 童年的水墨画",
+          "lessonNumber": 18,
+          "lessonTitle": "童年的水墨画",
+          "entries": [
+            {
+              "character": "墨",
+              "pinyin": "mò",
+              "raw": "墨 mò"
+            },
+            {
+              "character": "竿",
+              "pinyin": "gān",
+              "raw": "竿 gān"
+            },
+            {
+              "character": "腾",
+              "pinyin": "téng",
+              "raw": "腾 téng"
+            },
+            {
+              "character": "碎",
+              "pinyin": "suì",
+              "raw": "碎 suì"
+            },
+            {
+              "character": "拨",
+              "pinyin": "bō",
+              "raw": "拨 bō"
+            },
+            {
+              "character": "浪",
+              "pinyin": "làng",
+              "raw": "浪 làng"
+            },
+            {
+              "character": "葫",
+              "pinyin": "hú",
+              "raw": "葫 hú"
+            },
+            {
+              "character": "爽",
+              "pinyin": "shuǎng",
+              "raw": "爽 shuǎng"
+            },
+            {
+              "character": "蘑",
+              "pinyin": "mó",
+              "raw": "蘑 mó"
+            },
+            {
+              "character": "菇",
+              "pinyin": "gū",
+              "raw": "菇 gū"
+            }
+          ]
+        },
+        {
+          "heading": "19. 剃头大师",
+          "lessonNumber": 19,
+          "lessonTitle": "剃头大师",
+          "entries": [
+            {
+              "character": "胆",
+              "pinyin": "dǎn",
+              "raw": "胆 dǎn"
+            },
+            {
+              "character": "鬼",
+              "pinyin": "guǐ",
+              "raw": "鬼 guǐ"
+            },
+            {
+              "character": "骂",
+              "pinyin": "mà",
+              "raw": "骂 mà"
+            },
+            {
+              "character": "仇",
+              "pinyin": "chóu",
+              "raw": "仇 chóu"
+            },
+            {
+              "character": "差",
+              "pinyin": "chà",
+              "raw": "差 chà"
+            },
+            {
+              "character": "付",
+              "pinyin": "fù",
+              "raw": "付 fù"
+            },
+            {
+              "character": "倍",
+              "pinyin": "bèi",
+              "raw": "倍 bèi"
+            },
+            {
+              "character": "虽",
+              "pinyin": "suī",
+              "raw": "虽 suī"
+            },
+            {
+              "character": "件",
+              "pinyin": "jiàn",
+              "raw": "件 jiàn"
+            }
+          ]
+        },
+        {
+          "heading": "20. 肥皂泡",
+          "lessonNumber": 20,
+          "lessonTitle": "肥皂泡",
+          "entries": [
+            {
+              "character": "廊",
+              "pinyin": "láng",
+              "raw": "廊 láng"
+            },
+            {
+              "character": "碗",
+              "pinyin": "wǎn",
+              "raw": "碗 wǎn"
+            },
+            {
+              "character": "若",
+              "pinyin": "ruò",
+              "raw": "若 ruò"
+            },
+            {
+              "character": "透",
+              "pinyin": "tòu",
+              "raw": "透 tòu"
+            },
+            {
+              "character": "娇",
+              "pinyin": "jiāo",
+              "raw": "娇 jiāo"
+            },
+            {
+              "character": "扯",
+              "pinyin": "chě",
+              "raw": "扯 chě"
+            },
+            {
+              "character": "仰",
+              "pinyin": "yǎng",
+              "raw": "仰 yǎng"
+            },
+            {
+              "character": "串",
+              "pinyin": "chuàn",
+              "raw": "串 chuàn"
+            },
+            {
+              "character": "越",
+              "pinyin": "yuè",
+              "raw": "越 yuè"
+            },
+            {
+              "character": "婴",
+              "pinyin": "yīng",
+              "raw": "婴 yīng"
+            },
+            {
+              "character": "希",
+              "pinyin": "xī",
+              "raw": "希 xī"
+            }
+          ]
+        },
+        {
+          "heading": "21. 我不能失信",
+          "lessonNumber": 21,
+          "lessonTitle": "我不能失信",
+          "entries": [
+            {
+              "character": "耀",
+              "pinyin": "yào",
+              "raw": "耀 yào"
+            },
+            {
+              "character": "庆",
+              "pinyin": "qìng",
+              "raw": "庆 qìng"
+            },
+            {
+              "character": "盼",
+              "pinyin": "pàn",
+              "raw": "盼 pàn"
+            },
+            {
+              "character": "叠",
+              "pinyin": "dié",
+              "raw": "叠 dié"
+            },
+            {
+              "character": "歉",
+              "pinyin": "qiàn",
+              "raw": "歉 qiàn"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地六",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地六",
+          "entries": [
+            {
+              "character": "脆",
+              "pinyin": "cuì",
+              "raw": "脆 cuì"
+            },
+            {
+              "character": "薄",
+              "pinyin": "báo",
+              "raw": "薄 báo"
+            },
+            {
+              "character": "扯",
+              "pinyin": "chě",
+              "raw": "扯 chě"
+            },
+            {
+              "character": "仰",
+              "pinyin": "yǎng",
+              "raw": "仰 yǎng"
+            },
+            {
+              "character": "婴",
+              "pinyin": "yīng",
+              "raw": "婴 yīng"
+            },
+            {
+              "character": "灼",
+              "pinyin": "zhuó",
+              "raw": "灼 zhuó"
+            }
+          ]
+        },
+        {
+          "heading": "22. 我们奇妙的世界",
+          "lessonNumber": 22,
+          "lessonTitle": "我们奇妙的世界",
+          "entries": [
+            {
+              "character": "呈",
+              "pinyin": "chéng",
+              "raw": "呈 chéng"
+            },
+            {
+              "character": "幻",
+              "pinyin": "huàn",
+              "raw": "幻 huàn"
+            },
+            {
+              "character": "蜡",
+              "pinyin": "là",
+              "raw": "蜡 là"
+            },
+            {
+              "character": "烛",
+              "pinyin": "zhú",
+              "raw": "烛 zhú"
+            },
+            {
+              "character": "诱",
+              "pinyin": "yòu",
+              "raw": "诱 yòu"
+            },
+            {
+              "character": "润",
+              "pinyin": "rùn",
+              "raw": "润 rùn"
+            },
+            {
+              "character": "芒",
+              "pinyin": "máng",
+              "raw": "芒 máng"
+            },
+            {
+              "character": "剑",
+              "pinyin": "jiàn",
+              "raw": "剑 jiàn"
+            },
+            {
+              "character": "普",
+              "pinyin": "pǔ",
+              "raw": "普 pǔ"
+            },
+            {
+              "character": "通",
+              "pinyin": "tōng",
+              "raw": "通 tōng"
+            },
+            {
+              "character": "模",
+              "pinyin": "mó",
+              "raw": "模 mó"
+            },
+            {
+              "character": "型",
+              "pinyin": "xíng",
+              "raw": "型 xíng"
+            }
+          ]
+        },
+        {
+          "heading": "23. 海底世界",
+          "lessonNumber": 23,
+          "lessonTitle": "海底世界",
+          "entries": [
+            {
+              "character": "宁",
+              "pinyin": "níng",
+              "raw": "宁 níng"
+            },
+            {
+              "character": "官",
+              "pinyin": "guān",
+              "raw": "官 guān"
+            },
+            {
+              "character": "汪",
+              "pinyin": "wāng",
+              "raw": "汪 wāng"
+            },
+            {
+              "character": "险",
+              "pinyin": "xiǎn",
+              "raw": "险 xiǎn"
+            },
+            {
+              "character": "参",
+              "pinyin": "shēn",
+              "raw": "参 shēn"
+            },
+            {
+              "character": "攻",
+              "pinyin": "gōng",
+              "raw": "攻 gōng"
+            },
+            {
+              "character": "推",
+              "pinyin": "tuī",
+              "raw": "推 tuī"
+            },
+            {
+              "character": "迅",
+              "pinyin": "xùn",
+              "raw": "迅 xùn"
+            },
+            {
+              "character": "速",
+              "pinyin": "sù",
+              "raw": "速 sù"
+            },
+            {
+              "character": "退",
+              "pinyin": "tuì",
+              "raw": "退 tuì"
+            },
+            {
+              "character": "铁",
+              "pinyin": "tiě",
+              "raw": "铁 tiě"
+            }
+          ]
+        },
+        {
+          "heading": "24. 火烧云",
+          "lessonNumber": 24,
+          "lessonTitle": "火烧云",
+          "entries": [
+            {
+              "character": "必",
+              "pinyin": "bì",
+              "raw": "必 bì"
+            },
+            {
+              "character": "胡",
+              "pinyin": "hú",
+              "raw": "胡 hú"
+            },
+            {
+              "character": "灿",
+              "pinyin": "càn",
+              "raw": "灿 càn"
+            },
+            {
+              "character": "骑",
+              "pinyin": "qí",
+              "raw": "骑 qí"
+            },
+            {
+              "character": "秒",
+              "pinyin": "miǎo",
+              "raw": "秒 miǎo"
+            },
+            {
+              "character": "凶",
+              "pinyin": "xiōng",
+              "raw": "凶 xiōng"
+            },
+            {
+              "character": "猛",
+              "pinyin": "měng",
+              "raw": "猛 měng"
+            },
+            {
+              "character": "庙",
+              "pinyin": "miào",
+              "raw": "庙 miào"
+            },
+            {
+              "character": "威",
+              "pinyin": "wēi",
+              "raw": "威 wēi"
+            },
+            {
+              "character": "武",
+              "pinyin": "wǔ",
+              "raw": "武 wǔ"
+            },
+            {
+              "character": "镇",
+              "pinyin": "zhèn",
+              "raw": "镇 zhèn"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地七",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地七",
+          "entries": [
+            {
+              "character": "灿",
+              "pinyin": "càn",
+              "raw": "灿 càn"
+            },
+            {
+              "character": "芒",
+              "pinyin": "máng",
+              "raw": "芒 máng"
+            },
+            {
+              "character": "模",
+              "pinyin": "mú",
+              "raw": "模 mú"
+            },
+            {
+              "character": "镇",
+              "pinyin": "zhèn",
+              "raw": "镇 zhèn"
+            },
+            {
+              "character": "耀",
+              "pinyin": "yào",
+              "raw": "耀 yào"
+            },
+            {
+              "character": "险",
+              "pinyin": "xiǎn",
+              "raw": "险 xiǎn"
+            }
+          ]
+        },
+        {
+          "heading": "25. 慢性子裁缝和急性子顾客",
+          "lessonNumber": 25,
+          "lessonTitle": "慢性子裁缝和急性子顾客",
+          "entries": [
+            {
+              "character": "卷",
+              "pinyin": "juǎn",
+              "raw": "卷 juǎn"
+            },
+            {
+              "character": "缝",
+              "pinyin": "féng",
+              "raw": "缝 féng"
+            },
+            {
+              "character": "箱",
+              "pinyin": "xiāng",
+              "raw": "箱 xiāng"
+            },
+            {
+              "character": "夸",
+              "pinyin": "kuā",
+              "raw": "夸 kuā"
+            },
+            {
+              "character": "歪",
+              "pinyin": "wāi",
+              "raw": "歪 wāi"
+            },
+            {
+              "character": "承",
+              "pinyin": "chéng",
+              "raw": "承 chéng"
+            },
+            {
+              "character": "袖",
+              "pinyin": "xiù",
+              "raw": "袖 xiù"
+            },
+            {
+              "character": "衬",
+              "pinyin": "chèn",
+              "raw": "衬 chèn"
+            },
+            {
+              "character": "衫",
+              "pinyin": "shān",
+              "raw": "衫 shān"
+            },
+            {
+              "character": "负",
+              "pinyin": "fù",
+              "raw": "负 fù"
+            },
+            {
+              "character": "泄",
+              "pinyin": "xiè",
+              "raw": "泄 xiè"
+            },
+            {
+              "character": "艺",
+              "pinyin": "yì",
+              "raw": "艺 yì"
+            }
+          ]
+        },
+        {
+          "heading": "26. 方帽子店",
+          "lessonNumber": 26,
+          "lessonTitle": "方帽子店",
+          "entries": [
+            {
+              "character": "蕉",
+              "pinyin": "jiāo",
+              "raw": "蕉 jiāo"
+            },
+            {
+              "character": "筒",
+              "pinyin": "tǒng",
+              "raw": "筒 tǒng"
+            },
+            {
+              "character": "董",
+              "pinyin": "dǒng",
+              "raw": "董 dǒng"
+            },
+            {
+              "character": "嚷",
+              "pinyin": "rǎng",
+              "raw": "嚷 rǎng"
+            },
+            {
+              "character": "溜",
+              "pinyin": "liū",
+              "raw": "溜 liū"
+            },
+            {
+              "character": "筒",
+              "pinyin": "tǒng",
+              "raw": "筒 tǒng"
+            },
+            {
+              "character": "扣",
+              "pinyin": "kòu",
+              "raw": "扣 kòu"
+            },
+            {
+              "character": "蕉",
+              "pinyin": "jiāo",
+              "raw": "蕉 jiāo"
+            }
+          ]
+        },
+        {
+          "heading": "27. 漏",
+          "lessonNumber": 27,
+          "lessonTitle": "漏",
+          "entries": [
+            {
+              "character": "婆",
+              "pinyin": "pó",
+              "raw": "婆 pó"
+            },
+            {
+              "character": "脊",
+              "pinyin": "jǐ",
+              "raw": "脊 jǐ"
+            },
+            {
+              "character": "颠",
+              "pinyin": "diān",
+              "raw": "颠 diān"
+            },
+            {
+              "character": "旋",
+              "pinyin": "xuán",
+              "raw": "旋 xuán"
+            },
+            {
+              "character": "纵",
+              "pinyin": "zòng",
+              "raw": "纵 zòng"
+            },
+            {
+              "character": "贼",
+              "pinyin": "zéi",
+              "raw": "贼 zéi"
+            },
+            {
+              "character": "莫",
+              "pinyin": "mò",
+              "raw": "莫 mò"
+            },
+            {
+              "character": "厉",
+              "pinyin": "lì",
+              "raw": "厉 lì"
+            },
+            {
+              "character": "抱",
+              "pinyin": "bào",
+              "raw": "抱 bào"
+            },
+            {
+              "character": "粘",
+              "pinyin": "zhān",
+              "raw": "粘 zhān"
+            },
+            {
+              "character": "胶",
+              "pinyin": "jiāo",
+              "raw": "胶 jiāo"
+            }
+          ]
+        },
+        {
+          "heading": "28. 枣核",
+          "lessonNumber": 28,
+          "lessonTitle": "枣核",
+          "entries": [
+            {
+              "character": "核",
+              "pinyin": "hé",
+              "raw": "核 hé"
+            },
+            {
+              "character": "妻",
+              "pinyin": "qī",
+              "raw": "妻 qī"
+            },
+            {
+              "character": "爹",
+              "pinyin": "diē",
+              "raw": "爹 diē"
+            },
+            {
+              "character": "罢",
+              "pinyin": "bà",
+              "raw": "罢 bà"
+            },
+            {
+              "character": "勤",
+              "pinyin": "qín",
+              "raw": "勤 qín"
+            },
+            {
+              "character": "困",
+              "pinyin": "kùn",
+              "raw": "困 kùn"
+            },
+            {
+              "character": "牲",
+              "pinyin": "shēng",
+              "raw": "牲 shēng"
+            },
+            {
+              "character": "畜",
+              "pinyin": "chù",
+              "raw": "畜 chù"
+            },
+            {
+              "character": "善",
+              "pinyin": "shàn",
+              "raw": "善 shàn"
+            },
+            {
+              "character": "罢",
+              "pinyin": "bà",
+              "raw": "罢 bà"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地八",
+          "lessonNumber": null,
+          "lessonTitle": "语文园地八",
+          "entries": [
+            {
+              "character": "咳",
+              "pinyin": "ké",
+              "raw": "咳 ké"
+            },
+            {
+              "character": "嗽",
+              "pinyin": "sòu",
+              "raw": "嗽 sòu"
+            },
+            {
+              "character": "呕",
+              "pinyin": "ǒu",
+              "raw": "呕ǒu"
+            },
+            {
+              "character": "吐",
+              "pinyin": "tǔ",
+              "raw": "吐 tǔ"
+            },
+            {
+              "character": "唠",
+              "pinyin": "láo",
+              "raw": "唠 láo"
+            },
+            {
+              "character": "叨",
+              "pinyin": "dāo",
+              "raw": "叨 dāo"
+            },
+            {
+              "character": "嘀",
+              "pinyin": "dí",
+              "raw": "嘀 dí"
+            },
+            {
+              "character": "咕",
+              "pinyin": "gū",
+              "raw": "咕 gū"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "key": "appendix-writing",
+      "title": "写字表（会写·含拼音）",
+      "kind": "appendix",
+      "number": null,
+      "optional": false,
+      "originalHeading": "写字表（生字表二，会写，300 字，带拼音）",
+      "importNotes": [
+        "附件标题标注300字，实际有269条字音记录（257个不重复汉字）；重复字、读音及原有分组均按附件保留，不按标称字数删补。 本表课号、部分篇目与已导入的课文目录不同，作为全册附录独立查阅，不自动对应单篇课文；尚未与出版社原件核对。"
+      ],
+      "text": "1. 古诗三首：融 róng、燕 yàn、鸳 yuān、鸯 yāng、惠 huì、崇 chóng、芦 lú、芽 yá、梅 méi、泛 fàn、减 jiǎn\n2. 燕子：凑 còu、拂 fú、集 jí、聚 jù、形 xíng、成 chéng、掠 lüè、偶ǒu、尔ěr、沾 zhān、倦 juàn、纤 xiān\n3. 荷花：荷 hé、香 xiāng、瓣 bàn、蓬 péng、胀 zhàng、裂 liè、姿 zī、势 shì、仿 fǎng、佛 fú、随 suí、蹈 dǎo、止 zhǐ\n5. 守株待兔：守 shǒu、株 zhū、待 dài、触 chù、颈 jǐng、释 shì、其 qí、耒 lěi\n6. 陶罐和铁罐：骄 jiāo、傲 ào、谦 qiān、虚 xū、懦 nuò、弱 ruò、尘 chén、捧 pěng、代 dài、价 jià\n7. 鹿角和鹿腿：鹿 lù、塘 táng、映 yìng、欣 xīn、赏 shǎng、匀 yún、称 chèn、致 zhì、配 pèi、传 chuán、狮 shī、叹 tàn\n9. 古诗三首：符 fú、欲 yù、魂 hún、借 jiè、酒 jiǔ、何 hé、牧 mù、兄 xiōng、独 dú、异 yì、佳 jiā\n10. 纸的发明：术 shù、伟 wěi、录 lù、册 cè、保 bǎo、存 cún、约 yuē、验 yàn、阿ā、欧ōu、洲 zhōu、社 shè\n11. 赵州桥：县 xiàn、匠 jiàng、设 shè、计 jì、史 shǐ、创 chuàng、举 jǔ、且 qiě、智 zhì、慧 huì、历 lì\n12. 一幅名扬中外的画：术 shù、伟 wěi、录 lù、册 cè、保 bǎo、存 cún、约 yuē、验 yàn、阿ā、欧ōu、洲 zhōu、社 shè\n13. 花钟：斗 dòu、芬 fēn、芳 fāng、内 nèi、醒 xǐng、寿 shòu、苏 sū、强 qiáng、示 shì、昆 kūn、修 xiū、建 jiàn、组 zǔ\n14. 蜜蜂：蜜 mì、蜂 fēng、辨 biàn、阻 zǔ、跨 kuà、括 kuò、检 jiǎn、查 chá、确 què、误 wù、途 tú、陌 mò\n15. 小虾：套 tào、麻 má、烦 fán、悠 yōu、闲 xián、椅 yǐ、泡 pào、沫 mò、冰 bīng、凌 líng、提 tí、棒 bàng\n16. 宇宙的另一边：状 zhuàng、狐 hú、狸 lí、丁 dīng、零 líng、巧 qiǎo、克 kè、肠 cháng、继 jì、续 xù、抬 tái、秘 mì、密 mì\n18. 童年的水墨画：墨 mò、染 rǎn、竿 gān、腾 téng、碎 suì、拨 bō、浪 làng、葫 hú、爽 shuǎng、蘑 mó、菇 gū\n19. 剃头大师：表 biǎo、胆 dǎn、鬼 guǐ、理 lǐ、夺 duó、骂 mà、仇 chóu、差 chà、付 fù、倍 bèi、虽 suī、件 jiàn\n20. 肥皂泡：皂 zào、廊 láng、碗 wǎn、若 ruò、透 tòu、娇 jiāo、扯 chě、仰 yǎng、串 chuàn、越 yuè、婴 yīng、希 xī\n22. 我们奇妙的世界：呈 chéng、幻 huàn、蜡 là、烛 zhú、诱 yòu、润 rùn、芒 máng、剑 jiàn、普 pǔ、通 tōng、模 mó、型 xíng\n23. 海底世界：宁 níng、官 guān、汪 wāng、险 xiǎn、参 shēn、攻 gōng、推 tuī、迅 xùn、速 sù、退 tuì、铁 tiě\n24. 火烧云：必 bì、胡 hú、灿 càn、骑 qí、秒 miǎo、凶 xiōng、猛 měng、庙 miào、威 wēi、武 wǔ、镇 zhèn\n25. 慢性子裁缝和急性子顾客：卷 juǎn、缝 féng、箱 xiāng、夸 kuā、歪 wāi、承 chéng、袖 xiù、衬 chèn、衫 shān、负 fù、泄 xiè、艺 yì\n26. 方帽子店：蕉 jiāo、筒 tǒng、董 dǒng、嚷 rǎng、溜 liū、扣 kòu\n27. 漏：婆 pó、脊 jǐ、颠 diān、旋 xuán、纵 zòng、贼 zéi、莫 mò、厉 lì、抱 bào、粘 zhān、胶 jiāo\n28. 枣核：核 hé、妻 qī、爹 diē、罢 bà、勤 qín、困 kùn、牲 shēng、畜 chù、善 shàn",
+      "sourceNote": "附件标题标注300字，实际有269条字音记录（257个不重复汉字）；重复字、读音及原有分组均按附件保留，不按标称字数删补。 本表课号、部分篇目与已导入的课文目录不同，作为全册附录独立查阅，不自动对应单篇课文；尚未与出版社原件核对。",
+      "questions": [],
+      "tableKind": "writing",
+      "declaredCount": 300,
+      "entryCount": 269,
+      "uniqueCharacterCount": 257,
+      "groups": [
+        {
+          "heading": "1. 古诗三首",
+          "lessonNumber": 1,
+          "lessonTitle": "古诗三首",
+          "entries": [
+            {
+              "character": "融",
+              "pinyin": "róng",
+              "raw": "融 róng"
+            },
+            {
+              "character": "燕",
+              "pinyin": "yàn",
+              "raw": "燕 yàn"
+            },
+            {
+              "character": "鸳",
+              "pinyin": "yuān",
+              "raw": "鸳 yuān"
+            },
+            {
+              "character": "鸯",
+              "pinyin": "yāng",
+              "raw": "鸯 yāng"
+            },
+            {
+              "character": "惠",
+              "pinyin": "huì",
+              "raw": "惠 huì"
+            },
+            {
+              "character": "崇",
+              "pinyin": "chóng",
+              "raw": "崇 chóng"
+            },
+            {
+              "character": "芦",
+              "pinyin": "lú",
+              "raw": "芦 lú"
+            },
+            {
+              "character": "芽",
+              "pinyin": "yá",
+              "raw": "芽 yá"
+            },
+            {
+              "character": "梅",
+              "pinyin": "méi",
+              "raw": "梅 méi"
+            },
+            {
+              "character": "泛",
+              "pinyin": "fàn",
+              "raw": "泛 fàn"
+            },
+            {
+              "character": "减",
+              "pinyin": "jiǎn",
+              "raw": "减 jiǎn"
+            }
+          ]
+        },
+        {
+          "heading": "2. 燕子",
+          "lessonNumber": 2,
+          "lessonTitle": "燕子",
+          "entries": [
+            {
+              "character": "凑",
+              "pinyin": "còu",
+              "raw": "凑 còu"
+            },
+            {
+              "character": "拂",
+              "pinyin": "fú",
+              "raw": "拂 fú"
+            },
+            {
+              "character": "集",
+              "pinyin": "jí",
+              "raw": "集 jí"
+            },
+            {
+              "character": "聚",
+              "pinyin": "jù",
+              "raw": "聚 jù"
+            },
+            {
+              "character": "形",
+              "pinyin": "xíng",
+              "raw": "形 xíng"
+            },
+            {
+              "character": "成",
+              "pinyin": "chéng",
+              "raw": "成 chéng"
+            },
+            {
+              "character": "掠",
+              "pinyin": "lüè",
+              "raw": "掠 lüè"
+            },
+            {
+              "character": "偶",
+              "pinyin": "ǒu",
+              "raw": "偶ǒu"
+            },
+            {
+              "character": "尔",
+              "pinyin": "ěr",
+              "raw": "尔ěr"
+            },
+            {
+              "character": "沾",
+              "pinyin": "zhān",
+              "raw": "沾 zhān"
+            },
+            {
+              "character": "倦",
+              "pinyin": "juàn",
+              "raw": "倦 juàn"
+            },
+            {
+              "character": "纤",
+              "pinyin": "xiān",
+              "raw": "纤 xiān"
+            }
+          ]
+        },
+        {
+          "heading": "3. 荷花",
+          "lessonNumber": 3,
+          "lessonTitle": "荷花",
+          "entries": [
+            {
+              "character": "荷",
+              "pinyin": "hé",
+              "raw": "荷 hé"
+            },
+            {
+              "character": "香",
+              "pinyin": "xiāng",
+              "raw": "香 xiāng"
+            },
+            {
+              "character": "瓣",
+              "pinyin": "bàn",
+              "raw": "瓣 bàn"
+            },
+            {
+              "character": "蓬",
+              "pinyin": "péng",
+              "raw": "蓬 péng"
+            },
+            {
+              "character": "胀",
+              "pinyin": "zhàng",
+              "raw": "胀 zhàng"
+            },
+            {
+              "character": "裂",
+              "pinyin": "liè",
+              "raw": "裂 liè"
+            },
+            {
+              "character": "姿",
+              "pinyin": "zī",
+              "raw": "姿 zī"
+            },
+            {
+              "character": "势",
+              "pinyin": "shì",
+              "raw": "势 shì"
+            },
+            {
+              "character": "仿",
+              "pinyin": "fǎng",
+              "raw": "仿 fǎng"
+            },
+            {
+              "character": "佛",
+              "pinyin": "fú",
+              "raw": "佛 fú"
+            },
+            {
+              "character": "随",
+              "pinyin": "suí",
+              "raw": "随 suí"
+            },
+            {
+              "character": "蹈",
+              "pinyin": "dǎo",
+              "raw": "蹈 dǎo"
+            },
+            {
+              "character": "止",
+              "pinyin": "zhǐ",
+              "raw": "止 zhǐ"
+            }
+          ]
+        },
+        {
+          "heading": "5. 守株待兔",
+          "lessonNumber": 5,
+          "lessonTitle": "守株待兔",
+          "entries": [
+            {
+              "character": "守",
+              "pinyin": "shǒu",
+              "raw": "守 shǒu"
+            },
+            {
+              "character": "株",
+              "pinyin": "zhū",
+              "raw": "株 zhū"
+            },
+            {
+              "character": "待",
+              "pinyin": "dài",
+              "raw": "待 dài"
+            },
+            {
+              "character": "触",
+              "pinyin": "chù",
+              "raw": "触 chù"
+            },
+            {
+              "character": "颈",
+              "pinyin": "jǐng",
+              "raw": "颈 jǐng"
+            },
+            {
+              "character": "释",
+              "pinyin": "shì",
+              "raw": "释 shì"
+            },
+            {
+              "character": "其",
+              "pinyin": "qí",
+              "raw": "其 qí"
+            },
+            {
+              "character": "耒",
+              "pinyin": "lěi",
+              "raw": "耒 lěi"
+            }
+          ]
+        },
+        {
+          "heading": "6. 陶罐和铁罐",
+          "lessonNumber": 6,
+          "lessonTitle": "陶罐和铁罐",
+          "entries": [
+            {
+              "character": "骄",
+              "pinyin": "jiāo",
+              "raw": "骄 jiāo"
+            },
+            {
+              "character": "傲",
+              "pinyin": "ào",
+              "raw": "傲 ào"
+            },
+            {
+              "character": "谦",
+              "pinyin": "qiān",
+              "raw": "谦 qiān"
+            },
+            {
+              "character": "虚",
+              "pinyin": "xū",
+              "raw": "虚 xū"
+            },
+            {
+              "character": "懦",
+              "pinyin": "nuò",
+              "raw": "懦 nuò"
+            },
+            {
+              "character": "弱",
+              "pinyin": "ruò",
+              "raw": "弱 ruò"
+            },
+            {
+              "character": "尘",
+              "pinyin": "chén",
+              "raw": "尘 chén"
+            },
+            {
+              "character": "捧",
+              "pinyin": "pěng",
+              "raw": "捧 pěng"
+            },
+            {
+              "character": "代",
+              "pinyin": "dài",
+              "raw": "代 dài"
+            },
+            {
+              "character": "价",
+              "pinyin": "jià",
+              "raw": "价 jià"
+            }
+          ]
+        },
+        {
+          "heading": "7. 鹿角和鹿腿",
+          "lessonNumber": 7,
+          "lessonTitle": "鹿角和鹿腿",
+          "entries": [
+            {
+              "character": "鹿",
+              "pinyin": "lù",
+              "raw": "鹿 lù"
+            },
+            {
+              "character": "塘",
+              "pinyin": "táng",
+              "raw": "塘 táng"
+            },
+            {
+              "character": "映",
+              "pinyin": "yìng",
+              "raw": "映 yìng"
+            },
+            {
+              "character": "欣",
+              "pinyin": "xīn",
+              "raw": "欣 xīn"
+            },
+            {
+              "character": "赏",
+              "pinyin": "shǎng",
+              "raw": "赏 shǎng"
+            },
+            {
+              "character": "匀",
+              "pinyin": "yún",
+              "raw": "匀 yún"
+            },
+            {
+              "character": "称",
+              "pinyin": "chèn",
+              "raw": "称 chèn"
+            },
+            {
+              "character": "致",
+              "pinyin": "zhì",
+              "raw": "致 zhì"
+            },
+            {
+              "character": "配",
+              "pinyin": "pèi",
+              "raw": "配 pèi"
+            },
+            {
+              "character": "传",
+              "pinyin": "chuán",
+              "raw": "传 chuán"
+            },
+            {
+              "character": "狮",
+              "pinyin": "shī",
+              "raw": "狮 shī"
+            },
+            {
+              "character": "叹",
+              "pinyin": "tàn",
+              "raw": "叹 tàn"
+            }
+          ]
+        },
+        {
+          "heading": "9. 古诗三首",
+          "lessonNumber": 9,
+          "lessonTitle": "古诗三首",
+          "entries": [
+            {
+              "character": "符",
+              "pinyin": "fú",
+              "raw": "符 fú"
+            },
+            {
+              "character": "欲",
+              "pinyin": "yù",
+              "raw": "欲 yù"
+            },
+            {
+              "character": "魂",
+              "pinyin": "hún",
+              "raw": "魂 hún"
+            },
+            {
+              "character": "借",
+              "pinyin": "jiè",
+              "raw": "借 jiè"
+            },
+            {
+              "character": "酒",
+              "pinyin": "jiǔ",
+              "raw": "酒 jiǔ"
+            },
+            {
+              "character": "何",
+              "pinyin": "hé",
+              "raw": "何 hé"
+            },
+            {
+              "character": "牧",
+              "pinyin": "mù",
+              "raw": "牧 mù"
+            },
+            {
+              "character": "兄",
+              "pinyin": "xiōng",
+              "raw": "兄 xiōng"
+            },
+            {
+              "character": "独",
+              "pinyin": "dú",
+              "raw": "独 dú"
+            },
+            {
+              "character": "异",
+              "pinyin": "yì",
+              "raw": "异 yì"
+            },
+            {
+              "character": "佳",
+              "pinyin": "jiā",
+              "raw": "佳 jiā"
+            }
+          ]
+        },
+        {
+          "heading": "10. 纸的发明",
+          "lessonNumber": 10,
+          "lessonTitle": "纸的发明",
+          "entries": [
+            {
+              "character": "术",
+              "pinyin": "shù",
+              "raw": "术 shù"
+            },
+            {
+              "character": "伟",
+              "pinyin": "wěi",
+              "raw": "伟 wěi"
+            },
+            {
+              "character": "录",
+              "pinyin": "lù",
+              "raw": "录 lù"
+            },
+            {
+              "character": "册",
+              "pinyin": "cè",
+              "raw": "册 cè"
+            },
+            {
+              "character": "保",
+              "pinyin": "bǎo",
+              "raw": "保 bǎo"
+            },
+            {
+              "character": "存",
+              "pinyin": "cún",
+              "raw": "存 cún"
+            },
+            {
+              "character": "约",
+              "pinyin": "yuē",
+              "raw": "约 yuē"
+            },
+            {
+              "character": "验",
+              "pinyin": "yàn",
+              "raw": "验 yàn"
+            },
+            {
+              "character": "阿",
+              "pinyin": "ā",
+              "raw": "阿ā"
+            },
+            {
+              "character": "欧",
+              "pinyin": "ōu",
+              "raw": "欧ōu"
+            },
+            {
+              "character": "洲",
+              "pinyin": "zhōu",
+              "raw": "洲 zhōu"
+            },
+            {
+              "character": "社",
+              "pinyin": "shè",
+              "raw": "社 shè"
+            }
+          ]
+        },
+        {
+          "heading": "11. 赵州桥",
+          "lessonNumber": 11,
+          "lessonTitle": "赵州桥",
+          "entries": [
+            {
+              "character": "县",
+              "pinyin": "xiàn",
+              "raw": "县 xiàn"
+            },
+            {
+              "character": "匠",
+              "pinyin": "jiàng",
+              "raw": "匠 jiàng"
+            },
+            {
+              "character": "设",
+              "pinyin": "shè",
+              "raw": "设 shè"
+            },
+            {
+              "character": "计",
+              "pinyin": "jì",
+              "raw": "计 jì"
+            },
+            {
+              "character": "史",
+              "pinyin": "shǐ",
+              "raw": "史 shǐ"
+            },
+            {
+              "character": "创",
+              "pinyin": "chuàng",
+              "raw": "创 chuàng"
+            },
+            {
+              "character": "举",
+              "pinyin": "jǔ",
+              "raw": "举 jǔ"
+            },
+            {
+              "character": "且",
+              "pinyin": "qiě",
+              "raw": "且 qiě"
+            },
+            {
+              "character": "智",
+              "pinyin": "zhì",
+              "raw": "智 zhì"
+            },
+            {
+              "character": "慧",
+              "pinyin": "huì",
+              "raw": "慧 huì"
+            },
+            {
+              "character": "历",
+              "pinyin": "lì",
+              "raw": "历 lì"
+            }
+          ]
+        },
+        {
+          "heading": "12. 一幅名扬中外的画",
+          "lessonNumber": 12,
+          "lessonTitle": "一幅名扬中外的画",
+          "entries": [
+            {
+              "character": "术",
+              "pinyin": "shù",
+              "raw": "术 shù"
+            },
+            {
+              "character": "伟",
+              "pinyin": "wěi",
+              "raw": "伟 wěi"
+            },
+            {
+              "character": "录",
+              "pinyin": "lù",
+              "raw": "录 lù"
+            },
+            {
+              "character": "册",
+              "pinyin": "cè",
+              "raw": "册 cè"
+            },
+            {
+              "character": "保",
+              "pinyin": "bǎo",
+              "raw": "保 bǎo"
+            },
+            {
+              "character": "存",
+              "pinyin": "cún",
+              "raw": "存 cún"
+            },
+            {
+              "character": "约",
+              "pinyin": "yuē",
+              "raw": "约 yuē"
+            },
+            {
+              "character": "验",
+              "pinyin": "yàn",
+              "raw": "验 yàn"
+            },
+            {
+              "character": "阿",
+              "pinyin": "ā",
+              "raw": "阿ā"
+            },
+            {
+              "character": "欧",
+              "pinyin": "ōu",
+              "raw": "欧ōu"
+            },
+            {
+              "character": "洲",
+              "pinyin": "zhōu",
+              "raw": "洲 zhōu"
+            },
+            {
+              "character": "社",
+              "pinyin": "shè",
+              "raw": "社 shè"
+            }
+          ]
+        },
+        {
+          "heading": "13. 花钟",
+          "lessonNumber": 13,
+          "lessonTitle": "花钟",
+          "entries": [
+            {
+              "character": "斗",
+              "pinyin": "dòu",
+              "raw": "斗 dòu"
+            },
+            {
+              "character": "芬",
+              "pinyin": "fēn",
+              "raw": "芬 fēn"
+            },
+            {
+              "character": "芳",
+              "pinyin": "fāng",
+              "raw": "芳 fāng"
+            },
+            {
+              "character": "内",
+              "pinyin": "nèi",
+              "raw": "内 nèi"
+            },
+            {
+              "character": "醒",
+              "pinyin": "xǐng",
+              "raw": "醒 xǐng"
+            },
+            {
+              "character": "寿",
+              "pinyin": "shòu",
+              "raw": "寿 shòu"
+            },
+            {
+              "character": "苏",
+              "pinyin": "sū",
+              "raw": "苏 sū"
+            },
+            {
+              "character": "强",
+              "pinyin": "qiáng",
+              "raw": "强 qiáng"
+            },
+            {
+              "character": "示",
+              "pinyin": "shì",
+              "raw": "示 shì"
+            },
+            {
+              "character": "昆",
+              "pinyin": "kūn",
+              "raw": "昆 kūn"
+            },
+            {
+              "character": "修",
+              "pinyin": "xiū",
+              "raw": "修 xiū"
+            },
+            {
+              "character": "建",
+              "pinyin": "jiàn",
+              "raw": "建 jiàn"
+            },
+            {
+              "character": "组",
+              "pinyin": "zǔ",
+              "raw": "组 zǔ"
+            }
+          ]
+        },
+        {
+          "heading": "14. 蜜蜂",
+          "lessonNumber": 14,
+          "lessonTitle": "蜜蜂",
+          "entries": [
+            {
+              "character": "蜜",
+              "pinyin": "mì",
+              "raw": "蜜 mì"
+            },
+            {
+              "character": "蜂",
+              "pinyin": "fēng",
+              "raw": "蜂 fēng"
+            },
+            {
+              "character": "辨",
+              "pinyin": "biàn",
+              "raw": "辨 biàn"
+            },
+            {
+              "character": "阻",
+              "pinyin": "zǔ",
+              "raw": "阻 zǔ"
+            },
+            {
+              "character": "跨",
+              "pinyin": "kuà",
+              "raw": "跨 kuà"
+            },
+            {
+              "character": "括",
+              "pinyin": "kuò",
+              "raw": "括 kuò"
+            },
+            {
+              "character": "检",
+              "pinyin": "jiǎn",
+              "raw": "检 jiǎn"
+            },
+            {
+              "character": "查",
+              "pinyin": "chá",
+              "raw": "查 chá"
+            },
+            {
+              "character": "确",
+              "pinyin": "què",
+              "raw": "确 què"
+            },
+            {
+              "character": "误",
+              "pinyin": "wù",
+              "raw": "误 wù"
+            },
+            {
+              "character": "途",
+              "pinyin": "tú",
+              "raw": "途 tú"
+            },
+            {
+              "character": "陌",
+              "pinyin": "mò",
+              "raw": "陌 mò"
+            }
+          ]
+        },
+        {
+          "heading": "15. 小虾",
+          "lessonNumber": 15,
+          "lessonTitle": "小虾",
+          "entries": [
+            {
+              "character": "套",
+              "pinyin": "tào",
+              "raw": "套 tào"
+            },
+            {
+              "character": "麻",
+              "pinyin": "má",
+              "raw": "麻 má"
+            },
+            {
+              "character": "烦",
+              "pinyin": "fán",
+              "raw": "烦 fán"
+            },
+            {
+              "character": "悠",
+              "pinyin": "yōu",
+              "raw": "悠 yōu"
+            },
+            {
+              "character": "闲",
+              "pinyin": "xián",
+              "raw": "闲 xián"
+            },
+            {
+              "character": "椅",
+              "pinyin": "yǐ",
+              "raw": "椅 yǐ"
+            },
+            {
+              "character": "泡",
+              "pinyin": "pào",
+              "raw": "泡 pào"
+            },
+            {
+              "character": "沫",
+              "pinyin": "mò",
+              "raw": "沫 mò"
+            },
+            {
+              "character": "冰",
+              "pinyin": "bīng",
+              "raw": "冰 bīng"
+            },
+            {
+              "character": "凌",
+              "pinyin": "líng",
+              "raw": "凌 líng"
+            },
+            {
+              "character": "提",
+              "pinyin": "tí",
+              "raw": "提 tí"
+            },
+            {
+              "character": "棒",
+              "pinyin": "bàng",
+              "raw": "棒 bàng"
+            }
+          ]
+        },
+        {
+          "heading": "16. 宇宙的另一边",
+          "lessonNumber": 16,
+          "lessonTitle": "宇宙的另一边",
+          "entries": [
+            {
+              "character": "状",
+              "pinyin": "zhuàng",
+              "raw": "状 zhuàng"
+            },
+            {
+              "character": "狐",
+              "pinyin": "hú",
+              "raw": "狐 hú"
+            },
+            {
+              "character": "狸",
+              "pinyin": "lí",
+              "raw": "狸 lí"
+            },
+            {
+              "character": "丁",
+              "pinyin": "dīng",
+              "raw": "丁 dīng"
+            },
+            {
+              "character": "零",
+              "pinyin": "líng",
+              "raw": "零 líng"
+            },
+            {
+              "character": "巧",
+              "pinyin": "qiǎo",
+              "raw": "巧 qiǎo"
+            },
+            {
+              "character": "克",
+              "pinyin": "kè",
+              "raw": "克 kè"
+            },
+            {
+              "character": "肠",
+              "pinyin": "cháng",
+              "raw": "肠 cháng"
+            },
+            {
+              "character": "继",
+              "pinyin": "jì",
+              "raw": "继 jì"
+            },
+            {
+              "character": "续",
+              "pinyin": "xù",
+              "raw": "续 xù"
+            },
+            {
+              "character": "抬",
+              "pinyin": "tái",
+              "raw": "抬 tái"
+            },
+            {
+              "character": "秘",
+              "pinyin": "mì",
+              "raw": "秘 mì"
+            },
+            {
+              "character": "密",
+              "pinyin": "mì",
+              "raw": "密 mì"
+            }
+          ]
+        },
+        {
+          "heading": "18. 童年的水墨画",
+          "lessonNumber": 18,
+          "lessonTitle": "童年的水墨画",
+          "entries": [
+            {
+              "character": "墨",
+              "pinyin": "mò",
+              "raw": "墨 mò"
+            },
+            {
+              "character": "染",
+              "pinyin": "rǎn",
+              "raw": "染 rǎn"
+            },
+            {
+              "character": "竿",
+              "pinyin": "gān",
+              "raw": "竿 gān"
+            },
+            {
+              "character": "腾",
+              "pinyin": "téng",
+              "raw": "腾 téng"
+            },
+            {
+              "character": "碎",
+              "pinyin": "suì",
+              "raw": "碎 suì"
+            },
+            {
+              "character": "拨",
+              "pinyin": "bō",
+              "raw": "拨 bō"
+            },
+            {
+              "character": "浪",
+              "pinyin": "làng",
+              "raw": "浪 làng"
+            },
+            {
+              "character": "葫",
+              "pinyin": "hú",
+              "raw": "葫 hú"
+            },
+            {
+              "character": "爽",
+              "pinyin": "shuǎng",
+              "raw": "爽 shuǎng"
+            },
+            {
+              "character": "蘑",
+              "pinyin": "mó",
+              "raw": "蘑 mó"
+            },
+            {
+              "character": "菇",
+              "pinyin": "gū",
+              "raw": "菇 gū"
+            }
+          ]
+        },
+        {
+          "heading": "19. 剃头大师",
+          "lessonNumber": 19,
+          "lessonTitle": "剃头大师",
+          "entries": [
+            {
+              "character": "表",
+              "pinyin": "biǎo",
+              "raw": "表 biǎo"
+            },
+            {
+              "character": "胆",
+              "pinyin": "dǎn",
+              "raw": "胆 dǎn"
+            },
+            {
+              "character": "鬼",
+              "pinyin": "guǐ",
+              "raw": "鬼 guǐ"
+            },
+            {
+              "character": "理",
+              "pinyin": "lǐ",
+              "raw": "理 lǐ"
+            },
+            {
+              "character": "夺",
+              "pinyin": "duó",
+              "raw": "夺 duó"
+            },
+            {
+              "character": "骂",
+              "pinyin": "mà",
+              "raw": "骂 mà"
+            },
+            {
+              "character": "仇",
+              "pinyin": "chóu",
+              "raw": "仇 chóu"
+            },
+            {
+              "character": "差",
+              "pinyin": "chà",
+              "raw": "差 chà"
+            },
+            {
+              "character": "付",
+              "pinyin": "fù",
+              "raw": "付 fù"
+            },
+            {
+              "character": "倍",
+              "pinyin": "bèi",
+              "raw": "倍 bèi"
+            },
+            {
+              "character": "虽",
+              "pinyin": "suī",
+              "raw": "虽 suī"
+            },
+            {
+              "character": "件",
+              "pinyin": "jiàn",
+              "raw": "件 jiàn"
+            }
+          ]
+        },
+        {
+          "heading": "20. 肥皂泡",
+          "lessonNumber": 20,
+          "lessonTitle": "肥皂泡",
+          "entries": [
+            {
+              "character": "皂",
+              "pinyin": "zào",
+              "raw": "皂 zào"
+            },
+            {
+              "character": "廊",
+              "pinyin": "láng",
+              "raw": "廊 láng"
+            },
+            {
+              "character": "碗",
+              "pinyin": "wǎn",
+              "raw": "碗 wǎn"
+            },
+            {
+              "character": "若",
+              "pinyin": "ruò",
+              "raw": "若 ruò"
+            },
+            {
+              "character": "透",
+              "pinyin": "tòu",
+              "raw": "透 tòu"
+            },
+            {
+              "character": "娇",
+              "pinyin": "jiāo",
+              "raw": "娇 jiāo"
+            },
+            {
+              "character": "扯",
+              "pinyin": "chě",
+              "raw": "扯 chě"
+            },
+            {
+              "character": "仰",
+              "pinyin": "yǎng",
+              "raw": "仰 yǎng"
+            },
+            {
+              "character": "串",
+              "pinyin": "chuàn",
+              "raw": "串 chuàn"
+            },
+            {
+              "character": "越",
+              "pinyin": "yuè",
+              "raw": "越 yuè"
+            },
+            {
+              "character": "婴",
+              "pinyin": "yīng",
+              "raw": "婴 yīng"
+            },
+            {
+              "character": "希",
+              "pinyin": "xī",
+              "raw": "希 xī"
+            }
+          ]
+        },
+        {
+          "heading": "22. 我们奇妙的世界",
+          "lessonNumber": 22,
+          "lessonTitle": "我们奇妙的世界",
+          "entries": [
+            {
+              "character": "呈",
+              "pinyin": "chéng",
+              "raw": "呈 chéng"
+            },
+            {
+              "character": "幻",
+              "pinyin": "huàn",
+              "raw": "幻 huàn"
+            },
+            {
+              "character": "蜡",
+              "pinyin": "là",
+              "raw": "蜡 là"
+            },
+            {
+              "character": "烛",
+              "pinyin": "zhú",
+              "raw": "烛 zhú"
+            },
+            {
+              "character": "诱",
+              "pinyin": "yòu",
+              "raw": "诱 yòu"
+            },
+            {
+              "character": "润",
+              "pinyin": "rùn",
+              "raw": "润 rùn"
+            },
+            {
+              "character": "芒",
+              "pinyin": "máng",
+              "raw": "芒 máng"
+            },
+            {
+              "character": "剑",
+              "pinyin": "jiàn",
+              "raw": "剑 jiàn"
+            },
+            {
+              "character": "普",
+              "pinyin": "pǔ",
+              "raw": "普 pǔ"
+            },
+            {
+              "character": "通",
+              "pinyin": "tōng",
+              "raw": "通 tōng"
+            },
+            {
+              "character": "模",
+              "pinyin": "mó",
+              "raw": "模 mó"
+            },
+            {
+              "character": "型",
+              "pinyin": "xíng",
+              "raw": "型 xíng"
+            }
+          ]
+        },
+        {
+          "heading": "23. 海底世界",
+          "lessonNumber": 23,
+          "lessonTitle": "海底世界",
+          "entries": [
+            {
+              "character": "宁",
+              "pinyin": "níng",
+              "raw": "宁 níng"
+            },
+            {
+              "character": "官",
+              "pinyin": "guān",
+              "raw": "官 guān"
+            },
+            {
+              "character": "汪",
+              "pinyin": "wāng",
+              "raw": "汪 wāng"
+            },
+            {
+              "character": "险",
+              "pinyin": "xiǎn",
+              "raw": "险 xiǎn"
+            },
+            {
+              "character": "参",
+              "pinyin": "shēn",
+              "raw": "参 shēn"
+            },
+            {
+              "character": "攻",
+              "pinyin": "gōng",
+              "raw": "攻 gōng"
+            },
+            {
+              "character": "推",
+              "pinyin": "tuī",
+              "raw": "推 tuī"
+            },
+            {
+              "character": "迅",
+              "pinyin": "xùn",
+              "raw": "迅 xùn"
+            },
+            {
+              "character": "速",
+              "pinyin": "sù",
+              "raw": "速 sù"
+            },
+            {
+              "character": "退",
+              "pinyin": "tuì",
+              "raw": "退 tuì"
+            },
+            {
+              "character": "铁",
+              "pinyin": "tiě",
+              "raw": "铁 tiě"
+            }
+          ]
+        },
+        {
+          "heading": "24. 火烧云",
+          "lessonNumber": 24,
+          "lessonTitle": "火烧云",
+          "entries": [
+            {
+              "character": "必",
+              "pinyin": "bì",
+              "raw": "必 bì"
+            },
+            {
+              "character": "胡",
+              "pinyin": "hú",
+              "raw": "胡 hú"
+            },
+            {
+              "character": "灿",
+              "pinyin": "càn",
+              "raw": "灿 càn"
+            },
+            {
+              "character": "骑",
+              "pinyin": "qí",
+              "raw": "骑 qí"
+            },
+            {
+              "character": "秒",
+              "pinyin": "miǎo",
+              "raw": "秒 miǎo"
+            },
+            {
+              "character": "凶",
+              "pinyin": "xiōng",
+              "raw": "凶 xiōng"
+            },
+            {
+              "character": "猛",
+              "pinyin": "měng",
+              "raw": "猛 měng"
+            },
+            {
+              "character": "庙",
+              "pinyin": "miào",
+              "raw": "庙 miào"
+            },
+            {
+              "character": "威",
+              "pinyin": "wēi",
+              "raw": "威 wēi"
+            },
+            {
+              "character": "武",
+              "pinyin": "wǔ",
+              "raw": "武 wǔ"
+            },
+            {
+              "character": "镇",
+              "pinyin": "zhèn",
+              "raw": "镇 zhèn"
+            }
+          ]
+        },
+        {
+          "heading": "25. 慢性子裁缝和急性子顾客",
+          "lessonNumber": 25,
+          "lessonTitle": "慢性子裁缝和急性子顾客",
+          "entries": [
+            {
+              "character": "卷",
+              "pinyin": "juǎn",
+              "raw": "卷 juǎn"
+            },
+            {
+              "character": "缝",
+              "pinyin": "féng",
+              "raw": "缝 féng"
+            },
+            {
+              "character": "箱",
+              "pinyin": "xiāng",
+              "raw": "箱 xiāng"
+            },
+            {
+              "character": "夸",
+              "pinyin": "kuā",
+              "raw": "夸 kuā"
+            },
+            {
+              "character": "歪",
+              "pinyin": "wāi",
+              "raw": "歪 wāi"
+            },
+            {
+              "character": "承",
+              "pinyin": "chéng",
+              "raw": "承 chéng"
+            },
+            {
+              "character": "袖",
+              "pinyin": "xiù",
+              "raw": "袖 xiù"
+            },
+            {
+              "character": "衬",
+              "pinyin": "chèn",
+              "raw": "衬 chèn"
+            },
+            {
+              "character": "衫",
+              "pinyin": "shān",
+              "raw": "衫 shān"
+            },
+            {
+              "character": "负",
+              "pinyin": "fù",
+              "raw": "负 fù"
+            },
+            {
+              "character": "泄",
+              "pinyin": "xiè",
+              "raw": "泄 xiè"
+            },
+            {
+              "character": "艺",
+              "pinyin": "yì",
+              "raw": "艺 yì"
+            }
+          ]
+        },
+        {
+          "heading": "26. 方帽子店",
+          "lessonNumber": 26,
+          "lessonTitle": "方帽子店",
+          "entries": [
+            {
+              "character": "蕉",
+              "pinyin": "jiāo",
+              "raw": "蕉 jiāo"
+            },
+            {
+              "character": "筒",
+              "pinyin": "tǒng",
+              "raw": "筒 tǒng"
+            },
+            {
+              "character": "董",
+              "pinyin": "dǒng",
+              "raw": "董 dǒng"
+            },
+            {
+              "character": "嚷",
+              "pinyin": "rǎng",
+              "raw": "嚷 rǎng"
+            },
+            {
+              "character": "溜",
+              "pinyin": "liū",
+              "raw": "溜 liū"
+            },
+            {
+              "character": "扣",
+              "pinyin": "kòu",
+              "raw": "扣 kòu"
+            }
+          ]
+        },
+        {
+          "heading": "27. 漏",
+          "lessonNumber": 27,
+          "lessonTitle": "漏",
+          "entries": [
+            {
+              "character": "婆",
+              "pinyin": "pó",
+              "raw": "婆 pó"
+            },
+            {
+              "character": "脊",
+              "pinyin": "jǐ",
+              "raw": "脊 jǐ"
+            },
+            {
+              "character": "颠",
+              "pinyin": "diān",
+              "raw": "颠 diān"
+            },
+            {
+              "character": "旋",
+              "pinyin": "xuán",
+              "raw": "旋 xuán"
+            },
+            {
+              "character": "纵",
+              "pinyin": "zòng",
+              "raw": "纵 zòng"
+            },
+            {
+              "character": "贼",
+              "pinyin": "zéi",
+              "raw": "贼 zéi"
+            },
+            {
+              "character": "莫",
+              "pinyin": "mò",
+              "raw": "莫 mò"
+            },
+            {
+              "character": "厉",
+              "pinyin": "lì",
+              "raw": "厉 lì"
+            },
+            {
+              "character": "抱",
+              "pinyin": "bào",
+              "raw": "抱 bào"
+            },
+            {
+              "character": "粘",
+              "pinyin": "zhān",
+              "raw": "粘 zhān"
+            },
+            {
+              "character": "胶",
+              "pinyin": "jiāo",
+              "raw": "胶 jiāo"
+            }
+          ]
+        },
+        {
+          "heading": "28. 枣核",
+          "lessonNumber": 28,
+          "lessonTitle": "枣核",
+          "entries": [
+            {
+              "character": "核",
+              "pinyin": "hé",
+              "raw": "核 hé"
+            },
+            {
+              "character": "妻",
+              "pinyin": "qī",
+              "raw": "妻 qī"
+            },
+            {
+              "character": "爹",
+              "pinyin": "diē",
+              "raw": "爹 diē"
+            },
+            {
+              "character": "罢",
+              "pinyin": "bà",
+              "raw": "罢 bà"
+            },
+            {
+              "character": "勤",
+              "pinyin": "qín",
+              "raw": "勤 qín"
+            },
+            {
+              "character": "困",
+              "pinyin": "kùn",
+              "raw": "困 kùn"
+            },
+            {
+              "character": "牲",
+              "pinyin": "shēng",
+              "raw": "牲 shēng"
+            },
+            {
+              "character": "畜",
+              "pinyin": "chù",
+              "raw": "畜 chù"
+            },
+            {
+              "character": "善",
+              "pinyin": "shàn",
+              "raw": "善 shàn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "key": "appendix-vocabulary",
+      "title": "词语表（按附件课文顺序）",
+      "kind": "appendix",
+      "number": null,
+      "optional": false,
+      "originalHeading": "词语表（课本原版词语表，按课文顺序，A4 打印版）",
+      "importNotes": [
+        "按附件的23个课文分组保留255条词语及原有顺序。 本表课号、部分篇目与已导入的课文目录不同，作为全册附录独立查阅，不自动对应单篇课文；尚未与出版社原件核对。"
+      ],
+      "text": "### 第 2 课 燕子\n\n乌黑、活泼、春日、轻风、吹拂、洒落、赶集、聚拢、形成、加入、春光、湖面、偶尔、闲散、纤细\n\n### 第 3 课 荷花\n\n清香、圆盘、花瓣、莲蓬、花骨朵儿、破裂、姿势、眼前、本领、仿佛、随风、飘动、舞蹈、停止\n\n### 第 6 课 陶罐和铁罐\n\n国王、骄傲、傲慢、谦虚、懦弱、神气、住嘴、相提并论、王朝、尘土、光洁、美观、古代、价值、动手\n\n### 第 7 课 鹿角和鹿腿\n\n池塘、痛快、倒映、倒影、欣赏、匀称、精美、别致、没精打采、机灵、哎呀、狮子、机会、叹气\n\n### 第 9 课 古诗三首\n\n节日、酒家、牧童、兄弟、异乡、佳节\n\n### 第 10 课 纸的发明\n\n造纸术、伟大、记录、保存、大约、吸收、经验、原料、满足、朝鲜、半岛、日本、阿拉伯、欧洲、社会\n\n### 第 11 课 赵州桥\n\n赵州桥、石匠、设计、创举、冲击、节省、不但、而且、各自、似乎、体现、人民、智慧、才干、历史\n\n### 第 12 课 一幅名扬中外的画\n\n名扬中外、作坊、街市、热闹、形态、各异、毛驴、欣赏、溜达、保存、传奇\n\n### 第 13 课 花钟\n\n争奇斗艳、芬芳、迷人、艳丽、睡莲、醒来、万寿菊、欣然、苏醒、含笑、展示、昆虫、修建、组成\n\n### 第 14 课 蜜蜂\n\n辨认、能力、阻力、将近、包括、检查、迷失、准确、无误、沿途、陌生、记号、本能\n\n### 第 15 课 小虾\n\n水缸、空隙、掀开、稍等、末端、搏斗、较大、腹部、透明、休闲、追逐\n\n### 第 16 课 宇宙的另一边\n\n流淌、秘密、楼梯、铃声、乘法、思绪、一篇\n\n### 第 17 课 我变成了一棵树\n\n形状、狐狸、巧克力、香肠、继续、抬头、秘密\n\n### 第 18 课 童年的水墨画\n\n水墨画、垂柳、钓竿、扑腾、破碎、拨动、浪花、葫芦、清爽、蘑菇\n\n### 第 19 课 剃头大师\n\n表弟、胆小、理发、夺门而逃、仇人、付钱、双倍、虽然、一件\n\n### 第 20 课 肥皂泡\n\n肥皂、走廊、木碗、若是、透明、娇软、扯着、仰头、一串、飞越、婴儿、希望\n\n### 第 22 课 我们奇妙的世界\n\n奇妙、呈现、变幻、蜡烛、诱人、圆润、光芒、刀剑、普通、模型\n\n### 第 23 课 海底世界\n\n宁静、器官、汪汪、危险、海参、攻击、推动、迅速、后退、铁矿\n\n### 第 24 课 火烧云\n\n必须、胡子、灿烂、骑马、秒表、凶猛、庙门、威武、镇静\n\n### 第 25 课 慢性子裁缝和急性子顾客\n\n卷起来、裁缝、箱子、夸奖、歪头、承认、袖子、衬衫、负责、泄气、手艺\n\n### 第 26 课 方帽子店\n\n帽子、香蕉、圆筒、古董、叫嚷、一溜烟、扣子\n\n### 第 27 课 漏\n\n婆婆、脊背、颠倒、旋转、纵身、贼、莫非、厉害、抱住、粘住、胶水\n\n### 第 28 课 枣核\n\n枣核、夫妻、爹娘、罢休、勤快、困难、牲口、牲畜、善罢甘休",
+      "sourceNote": "按附件的23个课文分组保留255条词语及原有顺序。 本表课号、部分篇目与已导入的课文目录不同，作为全册附录独立查阅，不自动对应单篇课文；尚未与出版社原件核对。",
+      "questions": [],
+      "tableKind": "vocabulary",
+      "declaredCount": null,
+      "entryCount": 255,
+      "uniqueCharacterCount": null,
+      "groups": [
+        {
+          "heading": "第 2 课 燕子",
+          "lessonNumber": 2,
+          "lessonTitle": "燕子",
+          "entries": [
+            "乌黑",
+            "活泼",
+            "春日",
+            "轻风",
+            "吹拂",
+            "洒落",
+            "赶集",
+            "聚拢",
+            "形成",
+            "加入",
+            "春光",
+            "湖面",
+            "偶尔",
+            "闲散",
+            "纤细"
+          ]
+        },
+        {
+          "heading": "第 3 课 荷花",
+          "lessonNumber": 3,
+          "lessonTitle": "荷花",
+          "entries": [
+            "清香",
+            "圆盘",
+            "花瓣",
+            "莲蓬",
+            "花骨朵儿",
+            "破裂",
+            "姿势",
+            "眼前",
+            "本领",
+            "仿佛",
+            "随风",
+            "飘动",
+            "舞蹈",
+            "停止"
+          ]
+        },
+        {
+          "heading": "第 6 课 陶罐和铁罐",
+          "lessonNumber": 6,
+          "lessonTitle": "陶罐和铁罐",
+          "entries": [
+            "国王",
+            "骄傲",
+            "傲慢",
+            "谦虚",
+            "懦弱",
+            "神气",
+            "住嘴",
+            "相提并论",
+            "王朝",
+            "尘土",
+            "光洁",
+            "美观",
+            "古代",
+            "价值",
+            "动手"
+          ]
+        },
+        {
+          "heading": "第 7 课 鹿角和鹿腿",
+          "lessonNumber": 7,
+          "lessonTitle": "鹿角和鹿腿",
+          "entries": [
+            "池塘",
+            "痛快",
+            "倒映",
+            "倒影",
+            "欣赏",
+            "匀称",
+            "精美",
+            "别致",
+            "没精打采",
+            "机灵",
+            "哎呀",
+            "狮子",
+            "机会",
+            "叹气"
+          ]
+        },
+        {
+          "heading": "第 9 课 古诗三首",
+          "lessonNumber": 9,
+          "lessonTitle": "古诗三首",
+          "entries": ["节日", "酒家", "牧童", "兄弟", "异乡", "佳节"]
+        },
+        {
+          "heading": "第 10 课 纸的发明",
+          "lessonNumber": 10,
+          "lessonTitle": "纸的发明",
+          "entries": [
+            "造纸术",
+            "伟大",
+            "记录",
+            "保存",
+            "大约",
+            "吸收",
+            "经验",
+            "原料",
+            "满足",
+            "朝鲜",
+            "半岛",
+            "日本",
+            "阿拉伯",
+            "欧洲",
+            "社会"
+          ]
+        },
+        {
+          "heading": "第 11 课 赵州桥",
+          "lessonNumber": 11,
+          "lessonTitle": "赵州桥",
+          "entries": [
+            "赵州桥",
+            "石匠",
+            "设计",
+            "创举",
+            "冲击",
+            "节省",
+            "不但",
+            "而且",
+            "各自",
+            "似乎",
+            "体现",
+            "人民",
+            "智慧",
+            "才干",
+            "历史"
+          ]
+        },
+        {
+          "heading": "第 12 课 一幅名扬中外的画",
+          "lessonNumber": 12,
+          "lessonTitle": "一幅名扬中外的画",
+          "entries": [
+            "名扬中外",
+            "作坊",
+            "街市",
+            "热闹",
+            "形态",
+            "各异",
+            "毛驴",
+            "欣赏",
+            "溜达",
+            "保存",
+            "传奇"
+          ]
+        },
+        {
+          "heading": "第 13 课 花钟",
+          "lessonNumber": 13,
+          "lessonTitle": "花钟",
+          "entries": [
+            "争奇斗艳",
+            "芬芳",
+            "迷人",
+            "艳丽",
+            "睡莲",
+            "醒来",
+            "万寿菊",
+            "欣然",
+            "苏醒",
+            "含笑",
+            "展示",
+            "昆虫",
+            "修建",
+            "组成"
+          ]
+        },
+        {
+          "heading": "第 14 课 蜜蜂",
+          "lessonNumber": 14,
+          "lessonTitle": "蜜蜂",
+          "entries": [
+            "辨认",
+            "能力",
+            "阻力",
+            "将近",
+            "包括",
+            "检查",
+            "迷失",
+            "准确",
+            "无误",
+            "沿途",
+            "陌生",
+            "记号",
+            "本能"
+          ]
+        },
+        {
+          "heading": "第 15 课 小虾",
+          "lessonNumber": 15,
+          "lessonTitle": "小虾",
+          "entries": [
+            "水缸",
+            "空隙",
+            "掀开",
+            "稍等",
+            "末端",
+            "搏斗",
+            "较大",
+            "腹部",
+            "透明",
+            "休闲",
+            "追逐"
+          ]
+        },
+        {
+          "heading": "第 16 课 宇宙的另一边",
+          "lessonNumber": 16,
+          "lessonTitle": "宇宙的另一边",
+          "entries": ["流淌", "秘密", "楼梯", "铃声", "乘法", "思绪", "一篇"]
+        },
+        {
+          "heading": "第 17 课 我变成了一棵树",
+          "lessonNumber": 17,
+          "lessonTitle": "我变成了一棵树",
+          "entries": ["形状", "狐狸", "巧克力", "香肠", "继续", "抬头", "秘密"]
+        },
+        {
+          "heading": "第 18 课 童年的水墨画",
+          "lessonNumber": 18,
+          "lessonTitle": "童年的水墨画",
+          "entries": [
+            "水墨画",
+            "垂柳",
+            "钓竿",
+            "扑腾",
+            "破碎",
+            "拨动",
+            "浪花",
+            "葫芦",
+            "清爽",
+            "蘑菇"
+          ]
+        },
+        {
+          "heading": "第 19 课 剃头大师",
+          "lessonNumber": 19,
+          "lessonTitle": "剃头大师",
+          "entries": ["表弟", "胆小", "理发", "夺门而逃", "仇人", "付钱", "双倍", "虽然", "一件"]
+        },
+        {
+          "heading": "第 20 课 肥皂泡",
+          "lessonNumber": 20,
+          "lessonTitle": "肥皂泡",
+          "entries": [
+            "肥皂",
+            "走廊",
+            "木碗",
+            "若是",
+            "透明",
+            "娇软",
+            "扯着",
+            "仰头",
+            "一串",
+            "飞越",
+            "婴儿",
+            "希望"
+          ]
+        },
+        {
+          "heading": "第 22 课 我们奇妙的世界",
+          "lessonNumber": 22,
+          "lessonTitle": "我们奇妙的世界",
+          "entries": [
+            "奇妙",
+            "呈现",
+            "变幻",
+            "蜡烛",
+            "诱人",
+            "圆润",
+            "光芒",
+            "刀剑",
+            "普通",
+            "模型"
+          ]
+        },
+        {
+          "heading": "第 23 课 海底世界",
+          "lessonNumber": 23,
+          "lessonTitle": "海底世界",
+          "entries": [
+            "宁静",
+            "器官",
+            "汪汪",
+            "危险",
+            "海参",
+            "攻击",
+            "推动",
+            "迅速",
+            "后退",
+            "铁矿"
+          ]
+        },
+        {
+          "heading": "第 24 课 火烧云",
+          "lessonNumber": 24,
+          "lessonTitle": "火烧云",
+          "entries": ["必须", "胡子", "灿烂", "骑马", "秒表", "凶猛", "庙门", "威武", "镇静"]
+        },
+        {
+          "heading": "第 25 课 慢性子裁缝和急性子顾客",
+          "lessonNumber": 25,
+          "lessonTitle": "慢性子裁缝和急性子顾客",
+          "entries": [
+            "卷起来",
+            "裁缝",
+            "箱子",
+            "夸奖",
+            "歪头",
+            "承认",
+            "袖子",
+            "衬衫",
+            "负责",
+            "泄气",
+            "手艺"
+          ]
+        },
+        {
+          "heading": "第 26 课 方帽子店",
+          "lessonNumber": 26,
+          "lessonTitle": "方帽子店",
+          "entries": ["帽子", "香蕉", "圆筒", "古董", "叫嚷", "一溜烟", "扣子"]
+        },
+        {
+          "heading": "第 27 课 漏",
+          "lessonNumber": 27,
+          "lessonTitle": "漏",
+          "entries": [
+            "婆婆",
+            "脊背",
+            "颠倒",
+            "旋转",
+            "纵身",
+            "贼",
+            "莫非",
+            "厉害",
+            "抱住",
+            "粘住",
+            "胶水"
+          ]
+        },
+        {
+          "heading": "第 28 课 枣核",
+          "lessonNumber": 28,
+          "lessonTitle": "枣核",
+          "entries": ["枣核", "夫妻", "爹娘", "罢休", "勤快", "困难", "牲口", "牲畜", "善罢甘休"]
+        }
+      ]
+    }
+  ]
+}

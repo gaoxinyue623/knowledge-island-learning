@@ -40,12 +40,8 @@ async function loadOptions() {
     loading.value = false
     return
   }
-  if (
-    !curriculumStore.selectedRegionId ||
-    !curriculumStore.selectedGradeId ||
-    !curriculumStore.selectedSemesterId
-  ) {
-    error.value = '请先完成地区、年级和学期选择'
+  if (!curriculumStore.selectedGradeId || !curriculumStore.selectedSemesterId) {
+    error.value = '请先选择年级和课本册次'
     loading.value = false
     return
   }
@@ -104,8 +100,8 @@ onMounted(() => {
 <template>
   <CurriculumPageFrame
     :title="`你正在更换${subjectLabel}课本`"
-    description="同年级、同册次的已接入教材均可自主选择，不受地区限制。只修改这一门学科，其他科目保持不变。"
-    :step="3"
+    description="按当前年级和课本册次选择教材版本。只修改这一门学科，其他科目保持不变。"
+    :step="2"
     back-to="/curriculum-settings"
     context="我的学习设置"
   >
@@ -128,9 +124,7 @@ onMounted(() => {
         :semester-name="semesterName"
         @select="saveSelection"
       />
-      <p v-else class="curriculum-inline-empty">
-        当前年级和学期尚未接入这门学科的教材，无需更换地区。
-      </p>
+      <p v-else class="curriculum-inline-empty">当前年级和册次尚未接入这门学科的教材。</p>
       <p v-if="curriculumStore.error" class="curriculum-alert" role="alert">
         {{ curriculumStore.error }}
       </p>

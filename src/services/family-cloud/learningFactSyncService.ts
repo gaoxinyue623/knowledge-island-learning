@@ -1,12 +1,6 @@
 import { profileArchiveService } from '@/services/profile-archive/profileArchiveService'
-import {
-  updateFamilyCloudProfile,
-  type FamilyCloudUpdateResult,
-} from './familyCloud'
-import {
-  loadLearningSyncBinding,
-  saveLearningSyncBinding,
-} from './learningSyncBindingStorage'
+import { updateFamilyCloudProfile, type FamilyCloudUpdateResult } from './familyCloud'
+import { loadLearningSyncBinding, saveLearningSyncBinding } from './learningSyncBindingStorage'
 
 export type LearningFactSyncResult =
   | { kind: 'not_configured' }

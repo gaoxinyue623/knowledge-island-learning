@@ -1,0 +1,706 @@
+{
+  "title": "沪教牛津英语四年级上册（2022新版）",
+  "publisher": "上海教育出版社",
+  "sourceNote": "按用户提供的四年级上册双语文本整理，年份及页码沿用来稿，未对照出版社原书逐页核验。8个Unit及综合练习，未提供Project。词汇、音标、Reading、中文翻译、Grammar、Sound字母范围已保留，无原版语音示范。Unit 6的科学性问题在正文加注；配套练习保留原题并记录整理说明。补充词汇 hive 来自本课双语Reading，基础题与口语提示为项目原创。",
+  "sourceSha256": "65fb5fc23053bf727babb020a05af2742dab355b173268beeca4445aa5cfa6d1",
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 Where do people live?",
+      "page": 1,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "city",
+          "phonetic": "/ˈsɪti/",
+          "chinese": "城市"
+        },
+        {
+          "english": "building",
+          "phonetic": "/ˈbɪldɪŋ/",
+          "chinese": "建筑物，楼房"
+        },
+        {
+          "english": "flat",
+          "phonetic": "/flæt/",
+          "chinese": "公寓"
+        },
+        {
+          "english": "street",
+          "phonetic": "/striːt/",
+          "chinese": "街道"
+        },
+        {
+          "english": "country",
+          "phonetic": "/ˈkʌntri/",
+          "chinese": "乡村；国家"
+        },
+        {
+          "english": "farm",
+          "phonetic": "/fɑːm/",
+          "chinese": "农场"
+        },
+        {
+          "english": "house",
+          "phonetic": "/haʊs/",
+          "chinese": "房子"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "a",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Where’s your home?",
+          "english": "—Where do you live?\n—I live in a flat in the city.\nThere are many tall buildings and busy streets.\n—Where do you live?\n—I live in a house in the country.\nThere is a farm near my home.\nI love my home.",
+          "chinese": "—你住在哪里？\n—我住在城市里的一套公寓。\n这里有很多高楼和繁忙的街道。\n—你住在哪里？\n—我住在乡村的一栋房子里。\n我家附近有一个农场。\n我爱我的家。"
+        }
+      ],
+      "sentencePattern": "Where do ... live?\n... live ...",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "I live in a flat.",
+      "questions": [
+        {
+          "stem": "“city”在本单元中表示什么？",
+          "options": [
+            "城市",
+            "建筑物，楼房",
+            "公寓"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 city 表示“城市”。"
+        },
+        {
+          "stem": "Where ____ you live?",
+          "options": [
+            "do",
+            "does",
+            "is"
+          ],
+          "correctIndex": 0,
+          "explanation": "you 的一般现在时问句使用 do。"
+        },
+        {
+          "stem": "根据课文，乡村的房子附近有什么？",
+          "options": [
+            "A farm.",
+            "A supermarket.",
+            "A school."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 A farm."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 Where do animals live?",
+      "page": 11,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "eagle",
+          "phonetic": "/ˈiːɡl/",
+          "chinese": "鹰"
+        },
+        {
+          "english": "owl",
+          "phonetic": "/aʊl/",
+          "chinese": "猫头鹰"
+        },
+        {
+          "english": "honeybee",
+          "phonetic": "/ˈhʌnibiː/",
+          "chinese": "蜜蜂"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [
+        {
+          "english": "hive",
+          "chinese": "蜂巢"
+        }
+      ],
+      "sounds": "i",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Animals’ homes",
+          "english": "Look at the eagle. It lives in the mountains.\nLook at the owl. It lives in the tree.\nLook at the honeybee. It lives in a hive.\nWhere are the rabbits? They are in the hole.\nWhere’s the bird? It’s in the nest.",
+          "chinese": "看这只鹰。它住在山里。\n看这只猫头鹰。它住在树上。\n看这只蜜蜂。它住在蜂巢里。\n兔子在哪里？它们在洞穴里。\n小鸟在哪里？它在鸟巢里。"
+        }
+      ],
+      "sentencePattern": "Where’s / Where are ...?\nIt’s / They’re ...",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "The owl lives in the tree.",
+      "questions": [
+        {
+          "stem": "“eagle”在本单元中表示什么？",
+          "options": [
+            "鹰",
+            "猫头鹰",
+            "蜜蜂"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 eagle 表示“鹰”。"
+        },
+        {
+          "stem": "Where are the honeybees?",
+          "options": [
+            "They’re in the hive.",
+            "It’s in the hive.",
+            "They is in the hive."
+          ],
+          "correctIndex": 0,
+          "explanation": "honeybees 是复数，回答使用 They’re。"
+        },
+        {
+          "stem": "根据课文，鹰住在哪里？",
+          "options": [
+            "In the mountains.",
+            "In the hive.",
+            "In the hole."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 In the mountains."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 How do we use numbers?",
+      "page": 21,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "odd numbers",
+          "phonetic": "/ɒd ˈnʌmbəz/",
+          "chinese": "奇数"
+        },
+        {
+          "english": "even numbers",
+          "phonetic": "/ˈiːvn ˈnʌmbəz/",
+          "chinese": "偶数"
+        },
+        {
+          "english": "plus",
+          "phonetic": "/plʌs/",
+          "chinese": "加"
+        },
+        {
+          "english": "minus",
+          "phonetic": "/ˈmaɪnəs/",
+          "chinese": "减"
+        },
+        {
+          "english": "equal",
+          "phonetic": "/ˈiːkwəl/",
+          "chinese": "等于"
+        },
+        {
+          "english": "answer",
+          "phonetic": "/ˈɑːnsə(r)/",
+          "chinese": "答案"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "e",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Numbers! Numbers!",
+          "english": "We use numbers every day.\n1,3,5 are odd numbers.\n2,4,6 are even numbers.\nOne plus two equals three.\nFive minus two equals three.\nHow many pens do we have?\nWe have ten pens. We don’t have any pencils.",
+          "chinese": "我们每天都使用数字。\n1、3、5是奇数。\n2、4、6是偶数。\n一加二等于三。\n五减二等于三。\n我们有多少支钢笔？\n我们有十支钢笔。我们没有铅笔。"
+        }
+      ],
+      "sentencePattern": "How many ... do we have?\nWe have ...\n... don’t have ...",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "Three plus four equals seven.",
+      "questions": [
+        {
+          "stem": "“odd numbers”在本单元中表示什么？",
+          "options": [
+            "奇数",
+            "偶数",
+            "加"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 odd numbers 表示“奇数”。"
+        },
+        {
+          "stem": "How many pens do we have?",
+          "options": [
+            "We have ten pens.",
+            "It is ten yuan.",
+            "They are in the tree."
+          ],
+          "correctIndex": 0,
+          "explanation": "How many 询问数量，回答拥有的数量。"
+        },
+        {
+          "stem": "根据课文，我们没有哪种文具？",
+          "options": [
+            "Pencils.",
+            "Pens.",
+            "Books."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Pencils."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 What do we buy?",
+      "page": 31,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "supermarket",
+          "phonetic": "/ˈsuːpəmɑːkɪt/",
+          "chinese": "超市"
+        },
+        {
+          "english": "a bag of rice",
+          "phonetic": "/ə bæɡ ɒv raɪs/",
+          "chinese": "一袋大米"
+        },
+        {
+          "english": "a box of eggs",
+          "phonetic": "/ə bɒks ɒv eɡz/",
+          "chinese": "一盒鸡蛋"
+        },
+        {
+          "english": "a bottle of juice",
+          "phonetic": "/ə ˈbɒtl ɒv dʒuːs/",
+          "chinese": "一瓶果汁"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "o",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Let’s go shopping",
+          "english": "Let’s go to the supermarket.\n—What would you like?\n—I’d like a bag of rice.\n—I’d like a box of eggs.\n—I’d like a bottle of juice.\n—How much is the juice?\n—It’s ten yuan.\n—How much are the eggs?\n—They’re twelve yuan.",
+          "chinese": "我们去超市吧。\n—你想要点什么？\n—我想要一袋大米。\n—我想要一盒鸡蛋。\n—我想要一瓶果汁。\n—果汁多少钱？\n—十元。\n—鸡蛋多少钱？\n—十二元。"
+        }
+      ],
+      "sentencePattern": "What would you like? I’d like ...\nHow much is/are ...? It’s / They’re ... yuan.",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "I would like a bag of rice.",
+      "questions": [
+        {
+          "stem": "“supermarket”在本单元中表示什么？",
+          "options": [
+            "超市",
+            "一袋大米",
+            "一盒鸡蛋"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 supermarket 表示“超市”。"
+        },
+        {
+          "stem": "How much are the eggs?",
+          "options": [
+            "They’re twelve yuan.",
+            "It’s twelve yuan.",
+            "They twelve yuan."
+          ],
+          "correctIndex": 0,
+          "explanation": "the eggs 是复数，回答使用 They’re。"
+        },
+        {
+          "stem": "根据课文，果汁多少钱？",
+          "options": [
+            "Ten yuan.",
+            "Twelve yuan.",
+            "Fifteen yuan."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Ten yuan."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 How are the seasons different?",
+      "page": 41,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "spring",
+          "phonetic": "/sprɪŋ/",
+          "chinese": "春天"
+        },
+        {
+          "english": "warm",
+          "phonetic": "/wɔːm/",
+          "chinese": "温暖的"
+        },
+        {
+          "english": "summer",
+          "phonetic": "/ˈsʌmə(r)/",
+          "chinese": "夏天"
+        },
+        {
+          "english": "hot",
+          "phonetic": "/hɒt/",
+          "chinese": "炎热的"
+        },
+        {
+          "english": "autumn",
+          "phonetic": "/ˈɔːtəm/",
+          "chinese": "秋天"
+        },
+        {
+          "english": "cool",
+          "phonetic": "/kuːl/",
+          "chinese": "凉爽的"
+        },
+        {
+          "english": "winter",
+          "phonetic": "/ˈwɪntə(r)/",
+          "chinese": "冬天"
+        },
+        {
+          "english": "cold",
+          "phonetic": "/kəʊld/",
+          "chinese": "寒冷的"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "u",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "The four seasons",
+          "english": "There are four seasons in a year.\nIn spring, it gets warm. Plants grow.\nIn summer, it is hot.\nIn autumn, it gets cool. Leaves fall.\nIn winter, it is cold. It snows in some places.\nIt doesn’t snow here.",
+          "chinese": "一年有四个季节。\n春天，天气变暖。植物生长。\n夏天，天气炎热。\n秋天，天气转凉。树叶飘落。\n冬天，天气寒冷。有些地方会下雪。\n这里不下雪。"
+        }
+      ],
+      "sentencePattern": "It gets / snows ...\nIt doesn’t get / snow ...",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "It gets warm in spring.",
+      "questions": [
+        {
+          "stem": "“spring”在本单元中表示什么？",
+          "options": [
+            "春天",
+            "温暖的",
+            "夏天"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 spring 表示“春天”。"
+        },
+        {
+          "stem": "In spring, it ____ warm.",
+          "options": [
+            "gets",
+            "get",
+            "getting"
+          ],
+          "correctIndex": 0,
+          "explanation": "主语 it 对应第三人称单数 gets。"
+        },
+        {
+          "stem": "根据课文，树叶在什么季节飘落？",
+          "options": [
+            "Autumn.",
+            "Spring.",
+            "Summer."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Autumn."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 What’s amazing about plants?",
+      "page": 51,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "flower",
+          "phonetic": "/ˈflaʊə(r)/",
+          "chinese": "花"
+        },
+        {
+          "english": "fruit",
+          "phonetic": "/fruːt/",
+          "chinese": "果实，水果"
+        },
+        {
+          "english": "leaf",
+          "phonetic": "/liːf/",
+          "chinese": "叶子（复数 leaves）"
+        },
+        {
+          "english": "soil",
+          "phonetic": "/sɔɪl/",
+          "chinese": "土壤"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "a, e",
+      "intonation": "",
+      "notes": [
+        "向日葵会形成含种子的果实；已按英国皇家植物园 Kew 的植物资料修订正文。修订句为项目事实校正，不标作出版社原文。参考：https://www.kew.org/plants/sunflower"
+      ],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "My sunflower",
+          "english": "Look at my sunflower.\nIt has roots. They hold the plant in the soil.\nIt has a stem. It has leaves.\nIt has a big yellow flower.\nIt has seeds.\nWhat we call sunflower seeds are actually fruits.",
+          "chinese": "看我的向日葵。\n它有根。根把植物固定在土壤里。\n它有茎。它有叶子。\n它有一朵大大的黄色花朵。\n它有种子。\n我们通常所说的葵花籽其实是果实。"
+        }
+      ],
+      "sentencePattern": "It has ...",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "It has a yellow flower.",
+      "questions": [
+        {
+          "stem": "“flower”在本单元中表示什么？",
+          "options": [
+            "花",
+            "果实，水果",
+            "叶子（复数 leaves）"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 flower 表示“花”。"
+        },
+        {
+          "stem": "The plant ____ leaves.",
+          "options": [
+            "has",
+            "have",
+            "having"
+          ],
+          "correctIndex": 0,
+          "explanation": "主语 the plant 是单数，使用 has。"
+        },
+        {
+          "stem": "根据课文，根把植物固定在哪里？",
+          "options": [
+            "In the soil.",
+            "In a hive.",
+            "In a flat."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 In the soil."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Unit 7 How do we keep safe on the road?",
+      "page": 61,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "green light",
+          "phonetic": "/ɡriːn laɪt/",
+          "chinese": "绿灯"
+        },
+        {
+          "english": "red light",
+          "phonetic": "/red laɪt/",
+          "chinese": "红灯"
+        },
+        {
+          "english": "wait",
+          "phonetic": "/weɪt/",
+          "chinese": "等待"
+        },
+        {
+          "english": "cross",
+          "phonetic": "/krɒs/",
+          "chinese": "穿过（马路）"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "i, o",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Our way to school",
+          "english": "We walk to school.\nLook at the traffic lights.\nRed light, stop.\nGreen light, cross the road.\nYellow light, wait.\nDon’t play on the road. It’s dangerous.",
+          "chinese": "我们走路去上学。\n看交通信号灯。\n红灯，停下。\n绿灯，过马路。\n黄灯，等待。\n不要在马路上玩耍。很危险。"
+        }
+      ],
+      "sentencePattern": "Wait ...\nDon’t play ...",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "Wait for the green light.",
+      "questions": [
+        {
+          "stem": "“green light”在本单元中表示什么？",
+          "options": [
+            "绿灯",
+            "红灯",
+            "等待"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 green light 表示“绿灯”。"
+        },
+        {
+          "stem": "____ play on the road.",
+          "options": [
+            "Don’t",
+            "Not",
+            "Doesn’t"
+          ],
+          "correctIndex": 0,
+          "explanation": "祈使句的否定形式是 Don’t + 动词原形。"
+        },
+        {
+          "stem": "根据课文，看到红灯应该怎样做？",
+          "options": [
+            "Stop.",
+            "Run.",
+            "Play."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Stop."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Unit 8 What do our grandparents do?",
+      "page": 71,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "go shopping",
+          "phonetic": "/ɡəʊ ˈʃɒpɪŋ/",
+          "chinese": "购物"
+        },
+        {
+          "english": "go for a walk",
+          "phonetic": "/ɡəʊ fɔː(r) ə wɔːk/",
+          "chinese": "散步"
+        },
+        {
+          "english": "use the internet",
+          "phonetic": "/juːz ði ˈɪntənet/",
+          "chinese": "使用网络"
+        },
+        {
+          "english": "do exercise",
+          "phonetic": "/duː ˈeksəsaɪz/",
+          "chinese": "锻炼身体"
+        },
+        {
+          "english": "do housework",
+          "phonetic": "/duː ˈhaʊswɜːk/",
+          "chinese": "做家务"
+        },
+        {
+          "english": "do gardening",
+          "phonetic": "/duː ˈɡɑːdnɪŋ/",
+          "chinese": "打理花园"
+        }
+      ],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "u",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Our grandparents",
+          "english": "My grandma often goes shopping.\nMy grandpa often goes for a walk.\nThey sometimes do exercise.\nThey sometimes do housework.\nThey like to do gardening.\nThey also use the internet.",
+          "chinese": "我的奶奶经常去购物。\n我的爷爷经常去散步。\n他们有时候锻炼身体。\n他们有时候做家务。\n他们喜欢打理花园。\n他们也会上网。"
+        }
+      ],
+      "sentencePattern": "Review 本册句型总复习",
+      "sentencePrompt": "用本单元句型与同伴交流。",
+      "sentenceAnswer": "They do housework every day.",
+      "questions": [
+        {
+          "stem": "“go shopping”在本单元中表示什么？",
+          "options": [
+            "购物",
+            "散步",
+            "使用网络"
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元的 go shopping 表示“购物”。"
+        },
+        {
+          "stem": "My grandpa ____ for a walk.",
+          "options": [
+            "goes",
+            "go",
+            "going"
+          ],
+          "correctIndex": 0,
+          "explanation": "主语 my grandpa 是第三人称单数，动词用 goes。"
+        },
+        {
+          "stem": "根据课文，爷爷奶奶也会使用什么？",
+          "options": [
+            "The internet.",
+            "The guitar.",
+            "The violin."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 The internet."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "本册综合小练习",
+      "page": 0,
+      "kind": "review",
+      "words": [],
+      "aliases": [],
+      "readingWords": [],
+      "sounds": "",
+      "intonation": "",
+      "notes": [],
+      "excludedReadingLines": [],
+      "sections": [
+        {
+          "kind": "review",
+          "title": "本册综合小练习",
+          "english": "",
+          "chinese": "复习居住地点、植物描述、日常活动及祈使句。通过下方配套练习入口完成综合小练习。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "完成综合练习，核对答案并回顾相关单元。",
+      "sentenceAnswer": "",
+      "questions": []
+    }
+  ]
+}

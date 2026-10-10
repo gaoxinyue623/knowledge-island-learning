@@ -33,7 +33,13 @@ const nextAchievement = computed(() =>
 )
 const links: { title: string; description: string; path: string; icon: IconName }[] = [
   {
-    title: '今日 Agent 建议',
+    title: '账号与同步',
+    description: '自动保存、跨设备恢复与退出登录',
+    path: '/account',
+    icon: 'user-round',
+  },
+  {
+    title: '今日学习建议',
     description: '根据学习记录安排下一步',
     path: '/learning-agent',
     icon: 'sparkles',
@@ -129,8 +135,7 @@ watch(profileId, load, { immediate: true })
             <span class="personal-tag">知识岛探索者</span>
             <h2>{{ student.profile?.displayName ?? '小岛同学' }}</h2>
             <p v-if="presentation">
-              {{ presentation?.gradeName }} · {{ presentation?.semesterName }} ·
-              {{ presentation?.regionName }}
+              {{ presentation?.gradeName }} · {{ presentation?.semesterName }}
             </p>
             <RouterLink
               class="personal-primary"

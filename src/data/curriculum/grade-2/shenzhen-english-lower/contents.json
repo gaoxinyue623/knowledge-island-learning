@@ -1,0 +1,544 @@
+{
+  "title": "英语口语交际 二年级下册（广东省2025复审版·深圳2026春）",
+  "publisher": "上海教育出版社",
+  "sourceSha256": "469cf235baeddaf082a9874ac98c8b11aee91b88edf15b269637af42ed8d8a25",
+  "sourceNote": "教材版本说明按用户最新目录登记为广东省2025复审版·深圳2026春。复审年份不视为出版年份；已接入正文沿用用户提供文本，Unit 5 Extend与Unit 6 Chant按最新目录修正。补充词汇释义及练习为项目原创配套内容。",
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 What is fun about food? 美食有什么乐趣？",
+      "sections": [
+        {
+          "title": "A Listen, then point and say",
+          "kind": "listen",
+          "english": "Look. There’s lots of food.\nThere’s rice.\nThere are fish balls.\nThere’s congee.\nThere’s a piece of cake.\nI see bread.\nI see baozi.\nI see dim sum.",
+          "chinese": "看，这里有很多食物。\n有米饭。\n有鱼丸。\n有粥。\n有一块蛋糕。\n我看见面包。\n我看见包子。\n我看见点心。"
+        },
+        {
+          "title": "B Listen and chant",
+          "kind": "chant",
+          "english": "I like fish balls. I like rice.\nI like fish balls and rice.\nI like congee. I like baozi.\nI like congee and baozi.\nI like cakes. I like bread.\nI like cakes and bread.\nI like dim sum. I like dim sum best.",
+          "chinese": "我喜欢鱼丸。我喜欢米饭。\n我喜欢鱼丸和米饭。\n我喜欢粥。我喜欢包子。\n我喜欢粥和包子。\n我喜欢蛋糕。我喜欢面包。\n我喜欢蛋糕和面包。\n我喜欢点心。我最喜欢点心。"
+        },
+        {
+          "title": "C Story: Jenny’s story (A food festival)",
+          "kind": "story",
+          "english": "I’m hungry.\nMe too. Look, let’s try it.\nWhat is it, Amy?\nOh, it’s congee. I like it.\nWhat would you like?\nI’d like some dim sum.\nIt’s yummy.",
+          "chinese": "我饿了。\n我也是。看，我们尝一尝。\n艾米，这是什么？\n哦，是粥。我喜欢。\n你想要点什么？\n我想要一些点心。\n真美味。"
+        },
+        {
+          "title": "Communicate (Role play)",
+          "kind": "communicate",
+          "english": "—What would you like?\n—I’d like some congee. It’s yummy.",
+          "chinese": "—你想要什么？\n—我想要一些粥，很好吃。"
+        },
+        {
+          "title": "Think",
+          "kind": "think",
+          "english": "What would you like at a food festival?",
+          "chinese": "美食节上你想吃什么？"
+        },
+        {
+          "title": "Extend",
+          "kind": "extend",
+          "english": "At the Dragon Boat Festival, we eat zongzi.\nAt the Mid-Autumn Festival, we eat mooncakes.\nAt Thanksgiving, we eat pumpkin pies.\nAt Christmas, we eat gingerbread.",
+          "chinese": "端午节，我们吃粽子。\n中秋节，我们吃月饼。\n感恩节，我们吃南瓜派。\n圣诞节，我们吃姜饼。"
+        }
+      ],
+      "words": [
+        {
+          "english": "rice",
+          "chinese": "米饭"
+        },
+        {
+          "english": "fish balls",
+          "chinese": "鱼丸"
+        },
+        {
+          "english": "congee",
+          "chinese": "粥"
+        },
+        {
+          "english": "cake",
+          "chinese": "蛋糕"
+        },
+        {
+          "english": "bread",
+          "chinese": "面包"
+        },
+        {
+          "english": "baozi",
+          "chinese": "包子"
+        },
+        {
+          "english": "dim sum",
+          "chinese": "点心"
+        }
+      ],
+      "sentencePattern": "What would you like? —I’d like some … It’s yummy.",
+      "sentenceAnswer": "I’d like some congee. It’s yummy.",
+      "sentencePrompt": "和同伴在美食节对话，表达自己想要的食物。",
+      "questions": [
+        {
+          "stem": "Which phrase means “鱼丸”?",
+          "options": ["fish balls", "bread", "rice"],
+          "correctIndex": 0,
+          "explanation": "fish balls 对应鱼丸；bread 是面包，rice 是米饭。"
+        },
+        {
+          "stem": "What would you like? Choose a suitable answer.",
+          "options": ["I’d like some congee.", "I brush my teeth.", "It can run."],
+          "correctIndex": 0,
+          "explanation": "What would you like? 询问想要什么，可以回答 I’d like some congee.。"
+        },
+        {
+          "stem": "In Jenny’s story, Amy says, “Oh, it’s congee.” What is the food?",
+          "options": ["congee", "bread", "cake"],
+          "correctIndex": 0,
+          "explanation": "故事中 Amy 明确说食物是 congee（粥）。"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 How can we keep clean? 我们怎样保持干净？",
+      "sections": [
+        {
+          "title": "A Listen, then point and say",
+          "kind": "listen",
+          "english": "This is the way.\nI wash my hands. Early in the morning.\nThis is the way.\nI brush my teeth. Early in the morning.\nThis is the way.\nI wash my face. Early in the morning.",
+          "chinese": "就是这样。\n我洗手，在清晨。\n就是这样。\n我刷牙，在清晨。\n就是这样。\n我洗脸，在清晨。"
+        },
+        {
+          "title": "Chant",
+          "kind": "chant",
+          "english": "Wash, wash, wash your hands.\nAfter you play, wash your hands.\nBefore meals, wash your hands.\nRub, rub, rub your hands.",
+          "chinese": "洗，洗，洗你的手。\n玩耍之后要洗手。\n饭前要洗手。\n搓，搓，搓你的手。"
+        },
+        {
+          "title": "Story (Sam the pet dog)",
+          "kind": "story",
+          "english": "Leo, guess, who is coming?\nA new family member.\nYes. Welcome your new pet.\nTake good care of Sam.\nSam, your paws are dirty. Let’s go and wash.\nLet me wash your paws.\nIt’s bedtime. Let’s brush our teeth.\nI brush my teeth every day.\nNow your teeth are clean.\nSam, we need to keep clean every day.\nThis is a story about a dog.",
+          "chinese": "里奥，猜猜谁来了？\n一位新家庭成员。\n是的，欢迎你的新宠物。\n好好照顾山姆。\n山姆，你的爪子脏了。我们去洗一洗。\n我来帮你洗爪子。\n到睡觉时间了，我们刷牙吧。\n我每天刷牙。\n现在你的牙齿干净了。\n山姆，我们每天都要保持干净。\n这是一个关于小狗的故事。"
+        },
+        {
+          "title": "Communicate",
+          "kind": "communicate",
+          "english": "—What do you do to keep clean every day?\n—I wash my face. I brush my teeth.",
+          "chinese": "—你每天做什么保持干净？\n—我洗脸，我刷牙。"
+        },
+        {
+          "title": "Think",
+          "kind": "think",
+          "english": "How do you wash your hands?",
+          "chinese": "你怎么洗手？"
+        }
+      ],
+      "words": [
+        {
+          "english": "wash",
+          "chinese": "洗"
+        },
+        {
+          "english": "brush",
+          "chinese": "刷"
+        },
+        {
+          "english": "teeth",
+          "chinese": "牙齿"
+        },
+        {
+          "english": "face",
+          "chinese": "脸"
+        },
+        {
+          "english": "hands",
+          "chinese": "手"
+        },
+        {
+          "english": "paws",
+          "chinese": "爪子"
+        },
+        {
+          "english": "clean",
+          "chinese": "干净的"
+        }
+      ],
+      "sentencePattern": "What do you do to keep clean? —I wash my face. I brush my teeth.",
+      "sentenceAnswer": "I wash my face. I brush my teeth.",
+      "sentencePrompt": "说说自己每天保持干净的两件事。",
+      "questions": [
+        {
+          "stem": "Which phrase means “刷牙”?",
+          "options": ["brush my teeth", "wash my face", "wash my hands"],
+          "correctIndex": 0,
+          "explanation": "brush my teeth 是刷牙；wash my face 是洗脸。"
+        },
+        {
+          "stem": "What do you do to keep clean? Choose a suitable answer.",
+          "options": ["I wash my face.", "I do the lion dance.", "I see a wolf."],
+          "correctIndex": 0,
+          "explanation": "I wash my face. 表示我洗脸，可以用来回答如何保持干净。"
+        },
+        {
+          "stem": "In Sam’s story, “Sam, your paws are dirty.” What needs washing?",
+          "options": ["Sam’s paws.", "Sam’s tail.", "Sam’s wings."],
+          "correctIndex": 0,
+          "explanation": "原文说 Sam 的 paws（爪子）脏了，接着要洗爪子。"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What do you do in school clubs? 在学校社团你做什么？",
+      "sections": [
+        {
+          "title": "A Listen, then point and say",
+          "kind": "listen",
+          "english": "We do paper-cutting in this club.\nWe do the lion dance in the Lion Dance Club.\nWe’re in the Shuttlecock Club. We can kick shuttlecocks.",
+          "chinese": "我们在这个社团剪纸。\n我们在舞狮社团舞狮。\n我们在踢毽子社团，我们会踢毽子。"
+        },
+        {
+          "title": "Chant",
+          "kind": "chant",
+          "english": "Do you want to do paper-cutting?\nJoin us and have a try.\nEnjoy the art of paper-cutting.\nDo you want to do the lion dance?\nJoin us and have a try.\nEnjoy the lion dance.\nDo you want to kick a shuttlecock?\nJoin us and have a try.\nLet’s have fun together.",
+          "chinese": "你想剪纸吗？\n加入我们试一试。\n感受剪纸艺术。\n你想舞狮吗？\n加入我们试一试。\n感受舞狮的乐趣。\n你想踢毽子吗？\n加入我们试一试。\n我们一起开心玩耍。"
+        },
+        {
+          "title": "Story: A secret club",
+          "kind": "story",
+          "english": "Look, Kate. There’s a new club. Let’s go and see, Billy.\nLook! The secret club is in this room.\nWhat do you do in the club?\nI do paper-cutting.\nIs it a paper-cutting club?\nNo, it isn’t.\nIs it a lion dance club?\nNo, it isn’t.\nHmm, I have an idea.\nDo you kick a shuttlecock in the club?\nNo, I don’t.\nLook! Here’s a bin. What’s in it?\nIs this a drama club?\nYes, it is. Come in!\nI make masks. I put paper-cuts on the clothes.\nDo you like drama? You can join in!\nGreat!",
+          "chinese": "凯特，看，有一个新社团。比利，我们去看看。\n看！秘密社团就在这个房间里。\n你们在社团里做什么？\n我剪纸。\n这是剪纸社团吗？\n不是。\n这是舞狮社团吗？\n不是。\n嗯，我有个猜想。\n你们在社团踢毽子吗？\n不，我们不踢。\n看！这里有个箱子。里面是什么？\n这是戏剧社团吗？\n是的，进来吧！\n我做面具，我把剪纸贴在衣服上。\n你喜欢戏剧吗？你可以加入！\n太棒啦！"
+        },
+        {
+          "title": "Communicate",
+          "kind": "communicate",
+          "english": "—What club are you in?\n—I’m in the Paper-cutting Club. I do paper-cutting.",
+          "chinese": "—你参加了什么社团？\n—我在剪纸社团，我剪纸。"
+        },
+        {
+          "title": "Think",
+          "kind": "think",
+          "english": "What school club are you interested in?",
+          "chinese": "你对哪个学校社团感兴趣？"
+        }
+      ],
+      "words": [
+        {
+          "english": "paper-cutting",
+          "chinese": "剪纸"
+        },
+        {
+          "english": "lion dance",
+          "chinese": "舞狮"
+        },
+        {
+          "english": "shuttlecock",
+          "chinese": "毽子"
+        },
+        {
+          "english": "club",
+          "chinese": "社团"
+        },
+        {
+          "english": "mask",
+          "chinese": "面具"
+        },
+        {
+          "english": "drama",
+          "chinese": "戏剧"
+        }
+      ],
+      "sentencePattern": "What do you do in the club? —I do paper-cutting.",
+      "sentenceAnswer": "I do paper-cutting.",
+      "sentencePrompt": "用本课句型介绍一种社团活动。",
+      "questions": [
+        {
+          "stem": "Which word means “毽子”?",
+          "options": ["shuttlecock", "mask", "club"],
+          "correctIndex": 0,
+          "explanation": "shuttlecock 是毽子，mask 是面具，club 是社团。"
+        },
+        {
+          "stem": "What club are you in? Choose a suitable answer.",
+          "options": ["I’m in the Paper-cutting Club.", "I wash my hands.", "It can swim."],
+          "correctIndex": 0,
+          "explanation": "询问参加什么社团，应回答 I’m in the Paper-cutting Club.。"
+        },
+        {
+          "stem": "In “A secret club”, “Is this a drama club?” is answered “Yes, it is.” What is the club?",
+          "options": ["a drama club", "a lion dance club", "a shuttlecock club"],
+          "correctIndex": 0,
+          "explanation": "故事最后确定秘密社团是 drama club（戏剧社团）。"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 How are people and animals different? 人和动物有什么不同？",
+      "sections": [
+        {
+          "title": "A Listen, then point and say",
+          "kind": "listen",
+          "english": "Birds have wings. They can fly.\nHorses have strong legs. They can run fast.\nFish have tails. They can swim.\nI have legs. I can run. I can swim.\nI don’t have wings. I cannot fly.",
+          "chinese": "小鸟有翅膀，它们会飞。\n马有强壮的腿，它们跑得很快。\n鱼有尾巴，它们会游泳。\n我有腿，我会跑，我会游泳。\n我没有翅膀，我不会飞。"
+        },
+        {
+          "title": "B Listen and chant",
+          "kind": "chant",
+          "english": "Birds have wings.\nThey can fly away.\nI don’t have wings to fly away with.\nHorses have strong legs.\nThey can run fast.\nI also have strong legs to run fast with.",
+          "chinese": "小鸟有翅膀。\n它们可以飞向远方。\n我没有翅膀，不能飞向远方。\n马儿有强壮的腿。\n它们可以跑得飞快。\n我也有强壮的腿，可以快速奔跑。"
+        },
+        {
+          "title": "Story: In the jungle",
+          "kind": "story",
+          "english": "Emily and Charles are in the jungle.\nLook at the monkeys. They can climb trees.\nLook at the parrots. They can fly.\nLook at the fish. They can swim.\nAnimals are different. They have different abilities.",
+          "chinese": "艾米丽和查尔斯在丛林里。\n看猴子，它们会爬树。\n看鹦鹉，它们会飞。\n看鱼儿，它们会游泳。\n动物各不相同，它们有不同的本领。"
+        },
+        {
+          "title": "Communicate",
+          "kind": "communicate",
+          "english": "—Can it fly?\n—No, it can’t. It can run.",
+          "chinese": "—它会飞吗？\n—不会，它会跑。"
+        },
+        {
+          "title": "Think",
+          "kind": "think",
+          "english": "What can your favourite animal do?",
+          "chinese": "你最喜欢的动物会做什么？"
+        }
+      ],
+      "words": [
+        {
+          "english": "wing",
+          "chinese": "翅膀"
+        },
+        {
+          "english": "leg",
+          "chinese": "腿"
+        },
+        {
+          "english": "tail",
+          "chinese": "尾巴"
+        },
+        {
+          "english": "fly",
+          "chinese": "飞"
+        },
+        {
+          "english": "run",
+          "chinese": "跑"
+        },
+        {
+          "english": "swim",
+          "chinese": "游泳"
+        },
+        {
+          "english": "climb",
+          "chinese": "攀爬"
+        }
+      ],
+      "sentencePattern": "Can it …? —Yes, it can. / No, it can’t.",
+      "sentenceAnswer": "It can run.",
+      "sentencePrompt": "描述一种动物能做什么。",
+      "questions": [
+        {
+          "stem": "Which word means “翅膀”?",
+          "options": ["wing", "tail", "leg"],
+          "correctIndex": 0,
+          "explanation": "wing 是翅膀，tail 是尾巴，leg 是腿。"
+        },
+        {
+          "stem": "Can it fly? The animal cannot fly, but it can run. Choose a suitable answer.",
+          "options": ["No, it can’t. It can run.", "Yes, it can fly.", "No, it can’t run."],
+          "correctIndex": 0,
+          "explanation": "题目说不会飞、会跑，应回答 No, it can’t. It can run.。"
+        },
+        {
+          "stem": "In “In the jungle”, what can the monkeys do?",
+          "options": ["climb trees", "fix things", "brush teeth"],
+          "correctIndex": 0,
+          "explanation": "原文说 Look at the monkeys. They can climb trees.。"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 Who is your hero? 谁是你心中的英雄？",
+      "sections": [
+        {
+          "title": "A Listen, then point and say",
+          "kind": "listen",
+          "english": "My hero is Mrs Li. She’s our teacher.\nShe can help us learn. She’s warm and nice.\nMrs Zhang takes care of sick people.\nShe is kind and helpful.\nMr Song can fix things.\nHe is always happy to help.",
+          "chinese": "我的英雄是李老师。她是我们的老师。\n她帮助我们学习，她温柔又友善。\n张阿姨照顾病人。\n她善良，乐于助人。\n宋叔叔会修理东西。\n他总是乐于帮忙。"
+        },
+        {
+          "title": "Chant",
+          "kind": "chant",
+          "english": "Give a hand to others.\nLet’s be helpful.\nBe nice to others.\nLet’s be warm.\nShow care for others.",
+          "chinese": "伸出援手帮助他人。\n做乐于助人的人。\n友善对待别人。\n做温暖的人。\n关心身边的人。"
+        },
+        {
+          "title": "Story: Peter’s story",
+          "kind": "story",
+          "english": "Rainbow Team always wins.\nOh no! We don’t have any water.\nDon’t worry. We have some water.\nThanks, Peter. Here you are.\nI have an idea.\nHooray! Goal!\nDo you think Peter is a hero? Why or why not?",
+          "chinese": "彩虹队总是获胜。\n哦，不好！我们没有水了。\n别担心，我们有水。\n谢谢你，彼得。给你。\n我有个主意。\n万岁！进球！\n你认为彼得是英雄吗？为什么是/为什么不是？"
+        },
+        {
+          "title": "Communicate",
+          "kind": "communicate",
+          "english": "—Who is your hero?\n—My hero is my mum. She is helpful.",
+          "chinese": "—谁是你的英雄？\n—我的英雄是妈妈，她乐于助人。"
+        },
+        {
+          "title": "Think",
+          "kind": "think",
+          "english": "What makes a hero?",
+          "chinese": "什么样的人可以成为英雄？"
+        }
+      ],
+      "words": [
+        {
+          "english": "hero",
+          "chinese": "英雄"
+        },
+        {
+          "english": "helpful",
+          "chinese": "乐于助人的"
+        },
+        {
+          "english": "kind",
+          "chinese": "善良的"
+        },
+        {
+          "english": "warm",
+          "chinese": "温暖的；亲切的"
+        },
+        {
+          "english": "sick",
+          "chinese": "生病的"
+        },
+        {
+          "english": "fix",
+          "chinese": "修理"
+        }
+      ],
+      "sentencePattern": "Who is your hero? —My hero is … He/She is helpful.",
+      "sentenceAnswer": "My hero is my mum. She is helpful.",
+      "sentencePrompt": "介绍自己心中的英雄与理由；这是个人表达，不设唯一答案。",
+      "questions": [
+        {
+          "stem": "Which word means “乐于助人的”?",
+          "options": ["helpful", "sick", "farm"],
+          "correctIndex": 0,
+          "explanation": "helpful 是乐于助人的，sick 是生病的，farm 是农场。"
+        },
+        {
+          "stem": "Who is your hero? Choose a suitable answer.",
+          "options": ["My hero is my mum.", "I wash my face.", "There are fish balls."],
+          "correctIndex": 0,
+          "explanation": "Who is your hero? 询问心中的英雄，My hero is my mum. 回答人物。"
+        },
+        {
+          "stem": "In Peter’s story, “We don’t have any water” describes a problem. What is missing?",
+          "options": ["water", "masks", "sheep"],
+          "correctIndex": 0,
+          "explanation": "故事中的队员说没有 water（水），不是面具或羊。"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 Why should we be honest? 我们为什么要诚实？",
+      "sections": [
+        {
+          "title": "A Listen, then point and say",
+          "kind": "listen",
+          "english": "This is a big farm.\nThere are two farmers on the farm.\nThere’s a little boy on the farm too.\nHe watches the sheep.",
+          "chinese": "这是一个大农场。\n农场里有两位农夫。\n农场里还有一个小男孩。\n他看管羊群。"
+        },
+        {
+          "title": "Story: The boy and the wolf（狼来了）",
+          "kind": "story",
+          "english": "Boy: Wolf! Wolf! I see a wolf. Help! Help!\nFarmers come to help. But there is no wolf.\nBoy: It’s a lie. Ha ha!\nA new day.\nBoy: Wolf! Wolf! I see a wolf. Help! Help!\nFarmers come again. No wolf.\nThe farmers are angry.\nOne day, a real wolf comes.\nBoy: Wolf! Wolf! Help! Help!\nNo one comes.",
+          "chinese": "男孩：狼！狼！我看见狼了！救命！救命！\n农夫赶来帮忙，但是没有狼。\n男孩：我骗你们的，哈哈！\n新的一天。\n男孩：狼！狼！我看见狼了！救命！救命！\n农夫又来了，还是没有狼。\n农夫很生气。\n一天，真的狼来了。\n男孩：狼！狼！救命！救命！\n再也没有人来帮忙了。"
+        },
+        {
+          "title": "Communicate",
+          "kind": "communicate",
+          "english": "—Why should we be honest?\n—Because people will trust us.",
+          "chinese": "—我们为什么要诚实？\n—因为大家会信任我们。"
+        },
+        {
+          "title": "Think",
+          "kind": "think",
+          "english": "What happens when you tell lies?",
+          "chinese": "当你说谎的时候，会发生什么？"
+        },
+        {
+          "title": "Extend",
+          "kind": "extend",
+          "english": "Honesty is telling the truth.\nHonest people can get others’ trust.",
+          "chinese": "诚实就是讲真话。\n诚实的人可以获得别人的信任。"
+        }
+      ],
+      "words": [
+        {
+          "english": "honest",
+          "chinese": "诚实的"
+        },
+        {
+          "english": "farm",
+          "chinese": "农场"
+        },
+        {
+          "english": "farmer",
+          "chinese": "农夫"
+        },
+        {
+          "english": "sheep",
+          "chinese": "羊"
+        },
+        {
+          "english": "wolf",
+          "chinese": "狼"
+        },
+        {
+          "english": "lie",
+          "chinese": "谎言；说谎"
+        },
+        {
+          "english": "trust",
+          "chinese": "信任"
+        }
+      ],
+      "sentencePattern": "Why should we be honest? —Because people will trust us.",
+      "sentenceAnswer": "Because people will trust us.",
+      "sentencePrompt": "用本课句型说说诚实与信任的关系。",
+      "questions": [
+        {
+          "stem": "Which word means “诚实的”?",
+          "options": ["honest", "wolf", "farmer"],
+          "correctIndex": 0,
+          "explanation": "honest 是诚实的，wolf 是狼，farmer 是农夫。"
+        },
+        {
+          "stem": "Why should we be honest? Choose the response taught in this unit.",
+          "options": [
+            "Because people will trust us.",
+            "Because I can fly.",
+            "Because it is a farm."
+          ],
+          "correctIndex": 0,
+          "explanation": "本单元对话用 Because people will trust us. 表达诚实能让人信任我们。"
+        },
+        {
+          "stem": "In “The boy and the wolf”, a real wolf finally comes. Who comes to help the boy at the end?",
+          "options": ["No one.", "Both farmers.", "Sam the dog."],
+          "correctIndex": 0,
+          "explanation": "结尾写 No one comes.；此前男孩的虚假求助已经损害了信任。"
+        }
+      ]
+    }
+  ]
+}

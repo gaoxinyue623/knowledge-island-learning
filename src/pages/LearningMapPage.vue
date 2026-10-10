@@ -10,6 +10,7 @@ import AppToast from '@/components/common/AppToast.vue'
 import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
 import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import LearningRecommendationCard from '@/components/learning-strategy/LearningRecommendationCard.vue'
+import ComprehensiveAssessments from '@/components/learning-map/ComprehensiveAssessments.vue'
 import KnowledgeIslandMap from '@/components/learning-map/KnowledgeIslandMap.vue'
 import LearningProgressBar from '@/components/learning-map/LearningProgressBar.vue'
 import MapHeader from '@/components/learning-map/MapHeader.vue'
@@ -232,6 +233,7 @@ watch(
           compact
           :language="requestedSubject === 'ENGLISH' ? 'english' : 'chinese'"
         />
+        <ComprehensiveAssessments :model="viewModel" />
         <KnowledgeIslandMap
           :view-model="viewModel"
           :selected-node-id="learningMapStore.selectedNodeId"

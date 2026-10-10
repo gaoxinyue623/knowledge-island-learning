@@ -1,0 +1,540 @@
+{
+  "title": "北师大六年级下册数学2013版单元自测",
+  "sourceSha256": "efbd30f9749668f25be3bccdcdcd582edf037ec858cf7163062629fb14768de5",
+  "sourceNote": "来源为用户本次会话粘贴，按单元整理来源记录，非原消息逐字备份；原题和原参考答案与整理说明分列保存。清理侧面、底面公式污染，明确π取值、等底等高及旋转重合条件；年份按用户标注。",
+  "notice": "原稿部分分值与实际空数不一致，按实际题目统计，不换算为100分。圆的数值题π取3.14；数值题只填数值，单位见题面。公式、定义、解比例过程、解释和比例应用题由老师或家长核对，提交后显示参考解法。",
+  "papers": [
+    {
+      "topicKey": "cylinder-parts",
+      "title": "第一单元 圆柱与圆锥",
+      "sourceScoring": "填空每空4分共32分；判断每题5分共30分；计算18分；解决问题20分。原填空有9个空，与32分不一致。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "圆柱有（）个底面，都是大小相等的（）。",
+          "originalReference": "2；圆",
+          "stem": "圆柱有（）个底面，都是大小相等的（）。",
+          "kind": "fillBlank",
+          "reference": "2；圆",
+          "adjustment": "",
+          "answers": [
+            ["2", "两", "二"],
+            ["圆", "圆形"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "圆柱(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面沿高剪开是（）形。",
+          "originalReference": "长方",
+          "stem": "一般圆柱侧面沿高剪开展平是（）形。",
+          "kind": "fillBlank",
+          "reference": "长方",
+          "adjustment": "清理重复公式，展开为长方形，特殊尺寸也可能是正方形。",
+          "answers": [["长方", "长方形"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "(\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面半径3cm，高5cm，底面积（）cm²。",
+          "originalReference": "底面积≈3.14×3²＝28.26平方厘米，高不参与此计算。",
+          "stem": "π取3.14，圆柱底面半径3厘米、高5厘米，求底面积。（只填数值，单位：平方厘米）",
+          "kind": "calculation",
+          "reference": "底面积≈3.14×3²＝28.26平方厘米，高不参与此计算。",
+          "adjustment": "清理误嵌底面的体积公式，补充π取值。",
+          "value": 28.26
+        },
+        {
+          "number": 4,
+          "originalStem": "等底等高的圆柱和圆锥，圆柱体积24立方厘米，圆锥体积是多少？",
+          "originalReference": "24÷3＝8立方厘米。",
+          "stem": "等底等高的圆柱和圆锥，圆柱体积24立方厘米，圆锥体积是多少？（只填数值，单位：立方厘米）",
+          "kind": "calculation",
+          "reference": "24÷3＝8立方厘米。",
+          "adjustment": "",
+          "value": 8
+        },
+        {
+          "number": 5,
+          "originalStem": "圆锥体积公式：（）。",
+          "originalReference": "V＝1/3πr²h",
+          "stem": "写出圆锥体积公式，说明字母的含义。",
+          "kind": "shortAnswer",
+          "reference": "V＝1/3×S底×h＝1/3×πr²h，S底为底面积，r为底面半径，h为高。",
+          "adjustment": "公式有等价写法，使用人工核对，避免按字符串误判。"
+        },
+        {
+          "number": 6,
+          "originalStem": "(\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面直径4dm，底面周长（）dm。",
+          "originalReference": "底面周长≈3.14×4＝12.56分米。",
+          "stem": "π取3.14，圆柱底面直径4分米，求底面周长。（只填数值，单位：分米）",
+          "kind": "calculation",
+          "reference": "底面周长≈3.14×4＝12.56分米。",
+          "adjustment": "清理重复公式，明确π取值。",
+          "value": 12.56
+        },
+        {
+          "number": 7,
+          "originalStem": "圆柱体积＝底面积×（）。",
+          "originalReference": "高",
+          "stem": "圆柱体积＝底面积×（）。",
+          "kind": "fillBlank",
+          "reference": "高",
+          "adjustment": "",
+          "answers": [["高", "圆柱的高"]]
+        },
+        {
+          "number": 8,
+          "originalStem": "圆锥有（）条高。",
+          "originalReference": "1",
+          "stem": "通常研究的直圆锥有（）条高。",
+          "kind": "fillBlank",
+          "reference": "1",
+          "adjustment": "",
+          "answers": [["1", "一"]]
+        },
+        {
+          "number": 9,
+          "originalStem": "圆锥和圆柱一样，都有无数条高。",
+          "originalReference": "×",
+          "stem": "圆锥和圆柱一样，都有无数条高。",
+          "kind": "trueFalse",
+          "reference": "错误。本册直圆锥只有一条高，圆柱有无数条高。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "圆柱(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面积=底面周长×高。",
+          "originalReference": "√",
+          "stem": "圆柱侧面积＝底面周长×高。",
+          "kind": "trueFalse",
+          "reference": "正确。侧面展开长方形的长乘宽。",
+          "adjustment": "清理重复公式。",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "圆锥体积是圆柱体积的1/3。",
+          "originalReference": "×",
+          "stem": "不加其他条件，任意圆锥体积都是任意圆柱体积的1/3。",
+          "kind": "trueFalse",
+          "reference": "错误。等底等高时才可直接应用三倍关系。",
+          "adjustment": "明确原判断是在没有等底等高条件时讨论。",
+          "correctValue": false
+        },
+        {
+          "number": 12,
+          "originalStem": "(\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面半径扩大2倍，高不变，体积扩大4倍。",
+          "originalReference": "√",
+          "stem": "圆柱底面半径扩大到原来的2倍，高不变，体积扩大到原来的4倍。",
+          "kind": "trueFalse",
+          "reference": "正确。底面积随半径平方变化。",
+          "adjustment": "清理公式，并明确“扩大到”倍数。",
+          "correctValue": true
+        },
+        {
+          "number": 13,
+          "originalStem": "圆柱表面积=(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面积+两个底面积。",
+          "originalReference": "√",
+          "stem": "封闭圆柱表面积＝侧面积＋两个底面积。",
+          "kind": "trueFalse",
+          "reference": "正确。一侧面和两个底面合起来。",
+          "adjustment": "清理公式，明确有两个底面的封闭模型。",
+          "correctValue": true
+        },
+        {
+          "number": 14,
+          "originalStem": "圆锥(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面展开是扇形。",
+          "originalReference": "√",
+          "stem": "直圆锥侧面展开是扇形。",
+          "kind": "trueFalse",
+          "reference": "正确。沿母线剪开后展开为扇形。",
+          "adjustment": "清理公式，明确通常直圆锥模型。",
+          "correctValue": true
+        },
+        {
+          "number": 15,
+          "originalStem": "一个(\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面半径2分米，高6分米，求圆柱体积。",
+          "originalReference": "V≈3.14×2²×6＝75.36立方分米。",
+          "stem": "π取3.14，一个圆柱底面半径2分米，高6分米，求体积。（只填数值，单位：立方分米）",
+          "kind": "calculation",
+          "reference": "V≈3.14×2²×6＝75.36立方分米。",
+          "adjustment": "清理公式，统一π取值。",
+          "value": 75.36
+        },
+        {
+          "number": 16,
+          "originalStem": "圆锥形沙堆，底面半径3m，高2m，沙堆体积多少立方米？",
+          "originalReference": "V≈1/3×3.14×3²×2＝18.84立方米。",
+          "stem": "π取3.14，圆锥形沙堆底面半径3米、高2米，求体积。（只填数值，单位：立方米）",
+          "kind": "calculation",
+          "reference": "V≈1/3×3.14×3²×2＝18.84立方米。",
+          "adjustment": "",
+          "value": 18.84
+        }
+      ],
+      "sourceText": "## 第一单元 圆柱与圆锥\n\n原分值：填空每空4分共32分；判断每题5分共30分；计算18分；解决问题20分。原填空有9个空，与32分不一致。\n\n1. 圆柱有（）个底面，都是大小相等的（）。\n参考：2；圆\n\n2. 圆柱(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面沿高剪开是（）形。\n参考：长方\n\n3. (\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面半径3cm，高5cm，底面积（）cm²。\n参考：底面积≈3.14×3²＝28.26平方厘米，高不参与此计算。\n\n4. 等底等高的圆柱和圆锥，圆柱体积24立方厘米，圆锥体积是多少？\n参考：24÷3＝8立方厘米。\n\n5. 圆锥体积公式：（）。\n参考：V＝1/3πr²h\n\n6. (\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面直径4dm，底面周长（）dm。\n参考：底面周长≈3.14×4＝12.56分米。\n\n7. 圆柱体积＝底面积×（）。\n参考：高\n\n8. 圆锥有（）条高。\n参考：1\n\n9. 圆锥和圆柱一样，都有无数条高。\n参考：×\n\n10. 圆柱(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面积=底面周长×高。\n参考：√\n\n11. 圆锥体积是圆柱体积的1/3。\n参考：×\n\n12. (\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面半径扩大2倍，高不变，体积扩大4倍。\n参考：√\n\n13. 圆柱表面积=(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面积+两个底面积。\n参考：√\n\n14. 圆锥(\\boldsymbol{S\\_{侧}=Ch=2\\pi rh=\\pi dh})面展开是扇形。\n参考：√\n\n15. 一个(\\boldsymbol{V\\_{圆柱}=S\\_{底}h=\\pi r^2 h})面半径2分米，高6分米，求圆柱体积。\n参考：V≈3.14×2²×6＝75.36立方分米。\n\n16. 圆锥形沙堆，底面半径3m，高2m，沙堆体积多少立方米？\n参考：V≈1/3×3.14×3²×2＝18.84立方米。"
+    },
+    {
+      "topicKey": "proportion",
+      "title": "第二单元 比例",
+      "sourceScoring": "填空每空4分共32分；判断每题6分共30分；解比例18分；解决问题20分。原填空实际9个空。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "在比例2:3=4:6中，内项是（）和（），外项是（）和（）。",
+          "originalReference": "3；4；2；6",
+          "stem": "在比例2:3＝4:6中，按从左到右的顺序，内项是（）和（），外项是（）和（）。",
+          "kind": "fillBlank",
+          "reference": "3；4；2；6",
+          "adjustment": "指定填空顺序，避免同组交换次序造成歧义。",
+          "answers": [
+            ["3", "三"],
+            ["4", "四"],
+            ["2", "二"],
+            ["6", "六"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "比例基本性质：（）。",
+          "originalReference": "在比例中，两个内项的积等于两个外项的积。",
+          "stem": "说出比例的基本性质。",
+          "kind": "shortAnswer",
+          "reference": "在比例中，两个内项的积等于两个外项的积。",
+          "adjustment": "定义的等价表达由家长或老师核对。"
+        },
+        {
+          "number": 3,
+          "originalStem": "比例尺=（）:（）。",
+          "originalReference": "图上距离；实际距离",
+          "stem": "先统一单位，比例尺＝（）:（）。",
+          "kind": "fillBlank",
+          "reference": "图上距离；实际距离",
+          "adjustment": "",
+          "answers": [
+            ["图上距离", "图上长度"],
+            ["实际距离", "实际长度"]
+          ]
+        },
+        {
+          "number": 4,
+          "originalStem": "图上1cm代表实际20km，数值比例尺是（）。",
+          "originalReference": "20千米＝2000000厘米，比例尺为1:2000000。",
+          "stem": "图上1厘米代表实际20千米，数值比例尺是（），用a:b的形式填写。",
+          "kind": "fillBlank",
+          "reference": "20千米＝2000000厘米，比例尺为1:2000000。",
+          "adjustment": "",
+          "answers": [["1:2000000", "1：2000000", "1∶2000000"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "图形放大缩小，（）不变，大小变。",
+          "originalReference": "形状",
+          "stem": "图形按同一比例放大或缩小，（）不变，大小改变。",
+          "kind": "fillBlank",
+          "reference": "形状",
+          "adjustment": "",
+          "answers": [["形状"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "由两个比组成的式子就是比例。",
+          "originalReference": "×",
+          "stem": "由两个比组成的式子就是比例。",
+          "kind": "trueFalse",
+          "reference": "错误。必须是表示两个比相等的式子。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "比例尺的前项一定是1。",
+          "originalReference": "×",
+          "stem": "比例尺的前项一定是1。",
+          "kind": "trueFalse",
+          "reference": "错误。放大比例尺可为2:1。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "比例内项积等于外项积。",
+          "originalReference": "√",
+          "stem": "比例内项积等于外项积。",
+          "kind": "trueFalse",
+          "reference": "正确。这就是比例基本性质。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "把长方形按2:1放大，各边扩大2倍。",
+          "originalReference": "√",
+          "stem": "把长方形按2:1放大，各边长变为原来的2倍。",
+          "kind": "trueFalse",
+          "reference": "正确。图上对应边与原图对应边的比为2:1。",
+          "adjustment": "明确扩大到2倍，避免措辞歧义。",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "解比例的依据是比例基本性质。",
+          "originalReference": "√",
+          "stem": "解比例的依据是比例基本性质。",
+          "kind": "trueFalse",
+          "reference": "正确。化成内外项乘积相等的方程。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "解比例x:6=12:4。",
+          "originalReference": "4x=6×12，4x=72，x=18",
+          "stem": "解比例x:6＝12:4，写出主要步骤并检验。",
+          "kind": "shortAnswer",
+          "reference": "4x＝6×12，4x＝72，x＝18。检验18:6＝12:4＝3。",
+          "adjustment": ""
+        },
+        {
+          "number": 12,
+          "originalStem": "地图比例尺1:100000，图上距离5厘米，实际距离多少千米？",
+          "originalReference": "5×100000＝500000厘米＝5千米。",
+          "stem": "地图比例尺1:100000，图上距离5厘米，实际距离多少千米？（只填数值，单位：千米）",
+          "kind": "calculation",
+          "reference": "5×100000＝500000厘米＝5千米。",
+          "adjustment": "",
+          "value": 5
+        }
+      ],
+      "sourceText": "## 第二单元 比例\n\n原分值：填空每空4分共32分；判断每题6分共30分；解比例18分；解决问题20分。原填空实际9个空。\n\n1. 在比例2:3=4:6中，内项是（）和（），外项是（）和（）。\n参考：3；4；2；6\n\n2. 比例基本性质：（）。\n参考：在比例中，两个内项的积等于两个外项的积。\n\n3. 比例尺=（）:（）。\n参考：图上距离；实际距离\n\n4. 图上1cm代表实际20km，数值比例尺是（）。\n参考：20千米＝2000000厘米，比例尺为1:2000000。\n\n5. 图形放大缩小，（）不变，大小变。\n参考：形状\n\n6. 由两个比组成的式子就是比例。\n参考：×\n\n7. 比例尺的前项一定是1。\n参考：×\n\n8. 比例内项积等于外项积。\n参考：√\n\n9. 把长方形按2:1放大，各边扩大2倍。\n参考：√\n\n10. 解比例的依据是比例基本性质。\n参考：√\n\n11. 解比例x:6=12:4。\n参考：4x=6×12，4x=72，x=18\n\n12. 地图比例尺1:100000，图上距离5厘米，实际距离多少千米？\n参考：5×100000＝500000厘米＝5千米。"
+    },
+    {
+      "topicKey": "transformations",
+      "title": "第三单元 图形的运动",
+      "sourceScoring": "填空每空6分共30分；判断每题8分共32分；简答38分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "旋转三要素：旋转中心、（）、（）。",
+          "originalReference": "方向；角度",
+          "stem": "旋转三要素：旋转中心、旋转的（）（顺时针或逆时针）、旋转的（）（用度数表示）。",
+          "kind": "fillBlank",
+          "reference": "方向；角度",
+          "adjustment": "注明各空含义，避免两个正确属性交换顺序而误判。",
+          "answers": [["方向"], ["角度"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "平移后图形，（）、（）不变。",
+          "originalReference": "形状不变，大小不变，方向也不变。",
+          "stem": "平移后图形的形状和大小是否改变？依次填写：（）、（）。",
+          "kind": "fillBlank",
+          "reference": "形状不变，大小不变，方向也不变。",
+          "adjustment": "原题形状、大小、方向均成立且顺序不限，改成分别判断形状和大小是否改变。",
+          "answers": [
+            ["不变", "不改变", "没有改变"],
+            ["不变", "不改变", "没有改变"]
+          ]
+        },
+        {
+          "number": 3,
+          "originalStem": "钟面上时针从12到3，是顺时针旋转（）°。",
+          "originalReference": "90",
+          "stem": "钟面时针从12顺时针走到3，旋转（）°。",
+          "kind": "fillBlank",
+          "reference": "90",
+          "adjustment": "",
+          "answers": [["90"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "旋转改变图形大小。",
+          "originalReference": "×",
+          "stem": "旋转改变图形大小。",
+          "kind": "trueFalse",
+          "reference": "错误。旋转保持大小。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 5,
+          "originalStem": "平移不改变图形方向。",
+          "originalReference": "√",
+          "stem": "平移不改变图形方向。",
+          "kind": "trueFalse",
+          "reference": "正确。平移保持方向。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "一个图形旋转90°，形状不变。",
+          "originalReference": "√",
+          "stem": "一个图形旋转90°，形状不变。",
+          "kind": "trueFalse",
+          "reference": "正确。旋转不会拉伸或缩放图形。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "轴对称图形对折后两边完全重合。",
+          "originalReference": "√",
+          "stem": "轴对称图形沿对称轴对折后，两边完全重合。",
+          "kind": "trueFalse",
+          "reference": "正确。必须沿对称轴折叠。",
+          "adjustment": "补充沿对称轴的必要条件。",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "描述：正方形绕中心点顺时针旋转90°，图形会发生什么变化？",
+          "originalReference": "正方形位置改变，形状、大小不变，旋转后和原正方形重合。",
+          "stem": "正方形绕中心点顺时针旋转90°，形状、大小、整体占据的区域和标记顶点各发生什么变化？",
+          "kind": "shortAnswer",
+          "reference": "形状、大小不变，无标记正方形与原图重合，整体占据的区域不变。中心不动，每个标记顶点移到顺时针相邻顶点的原位置。",
+          "adjustment": "更正“位置改变”与“原图重合”的笼统冲突，区分标记顶点移动与整体占位。"
+        }
+      ],
+      "sourceText": "## 第三单元 图形的运动\n\n原分值：填空每空6分共30分；判断每题8分共32分；简答38分。\n\n1. 旋转三要素：旋转中心、（）、（）。\n参考：方向；角度\n\n2. 平移后图形，（）、（）不变。\n参考：形状不变，大小不变，方向也不变。\n\n3. 钟面上时针从12到3，是顺时针旋转（）°。\n参考：90\n\n4. 旋转改变图形大小。\n参考：×\n\n5. 平移不改变图形方向。\n参考：√\n\n6. 一个图形旋转90°，形状不变。\n参考：√\n\n7. 轴对称图形对折后两边完全重合。\n参考：√\n\n8. 描述：正方形绕中心点顺时针旋转90°，图形会发生什么变化？\n参考：正方形位置改变，形状、大小不变，旋转后和原正方形重合。"
+    },
+    {
+      "topicKey": "direct-proportion",
+      "title": "第四单元 正比例与反比例",
+      "sourceScoring": "填空每空4分共24分；判断每题9分共36分；应用题40分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "正比例：两个量（）一定；反比例：两个量（）一定。",
+          "originalReference": "比值；乘积",
+          "stem": "正比例：两个相关联的变化量的（）一定；反比例：两个量的（）一定。",
+          "kind": "fillBlank",
+          "reference": "比值；乘积",
+          "adjustment": "",
+          "answers": [
+            ["比值", "商"],
+            ["乘积", "积"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "路程一定，速度和时间成（）比例。",
+          "originalReference": "反",
+          "stem": "路程一定，速度和时间成（）比例。",
+          "kind": "fillBlank",
+          "reference": "反",
+          "adjustment": "",
+          "answers": [["反"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "单价一定，总价和数量成（）比例。",
+          "originalReference": "正",
+          "stem": "单价一定，总价和数量成（）比例。",
+          "kind": "fillBlank",
+          "reference": "正",
+          "adjustment": "",
+          "answers": [["正"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "圆的面积和半径（）比例。",
+          "originalReference": "不成",
+          "stem": "圆的面积和半径（）正比例或反比例（填“成”或“不成”）。",
+          "kind": "fillBlank",
+          "reference": "不成",
+          "adjustment": "",
+          "answers": [["不成"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "工作总量一定，工作效率和时间成（）比例。",
+          "originalReference": "反",
+          "stem": "工作总量一定，工作效率和时间成（）比例。",
+          "kind": "fillBlank",
+          "reference": "反",
+          "adjustment": "",
+          "answers": [["反"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "长方形面积一定，长和宽成反比例。",
+          "originalReference": "√",
+          "stem": "长方形面积一定，长和宽成反比例。",
+          "kind": "trueFalse",
+          "reference": "正确。长×宽＝面积一定。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 7,
+          "originalStem": "身高和年龄成正比例。",
+          "originalReference": "×",
+          "stem": "身高和年龄成正比例。",
+          "kind": "trueFalse",
+          "reference": "错误。身高÷年龄不是固定值。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 8,
+          "originalStem": "比例尺一定，图上距离和实际距离成正比例。",
+          "originalReference": "√",
+          "stem": "比例尺一定，图上距离和实际距离成正比例。",
+          "kind": "trueFalse",
+          "reference": "正确。统一单位后的比值是固定比例尺。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "圆周长一定，直径和π成反比例。",
+          "originalReference": "×",
+          "stem": "圆周长一定，直径和π成反比例。",
+          "kind": "trueFalse",
+          "reference": "错误。π是常数，圆周长固定时直径也固定，不是两个相关联的变化量。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "一辆汽车速度不变，行驶3小时走180km，照这样，5小时行驶多少千米？（用比例解）",
+          "originalReference": "设5小时行驶x千米，180/3=x/5，3x=900，x=300。",
+          "stem": "一辆汽车速度不变，行驶3小时走180千米，5小时走多少千米？用比例解，写出步骤。",
+          "kind": "shortAnswer",
+          "reference": "设5小时行驶x千米。180/3＝x/5，3x＝900，x＝300。答：300千米。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第四单元 正比例与反比例\n\n原分值：填空每空4分共24分；判断每题9分共36分；应用题40分。\n\n1. 正比例：两个量（）一定；反比例：两个量（）一定。\n参考：比值；乘积\n\n2. 路程一定，速度和时间成（）比例。\n参考：反\n\n3. 单价一定，总价和数量成（）比例。\n参考：正\n\n4. 圆的面积和半径（）比例。\n参考：不成\n\n5. 工作总量一定，工作效率和时间成（）比例。\n参考：反\n\n6. 长方形面积一定，长和宽成反比例。\n参考：√\n\n7. 身高和年龄成正比例。\n参考：×\n\n8. 比例尺一定，图上距离和实际距离成正比例。\n参考：√\n\n9. 圆周长一定，直径和π成反比例。\n参考：×\n\n10. 一辆汽车速度不变，行驶3小时走180km，照这样，5小时行驶多少千米？（用比例解）\n参考：设5小时行驶x千米，180/3=x/5，3x=900，x=300。"
+    },
+    {
+      "topicKey": "campus-plan",
+      "title": "数学好玩",
+      "sourceScoring": "每题50分，共100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "莫比乌斯带，沿中线剪开，得到（）。",
+          "originalReference": "1个更大的闭合纸环，而不是两个分离纸环。",
+          "stem": "莫比乌斯带沿纸带中线完整剪开，得到（）个闭合纸环（只填个数）。",
+          "kind": "fillBlank",
+          "reference": "1个更大的闭合纸环，而不是两个分离纸环。",
+          "adjustment": "原题开放描述转换为环的个数，避免不同正确措辞被自动判错。",
+          "answers": [["1", "一"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "绘制校园平面图，需要先确定（）。",
+          "originalReference": "比例尺",
+          "stem": "在已确定绘图范围的情况下，绘制校园平面图，需要先确定（）。",
+          "kind": "fillBlank",
+          "reference": "比例尺",
+          "adjustment": "",
+          "answers": [["比例尺"]]
+        }
+      ],
+      "sourceText": "## 数学好玩\n\n原分值：每题50分，共100分。\n\n1. 莫比乌斯带，沿中线剪开，得到（）。\n参考：1个更大的闭合纸环，而不是两个分离纸环。\n\n2. 绘制校园平面图，需要先确定（）。\n参考：比例尺"
+    }
+  ]
+}

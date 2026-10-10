@@ -1,0 +1,53 @@
+{
+  "title": "沪教牛津英语六年级下册（三年级起点·2013版）",
+  "editionYear": 2013,
+  "updatedAt": "2026-10-10T02:35:02.000Z",
+  "sourceSha256": "c9ca4af88ff8e2a76a9da698f462af985088c864f592b2b95072fb6ec6845227",
+  "sourceNote": "用户补充Unit 12句子语调规则、4个示例句、3个朗读练习及提示，并明确本册为沪教牛津三年级起点2013版（深圳用）。补充稿与初次来稿分别存档，未独立对照出版社原页；语调箭头为文字提示，设备跟读为合成语音，非教材原声。",
+  "unitNumber": 12,
+  "theme": "Intonation 句子语调",
+  "rules": [
+    "降调（↘）：陈述句、特殊疑问句、感叹句、命令祈使句。",
+    "升调（↗）：一般疑问句；列举事物，前面各项升调，最后一项降调。"
+  ],
+  "examples": [
+    {
+      "sentence": "Will we live here forever?",
+      "direction": "↗",
+      "description": "一般疑问句，升调"
+    },
+    {
+      "sentence": "We’ll grow bigger and stronger.",
+      "direction": "↘",
+      "description": "陈述句，降调"
+    },
+    {
+      "sentence": "Where will we go?",
+      "direction": "↘",
+      "description": "特殊疑问句，降调"
+    },
+    {
+      "sentence": "Pea 1, pea 2, pea 3, pea 4 and pea 5.",
+      "direction": "↗ ↗ ↗ ↗ ↘",
+      "description": "列举：Pea 1、pea 2、pea 3、pea 4读升调↗，最后and pea 5读降调↘"
+    }
+  ],
+  "practice": [
+    {
+      "sentence": "Do you want to see the world?",
+      "direction": "↗",
+      "description": "一般疑问句，升调"
+    },
+    {
+      "sentence": "The pea fell on the ground.",
+      "direction": "↘",
+      "description": "陈述句，降调"
+    },
+    {
+      "sentence": "What will happen to the pea?",
+      "direction": "↘",
+      "description": "特殊疑问句，降调"
+    }
+  ],
+  "tip": "朗读故事对话时，用合适语调表达人物情绪；一般疑问句句尾读升调，陈述、特殊疑问句句尾读降调。"
+}

@@ -9,6 +9,7 @@ import type {
   QuestionMedia,
   QuestionOption,
   QuestionType,
+  PictureWritingPrompt,
   VerificationStatus,
 } from './domain'
 
@@ -99,6 +100,7 @@ export interface QuestionViewModel {
   stem: ContentBlock[]
   options: QuestionOptionViewModel[]
   media: QuestionMediaViewModel[]
+  pictureWriting?: PictureWritingPrompt
   answerDraft: QuestionAnswerDraft
   submitted: boolean
   result?: QuestionAttemptResult
@@ -183,6 +185,7 @@ export interface QuestionEngineLoadResult {
 }
 
 export interface QuestionEngineLoadOptions {
+  selectedQuestionIds?: Id[]
   dataset?: QuestionEngineDataset
   demoState?: QuestionEngineDemoState
   studentId?: Id

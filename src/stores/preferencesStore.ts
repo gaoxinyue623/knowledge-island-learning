@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -12,7 +13,7 @@ export const usePreferencesStore = defineStore('preferences', () => {
   const preferences = ref<Preferences>({ ...defaults })
   const warning = ref<string | null>(null)
   try {
-    const raw = window.localStorage.getItem(PREFERENCES_STORAGE_KEY)
+    const raw = accountStorage.getItem(PREFERENCES_STORAGE_KEY)
     if (raw) {
       const saved = JSON.parse(raw)
       if (
@@ -31,7 +32,7 @@ export const usePreferencesStore = defineStore('preferences', () => {
   }
   function save(next: Preferences) {
     try {
-      window.localStorage.setItem(
+      accountStorage.setItem(
         PREFERENCES_STORAGE_KEY,
         JSON.stringify({ version: 1, preferences: next }),
       )

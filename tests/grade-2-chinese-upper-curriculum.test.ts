@@ -133,6 +133,10 @@ describe('Grade 2 PEP Chinese upper-volume curriculum', () => {
     expect(curriculumData.grades.map((grade) => grade.id)).toEqual([
       'GRADE_1',
       G2_PEP_CHINESE_GRADE_ID,
+      'GRADE_3',
+      'GRADE_4',
+      'GRADE_5',
+      'GRADE_6',
     ])
     expect(isChinesePilotTextbook(G2_PEP_CHINESE_S1_TEXTBOOK_ID)).toBe(true)
     expect(gradeTwoChineseUpperCurriculum.textbooks[0]?.verificationStatus).toBe('UNVERIFIED')

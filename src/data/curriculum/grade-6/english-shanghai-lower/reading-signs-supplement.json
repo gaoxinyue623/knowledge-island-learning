@@ -1,0 +1,111 @@
+{
+  "updatedAt": "2026-10-10T10:10:00.000Z",
+  "sourceSha256": "3b9661b23e4bd4950ea45dcd5e8da9444b85a9c15c38ac8af6ef91796a6a8f51",
+  "sourceNote": "按用户提供的2013版Unit 8补充对话及标识含义更新，语调符号保留，中文对话译文为项目整理。用户称已核对课本原文，项目未独立核验出版社原版；插图为AI生成配套素材。原Look and read及3道理解题保留。",
+  "lesson": {
+    "number": 8,
+    "moduleNumber": 3,
+    "kind": "unit",
+    "title": "Unit 8 Reading signs",
+    "page": 48,
+    "words": [
+      {
+        "english": "sign",
+        "phonetic": "/saɪn/",
+        "chinese": "标识；标志",
+        "partOfSpeech": "n."
+      },
+      {
+        "english": "look out",
+        "phonetic": "",
+        "chinese": "小心；留意",
+        "partOfSpeech": ""
+      },
+      {
+        "english": "follow",
+        "phonetic": "/ˈfɒləʊ/",
+        "chinese": "跟随",
+        "partOfSpeech": "v."
+      },
+      {
+        "english": "exit",
+        "phonetic": "/ˈeksɪt/",
+        "chinese": "出口",
+        "partOfSpeech": "n."
+      },
+      {
+        "english": "smoke",
+        "phonetic": "/sməʊk/",
+        "chinese": "吸烟",
+        "partOfSpeech": "v."
+      }
+    ],
+    "aliases": [],
+    "readingWords": [],
+    "sections": [
+      {
+        "kind": "dialogue",
+        "scope": "Listen and say",
+        "title": "Listen and say",
+        "byline": "",
+        "english": "Woman: Excuse me. Where’s the underground station ↘?\nMark: It’s over there ↘. Can you see that sign ↗?\nWoman: Yes ↘. Thank you ↘. I just came from Shanghai ↘. The sign for the underground station there is red ↘.\nMark: I see ↘. There are different signs in different cities ↘.\nWoman: In the UK, the sign is a big red circle ↘. You can see the word “UNDERGROUND” in the middle ↘.\nMark: Are there any special signs in your country ↗?\nWoman: Yes ↘. We have some animal signs ↘. Sometimes the animals use the roads too ↘. We must look out for them ↘.\nMark: That’s interesting ↘.",
+        "chinese": "项目整理译文（对应用户补充对话）\n女士：打扰一下，地铁站在哪里？\nMark：在那边。你能看到那个标识吗？\n女士：能。谢谢。我刚从上海来。那里的地铁站标识是红色的。\nMark：我明白了。不同城市有不同的标识。\n女士：在英国，标识是一个大红圈。中间可以看到“UNDERGROUND”这个词。\nMark：你们国家有特别的标识吗？\n女士：有。我们有一些动物标识。有时动物也会使用道路。我们必须留意它们。\nMark：真有趣。"
+      },
+      {
+        "kind": "signs",
+        "scope": "Look and learn",
+        "title": "公共标识与含义",
+        "byline": "",
+        "english": "No smoking.\nNo swimming.\nLook out for animals.\nKeep quiet.\nMind the gaps.",
+        "chinese": "禁止吸烟（No smoking.）\n禁止游泳（No swimming.）\n当心动物（Look out for animals.）\n保持安静（Keep quiet.）\n小心缝隙（Mind the gaps.，站台警示）"
+      },
+      {
+        "kind": "story",
+        "scope": "Look and read",
+        "title": "Signs around us",
+        "byline": "",
+        "english": "We can see many signs around us. Different signs tell us different things.\nSome signs tell us what we must do. Some tell us what we must not do.\nWe can see signs in the library, in the park, on the road and in the underground. They help us stay safe.",
+        "chinese": "我们身边的标识\n我们身边能看到很多标识。不同标识传递不同信息。\n有些标识告诉我们必须做什么，有些告诉我们禁止做什么。\n图书馆、公园、马路、地铁里都有标识。它们帮助我们保障安全。"
+      }
+    ],
+    "sounds": "",
+    "soundExamples": "",
+    "speechFeature": "Word stress 单词重音",
+    "speechExamples": "'paper, be'gin",
+    "sentencePattern": "We must keep quiet. We shouldn’t smoke.",
+    "sentencePrompt": "用 must 或 shouldn’t 说一条规则。",
+    "sentenceAnswer": "We must keep quiet.",
+    "excludedReadingLines": [],
+    "notes": [
+      "主课文Listen and say已按用户补充稿更新为女士与Mark的街头问路对话，旧稿图书馆错位标识解释保留于历史来源。",
+      "新增5组标识含义及英国地铁标识插图；插图为AI生成的项目配套素材，非出版社教材原图。",
+      "语调符号按用户来稿保留，跟读使用设备合成语音；对话中文译文为项目整理，原版音频未提供。"
+    ],
+    "corrections": [],
+    "missingSections": [],
+    "questions": [
+      {
+        "stem": "exit 的意思是什么？",
+        "options": ["出口", "花瓶", "胶带"],
+        "correctIndex": 0,
+        "explanation": "exit 意为出口。"
+      },
+      {
+        "stem": "选择正确的情态动词句子。",
+        "options": ["We must keep quiet.", "We must keeps quiet.", "We must keeping quiet."],
+        "correctIndex": 0,
+        "explanation": "must 后面接动词原形 keep；此题考查语法，不把来稿错位的标识解释当作依据。"
+      },
+      {
+        "stem": "根据 Signs around us，标识有什么作用？",
+        "options": [
+          "They help us stay safe.",
+          "They replace all our books.",
+          "They make us taller."
+        ],
+        "correctIndex": 0,
+        "explanation": "阅读末句 They help us stay safe。"
+      }
+    ]
+  }
+}

@@ -35,7 +35,12 @@ describe('learning fact cloud sync', () => {
   it('keeps the local revision on conflict without retrying or overwriting', async () => {
     saveLearningSyncBinding(binding)
     vi.spyOn(profileArchiveService, 'exportArchive').mockResolvedValue({} as never)
-    const conflict = { kind: 'conflict' as const, currentRevision: 4, currentDigest: 'remote', updatedAt: binding.updatedAt }
+    const conflict = {
+      kind: 'conflict' as const,
+      currentRevision: 4,
+      currentDigest: 'remote',
+      updatedAt: binding.updatedAt,
+    }
     const update = vi.spyOn(familyCloud, 'updateFamilyCloudProfile').mockResolvedValue(conflict)
     await expect(syncLearningFactsToCloud(profileId)).resolves.toEqual(conflict)
     expect(update).toHaveBeenCalledTimes(1)
@@ -46,7 +51,10 @@ describe('learning fact cloud sync', () => {
     saveLearningSyncBinding(binding)
     vi.spyOn(profileArchiveService, 'exportArchive').mockResolvedValue({} as never)
     vi.spyOn(familyCloud, 'updateFamilyCloudProfile').mockRejectedValue(new Error('offline'))
-    await expect(syncLearningFactsToCloud(profileId)).resolves.toEqual({ kind: 'failed', message: 'offline' })
+    await expect(syncLearningFactsToCloud(profileId)).resolves.toEqual({
+      kind: 'failed',
+      message: 'offline',
+    })
     expect(loadLearningSyncBinding(profileId)).toEqual(binding)
   })
 
@@ -55,7 +63,10 @@ describe('learning fact cloud sync', () => {
     vi.spyOn(profileArchiveService, 'exportArchive').mockResolvedValue({} as never)
     vi.spyOn(familyCloud, 'updateFamilyCloudProfile').mockImplementation(async () => {
       clearLearningSyncBinding(profileId)
-      return { kind: 'updated', profile: { ...binding, label: 'test', digest: 'test', revision: 3 } }
+      return {
+        kind: 'updated',
+        profile: { ...binding, label: 'test', digest: 'test', revision: 3 },
+      }
     })
     await syncLearningFactsToCloud(profileId)
     expect(loadLearningSyncBinding(profileId)).toBeNull()

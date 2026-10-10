@@ -8,6 +8,7 @@ import AppEmptyState from '@/components/common/AppEmptyState.vue'
 import AppErrorState from '@/components/common/AppErrorState.vue'
 import AppLoading from '@/components/common/AppLoading.vue'
 import TextbookCard from '@/components/curriculum/TextbookCard.vue'
+import TextbookCoverage from '@/components/curriculum/TextbookCoverage.vue'
 import TextbookVersionSelector from '@/components/curriculum/TextbookVersionSelector.vue'
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
 import { curriculumService } from '@/services'
@@ -41,15 +42,14 @@ const activeSubject = ref<SubjectCode | null>(null)
 const helpOpen = ref(false)
 const gradeName = ref('当前年级')
 const semesterName = ref('当前学期')
+const selectedCount = computed(
+  () => subjects.filter((subject) => curriculumStore.selectedTextbooks[subject.code]).length,
+)
 
 const isSettingsEdit = computed(() => route.query.from === 'settings')
 const backTo = computed(() => (isSettingsEdit.value ? '/curriculum-settings' : '/onboarding/grade'))
 const profileReady = computed(() =>
-  Boolean(
-    curriculumStore.selectedRegionId &&
-    curriculumStore.selectedGradeId &&
-    curriculumStore.selectedSemesterId,
-  ),
+  Boolean(curriculumStore.selectedGradeId && curriculumStore.selectedSemesterId),
 )
 const hasNoTextbooks = computed(() =>
   subjects.every((subject) => curriculumStore.resolutionStatus[subject.code] === 'NOT_AVAILABLE'),
@@ -83,7 +83,6 @@ async function loadTextbooks() {
   loading.value = true
   error.value = null
   if (!profileReady.value) {
-    error.value = '请先完成地区、年级和学期选择'
     loading.value = false
     return
   }
@@ -118,6 +117,7 @@ async function loadTextbooks() {
       }),
     )
     displays.value = Object.fromEntries(nextDisplays) as Record<SubjectCode, TextbookDisplay[]>
+    curriculumStore.selectSingleTextbookDefaults()
   } catch (caught) {
     error.value = caught instanceof Error ? caught.message : '教材详情暂时无法加载'
   } finally {
@@ -126,7 +126,26 @@ async function loadTextbooks() {
 }
 
 function openSelector(subjectCode: SubjectCode) {
+  const options = displays.value[subjectCode]
+  if (options.length === 1) {
+    curriculumStore.selectTextbook(subjectCode, options[0]!.textbook.id)
+    return
+  }
+  if (!options.length) return
   activeSubject.value = subjectCode
+}
+
+function selectContext(selection: { gradeId: string; semesterId: string }) {
+  if (loading.value || curriculumStore.loading) return
+  if (
+    selection.gradeId === curriculumStore.selectedGradeId &&
+    selection.semesterId === curriculumStore.selectedSemesterId
+  )
+    return
+  activeSubject.value = null
+  curriculumStore.selectGrade(selection.gradeId)
+  curriculumStore.selectSemester(selection.semesterId)
+  void loadTextbooks()
 }
 
 function selectTextbook(textbookId: string) {
@@ -145,13 +164,34 @@ onMounted(() => void loadTextbooks())
 
 <template>
   <CurriculumPageFrame
-    title="选择你的课本"
-    description="按年级和上下册选择正在使用的教材。所有已接入版本均可自主选择，不受地区限制。"
-    :step="3"
+    title="选择教材版本"
+    description="已导入教材对所有账号开放。按当前年级和课本册次，选择各科正在使用的教材版本。"
+    :step="2"
     :back-to="backTo"
     :context="isSettingsEdit ? '我的学习设置' : '课程配置'"
   >
+    <details class="textbook-coverage-toggle">
+      <summary>查看各年级教材接入情况 / 切换年级与册次</summary>
+      <TextbookCoverage
+        :grade-id="curriculumStore.selectedGradeId"
+        :semester-id="curriculumStore.selectedSemesterId"
+        :disabled="loading || curriculumStore.loading"
+        @select="selectContext"
+      />
+    </details>
     <AppLoading v-if="loading" label="正在准备可选教材" />
+    <AppEmptyState
+      v-else-if="!profileReady"
+      title="先完成学习信息"
+      description="请选择年级和课本册次，再选择各科教材版本。"
+      action-label="继续设置"
+      @action="
+        router.replace({
+          path: '/onboarding/grade',
+          query: route.query,
+        })
+      "
+    />
     <AppErrorState
       v-else-if="error"
       title="教材暂时打不开"
@@ -160,7 +200,11 @@ onMounted(() => void loadTextbooks())
     />
     <template v-else>
       <div class="curriculum-alert curriculum-alert--info">
-        可以只选一科，也可以分别选择多科。请对照课本封面的出版社、年级和上下册，选择适合自己的版本。
+        只有一个版本的学科已默认选中，可直接确认，也可取消。多个版本请先选择；尚未接入的学科不影响继续。
+      </div>
+      <div class="curriculum-section-heading" aria-live="polite">
+        <h2>{{ gradeName }} · {{ semesterName }}</h2>
+        <span>已选 {{ selectedCount }} 科 · 确认后保存到当前账号</span>
       </div>
       <div class="textbook-card-grid">
         <TextbookCard
@@ -182,7 +226,7 @@ onMounted(() => void loadTextbooks())
       <AppEmptyState
         v-if="hasNoTextbooks"
         title="当前年级和学期还没有可选教材"
-        description="可以检查年级和上下册是否选对，或等待后续教材接入。无需更换地区。"
+        description="可以检查年级和上下册是否选对，或等待后续教材接入。"
         action-label="修改年级和学期"
         @action="
           router.push({

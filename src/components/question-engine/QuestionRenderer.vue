@@ -10,6 +10,7 @@ import QuestionAnswerFeedback from './QuestionAnswerFeedback.vue'
 import QuestionContentRenderer from './QuestionContentRenderer.vue'
 import QuestionMediaRenderer from './QuestionMediaRenderer.vue'
 import ShortAnswerQuestion from './ShortAnswerQuestion.vue'
+import PictureStoryWritingQuestion from './PictureStoryWritingQuestion.vue'
 import SingleChoiceQuestion from './SingleChoiceQuestion.vue'
 import TrueFalseQuestion from './TrueFalseQuestion.vue'
 import UnsupportedQuestion from './UnsupportedQuestion.vue'
@@ -40,8 +41,17 @@ const questionTypeLabel: Record<string, string> = {
   shortAnswer: '简答题',
 }
 
-const answerComponent = computed(() => componentByType[props.question.type] ?? null)
-const typeLabel = computed(() => questionTypeLabel[props.question.type] ?? '题目')
+const isPictureWriting = computed(
+  () => props.question.type === 'shortAnswer' && Boolean(props.question.pictureWriting),
+)
+const answerComponent = computed(() =>
+  isPictureWriting.value
+    ? PictureStoryWritingQuestion
+    : (componentByType[props.question.type] ?? null),
+)
+const typeLabel = computed(() =>
+  isPictureWriting.value ? '看图写故事' : (questionTypeLabel[props.question.type] ?? '题目'),
+)
 </script>
 
 <template>
@@ -53,7 +63,7 @@ const typeLabel = computed(() => questionTypeLabel[props.question.type] ?? '题�
     <div :id="`question-stem-${props.question.id}`" class="question-renderer__stem">
       <QuestionContentRenderer :blocks="props.question.stem" />
     </div>
-    <QuestionMediaRenderer :media="props.question.media" />
+    <QuestionMediaRenderer v-if="!isPictureWriting" :media="props.question.media" />
     <component
       :is="answerComponent"
       v-if="answerComponent"

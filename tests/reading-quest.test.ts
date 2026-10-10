@@ -188,7 +188,7 @@ describe('Reading quest content projection', () => {
     expect(JSON.stringify(quest.stages)).not.toContain('练习说明测试标记')
   })
 
-  it('keeps every generated closed answer solvable across all eleven imported textbooks', () => {
+  it('keeps every generated closed answer solvable across all imported textbooks', () => {
     const coverage = new Map<string, { lessons: number; stages: number }>()
     for (const bundle of bundles) {
       const quest = createReadingQuest(inputFor(bundle))
@@ -226,7 +226,7 @@ describe('Reading quest content projection', () => {
         }
       }
     }
-    expect(coverage.size).toBe(11)
+    expect(coverage.size).toBe(40)
     expect([...coverage.values()].every((item) => item.lessons >= 6)).toBe(true)
     console.info('Reading quest coverage', Object.fromEntries(coverage))
   })
@@ -343,7 +343,8 @@ describe('Reading quest interaction', () => {
       write.mock.calls.every(
         ([key]) =>
           key.startsWith(QUEST_PROGRESS_PREFIX) ||
-          key.startsWith('knowledge-island.activities.v1:'),
+          key.startsWith('knowledge-island.activities.v1:') ||
+          key.startsWith('knowledge-island.spaced-review.v1:'),
       ),
     ).toBe(true)
   })

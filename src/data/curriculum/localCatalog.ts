@@ -1,3 +1,64 @@
+import { readingSignsIllustrationAsset } from './grade-6/english-shanghai-lower/reading-signs-illustration'
+import {
+  cuboidIllustrationAsset,
+  cuboidIllustrationSource,
+} from './grade-3/bnu-unit-tests/cuboid-illustration'
+import { classroomIllustrationAsset } from './grade-5/chinese-pep-lower/classroom-illustration'
+import { gradeFiveChineseUnitThreeMediaAssets } from './grade-5/chinese-pep-lower/unit-3-media'
+import { luhuaIllustrationAsset } from './grade-4/chinese-pep-lower/luhua-illustration'
+import { gradeFourEnglishUpperCurriculum } from './grade-4/english-shanghai-upper-2022'
+import { gradeFiveEnglishLowerCurriculum } from './grade-5/english-shanghai-lower'
+import { gradeSixEnglishLowerCurriculum } from './grade-6/english-shanghai-lower'
+import { gradeSixEnglishUpperCurriculum } from './grade-6/english-shanghai-upper-2022'
+import { gradeFiveEnglishUpperCurriculum } from './grade-5/english-shanghai-upper-2022'
+import { gradeFourEnglishLowerCurriculum } from './grade-4/english-shanghai-lower-2022'
+import { gradeThreeEnglishLowerCurriculum } from './grade-3/english-shanghai-lower-2022'
+import { gradeFourEnglishUpperUnitTestSources } from './grade-4/english-shanghai-upper-2022/unit-tests'
+import { gradeFiveEnglishLowerUnitTestSources } from './grade-5/english-shanghai-lower/unit-tests'
+import { gradeFiveEnglishUpperUnitTestSources } from './grade-5/english-shanghai-upper-2022/unit-tests'
+import { gradeFourEnglishLowerUnitTestSources } from './grade-4/english-shanghai-lower-2022/unit-tests'
+import { gradeThreeEnglishLowerUnitTestSources } from './grade-3/english-shanghai-lower-2022/unit-tests'
+import { gradeThreeEnglishUpperCurriculum } from './grade-3/english-shanghai-upper-2022'
+import { gradeSixBnuMathLowerCurriculum } from './grade-6/math-bnu-lower-2013'
+import { gradeSixBnuLowerUnitTestSources } from './grade-6/math-bnu-lower-2013/unit-tests'
+import { gradeSixBnuMathCurriculum } from './grade-6/math-bnu-upper-2022'
+import { gradeSixBnuUnitTestSources } from './grade-6/math-bnu-upper-2022/unit-tests'
+import { gradeFiveBnuMathLowerCurriculum } from './grade-5/math-bnu-lower-2013'
+import { gradeFiveBnuLowerUnitTestSources } from './grade-5/math-bnu-lower-2013/unit-tests'
+import { gradeFiveBnuMathCurriculum } from './grade-5/math-bnu-upper'
+import { gradeFiveBnuUnitTestSources } from './grade-5/math-bnu-upper/unit-tests'
+import { gradeFourBnuMathLowerCurriculum } from './grade-4/math-bnu-lower'
+import { gradeFourBnuLowerUnitTestSources } from './grade-4/math-bnu-lower/unit-tests'
+import { gradeFourBnuUnitTestSources } from './grade-4/math-bnu-upper-2022/unit-tests'
+import { gradeFourBnuMathCurriculum } from './grade-4/math-bnu-upper-2022'
+import { countFiguresMediaAssets } from './grade-4/math-bnu-upper-2022/count-figures-media'
+import {
+  coordinateIllustrationAsset,
+  coordinateIllustrationSource,
+} from './grade-4/math-bnu-upper-2022/unit-tests/coordinate-illustration'
+import { bnuUnitTestSources } from './grade-3/bnu-unit-tests'
+import { gradeThreeBnuMathLowerCurriculum } from './grade-3/math-bnu-lower-2022'
+import { gradeThreeBnuMathCurriculum } from './grade-3/math-bnu-upper-2022'
+import { gradeSixChinese2019LowerCurriculum } from './grade-6/chinese-pep-lower-2019'
+import { gradeFiveChineseLowerCurriculum } from './grade-5/chinese-pep-lower'
+import { gradeFiveChineseCurriculum, gradeFiveChineseGrade } from './grade-5/chinese-pep-upper'
+import { gradeSixChineseCurriculum, gradeSixChineseGrade } from './grade-6/chinese-pep-upper'
+import { gradeSixChinese2019Curriculum } from './grade-6/chinese-pep-upper-2019'
+import { gradeFourChineseLowerCurriculum } from './grade-4/chinese-pep-lower'
+import { gradeFourChineseCurriculum, gradeFourChineseGrade } from './grade-4/chinese-pep-upper'
+import { gradeThreeChineseLowerCurriculum } from './grade-3/chinese-pep-lower'
+import { gradeThreeChineseSyncSource } from './grade-3/chinese-pep-upper/synchronousExercises'
+import { gradeThreeChineseLowerSyncSource } from './grade-3/chinese-pep-lower/synchronousExercises'
+import {
+  pictureWritingMediaAssets,
+  pictureWritingSource,
+} from './grade-3/chinese-pep-lower/pictureWriting'
+import {
+  gradeThreeChineseCurriculum,
+  gradeThreeChineseGrade,
+  gradeThreeStoryWritingMediaAssets,
+} from './grade-3/chinese-pep-upper'
+import { shenzhenEnglishSyncSource } from './grade-2/shenzhen-english-lower/synchronousExercises'
 import { gradeOneChineseLowerCurriculum, gradeOneChineseUpperCurriculum } from './grade-1'
 import { gradeOneShenzhenEnglishLowerCurriculum } from './grade-1/english-shanghai-lower'
 import { gradeOneShenzhenEnglishUpperCurriculum } from './grade-1/english-shanghai-upper'
@@ -11,6 +72,8 @@ import {
   revisedChineseLowerCurriculum,
 } from './grade-2'
 import type { CurriculumData } from './types'
+import { bnuMathLowerCurriculum } from './grade-2/bnu-lower'
+import { shenzhenEnglishLowerCurriculum } from './grade-2/shenzhen-english-lower'
 
 /**
  * Original local import records, retained as source evidence.
@@ -19,7 +82,14 @@ import type { CurriculumData } from './types'
  * Original verification and source metadata remain unchanged in this catalogue.
  */
 export const localCurriculumData: CurriculumData = {
-  grades: [gradeOneChineseUpperCurriculum.grade, gradeTwoChineseUpperCurriculum.grade],
+  grades: [
+    gradeOneChineseUpperCurriculum.grade,
+    gradeTwoChineseUpperCurriculum.grade,
+    gradeThreeChineseGrade,
+    gradeFourChineseGrade,
+    gradeFiveChineseGrade,
+    gradeSixChineseGrade,
+  ],
   semesters: [gradeOneChineseUpperCurriculum.semester, gradeOneChineseLowerCurriculum.semester],
   subjects: [
     gradeOneChineseUpperCurriculum.subject,
@@ -47,6 +117,33 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.textbooks,
     ...gradeOneShenzhenMathUpperCurriculum.textbooks,
     ...gradeOneShenzhenMathLowerCurriculum.textbooks,
+    ...bnuMathLowerCurriculum.textbooks,
+    ...gradeFourEnglishUpperCurriculum.textbooks,
+    ...gradeFiveEnglishLowerCurriculum.textbooks,
+    ...gradeSixEnglishLowerCurriculum.textbooks,
+    ...gradeSixEnglishUpperCurriculum.textbooks,
+    ...gradeFiveEnglishUpperCurriculum.textbooks,
+    ...gradeFourEnglishLowerCurriculum.textbooks,
+    ...gradeThreeEnglishLowerCurriculum.textbooks,
+    ...gradeThreeEnglishUpperCurriculum.textbooks,
+    ...shenzhenEnglishLowerCurriculum.textbooks,
+    ...gradeThreeChineseCurriculum.textbooks,
+    ...gradeThreeBnuMathCurriculum.textbooks,
+    ...gradeFourBnuMathLowerCurriculum.textbooks,
+    ...gradeFiveBnuMathCurriculum.textbooks,
+    ...gradeFiveBnuMathLowerCurriculum.textbooks,
+    ...gradeSixBnuMathCurriculum.textbooks,
+    ...gradeSixBnuMathLowerCurriculum.textbooks,
+    ...gradeFourBnuMathCurriculum.textbooks,
+    ...gradeThreeBnuMathLowerCurriculum.textbooks,
+    ...gradeThreeChineseLowerCurriculum.textbooks,
+    ...gradeFourChineseCurriculum.textbooks,
+    ...gradeFourChineseLowerCurriculum.textbooks,
+    ...gradeFiveChineseCurriculum.textbooks,
+    ...gradeSixChineseCurriculum.textbooks,
+    ...gradeSixChinese2019Curriculum.textbooks,
+    ...gradeSixChinese2019LowerCurriculum.textbooks,
+    ...gradeFiveChineseLowerCurriculum.textbooks,
   ],
   regionTextbookRelations: [
     ...gradeOneChineseUpperCurriculum.regionTextbookRelations,
@@ -72,6 +169,33 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.units,
     ...gradeOneShenzhenMathUpperCurriculum.units,
     ...gradeOneShenzhenMathLowerCurriculum.units,
+    ...bnuMathLowerCurriculum.units,
+    ...gradeFourEnglishUpperCurriculum.units,
+    ...gradeFiveEnglishLowerCurriculum.units,
+    ...gradeSixEnglishLowerCurriculum.units,
+    ...gradeSixEnglishUpperCurriculum.units,
+    ...gradeFiveEnglishUpperCurriculum.units,
+    ...gradeFourEnglishLowerCurriculum.units,
+    ...gradeThreeEnglishLowerCurriculum.units,
+    ...gradeThreeEnglishUpperCurriculum.units,
+    ...shenzhenEnglishLowerCurriculum.units,
+    ...gradeThreeChineseCurriculum.units,
+    ...gradeThreeBnuMathCurriculum.units,
+    ...gradeFourBnuMathLowerCurriculum.units,
+    ...gradeFiveBnuMathCurriculum.units,
+    ...gradeFiveBnuMathLowerCurriculum.units,
+    ...gradeSixBnuMathCurriculum.units,
+    ...gradeSixBnuMathLowerCurriculum.units,
+    ...gradeFourBnuMathCurriculum.units,
+    ...gradeThreeBnuMathLowerCurriculum.units,
+    ...gradeThreeChineseLowerCurriculum.units,
+    ...gradeFourChineseCurriculum.units,
+    ...gradeFourChineseLowerCurriculum.units,
+    ...gradeFiveChineseCurriculum.units,
+    ...gradeSixChineseCurriculum.units,
+    ...gradeSixChinese2019Curriculum.units,
+    ...gradeSixChinese2019LowerCurriculum.units,
+    ...gradeFiveChineseLowerCurriculum.units,
   ],
   lessons: [
     ...gradeOneChineseUpperCurriculum.lessons,
@@ -85,6 +209,33 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.lessons,
     ...gradeOneShenzhenMathUpperCurriculum.lessons,
     ...gradeOneShenzhenMathLowerCurriculum.lessons,
+    ...bnuMathLowerCurriculum.lessons,
+    ...gradeFourEnglishUpperCurriculum.lessons,
+    ...gradeFiveEnglishLowerCurriculum.lessons,
+    ...gradeSixEnglishLowerCurriculum.lessons,
+    ...gradeSixEnglishUpperCurriculum.lessons,
+    ...gradeFiveEnglishUpperCurriculum.lessons,
+    ...gradeFourEnglishLowerCurriculum.lessons,
+    ...gradeThreeEnglishLowerCurriculum.lessons,
+    ...gradeThreeEnglishUpperCurriculum.lessons,
+    ...shenzhenEnglishLowerCurriculum.lessons,
+    ...gradeThreeChineseCurriculum.lessons,
+    ...gradeThreeBnuMathCurriculum.lessons,
+    ...gradeFourBnuMathLowerCurriculum.lessons,
+    ...gradeFiveBnuMathCurriculum.lessons,
+    ...gradeFiveBnuMathLowerCurriculum.lessons,
+    ...gradeSixBnuMathCurriculum.lessons,
+    ...gradeSixBnuMathLowerCurriculum.lessons,
+    ...gradeFourBnuMathCurriculum.lessons,
+    ...gradeThreeBnuMathLowerCurriculum.lessons,
+    ...gradeThreeChineseLowerCurriculum.lessons,
+    ...gradeFourChineseCurriculum.lessons,
+    ...gradeFourChineseLowerCurriculum.lessons,
+    ...gradeFiveChineseCurriculum.lessons,
+    ...gradeSixChineseCurriculum.lessons,
+    ...gradeSixChinese2019Curriculum.lessons,
+    ...gradeSixChinese2019LowerCurriculum.lessons,
+    ...gradeFiveChineseLowerCurriculum.lessons,
   ],
   knowledgePoints: [
     ...gradeOneChineseUpperCurriculum.knowledgePoints,
@@ -98,6 +249,33 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.knowledgePoints,
     ...gradeOneShenzhenMathUpperCurriculum.knowledgePoints,
     ...gradeOneShenzhenMathLowerCurriculum.knowledgePoints,
+    ...bnuMathLowerCurriculum.knowledgePoints,
+    ...gradeFourEnglishUpperCurriculum.knowledgePoints,
+    ...gradeFiveEnglishLowerCurriculum.knowledgePoints,
+    ...gradeSixEnglishLowerCurriculum.knowledgePoints,
+    ...gradeSixEnglishUpperCurriculum.knowledgePoints,
+    ...gradeFiveEnglishUpperCurriculum.knowledgePoints,
+    ...gradeFourEnglishLowerCurriculum.knowledgePoints,
+    ...gradeThreeEnglishLowerCurriculum.knowledgePoints,
+    ...gradeThreeEnglishUpperCurriculum.knowledgePoints,
+    ...shenzhenEnglishLowerCurriculum.knowledgePoints,
+    ...gradeThreeChineseCurriculum.knowledgePoints,
+    ...gradeThreeBnuMathCurriculum.knowledgePoints,
+    ...gradeFourBnuMathLowerCurriculum.knowledgePoints,
+    ...gradeFiveBnuMathCurriculum.knowledgePoints,
+    ...gradeFiveBnuMathLowerCurriculum.knowledgePoints,
+    ...gradeSixBnuMathCurriculum.knowledgePoints,
+    ...gradeSixBnuMathLowerCurriculum.knowledgePoints,
+    ...gradeFourBnuMathCurriculum.knowledgePoints,
+    ...gradeThreeBnuMathLowerCurriculum.knowledgePoints,
+    ...gradeThreeChineseLowerCurriculum.knowledgePoints,
+    ...gradeFourChineseCurriculum.knowledgePoints,
+    ...gradeFourChineseLowerCurriculum.knowledgePoints,
+    ...gradeFiveChineseCurriculum.knowledgePoints,
+    ...gradeSixChineseCurriculum.knowledgePoints,
+    ...gradeSixChinese2019Curriculum.knowledgePoints,
+    ...gradeSixChinese2019LowerCurriculum.knowledgePoints,
+    ...gradeFiveChineseLowerCurriculum.knowledgePoints,
   ],
   lessonKnowledgePointRelations: [
     ...gradeOneChineseUpperCurriculum.lessonKnowledgePointRelations,
@@ -111,6 +289,33 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.lessonKnowledgePointRelations,
     ...gradeOneShenzhenMathUpperCurriculum.lessonKnowledgePointRelations,
     ...gradeOneShenzhenMathLowerCurriculum.lessonKnowledgePointRelations,
+    ...bnuMathLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeFourEnglishUpperCurriculum.lessonKnowledgePointRelations,
+    ...gradeFiveEnglishLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeSixEnglishLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeSixEnglishUpperCurriculum.lessonKnowledgePointRelations,
+    ...gradeFiveEnglishUpperCurriculum.lessonKnowledgePointRelations,
+    ...gradeFourEnglishLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeThreeEnglishLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeThreeEnglishUpperCurriculum.lessonKnowledgePointRelations,
+    ...shenzhenEnglishLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeThreeChineseCurriculum.lessonKnowledgePointRelations,
+    ...gradeThreeBnuMathCurriculum.lessonKnowledgePointRelations,
+    ...gradeFourBnuMathLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeFiveBnuMathCurriculum.lessonKnowledgePointRelations,
+    ...gradeFiveBnuMathLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeSixBnuMathCurriculum.lessonKnowledgePointRelations,
+    ...gradeSixBnuMathLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeFourBnuMathCurriculum.lessonKnowledgePointRelations,
+    ...gradeThreeBnuMathLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeThreeChineseLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeFourChineseCurriculum.lessonKnowledgePointRelations,
+    ...gradeFourChineseLowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeFiveChineseCurriculum.lessonKnowledgePointRelations,
+    ...gradeSixChineseCurriculum.lessonKnowledgePointRelations,
+    ...gradeSixChinese2019Curriculum.lessonKnowledgePointRelations,
+    ...gradeSixChinese2019LowerCurriculum.lessonKnowledgePointRelations,
+    ...gradeFiveChineseLowerCurriculum.lessonKnowledgePointRelations,
   ],
   knowledgePrerequisites: [
     ...gradeOneChineseUpperCurriculum.knowledgePrerequisites,
@@ -124,6 +329,33 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.knowledgePrerequisites,
     ...gradeOneShenzhenMathUpperCurriculum.knowledgePrerequisites,
     ...gradeOneShenzhenMathLowerCurriculum.knowledgePrerequisites,
+    ...bnuMathLowerCurriculum.knowledgePrerequisites,
+    ...gradeFourEnglishUpperCurriculum.knowledgePrerequisites,
+    ...gradeFiveEnglishLowerCurriculum.knowledgePrerequisites,
+    ...gradeSixEnglishLowerCurriculum.knowledgePrerequisites,
+    ...gradeSixEnglishUpperCurriculum.knowledgePrerequisites,
+    ...gradeFiveEnglishUpperCurriculum.knowledgePrerequisites,
+    ...gradeFourEnglishLowerCurriculum.knowledgePrerequisites,
+    ...gradeThreeEnglishLowerCurriculum.knowledgePrerequisites,
+    ...gradeThreeEnglishUpperCurriculum.knowledgePrerequisites,
+    ...shenzhenEnglishLowerCurriculum.knowledgePrerequisites,
+    ...gradeThreeChineseCurriculum.knowledgePrerequisites,
+    ...gradeThreeBnuMathCurriculum.knowledgePrerequisites,
+    ...gradeFourBnuMathLowerCurriculum.knowledgePrerequisites,
+    ...gradeFiveBnuMathCurriculum.knowledgePrerequisites,
+    ...gradeFiveBnuMathLowerCurriculum.knowledgePrerequisites,
+    ...gradeSixBnuMathCurriculum.knowledgePrerequisites,
+    ...gradeSixBnuMathLowerCurriculum.knowledgePrerequisites,
+    ...gradeFourBnuMathCurriculum.knowledgePrerequisites,
+    ...gradeThreeBnuMathLowerCurriculum.knowledgePrerequisites,
+    ...gradeThreeChineseLowerCurriculum.knowledgePrerequisites,
+    ...gradeFourChineseCurriculum.knowledgePrerequisites,
+    ...gradeFourChineseLowerCurriculum.knowledgePrerequisites,
+    ...gradeFiveChineseCurriculum.knowledgePrerequisites,
+    ...gradeSixChineseCurriculum.knowledgePrerequisites,
+    ...gradeSixChinese2019Curriculum.knowledgePrerequisites,
+    ...gradeSixChinese2019LowerCurriculum.knowledgePrerequisites,
+    ...gradeFiveChineseLowerCurriculum.knowledgePrerequisites,
   ],
   courseContents: [
     ...gradeOneChineseUpperCurriculum.courseContents,
@@ -137,13 +369,52 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.courseContents,
     ...gradeOneShenzhenMathUpperCurriculum.courseContents,
     ...gradeOneShenzhenMathLowerCurriculum.courseContents,
+    ...bnuMathLowerCurriculum.courseContents,
+    ...gradeFourEnglishUpperCurriculum.courseContents,
+    ...gradeFiveEnglishLowerCurriculum.courseContents,
+    ...gradeSixEnglishLowerCurriculum.courseContents,
+    ...gradeSixEnglishUpperCurriculum.courseContents,
+    ...gradeFiveEnglishUpperCurriculum.courseContents,
+    ...gradeFourEnglishLowerCurriculum.courseContents,
+    ...gradeThreeEnglishLowerCurriculum.courseContents,
+    ...gradeThreeEnglishUpperCurriculum.courseContents,
+    ...shenzhenEnglishLowerCurriculum.courseContents,
+    ...gradeThreeChineseCurriculum.courseContents,
+    ...gradeThreeBnuMathCurriculum.courseContents,
+    ...gradeFourBnuMathLowerCurriculum.courseContents,
+    ...gradeFiveBnuMathCurriculum.courseContents,
+    ...gradeFiveBnuMathLowerCurriculum.courseContents,
+    ...gradeSixBnuMathCurriculum.courseContents,
+    ...gradeSixBnuMathLowerCurriculum.courseContents,
+    ...gradeFourBnuMathCurriculum.courseContents,
+    ...gradeThreeBnuMathLowerCurriculum.courseContents,
+    ...gradeThreeChineseLowerCurriculum.courseContents,
+    ...gradeFourChineseCurriculum.courseContents,
+    ...gradeFourChineseLowerCurriculum.courseContents,
+    ...gradeFiveChineseCurriculum.courseContents,
+    ...gradeSixChineseCurriculum.courseContents,
+    ...gradeSixChinese2019Curriculum.courseContents,
+    ...gradeSixChinese2019LowerCurriculum.courseContents,
+    ...gradeFiveChineseLowerCurriculum.courseContents,
   ],
   questions: [],
   questionKnowledgePoints: [],
-  mediaAssets: [],
+  mediaAssets: [
+    coordinateIllustrationAsset,
+    ...countFiguresMediaAssets,
+    readingSignsIllustrationAsset,
+    cuboidIllustrationAsset,
+    classroomIllustrationAsset,
+    ...gradeThreeStoryWritingMediaAssets,
+    ...pictureWritingMediaAssets,
+    luhuaIllustrationAsset,
+    ...gradeFiveChineseUnitThreeMediaAssets,
+  ],
   learningMaps: [],
   mapNodes: [],
   sources: [
+    coordinateIllustrationSource,
+    cuboidIllustrationSource,
     ...gradeOneChineseUpperCurriculum.sources,
     ...gradeOneChineseLowerCurriculum.sources,
     ...gradeTwoChineseUpperCurriculum.sources,
@@ -155,5 +426,48 @@ export const localCurriculumData: CurriculumData = {
     ...gradeTwoShenzhenMathUpperCurriculum.sources,
     ...gradeOneShenzhenMathUpperCurriculum.sources,
     ...gradeOneShenzhenMathLowerCurriculum.sources,
+    ...bnuMathLowerCurriculum.sources,
+    ...gradeFourEnglishUpperCurriculum.sources,
+    ...gradeFiveEnglishLowerCurriculum.sources,
+    ...gradeSixEnglishLowerCurriculum.sources,
+    ...gradeSixEnglishUpperCurriculum.sources,
+    ...gradeFiveEnglishUpperCurriculum.sources,
+    ...gradeFourEnglishLowerCurriculum.sources,
+    ...gradeThreeEnglishLowerCurriculum.sources,
+    ...gradeThreeEnglishUpperCurriculum.sources,
+    ...gradeFourEnglishUpperUnitTestSources,
+    ...gradeFiveEnglishLowerUnitTestSources,
+    ...gradeFiveEnglishUpperUnitTestSources,
+    ...gradeFourEnglishLowerUnitTestSources,
+    ...gradeThreeEnglishLowerUnitTestSources,
+    ...shenzhenEnglishLowerCurriculum.sources,
+    ...gradeThreeChineseCurriculum.sources,
+    ...gradeThreeBnuMathCurriculum.sources,
+    ...gradeFourBnuMathLowerCurriculum.sources,
+    ...gradeFiveBnuMathCurriculum.sources,
+    ...gradeFiveBnuMathLowerCurriculum.sources,
+    ...gradeSixBnuMathCurriculum.sources,
+    ...gradeSixBnuMathLowerCurriculum.sources,
+    ...gradeFourBnuMathCurriculum.sources,
+    ...gradeThreeBnuMathLowerCurriculum.sources,
+    ...gradeThreeChineseLowerCurriculum.sources,
+    ...gradeFourChineseCurriculum.sources,
+    ...gradeFourChineseLowerCurriculum.sources,
+    ...gradeFiveChineseCurriculum.sources,
+    ...gradeSixChineseCurriculum.sources,
+    ...gradeSixChinese2019Curriculum.sources,
+    ...gradeSixChinese2019LowerCurriculum.sources,
+    ...gradeFiveChineseLowerCurriculum.sources,
+    shenzhenEnglishSyncSource,
+    gradeThreeChineseSyncSource,
+    gradeThreeChineseLowerSyncSource,
+    pictureWritingSource,
+    ...bnuUnitTestSources,
+    ...gradeFourBnuUnitTestSources,
+    ...gradeSixBnuLowerUnitTestSources,
+    ...gradeSixBnuUnitTestSources,
+    ...gradeFiveBnuLowerUnitTestSources,
+    ...gradeFiveBnuUnitTestSources,
+    ...gradeFourBnuLowerUnitTestSources,
   ],
 }

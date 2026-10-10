@@ -195,6 +195,11 @@ export class RuntimeLearningAgentExecutionService {
 
   private async load(request: RuntimeExecutionRequest, now: string) {
     const { profileId, textbookId, decision, questionIds } = request
+    if (decision?.recommendedActivity?.selectedQuestionIds)
+      requireValid(
+        canonical(questionIds) === canonical(decision.recommendedActivity.selectedQuestionIds),
+        'AGENT_EXECUTION_QUESTIONS_INVALID',
+      )
     requireValid(
       profileId && textbookId && Number.isFinite(Date.parse(now)),
       'AGENT_EXECUTION_INPUT_INVALID',

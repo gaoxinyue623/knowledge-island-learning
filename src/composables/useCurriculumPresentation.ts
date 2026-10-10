@@ -2,7 +2,6 @@ import { curriculumService } from '@/services'
 import type { Id, StudentCurriculumProfile, SubjectCode, TextbookDisplay } from '@/types'
 
 export interface CurriculumPresentation {
-  regionName: string
   gradeName: string
   semesterName: string
   textbooks: Record<SubjectCode, TextbookDisplay | null>
@@ -19,8 +18,7 @@ const textbookIdsBySubject = (
 export async function getCurriculumPresentation(
   profile: StudentCurriculumProfile,
 ): Promise<CurriculumPresentation> {
-  const [regions, grades, semesters, ...displays] = await Promise.all([
-    curriculumService.getRegions(),
+  const [grades, semesters, ...displays] = await Promise.all([
     curriculumService.getGrades(),
     curriculumService.getSemesters(),
     ...Object.values(textbookIdsBySubject(profile)).map((textbookId) =>
@@ -30,7 +28,6 @@ export async function getCurriculumPresentation(
 
   const textbookValues = displays as Array<TextbookDisplay | null>
   return {
-    regionName: regions.find((region) => region.id === profile.regionId)?.name ?? '地区待确认',
     gradeName: grades.find((grade) => grade.id === profile.gradeId)?.name ?? '年级待确认',
     semesterName:
       semesters.find((semester) => semester.id === profile.semesterId)?.name ?? '学期待确认',

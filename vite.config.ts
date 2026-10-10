@@ -12,6 +12,20 @@ export default defineConfig(({ mode }) => {
     throw new Error('VITE_LLM_API_KEY is unsafe; use server-only LLM_API_KEY in .env.local')
   return {
     plugins: [vue(), localTtsPlugin(), localLLMPlugin()],
+    build: {
+      rollupOptions: {
+        output: {
+          // Keep stable libraries and curriculum data independently cacheable.
+          onlyExplicitManualChunks: true,
+          manualChunks(id) {
+            const path = id.replaceAll('\\', '/')
+            if (path.includes('/node_modules/')) return 'vendor'
+            if (path.includes('/src/data/curriculum/grade-1/')) return 'curriculum-grade-1'
+            if (path.includes('/src/data/curriculum/grade-2/')) return 'curriculum-grade-2'
+          },
+        },
+      },
+    },
     server: {
       proxy: {
         '/api/pet': 'http://127.0.0.1:8787',

@@ -1,4 +1,5 @@
 import type { ContentBlock, ContentStatus, Id, MediaType, VerificationStatus } from './domain'
+import type { LiteracyTablePresentation } from './literacy'
 import type { LessonLaunchContext } from './learning-map'
 
 /**
@@ -71,6 +72,7 @@ export interface LessonContentBlockRecord {
   highlights?: string[]
   interaction?: LessonContentInteraction
   mediaAssetIds?: Id[]
+  literacyTable?: LiteracyTablePresentation
   sort: number
   isSample: boolean
   verificationStatus?: VerificationStatus
@@ -167,6 +169,7 @@ export interface LessonContentBlockViewModel {
   highlights?: string[]
   media?: MediaViewModel[]
   interaction?: InteractiveContentViewModel
+  literacyTable?: LiteracyTablePresentation
   isSample: boolean
   verificationStatus?: VerificationStatus
   sort: number

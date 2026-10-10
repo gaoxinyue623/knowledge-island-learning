@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 import type { ReadingPracticeQuest } from '@/types/reading-quest'
 
@@ -43,7 +44,7 @@ export function questProgressKey(profileId: string, questId: string): string {
 }
 export function browserQuestStorage(): QuestStorage | undefined {
   try {
-    return window.localStorage
+    return accountStorage
   } catch {
     return undefined
   }

@@ -36,7 +36,7 @@ function updateValue(nextValue: string) {
       />
     </label>
     <p class="question-answer-group__instruction">
-      此题提交后暂不支持自动评分，会进入人工判断占位状态。
+      写下自己的回答，提交后对照参考答案检查。这道开放题不计入自动评分成绩。
     </p>
   </fieldset>
 </template>

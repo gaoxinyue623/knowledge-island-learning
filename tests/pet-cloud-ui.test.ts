@@ -26,7 +26,9 @@ afterEach(() => {
 async function connected() {
   vi.spyOn(cloud, 'petCloudRequest').mockResolvedValue({ username: 'parent_a' })
   vi.spyOn(cloud, 'listCloudBackups').mockResolvedValue([backup])
-  const wrapper = mount(PetCloudPanel)
+  const wrapper = mount(PetCloudPanel, {
+    global: { stubs: { RouterLink: { template: '<a><slot /></a>' } } },
+  })
   const click = async (label: string) => {
     await wrapper
       .findAll('button')
@@ -34,7 +36,7 @@ async function connected() {
       .trigger('click')
     await flushPromises()
   }
-  await click('恢复登录状态')
+  await click('加载独立备份')
   return { wrapper, click }
 }
 describe('cloud interface recovery boundaries', () => {
@@ -44,7 +46,7 @@ describe('cloud interface recovery boundaries', () => {
       new cloud.PetCloudError(401, '请先登录家长账号。'),
     )
     await click('刷新备份')
-    expect(wrapper.find('#pet-account-name').exists()).toBe(true)
+    expect(wrapper.text()).toContain('加载独立备份')
     expect(usePetStore().account).toEqual(account)
     expect(wrapper.text()).toContain('请先登录家长账号')
     wrapper.unmount()

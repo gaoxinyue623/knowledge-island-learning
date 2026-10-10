@@ -4,7 +4,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ref, type Ref } from 'vue'
 import { PetCloudError } from '@/services/pet/petCloud'
 import { useStudentStore } from '@/stores/studentStore'
-import { clearLearningSyncBinding, loadLearningSyncBinding, saveLearningSyncBinding } from '@/services/family-cloud/learningSyncBindingStorage'
+import {
+  clearLearningSyncBinding,
+  loadLearningSyncBinding,
+  saveLearningSyncBinding,
+} from '@/services/family-cloud/learningSyncBindingStorage'
 
 const state = vi.hoisted(() => ({
   profileId: null as unknown as Ref<string>,
@@ -14,34 +18,56 @@ const state = vi.hoisted(() => ({
   update: vi.fn(),
   create: vi.fn(),
   archive: {
-    bootstrapProfile: vi.fn(), createProfile: vi.fn(), activate: vi.fn(), exportArchive: vi.fn(),
-    inspectArchive: vi.fn(), restore: vi.fn(),
+    bootstrapProfile: vi.fn(),
+    createProfile: vi.fn(),
+    activate: vi.fn(),
+    exportArchive: vi.fn(),
+    inspectArchive: vi.fn(),
+    restore: vi.fn(),
   },
 }))
 
-vi.mock('@/composables/useLearningProfile', () => ({ useLearningProfile: () => ({ profileId: state.profileId }) }))
+vi.mock('@/composables/useLearningProfile', () => ({
+  useLearningProfile: () => ({ profileId: state.profileId }),
+}))
 vi.mock('@/services/pet/petCloud', async () => {
-  const actual = await vi.importActual<typeof import('@/services/pet/petCloud')>('@/services/pet/petCloud')
+  const actual =
+    await vi.importActual<typeof import('@/services/pet/petCloud')>('@/services/pet/petCloud')
   return { ...actual, petCloudRequest: state.petRequest }
 })
 vi.mock('@/services/family-cloud/familyCloud', () => ({
-  listFamilyCloudProfiles: state.list, downloadFamilyCloudSnapshot: state.download,
-  updateFamilyCloudProfile: state.update, createFamilyCloudProfile: state.create,
+  listFamilyCloudProfiles: state.list,
+  downloadFamilyCloudSnapshot: state.download,
+  updateFamilyCloudProfile: state.update,
+  createFamilyCloudProfile: state.create,
 }))
-vi.mock('@/services/profile-archive/profileArchiveService', () => ({ profileArchiveService: state.archive }))
-vi.mock('@/services/family/localFamilyProfiles', () => ({ localFamilyProfileRepository: { read: vi.fn(() => null) } }))
+vi.mock('@/services/profile-archive/profileArchiveService', () => ({
+  profileArchiveService: state.archive,
+}))
+vi.mock('@/services/family/localFamilyProfiles', () => ({
+  localFamilyProfileRepository: { read: vi.fn(() => null) },
+}))
 
 import FamilyProfilesPage from '@/pages/FamilyProfilesPage.vue'
 
 const profile = {
-  cloudProfileId: '018e23b0-15d7-7cc4-8db2-c02439587791', label: '云端甲', revision: 1,
-  digest: 'a'.repeat(64), updatedAt: '2026-09-08T00:00:00.000Z',
+  cloudProfileId: '018e23b0-15d7-7cc4-8db2-c02439587791',
+  label: '云端甲',
+  revision: 1,
+  digest: 'a'.repeat(64),
+  updatedAt: '2026-09-08T00:00:00.000Z',
 }
 const archive = { format: 'knowledge-island.student-profile' } as never
 const preview = {
-  source: { displayName: '小学生', exportedAt: '2026-09-08T00:00:00.000Z', formatVersion: 1 as const },
+  source: {
+    displayName: '小学生',
+    exportedAt: '2026-09-08T00:00:00.000Z',
+    formatVersion: 1 as const,
+  },
   target: { mode: 'COPY' as const, proposedProfileId: 'copy', proposedDisplayName: '副本' },
-  sections: [{ kind: 'student-profile', status: 'READY' as const, count: 1 }], canRestore: true, digest: 'digest',
+  sections: [{ kind: 'student-profile', status: 'READY' as const, count: 1 }],
+  canRestore: true,
+  digest: 'digest',
 }
 
 function buttons(wrapper: ReturnType<typeof mount>) {
@@ -53,14 +79,17 @@ function button(wrapper: ReturnType<typeof mount>, text: string) {
   return found
 }
 async function login(wrapper: ReturnType<typeof mount>) {
-  await wrapper.find('#family-account').setValue('parent_a')
-  await wrapper.find('#family-password').setValue('strong-password-123')
-  await wrapper.findAll('form')[1]!.trigger('submit')
+  await button(wrapper, '加载独立备份').trigger('click')
   await flushPromises()
 }
 function page() {
   return mount(FamilyProfilesPage, {
-    global: { stubs: { AppShell: { template: '<main><slot /></main>' }, RouterLink: { template: '<a><slot /></a>' } } },
+    global: {
+      stubs: {
+        AppShell: { template: '<main><slot /></main>' },
+        RouterLink: { template: '<a><slot /></a>' },
+      },
+    },
   })
 }
 
@@ -77,7 +106,11 @@ beforeEach(() => {
   state.update.mockReset()
   state.create.mockReset()
   Object.values(state.archive).forEach((mock) => mock.mockReset())
-  state.archive.bootstrapProfile.mockReturnValue({ schemaVersion: 1, activeProfileId: 'student-a', profiles: [] })
+  state.archive.bootstrapProfile.mockReturnValue({
+    schemaVersion: 1,
+    activeProfileId: 'student-a',
+    profiles: [],
+  })
   state.archive.exportArchive.mockResolvedValue(archive)
   state.archive.inspectArchive.mockReturnValue(preview)
   state.list.mockResolvedValue([profile])
@@ -86,7 +119,14 @@ beforeEach(() => {
 
 describe('FamilyProfilesPage', () => {
   it('removes the previous automatic binding when saving with sync unchecked', async () => {
-    saveLearningSyncBinding({ profileId: 'student-a', username: 'parent_a', cloudProfileId: profile.cloudProfileId, revision: 1, enabled: true, updatedAt: profile.updatedAt })
+    saveLearningSyncBinding({
+      profileId: 'student-a',
+      username: 'parent_a',
+      cloudProfileId: profile.cloudProfileId,
+      revision: 1,
+      enabled: true,
+      updatedAt: profile.updatedAt,
+    })
     const wrapper = page()
     await login(wrapper)
     await wrapper.find('#family-cloud-select').setValue(profile.cloudProfileId)
@@ -107,7 +147,7 @@ describe('FamilyProfilesPage', () => {
     state.list.mockRejectedValueOnce(new PetCloudError(401, '请先登录'))
     await button(wrapper, '刷新云端列表').trigger('click')
     await flushPromises()
-    expect(wrapper.find('#family-account').exists()).toBe(true)
+    expect(wrapper.text()).toContain('加载独立备份')
   })
 
   it('requires a local preview before any upload is enabled', async () => {
@@ -128,7 +168,12 @@ describe('FamilyProfilesPage', () => {
     await wrapper.find('#family-cloud-select').setValue(profile.cloudProfileId)
     await button(wrapper, '预览本机档案再同步').trigger('click')
     await flushPromises()
-    state.update.mockResolvedValue({ kind: 'conflict', currentRevision: 2, currentDigest: 'b'.repeat(64), updatedAt: profile.updatedAt })
+    state.update.mockResolvedValue({
+      kind: 'conflict',
+      currentRevision: 2,
+      currentDigest: 'b'.repeat(64),
+      updatedAt: profile.updatedAt,
+    })
     const overwrite = button(wrapper, '确认更新选中的云端档案')
     await overwrite.trigger('click')
     await flushPromises()
@@ -149,12 +194,15 @@ describe('FamilyProfilesPage', () => {
   })
 
   it('does not backfill a stale login response after profile switching or unmount', async () => {
-    let resolveList!: (value: typeof profile[]) => void
-    state.list.mockImplementationOnce(() => new Promise((resolve) => { resolveList = resolve }))
+    let resolveList!: (value: (typeof profile)[]) => void
+    state.list.mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          resolveList = resolve
+        }),
+    )
     const wrapper = page()
-    await wrapper.find('#family-account').setValue('parent_a')
-    await wrapper.find('#family-password').setValue('strong-password-123')
-    await wrapper.findAll('form')[1]!.trigger('submit')
+    await button(wrapper, '加载独立备份').trigger('click')
     state.profileId.value = 'student-b'
     await flushPromises()
     resolveList([profile])
@@ -170,7 +218,12 @@ describe('FamilyProfilesPage', () => {
     state.download.mockResolvedValueOnce({ ...profile, archive })
     await button(wrapper, '预览选中的云端档案').trigger('click')
     await flushPromises()
-    state.download.mockResolvedValueOnce({ ...profile, revision: 2, digest: 'b'.repeat(64), archive })
+    state.download.mockResolvedValueOnce({
+      ...profile,
+      revision: 2,
+      digest: 'b'.repeat(64),
+      archive,
+    })
     await button(wrapper, '确认恢复为新的本机副本').trigger('click')
     await flushPromises()
     expect(state.archive.restore).not.toHaveBeenCalled()

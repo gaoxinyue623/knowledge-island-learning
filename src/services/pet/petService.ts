@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { petRepository, type PetRepository } from './petDatabase'
 import {
   applyPetCommand,
@@ -13,7 +14,7 @@ export interface PetServiceResult {
 }
 export function createPetService(
   repository: PetRepository = petRepository,
-  storage: () => PetSourceStorage = () => window.localStorage,
+  storage: () => PetSourceStorage = () => accountStorage,
   now = () => new Date().toISOString(),
 ) {
   return {

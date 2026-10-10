@@ -652,7 +652,7 @@ const units: LowerUnitDefinition[] = [
 日积月累
 《弟子规》选段
 冠必正，纽必结，袜与履，俱紧切。
-置官服，有定位，勿乱顿，致污秽。`,
+置冠服，有定位，勿乱顿，致污秽。`,
       ),
     ],
   },
@@ -1019,8 +1019,6 @@ const gradeTwoChineseLowerAppendix = String.raw`
 扇 慢 遇 兔 安 根 痛 最
 店 蹲 寂 罩 编 顾 付 颈 袜 蜈 蚣
 烂 泥 塘 吆 喝 坑 劲 茵 灌 缺 播 挪 伐 锯 牌
-昆 怜 挪 仿 佛 尽 绒 竭 规 挣 愉 绒
-
 第八单元
 篮 望 摘 掏 赛 蔷 薇 逮 忆
 纪 必 须 功 譬 糙 敏 式 简
@@ -1031,7 +1029,7 @@ const gradeTwoChineseLowerAppendix = String.raw`
 第一单元
 诗 村 童 碧 妆 绿 丝 剪
 冲 寻 姑 娘 吐 柳 荡
-鲜 邮 递 員 原 叔 局 堆 礼
+鲜 邮 递 员 原 叔 局 堆 礼
 邓 植 格 引 注 满 休 息
 
 第二单元

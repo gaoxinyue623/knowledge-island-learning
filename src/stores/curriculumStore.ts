@@ -1,9 +1,10 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 import { curriculumService } from '@/services'
 import type { CurriculumService } from '@/services/contracts'
 import { curriculumProfileRepository } from '@/services/storage/curriculumProfileRepository'
+import { curriculumDraftRepository } from '@/services/storage/curriculumDraftRepository'
 import type {
   Id,
   ResolveAvailableTextbooksOutput,
@@ -62,15 +63,27 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   const persistedProfile =
     storedProfile && !isLegacySampleProfile(storedProfile) ? storedProfile : null
   if (storedProfile && !persistedProfile) curriculumProfileRepository.clear()
-  const selectedRegionId = ref<Id | null>(persistedProfile?.regionId ?? null)
-  const selectedGradeId = ref<Id | null>(persistedProfile?.gradeId ?? null)
-  const selectedSemesterId = ref<Id | null>(persistedProfile?.semesterId ?? null)
-  const selectedTextbooks = ref<SubjectTextbookSelection>({
-    CHINESE: persistedProfile?.chineseTextbookVersionId ?? null,
-    MATH: persistedProfile?.mathTextbookVersionId ?? null,
-    ENGLISH: persistedProfile?.englishTextbookVersionId ?? null,
-  })
+  const draft = curriculumDraftRepository.load(persistedProfile)
+  const selectedRegionId = ref<Id | null>(
+    draft ? draft.regionId : (persistedProfile?.regionId ?? null),
+  )
+  const selectedGradeId = ref<Id | null>(
+    draft ? draft.gradeId : (persistedProfile?.gradeId ?? null),
+  )
+  const selectedSemesterId = ref<Id | null>(
+    draft ? draft.semesterId : (persistedProfile?.semesterId ?? null),
+  )
+  const selectedTextbooks = ref<SubjectTextbookSelection>(
+    draft?.textbooks ?? {
+      CHINESE: persistedProfile?.chineseTextbookVersionId ?? null,
+      MATH: persistedProfile?.mathTextbookVersionId ?? null,
+      ENGLISH: persistedProfile?.englishTextbookVersionId ?? null,
+    },
+  )
   const curriculumProfile = ref<StudentCurriculumProfile | null>(persistedProfile)
+  const selectionTouched = ref<SubjectCode[]>(
+    draft?.selectionTouched ?? (persistedProfile ? [...SUBJECT_CODES] : []),
+  )
   const availableTextbooks = ref<ResolveAvailableTextbooksOutput | null>(null)
   const resolutionStatus = ref<SubjectResolutionStatus>(emptyResolutionStatus())
   const confirmedAt = ref<string | null>(persistedProfile?.confirmedAt ?? null)
@@ -81,6 +94,22 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   const error = ref<string | null>(null)
   let resolutionRequestId = 0
 
+  watch(
+    [selectedRegionId, selectedGradeId, selectedSemesterId, selectedTextbooks, selectionTouched],
+    () =>
+      curriculumDraftRepository.save(
+        {
+          regionId: selectedRegionId.value,
+          gradeId: selectedGradeId.value,
+          semesterId: selectedSemesterId.value,
+          textbooks: selectedTextbooks.value,
+          selectionTouched: selectionTouched.value,
+        },
+        curriculumProfile.value,
+      ),
+    { deep: true, flush: 'sync' },
+  )
+
   function hasSelectedTextbook(selection: SubjectTextbookSelection): boolean {
     return SUBJECT_CODES.some((subjectCode) => Boolean(selection[subjectCode]))
   }
@@ -88,8 +117,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   const isComplete = computed(() => {
     const profile = curriculumProfile.value
     return Boolean(
-      profile?.regionId &&
-      profile.gradeId &&
+      profile?.gradeId &&
       profile.semesterId &&
       hasSelectedTextbook({
         CHINESE: profile.chineseTextbookVersionId,
@@ -102,7 +130,6 @@ export const useCurriculumStore = defineStore('curriculum', () => {
 
   const draftIsComplete = computed(() =>
     Boolean(
-      selectedRegionId.value &&
       selectedGradeId.value &&
       selectedSemesterId.value &&
       hasSelectedTextbook(selectedTextbooks.value),
@@ -121,17 +148,20 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   }
 
   function clearDraft() {
+    selectionTouched.value = []
     selectedRegionId.value = null
     selectedGradeId.value = null
     selectedSemesterId.value = null
     selectedTextbooks.value = emptySelections()
     confirmedAt.value = null
     clearResolution()
+    curriculumDraftRepository.clear()
   }
 
   function setProfile(profile: StudentCurriculumProfile) {
+    selectionTouched.value = [...SUBJECT_CODES]
     curriculumProfile.value = profile
-    selectedRegionId.value = profile.regionId
+    selectedRegionId.value = profile.regionId ?? null
     selectedGradeId.value = profile.gradeId
     selectedSemesterId.value = profile.semesterId
     selectedTextbooks.value = {
@@ -142,12 +172,14 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     confirmedAt.value = profile.confirmedAt
     source.value = profile.source
     error.value = null
+    curriculumDraftRepository.clear()
   }
 
   function setContext(
     context: Pick<StudentCurriculumProfile, 'regionId' | 'gradeId' | 'semesterId'>,
   ) {
-    selectedRegionId.value = context.regionId
+    selectionTouched.value = []
+    selectedRegionId.value = context.regionId ?? null
     selectedGradeId.value = context.gradeId
     selectedSemesterId.value = context.semesterId
     selectedTextbooks.value = emptySelections()
@@ -158,7 +190,8 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   function beginEdit() {
     const profile = curriculumProfile.value
     if (!profile) return
-    selectedRegionId.value = profile.regionId
+    selectionTouched.value = [...SUBJECT_CODES]
+    selectedRegionId.value = profile.regionId ?? null
     selectedGradeId.value = profile.gradeId
     selectedSemesterId.value = profile.semesterId
     selectedTextbooks.value = {
@@ -184,7 +217,10 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   }
 
   function selectGrade(gradeId: Id) {
-    if (selectedGradeId.value !== gradeId) selectedTextbooks.value = emptySelections()
+    if (selectedGradeId.value !== gradeId) {
+      selectionTouched.value = []
+      selectedTextbooks.value = emptySelections()
+    }
     selectedGradeId.value = gradeId
     confirmedAt.value = null
     clearResolution()
@@ -192,7 +228,10 @@ export const useCurriculumStore = defineStore('curriculum', () => {
   }
 
   function selectSemester(semesterId: Id) {
-    if (selectedSemesterId.value !== semesterId) selectedTextbooks.value = emptySelections()
+    if (selectedSemesterId.value !== semesterId) {
+      selectionTouched.value = []
+      selectedTextbooks.value = emptySelections()
+    }
     selectedSemesterId.value = semesterId
     confirmedAt.value = null
     clearResolution()
@@ -201,8 +240,8 @@ export const useCurriculumStore = defineStore('curriculum', () => {
 
   async function resolveTextbooks(): Promise<ResolveAvailableTextbooksOutput | null> {
     clearResolution()
-    if (!selectedRegionId.value || !selectedGradeId.value || !selectedSemesterId.value) {
-      error.value = '请先完成地区、年级和学期选择'
+    if (!selectedGradeId.value || !selectedSemesterId.value) {
+      error.value = '请先选择年级和课本册次'
       return null
     }
 
@@ -211,7 +250,6 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     const requestId = resolutionRequestId
     try {
       const result = await dependencies.curriculumService.resolveAvailableTextbooks({
-        regionId: selectedRegionId.value,
         gradeId: selectedGradeId.value,
         semesterId: selectedSemesterId.value,
       })
@@ -255,25 +293,37 @@ export const useCurriculumStore = defineStore('curriculum', () => {
       return false
     }
     selectedTextbooks.value = { ...selectedTextbooks.value, [subjectCode]: textbookVersionId }
+    if (!selectionTouched.value.includes(subjectCode)) selectionTouched.value.push(subjectCode)
     error.value = null
     return true
   }
 
   function clearTextbookSelection(subjectCode: SubjectCode) {
+    if (!selectionTouched.value.includes(subjectCode)) selectionTouched.value.push(subjectCode)
     selectedTextbooks.value = { ...selectedTextbooks.value, [subjectCode]: null }
     error.value = null
+  }
+
+  function selectSingleTextbookDefaults() {
+    for (const subject of SUBJECT_CODES) {
+      const options =
+        availableTextbooks.value?.[
+          subject === 'CHINESE' ? 'chinese' : subject === 'MATH' ? 'math' : 'english'
+        ].availableTextbooks
+      if (
+        options?.length === 1 &&
+        !selectedTextbooks.value[subject] &&
+        !selectionTouched.value.includes(subject)
+      )
+        selectTextbook(subject, options[0]!.id)
+    }
   }
 
   async function confirmCurriculum(
     studentId: Id,
     profileSource: StudentCurriculumProfile['source'] = 'USER_CONFIRMED',
   ): Promise<StudentCurriculumProfile | null> {
-    if (
-      !selectedRegionId.value ||
-      !selectedGradeId.value ||
-      !selectedSemesterId.value ||
-      !draftIsComplete.value
-    ) {
+    if (!selectedGradeId.value || !selectedSemesterId.value || !draftIsComplete.value) {
       error.value = '请选择年级和学期，并至少确认一科教材'
       return null
     }
@@ -282,7 +332,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     error.value = null
     const profile: StudentCurriculumProfile = {
       studentId,
-      regionId: selectedRegionId.value,
+      ...(selectedRegionId.value ? { regionId: selectedRegionId.value } : {}),
       gradeId: selectedGradeId.value,
       semesterId: selectedSemesterId.value,
       chineseTextbookVersionId: selectedTextbooks.value.CHINESE,
@@ -359,6 +409,7 @@ export const useCurriculumStore = defineStore('curriculum', () => {
     selectSemester,
     resolveTextbooks,
     selectTextbook,
+    selectSingleTextbookDefaults,
     clearTextbookSelection,
     confirmCurriculum,
     loadCurriculumProfile,

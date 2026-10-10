@@ -36,23 +36,35 @@ const emit = defineEmits<{ change: []; clear: [] }>()
       <p class="textbook-card__meta">{{ props.gradeName }} · {{ props.semesterName }}</p>
     </template>
     <p v-else class="textbook-card__pending">暂时没有找到匹配课本</p>
-    <p v-if="props.resolutionStatus === 'NEEDS_CONFIRMATION'" class="textbook-card__notice">
+    <p v-if="props.candidateCount === 1" class="textbook-card__notice">
+      {{
+        props.selected ? '当前仅此版本，已选好，可直接确认。' : '当前仅此版本，点击下方即可选中。'
+      }}
+    </p>
+    <p v-else-if="props.resolutionStatus === 'NEEDS_CONFIRMATION'" class="textbook-card__notice">
       这里有 {{ props.candidateCount }} 种课本版本，请确认你正在使用哪一本。
     </p>
     <p v-else-if="props.resolutionStatus === 'NOT_AVAILABLE'" class="textbook-card__notice">
       当前年级和学期尚未接入这门学科的教材，可以先选择其他学科。
     </p>
-    <button class="textbook-card__change" type="button" @click="emit('change')">
+    <button
+      v-if="props.candidateCount"
+      class="textbook-card__change"
+      type="button"
+      @click="props.candidateCount === 1 && props.selected ? emit('clear') : emit('change')"
+    >
       {{
-        props.resolutionStatus === 'NOT_AVAILABLE'
-          ? '查看版本'
+        props.candidateCount === 1
+          ? props.selected
+            ? `暂不学习${props.subjectName}`
+            : '选择这本'
           : props.selected
             ? '修改版本'
             : '选择教材'
       }}
     </button>
     <button
-      v-if="props.selected"
+      v-if="props.selected && props.candidateCount > 1"
       class="curriculum-text-button"
       type="button"
       @click="emit('clear')"

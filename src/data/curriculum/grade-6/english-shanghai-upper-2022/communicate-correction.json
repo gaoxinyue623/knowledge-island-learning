@@ -1,0 +1,70 @@
+{
+  "updatedAt": "2026-10-10T02:46:55.000Z",
+  "sourceSha256": "9d9e9c066c31d558737775460f314cd6fc080998b0c38af9c8a4f032bc5824a9",
+  "sourceNote": "Unit 4—6按用户最新修正稿展示力与运动、简易发明和临水城市的Communicate听力、口语、写作及答案，与现有单元主题对应；此前不对应的三份材料仅作历史来源归档，不再展示或跟读。Unit 1—3保留上次提供材料。用户说明按图片整理，当前按来稿保存，未独立核对出版社原页；未提供教材原版录音。",
+  "replacesSourceId": "G6_SHANGHAI_ENGLISH_S1_COMMUNICATE_SUPPLEMENT_2026_10_10",
+  "revision": 3,
+  "nodes": [
+    {
+      "number": 4,
+      "title": "Forces we use to move things",
+      "listenTask": "A Listen, number and complete. Then talk.",
+      "listen": "1. This is a suitcase. We use this when we are on trips. We pull it to move it.\n2. This is a door. We push or pull this to go into or out of a room.",
+      "answers": [
+        "We use this when we are on trips.",
+        "We push or pull this to go into or out of a room."
+      ],
+      "answerNotes": "填空：trips、room。",
+      "questions": [],
+      "speak": "A: What do we use a suitcase for?\nB: We pull it when we are on trips. Pull is a force.\nA: What force do we use for a door?\nB: We push or pull the door to go in or out of a room.",
+      "frames": "We push / pull … to … Push / Pull is a force.",
+      "write": "Write about push and pull.\nWe use forces to move things. We ______ the suitcase on trips. We ______ the door to go into a room. Push and pull are forces.",
+      "originalUnitTitle": "Unit 4 What makes things move? 是什么让物体运动？",
+      "topicMismatch": false,
+      "notes": [
+        "本次修正稿按原单元的力与运动主题展示，替换上一份主题不对应的Communicate材料。"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "How will Lele and his dad use simple inventions to build a tree house?",
+      "listenTask": "A Listen, match and complete. Then say.",
+      "listen": "Lele and his dad will build a tree house.\n1. First, they will use the ladder. They will climb up the tree with it.\n2. Next, they will use the cart. They will carry the boards with it.",
+      "answers": [
+        "1 → ladder",
+        "2 → cart"
+      ],
+      "answerNotes": "按用户提供的编号匹配梯子和手推车。",
+      "questions": [],
+      "speak": "A: What will they use the ladder for?\nB: They will use the ladder to climb up the tree.\nA: What will they use the cart for?\nB: They will use the cart to carry the boards.",
+      "frames": "They will use … to …",
+      "write": "Lele and Dad will build a tree house. They will use the ladder to ______. They will use the cart to ______. Simple inventions help them a lot.",
+      "originalUnitTitle": "Unit 5 How do inventions change our lives? 发明如何改变我们的生活？",
+      "topicMismatch": false,
+      "notes": [
+        "本次修正稿按原单元的简易发明与树屋主题展示，替换上一份主题不对应的Communicate材料。"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Cities are usually near rivers or lakes. Why?",
+      "listenTask": "A Listen and match. Then say.",
+      "listen": "1. The Seine River runs through Paris. It is important for ships to travel on.\n2. Lake Texcoco is near Mexico City. It kept the city safe long ago.\n3. The Pearl River is near Guangzhou. It gave people food and water.",
+      "answers": [
+        "The Seine River → Paris → It is important for ships to travel on.",
+        "Lake Texcoco → Mexico City → It kept the city safe.",
+        "The Pearl River → Guangzhou → It gave people food and water."
+      ],
+      "answerNotes": "按听力编号依次匹配：1. Seine River—Paris；2. Lake Texcoco—Mexico City；3. Pearl River—Guangzhou。",
+      "questions": [],
+      "speak": "A: Why are many cities near rivers or lakes?\nB: Because water gave people food and water.\nA: What about Paris?\nB: Paris is by the Seine River. Ships can travel on the river.",
+      "frames": "… is near … because …",
+      "write": "Many cities are near rivers or lakes. ______ is near ______. People can get ______ from the water. Water helps the city.",
+      "originalUnitTitle": "Unit 6 What is a city? 什么是城市？",
+      "topicMismatch": false,
+      "notes": [
+        "本次修正稿按原单元的临水城市主题展示，替换上一份主题不对应的Communicate材料。"
+      ]
+    }
+  ]
+}

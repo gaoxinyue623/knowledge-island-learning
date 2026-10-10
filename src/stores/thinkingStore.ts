@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { recordLearningActivity } from '@/services/learning-activity/activityHistory'
 import { notifyPetLearningChanged } from '@/services/pet/petNotifications'
 import { defineStore } from 'pinia'
@@ -21,7 +22,7 @@ export const useThinkingStore = defineStore('thinking', () => {
     if (loadedProfile === profileId) return
     loadedProfile = profileId
     try {
-      const loaded = readThinkingProgress(window.localStorage, profileId)
+      const loaded = readThinkingProgress(accountStorage, profileId)
       data.value = loaded.data
       warning.value = loaded.warning
       writable = loaded.writable
@@ -47,7 +48,7 @@ export const useThinkingStore = defineStore('thinking', () => {
     data.value = next
     if (writable) {
       try {
-        const latest = readThinkingProgress(window.localStorage, profileId)
+        const latest = readThinkingProgress(accountStorage, profileId)
         if (!latest.writable) {
           writable = false
           warning.value = latest.warning
@@ -58,7 +59,7 @@ export const useThinkingStore = defineStore('thinking', () => {
             next = withSolvedThinkingPuzzle(next, record.missionId, id) ?? next
         }
         data.value = next
-        window.localStorage.setItem(thinkingProgressKey(profileId), JSON.stringify(next))
+        accountStorage.setItem(thinkingProgressKey(profileId), JSON.stringify(next))
         recordLearningActivity({
           id: `thinking:${missionId}:${mission!.version}:${puzzleId}`,
           profileId,

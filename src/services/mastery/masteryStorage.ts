@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import { z } from 'zod'
 
 import type { LearningEvidence, MasteryRecord } from '@/types'
@@ -136,8 +137,8 @@ export function migrateMasteryRecordStoragePayload(
 }
 
 function defaultStorage(): MasteryStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 export function createMasteryStorage(

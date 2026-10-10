@@ -1,133 +1,54 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
 import AppButton from '@/components/common/AppButton.vue'
-import AppEmptyState from '@/components/common/AppEmptyState.vue'
-import AppErrorState from '@/components/common/AppErrorState.vue'
-import AppLoading from '@/components/common/AppLoading.vue'
-import GradeSelector from '@/components/curriculum/GradeSelector.vue'
+import TextbookCoverage from '@/components/curriculum/TextbookCoverage.vue'
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
-import { G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID } from '@/data/curriculum'
-import { curriculumService } from '@/services'
 import { useCurriculumStore } from '@/stores/curriculumStore'
-import type { Grade, Semester } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
 const curriculumStore = useCurriculumStore()
-const grades = ref<Grade[]>([])
-const semesters = ref<Semester[]>([])
-const loading = ref(true)
-const error = ref<string | null>(null)
-const supportedGradeIds = [G1_PEP_CHINESE_GRADE_ID, G2_PEP_CHINESE_GRADE_ID]
+const selectionAvailable = ref(false)
 const isSettingsEdit = computed(() => route.query.from === 'settings')
-const backTo = computed(() =>
-  isSettingsEdit.value ? '/curriculum-settings' : '/onboarding/region',
-)
-
-const selectedSemesterId = computed(() => curriculumStore.selectedSemesterId)
-const canContinue = computed(
-  () =>
-    Boolean(curriculumStore.selectedGradeId && curriculumStore.selectedSemesterId) &&
-    supportedGradeIds.includes(curriculumStore.selectedGradeId ?? ''),
-)
-
-async function loadOptions() {
-  loading.value = true
-  error.value = null
-  try {
-    const [loadedGrades, loadedSemesters] = await Promise.all([
-      curriculumService.getGrades(),
-      curriculumService.getSemesters(),
-    ])
-    grades.value = loadedGrades
-    semesters.value = loadedSemesters
-    const upperSemester = loadedSemesters.find((semester) => semester.code === 'UPPER')
-    if (upperSemester && !curriculumStore.selectedSemesterId) {
-      curriculumStore.selectSemester(upperSemester.id)
-    }
-  } catch (caught) {
-    error.value = caught instanceof Error ? caught.message : '年级暂时无法加载'
-  } finally {
-    loading.value = false
-  }
+const backTo = computed(() => (isSettingsEdit.value ? '/curriculum-settings' : '/onboarding'))
+function selectContext(selection: { gradeId: string; semesterId: string }) {
+  curriculumStore.selectGrade(selection.gradeId)
+  curriculumStore.selectSemester(selection.semesterId)
 }
-
-function selectGrade(grade: Grade) {
-  curriculumStore.selectGrade(grade.id)
-}
-
 function continueToTextbooks() {
-  if (canContinue.value) {
+  if (selectionAvailable.value)
     router.push({
       path: '/onboarding/textbooks',
       query: isSettingsEdit.value ? { from: 'settings' } : undefined,
     })
-  }
 }
-
-onMounted(() => void loadOptions())
 </script>
 
 <template>
   <CurriculumPageFrame
-    title="你现在几年级？"
-    description="当前已接入一年级和二年级教材。选好年级和上下册，再自主选择各科课本，不受地区限制。"
-    :step="2"
+    title="选择年级和课本册次"
+    description="先了解各年级的教材接入情况，再选择适合你的课本。有部分学科缺失时，仍可学习已接入的学科。"
+    :step="1"
     :back-to="backTo"
   >
-    <AppLoading v-if="loading" label="正在准备年级选择" />
-    <AppErrorState
-      v-else-if="error"
-      title="年级列表暂时打不开"
-      :description="error"
-      @retry="loadOptions"
+    <TextbookCoverage
+      :grade-id="curriculumStore.selectedGradeId"
+      :semester-id="curriculumStore.selectedSemesterId"
+      @select="selectContext"
+      @availability="selectionAvailable = $event"
     />
-    <AppEmptyState
-      v-else-if="!grades.length"
-      title="这个年级列表正在准备中"
-      description="请稍后重试。"
-      action-label="重新加载"
-      @action="loadOptions"
-    />
-    <template v-else>
-      <GradeSelector
-        :grades="grades"
-        :selected-grade-id="curriculumStore.selectedGradeId"
-        :available-grade-ids="supportedGradeIds"
-        @select="selectGrade"
-      />
-      <section class="semester-choice" aria-labelledby="semester-title">
-        <div>
-          <p class="curriculum-eyebrow">学习学期</p>
-          <h2 id="semester-title">先从哪一册开始？</h2>
-        </div>
-        <div class="semester-choice__options">
-          <button
-            v-for="semester in semesters"
-            :key="semester.id"
-            class="semester-choice__option"
-            :class="{ 'semester-choice__option--selected': selectedSemesterId === semester.id }"
-            type="button"
-            :aria-pressed="selectedSemesterId === semester.id"
-            @click="curriculumStore.selectSemester(semester.id)"
-          >
-            {{ semester.name }}
-          </button>
-        </div>
-        <p class="curriculum-hint">当前默认选择上册，你也可以在这里明确切换。</p>
-      </section>
-      <div class="curriculum-actions">
-        <AppButton
-          size="lg"
-          icon-right="arrow-right"
-          :disabled="!canContinue"
-          @click="continueToTextbooks"
-        >
-          继续确认课本
-        </AppButton>
-      </div>
-    </template>
+    <div class="curriculum-actions">
+      <p v-if="!selectionAvailable" class="curriculum-hint">
+        请在总览中选择一个已接入的年级和册次。
+      </p>
+      <AppButton
+        size="lg"
+        icon-right="arrow-right"
+        :disabled="!selectionAvailable"
+        @click="continueToTextbooks"
+        >继续选择教材版本</AppButton
+      >
+    </div>
   </CurriculumPageFrame>
 </template>

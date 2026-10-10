@@ -448,7 +448,7 @@ export const revisedChineseLowerTexts: readonly RevisedChineseLessonText[] = [
     text: `日积月累
 《弟子规》选段
 冠必正，纽必结，袜与履，俱紧切。
-置官服，有定位，勿乱顿，致污秽。
+置冠服，有定位，勿乱顿，致污秽。
 唯德学，唯才艺，不如人，当自砺。
 若衣服，若饮食，不如人，勿生戚。`,
   },

@@ -85,7 +85,10 @@ describe('Lesson guided practice', () => {
   })
 
   it('does not let an older A request replace a newer A after A to B to A', async () => {
-    const bundle = await contentExpansionRepository.getBundle(lessonContext.knowledgePointId, 'profile')
+    const bundle = await contentExpansionRepository.getBundle(
+      lessonContext.knowledgePointId,
+      'profile',
+    )
     expect(bundle).not.toBeNull()
     let rejectFirst!: (reason: unknown) => void
     const first = new Promise<Awaited<typeof bundle>>((_, reject) => {
@@ -103,12 +106,16 @@ describe('Lesson guided practice', () => {
     await vi.waitFor(() => expect(store.status).toBe('ready'))
     await completeLessonViaUi(wrapper, store)
     await vi.waitFor(() =>
-      expect(wrapper.findComponent({ name: 'ReadingQuest' }).props('profileId')).toBe('child-newer'),
+      expect(wrapper.findComponent({ name: 'ReadingQuest' }).props('profileId')).toBe(
+        'child-newer',
+      ),
     )
 
     useStudentStore().profile = { id: 'child-first', displayName: '原来的同学' }
     await vi.waitFor(() =>
-      expect(wrapper.findComponent({ name: 'ReadingQuest' }).props('profileId')).toBe('child-first'),
+      expect(wrapper.findComponent({ name: 'ReadingQuest' }).props('profileId')).toBe(
+        'child-first',
+      ),
     )
     expect(getBundle).toHaveBeenCalledTimes(3)
 
@@ -122,7 +129,10 @@ describe('Lesson guided practice', () => {
   it.each(['success', 'failure'] as const)(
     'ignores a late guided-practice %s response after the page unmounts',
     async (outcome) => {
-      const bundle = await contentExpansionRepository.getBundle(lessonContext.knowledgePointId, 'profile')
+      const bundle = await contentExpansionRepository.getBundle(
+        lessonContext.knowledgePointId,
+        'profile',
+      )
       expect(bundle).not.toBeNull()
       let resolveFirst!: (value: typeof bundle) => void
       let rejectFirst!: (reason: unknown) => void

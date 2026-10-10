@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reloadAfterAccountChange } from '@/services/account/accountService'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { z } from 'zod'
 import AppShell from '@/layouts/AppShell.vue'
@@ -40,8 +41,6 @@ const character = ref<string>(characterOptions[0].id)
 const busy = ref(false)
 const message = ref('')
 const username = ref<string | null>(null)
-const loginName = ref('')
-const password = ref('')
 const profiles = ref<FamilyCloudProfile[]>([])
 const selectedId = ref('')
 const selected = computed(() =>
@@ -81,7 +80,8 @@ function initializeLocal() {
           createdAt: new Date().toISOString(),
         })
       : localFamilyProfileRepository.read()
-    if (!registry.value) message.value = '本机档案目录暂时无法读取，原资料已保留。请先在通用设置中检查档案备份。'
+    if (!registry.value)
+      message.value = '本机档案目录暂时无法读取，原资料已保留。请先在通用设置中检查档案备份。'
   } catch {
     registry.value = null
     message.value = '本机档案目录暂时无法读取，原资料已保留。请先在通用设置中导出可读取的档案。'
@@ -120,43 +120,31 @@ async function createChild() {
       characterId: character.value,
       copyCurriculum: true,
     })
-    if (current() && result.profile) window.location.reload()
+    if (current() && result.profile) await reloadAfterAccountChange()
   })
 }
 async function switchChild(id: string) {
   await run(async () => {
     await profileArchiveService.activate(id)
-    window.location.reload()
+    await reloadAfterAccountChange()
   })
 }
-async function connect(mode: 'session' | 'login' | 'register') {
+async function connect() {
   await run(async (current) => {
-    try {
-      const response = z
-        .object({ username: z.string().min(1).nullable() })
-        .parse(
-          await petCloudRequest(
-            mode,
-            mode === 'session' ? 'GET' : 'POST',
-            mode === 'session'
-              ? undefined
-              : { username: loginName.value, password: password.value },
-          ),
-        )
-      if (!current()) return
-      resetCloud()
-      username.value = response.username
-      if (!response.username) {
-        message.value = '服务已连接，请登录家长账号。'
-        return
-      }
-      const list = await listFamilyCloudProfiles(response.username)
-      if (!current()) return
-      profiles.value = list
-      message.value = '已连接。同步由你手动发起，本机档案保持独立。'
-    } finally {
-      password.value = ''
+    const response = z
+      .object({ username: z.string().min(1).nullable() })
+      .parse(await petCloudRequest('session'))
+    if (!current()) return
+    resetCloud()
+    username.value = response.username
+    if (!response.username) {
+      message.value = '请前往统一登录页登录账号。'
+      return
     }
+    const list = await listFamilyCloudProfiles(response.username)
+    if (!current()) return
+    profiles.value = list
+    message.value = '独立备份列表已加载。日常学习数据由账号自动同步。'
   })
 }
 async function refreshCloud() {
@@ -267,18 +255,7 @@ async function restoreCloud() {
       throw new Error('云端档案已更新，请重新预览后恢复。')
     }
     await profileArchiveService.restore(expected.archive, preview)
-    if (current()) window.location.reload()
-  })
-}
-async function logout() {
-  if (!username.value) return
-  const account = username.value
-  await run(async (current) => {
-    await petCloudRequest('logout', 'POST', undefined, account)
-    if (current()) {
-      resetCloud()
-      message.value = '已退出账号，本机学习档案仍保留。'
-    }
+    if (current()) await reloadAfterAccountChange()
   })
 }
 watch(profileId, initializeLocal, { immediate: true })
@@ -288,12 +265,12 @@ watch(selectedId, () => {
   upload.value = null
   conflict.value = false
   enableAutoSync.value = Boolean(
-    selectedId.value && loadLearningSyncBinding(profileId.value)?.cloudProfileId === selectedId.value,
+    selectedId.value &&
+    loadLearningSyncBinding(profileId.value)?.cloudProfileId === selectedId.value,
   )
 })
 onBeforeUnmount(() => {
   generation++
-  password.value = ''
 })
 </script>
 
@@ -304,12 +281,12 @@ onBeforeUnmount(() => {
         <p class="curriculum-eyebrow">由家长管理，一人一份学习记录</p>
         <h1>家庭学习档案</h1>
         <p>
-          本机可建立多个孩子的档案。登录家长账号后，可保存到云端；开启自动同步后，正式 Agent 完成学习会上传最新学习事实。
+          可为每个孩子建立独立档案。学习记录、教材设置与宠物都会自动保存到当前账号，换设备登录后可继续学习。
         </p>
       </header>
       <p v-if="message" role="status" class="family-profiles__notice">{{ message }}</p>
       <section aria-labelledby="family-local-title">
-        <h2 id="family-local-title">本机的孩子</h2>
+        <h2 id="family-local-title">账号中的孩子</h2>
         <ul>
           <li v-for="child in registry?.profiles ?? []" :key="child.id">
             <strong>{{ child.displayName }}</strong
@@ -347,50 +324,17 @@ onBeforeUnmount(() => {
         <RouterLink to="/settings">通过文件导出或恢复学习档案 →</RouterLink>
       </section>
       <section aria-labelledby="family-cloud-title">
-        <h2 id="family-cloud-title">家长账号与跨设备同步</h2>
-        <template v-if="!username"
-          ><p>可使用已有宠物备份账号，无需真实姓名或邮箱。请保存好密码，目前尚无找回密码功能。</p>
-          <form @submit.prevent="connect('login')">
-            <label for="family-account"
-              >账号<input
-                id="family-account"
-                v-model="loginName"
-                autocomplete="username"
-                required
-                pattern="[A-Za-z0-9_]{4,32}"
-                minlength="4"
-                maxlength="32"
-                :disabled="busy" /></label
-            ><label for="family-password"
-              >密码<input
-                id="family-password"
-                v-model="password"
-                type="password"
-                autocomplete="current-password"
-                required
-                minlength="10"
-                maxlength="128"
-                :disabled="busy"
-            /></label>
-            <div class="family-profiles__actions">
-              <button type="submit" :disabled="busy">登录</button
-              ><button
-                type="button"
-                :disabled="busy || !/^[A-Za-z0-9_]{4,32}$/.test(loginName) || password.length < 10"
-                @click="connect('register')"
-              >
-                注册家长账号</button
-              ><button type="button" :disabled="busy" @click="connect('session')">
-                检查已有登录
-              </button>
-            </div>
-          </form></template
-        >
+        <h2 id="family-cloud-title">独立档案备份</h2>
+        <template v-if="!username">
+          <p>日常记录已通过账号自动同步。这里保留以前创建的独立档案备份，方便手动导入和另存。</p>
+          <button type="button" :disabled="busy" @click="connect()">加载独立备份</button>
+          <RouterLink to="/account">管理账号与自动同步 →</RouterLink>
+        </template>
         <template v-else
           ><p>当前家长账号：{{ username }}</p>
           <div class="family-profiles__actions">
             <button type="button" :disabled="busy" @click="refreshCloud">刷新云端列表</button
-            ><button type="button" :disabled="busy" @click="logout">退出账号</button>
+            ><RouterLink to="/account">账号与同步</RouterLink>
           </div>
           <label for="family-cloud-select"
             >选择云端档案<select id="family-cloud-select" v-model="selectedId" :disabled="busy">

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AiWrongBook from '@/components/knowledge-point/AiWrongBook.vue'
 import LearningActivityHistory from '@/components/common/LearningActivityHistory.vue'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { computed, ref, watch } from 'vue'
@@ -22,6 +23,7 @@ const route = useRoute()
 const wrongBookStore = useWrongBookStore()
 
 const includeResolved = ref(false)
+const refreshAi = ref(0)
 const actionMessage = ref<string | null>(null)
 const questionTitles = ref<Record<Id, string>>({})
 const questionLoading = ref(false)
@@ -44,6 +46,7 @@ const reviewQueuePath = computed(() => (isDevRoute.value ? '/dev/review-queue' :
 const demoSeeded = ref(false)
 
 function loadWrongBook() {
+  refreshAi.value++
   actionMessage.value = null
   wrongBookStore.load(profileId.value, {
     includeResolved: includeResolved.value,
@@ -219,6 +222,12 @@ watch(profileId, loadWrongBook, { immediate: true })
         </AppButton>
       </div>
 
+      <AiWrongBook
+        v-if="!isDevRoute"
+        :profile-id="profileId"
+        :include-resolved="includeResolved"
+        :refresh="refreshAi"
+      />
       <AppLoading v-if="wrongBookStore.loading" label="正在整理错题本" />
       <AppErrorState
         v-else-if="wrongBookStore.status === 'error'"

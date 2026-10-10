@@ -3,13 +3,15 @@ import { validatePortableArchive } from '@/services/profile-archive/portableArch
 import type { StudentProfileArchive } from '@/services/profile-archive/profileArchiveSchema'
 import { PetCloudError, petCloudRequest } from '@/services/pet/petCloud'
 
-export const familyCloudProfileSchema = z.object({
-  cloudProfileId: z.string().uuid(),
-  label: z.string().min(1).max(80),
-  revision: z.number().int().positive(),
-  digest: z.string().min(1).max(200),
-  updatedAt: z.string().datetime(),
-}).strict()
+export const familyCloudProfileSchema = z
+  .object({
+    cloudProfileId: z.string().uuid(),
+    label: z.string().min(1).max(80),
+    revision: z.number().int().positive(),
+    digest: z.string().min(1).max(200),
+    updatedAt: z.string().datetime(),
+  })
+  .strict()
 
 export type FamilyCloudProfile = z.infer<typeof familyCloudProfileSchema>
 export type FamilyCloudSnapshot = FamilyCloudProfile & { archive: StudentProfileArchive }
@@ -17,7 +19,9 @@ export type FamilyCloudUpdateResult =
   | { kind: 'updated'; profile: FamilyCloudProfile }
   | { kind: 'conflict'; currentRevision: number; currentDigest: string; updatedAt: string }
 
-const listResponseSchema = z.object({ profiles: z.array(familyCloudProfileSchema).max(100) }).strict()
+const listResponseSchema = z
+  .object({ profiles: z.array(familyCloudProfileSchema).max(100) })
+  .strict()
 const snapshotResponseSchema = familyCloudProfileSchema.extend({ archive: z.unknown() }).strict()
 const updateResponseSchema = familyCloudProfileSchema
 
@@ -44,17 +48,27 @@ function encodeProfileId(cloudProfileId: string): string {
 }
 
 function conflictFrom(error: unknown): FamilyCloudUpdateResult | null {
-  if (!(error instanceof PetCloudError) || error.status !== 409 || error.code !== 'REVISION_CONFLICT') return null
-  const details = z.object({
-    currentRevision: z.number().int().positive(),
-    currentDigest: z.string().min(1).max(200),
-    updatedAt: z.string().datetime(),
-  }).strict().safeParse(error.details)
+  if (
+    !(error instanceof PetCloudError) ||
+    error.status !== 409 ||
+    error.code !== 'REVISION_CONFLICT'
+  )
+    return null
+  const details = z
+    .object({
+      currentRevision: z.number().int().positive(),
+      currentDigest: z.string().min(1).max(200),
+      updatedAt: z.string().datetime(),
+    })
+    .strict()
+    .safeParse(error.details)
   if (!details.success) throw new Error('云端冲突响应无法识别，本机记录未改变。')
   return { kind: 'conflict', ...details.data }
 }
 
-export async function listFamilyCloudProfiles(expectedUsername: string): Promise<FamilyCloudProfile[]> {
+export async function listFamilyCloudProfiles(
+  expectedUsername: string,
+): Promise<FamilyCloudProfile[]> {
   return listResponseSchema.parse(
     await petCloudRequest('family/profiles', 'GET', undefined, expectedUsername),
   ).profiles
@@ -65,22 +79,31 @@ export async function createFamilyCloudProfile(
   archive: unknown,
   expectedUsername: string,
 ): Promise<FamilyCloudProfile> {
-  return updateResponseSchema.parse(await petCloudRequest('family/profiles', 'POST', {
-    label: z.string().trim().min(1).max(80).parse(label),
-    archive: validatedArchive(archive),
-  }, expectedUsername))
+  return updateResponseSchema.parse(
+    await petCloudRequest(
+      'family/profiles',
+      'POST',
+      {
+        label: z.string().trim().min(1).max(80).parse(label),
+        archive: validatedArchive(archive),
+      },
+      expectedUsername,
+    ),
+  )
 }
 
 export async function downloadFamilyCloudSnapshot(
   cloudProfileId: string,
   expectedUsername: string,
 ): Promise<FamilyCloudSnapshot> {
-  const snapshot = parseSnapshot(await petCloudRequest(
-    `family/profiles/${encodeProfileId(cloudProfileId)}`,
-    'GET',
-    undefined,
-    expectedUsername,
-  ))
+  const snapshot = parseSnapshot(
+    await petCloudRequest(
+      `family/profiles/${encodeProfileId(cloudProfileId)}`,
+      'GET',
+      undefined,
+      expectedUsername,
+    ),
+  )
   if (snapshot.cloudProfileId !== cloudProfileId)
     throw new Error('云端返回的档案编号不匹配，本机记录未改变。')
   return snapshot
@@ -94,15 +117,18 @@ export async function updateFamilyCloudProfile(
   expectedUsername: string,
 ): Promise<FamilyCloudUpdateResult> {
   try {
-    const profile = matchingProfile(await petCloudRequest(
-      `family/profiles/${encodeProfileId(cloudProfileId)}`,
-      'PUT',
-      {
-        expectedRevision: z.number().int().positive().parse(expectedRevision),
-        archive: validatedArchive(archive),
-      },
-      expectedUsername,
-    ), cloudProfileId)
+    const profile = matchingProfile(
+      await petCloudRequest(
+        `family/profiles/${encodeProfileId(cloudProfileId)}`,
+        'PUT',
+        {
+          expectedRevision: z.number().int().positive().parse(expectedRevision),
+          archive: validatedArchive(archive),
+        },
+        expectedUsername,
+      ),
+      cloudProfileId,
+    )
     return { kind: 'updated', profile }
   } catch (error) {
     const conflict = conflictFrom(error)

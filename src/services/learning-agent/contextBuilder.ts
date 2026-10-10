@@ -30,6 +30,9 @@ export function scopeAgentSnapshot(input: LearningAgentSnapshot): LearningAgentS
       }),
   )
   const questions = new Set(s.questions.map((q) => q.id))
+  s.aiSignals = (s.aiSignals ?? []).filter(
+    (a) => a.profileId === profileId && a.textbookId === textbookId && ids.has(a.knowledgePointId),
+  )
   s.mappings = s.mappings.filter(
     (m) =>
       questions.has(m.questionId) &&

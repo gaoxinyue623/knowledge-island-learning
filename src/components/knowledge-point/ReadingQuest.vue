@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { recordLearningActivity, type LearningActivity } from '@/services/learning-activity/activityHistory'
+import ContentFeedbackLink from '@/components/account/ContentFeedbackLink.vue'
+import {
+  recordLearningActivity,
+  type LearningActivity,
+} from '@/services/learning-activity/activityHistory'
 import { spacedReviewService } from '@/services/student-growth/spacedReview'
 import { readingStories } from '@/data/reading-islands'
 import { productionCurriculumIndex } from '@/data/curriculum/production'
@@ -44,12 +48,17 @@ const props = withDefaults(
     reviewAttemptId?: string
     activityContext?: Pick<LearningActivity, 'title' | 'subject' | 'href'>
   }>(),
-  { muted: undefined, readingLabel: undefined, note: undefined, reviewAttemptId: undefined, activityContext: undefined },
+  {
+    muted: undefined,
+    readingLabel: undefined,
+    note: undefined,
+    reviewAttemptId: undefined,
+    activityContext: undefined,
+  },
 )
 const petRewardWarning = ref('')
 const appInstance = getCurrentInstance()
-const appPinia = appInstance?.appContext.config.globalProperties.$pinia as
-  Pinia | undefined
+const appPinia = appInstance?.appContext.config.globalProperties.$pinia as Pinia | undefined
 const preferences = appPinia ? usePreferencesStore(appPinia) : null
 const muted = computed(() => props.muted ?? preferences?.preferences.muted ?? false)
 const attemptId = ref(''),
@@ -92,8 +101,7 @@ const hasExplicitEvidence = ref(false)
 const revision = computed(() => questContentRevision(props.quest))
 const reviewAttemptId = computed(() => {
   const currentRoute = appInstance?.appContext.config.globalProperties.$route as
-    | { query?: Record<string, unknown> }
-    | undefined
+    { query?: Record<string, unknown> } | undefined
   const value = props.reviewAttemptId ?? currentRoute?.query?.reviewAttempt
   if (typeof value !== 'string') return null
   return value && /^[a-zA-Z0-9_-]{1,100}$/.test(value) ? value : null
@@ -105,7 +113,8 @@ const progressQuest = computed<ReadingPracticeQuest>(() =>
     : props.quest,
 )
 let loadedScope = ''
-const scope = () => JSON.stringify([props.profileId, props.quest.id, revision.value, reviewAttemptId.value])
+const scope = () =>
+  JSON.stringify([props.profileId, props.quest.id, revision.value, reviewAttemptId.value])
 
 const stages = computed(() =>
   props.quest.stages.filter((stage) => !reviewIds.value || reviewIds.value.includes(stage.id)),
@@ -124,6 +133,21 @@ const canCheck = computed(
 )
 const prompt = computed(
   () => question.value?.stem.map((block) => block.text ?? '').join('\n') ?? '',
+)
+const questionImages = computed(() =>
+  (question.value?.media ?? [])
+    .filter((media) => media.usageType === 'STEM')
+    .sort(
+      (left, right) =>
+        left.order - right.order || left.mediaAssetId.localeCompare(right.mediaAssetId),
+    )
+    .flatMap((media) => {
+      const asset = productionCurriculumIndex.mediaAssets.find(
+        (item) => item.id === media.mediaAssetId,
+      )
+      if (!asset?.url || (asset.mediaType !== 'IMAGE' && asset.mediaType !== 'SVG')) return []
+      return [{ ...media, url: asset.url, altText: asset.altText || '题目图片' }]
+    }),
 )
 const supportsQuestionReadAloud = computed(() => isMath.value)
 const readAloudScope = computed(
@@ -257,13 +281,18 @@ function persist(): void {
           contentVersion: revision.value,
           kind: 'quest',
           title: props.activityContext?.title ?? lesson?.title ?? story?.title ?? '课后闯关',
-          subject: props.activityContext?.subject ?? props.quest.subject ?? (story?.language === 'english' ? 'ENGLISH' : 'CHINESE'),
+          subject:
+            props.activityContext?.subject ??
+            props.quest.subject ??
+            (story?.language === 'english' ? 'ENGLISH' : 'CHINESE'),
           occurredAt: completedAt.value,
           completedCount: passed.value.length,
           mistakeCount: mistakes.value.length,
-          href: props.activityContext?.href ?? (lesson
-            ? `/knowledge-point/${encodeURIComponent(quest.knowledgePointId!)}?${query}#knowledge-challenges`
-            : window.location.pathname),
+          href:
+            props.activityContext?.href ??
+            (lesson
+              ? `/knowledge-point/${encodeURIComponent(quest.knowledgePointId!)}?${query}#knowledge-challenges`
+              : window.location.pathname),
         })
       } catch {
         storageWarning.value = '闯关进度已保存，活动记录暂未更新；重新打开本组练习会重试。'
@@ -329,7 +358,8 @@ function recordSpacedReviewEvidence(): void {
       }
     }),
   })
-  if (!recorded && !storageWarning.value) storageWarning.value = spacedReviewService.getLastWarning()
+  if (!recorded && !storageWarning.value)
+    storageWarning.value = spacedReviewService.getLastWarning()
 }
 watch(
   [passed, mistakes, helped, completedStageIds, reviewIds, stageIndex, summaryVisible],
@@ -638,6 +668,15 @@ function restart(onlyMistakes: boolean): void {
         <MathQuestVisual v-if="stage.visual" :key="round + ':' + stage.id" :visual="stage.visual" />
         <template v-if="stage.kind === 'question' && question">
           <p id="quest-question-prompt" class="reading-quest__prompt">{{ prompt }}</p>
+          <div v-if="questionImages.length" class="question-media-list" aria-label="题目图片">
+            <figure
+              v-for="image in questionImages"
+              :key="`${round}:${question.id}:${image.mediaAssetId}:${image.order}`"
+              class="question-media"
+            >
+              <img class="question-media__image" :src="image.url" :alt="image.altText" />
+            </figure>
+          </div>
           <StudentReadAloud
             v-if="supportsQuestionReadAloud"
             :text="questionReadAloudText"
@@ -816,6 +855,9 @@ function restart(onlyMistakes: boolean): void {
           </button>
         </div>
         <p v-if="feedback" class="reading-quest__feedback" role="status">{{ feedback }}</p>
+        <ContentFeedbackLink
+          :content-id="`${quest.id}:${stage.id}:${questContentRevision(quest)}`"
+        />
         <div v-if="hintVisible" id="quest-hint" class="reading-quest__hint" role="status">
           <StudentReadAloud
             v-if="supportsQuestionReadAloud"

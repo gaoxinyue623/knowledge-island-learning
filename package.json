@@ -18,6 +18,8 @@
     "curriculum:batch": "tsx --tsconfig tsconfig.app.json scripts/curriculum-batch.ts batch-01",
     "curriculum:import": "tsx --tsconfig tsconfig.app.json scripts/curriculum-batch.ts import",
     "curriculum:review": "tsx --tsconfig tsconfig.app.json scripts/curriculum-review.ts",
+    "curriculum:audit": "tsx --tsconfig tsconfig.app.json scripts/curriculum-catalog-audit.ts",
+    "curriculum:verification": "npm run curriculum:audit && tsx --tsconfig tsconfig.app.json scripts/textbook-verification-audit.ts",
     "curriculum:data-review": "tsx --tsconfig tsconfig.app.json scripts/curriculum-data-review.ts",
     "curriculum:content:fetch": "tsx --tsconfig tsconfig.app.json scripts/curriculum-content-fetch.ts",
     "curriculum:content:discover": "tsx --tsconfig tsconfig.app.json scripts/curriculum-content-discover.ts",
@@ -32,7 +34,8 @@
     "agent:fastapi:test": "python3 -m unittest discover -s python_agent -t . -v",
     "agent:evaluate": "tsx --tsconfig tsconfig.app.json scripts/learning-agent-evaluate.ts",
     "llm:evaluate": "tsx --tsconfig tsconfig.app.json scripts/real-llm-evaluate.ts",
-    "llm:review": "tsx --tsconfig tsconfig.app.json scripts/real-llm-review.ts"
+    "llm:review": "tsx --tsconfig tsconfig.app.json scripts/real-llm-review.ts",
+    "dev:all": "tsx --tsconfig tsconfig.app.json scripts/dev-all.ts"
   },
   "dependencies": {
     "lucide-vue-next": "^0.468.0",

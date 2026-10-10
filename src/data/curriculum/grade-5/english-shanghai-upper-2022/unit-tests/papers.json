@@ -1,0 +1,319 @@
+{
+  "title": "沪教牛津五年级上册配套练习",
+  "sourceSha256": "228a008c881324e9e4e83c7ec6e6ecb13ef45de58c2dcc09e9f4aea05086a83d",
+  "sourceNote": "用户提供的单元小练习和综合小练习，完整原稿留存；Unit 1、2第一题答案的shtu分别更正为am、is，原答及修订说明留存，不自加分值。",
+  "notice": "按题核对答案，不按百分制折算。Unit 1、2第一题原答案有笔误，已分别更正为am、is。",
+  "papers": [
+    {
+      "topicKey": "1",
+      "title": "Unit 1 小练习",
+      "sourceText": "1. I ____ (am / is) going to watch TV.\n2. They ____ (are / is) going to have a picnic.\n✅答案：shtu 2.are",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "I ____ going to watch TV.",
+          "originalStem": "I ____ (am / is) going to watch TV.",
+          "originalReference": "shtu",
+          "kind": "singleChoice",
+          "options": ["am", "is"],
+          "correctIndex": 0,
+          "reference": "A. am",
+          "adjustment": "来稿第一题答案为“shtu”，按主语I及选项更正为am；原稿保留。"
+        },
+        {
+          "number": 2,
+          "stem": "They ____ going to have a picnic.",
+          "originalStem": "They ____ (are / is) going to have a picnic.",
+          "originalReference": "are",
+          "kind": "singleChoice",
+          "options": ["are", "is"],
+          "correctIndex": 0,
+          "reference": "A. are",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "2",
+      "title": "Unit 2 小练习",
+      "sourceText": "1. She ____ (is / are) going to eat healthy food.\n2. —What ____ you going to do? —I’m going to exercise. (am / are)\n✅答案：shtu 2.are",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "She ____ going to eat healthy food.",
+          "originalStem": "She ____ (is / are) going to eat healthy food.",
+          "originalReference": "shtu",
+          "kind": "singleChoice",
+          "options": ["is", "are"],
+          "correctIndex": 0,
+          "reference": "A. is",
+          "adjustment": "来稿第一题答案为“shtu”，按主语She及选项更正为is；原稿保留。"
+        },
+        {
+          "number": 2,
+          "stem": "—What ____ you going to do? —I’m going to exercise.",
+          "originalStem": "—What ____ you going to do? —I’m going to exercise. (am / are)",
+          "originalReference": "are",
+          "kind": "singleChoice",
+          "options": ["am", "are"],
+          "correctIndex": 1,
+          "reference": "B. are",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "3",
+      "title": "Unit 3 小练习",
+      "sourceText": "1. France is ____ the south of the UK. (in / to)\n2. China is in the ____ of Asia. (east / south)\n✅答案：1.to 2.east",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "France is ____ the south of the UK.",
+          "originalStem": "France is ____ the south of the UK. (in / to)",
+          "originalReference": "to",
+          "kind": "singleChoice",
+          "options": ["in", "to"],
+          "correctIndex": 1,
+          "reference": "B. to",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "China is in the ____ of Asia.",
+          "originalStem": "China is in the ____ of Asia. (east / south)",
+          "originalReference": "east",
+          "kind": "singleChoice",
+          "options": ["east", "south"],
+          "correctIndex": 0,
+          "reference": "A. east",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "4",
+      "title": "Unit 4 小练习",
+      "sourceText": "1. I ____ (will / am) visit the mountain.\n2. —Where ____ you go? —I will go to Guilin. (will / are)\n✅答案：1.will 2.will",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "I ____ visit the mountain.",
+          "originalStem": "I ____ (will / am) visit the mountain.",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "am"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "—Where ____ you go? —I will go to Guilin.",
+          "originalStem": "—Where ____ you go? —I will go to Guilin. (will / are)",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "are"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "5",
+      "title": "Unit 5 小练习",
+      "sourceText": "1. Plants grow ____ get sunlight. (and / but)\n2. A toy cannot grow ____ change. (or / and)\n✅答案：1.and 2.or",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "Plants grow ____ get sunlight.",
+          "originalStem": "Plants grow ____ get sunlight. (and / but)",
+          "originalReference": "and",
+          "kind": "singleChoice",
+          "options": ["and", "but"],
+          "correctIndex": 0,
+          "reference": "A. and",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "A toy cannot grow ____ change.",
+          "originalStem": "A toy cannot grow ____ change. (or / and)",
+          "originalReference": "or",
+          "kind": "singleChoice",
+          "options": ["or", "and"],
+          "correctIndex": 0,
+          "reference": "A. or",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "6",
+      "title": "Unit 6 小练习",
+      "sourceText": "1. We ____ recycle rubbish. (should / shouldn’t)\n2. We ____ cut too many trees. (shouldn’t / should)\n✅答案：1.should 2.shouldn’t",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "We ____ recycle rubbish.",
+          "originalStem": "We ____ recycle rubbish. (should / shouldn’t)",
+          "originalReference": "should",
+          "kind": "singleChoice",
+          "options": ["should", "shouldn’t"],
+          "correctIndex": 0,
+          "reference": "A. should",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "We ____ cut too many trees.",
+          "originalStem": "We ____ cut too many trees. (shouldn’t / should)",
+          "originalReference": "shouldn’t",
+          "kind": "singleChoice",
+          "options": ["shouldn’t", "should"],
+          "correctIndex": 0,
+          "reference": "A. shouldn’t",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "7",
+      "title": "Unit 7 小练习",
+      "sourceText": "1. We ____ (will / are) have the festival next month.\n2. We eat mooncakes ____ the Mid-Autumn Festival. (at / in)\n✅答案：1.will 2.at",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "We ____ have the festival next month.",
+          "originalStem": "We ____ (will / are) have the festival next month.",
+          "originalReference": "will",
+          "kind": "singleChoice",
+          "options": ["will", "are"],
+          "correctIndex": 0,
+          "reference": "A. will",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "We eat mooncakes ____ the Mid-Autumn Festival.",
+          "originalStem": "We eat mooncakes ____ the Mid-Autumn Festival. (at / in)",
+          "originalReference": "at",
+          "kind": "singleChoice",
+          "options": ["at", "in"],
+          "correctIndex": 0,
+          "reference": "A. at",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "8",
+      "title": "Unit 8 小练习",
+      "sourceText": "1. Fast music makes me ____. (excited / slow)\n2. Slow music makes me ____. (relaxed / unhappy)\n✅答案：1.excited 2.relaxed",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "Fast music makes me ____.",
+          "originalStem": "Fast music makes me ____. (excited / slow)",
+          "originalReference": "excited",
+          "kind": "singleChoice",
+          "options": ["excited", "slow"],
+          "correctIndex": 0,
+          "reference": "A. excited",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "Slow music makes me ____.",
+          "originalStem": "Slow music makes me ____. (relaxed / unhappy)",
+          "originalReference": "relaxed",
+          "kind": "singleChoice",
+          "options": ["relaxed", "unhappy"],
+          "correctIndex": 0,
+          "reference": "A. relaxed",
+          "adjustment": ""
+        }
+      ]
+    },
+    {
+      "topicKey": "11",
+      "title": "本册综合小练习",
+      "sourceText": "一、选词填空\nwill, should, are, excited, in\n1. We ____ going to do exercise.\n2. We ____ protect our Earth.\n3. I ____ visit the waterfall next holiday.\n4. Fast music makes me ____.\n5. We will have the festival ____ one month.\n✅答案：1.are 2.should 3.will 4.excited 5.in\n\n二、单项选择\n1. —What ____ you going to do this weekend?\nA. is B. are C. am\n2. We ____ throw rubbish everywhere.\nA. shouldn’t B. should C. will\n✅答案：1.B 2.A",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "选词填空（will, should, are, excited, in）：\nWe ____ going to do exercise.",
+          "originalStem": "We ____ going to do exercise.",
+          "originalReference": "are",
+          "kind": "fillBlank",
+          "reference": "are",
+          "answers": [["are"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "选词填空（will, should, are, excited, in）：\nWe ____ protect our Earth.",
+          "originalStem": "We ____ protect our Earth.",
+          "originalReference": "should",
+          "kind": "fillBlank",
+          "reference": "should",
+          "answers": [["should"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "选词填空（will, should, are, excited, in）：\nI ____ visit the waterfall next holiday.",
+          "originalStem": "I ____ visit the waterfall next holiday.",
+          "originalReference": "will",
+          "kind": "fillBlank",
+          "reference": "will",
+          "answers": [["will"]],
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "选词填空（will, should, are, excited, in）：\nFast music makes me ____.",
+          "originalStem": "Fast music makes me ____.",
+          "originalReference": "excited",
+          "kind": "fillBlank",
+          "reference": "excited",
+          "answers": [["excited"]],
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "选词填空（will, should, are, excited, in）：\nWe will have the festival ____ one month.",
+          "originalStem": "We will have the festival ____ one month.",
+          "originalReference": "in",
+          "kind": "fillBlank",
+          "reference": "in",
+          "answers": [["in"]],
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "stem": "—What ____ you going to do this weekend?",
+          "originalStem": "—What ____ you going to do this weekend?",
+          "originalReference": "B",
+          "kind": "singleChoice",
+          "options": ["is", "are", "am"],
+          "correctIndex": 1,
+          "reference": "B. are",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "stem": "We ____ throw rubbish everywhere.",
+          "originalStem": "We ____ throw rubbish everywhere.",
+          "originalReference": "A",
+          "kind": "singleChoice",
+          "options": ["shouldn’t", "should", "will"],
+          "correctIndex": 0,
+          "reference": "A. shouldn’t",
+          "adjustment": ""
+        }
+      ]
+    }
+  ]
+}

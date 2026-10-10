@@ -1,0 +1,1050 @@
+{
+  "title": "北师大五年级上册数学单元自测",
+  "sourceSha256": "3d7e86bcea972f7841a71afd07e88574703e8ab3016bfa424c08a963f6b00c0d",
+  "sourceNote": "用户附件全文原样归档；配套题按单元整理，公式乱码及数学条件修订均有记录。来稿未注明出版年份，不推断版本年份。",
+  "notice": "原稿部分分值小计与题量不一致，本测验按实际题目统计，不换算为100分。自动题仅核对所填答案；竖式、简便计算、解方程过程、公式表达和画图需由老师或家长核对，提交后可查看参考解法。",
+  "papers": [
+    {
+      "topicKey": "decimal-meaning",
+      "title": "第一单元 小数的再认识和加减法",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "0.45里面有（）个0.01。",
+          "originalReference": "45",
+          "stem": "0.45里面有（）个0.01。",
+          "kind": "fillBlank",
+          "reference": "45",
+          "adjustment": "",
+          "answers": [["45"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "小数加减法，计算时要对齐（）。",
+          "originalReference": "小数点",
+          "stem": "小数加减法，计算时要对齐（）。",
+          "kind": "fillBlank",
+          "reference": "小数点",
+          "adjustment": "",
+          "answers": [["小数点"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "8分米＝（）米；7元2角＝（）元。",
+          "originalReference": "0.8；7.2",
+          "stem": "8分米＝（）米；7元2角＝（）元。",
+          "kind": "fillBlank",
+          "reference": "0.8；7.2",
+          "adjustment": "",
+          "answers": [["0.8"], ["7.2"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "比较大小：$3.06(3.06(0.81〇0.809)3.60)3.60$；$0.81(3.06(0.81〇0.809)3.60)0.809$。",
+          "originalReference": "＜；＞",
+          "stem": "比较大小，依次填＜、＞或＝：3.06（）3.60；0.81（）0.809。",
+          "kind": "fillBlank",
+          "reference": "＜；＞",
+          "adjustment": "根据原数值与参考答案恢复被重复公式破坏的两个比较式。",
+          "answers": [
+            ["＜", "<"],
+            ["＞", ">"]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "4.7＋3.28＝（）；12－5.35＝（）。",
+          "originalReference": "7.98；6.65",
+          "stem": "4.7＋3.28＝（）；12－5.35＝（）。",
+          "kind": "fillBlank",
+          "reference": "7.98；6.65",
+          "adjustment": "",
+          "answers": [["7.98"], ["6.65"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "2.6＋1.74，和的整数部分是（）。",
+          "originalReference": "4",
+          "stem": "2.6＋1.74，和的整数部分是（）。",
+          "kind": "fillBlank",
+          "reference": "4",
+          "adjustment": "",
+          "answers": [["4"]]
+        },
+        {
+          "number": 7,
+          "originalStem": "在纸上列竖式计算16.42＋7.8，记录过程。",
+          "originalReference": "16.42＋7.80＝24.22；小数点对齐，检查进退位。",
+          "stem": "在纸上列竖式计算16.42＋7.8，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "16.42＋7.80＝24.22；小数点对齐，检查进退位。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "在纸上列竖式计算9.3－4.06，记录过程。",
+          "originalReference": "9.30－4.06＝5.24；小数点对齐，检查进退位。",
+          "stem": "在纸上列竖式计算9.3－4.06，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "9.30－4.06＝5.24；小数点对齐，检查进退位。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "在纸上列竖式计算20.5＋3.67，记录过程。",
+          "originalReference": "20.50＋3.67＝24.17；小数点对齐，检查进退位。",
+          "stem": "在纸上列竖式计算20.5＋3.67，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "20.50＋3.67＝24.17；小数点对齐，检查进退位。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "在纸上列竖式计算15－6.83，记录过程。",
+          "originalReference": "15.00－6.83＝8.17；小数点对齐，检查进退位。",
+          "stem": "在纸上列竖式计算15－6.83，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "15.00－6.83＝8.17；小数点对齐，检查进退位。",
+          "adjustment": ""
+        },
+        {
+          "number": 11,
+          "originalStem": "用简便方法计算，写出过程：7.24＋5.8＋2.76",
+          "originalReference": "（7.24＋2.76）＋5.8＝15.8。",
+          "stem": "用简便方法计算，写出过程：7.24＋5.8＋2.76",
+          "kind": "shortAnswer",
+          "reference": "（7.24＋2.76）＋5.8＝15.8。",
+          "adjustment": ""
+        },
+        {
+          "number": 12,
+          "originalStem": "用简便方法计算，写出过程：18.3－4.47－5.53",
+          "originalReference": "18.3－（4.47＋5.53）＝8.3。",
+          "stem": "用简便方法计算，写出过程：18.3－4.47－5.53",
+          "kind": "shortAnswer",
+          "reference": "18.3－（4.47＋5.53）＝8.3。",
+          "adjustment": ""
+        },
+        {
+          "number": 13,
+          "originalStem": "一根彩带长12.6米，第一次用去4.7米，第二次用去3.9米，还剩多少米？",
+          "originalReference": "12.6－4.7－3.9＝4米。",
+          "stem": "一根彩带长12.6米，第一次用去4.7米，第二次用去3.9米，还剩多少米？（只填数值，单位：米）",
+          "kind": "calculation",
+          "reference": "12.6－4.7－3.9＝4米。",
+          "adjustment": "",
+          "value": 4
+        }
+      ],
+      "sourceText": "## 第一单元 小数的再认识和加减法\n\n一、填空（每空3分，共30分）\n\n1. 0.45里面有（）个0.01。\n2. 小数加减法，计算时要对齐（）。\n3. 8分米=（）米；7元2角=（）元。\n4. 比较大小：$3.06(3.06(0.81〇0.809)3.60)3.60$；$0.81(3.06(0.81〇0.809)3.60)0.809$。\n5. $(4.7+3.28=)$（）；$12-5.35=$（）。\n6. $(2.6+1.74)$，和的整数部分是（）。\n\n二、竖式计算（每题8分，共32分）\n$(16.42+7.8=)$　　$9.3-4.06=$\n$(20.5+3.67=)$　　$15-6.83=$\n\n三、简便计算（每题9分，共18分）\n$(7.24+5.8+2.76)$　　$18.3-4.47-5.53$\n\n四、解决问题（20分）\n一根彩带长12.6米，第一次用去4.7米，第二次用去3.9米，还剩多少米？\n\n第一单元参考答案\n一、1.45；2.小数点；3.0.8，7.2；4.＜，＞；5.7.98，6.65；6.4\n二、24.22；5.24；24.17；8.17\n三、$(7.24+2.76)+5.8=15.8$；$18.3-(4.47+5.53)=8.3$\n四、$12.6-4.7-3.9=4$（米）答：还剩4米。\n\n"
+    },
+    {
+      "topicKey": "triangle-properties",
+      "title": "第二单元 三角形的再认识",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "三角形内角和是（）°。",
+          "originalReference": "180",
+          "stem": "三角形内角和是（）°。",
+          "kind": "fillBlank",
+          "reference": "180",
+          "adjustment": "",
+          "answers": [["180"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "三角形任意两边之和（）第三边。",
+          "originalReference": "大于",
+          "stem": "三角形任意两边之和（）第三边。",
+          "kind": "fillBlank",
+          "reference": "大于",
+          "adjustment": "",
+          "answers": [["大于"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "直角三角形两个锐角之和是（）°。",
+          "originalReference": "90",
+          "stem": "直角三角形两个锐角之和是（）°。",
+          "kind": "fillBlank",
+          "reference": "90",
+          "adjustment": "",
+          "answers": [["90"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "等边三角形每个内角是（）°。",
+          "originalReference": "60",
+          "stem": "等边三角形每个内角是（）°。",
+          "kind": "fillBlank",
+          "reference": "60",
+          "adjustment": "",
+          "answers": [["60"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "三角形有（）条高。",
+          "originalReference": "3",
+          "stem": "三角形有（）条高。",
+          "kind": "fillBlank",
+          "reference": "3",
+          "adjustment": "",
+          "answers": [["3", "三"]]
+        },
+        {
+          "number": 6,
+          "originalStem": "用活动连接的小棒围成图形，（）具有稳定性。",
+          "originalReference": "三角形",
+          "stem": "用活动连接的小棒围成图形，（）具有稳定性。",
+          "kind": "fillBlank",
+          "reference": "三角形",
+          "adjustment": "",
+          "answers": [["三角形"]]
+        },
+        {
+          "number": 7,
+          "originalStem": "有一个角是钝角的三角形叫（）三角形。",
+          "originalReference": "钝角",
+          "stem": "有一个角是钝角的三角形叫（）三角形。",
+          "kind": "fillBlank",
+          "reference": "钝角",
+          "adjustment": "",
+          "answers": [["钝角"]]
+        },
+        {
+          "number": 8,
+          "originalStem": "一个三角形最多只有1个钝角。",
+          "originalReference": "正确。两个钝角之和已大于180°。",
+          "stem": "一个三角形最多只有1个钝角。",
+          "kind": "trueFalse",
+          "reference": "正确。两个钝角之和已大于180°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "3厘米、5厘米、8厘米的小棒可以拼成三角形。",
+          "originalReference": "错误。3＋5＝8，不满足两边之和大于第三边。",
+          "stem": "3厘米、5厘米、8厘米的小棒可以拼成三角形。",
+          "kind": "trueFalse",
+          "reference": "错误。3＋5＝8，不满足两边之和大于第三边。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "等腰三角形可以是直角三角形。",
+          "originalReference": "正确。等腰直角三角形的角为45°、45°、90°。",
+          "stem": "等腰三角形可以是直角三角形。",
+          "kind": "trueFalse",
+          "reference": "正确。等腰直角三角形的角为45°、45°、90°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 11,
+          "originalStem": "任意三角形都有三条高。",
+          "originalReference": "正确。每个顶点都能向对边所在直线作一条垂线段。",
+          "stem": "任意三角形都有三条高。",
+          "kind": "trueFalse",
+          "reference": "正确。每个顶点都能向对边所在直线作一条垂线段。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 12,
+          "originalStem": "大三角形内角和比小三角形大。",
+          "originalReference": "错误。平面三角形内角和均为180°。",
+          "stem": "大三角形内角和比小三角形大。",
+          "kind": "trueFalse",
+          "reference": "错误。平面三角形内角和均为180°。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 13,
+          "originalStem": "等边三角形一定是锐角三角形。",
+          "originalReference": "正确。每个角为60°。",
+          "stem": "等边三角形一定是锐角三角形。",
+          "kind": "trueFalse",
+          "reference": "正确。每个角为60°。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 14,
+          "originalStem": "三角形∠1＝38°，∠2＝62°，∠3是多少度？",
+          "originalReference": "180°－38°－62°＝80°。",
+          "stem": "三角形∠1＝38°，∠2＝62°，∠3是多少度？（只填数值，单位：度）",
+          "kind": "calculation",
+          "reference": "180°－38°－62°＝80°。",
+          "adjustment": "",
+          "value": 80
+        },
+        {
+          "number": 15,
+          "originalStem": "画一个直角三角形，并画出一条高。",
+          "originalReference": "画图略",
+          "stem": "在纸上画一个直角三角形，并画出一条高，标出对应底和直角记号。",
+          "kind": "shortAnswer",
+          "reference": "可以选一条直角边为底，另一条直角边就是对应高；也可从直角顶点向斜边作垂线段。由老师或家长检查实际图形。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第二单元 三角形的再认识\n\n一、填空（每空4分，共32分）\n\n1. 三角形内角和是（）°。\n2. 三角形任意两边之和（）第三边。\n3. 直角三角形两个锐角之和是（）°。\n4. 等边三角形每个内角是（）°。\n5. 三角形有（）条高。\n6. （）具有稳定性。\n7. 有一个角是钝角的三角形叫（）三角形。\n\n二、判断（每题5分，共30分）\n\n1. 一个三角形最多只有1个钝角。（）\n2. 3cm、5cm、8cm小棒可以拼成三角形。（）\n3. 等腰三角形可以是直角三角形。（）\n4. 任意三角形都有三条高。（）\n5. 大三角形内角和比小三角形大。（）\n6. 等边三角形一定是锐角三角形。（）\n\n三、求角度（18分）\n三角形∠1=38°，∠2=62°，求∠3。\n\n四、画图（20分）\n画一个直角三角形，并画出一条高。\n\n第二单元参考答案\n一、1.180；2.大于；3.90；4.60；5.3；6.三角形；7.钝角\n二、√，×，√，√，×，√\n三、$180-38-62=80°$\n四、画图略\n\n"
+    },
+    {
+      "topicKey": "designer",
+      "title": "综合实践：小小设计师",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "平移、轴对称、旋转，图形（）不变。",
+          "originalReference": "形状、大小",
+          "stem": "平移、轴对称、旋转后，图形的（）不变。（填写两个属性）",
+          "kind": "fillBlank",
+          "reference": "形状、大小",
+          "adjustment": "",
+          "answers": [["形状、大小", "大小、形状", "形状和大小", "大小和形状"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "正方形有（）条对称轴。",
+          "originalReference": "4",
+          "stem": "正方形有（）条对称轴。",
+          "kind": "fillBlank",
+          "reference": "4",
+          "adjustment": "",
+          "answers": [["4", "四"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "钟面上指针转动属于（）现象。",
+          "originalReference": "旋转",
+          "stem": "钟面上指针转动属于（）现象。",
+          "kind": "fillBlank",
+          "reference": "旋转",
+          "adjustment": "",
+          "answers": [["旋转"]]
+        }
+      ],
+      "sourceText": "## 综合实践：小小设计师\n\n1. 平移、轴对称、旋转，图形（）不变。（40分）\n2. 正方形有（）条对称轴。（30分）\n3. 钟面上指针转动属于（）现象。（30分）\n\n综合实践参考答案\n1.形状、大小；2.4；3.旋转\n\n"
+    },
+    {
+      "topicKey": "decimal-shift",
+      "title": "第三单元 小数乘法",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "口算：0.3×4＝？",
+          "originalReference": "1.2",
+          "stem": "口算：0.3×4＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "1.2",
+          "adjustment": "",
+          "value": 1.2
+        },
+        {
+          "number": 2,
+          "originalStem": "口算：0.2×0.6＝？",
+          "originalReference": "0.12",
+          "stem": "口算：0.2×0.6＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "0.12",
+          "adjustment": "",
+          "value": 0.12
+        },
+        {
+          "number": 3,
+          "originalStem": "口算：1.1×5＝？",
+          "originalReference": "5.5",
+          "stem": "口算：1.1×5＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "5.5",
+          "adjustment": "",
+          "value": 5.5
+        },
+        {
+          "number": 4,
+          "originalStem": "口算：0.25×8＝？",
+          "originalReference": "2",
+          "stem": "口算：0.25×8＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "2",
+          "adjustment": "",
+          "value": 2
+        },
+        {
+          "number": 5,
+          "originalStem": "口算：0.7×0.7＝？",
+          "originalReference": "0.49",
+          "stem": "口算：0.7×0.7＝？（只填数值）",
+          "kind": "calculation",
+          "reference": "0.49",
+          "adjustment": "",
+          "value": 0.49
+        },
+        {
+          "number": 6,
+          "originalStem": "在纸上列竖式计算3.2×1.4，记录过程。",
+          "originalReference": "32×14＝448，点两位小数得到4.48。",
+          "stem": "在纸上列竖式计算3.2×1.4，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "32×14＝448，点两位小数得到4.48。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "originalStem": "在纸上列竖式计算0.45×0.6，记录过程。",
+          "originalReference": "45×6＝270，点三位小数得0.270，化简为0.27。",
+          "stem": "在纸上列竖式计算0.45×0.6，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "45×6＝270，点三位小数得0.270，化简为0.27。",
+          "adjustment": ""
+        },
+        {
+          "number": 8,
+          "originalStem": "在纸上列竖式计算1.08×2.5，记录过程。",
+          "originalReference": "108×25＝2700，点三位小数得2.700，化简为2.7。",
+          "stem": "在纸上列竖式计算1.08×2.5，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "108×25＝2700，点三位小数得2.700，化简为2.7。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "在纸上列竖式计算4.8×0.25，记录过程。",
+          "originalReference": "48×25＝1200，点三位小数得1.200，化简为1.2。",
+          "stem": "在纸上列竖式计算4.8×0.25，记录过程。",
+          "kind": "shortAnswer",
+          "reference": "48×25＝1200，点三位小数得1.200，化简为1.2。",
+          "adjustment": ""
+        },
+        {
+          "number": 10,
+          "originalStem": "用简便方法计算，写出过程：0.25×4.8×4",
+          "originalReference": "0.25×4×4.8＝4.8。",
+          "stem": "用简便方法计算，写出过程：0.25×4.8×4",
+          "kind": "shortAnswer",
+          "reference": "0.25×4×4.8＝4.8。",
+          "adjustment": ""
+        },
+        {
+          "number": 11,
+          "originalStem": "用简便方法计算，写出过程：5.6×99＋5.6",
+          "originalReference": "5.6×（99＋1）＝560。",
+          "stem": "用简便方法计算，写出过程：5.6×99＋5.6",
+          "kind": "shortAnswer",
+          "reference": "5.6×（99＋1）＝560。",
+          "adjustment": ""
+        },
+        {
+          "number": 12,
+          "originalStem": "橙子每千克8.4元，买3.5千克，一共付多少元？",
+          "originalReference": "8.4×3.5＝29.4元。",
+          "stem": "橙子每千克8.4元，买3.5千克，一共付多少元？（只填数值，单位：元）",
+          "kind": "calculation",
+          "reference": "8.4×3.5＝29.4元。",
+          "adjustment": "",
+          "value": 29.4
+        }
+      ],
+      "sourceText": "## 第三单元 小数乘法\n\n一、口算（每题3分，共15分）\n$(0.3×4=)$　$(0.2×0.6=)$　$(1.1×5=)$　$(0.25×8=)$　$(0.7×0.7=)$\n\n二、竖式计算（每题8分，共32分）\n$(3.2×1.4=)$　$(0.45×0.6=)$　$(1.08×2.5=)$　$(4.8×0.25=)$\n\n三、简便计算（每题10分，共20分）\n$(0.25×4.8×4)$　　$(5.6×99+5.6)$\n\n四、解决问题（33分）\n橙子每千克8.4元，买3.5千克，一共要付多少钱？\n\n第三单元参考答案\n一、1.2；0.12；5.5；2；0.49\n二、4.48；0.27；2.7；1.2\n三、$0.25×4×4.8=4.8$；$5.6×(99+1)=560$\n四、$8.4×3.5=29.4$元\n\n"
+    },
+    {
+      "topicKey": "letters",
+      "title": "第四单元 用字母表示（一）",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "含有（）的等式叫方程。",
+          "originalReference": "未知数",
+          "stem": "含有（）的等式叫方程。",
+          "kind": "fillBlank",
+          "reference": "未知数",
+          "adjustment": "",
+          "answers": [["未知数"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "b×b简写为（），3×m简写为（）。",
+          "originalReference": "b²；3m",
+          "stem": "b×b简写为（），3×m简写为（）。",
+          "kind": "fillBlank",
+          "reference": "b²；3m",
+          "adjustment": "",
+          "answers": [["b²", "b^2"], ["3m"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "等式两边同时除以（）的数，等式仍然成立。",
+          "originalReference": "不为0",
+          "stem": "等式两边同时除以同一个（）的数，等式仍然成立。",
+          "kind": "fillBlank",
+          "reference": "不为0",
+          "adjustment": "补充“同一个”必要条件。",
+          "answers": [["不为0", "不为零", "非0", "非零"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "x－3.6＝5.4，x＝（）。",
+          "originalReference": "9",
+          "stem": "x－3.6＝5.4，x＝（）。",
+          "kind": "fillBlank",
+          "reference": "9",
+          "adjustment": "",
+          "answers": [["9"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "x＋4.5＝9.2",
+          "originalReference": "两边减4.5，x＝4.7。代入原式核对左右相等。",
+          "stem": "解方程并检验：x＋4.5＝9.2",
+          "kind": "shortAnswer",
+          "reference": "两边减4.5，x＝4.7。代入原式核对左右相等。",
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "originalStem": "x－27＝45",
+          "originalReference": "两边加27，x＝72。代入原式核对左右相等。",
+          "stem": "解方程并检验：x－27＝45",
+          "kind": "shortAnswer",
+          "reference": "两边加27，x＝72。代入原式核对左右相等。",
+          "adjustment": ""
+        },
+        {
+          "number": 7,
+          "originalStem": "$6(x=)13.2$",
+          "originalReference": "两边除以6，x＝2.2。代入原式核对左右相等。",
+          "stem": "解方程并检验：6x＝13.2",
+          "kind": "shortAnswer",
+          "reference": "两边除以6，x＝2.2。代入原式核对左右相等。",
+          "adjustment": "将损坏公式恢复为6x＝13.2。"
+        },
+        {
+          "number": 8,
+          "originalStem": "x÷2.4＝5",
+          "originalReference": "两边乘2.4，x＝12。代入原式核对左右相等。",
+          "stem": "解方程并检验：x÷2.4＝5",
+          "kind": "shortAnswer",
+          "reference": "两边乘2.4，x＝12。代入原式核对左右相等。",
+          "adjustment": ""
+        },
+        {
+          "number": 9,
+          "originalStem": "一个数的5倍是60，求这个数。",
+          "originalReference": "5\\(x=\\)60；\\(x=\\)12",
+          "stem": "一个数的5倍是60，列方程求这个数，写出过程。",
+          "kind": "shortAnswer",
+          "reference": "设这个数为x，5x＝60，两边除以5得x＝12。检验5×12＝60。",
+          "adjustment": "恢复原解答中的公式乱码；保留列方程过程供人工核对。"
+        }
+      ],
+      "sourceText": "## 第四单元 用字母表示（一）\n\n一、填空（每空4分，共24分）\n\n1. 含有（）的等式叫方程。\n2. $(b×b)$简写为（），$(3×m)$简写为（）。\n3. 等式两边同时除以（）的数，等式仍然成立。\n4. $x-3.6=5.4$，$(x=)$（）。\n\n二、解方程（每题9分，共36分）\n$(x+4.5=9.2)$　　$x-27=45$\n$6(x=)13.2$　　$(x÷2.4=5)$\n\n三、列方程解决问题（40分）\n一个数的5倍是60，求这个数。\n\n第四单元参考答案\n一、1.未知数；2.$b^2$，$3m$；3.不为0；4.9\n二、$\\(x=\\)4.7$；$\\(x=\\)72$；$\\(x=\\)2.2$；$\\(x=\\)12$\n三、解：设这个数为$x$\n$5\\(x=\\)60$\n$\\(x=\\)12$\n答：这个数是12。\n\n"
+    },
+    {
+      "topicKey": "area-units",
+      "title": "第五单元 多边形的面积",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "平行四边形面积公式：S＝（）。",
+          "originalReference": "ah",
+          "stem": "写出平行四边形面积公式（底a，对应高h）。",
+          "kind": "shortAnswer",
+          "reference": "S＝ah，即底×对应的高。",
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "originalStem": "三角形面积公式：S＝（）。",
+          "originalReference": "ah÷2",
+          "stem": "写出三角形面积公式（底a，对应高h）。",
+          "kind": "shortAnswer",
+          "reference": "S＝ah÷2，即底×对应的高÷2。",
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "originalStem": "梯形面积公式：S＝（）。",
+          "originalReference": "(a+b)h÷2",
+          "stem": "写出梯形面积公式（上底a，下底b，高h）。",
+          "kind": "shortAnswer",
+          "reference": "S＝（a＋b）h÷2。接受等价写法。",
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "originalStem": "等底等高的三角形面积是平行四边形的（）。",
+          "originalReference": "一半",
+          "stem": "等底等高的三角形面积是平行四边形的（）。",
+          "kind": "fillBlank",
+          "reference": "一半",
+          "adjustment": "",
+          "answers": [["一半", "二分之一", "1/2", "0.5"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "平行四边形底6厘米，对应高4厘米，面积是多少平方厘米？",
+          "originalReference": "24平方厘米",
+          "stem": "平行四边形底6厘米，对应高4厘米，面积是多少平方厘米？（只填数值，单位：平方厘米）",
+          "kind": "calculation",
+          "reference": "24平方厘米",
+          "adjustment": "",
+          "value": 24
+        },
+        {
+          "number": 6,
+          "originalStem": "三角形底8米，对应高5米，面积是多少平方米？",
+          "originalReference": "20平方米",
+          "stem": "三角形底8米，对应高5米，面积是多少平方米？（只填数值，单位：平方米）",
+          "kind": "calculation",
+          "reference": "20平方米",
+          "adjustment": "",
+          "value": 20
+        },
+        {
+          "number": 7,
+          "originalStem": "梯形上底3厘米，下底7厘米，高4厘米，面积是多少平方厘米？",
+          "originalReference": "20平方厘米",
+          "stem": "梯形上底3厘米，下底7厘米，高4厘米，面积是多少平方厘米？（只填数值，单位：平方厘米）",
+          "kind": "calculation",
+          "reference": "20平方厘米",
+          "adjustment": "",
+          "value": 20
+        },
+        {
+          "number": 8,
+          "originalStem": "平行四边形面积等于长方形面积。",
+          "originalReference": "错误。只有满足如底等于长、对应高等于宽等条件时，面积才相等。",
+          "stem": "任意一个平行四边形的面积总等于任意一个长方形的面积。",
+          "kind": "trueFalse",
+          "reference": "错误。只有满足如底等于长、对应高等于宽等条件时，面积才相等。",
+          "adjustment": "明确全称判断；原题缺少等底等高条件。",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "两个完全一样的梯形可以拼成平行四边形。",
+          "originalReference": "正确。将一个旋转180°，沿一条腰拼接。",
+          "stem": "两个完全一样的梯形可以拼成平行四边形。",
+          "kind": "trueFalse",
+          "reference": "正确。将一个旋转180°，沿一条腰拼接。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 10,
+          "originalStem": "三角形面积是平行四边形面积一半。",
+          "originalReference": "错误。等底等高可以保证这一关系；一般需按各自底与高的乘积计算，不能直接认定一半。",
+          "stem": "任意一个三角形的面积总是任意一个平行四边形面积的一半。",
+          "kind": "trueFalse",
+          "reference": "错误。等底等高可以保证这一关系；一般需按各自底与高的乘积计算，不能直接认定一半。",
+          "adjustment": "明确全称判断，不能忽略等底等高条件。",
+          "correctValue": false
+        },
+        {
+          "number": 11,
+          "originalStem": "平行四边形的底扩大到原来的2倍，对应高不变，面积扩大到原来的2倍。",
+          "originalReference": "正确。面积＝底×高。",
+          "stem": "平行四边形的底扩大到原来的2倍，对应高不变，面积扩大到原来的2倍。",
+          "kind": "trueFalse",
+          "reference": "正确。面积＝底×高。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 12,
+          "originalStem": "梯形有无数条高。",
+          "originalReference": "正确。两底所在平行直线间可作无数条等长垂线段。",
+          "stem": "梯形有无数条高。",
+          "kind": "trueFalse",
+          "reference": "正确。两底所在平行直线间可作无数条等长垂线段。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 13,
+          "originalStem": "平行四边形菜地底12米，对应高5米，每平方米收白菜8千克，共收多少千克？",
+          "originalReference": "面积12×5＝60平方米，总产量60×8＝480千克。",
+          "stem": "平行四边形菜地底12米，对应高5米，每平方米收白菜8千克，共收多少千克？（只填数值，单位：千克）",
+          "kind": "calculation",
+          "reference": "面积12×5＝60平方米，总产量60×8＝480千克。",
+          "adjustment": "",
+          "value": 480
+        }
+      ],
+      "sourceText": "## 第五单元 多边形的面积\n\n一、填空（每空4分，共32分）\n\n1. 平行四边形面积公式：$\\boldsymbol{(\\boldsymbol{S=})}$（）。\n2. 三角形面积公式：$\\boldsymbol{(\\boldsymbol{S=})}$（）。\n3. 梯形面积公式：$\\boldsymbol{(\\boldsymbol{S=})}$（）。\n4. 等底等高的三角形面积是平行四边形的（）。\n5. 平行四边形底6cm，高4cm，面积（）$\\mathrm{cm^2}$。\n6. 三角形底8m，高5m，面积（）$\\mathrm{m^2}$。\n7. 梯形上底3cm，下底7cm，高4cm，面积（）$\\mathrm{cm^2}$。\n\n二、判断（每题6分，共30分）\n\n1. 平行四边形面积等于长方形面积。（）\n2. 两个完全一样的梯形可以拼成平行四边形。（）\n3. 三角形面积是平行四边形面积一半。（）\n4. 平行四边形底扩大2倍，高不变，面积扩大2倍。（）\n5. 梯形有无数条高。（）\n\n三、应用题（38分）\n一块平行四边形菜地，底12米，高5米。每平方米收白菜8千克，一共收白菜多少千克？\n\n第五单元参考答案\n一、1.$ah$；2.$ah÷2$；3.$(a+b)h÷2$；4.一半；5.24；6.20；7.20\n二、×，√，×，√，√\n三、面积：$12×5=60$平方米；总产量：$60×8=480$千克\n答：一共收白菜480千克。\n\n"
+    },
+    {
+      "topicKey": "chicken-rabbit",
+      "title": "数学好玩：鸡兔同笼",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "鸡兔同笼，头10个，腿28条，鸡（）只，兔（）只。",
+          "originalReference": "假设全是鸡，多28－10×2＝8条腿，每只兔多2条腿，兔4只，鸡6只。",
+          "stem": "鸡兔同笼，鸡每只2条腿、兔每只4条腿。共10个头、28条腿，鸡（）只，兔（）只。",
+          "kind": "fillBlank",
+          "reference": "假设全是鸡，多28－10×2＝8条腿，每只兔多2条腿，兔4只，鸡6只。",
+          "adjustment": "",
+          "answers": [["6"], ["4"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "假设法解题，先假设全是鸡，算出腿差，再求兔子数量。",
+          "originalReference": "正确。每把一只鸡换成一只兔，多2条腿。",
+          "stem": "先假设全是鸡，用实际腿数减去假设腿数，再除以2，可以求出兔子数量。",
+          "kind": "trueFalse",
+          "reference": "正确。每把一只鸡换成一只兔，多2条腿。",
+          "adjustment": "",
+          "correctValue": true
+        }
+      ],
+      "sourceText": "## 数学好玩：鸡兔同笼\n\n1. 鸡兔同笼，头10个，腿28条，鸡（）只，兔（）只。（50分）\n2. 假设法解题，先假设全是鸡，算出腿差，再求兔子数量。（判断）（50分）\n\n鸡兔同笼参考答案\n1.6，4；2.√\n\n"
+    },
+    {
+      "topicKey": "symmetry",
+      "title": "第六单元 图形的位置与运动（一）",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "正方形有（）条对称轴，长方形有（）条对称轴。",
+          "originalReference": "4；2",
+          "stem": "正方形有（）条对称轴，长和宽不相等的长方形有（）条对称轴。",
+          "kind": "fillBlank",
+          "reference": "4；2",
+          "adjustment": "排除正方形这一特殊长方形，否则第二空可能为4。",
+          "answers": [
+            ["4", "四"],
+            ["2", "二", "两"]
+          ]
+        },
+        {
+          "number": 2,
+          "originalStem": "平移只改变图形的（），形状大小不变。",
+          "originalReference": "位置",
+          "stem": "平移只改变图形的（），形状大小不变。",
+          "kind": "fillBlank",
+          "reference": "位置",
+          "adjustment": "",
+          "answers": [["位置"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "旋转三要素：中心点、方向、（）。",
+          "originalReference": "角度",
+          "stem": "旋转三要素：中心点、方向、（）。",
+          "kind": "fillBlank",
+          "reference": "角度",
+          "adjustment": "",
+          "answers": [["角度", "旋转角度"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "沿一条直线对折，两部分能完全重合的图形叫（）图形。",
+          "originalReference": "轴对称",
+          "stem": "沿一条直线对折，两部分能完全重合的图形叫（）图形。",
+          "kind": "fillBlank",
+          "reference": "轴对称",
+          "adjustment": "",
+          "answers": [["轴对称"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "圆有无数条对称轴。",
+          "originalReference": "正确。每条经过圆心的直线都是对称轴。",
+          "stem": "圆有无数条对称轴。",
+          "kind": "trueFalse",
+          "reference": "正确。每条经过圆心的直线都是对称轴。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "电梯轿厢沿竖直轨道上下运动属于旋转。",
+          "originalReference": "错误。属于平移。",
+          "stem": "电梯轿厢沿竖直轨道上下运动属于旋转。",
+          "kind": "trueFalse",
+          "reference": "错误。属于平移。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "旋转后图形大小不变。",
+          "originalReference": "正确。位置和朝向可能变化，形状大小不变。",
+          "stem": "旋转后图形大小不变。",
+          "kind": "trueFalse",
+          "reference": "正确。位置和朝向可能变化，形状大小不变。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "平行四边形是轴对称图形。",
+          "originalReference": "错误。一般平行四边形不是；长方形、菱形等特殊平行四边形可以是。",
+          "stem": "所有平行四边形都是轴对称图形。",
+          "kind": "trueFalse",
+          "reference": "错误。一般平行四边形不是；长方形、菱形等特殊平行四边形可以是。",
+          "adjustment": "明确“所有”，区分一般与特殊平行四边形。",
+          "correctValue": false
+        },
+        {
+          "number": 9,
+          "originalStem": "画出三角形向右平移4格后的图形。",
+          "originalReference": "画图略",
+          "stem": "在方格纸上画三角形A（1，1）、B（1，3）、C（3，1），再画向右平移4格后的三角形。约定列号向右增大、行号向上增大，写出新顶点。",
+          "kind": "shortAnswer",
+          "reference": "A′（5，1）、B′（5，3）、C′（7，1）。每个点向右4格，形状大小不变；老师或家长检查图形。",
+          "adjustment": "来稿未附原三角形，补充坐标条件使画图任务可操作。"
+        }
+      ],
+      "sourceText": "## 第六单元 图形的位置与运动（一）\n\n一、填空（每空6分，共30分）\n\n1. 正方形有（）条对称轴，长方形有（）条对称轴。\n2. 平移只改变图形的（），形状大小不变。\n3. 旋转三要素：中心点、方向、（）。\n4. 对折后完全重合的图形叫（）图形。\n\n二、判断（每题8分，共32分）\n\n1. 圆有无数条对称轴。（）\n2. 电梯上下运动属于旋转。（）\n3. 旋转后图形大小不变。（）\n4. 平行四边形是轴对称图形。（）\n\n三、画图（38分）\n画出三角形向右平移4格后的图形。\n\n第六单元参考答案\n一、1.4，2；2.位置；3.角度；4.轴对称\n二、√，×，√，×\n三、画图略\n\n"
+    },
+    {
+      "topicKey": "factors",
+      "title": "第七单元 倍数与因数",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "在非0自然数范围内，最小质数是（），最小合数是（），（）既不是质数也不是合数。",
+          "originalReference": "2；4；1",
+          "stem": "在非0自然数范围内，最小质数是（），最小合数是（），（）既不是质数也不是合数。",
+          "kind": "fillBlank",
+          "reference": "2；4；1",
+          "adjustment": "",
+          "answers": [["2"], ["4"], ["1"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "在非0自然数范围内，2的倍数叫（），不是2的倍数叫（）。",
+          "originalReference": "偶数；奇数",
+          "stem": "在非0自然数范围内，2的倍数叫（），不是2的倍数叫（）。",
+          "kind": "fillBlank",
+          "reference": "偶数；奇数",
+          "adjustment": "",
+          "answers": [["偶数"], ["奇数"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "5的倍数，个位是（）或（）。",
+          "originalReference": "0；5",
+          "stem": "5的倍数，个位是（）或（）（按从小到大填写）。",
+          "kind": "fillBlank",
+          "reference": "0；5",
+          "adjustment": "明确填写顺序以匹配两空；不改变数学条件。",
+          "answers": [["0"], ["5"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "3的倍数，（）之和是3的倍数。",
+          "originalReference": "各数位数字",
+          "stem": "3的倍数，（）之和是3的倍数。",
+          "kind": "fillBlank",
+          "reference": "各数位数字",
+          "adjustment": "",
+          "answers": [
+            ["各数位数字", "各个数位上的数字", "各数位上的数字", "各位数字", "各个数位数字"]
+          ]
+        },
+        {
+          "number": 5,
+          "originalStem": "所有偶数都是合数。",
+          "originalReference": "错误。2是偶数也是质数。",
+          "stem": "所有偶数都是合数。",
+          "kind": "trueFalse",
+          "reference": "错误。2是偶数也是质数。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 6,
+          "originalStem": "在非0自然数范围，一个数的倍数一定比它的因数大。",
+          "originalReference": "错误。例如6是6的倍数也是6的因数，两者可相等。",
+          "stem": "在非0自然数范围，一个数的倍数一定比它的因数大。",
+          "kind": "trueFalse",
+          "reference": "错误。例如6是6的倍数也是6的因数，两者可相等。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "2是唯一的偶质数。",
+          "originalReference": "正确。其他大于2的偶数都有因数2，属于合数。",
+          "stem": "2是唯一的偶质数。",
+          "kind": "trueFalse",
+          "reference": "正确。其他大于2的偶数都有因数2，属于合数。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "9是合数。",
+          "originalReference": "正确。9的因数有1、3、9。",
+          "stem": "9是合数。",
+          "kind": "trueFalse",
+          "reference": "正确。9的因数有1、3、9。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "个位是3、6、9的数一定是3的倍数。",
+          "originalReference": "错误。例如13、16、19都不是3的倍数；应看各位数字之和。",
+          "stem": "个位是3、6、9的数一定是3的倍数。",
+          "kind": "trueFalse",
+          "reference": "错误。例如13、16、19都不是3的倍数；应看各位数字之和。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 10,
+          "originalStem": "在1、2、9、13、18、21中，找出质数和合数，并说明1属于哪类。",
+          "originalReference": "质数：2、13；合数：9、18、21；1既不是质数也不是合数。各组内部顺序不限。",
+          "stem": "在1、2、9、13、18、21中，找出质数和合数，并说明1属于哪类。",
+          "kind": "shortAnswer",
+          "reference": "质数：2、13；合数：9、18、21；1既不是质数也不是合数。各组内部顺序不限。",
+          "adjustment": ""
+        }
+      ],
+      "sourceText": "## 第七单元 倍数与因数\n\n一、填空（每空4分，共32分）\n\n1. 最小质数是（），最小合数是（），（）既不是质数也不是合数。\n2. 2的倍数叫（），不是2的倍数叫（）。\n3. 5的倍数，个位是（）或（）。\n4. 3的倍数，（）之和是3的倍数。\n\n二、判断（每题6分，共30分）\n\n1. 所有偶数都是合数。（）\n2. 一个数倍数一定比因数大。（）\n3. 2是唯一偶质数。（）\n4. 9是合数。（）\n5. 个位3、6、9的数一定是3的倍数。（）\n\n三、按要求写数（38分）\n在1、2、9、13、18、21中，找出质数和合数。\n\n第七单元参考答案\n一、1.2，4，1；2.偶数，奇数；3.0，5；4.各数位数字\n二、×，×，√，√，×\n三、质数：2，13；合数：9，18，21；1既不是质数也不是合数\n\n"
+    },
+    {
+      "topicKey": "chance",
+      "title": "第八单元 可能性",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "事件发生的可能性有（）。",
+          "originalReference": "大小",
+          "stem": "事件发生的可能性有（）。",
+          "kind": "fillBlank",
+          "reference": "大小",
+          "adjustment": "",
+          "answers": [["大小"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "盒子5红1白，摸到（）球可能性更大。",
+          "originalReference": "红",
+          "stem": "盒中5个红球、1个白球，除颜色外相同，每个球被摸到机会相同，随机摸一次，摸到（）球可能性更大。",
+          "kind": "fillBlank",
+          "reference": "红",
+          "adjustment": "补充每个球被摸到机会相同的前提。",
+          "answers": [["红", "红色"]]
+        },
+        {
+          "number": 3,
+          "originalStem": "在地球上日常观察，太阳从西边升起是（）事件。",
+          "originalReference": "不可能",
+          "stem": "在地球上日常观察，太阳从西边升起是（）事件。",
+          "kind": "fillBlank",
+          "reference": "不可能",
+          "adjustment": "",
+          "answers": [["不可能", "不可能发生"]]
+        },
+        {
+          "number": 4,
+          "originalStem": "按双方胜出机会衡量，游戏公平时，双方获胜可能性（）。",
+          "originalReference": "相等",
+          "stem": "按双方胜出机会衡量，游戏公平时，双方获胜可能性（）。",
+          "kind": "fillBlank",
+          "reference": "相等",
+          "adjustment": "",
+          "answers": [["相等", "一样", "相同"]]
+        },
+        {
+          "number": 5,
+          "originalStem": "抛硬币，正反面可能性相等。",
+          "originalReference": "正确。理想模型中正反面各占一半。",
+          "stem": "抛掷一枚理想均匀硬币，不考虑竖立等情况，正反面朝上的可能性相等。",
+          "kind": "trueFalse",
+          "reference": "正确。理想模型中正反面各占一半。",
+          "adjustment": "补充理想均匀硬币及忽略竖立情况。",
+          "correctValue": true
+        },
+        {
+          "number": 6,
+          "originalStem": "可能性大，就一定会发生。",
+          "originalReference": "错误。更可能不代表必然。",
+          "stem": "可能性大，就一定会发生。",
+          "kind": "trueFalse",
+          "reference": "错误。更可能不代表必然。",
+          "adjustment": "",
+          "correctValue": false
+        },
+        {
+          "number": 7,
+          "originalStem": "盒子里有若干球且全是红球，从中摸出白球是不可能的。",
+          "originalReference": "正确。没有白球。",
+          "stem": "盒子里有若干球且全是红球，从中摸出白球是不可能的。",
+          "kind": "trueFalse",
+          "reference": "正确。没有白球。",
+          "adjustment": "",
+          "correctValue": true
+        },
+        {
+          "number": 8,
+          "originalStem": "数量越少，可能性越小。",
+          "originalReference": "正确。在总数相同、等可能摸取条件下，数量占比越少，可能性越小。",
+          "stem": "同一袋中每个球被摸到机会相同时，某种颜色的球越少，摸到这种颜色的可能性越小。",
+          "kind": "trueFalse",
+          "reference": "正确。在总数相同、等可能摸取条件下，数量占比越少，可能性越小。",
+          "adjustment": "补充同一总量及等机会条件。",
+          "correctValue": true
+        },
+        {
+          "number": 9,
+          "originalStem": "口袋：4黑、2白，随便摸一个，摸到哪种球可能性大？为什么？",
+          "originalReference": "黑球可能性大，因为6个球中黑球有4个，比2个白球多。并不是一定摸到黑球。",
+          "stem": "口袋中有4个黑球、2个白球，除颜色外相同，每个球被摸到机会相同。随机摸一个，哪种颜色可能性大？为什么？",
+          "kind": "shortAnswer",
+          "reference": "黑球可能性大，因为6个球中黑球有4个，比2个白球多。并不是一定摸到黑球。",
+          "adjustment": "补充等可能摸取条件。"
+        }
+      ],
+      "sourceText": "## 第八单元 可能性\n\n一、填空（每空8分，共32分）\n\n1. 事件发生可能性有（）。\n2. 盒子5红1白，摸到（）球可能性更大。\n3. 太阳从西边升起是（）事件。\n4. 游戏公平，双方可能性（）。\n\n二、判断（每题10分，共40分）\n\n1. 抛硬币，正反面可能性相等。（）\n2. 可能性大，就一定会发生。（）\n3. 盒子全是红球，摸出白球不可能。（）\n4. 数量越少，可能性越小。（）\n\n三、简答（28分）\n口袋：4黑、2白，随便摸一个，摸到哪种球可能性大？为什么？\n\n第八单元参考答案\n一、1.大小；2.红；3.不可能；4.相等\n二、√，×，√，√\n三、黑球可能性大；黑球数量更多。\n\n"
+    },
+    {
+      "topicKey": "leaves",
+      "title": "综合实践：多少落叶能铺满",
+      "sourceScoring": "原稿分值保留在sourceText；按实际题量核对，不换算100分。",
+      "questions": [
+        {
+          "number": 1,
+          "originalStem": "估算不规则图形面积常用（）法。",
+          "originalReference": "数方格",
+          "stem": "估算不规则图形面积常用（）法。",
+          "kind": "fillBlank",
+          "reference": "数方格",
+          "adjustment": "",
+          "answers": [["数方格", "数格子", "数格"]]
+        },
+        {
+          "number": 2,
+          "originalStem": "数方格，满格算1格，不满格一般按（）格估算。",
+          "originalReference": "半格（0.5格）；实际部分格可多于或少于半格，需按图形细化估算。",
+          "stem": "用简易“半格估算法”估算叶片面积：满格计1格，不满格统一粗略计（）格。",
+          "kind": "fillBlank",
+          "reference": "半格（0.5格）；实际部分格可多于或少于半格，需按图形细化估算。",
+          "adjustment": "明确是本题采用的粗略估算方法；不能认为所有不满格的实际面积都等于半格。",
+          "answers": [["半", "0.5", "1/2", "二分之一"]]
+        }
+      ],
+      "sourceText": "## 综合实践：多少落叶能铺满\n\n1. 估算不规则图形面积常用（）法。（50分）\n2. 数方格，满格算1格，不满格一般按（）格估算。（50分）\n\n综合实践参考答案\n1.数方格；2.半\n"
+    }
+  ]
+}

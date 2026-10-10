@@ -270,7 +270,7 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
 
   let loadGeneration = 0
   async function loadAssessment(
-    launchContext: AssessmentLaunchContext,
+    launchContext: AssessmentLaunchContext | null,
     options: QuestionEngineLoadOptions = {},
   ): Promise<QuestionEngineViewModel | null> {
     const generation = ++loadGeneration
@@ -287,6 +287,12 @@ export const useQuestionEngineStore = defineStore('questionEngine', () => {
     error.value = null
     warning.value = null
     lastRewardEvent.value = null
+    if (!launchContext) {
+      status.value = 'invalid_context'
+      error.value = '练习入口信息不完整，请从知识地图选择课程后重新进入。'
+      loading.value = false
+      return null
+    }
     try {
       const result = await dependencies.adapter.loadAssessment(launchContext, {
         ...options,

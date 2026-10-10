@@ -22,15 +22,24 @@ function archive(sourceProfileId = 'student-a') {
     sections: profileArchiveSectionKinds.map((kind) => ({
       kind,
       schemaVersion: kind === 'pet-account' ? 2 : 1,
-      data: kind === 'student-profile'
-        ? { version: 1, profile: { id: sourceProfileId, displayName: '小学生' }, characterId: 'default-character' }
-        : null,
+      data:
+        kind === 'student-profile'
+          ? {
+              version: 1,
+              profile: { id: sourceProfileId, displayName: '小学生' },
+              characterId: 'default-character',
+            }
+          : null,
     })),
   }
 }
 
 async function start() {
-  app = createPetServer({ databasePath: join(directory, 'test.sqlite'), origins: [origin], now: () => time })
+  app = createPetServer({
+    databasePath: join(directory, 'test.sqlite'),
+    origins: [origin],
+    now: () => time,
+  })
   await new Promise<void>((resolve) => app.server.listen(0, '127.0.0.1', resolve))
   url = `http://127.0.0.1:${(app.server.address() as { port: number }).port}/api/pet/`
 }
@@ -41,13 +50,25 @@ beforeEach(async () => {
   await start()
 })
 
-afterEach(async () => { await app.close(); rmSync(directory, { recursive: true, force: true }) })
+afterEach(async () => {
+  await app.close()
+  rmSync(directory, { recursive: true, force: true })
+})
 
-async function request(path: string, method = 'GET', body?: unknown, cookie = '', username = 'parent_a', includeCsrf = true) {
+async function request(
+  path: string,
+  method = 'GET',
+  body?: unknown,
+  cookie = '',
+  username = 'parent_a',
+  includeCsrf = true,
+) {
   return fetch(url + path, {
     method,
     headers: {
-      'Content-Type': 'application/json', Origin: origin, Cookie: cookie,
+      'Content-Type': 'application/json',
+      Origin: origin,
+      Cookie: cookie,
       ...(includeCsrf ? { 'X-Knowledge-Island': 'pet-v2' } : {}),
       'X-Pet-Account': username,
     },
@@ -62,41 +83,117 @@ async function register(username = 'parent_a') {
 }
 
 describe('family cloud API', () => {
+  it('round-trips a grade-and-version profile without region metadata', async () => {
+    const value = archive()
+    const profile = {
+      studentId: value.sourceProfileId,
+      gradeId: 'GRADE_1',
+      semesterId: 'SEMESTER_UPPER',
+      chineseTextbookVersionId: 'G1_PEP_CHINESE_S1_2024_CANDIDATE',
+      mathTextbookVersionId: null,
+      englishTextbookVersionId: null,
+      confirmedAt: '2026-10-08T00:00:00.000Z',
+      source: 'USER_CONFIRMED' as const,
+    }
+    value.sections.find((section) => section.kind === 'curriculum-profile')!.data = {
+      schemaVersion: 1,
+      profile,
+    }
+    expect(validatePortableArchive(value)).toMatchObject({ ok: true })
+    const cookie = await register()
+    const response = await request(
+      'family/profiles',
+      'POST',
+      { label: '按年级选教材', archive: value },
+      cookie,
+    )
+    expect(response.status).toBe(200)
+    const { cloudProfileId } = await response.json()
+    const saved = await (
+      await request(`family/profiles/${cloudProfileId}`, 'GET', undefined, cookie)
+    ).json()
+    expect(saved.archive).toEqual(value)
+    expect(
+      saved.archive.sections.find(
+        (section: { kind: string }) => section.kind === 'curriculum-profile',
+      ).data.profile,
+    ).not.toHaveProperty('regionId')
+  })
   it('builds a portable archive fixture', () => {
     const result = validatePortableArchive(archive())
     expect(result, result.ok ? '' : result.issue).toMatchObject({ ok: true })
   })
   it('isolates accounts and exposes only metadata from list', async () => {
     const firstCookie = await register()
-    const created = await request('family/profiles', 'POST', { label: '第一份', archive: archive() }, firstCookie)
+    const created = await request(
+      'family/profiles',
+      'POST',
+      { label: '第一份', archive: archive() },
+      firstCookie,
+    )
     expect(created.status, await created.text()).toBe(200)
     const metadata = await (await request('family/profiles', 'GET', undefined, firstCookie)).json()
     expect(metadata.profiles[0]).toMatchObject({ label: '第一份', revision: 1 })
     expect(metadata.profiles[0]).not.toHaveProperty('archive')
     const id = metadata.profiles[0].cloudProfileId as string
     const secondCookie = await register('parent_b')
-    expect((await request(`family/profiles/${id}`, 'GET', undefined, secondCookie, 'parent_b')).status).toBe(404)
+    expect(
+      (await request(`family/profiles/${id}`, 'GET', undefined, secondCookie, 'parent_b')).status,
+    ).toBe(404)
   })
 
   it('rejects missing authentication, csrf, malformed archive and session-account changes', async () => {
     expect((await request('family/profiles')).status).toBe(401)
     const cookie = await register()
-    expect((await request('family/profiles', 'POST', { label: 'x', archive: archive() }, cookie, 'parent_a', false)).status).toBe(403)
-    expect((await request('family/profiles', 'POST', { label: 'x', archive: { nope: true } }, cookie)).status).toBe(400)
-    expect((await request('family/profiles', 'GET', undefined, cookie, 'other_parent')).status).toBe(409)
+    expect(
+      (
+        await request(
+          'family/profiles',
+          'POST',
+          { label: 'x', archive: archive() },
+          cookie,
+          'parent_a',
+          false,
+        )
+      ).status,
+    ).toBe(403)
+    expect(
+      (await request('family/profiles', 'POST', { label: 'x', archive: { nope: true } }, cookie))
+        .status,
+    ).toBe(400)
+    expect(
+      (await request('family/profiles', 'GET', undefined, cookie, 'other_parent')).status,
+    ).toBe(409)
   })
 
   it('uses transaction CAS without changing the remote archive on a stale update', async () => {
     const cookie = await register()
-    const created = await (await request('family/profiles', 'POST', { label: '第一份', archive: archive() }, cookie)).json()
+    const created = await (
+      await request('family/profiles', 'POST', { label: '第一份', archive: archive() }, cookie)
+    ).json()
     const id = created.cloudProfileId as string
     const next = archive()
     next.exportedAt = '2026-09-08T01:00:00.000Z'
-    const updated = await request(`family/profiles/${id}`, 'PUT', { expectedRevision: 1, archive: next }, cookie)
+    const updated = await request(
+      `family/profiles/${id}`,
+      'PUT',
+      { expectedRevision: 1, archive: next },
+      cookie,
+    )
     expect(updated.status).toBe(200)
-    const stale = await request(`family/profiles/${id}`, 'PUT', { expectedRevision: 1, archive: archive('student-b') }, cookie)
+    const stale = await request(
+      `family/profiles/${id}`,
+      'PUT',
+      { expectedRevision: 1, archive: archive('student-b') },
+      cookie,
+    )
     expect(stale.status).toBe(409)
-    expect(await stale.json()).toMatchObject({ code: 'REVISION_CONFLICT', details: { currentRevision: 2 } })
-    expect(await (await request(`family/profiles/${id}`, 'GET', undefined, cookie)).json()).toMatchObject({ revision: 2, archive: next })
+    expect(await stale.json()).toMatchObject({
+      code: 'REVISION_CONFLICT',
+      details: { currentRevision: 2 },
+    })
+    expect(
+      await (await request(`family/profiles/${id}`, 'GET', undefined, cookie)).json(),
+    ).toMatchObject({ revision: 2, archive: next })
   })
 })

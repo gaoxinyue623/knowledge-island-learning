@@ -86,17 +86,37 @@ describe('student weekly plan', () => {
   afterEach(() => vi.useRealTimers())
   it('does not complete review or wrong-question tasks from an unrelated lesson completion', () => {
     const history: LearningHistoryRecord = {
-      id: 'history', profileId: 'STUDENT_A', type: 'lesson_completed', sourceId: 'different-session',
-      textbookId: 'TEXTBOOK_A', unitId: 'UNIT_A', lessonId: 'LESSON_A', knowledgePointId: 'KP_A',
-      occurredAt: '2026-09-08T10:00:00.000Z', provenance: { isSampleDerived: false },
+      id: 'history',
+      profileId: 'STUDENT_A',
+      type: 'lesson_completed',
+      sourceId: 'different-session',
+      textbookId: 'TEXTBOOK_A',
+      unitId: 'UNIT_A',
+      lessonId: 'LESSON_A',
+      knowledgePointId: 'KP_A',
+      occurredAt: '2026-09-08T10:00:00.000Z',
+      provenance: { isSampleDerived: false },
     }
     for (const action of [
       { type: 'review_queue' as const, reviewQueueItemId: 'review-a' },
       { type: 'wrong_question' as const, wrongQuestionId: 'wrong-a' },
-      { type: 'assessment' as const, launchContext: { textbookId: 'TEXTBOOK_A', unitId: 'UNIT_A', lessonId: 'LESSON_A', knowledgePointId: 'KP_A', source: 'lesson' as const } },
+      {
+        type: 'assessment' as const,
+        launchContext: {
+          textbookId: 'TEXTBOOK_A',
+          unitId: 'UNIT_A',
+          lessonId: 'LESSON_A',
+          knowledgePointId: 'KP_A',
+          source: 'lesson' as const,
+        },
+      },
     ]) {
-      const weekly = updateWeeklyPlanDay(defaultWeeklyPlan('STUDENT_A', '2026-09-07'), 1,
-        { targetCount: 1, tasks: [task({ action })] }, new Date('2026-09-08T08:00:00Z'))
+      const weekly = updateWeeklyPlanDay(
+        defaultWeeklyPlan('STUDENT_A', '2026-09-07'),
+        1,
+        { targetCount: 1, tasks: [task({ action })] },
+        new Date('2026-09-08T08:00:00Z'),
+      )
       const result = resolveWeeklyPlan(weekly, plan([]), evidence({ history: () => [history] }))
       expect(result.days[1]?.taskReferences[0]?.status).toBe('pending')
     }
@@ -104,7 +124,9 @@ describe('student weekly plan', () => {
 
   it('reconciles a changed daily task ID without selecting the same learning task twice', async () => {
     const original = task()
-    const wrapper = mount(WeeklyPlanCard, { props: { profileId: 'STUDENT_A', dailyPlan: plan([original]) } })
+    const wrapper = mount(WeeklyPlanCard, {
+      props: { profileId: 'STUDENT_A', dailyPlan: plan([original]) },
+    })
     await wrapper.get('input[value="1"]').setValue()
     await wrapper.get('input[type="checkbox"]').setValue(true)
     await wrapper.setProps({ dailyPlan: plan([task({ id: 'refreshed-id' })]) })
@@ -143,7 +165,12 @@ describe('student weekly plan', () => {
   })
 
   it('reports a storage write failure explicitly', () => {
-    const storage = createWeeklyPlanStorage({ getItem: () => null, setItem: () => { throw new Error('quota') } })
+    const storage = createWeeklyPlanStorage({
+      getItem: () => null,
+      setItem: () => {
+        throw new Error('quota')
+      },
+    })
     expect(storage.save(defaultWeeklyPlan('STUDENT_A', '2026-09-07')).warning).toContain('无法保存')
   })
 
@@ -216,7 +243,9 @@ describe('student weekly plan', () => {
   })
 
   it('renders a rest day and emits an existing task action without marking it complete', async () => {
-    const wrapper = mount(WeeklyPlanCard, { props: { profileId: 'STUDENT_A', dailyPlan: plan([task()]) } })
+    const wrapper = mount(WeeklyPlanCard, {
+      props: { profileId: 'STUDENT_A', dailyPlan: plan([task()]) },
+    })
     expect(wrapper.text()).toContain('周二 · 2026-09-08')
     await wrapper.get('input[value="0"]').setValue()
     expect(wrapper.text()).toContain('今天安排休息')
@@ -224,7 +253,10 @@ describe('student weekly plan', () => {
     await wrapper.get('input[value="1"]').setValue()
     await wrapper.get('input[type="checkbox"]').setValue(true)
     await wrapper.findAll('.app-button').at(-1)?.trigger('click')
-    expect(wrapper.emitted('open-task')?.[0]?.[0]).toMatchObject({ status: 'pending', title: '继续学习：认识数字' })
+    expect(wrapper.emitted('open-task')?.[0]?.[0]).toMatchObject({
+      status: 'pending',
+      title: '继续学习：认识数字',
+    })
     expect(wrapper.text()).toContain('待继续')
   })
 

@@ -438,11 +438,7 @@ export class HomeService {
     const textbookIds = subjectTextbookIds(profile)
     if (dataset === 'demo') textbookIds.MATH = DEMO_TEXTBOOK_ID
 
-    const [regions, grades, semesters] = await Promise.all([
-      this.dependencies.curriculum.getRegions().catch((caught: unknown) => {
-        addWarning(warnings, caught instanceof Error ? caught.message : '地区信息暂时无法读取。')
-        return []
-      }),
+    const [grades, semesters] = await Promise.all([
       this.dependencies.curriculum.getGrades().catch((caught: unknown) => {
         addWarning(warnings, caught instanceof Error ? caught.message : '年级信息暂时无法读取。')
         return []
@@ -711,7 +707,6 @@ export class HomeService {
     const profileView = {
       profileId: profile.studentId,
       displayName: displayNameFor(profile.studentId, options.displayName),
-      regionName: regions.find((region) => region.id === profile.regionId)?.name ?? '地区待确认',
       gradeName: grades.find((grade) => grade.id === profile.gradeId)?.name ?? '年级待确认',
       semesterName:
         semesters.find((semester) => semester.id === profile.semesterId)?.name ?? '学期待确认',

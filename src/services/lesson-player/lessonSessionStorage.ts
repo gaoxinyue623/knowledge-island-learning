@@ -1,3 +1,4 @@
+import { accountStorage } from '@/services/account/storage'
 import type { Id, LessonLaunchContext, LessonSession, LessonSessionStoragePayload } from '@/types'
 
 export const LESSON_SESSION_STORAGE_KEY = 'knowledge-island.lesson-sessions'
@@ -10,8 +11,8 @@ export interface LessonSessionStorageLike {
 }
 
 function browserStorage(): LessonSessionStorageLike | null {
-  if (typeof window === 'undefined' || !window.localStorage) return null
-  return window.localStorage
+  if (typeof window === 'undefined' || !accountStorage) return null
+  return accountStorage
 }
 
 const SESSION_STATUSES = new Set<LessonSession['status']>([
@@ -64,7 +65,9 @@ function parseSession(value: unknown): LessonSession | null {
   }
 }
 
-export function parseLessonSessionStoragePayload(value: unknown): LessonSessionStoragePayload | null {
+export function parseLessonSessionStoragePayload(
+  value: unknown,
+): LessonSessionStoragePayload | null {
   if (!value) return null
   try {
     const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value

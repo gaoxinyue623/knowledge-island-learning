@@ -7,6 +7,7 @@ import { buildAgentContext } from './contextBuilder'
 import { LearningPlanner } from './learningPlanner'
 import { DEFAULT_LEARNING_PLANNER_CONFIG, stableId } from './plannerConfig'
 import { RuntimeLearningAgentSource } from './runtimeSource'
+import { selectAgentQuestions } from './questionSelection'
 
 export interface RuntimeDecisionOptions {
   now?: string
@@ -77,6 +78,22 @@ export class RuntimeLearningAgentDecisionService {
       result.studentStateSummary = context.knowledgeState
       event('BUILD_CONTEXT', { knowledgePoints: context.knowledgeState.knowledgePoints.length })
       const decision = new LearningPlanner(config).plan(context)
+      const aiSignals = (snapshot.aiSignals ?? []).filter(
+        (s) =>
+          s.knowledgePointId === decision.targetKnowledgePointId ||
+          s.knowledgePointId === decision.sourceKnowledgePointId,
+      )
+      if (aiSignals.length) {
+        decision.evidenceRefs = [
+          ...new Set([...decision.evidenceRefs, ...aiSignals.map((s) => s.id)]),
+        ].sort()
+        event('AI_AUXILIARY_EVIDENCE', { count: aiSignals.length })
+        if (decision.reasons[0])
+          decision.reasons[0].message += '（参考了 AI 练习结果，课程通关仍以正式练习为准。）'
+      }
+      Object.assign(decision.recommendedActivity, selectAgentQuestions(snapshot, decision))
+      if (!decision.recommendedActivity.selectedQuestionIds?.length)
+        throw new Error('AGENT_NO_AVAILABLE_KNOWLEDGE_POINT')
       result.decision = decision
       result.activityPlan = decision.recommendedActivity
       check('CONTEXT', 'PASS', 'AGENT_RUNTIME_CONTEXT_VALID')

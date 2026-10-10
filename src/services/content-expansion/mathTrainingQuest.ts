@@ -1,11 +1,32 @@
+import { G6_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-6/math-bnu-lower-2013'
+import { G6_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-6/math-bnu-upper-2022'
+import { G5_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-5/math-bnu-lower-2013'
+import { G5_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-5/math-bnu-upper'
+import { G4_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-4/math-bnu-lower'
+import { G4_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-4/math-bnu-upper-2022'
+import { G3_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-3/math-bnu-lower-2022'
+import { G3_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-3/math-bnu-upper-2022'
 import { gradeOneShenzhenMathUpperDefinitions } from '@/data/curriculum/grade-1/math-bnu-upper'
 import { gradeOneShenzhenMathLowerDefinitions } from '@/data/curriculum/grade-1/math-bnu-lower'
 import { gradeTwoShenzhenMathUpperDefinitions } from '@/data/curriculum/grade-2/math-bnu-upper'
 import { makeNumberGrid } from '@/data/content-expansion/math-lower-visuals'
 import type { ReadingQuest } from '@/types/reading-quest'
 import { createTrainingBuilder } from './trainingQuestBuilder'
+import { isBnuLowerMathTextbook, createBnuLowerMathReview } from './bnuLowerMathQuest'
 
 export function createMathTrainingQuest(base: ReadingQuest, variant: number): ReadingQuest | null {
+  if (
+    base.textbookId === G3_BNU_MATH_S1_TEXTBOOK_ID ||
+    base.textbookId === G4_BNU_MATH_S2_TEXTBOOK_ID ||
+    base.textbookId === G5_BNU_MATH_S1_TEXTBOOK_ID ||
+    base.textbookId === G5_BNU_MATH_S2_TEXTBOOK_ID ||
+    base.textbookId === G6_BNU_MATH_S1_TEXTBOOK_ID ||
+    base.textbookId === G6_BNU_MATH_S2_TEXTBOOK_ID ||
+    base.textbookId === G4_BNU_MATH_S1_TEXTBOOK_ID ||
+    base.textbookId === G3_BNU_MATH_S2_TEXTBOOK_ID ||
+    isBnuLowerMathTextbook(base.textbookId)
+  )
+    return createBnuLowerMathReview(base, variant)
   const early = gradeOneShenzhenMathUpperDefinitions.find(
     (d) => d.knowledgePointId === base.knowledgePointId,
   )

@@ -32,16 +32,22 @@ export interface AbilityPortfolioProjectionInput {
 function catalogSubject(textbookId: string): SubjectCode | null {
   const textbook = productionCurriculumIndex.textbooks.find((item) => item.id === textbookId)
   return textbook
-    ? (productionCurriculumIndex.subjects.find((item) => item.id === textbook.subjectId)?.code ?? null)
+    ? (productionCurriculumIndex.subjects.find((item) => item.id === textbook.subjectId)?.code ??
+        null)
     : null
 }
 
 /** Read-only, evidence-first projection. Old history proves practice, never mastery. */
-export function projectAbilityPortfolio(input: AbilityPortfolioProjectionInput): AbilityPortfolioItem[] {
+export function projectAbilityPortfolio(
+  input: AbilityPortfolioProjectionInput,
+): AbilityPortfolioItem[] {
   const now = input.now ?? new Date()
-  const profileHistory = input.history.filter(record => record.profileId === input.profileId &&
-    !record.provenance.isSampleDerived &&
-    (record.type === 'lesson_completed' || record.type === 'assessment_completed'))
+  const profileHistory = input.history.filter(
+    (record) =>
+      record.profileId === input.profileId &&
+      !record.provenance.isSampleDerived &&
+      (record.type === 'lesson_completed' || record.type === 'assessment_completed'),
+  )
   const active = input.evidence.filter(
     (item) =>
       item.profileId === input.profileId &&
@@ -87,13 +93,17 @@ export function projectAbilityPortfolio(input: AbilityPortfolioProjectionInput):
     ])
   for (const [knowledgePointId, records] of historyByKnowledgePoint) {
     if (evidencedKnowledgePoints.has(knowledgePointId)) continue
-    const latest = [...records].sort((left, right) => right.occurredAt.localeCompare(left.occurredAt))[0]!
+    const latest = [...records].sort((left, right) =>
+      right.occurredAt.localeCompare(left.occurredAt),
+    )[0]!
     const subject = catalogSubject(latest.textbookId)
     if (!subject) continue
     result.push({
       id: `history:${knowledgePointId}`,
       knowledgePointId,
-      title: productionCurriculumIndex.knowledgePoints.find(point => point.id === knowledgePointId)?.name ?? '已完成的课程',
+      title:
+        productionCurriculumIndex.knowledgePoints.find((point) => point.id === knowledgePointId)
+          ?.name ?? '已完成的课程',
       subject,
       status: 'practiced',
       latestAt: latest.occurredAt,

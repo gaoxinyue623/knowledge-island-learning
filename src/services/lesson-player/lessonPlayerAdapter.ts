@@ -154,6 +154,7 @@ function blockViewModel(
     ...(record.highlights?.length ? { highlights: [...record.highlights] } : {}),
     ...(media.length ? { media } : {}),
     ...(interaction ? { interaction } : {}),
+    ...(record.literacyTable ? { literacyTable: record.literacyTable } : {}),
     isSample: record.isSample,
     ...(record.verificationStatus ? { verificationStatus: record.verificationStatus } : {}),
     sort: record.sort,

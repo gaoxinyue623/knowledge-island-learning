@@ -1,0 +1,166 @@
+
+> knowledge-island-learning@0.1.0 build
+> npm run type-check && vite build
+
+
+> knowledge-island-learning@0.1.0 type-check
+> vue-tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json
+
+vite v7.3.6 building client environment for production...
+transforming...
+node_modules/zod/v4/core/util.js (330:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/regexes.js (70:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 2572 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                                              0.97 kB │ gzip:   0.47 kB
+dist/assets/island-adventure-BWHtEluC.jpg                                                  617.22 kB
+dist/assets/AiReviewPage-B_w4osRw.css                                                        0.07 kB │ gzip:   0.09 kB
+dist/assets/WorkshopObject-DOI2o5xj.css                                                      0.07 kB │ gzip:   0.09 kB
+dist/assets/ContentFeedbackLink-Bl22kN7-.css                                                 0.13 kB │ gzip:   0.14 kB
+dist/assets/WrongBookPage-cx9V2EU_.css                                                       0.40 kB │ gzip:   0.22 kB
+dist/assets/ReadingQuest-TCJyP04X.css                                                        0.50 kB │ gzip:   0.30 kB
+dist/assets/SettingsPage-aKI215Pl.css                                                        0.72 kB │ gzip:   0.31 kB
+dist/assets/PetStoriesPage-BNkuBkKa.css                                                      0.79 kB │ gzip:   0.32 kB
+dist/assets/AbilityPortfolioPage-DcU90Vri.css                                                1.11 kB │ gzip:   0.42 kB
+dist/assets/AccountPage-Clv9qTr5.css                                                         1.13 kB │ gzip:   0.43 kB
+dist/assets/LearningMapPage-B3D6FItt.css                                                     1.13 kB │ gzip:   0.45 kB
+dist/assets/ThinkingEntry-Ber9kNGd.css                                                       1.15 kB │ gzip:   0.50 kB
+dist/assets/LessonPlayerPage-Co4Yh_tL.css                                                    1.23 kB │ gzip:   0.43 kB
+dist/assets/FamilyProfilesPage-CVUFKLO4.css                                                  1.89 kB │ gzip:   0.59 kB
+dist/assets/FormalLearningAgentPage-BPugbDai.css                                             2.00 kB │ gzip:   0.65 kB
+dist/assets/GradeExplorerPage-DIqrg0k2.css                                                   2.24 kB │ gzip:   0.70 kB
+dist/assets/DevUi-BrQlgKAY.css                                                               2.50 kB │ gzip:   0.64 kB
+dist/assets/FormalAiPractice-0s-sWefy.css                                                    2.51 kB │ gzip:   0.83 kB
+dist/assets/english-listener-0fVhqwK9.css                                                    3.32 kB │ gzip:   1.07 kB
+dist/assets/AuthPage-t56vRW80.css                                                            4.20 kB │ gzip:   1.36 kB
+dist/assets/HomePage-CU5IILii.css                                                            4.25 kB │ gzip:   1.02 kB
+dist/assets/pet-DG0_XO12.css                                                                 5.98 kB │ gzip:   1.79 kB
+dist/assets/RewardPage-BrCGOGUJ.css                                                          6.72 kB │ gzip:   1.72 kB
+dist/assets/DevLearningAgentPage-De53q--L.css                                                7.18 kB │ gzip:   1.81 kB
+dist/assets/MathQuestVisual-DtV2PDSP.css                                                     9.25 kB │ gzip:   2.22 kB
+dist/assets/reading-islands-eCuoa0Rd.css                                                    10.53 kB │ gzip:   2.84 kB
+dist/assets/evidencePractice-BqKOxd4J.css                                                   13.33 kB │ gzip:   3.76 kB
+dist/assets/thinking-Clco0vph.css                                                           15.29 kB │ gzip:   3.66 kB
+dist/assets/index-BVGnZfqk.css                                                             185.78 kB │ gzip:  30.59 kB
+dist/assets/learningMapRepository-78l_vgXQ.js                                                0.29 kB │ gzip:   0.23 kB
+dist/assets/subjectTheme-xA9RVvT3.js                                                         0.51 kB │ gzip:   0.27 kB
+dist/assets/bnuMathLowerApproval-CNkxe2jG.js                                                 0.54 kB │ gzip:   0.36 kB
+dist/assets/useCurriculumPresentation-C0zseteX.js                                            0.55 kB │ gzip:   0.38 kB
+dist/assets/synchronousPractice-Df4jCBST.js                                                  0.67 kB │ gzip:   0.36 kB
+dist/assets/pilot-03PBeDDL.js                                                                0.76 kB │ gzip:   0.42 kB
+dist/assets/NotFoundPage-nWbaBbuW.js                                                         0.76 kB │ gzip:   0.55 kB
+dist/assets/AppToast.vue_vue_type_script_setup_true_lang-LwhbF9th.js                         0.79 kB │ gzip:   0.49 kB
+dist/assets/contract-BHdFDeh0.js                                                             0.80 kB │ gzip:   0.53 kB
+dist/assets/strategyAdapters-lcSmGWNE.js                                                     0.82 kB │ gzip:   0.40 kB
+dist/assets/AppProgress.vue_vue_type_script_setup_true_lang-dr-wfQ8d.js                      0.85 kB │ gzip:   0.50 kB
+dist/assets/ContentFeedbackLink-bFaju0dn.js                                                  0.88 kB │ gzip:   0.57 kB
+dist/assets/ThinkingEntry-D82TWGmB.js                                                        0.98 kB │ gzip:   0.70 kB
+dist/assets/signals-BD6Qowzw.js                                                              1.05 kB │ gzip:   0.68 kB
+dist/assets/learningSyncBindingStorage-D_8MghBy.js                                           1.05 kB │ gzip:   0.50 kB
+dist/assets/archivePresentation-D5uYf6Px.js                                                  1.06 kB │ gzip:   0.72 kB
+dist/assets/activityHistory-CeFLWlZE.js                                                      1.07 kB │ gzip:   0.69 kB
+dist/assets/currentQuestResolver-CT40-LRU.js                                                 1.13 kB │ gzip:   0.62 kB
+dist/assets/reading-islands.css_vue_type_style_index_0_src_true_lang-DkJ3hV0D.js             1.18 kB │ gzip:   0.81 kB
+dist/assets/masteryStore-BRQVBPFp.js                                                         1.33 kB │ gzip:   0.71 kB
+dist/assets/index-B8zPRPav.js                                                                1.36 kB │ gzip:   0.61 kB
+dist/assets/rewardStore-DXpTlrNQ.js                                                          1.46 kB │ gzip:   0.69 kB
+dist/assets/learningMapStorage-tOYzv_bl.js                                                   1.82 kB │ gzip:   0.93 kB
+dist/assets/familyCloud-7MGJgM8V.js                                                          1.82 kB │ gzip:   0.89 kB
+dist/assets/reviewQueueStore-jZukaB1h.js                                                     1.87 kB │ gzip:   0.88 kB
+dist/assets/AiReviewPage-CyTrTcxr.js                                                         2.01 kB │ gzip:   1.21 kB
+dist/assets/LearningActivityHistory.vue_vue_type_script_setup_true_lang-C-K-Dkoq.js          2.06 kB │ gzip:   1.22 kB
+dist/assets/phase13DemoRewardFacts-CnHAveWj.js                                               2.33 kB │ gzip:   0.98 kB
+dist/assets/growthStore-D1Rpc2wh.js                                                          2.33 kB │ gzip:   0.90 kB
+dist/assets/masteryService-CpocFZhq.js                                                       2.48 kB │ gzip:   1.03 kB
+dist/assets/CharacterPage-DCOz4DYt.js                                                        2.50 kB │ gzip:   1.41 kB
+dist/assets/lessonSessionStorage-BhU75J7l.js                                                 2.63 kB │ gzip:   1.21 kB
+dist/assets/AppModal.vue_vue_type_script_setup_true_lang-BmiwUH0I.js                         2.73 kB │ gzip:   1.22 kB
+dist/assets/DevActivityEnginePage-5FSKwlpT.js                                                2.88 kB │ gzip:   1.56 kB
+dist/assets/RecoverPage-BmvMRk4h.js                                                          3.07 kB │ gzip:   1.54 kB
+dist/assets/TextbookSubjectSelectPage-BeU-RdA4.js                                            3.08 kB │ gzip:   1.69 kB
+dist/assets/WorkshopObject-BCZAiCiI.js                                                       3.15 kB │ gzip:   1.17 kB
+dist/assets/FeedbackManagePage-C0zQd8yt.js                                                   3.25 kB │ gzip:   1.75 kB
+dist/assets/wrongBookStore-DHbKPIDc.js                                                       3.40 kB │ gzip:   1.35 kB
+dist/assets/masteryEngine-zursV_k-.js                                                        3.41 kB │ gzip:   1.32 kB
+dist/assets/petStoryService-4PSijYY6.js                                                      3.60 kB │ gzip:   1.90 kB
+dist/assets/evidenceExtractor-COEDUYlx.js                                                    3.87 kB │ gzip:   1.41 kB
+dist/assets/learningStrategyStore-BxooAUxr.js                                                4.01 kB │ gzip:   1.70 kB
+dist/assets/questionValidation-BRny37Bb.js                                                   4.02 kB │ gzip:   1.55 kB
+dist/assets/PetStoriesPage-CIhWONsn.js                                                       4.07 kB │ gzip:   2.17 kB
+dist/assets/SubjectHabitat.vue_vue_type_script_setup_true_lang-caAvnuqJ.js                   4.24 kB │ gzip:   1.74 kB
+dist/assets/spacedReview-D58x_YPz.js                                                         4.26 kB │ gzip:   2.00 kB
+dist/assets/learningMapStore-B6z7Mh1S.js                                                     4.34 kB │ gzip:   1.81 kB
+dist/assets/client-BJaZBKKu.js                                                               4.38 kB │ gzip:   1.96 kB
+dist/assets/SortOrderActivity.vue_vue_type_script_setup_true_lang-B2Sv3U7p.js                4.44 kB │ gzip:   1.80 kB
+dist/assets/CurriculumSettingsPage-CPQZYZbz.js                                               4.69 kB │ gzip:   2.30 kB
+dist/assets/DevStrategyPage-tYOQ91TB.js                                                      4.87 kB │ gzip:   2.27 kB
+dist/assets/AccountSecurityPage-CSGdBWnS.js                                                  5.16 kB │ gzip:   2.42 kB
+dist/assets/thinking-DVzED4mu.js                                                             5.29 kB │ gzip:   2.75 kB
+dist/assets/FeedbackPage-33ogcjWl.js                                                         5.29 kB │ gzip:   2.66 kB
+dist/assets/rewardService-PCzyQaLe.js                                                        5.30 kB │ gzip:   1.59 kB
+dist/assets/AuthPage-D2bWllB6.js                                                             5.61 kB │ gzip:   2.74 kB
+dist/assets/DevLearningMapPage-2wnE6rxf.js                                                   5.69 kB │ gzip:   2.73 kB
+dist/assets/AccountPage-BhW3Sa67.js                                                          5.75 kB │ gzip:   2.74 kB
+dist/assets/ProfilePage-DbKkOuFa.js                                                          6.16 kB │ gzip:   2.97 kB
+dist/assets/DevContentExpansionPage-Z-DFeV3M.js                                              6.18 kB │ gzip:   2.37 kB
+dist/assets/DevUi-6RH1KAvG.js                                                                6.28 kB │ gzip:   2.63 kB
+dist/assets/AbilityPortfolioPage-BrTF2VUF.js                                                 6.33 kB │ gzip:   3.14 kB
+dist/assets/ReadingIslandsPage-D0wx-QSe.js                                                   7.00 kB │ gzip:   3.23 kB
+dist/assets/ReviewQueuePage-5u2Xvhs0.js                                                      7.30 kB │ gzip:   3.23 kB
+dist/assets/LearningHistoryPage-OEolu3yN.js                                                  7.35 kB │ gzip:   3.27 kB
+dist/assets/DevMasteryPage-CNRmVH3F.js                                                       7.89 kB │ gzip:   3.44 kB
+dist/assets/weeklyPlanService-CEYYvuQ1.js                                                    8.09 kB │ gzip:   2.90 kB
+dist/assets/learningMapAdapter-DUjO3fTV.js                                                   8.15 kB │ gzip:   3.09 kB
+dist/assets/ThinkingIslandsPage-D7NHM_00.js                                                  8.57 kB │ gzip:   3.72 kB
+dist/assets/ReadingStoryPage-DKzlyQVK.js                                                     9.20 kB │ gzip:   3.96 kB
+dist/assets/WrongBookPage-XaYYn2ly.js                                                        9.22 kB │ gzip:   3.94 kB
+dist/assets/SettingsPage-JIEQexrJ.js                                                         9.46 kB │ gzip:   4.21 kB
+dist/assets/FormalAiPractice-C2kvdepE.js                                                     9.93 kB │ gzip:   4.21 kB
+dist/assets/FamilyProfilesPage-BQSBdzXh.js                                                  10.67 kB │ gzip:   4.40 kB
+dist/assets/MapHeader.vue_vue_type_script_setup_true_lang-Dqogk12v.js                       11.14 kB │ gzip:   4.05 kB
+dist/assets/lessonPlayerStore-oAH7R2Bn.js                                                   11.86 kB │ gzip:   4.39 kB
+dist/assets/QuestionRenderer.vue_vue_type_script_setup_true_lang-DFLinYH1.js                12.70 kB │ gzip:   3.91 kB
+dist/assets/LessonContentRenderer.vue_vue_type_script_setup_true_lang-GiSjmyfv.js           12.83 kB │ gzip:   4.06 kB
+dist/assets/InteractiveActivityRenderer.vue_vue_type_script_setup_true_lang-hAGfsnXW.js     13.21 kB │ gzip:   4.72 kB
+dist/assets/FormalLearningAgentPage-D9D4XwZa.js                                             13.42 kB │ gzip:   5.88 kB
+dist/assets/english-listener.css_vue_type_style_index_0_src_true_lang-i3VXoCX5.js           14.15 kB │ gzip:   6.38 kB
+dist/assets/LearningMapPage-COUoebh6.js                                                     16.16 kB │ gzip:   6.60 kB
+dist/assets/runtimeExecutionService-C-h30prR.js                                             19.24 kB │ gzip:   6.36 kB
+dist/assets/LessonPlayerPage-DKtMKAFh.js                                                    21.48 kB │ gzip:   7.94 kB
+dist/assets/ThinkingMissionPage-BXOQSFpc.js                                                 22.15 kB │ gzip:   8.22 kB
+dist/assets/profileArchiveService-BsUQWWrY.js                                               23.59 kB │ gzip:   7.00 kB
+dist/assets/GradeExplorerPage-CR6d0OgS.js                                                   23.67 kB │ gzip:   8.96 kB
+dist/assets/ReadingQuest.vue_vue_type_script_setup_true_lang-BNqb3KNY.js                    23.92 kB │ gzip:   9.28 kB
+dist/assets/MathQuestVisual-By5YQnYs.js                                                     24.36 kB │ gzip:   8.86 kB
+dist/assets/DevCurriculum-CUapYqaL.js                                                       27.17 kB │ gzip:   7.02 kB
+dist/assets/evidencePractice-B4WPitAw.js                                                    27.46 kB │ gzip:  11.64 kB
+dist/assets/RewardPage-Cyhd-hsE.js                                                          29.53 kB │ gzip:  10.75 kB
+dist/assets/QuestionEnginePage-DhDIKhmP.js                                                  31.93 kB │ gzip:  10.84 kB
+dist/assets/promptRegistry-BZIpIuGK.js                                                      40.09 kB │ gzip:  14.16 kB
+dist/assets/readingStoryAdapter-Cs3kLUsI.js                                                 47.21 kB │ gzip:  18.47 kB
+dist/assets/HomePage-BYjfhoAD.js                                                            50.93 kB │ gzip:  16.48 kB
+dist/assets/DevLearningAgentPage-BvcBL37p.js                                                51.92 kB │ gzip:  17.75 kB
+dist/assets/ParentDashboardPage-Dfx_ipZ9.js                                                 57.99 kB │ gzip:  17.21 kB
+dist/assets/g1-chinese-content-import-ogUGoQRX.js                                           77.20 kB │ gzip:  19.37 kB
+dist/assets/KnowledgePointDetailPage-CjoNFfNX.js                                            77.41 kB │ gzip:  29.56 kB
+dist/assets/curriculum-grade-1-BtRKCem2.js                                                 142.42 kB │ gzip:  50.77 kB
+dist/assets/vendor-Zk7yP09g.js                                                             215.37 kB │ gzip:  72.87 kB
+dist/assets/curriculum-grade-2-CiMj_2Zo.js                                                 311.56 kB │ gzip: 114.01 kB
+dist/assets/index-D5g0yK1J.js                                                            3,100.43 kB │ gzip: 927.28 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.76s

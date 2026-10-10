@@ -19,7 +19,9 @@ function reportChapter(chapter: 'review' | 'expression' | 'discovery') {
     <header>
       <p class="curriculum-eyebrow">团子的知识小故事</p>
       <h2>{{ props.story.title }}</h2>
-      <AppButton v-if="!props.story.opened" size="sm" variant="secondary" @click="emit('open')">打开故事</AppButton>
+      <AppButton v-if="!props.story.opened" size="sm" variant="secondary" @click="emit('open')"
+        >打开故事</AppButton
+      >
       <span v-else>故事已打开</span>
     </header>
     <p>{{ props.story.introduction }}</p>
@@ -28,7 +30,13 @@ function reportChapter(chapter: 'review' | 'expression' | 'discovery') {
       <li v-for="chapter in props.story.chapters" :key="chapter.id">
         <strong>{{ chapter.title }}</strong>
         <p>{{ chapter.prompt }}</p>
-        <span>{{ chapter.completed ? '已完成' : chapter.id === 'review' ? '完成新的复习后解锁' : '可以自己记录' }}</span>
+        <span>{{
+          chapter.completed
+            ? '已完成'
+            : chapter.id === 'review'
+              ? '完成新的复习后解锁'
+              : '可以自己记录'
+        }}</span>
         <AppButton
           v-if="!chapter.completed && chapter.id === 'review'"
           size="sm"
@@ -36,11 +44,7 @@ function reportChapter(chapter: 'review' | 'expression' | 'discovery') {
         >
           去复习
         </AppButton>
-        <button
-          v-else-if="!chapter.completed"
-          type="button"
-          @click="reportChapter(chapter.id)"
-        >
+        <button v-else-if="!chapter.completed" type="button" @click="reportChapter(chapter.id)">
           我完成了
         </button>
       </li>
@@ -49,10 +53,38 @@ function reportChapter(chapter: 'review' | 'expression' | 'discovery') {
 </template>
 
 <style scoped>
-.pet-story-card { display: grid; gap: 1rem; padding: 1rem; border: 1px solid var(--color-primary-200, #b9d8ff); border-radius: 1rem; }
-.pet-story-card header { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-.pet-story-card h2, .pet-story-card p { margin: 0; }
-.pet-story-card ol { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
-.pet-story-card li { padding: .75rem; background: var(--color-primary-50, #f1f8ff); border-radius: .5rem; }
-.pet-story-card li span { display: block; margin: .35rem 0; color: var(--color-text-secondary, #4b5563); }
+.pet-story-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-primary-200, #b9d8ff);
+  border-radius: 1rem;
+}
+.pet-story-card header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pet-story-card h2,
+.pet-story-card p {
+  margin: 0;
+}
+.pet-story-card ol {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pet-story-card li {
+  padding: 0.75rem;
+  background: var(--color-primary-50, #f1f8ff);
+  border-radius: 0.5rem;
+}
+.pet-story-card li span {
+  display: block;
+  margin: 0.35rem 0;
+  color: var(--color-text-secondary, #4b5563);
+}
 </style>

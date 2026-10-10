@@ -1,0 +1,620 @@
+{
+  "title": "沪教牛津英语五年级上册（2022新版）",
+  "publisher": "上海教育出版社",
+  "sourceNote": "按用户提供的五年级上册双语文本整理，年份和页码沿用来稿，未对照出版社原书逐页核验。保留词汇、音标、Reading、中文翻译、Grammar、语音栏目及Project；语音栏目仅提供字母组合或栏目名称，未提供原版示范音频。配套题单独收录，基础题和口语提示为项目原创。",
+  "sourceSha256": "228a008c881324e9e4e83c7ec6e6ecb13ef45de58c2dcc09e9f4aea05086a83d",
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 What do we do at the weekend?",
+      "page": 1,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "go jogging",
+          "phonetic": "/ɡəʊ ˈdʒɒɡɪŋ/",
+          "chinese": "慢跑"
+        },
+        {
+          "english": "go fishing",
+          "phonetic": "/ɡəʊ ˈfɪʃɪŋ/",
+          "chinese": "钓鱼"
+        },
+        {
+          "english": "do chores",
+          "phonetic": "/duː tʃɔːz/",
+          "chinese": "做家务"
+        },
+        {
+          "english": "watch TV",
+          "phonetic": "/wɒtʃ ˌtiː ˈviː/",
+          "chinese": "看电视"
+        },
+        {
+          "english": "play with friends",
+          "phonetic": "/pleɪ wɪð frendz/",
+          "chinese": "和朋友玩耍"
+        },
+        {
+          "english": "have a picnic",
+          "phonetic": "/hæv ə ˈpɪknɪk/",
+          "chinese": "野餐"
+        }
+      ],
+      "aliases": [],
+      "sounds": "c, g",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Weekend plans",
+          "english": "People do fun activities at the weekend.\nWhat are these children going to do this weekend?\nThis weekend, I'm going to go jogging with my family in the park.\nWe must get up early on Sunday morning and warm up. It's going to be fun!\nThis weekend, my dad and I are going to go fishing at Blue Lake.\nI can't wait to catch more fish than my dad.\nI'm going to have a picnic with my family this weekend.\nWe can fly a kite in the park. Hurry up, Saturday!\nToday is a busy day! We're all going to do chores.",
+          "chinese": "人们在周末开展有趣的活动。\n这些孩子这个周末打算做什么？\n这个周末，我打算和家人去公园慢跑。\n周日早上我们必须早起热身。一定会很好玩！\n这个周末，我和爸爸打算去蓝湖钓鱼。\n我迫不及待想钓比爸爸更多的鱼。\n这个周末我要和家人去野餐。\n我们可以在公园里放风筝。快点到来吧，星期六！\n今天会很忙碌！我们都要做家务。"
+        }
+      ],
+      "sentencePattern": "I am / He is / She is / We are going to …（一般将来时：打算、将要做）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I am going to go jogging.",
+      "questions": [
+        {
+          "stem": "“go jogging”在本单元中的意思是什么？",
+          "options": ["慢跑", "钓鱼", "做家务"],
+          "correctIndex": 0,
+          "explanation": "本单元中 go jogging 表示“慢跑”。"
+        },
+        {
+          "stem": "They ____ going to have a picnic.",
+          "options": ["are", "am", "is"],
+          "correctIndex": 0,
+          "explanation": "They 对应 are，使用 are going to + 动词原形。"
+        },
+        {
+          "stem": "根据课文，孩子和爸爸要到哪里钓鱼？",
+          "options": ["Blue Lake.", "Guilin.", "Jiuzhaigou."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Blue Lake."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 How do we stay healthy?",
+      "page": 13,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "do exercise",
+          "phonetic": "/duː ˈeksəsaɪz/",
+          "chinese": "锻炼身体"
+        },
+        {
+          "english": "eat healthy food",
+          "phonetic": "/iːt ˈhelθi fuːd/",
+          "chinese": "吃健康食物"
+        },
+        {
+          "english": "drink a lot of water",
+          "phonetic": "/drɪŋk ə lɒt ɒv ˈwɔːtə(r)/",
+          "chinese": "大量喝水"
+        },
+        {
+          "english": "get enough sleep",
+          "phonetic": "/ɡet ɪˈnʌf sliːp/",
+          "chinese": "保证充足睡眠"
+        }
+      ],
+      "aliases": [],
+      "sounds": "th",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Healthy or not?",
+          "english": "Healthy children stay strong.\nWhat are you going to do to stay healthy?\nI am going to do exercise every day.\nI am going to eat healthy food. Fruit and vegetables are good for me.\nI am going to drink a lot of water.\nI am going to get enough sleep.\nWhat is he going to do?\nHe is going to play computer games all day. That’s not healthy.\nWhat is she going to do?\nShe is going to eat too much sweet food. That’s not healthy.",
+          "chinese": "健康的孩子身体强壮。\n你打算做些什么来保持健康？\n我打算每天锻炼身体。\n我打算吃健康食物。水果和蔬菜对我有益。\n我打算多喝白开水。\n我打算保证充足睡眠。\n他打算做什么？\n他打算一整天玩电脑游戏。这不健康。\n她打算做什么？\n她打算吃太多甜食。这不健康。"
+        }
+      ],
+      "sentencePattern": "What are you going to do? We are / I am going to …\nWhat is he / she going to do? He / She is going to …",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I am going to do exercise.",
+      "questions": [
+        {
+          "stem": "“do exercise”在本单元中的意思是什么？",
+          "options": ["锻炼身体", "吃健康食物", "大量喝水"],
+          "correctIndex": 0,
+          "explanation": "本单元中 do exercise 表示“锻炼身体”。"
+        },
+        {
+          "stem": "What ____ she going to do?",
+          "options": ["is", "are", "am"],
+          "correctIndex": 0,
+          "explanation": "she 对应 is，询问计划用 What is she going to do?"
+        },
+        {
+          "stem": "根据课文，哪一种计划有助于保持健康？",
+          "options": [
+            "Get enough sleep.",
+            "Play computer games all day.",
+            "Eat too much sweet food."
+          ],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Get enough sleep."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What do you know about different countries?",
+      "page": 25,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "China",
+          "phonetic": "/ˈtʃaɪnə/",
+          "chinese": "中国"
+        },
+        {
+          "english": "France",
+          "phonetic": "/frɑːns/",
+          "chinese": "法国"
+        },
+        {
+          "english": "UK",
+          "phonetic": "/ˌjuː ˈkeɪ/",
+          "chinese": "英国"
+        },
+        {
+          "english": "north",
+          "phonetic": "/nɔːθ/",
+          "chinese": "北方"
+        },
+        {
+          "english": "south",
+          "phonetic": "/saʊθ/",
+          "chinese": "南方"
+        },
+        {
+          "english": "east",
+          "phonetic": "/iːst/",
+          "chinese": "东方"
+        },
+        {
+          "english": "west",
+          "phonetic": "/west/",
+          "chinese": "西方"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ss",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Countries around the world",
+          "english": "Look at the map of the world.\nChina is in the east of Asia.\nThe UK is in the west of Europe.\nFrance is also in Europe. It is to the south of the UK.\nCanada is in the north of North America.\nAustralia is in the south of the world.\nDifferent countries have different beautiful places.",
+          "chinese": "看这张世界地图。\n中国位于亚洲东部。\n英国位于欧洲西部。\n法国也在欧洲。它在英国的南边。\n加拿大位于北美洲北部。\n澳大利亚在南半球。\n不同的国家有着不同美丽的地方。"
+        }
+      ],
+      "sentencePattern": "China is in the east of Asia.（方位表达：in the +方位 + of…）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "China is in the east of Asia.",
+      "questions": [
+        {
+          "stem": "“China”在本单元中的意思是什么？",
+          "options": ["中国", "法国", "英国"],
+          "correctIndex": 0,
+          "explanation": "本单元中 China 表示“中国”。"
+        },
+        {
+          "stem": "China is ____ the east of Asia.",
+          "options": ["in", "to", "on"],
+          "correctIndex": 0,
+          "explanation": "表达位于某区域内部的方位时使用 in the east of…。"
+        },
+        {
+          "stem": "根据课文，哪个国家位于英国南边？",
+          "options": ["France.", "Canada.", "China."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 France."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 What’s interesting about holidays?",
+      "page": 37,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "mountain",
+          "phonetic": "/ˈmaʊntən/",
+          "chinese": "高山"
+        },
+        {
+          "english": "cave",
+          "phonetic": "/keɪv/",
+          "chinese": "洞穴"
+        },
+        {
+          "english": "waterfall",
+          "phonetic": "/ˈwɔːtəfɔːl/",
+          "chinese": "瀑布"
+        },
+        {
+          "english": "hotel",
+          "phonetic": "/həʊˈtel/",
+          "chinese": "酒店"
+        }
+      ],
+      "aliases": [],
+      "sounds": "sh, ch",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "A holiday plan",
+          "english": "The summer holiday is coming.\nHow will you spend your holiday?\nWhere will you go?\nI will go to Guilin. I will see beautiful mountains and rivers.\nI will go to Huangshan. I will visit the mountains and see strange rocks.\nI will go to Jiuzhaigou. I will see waterfalls.\nI will stay in a nice hotel.\nI will take photos. I will have great fun!",
+          "chinese": "暑假快要来了。\n你会如何度过假期？\n你要去哪里？\n我会去桂林。我会欣赏秀美的山水。\n我会去黄山。我游览群山，观赏奇石。\n我会去九寨沟。我去看瀑布。\n我会住在一家舒适的酒店里。\n我会拍照。我会玩得非常开心！"
+        }
+      ],
+      "sentencePattern": "How will you …? Where will you …? What will you …? I will …（will 一般将来时）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "I will visit the waterfall.",
+      "questions": [
+        {
+          "stem": "“mountain”在本单元中的意思是什么？",
+          "options": ["高山", "洞穴", "瀑布"],
+          "correctIndex": 0,
+          "explanation": "本单元中 mountain 表示“高山”。"
+        },
+        {
+          "stem": "I will ____ the mountains.",
+          "options": ["visit", "visits", "visiting"],
+          "correctIndex": 0,
+          "explanation": "will 后接动词原形 visit。"
+        },
+        {
+          "stem": "根据课文，去九寨沟要看什么？",
+          "options": ["Waterfalls.", "Computer games.", "Mooncakes."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Waterfalls."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 What are living things?",
+      "page": 49,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "get sunlight",
+          "phonetic": "/ɡet ˈsʌnlaɪt/",
+          "chinese": "获取阳光"
+        },
+        {
+          "english": "get food and water",
+          "phonetic": "/ɡet fuːd ənd ˈwɔːtə(r)/",
+          "chinese": "获取食物和水"
+        },
+        {
+          "english": "grow",
+          "phonetic": "/ɡrəʊ/",
+          "chinese": "生长"
+        },
+        {
+          "english": "change",
+          "phonetic": "/tʃeɪndʒ/",
+          "chinese": "变化"
+        },
+        {
+          "english": "move",
+          "phonetic": "/muːv/",
+          "chinese": "移动"
+        }
+      ],
+      "aliases": [],
+      "sounds": "w, wh",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Living and non-living things",
+          "english": "Living things are plants and animals.\nLiving things get sunlight, food and water.\nThey grow. They change. They can move.\nA bird is a living thing. It can fly. It grows.\nA tree is a living thing. It grows. It gets sunlight.\nA rock is not a living thing. It does not grow. It does not move.\nA toy car is not a living thing. It cannot grow or change.",
+          "chinese": "生物包括植物和动物。\n生物获取阳光、食物和水。\n它们会生长、变化，能够移动。\n小鸟是生物。它会飞，会长大。\n大树是生物。它会生长，获取阳光。\n石头不是生物。它不会生长，不会移动。\n玩具汽车不是生物。它不能生长，也不会发生变化。"
+        }
+      ],
+      "sentencePattern": "and, or, but 连词",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "A tree can grow.",
+      "questions": [
+        {
+          "stem": "“get sunlight”在本单元中的意思是什么？",
+          "options": ["获取阳光", "获取食物和水", "生长"],
+          "correctIndex": 0,
+          "explanation": "本单元中 get sunlight 表示“获取阳光”。"
+        },
+        {
+          "stem": "The bird can fly, ____ the rock cannot.",
+          "options": ["but", "and", "or"],
+          "correctIndex": 0,
+          "explanation": "but 连接对比的信息。"
+        },
+        {
+          "stem": "根据课文，下列哪一个是生物？",
+          "options": ["A tree.", "A rock.", "A toy car."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 A tree."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 Why should we take care of the Earth?",
+      "page": 61,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "smoke",
+          "phonetic": "/sməʊk/",
+          "chinese": "烟雾"
+        },
+        {
+          "english": "dirty",
+          "phonetic": "/ˈdɜːti/",
+          "chinese": "脏的"
+        },
+        {
+          "english": "rubbish",
+          "phonetic": "/ˈrʌbɪʃ/",
+          "chinese": "垃圾"
+        },
+        {
+          "english": "recycle",
+          "phonetic": "/ˌriːˈsaɪkl/",
+          "chinese": "回收利用"
+        },
+        {
+          "english": "reduce",
+          "phonetic": "/rɪˈdjuːs/",
+          "chinese": "减少"
+        }
+      ],
+      "aliases": [],
+      "sounds": "ng, nk",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Natural resources",
+          "english": "The Earth gives us many natural resources.\nWe get water, wood and coal from the Earth.\nBut we make the Earth dirty. Smoke and rubbish are bad for it.\nWe should take care of the Earth.\nWe should reduce waste.\nWe should recycle paper and plastic.\nWe shouldn’t throw rubbish everywhere.\nWe shouldn’t cut down too many trees.",
+          "chinese": "地球给我们提供很多自然资源。\n我们从地球上获取水、木材和煤炭。\n但是我们把地球弄脏了。烟雾和垃圾对地球有害。\n我们应当爱护地球。\n我们应当减少浪费。\n我们应当回收纸张和塑料。\n我们不应该到处乱扔垃圾。\n我们不应该砍伐太多树木。"
+        }
+      ],
+      "sentencePattern": "We should … We shouldn’t …（should应该 / shouldn’t不应该）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "We should reduce waste.",
+      "questions": [
+        {
+          "stem": "“smoke”在本单元中的意思是什么？",
+          "options": ["烟雾", "脏的", "垃圾"],
+          "correctIndex": 0,
+          "explanation": "本单元中 smoke 表示“烟雾”。"
+        },
+        {
+          "stem": "We ____ throw rubbish everywhere.",
+          "options": ["shouldn’t", "should", "are"],
+          "correctIndex": 0,
+          "explanation": "shouldn’t 表示不应该，用来劝阻乱扔垃圾。"
+        },
+        {
+          "stem": "根据课文，我们应该回收哪些材料？",
+          "options": ["Paper and plastic.", "Smoke and dirty water.", "Coal and food."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Paper and plastic."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Unit 7 How do we celebrate festivals?",
+      "page": 73,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "Spring Festival",
+          "phonetic": "/sprɪŋ ˈfestɪvl/",
+          "chinese": "春节"
+        },
+        {
+          "english": "Lantern Festival",
+          "phonetic": "/ˈlæntən ˈfestɪvl/",
+          "chinese": "元宵节"
+        },
+        {
+          "english": "Dragon Boat Festival",
+          "phonetic": "/ˈdræɡən bəʊt ˈfestɪvl/",
+          "chinese": "端午节"
+        },
+        {
+          "english": "Mid-Autumn Festival",
+          "phonetic": "/ˌmɪd ˈɔːtəm ˈfestɪvl/",
+          "chinese": "中秋节"
+        }
+      ],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "句子重音 Sentence stress",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "Important festivals",
+          "english": "We have many important festivals in China.\nAt the Spring Festival, we have a big family dinner.\nWe visit relatives.\nAt the Lantern Festival, we watch lanterns and eat tangyuan.\nAt the Dragon Boat Festival, we have dragon boat races and eat zongzi.\nAt the Mid-Autumn Festival, we look at the moon and eat mooncakes.\nWe will have the Mid-Autumn Festival in one month.",
+          "chinese": "在中国，我们有很多重要节日。\n春节，我们吃丰盛的年夜饭，走亲访友。\n元宵节，我们赏花灯，吃汤圆。\n端午节，我们举办龙舟赛，吃粽子。\n中秋节，我们赏月，吃月饼。\n再过一个月我们就要过中秋节了。"
+        }
+      ],
+      "sentencePattern": "Time words for future: in one hour, next month …（将来时间短语）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "We will celebrate the Spring Festival.",
+      "questions": [
+        {
+          "stem": "“Spring Festival”在本单元中的意思是什么？",
+          "options": ["春节", "元宵节", "端午节"],
+          "correctIndex": 0,
+          "explanation": "本单元中 Spring Festival 表示“春节”。"
+        },
+        {
+          "stem": "We will have the festival ____ one month.",
+          "options": ["in", "at", "on"],
+          "correctIndex": 0,
+          "explanation": "in one month 表示一个月后。"
+        },
+        {
+          "stem": "根据课文，端午节吃什么？",
+          "options": ["Zongzi.", "Mooncakes.", "Tangyuan."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Zongzi."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Unit 8 How does music make us feel?",
+      "page": 85,
+      "kind": "unit",
+      "words": [
+        {
+          "english": "fast",
+          "phonetic": "/fɑːst/",
+          "chinese": "快的"
+        },
+        {
+          "english": "slow",
+          "phonetic": "/sləʊ/",
+          "chinese": "慢的"
+        },
+        {
+          "english": "excited",
+          "phonetic": "/ɪkˈsaɪtɪd/",
+          "chinese": "兴奋的"
+        },
+        {
+          "english": "unhappy",
+          "phonetic": "/ʌnˈhæpi/",
+          "chinese": "不开心的"
+        }
+      ],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "失去爆破 Loss of plosion",
+      "sections": [
+        {
+          "kind": "story",
+          "title": "How music makes us feel",
+          "english": "Music can make us feel different ways.\nFast music can make us feel excited.\nLoud drums and fast music make people excited.\nSlow music can make us feel quiet and relaxed.\nSoft piano music is slow. It makes me calm.\nSad music can make us feel unhappy.\nHappy music can make us feel glad.\nDifferent music brings different feelings.",
+          "chinese": "音乐可以带给我们不同的感受。\n节奏快的音乐能让我们感到兴奋。\n响亮的鼓点和快节奏音乐使人兴奋。\n舒缓的音乐可以让我们安静放松。\n轻柔的钢琴曲节奏缓慢，使我平静。\n悲伤的音乐能让我们感到难过。\n欢快的音乐能让我们感到愉悦。\n不同的音乐带来不一样的感受。"
+        }
+      ],
+      "sentencePattern": "Review（本册全部句型总复习）",
+      "sentencePrompt": "用本单元句型和同伴交流。",
+      "sentenceAnswer": "Fast music makes me excited.",
+      "questions": [
+        {
+          "stem": "“fast”在本单元中的意思是什么？",
+          "options": ["快的", "慢的", "兴奋的"],
+          "correctIndex": 0,
+          "explanation": "本单元中 fast 表示“快的”。"
+        },
+        {
+          "stem": "根据课文，Fast music can make us feel ____.",
+          "options": ["excited", "unhappy", "slow"],
+          "correctIndex": 0,
+          "explanation": "课文中 Fast music can make us feel excited. 表示快节奏音乐让人兴奋。"
+        },
+        {
+          "stem": "根据课文，哪一种音乐让说话者感到平静？",
+          "options": ["Soft piano music.", "Loud drums.", "Fast music."],
+          "correctIndex": 0,
+          "explanation": "根据本单元 Reading，答案是 Soft piano music."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Project 1 Make a holiday poster",
+      "page": 97,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a holiday poster",
+          "english": "Make a holiday poster",
+          "chinese": "制作假期海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作假期海报，用已学词句向同伴介绍。",
+      "sentenceAnswer": "I will visit the mountains.",
+      "questions": []
+    },
+    {
+      "number": 10,
+      "title": "Project 2 Make a poster about protecting the Earth",
+      "page": 99,
+      "kind": "project",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Make a poster about protecting the Earth",
+          "english": "Make a poster about protecting the Earth",
+          "chinese": "制作保护地球海报"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "制作保护地球海报，用已学词句向同伴介绍。",
+      "sentenceAnswer": "We should reduce waste.",
+      "questions": []
+    },
+    {
+      "number": 11,
+      "title": "本册综合小练习",
+      "page": 0,
+      "kind": "review",
+      "words": [],
+      "aliases": [],
+      "sounds": "",
+      "intonation": "",
+      "speechFeature": "",
+      "sections": [
+        {
+          "kind": "review",
+          "title": "本册综合小练习",
+          "english": "",
+          "chinese": "复习周末计划、健康习惯、国家方位、假期、连词、环保、节日和音乐感受。在配套练习入口完成所提供的综合小练习。"
+        }
+      ],
+      "sentencePattern": "",
+      "sentencePrompt": "完成综合练习，核对答案并回顾相关单元。",
+      "sentenceAnswer": "",
+      "questions": []
+    }
+  ]
+}

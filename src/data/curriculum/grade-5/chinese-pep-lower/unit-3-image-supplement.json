@@ -1,0 +1,326 @@
+{
+  "updatedAt": "2026-10-10T04:24:06.807676+00:00",
+  "editionYear": 2019,
+  "sourceSha256": "d7c72ff36f568dc43f8f018e043e217c8141329774aa7961edabd3dbbb3e04d5",
+  "sourceNote": "用户10张教材页面原图及完整文字转录，图片按照用户指定分组。裁剪仅提取原图内容，不生成或修补书法、古文字。",
+  "sourceImages": [
+    {
+      "page": 1,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-01.png",
+      "sha256": "600b8dbd4884d6b788686761e9a7524c178c3a556c51be996fb9c9ecdfce335e"
+    },
+    {
+      "page": 2,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-02.png",
+      "sha256": "fb2b58df755ee8f9672cf5857a09fa7b50c883a21559a4d1dabc3c104de61dc8"
+    },
+    {
+      "page": 3,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-03.png",
+      "sha256": "4f5bb79514bb0ac16a01cff09e1e19a6c26fa54742d2fa29e9b396135218ef8c"
+    },
+    {
+      "page": 4,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-04.png",
+      "sha256": "e456701dc3fc8ba686e17712cf1ec47a3ae55c4b985ed6a966ac6be587baca91"
+    },
+    {
+      "page": 5,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-05.png",
+      "sha256": "924f7a6d85d2f3418c7297c2d0e3cf6dd14e2632eecd9773251cb58e643ea528"
+    },
+    {
+      "page": 6,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-06.png",
+      "sha256": "e8b1d04d7bce1db79d8758948fa018a468e56c09aa8893ee78875577c91d6a59"
+    },
+    {
+      "page": 7,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-07.png",
+      "sha256": "28b7ba9f34a8e65cc47d46eb6cb18276337df8685f0d7b28334a634e0a699d3c"
+    },
+    {
+      "page": 8,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-08.png",
+      "sha256": "a36afab3c822f69ddde4b5fde16609eb5e699ccbd7689b9822563f212130af99"
+    },
+    {
+      "page": 9,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-09.png",
+      "sha256": "49b2a11196c0e4a01b5bea769135ea9212f8300d1dfd5b072a6e02b6552c129b"
+    },
+    {
+      "page": 10,
+      "path": "src/data/curriculum/grade-5/chinese-pep-lower/unit-3-source-images/page-10.png",
+      "sha256": "f045a3281f3868f6c8224f1f54d5bdec4c260ec6c376622fb096993f35100be8"
+    }
+  ],
+  "assets": [
+    {
+      "key": "riddle-person-tree",
+      "page": 2,
+      "cropBox": [73, 301, 308, 567],
+      "ownerKey": "integrated-fun",
+      "beforeText": "⑤ 图片字谜",
+      "title": "字谜⑤：戴草帽的人倚着树",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_RIDDLE_PERSON_TREE",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/riddle-person-tree.png",
+      "width": 235,
+      "height": 266,
+      "sha256": "8e026e685e73f96c2bfe0b5b281bedb671eeb0eb5520bde2e7284d9e675aef56"
+    },
+    {
+      "key": "riddle-clock",
+      "page": 2,
+      "cropBox": [370, 327, 552, 512],
+      "ownerKey": "integrated-fun",
+      "beforeText": "⑥ 图片字谜",
+      "title": "字谜⑥：时针和分针指向12的钟面",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_RIDDLE_CLOCK",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/riddle-clock.png",
+      "width": 182,
+      "height": 185,
+      "sha256": "eb03586eff856da22a20a398f96a0ea744499df5b105c8b115212e89bd331080"
+    },
+    {
+      "key": "pipa-instrument",
+      "page": 3,
+      "cropBox": [105, 603, 342, 788],
+      "ownerKey": "integrated-fun",
+      "beforeText": "4 “枇杷”和“琵琶”",
+      "title": "琵琶：拨弦乐器",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_PIPA_INSTRUMENT",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/pipa-instrument.png",
+      "width": 237,
+      "height": 185,
+      "sha256": "339781b60a8af69d0f313a2a0f64be1262471b95d8e0ef2957749019f4c0f5ce"
+    },
+    {
+      "key": "loquat-fruit",
+      "page": 3,
+      "cropBox": [391, 610, 501, 744],
+      "ownerKey": "integrated-fun",
+      "beforeText": "4 “枇杷”和“琵琶”",
+      "title": "枇杷：果实",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_LOQUAT_FRUIT",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/loquat-fruit.png",
+      "width": 110,
+      "height": 134,
+      "sha256": "c996079cd079668290008215afa38f160ba3400a1bfc8481a8de344be7398669"
+    },
+    {
+      "key": "xing-glyphs",
+      "page": 4,
+      "cropBox": [80, 116, 128, 143],
+      "ownerKey": "integrated-fun",
+      "beforeText": "（“星”的古文字",
+      "title": "“星”的古文字字形",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_XING_GLYPHS",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/xing-glyphs.png",
+      "width": 48,
+      "height": 27,
+      "sha256": "b27ace562848e2166c4a11690f8ba7c29e598456f0c118dbb510169e61f55221"
+    },
+    {
+      "key": "feng-glyphs",
+      "page": 4,
+      "cropBox": [80, 244, 128, 274],
+      "ownerKey": "integrated-fun",
+      "beforeText": "（“凤”的古文字",
+      "title": "“凤”的古文字字形",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_FENG_GLYPHS",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/feng-glyphs.png",
+      "width": 48,
+      "height": 30,
+      "sha256": "5d8924116b4c204512e0b4387aabd61e0e02cacf83dfafe74edf39598e30c9e8"
+    },
+    {
+      "key": "shu-glyphs",
+      "page": 4,
+      "cropBox": [80, 512, 129, 540],
+      "ownerKey": "integrated-fun",
+      "beforeText": "（“蜀”的古文字",
+      "title": "“蜀”的古文字字形",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_SHU_GLYPHS",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/shu-glyphs.png",
+      "width": 49,
+      "height": 28,
+      "sha256": "0143a0e71932b3df1aac7efd2b77cbf2a06546bfb8007662b37d621681a2624f"
+    },
+    {
+      "key": "ji-glyphs",
+      "page": 4,
+      "cropBox": [80, 642, 132, 670],
+      "ownerKey": "integrated-fun",
+      "beforeText": "（“祭”的古文字",
+      "title": "“祭”的古文字字形",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_JI_GLYPHS",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/ji-glyphs.png",
+      "width": 52,
+      "height": 28,
+      "sha256": "1ef1398aea1003e087fac3221c5fb4de267a8b3a361776fb52f9c1b590124984"
+    },
+    {
+      "key": "papercut",
+      "page": 5,
+      "cropBox": [108, 150, 230, 320],
+      "ownerKey": "integrated-love",
+      "beforeText": "汉字艺术：",
+      "title": "汉字艺术：剪纸",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_PAPERCUT",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/papercut.png",
+      "width": 122,
+      "height": 170,
+      "sha256": "ed01776966c978021f38f5a8ac6d437d9eba8507c4aff5bbc1bf53d12addaeb1"
+    },
+    {
+      "key": "seal",
+      "page": 5,
+      "cropBox": [429, 177, 572, 320],
+      "ownerKey": "integrated-love",
+      "beforeText": "汉字艺术：",
+      "title": "汉字艺术：印章",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_SEAL",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/seal.png",
+      "width": 143,
+      "height": 143,
+      "sha256": "2fce98ee1e351690a4f632f7de0b1b02e1f7950c900dd9c1389e306ebb6c31a9"
+    },
+    {
+      "key": "fan-calligraphy",
+      "page": 5,
+      "cropBox": [190, 320, 449, 443],
+      "ownerKey": "integrated-love",
+      "beforeText": "汉字艺术：",
+      "title": "汉字艺术：扇面书法",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_FAN_CALLIGRAPHY",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/fan-calligraphy.png",
+      "width": 259,
+      "height": 123,
+      "sha256": "6901bc0c4a374242edb4302a4dd025cf1897d3c88486797e77c545826bb8dd71"
+    },
+    {
+      "key": "script-evolution",
+      "page": 6,
+      "cropBox": [53, 71, 524, 375],
+      "ownerKey": "integrated-love",
+      "beforeText": "字形演变表",
+      "title": "日、月、车、马的甲骨文、金文、小篆、隶书、楷书字形表",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_SCRIPT_EVOLUTION",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/script-evolution.png",
+      "width": 471,
+      "height": 304,
+      "sha256": "5327b5629668edcefdc5f2edb0128891d9951788d42d7a2eeb6ec97e92f56288"
+    },
+    {
+      "key": "tian-glyph-excerpt",
+      "page": 6,
+      "cropBox": [36, 488, 558, 566],
+      "ownerKey": "integrated-love",
+      "beforeText": "甲骨文是刻",
+      "title": "甲骨文“田”的多种字形（含原段文字）",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_TIAN_GLYPH_EXCERPT",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/tian-glyph-excerpt.png",
+      "width": 522,
+      "height": 78,
+      "sha256": "c56e96283d49a72ca6ae5764c9e909d9df7b54cf8cd151bbf6d202ef5bcede69"
+    },
+    {
+      "key": "che-glyph-excerpt",
+      "page": 6,
+      "cropBox": [34, 619, 566, 675],
+      "ownerKey": "integrated-love",
+      "beforeText": "金文是铸刻",
+      "title": "金文“车”的繁简字形（含原段文字）",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_CHE_GLYPH_EXCERPT",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/che-glyph-excerpt.png",
+      "width": 532,
+      "height": 56,
+      "sha256": "5811f9623e28247b2d9cfdfe5fc414e81ee4f2fd911973ba3459850904ec637e"
+    },
+    {
+      "key": "oracle-examples",
+      "page": 7,
+      "cropBox": [118, 586, 505, 704],
+      "ownerKey": "integrated-love",
+      "beforeText": "甲骨文字形示例",
+      "title": "甲骨文字形：乘、北、井、册",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_ORACLE_EXAMPLES",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/oracle-examples.png",
+      "width": 387,
+      "height": 118,
+      "sha256": "0ccb443517931bd46416ad486a771a81e0b9c85b6722df57b2cb5f1268c9f622"
+    },
+    {
+      "key": "zhiyong-kaishu",
+      "page": 8,
+      "cropBox": [31, 73, 188, 339],
+      "ownerKey": "integrated-love",
+      "beforeText": "南朝智永楷书",
+      "title": "南朝智永楷书《千字文》（局部）",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_ZHIYONG_KAISHU",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/zhiyong-kaishu.png",
+      "width": 157,
+      "height": 266,
+      "sha256": "c0d33e04c25c0c434b8b339311b87a3102ebbce33a86e9e68cefbc70e00f1434"
+    },
+    {
+      "key": "huaisu-caoshu",
+      "page": 8,
+      "cropBox": [208, 74, 365, 339],
+      "ownerKey": "integrated-love",
+      "beforeText": "唐代怀素草书",
+      "title": "唐代怀素草书《千字文》（局部）",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_HUAISU_CAOSHU",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/huaisu-caoshu.png",
+      "width": 157,
+      "height": 265,
+      "sha256": "2788007c0d2d278efd8195a45419f4520f6ea3fbe7e80831c21dba37b825f6e6"
+    },
+    {
+      "key": "wenzhengming-xingcao",
+      "page": 8,
+      "cropBox": [385, 73, 579, 339],
+      "ownerKey": "integrated-love",
+      "beforeText": "明代文征明行草",
+      "title": "明代文征明行草《千字文》（局部）",
+      "mediaAssetId": "G5_PEP_CHINESE_S2_U3_WENZHENGMING_XINGCAO",
+      "url": "/curriculum/grade-5/chinese-pep-lower/unit-3/wenzhengming-xingcao.png",
+      "width": 194,
+      "height": 266,
+      "sha256": "1a58a5bd2ec77713efd1a427ccea64ff60e9dda159e87d58a34e36ca5f1c39c4"
+    }
+  ],
+  "lessons": [
+    {
+      "unit": 3,
+      "key": "integrated-fun",
+      "title": "汉字真有趣",
+      "kind": "integrated",
+      "number": null,
+      "optional": false,
+      "text": "活动建议\n自由组成小组，讨论可以从哪些方面了解汉字。从下面的内容中选择一项，制订活动计划，根据计划开展活动。“阅读材料”供参考。\n\n搜集字谜，开展猜字谜活动。\n\n搜集体现汉字特点的古诗、歇后语、对联、故事等资料，办一次趣味汉字交流会。\n\n搜集资料\n\n查找图书\n1. 在学校阅览室、图书馆或书店，可以按类别找书。如，搜集汉字故事，可以到语言类或文化类的书架上去找。\n2. 书名、目录、内容简介等，能帮助我们大致判断书中是否有自己需要的内容。\n\n网络搜索\n1. 在网上搜集资料，关键词很重要。如，搜集汉字故事，可以检索关键词“汉字故事”，不能仅仅检索“故事”。\n2. 检索后的条目很多，可以根据题目、显示的内容等，判断哪些是需要的资料。\n\n请教别人\n1. 想想谁可能会有自己需要的资料。\n2. 想好问题，请教合适的人。\n\n阅读材料\n\n1 字谜七则\n\n① 画时圆，写时方。冬时短，夏时长。\n\n② 一块土，两人站，中间隔条线，两人看不见。\n\n③ 有人不是我，有马飞跑过，有水能养鱼，有土庄稼活。\n\n④ 右边有，左边无。后面有，前面无。哥哥有，弟弟无。周家有，李家无。\n\n⑤ 图片字谜：一位戴草帽的人倚着树。\n\n⑥ 图片字谜：钟面上的时针、分针都指向12。\n\n⑦ 相传唐伯虎曾在街头卖画。一天，他挂出一幅水墨画，上面画着一只黑狗，十分可爱。唐伯虎对人们说：“这是一则字谜，想购买者，需要付三十二两银子，如果猜中谜语，就分文不收。”大半天过去了，无人猜中。这时，有一位年轻人说：“我猜中了。”唐伯虎请他说出谜底，他却笑而不答，取下画来便走。\n\n唐伯虎望着这位年轻人的背影，哈哈一笑，说：“猜中了！他猜中了！”\n\n你能猜出这是什么字吗？\n\n2 门内添“活”字\n\n传说东汉时的杨修是猜谜高手。有一次，曹操命人造一座花园，花园造好之后，曹操去看，也没说好坏，随手在花园的门上写了一个“活”字。众人不解其意，于是去请教杨修。杨修心领神会，对众人说：“门内添‘活’字，乃‘阔’字也，丞相是嫌你们把花园的门造得太宽大了。”众人听后便把花园的门重修了，曹操见后非常高兴。\n\n3 有意思的谐音\n\n外甥打灯笼——照旧（舅）\n梁山泊的军师——无（吴）用\n四月的冰河——开动（冻）了\n咸菜烧豆腐——有言（盐）在先\n隔着门缝吹喇叭——名（鸣）声在外\n\n4 “枇杷”和“琵琶”\n\n古时候，有人送枇杷给朋友，可他在礼单上把“枇杷”错写成了“琵琶”。朋友笑道：“‘枇杷’不是此‘琵琶’，只恨当年识字差！”旁边有人应声道：“若使琵琶能结果，满城箫管尽开花。”\n\n5 有趣的形声字\n\n在汉字王国里，形声字是重要的一员。数千年来，我们的祖先不断地创造形声字，光是在甲骨文中，就有许多象形字向形声字演变的例子。\n\n（“星”的古文字字形见配图）这是星星的“星”。天上三光日月星，在甲骨文里，日和月都只用一个形体来表示，星星的特点是数量多，所以一开始用三个相同的形体来表示，以便跟日、月相区别。但问题是，这些简单的形体能表示的事物太多了，三块石头、三个拳头……谁说一定就是星星呢？于是，古人就在原来的字形上加了一个声符“生”。强化了字音，就能把“星”和其他事物区分开来了。\n\n（“凤”的古文字字形见配图）这是凤凰的“凤”，繁体字写作“鳳”。凤凰是古代传说中的神鸟，它的样子有点儿像今天的孔雀，头上有冠，身后拖着漂亮的长尾巴。尽管如此，表示“凤”与表示其他鸟的字形也较难分清。古人想出了办法：在原来的字形上增加了一个部件“凡”，用来标示字音。这样一来，“凤”字有了声符“凡”，原来的象形字就变成了形符，是不是象凤凰之形，已经变得不重要了。\n\n“星”和“凤”有共同的特点：它们原来都是象形字，有着鲜明的图画文字特征。汉字毕竟不是绘画，而是文字符号，字形经过演变，象形的特征一旦弱化，就不容易辨认出来了。因此，古人在象形字的基础上增加声符，创造了新的形声字。\n\n还有一种形声字，是在象形字的基础上增加形符创造出来的。\n\n（“蜀”的古文字字形见配图）你猜到了吗？这是蜀国的“蜀”。相传古蜀国有一位先祖，名叫蚕丛，是养蚕的专家。“蜀”字最开始就是蚕的象形，上部像蚕首，下部像蚕蜷曲的身子。但这个字与其他象形字的区分度还不够大，古人给它增加了一个部件“虫”，强化了它的类别。有了“虫”充当形符，原来的象形字就自然而然变为声符了。\n\n（“祭”的古文字字形见配图）你看出来了吗？这是祭祀的“祭”。最早的字形描述古代的血祭，画的是一只手杀牲祭祀，把血滴在盆里。后来古人觉得这样表意还不够充分，就给它增加了表示祭祀的部件“示”。这样，就产生了一个“示”充当形符、原来的象形字变为声符的形声字。\n\n形声字是不是很有趣？\n\n本文作者王宁，选作课文时有改动。",
+      "sourceNote": "按用户本次教材页面图片完整转录并提取原图，五年级下册第三单元，2019版由用户明确指定。古文字字形、图片字谜与书法作品保留图片呈现；文字中的“见配图”等为项目定位说明。用于阅读与开放活动，不自动判分。",
+      "importNotes": [
+        "用户明确分组：图1—图4为汉字真有趣，图5—图10为我爱你，汉字。",
+        "合并跨页段落及研究报告续表，保留作品原有标题；未在字谜正文中加入谜底。"
+      ],
+      "questions": []
+    },
+    {
+      "unit": 3,
+      "key": "integrated-love",
+      "title": "我爱你，汉字",
+      "kind": "integrated",
+      "number": null,
+      "optional": false,
+      "text": "汉字艺术：剪纸、印章、扇面（见附件提取图片）。\n\n活动建议\n汉字有着悠久的历史，蕴含着丰富的文化。我们每天都在学习和使用汉字，应该增进对汉字的了解，为汉字的规范使用做一些力所能及的事情。从下面的内容中选择一项开展活动，写一份简单的研究报告。“阅读材料”供参考。\n\n搜集更多的资料，围绕汉字历史、汉字书法或其他感兴趣的与汉字有关的内容，开展简单的研究。\n\n调查同学的作业本、街头招牌、书籍报刊等，围绕生活中用字不规范的情况，开展简单的研究。\n\n阅读材料\n\n1 汉字字体的演变\n\n字形演变表（见配图）：甲骨文、金文、小篆、隶书、楷书；展示“日、月、车、马”四个字的不同字形。\n\n汉字已经有三四千年的历史。在漫长的发展演变过程中，字体发生了很大变化，其中以甲骨文、金文、小篆、隶书、楷书五种字体最为典型。\n\n甲骨文是刻在龟甲或兽骨上的文字，主要在商周时期使用，它是我们目前所能见到的最早的成熟汉字。已经出土的单字有四千多个，其中已经认出的有一千多个，主要记录祭祀、战争、狩猎、农事、气象等内容。字形的象形性较强，写法也不固定，如，“田”字可以写作（字形见配图）。由于是刀刻，字的线条比较纤细。\n\n金文是铸刻在铜器上的文字，主要在商周时期使用。字的线条粗壮，早期部分字形的象形性还很明显，西周晚期之后，字形逐渐规整、美观。有些字形繁简差别很大，如，“车”字早期一般写作（字形见配图），看上去很烦琐，中晚期一般写作（字形见配图），与现在的繁体字“車”差别不大。\n\n小篆是从战国时期的秦国文字发展而来的，秦统一全国后得到推行，成为我国最早的统一的文字。小篆字形结构稳定，线条圆转，粗细基本一致，象形意味不明显。今天的书法作品，特别是印章中仍然较多地使用这种字体。\n\n隶书形成于战国晚期，通行于两汉。它将篆书圆转的线条改为直笔或方笔，象形意味已基本消失，笔画简化，书写方便，汉字的点、横、竖、撇、捺等基本笔画已经形成，成为汉字发展史上的分水岭。\n\n魏晋时期有了楷书。“楷”是规矩、楷模的意思。楷书字形方正，笔画规整，比隶书更加便于书写和认读。进入南北朝之后，楷书成为占主导地位的字体，一直通行至今。\n\n本文是自编课文。\n\n2 甲骨文的发现\n\n十九世纪七八十年代，河南安阳小屯村的村民在田间劳作时，发现一些带有刻痕的龟甲、兽骨，称它们为龙骨。他们不知道这是古代的遗物，将较大的龙骨卖给了药铺，将小的龙骨丢弃了。药铺将龙骨碾成粉末用作治疗创伤的药材。龙骨上的刻痕因无人知道是极有价值的殷商时期的刀刻文字，而常被村民打磨掉。\n\n1899年，一次偶然的机会，这些龟甲、兽骨上的刻痕，引起了清代国子监主管官员王懿荣的注意。王懿荣平时酷爱收藏古董，精通金石之学。经过仔细研究，他认为这些龙骨上的刻痕是一种比篆书更早的文字。\n\n后来，人们把刻在龟甲或兽骨上的文字叫作甲骨文，我国学术领域由此又多了一门新学科，叫“甲骨学”。\n\n甲骨文字形示例：乘、北、井、册（见配图）。\n\n本文作者陈双新。\n①［国子监］我国古代最高的教育管理机关，有的朝代兼为最高学府。\n②［金石之学］以古代铜器、石刻及其上面的文字为研究对象的学科。\n\n3 书法欣赏\n\n南朝智永楷书《千字文》（局部）\n\n唐代怀素草书《千字文》（局部）\n\n明代文征明行草《千字文》（局部）\n\n书法内容对照\n天地玄黄，宇宙洪荒。\n日月盈昃，辰宿列张。\n寒来暑往，秋收冬藏。\n闰余成岁，律吕调阳。\n云腾致雨，露结为霜。\n金生丽水，玉出昆冈。\n剑号巨阙，珠称夜光。\n果珍李柰，菜重芥姜。\n\n4 制定国家通用语言文字法的必要性\n\n我国是一个多民族、多语言、多文种的国家，……制定国家通用语言文字法，用法律的形式确定普通话和规范汉字作为国家通用语言文字的地位，规定国家通用语言文字的使用范围，有利于语言文字的社会应用，有利于各民族之间的交往，有利于促进民族团结，维护国家统一。\n\n本文选自《关于〈中华人民共和国国家通用语言文字法（草案）〉的说明》。\n\n5 关于“李”姓的历史和现状的研究报告\n\n一、问题的提出\n我们学校有不少同学姓李，我有好几个邻居也姓李。“李”姓是怎么来的？历史上姓李的名人有哪些？现在的“李”姓是不是我国人口最多的姓氏？带着这些问题，我对“李”姓的历史和现状作了一次研究。\n\n二、研究方法\n1. 查阅书籍和报刊。\n2. 询问身边的人。\n3. 其他方法。\n\n三、资料整理\n\n来源\n传说皋陶曾任尧帝的大理官（掌管刑罚的官职），其子孙以官名“理”为姓氏。后来的“李”姓大多来源于此。唐代时，“李”为国姓。一些姓徐、安、杜、郭、麻、鲜于的武将，因立功被皇帝赐“李”姓。\n\n历史名人\n战国时期的李冰父子主持修建了都江堰水利工程；汉代的李广抗击匈奴，威名远扬；隋代的李春是著名的桥梁专家，举世闻名的赵州桥就是他设计并参加建造的；唐代的李白被誉为“诗仙”；宋代的李清照是一位词人，有“千古第一才女”之称；明代的李时珍编写了我国古代药物学巨著《本草纲目》；近现代的李大钊是中国共产党的创始人之一……\n\n现状\n据统计，2018年全国户籍人口中，王、李、张、刘、陈五个姓氏的数量占据前五名。其中，“王”姓和“李”姓的数量均超过一亿，并且“王”姓比“李”姓略多。\n\n四、研究结论\n1. 传说，“李”姓来源于上古时代的官名。唐代时，有些姓氏改为“李”姓，这可能为后来“李”姓人口的增长奠定了基础。\n2. 历史上，“李”姓名人辈出。有水利专家李冰父子、军事将领李广、桥梁专家李春、“诗仙”李白、词人李清照、医药学家李时珍、革命先驱李大钊……他们在各个领域都闪耀着光芒。\n3. 2018年，我国户籍人口最多的姓氏是“王”姓，“李”姓排名第二。\n\n研究报告旁批\n研究报告的标题要体现研究的主要内容。\n写出研究目的。\n写清楚研究方法。\n把搜集到的资料整理出来。\n对资料进行简要的概括和分析。\n\n这份研究报告给了我许多启发……\n\n本文是自编课文。",
+      "sourceNote": "按用户本次教材页面图片完整转录并提取原图，五年级下册第三单元，2019版由用户明确指定。古文字字形、图片字谜与书法作品保留图片呈现；文字中的“见配图”等为项目定位说明。用于阅读与开放活动，不自动判分。",
+      "importNotes": [
+        "用户明确分组：图1—图4为汉字真有趣，图5—图10为我爱你，汉字。",
+        "合并跨页段落及研究报告续表，保留作品原有标题；未在字谜正文中加入谜底。"
+      ],
+      "questions": []
+    }
+  ]
+}

@@ -36,7 +36,27 @@ export class StudentKnowledgeStateBuilder {
               )
               .map((a) => ({ ...a, key: `${s.id}:${a.questionId}` })),
           )
-        const unique = [...new Map(attempts.map((a) => [a.key, a])).values()].sort(
+        const ai = (snapshot.aiSignals ?? []).filter(
+          (a) =>
+            a.profileId === profileId &&
+            a.textbookId === textbookId &&
+            a.knowledgePointId === kp.id,
+        )
+        const aiAttempts = ai.map((a) => ({
+          key: a.id,
+          questionId: a.questionId,
+          submittedAt: a.occurredAt,
+          answer: { type: 'shortAnswer' as const, value: a.answer },
+          result: {
+            status: a.correct ? ('correct' as const) : ('incorrect' as const),
+            score: a.correct ? 1 : 0,
+            maxScore: 1,
+          },
+          errorPatterns: [],
+        }))
+        const unique = [
+          ...new Map([...attempts, ...aiAttempts].map((a) => [a.key, a])).values(),
+        ].sort(
           (a, b) =>
             (a.submittedAt ?? '').localeCompare(b.submittedAt ?? '') || a.key.localeCompare(b.key),
         )
@@ -67,7 +87,14 @@ export class StudentKnowledgeStateBuilder {
           .filter((t): t is string => Boolean(t))
           .sort()
           .at(-1)
-        const score = (mastery?.masteryScore ?? 0) / 100
+        // AI practice informs recommendations with bounded weight; it cannot alone certify course mastery.
+        const aiWeight = Math.min(ai.length * 0.2, 1)
+        const formalWeight = (mastery?.confidence ?? 0) * 5
+        const aiRate = ai.length ? ai.filter((a) => a.correct).length / ai.length : 0
+        const score = aiWeight
+          ? (((mastery?.masteryScore ?? 0) / 100) * formalWeight + aiRate * aiWeight) /
+            (formalWeight + aiWeight)
+          : (mastery?.masteryScore ?? 0) / 100
         const weaknessSignals = [
           ...(mastery && score < config.lowMastery ? ['LOW_MASTERY'] : []),
           ...(streak('incorrect') >= config.consecutiveErrors ? ['CONSECUTIVE_ERRORS'] : []),
@@ -92,7 +119,7 @@ export class StudentKnowledgeStateBuilder {
           lastStudiedAt,
           weaknessSignals,
           errorPatterns: [...new Map(errorPatterns.map((p) => [p.code, p])).values()],
-          confidence: mastery?.confidence ?? 0,
+          confidence: mastery?.confidence ?? Math.min(aiWeight / 5, 0.2),
         }
       })
       .sort((a, b) => a.knowledgePointId.localeCompare(b.knowledgePointId))

@@ -1,3 +1,4 @@
+import { accountSessionStorage } from '@/services/account/storage'
 import { AdaptiveLearningPlan, type AdaptivePlanCheckpoint } from './adaptiveLearningPlan'
 
 export interface AdaptivePlanDraft {
@@ -27,7 +28,7 @@ function storageKey(scope: string) {
 function browserSessionStorage(): Storage | null {
   if (typeof window === 'undefined') return null
   try {
-    return window.sessionStorage
+    return accountSessionStorage
   } catch {
     return null
   }

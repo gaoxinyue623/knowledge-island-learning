@@ -1,0 +1,204 @@
+{
+  "title": "沪教牛津英语五年级下册（三年级起点·2013版）",
+  "editionYear": 2013,
+  "updatedAt": "2026-10-10T02:18:23.000Z",
+  "sourceSha256": "36744941191a5ccd35520cff4b6802343e98a12cece40cd2516992beacd2b031",
+  "sourceNote": "教材年份2013由用户明确确认；本次补入用户提供的Unit 10—12句型和语音示例、Revision 1—3、Project 1—4及四个附录栏目。复习为来稿提供的提要和任务，项目按最新来稿更新；未对照出版社原书逐页核验，未提供原版示范音频。",
+  "nodes": [
+    {
+      "number": 10,
+      "sentencePattern": "I think … is a great invention. People can …\nWhat are you going to invent?\nI’m going to invent something myself.",
+      "sounds": "ch /tʃ/ (chair), sh /ʃ/ (shop)",
+      "phonicsExamples": [
+        {
+          "letters": "ch",
+          "phonetic": "/tʃ/",
+          "word": "chair"
+        },
+        {
+          "letters": "sh",
+          "phonetic": "/ʃ/",
+          "word": "shop"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "sentencePattern": "… comes in … every year.\nIt is an important Chinese festival.\nPeople call it …",
+      "sounds": "ar /ɑː/ (star), al /ɔː/ (wall)",
+      "phonicsExamples": [
+        {
+          "letters": "ar",
+          "phonetic": "/ɑː/",
+          "word": "star"
+        },
+        {
+          "letters": "al",
+          "phonetic": "/ɔː/",
+          "word": "wall"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "sentencePattern": "A giant lives in a big house with a beautiful garden.\nChildren come through a hole.\nThe giant is kind to the children.",
+      "sounds": "th /θ/ (think), th /ð/ (this)",
+      "phonicsExamples": [
+        {
+          "letters": "th",
+          "phonetic": "/θ/",
+          "word": "think"
+        },
+        {
+          "letters": "th",
+          "phonetic": "/ð/",
+          "word": "this"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "sections": [
+        {
+          "kind": "revision",
+          "title": "Module1 Changes and differences",
+          "english": "",
+          "chinese": "模块复盘 Module1 Changes and differences\n核心句型汇总：物主代词、Why / Because 问答、一般将来时 will / won’t\n重点词汇：tidy, yours, mine, hers, theirs, study, future, machine\n语音复盘：ar / ue / oo；ir / ur / au / oor；ee / ea / eer / ear\n任务：词汇、句型配对；看图问答；语音朗读练习。"
+        }
+      ],
+      "sentencePrompt": "复盘Module 1的物主代词、原因问答、将来时和语音，完成来稿所列复习任务。"
+    },
+    {
+      "number": 15,
+      "sections": [
+        {
+          "kind": "revision",
+          "title": "Module2 Work and play",
+          "english": "",
+          "chinese": "模块复盘 Module2 Work and play\n核心句型：be going to（计划打算）；将来特殊疑问句 Where will… / How long will…\n重点词汇：storybook, magazine, weekend, film, holiday, seafood, island\n语音复盘：i / ie；o / oa / oe；oy / oi\n任务：对话补全；周末、假期情景口头表达；语音辨音。"
+        }
+      ],
+      "sentencePrompt": "复盘Module 2的计划和假期问答、词汇及语音，完成来稿所列复习任务。"
+    },
+    {
+      "number": 17,
+      "sections": [
+        {
+          "kind": "revision",
+          "title": "Module3 Things we do",
+          "english": "",
+          "chinese": "模块复盘 Module3 Things we do\n核心句型：will 将来时；选择疑问句；should / shouldn’t 提建议\n重点词汇：meet, hall, trousers, sweater, headache, fever, medicine\n语音复盘：air / are / ear；ou / ow；ay / ai\n任务：情景角色扮演；看图选句子；语音单词分类。"
+        }
+      ],
+      "sentencePrompt": "复盘Module 3的将来时、选择问答、建议表达和语音，完成来稿所列复习任务。"
+    },
+    {
+      "number": 14,
+      "kind": "project",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 1: Our changes",
+          "english": "1. Draw and write: Write about your changes.\n2. Interview your friend: What will you be like in the future?",
+          "chinese": "项目主题：记录过去与将来的变化\n展示：制作海报，介绍自己和朋友未来的样子。"
+        }
+      ],
+      "sentencePrompt": "制作海报，记录过去与将来的变化，采访并介绍自己和朋友未来的样子。",
+      "sentenceAnswer": "作品没有唯一答案，不自动判分。",
+      "notes": ["项目任务按本次补充稿更新，初次来稿任务留存于原始来源文件。"]
+    },
+    {
+      "number": 16,
+      "kind": "project",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 2: My holiday plan",
+          "english": "1. Make a holiday plan. Where will you go? What are you going to do?\n2. Share your plan in groups.",
+          "chinese": "项目主题：假期计划\n产出：手写假期计划表，小组口头汇报。"
+        }
+      ],
+      "sentencePrompt": "制作假期计划表，说明目的地和活动安排，并在小组中分享。",
+      "sentenceAnswer": "作品没有唯一答案，不自动判分。",
+      "notes": ["项目任务按本次补充稿更新，初次来稿任务留存于原始来源文件。"]
+    },
+    {
+      "number": 18,
+      "kind": "project",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 3: Our Open Day",
+          "english": "1. Make an Open Day programme.\n2. Talk about what parents will do on Open Day.",
+          "chinese": "项目主题：校园开放日\n产出：设计开放日流程表，小组模拟开放日介绍。"
+        }
+      ],
+      "sentencePrompt": "设计校园开放日流程表，介绍家长将参与的活动，小组模拟汇报。",
+      "sentenceAnswer": "作品没有唯一答案，不自动判分。",
+      "notes": ["项目任务按本次补充稿更新，初次来稿任务留存于原始来源文件。"]
+    },
+    {
+      "number": 19,
+      "kind": "project",
+      "sections": [
+        {
+          "kind": "project",
+          "title": "Project 4: A poster about Chinese festivals / Great inventions",
+          "english": "1. Choose one festival or invention.\n2. Draw pictures and write short sentences.\n3. Introduce your poster to classmates.",
+          "chinese": "项目主题：制作海报（二选一：中国节日 / 伟大发明）"
+        }
+      ],
+      "sentencePrompt": "选择一个中国节日或一项伟大发明，绘图并写短句制作海报，向同学介绍。",
+      "sentenceAnswer": "作品没有唯一答案，不自动判分。",
+      "notes": []
+    },
+    {
+      "number": 20,
+      "sections": [
+        {
+          "kind": "appendix-words",
+          "title": "Word list 1",
+          "english": "Unit1 单词\ntidy, sock, yours, mine, cap, crayon, umbrella, hers, theirs\nUnit2 单词\nwhy, because, study, dining room, change, place, every, then\nUnit3 单词\nfuture, stand, machine, will, exercise, early, hard\nUnit4 单词\nstorybook, buy, story, dictionary, magazine, newspaper, week, student\nUnit5 单词\nweekend, stay, film, boat, plan, tomorrow, build, next, cry, until\nUnit6 单词\nholiday, clear, seafood, hotel, island",
+          "chinese": "单元核心词汇总（Unit1–6）"
+        }
+      ],
+      "sentencePrompt": "按单元阅读Word list 1，复习Unit 1—6的来稿词汇。"
+    },
+    {
+      "number": 21,
+      "sections": [
+        {
+          "kind": "appendix-words",
+          "title": "Word list 2",
+          "english": "Unit7 单词\nmeet, school gate, art room, hall, finally, meeting room, show\nUnit8 单词\nwhich, trousers, sweater, coat, shoe, only, smile, money, keep, laugh\nUnit9 单词\nill, headache, fever, should, medicine, rest, toothache, present, world\nUnit10 单词\ninvention, watch, anywhere, travel, invent, myself, camera\nUnit11 单词\nfestival, important, call, end, village, last\nUnit12 单词\nwall, kind, through",
+          "chinese": "单元核心词汇总（Unit7–12）"
+        }
+      ],
+      "sentencePrompt": "按单元阅读Word list 2，复习Unit 7—12的来稿词汇。"
+    },
+    {
+      "number": 22,
+      "sections": [
+        {
+          "kind": "appendix",
+          "title": "Daily expressions",
+          "english": "- Whose … is this? / Whose … are these?\n- Why do you like …? Because …\n- What will you do? I’ll …\n- What are you going to do?\n- Where will you stay? How long will you stay?\n- Which … do you like, … or …?\n- You should … / You shouldn’t …\n- I think … is a great invention.\n- When’s …? It’s in …",
+          "chinese": "日常用语"
+        }
+      ],
+      "sentencePrompt": "阅读并运用本册日常用语进行交流。"
+    },
+    {
+      "number": 23,
+      "sections": [
+        {
+          "kind": "appendix-words",
+          "title": "Proper nouns",
+          "english": "Sanya, Chinese New Year, the Dragon Boat Festival, the Mid-Autumn Festival, the Double Ninth Festival",
+          "chinese": "专有名词"
+        }
+      ],
+      "sentencePrompt": "认读来稿列出的地点和中国节日专有名词。"
+    }
+  ]
+}

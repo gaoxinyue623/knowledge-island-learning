@@ -263,7 +263,9 @@ export class MockCurriculumService implements CurriculumService {
       .sort((left, right) => left.id.localeCompare(right.id))
 
     // Regional adoption metadata is diagnostic only, never a selection restriction.
-    const relations = (this.relationsByRegionId.get(input.regionId) ?? []).filter((relation) => {
+    const relations = (
+      input.regionId ? (this.relationsByRegionId.get(input.regionId) ?? []) : []
+    ).filter((relation) => {
       const textbook = this.textbookById.get(relation.textbookVersionId)
       if (!textbook) return false
       return (

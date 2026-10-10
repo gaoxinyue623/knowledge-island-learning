@@ -1,0 +1,2970 @@
+{
+  "sourceSha256": "f3c6ffdf12f80b342d60f75b087ca706d52332fd3b4da454b5384ee45635d53c",
+  "sourceNote": "按2026-10-10提供的8页教材图片录入三张字词附录，完整保留课号、分组、字词顺序、识字表拼音和25个蓝色多音字条目。",
+  "updatedAt": "2026-10-10T06:59:37.422Z",
+  "revision": 2,
+  "sourceImages": [
+    {
+      "number": 1,
+      "title": "识字表原图（附件图1）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-1.png",
+      "sha256": "4fcfe4869c6112d9ee089c2d69f3be4388cf7d8e2c287422c9a3f930477a9341"
+    },
+    {
+      "number": 2,
+      "title": "识字表原图（附件图2）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-2.png",
+      "sha256": "20697a0b3613fab47c0e2e5b4439465fcff9d55d042738faebbff0b15341f107"
+    },
+    {
+      "number": 3,
+      "title": "识字表原图（附件图3）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-3.png",
+      "sha256": "8e6638ad433e95159e9773ad930e6c2aca21984d927f0d9afb3e8d92aa675e27"
+    },
+    {
+      "number": 4,
+      "title": "写字表原图（附件图4）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-4.png",
+      "sha256": "710f46079a370b07887659961d96633bc0beb285a855061f8067d7db1968a29c"
+    },
+    {
+      "number": 5,
+      "title": "写字表原图（附件图5）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-5.png",
+      "sha256": "541a2ed2e535e7f22acf55d6a0a73159fe5da2643966d416c25244ed506632fc"
+    },
+    {
+      "number": 6,
+      "title": "词语表原图（附件图6）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-6.png",
+      "sha256": "559edb0f191b0fc09084516180e405af66b0e1d93fcc32017de8d16cb2ec3981"
+    },
+    {
+      "number": 7,
+      "title": "词语表原图（附件图7）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-7.png",
+      "sha256": "480da3d0cfbb10f2d1ba8becbe361a668eaef6e4e7e3ba0bb12e0b70b2c86768"
+    },
+    {
+      "number": 8,
+      "title": "词语表原图（附件图8）",
+      "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-8.png",
+      "sha256": "e92d10c2583e15b2ee0f68c719044003a7c5caea7bc3832231f3d68101fc090e"
+    }
+  ],
+  "tables": [
+    {
+      "unit": 8,
+      "key": "appendix-recognition",
+      "title": "识字表（会认·含拼音）",
+      "kind": "appendix",
+      "number": null,
+      "optional": false,
+      "originalHeading": "识字表",
+      "importNotes": [],
+      "text": "1：鸳 yuān、鸯 yāng、惠 huì、崇 chóng、豚 tún、曾 zēng、梅 méi\n2：凑 còu、伶 líng、俐 lì、旷 kuàng、横 héng、翼 yì、漾 yàng、倦 juàn、散 sǎn、纤 xiān、杆 gān、痕 hén\n3：挨 āi、蓬 péng、胀 zhàng、裳 shang、翩 piān、蜻 qīng、蜓 tíng\n4：录 lù、琢 zuó、敏 mǐn、款 kuǎn、膜 mó、瞎 xiā、益 yì、辆 liàng、蚂 mǎ、斑 bān、褐 hè\n语文园地：比 bǐ、忆 yì、艺 yì、乙 yǐ、冗 rǒng、犬 quǎn、税 shuì、兑 duì、执 zhí\n5：耕 gēng、释 shì、冀 jì\n6：模 mú、驯 xùn、良 liáng、毫 háo、犹 yóu、豫 yù、狡 jiǎo、猾 huá、凶 xiōng、恶 è、相 xiàng、狠 hěn、猎 liè\n7：匀 yún、称 chèn、皱 zhòu、配 pèi、撒 sā、扯 chě\n8：滔 tāo、贯 guàn、妇 fù、垫 diàn、忧 yōu、虑 lǜ、凭 píng、哲 zhé、遵 zūn、循 xún、逸 yì、尊 zūn、衰 shuāi\n9：否 fǒu、窃 qiè、私 sī、肌 jī、缩 suō、免 miǎn、差 chā、藻 zǎo、达 dá、胞 bāo、煤 méi、储 chǔ、属 shǔ\n10：证 zhèng、概 gài、阻 zǔ、误 wù、逆 nì、殊 shū\n11：隙 xì、稍 shāo、逐 zhú、副 fù、钳 qián、翘 qiào、搏 bó、捡 jiǎn、较 jiào、腹 fù、卵 luǎn\n12：牧 mù、魂 hún、酒 jiǔ、兄 xiōng、佳 jiā\n13：贡 gòng、尤 yóu、笨 bèn、阅 yuè、存 cún、蔡 cài、伦 lún、累 lěi、切 qiē、价 jià、便 pián、鲜 xiān、社 shè\n14：县 xiàn、拱 gǒng、济 jì、匠 jiàng、砌 qì、栏 lán、爪 zhǎo、抵 dǐ、智 zhì、慧 huì、历 lì、遗 yí\n15：择 zé、摊 tān、贩 fàn、吏 lì、驴 lǘ、乘 shèng、笼 lǒng、拽 zhuài、扰 rǎo、貌 mào\n语文园地：援 yuán、掷 zhì、投 tóu、捞 lāo、拆 chāi、搅 jiǎo、拓 tuò\n16：萝 luó、卜 bo、愁 chóu、晾 liàng、尿 niào、肩 jiān、掏 tāo\n17：桑 sāng、痒 yǎng、驼 tuó、羚 líng、鳄 è、震 zhèn、零 líng、肠 cháng、啃 kěn、醋 cù、馋 chán\n18：墨 mò、染 rǎn、碎 suì、溅 jiàn\n19：剩 shèng、和 huò、溶 róng、套 tào、若 ruò、悬 xuán、屏 bǐng、巅 diān、婴 yīng\n20：胸 xiōng、脯 pú、婉 wǎn、惹 rě\n21：耀 yào、示 shì、歉 qiàn、诺 nuò\n语文园地：旭 xù、屿 yǔ、舰 jiàn、锚 máo、瞭 liào、巡 xún\n22：檀 tán、猪 zhū、盈 yíng、彤 tóng、跪 guì、庙 miào、镇 zhèn、揉 róu、偏 piān\n23：闷 mèn、蔓 màn、延 yán、昏 hūn、汹 xiōng、况 kuàng、报 bào、隆 lóng\n24：呈 chéng、蔚 wèi、雕 diāo、洼 wā、烁 shuò、蜡 là、烛 zhú、芒 máng、略 lüè、劲 jìng、柱 zhù、剑 jiàn\n25：缝 féng、箱 xiāng、夸 kuā、奖 jiǎng、承 chéng、夹 jiá、袖 xiù、衬 chèn、衫 shān、负 fù、责 zé、讶 yà、恼 nǎo\n26：脊 jǐ、贼 zéi、莫 mò、晕 yūn、颠 diān、歪 wāi、胶 jiāo、旋 xuàn、纵 zòng、嫌 xián\n27：核 hé、妻 qī、爹 diē、犁 lí、聪 cōng、旱 hàn、纳 nà、搜 sōu、折 zhē、困 kùn、岂 qǐ、涨 zhàng\n语文园地：咳 ké、嗽 sòu、唠 láo、叨 dāo、吆 yāo、讽 fěng、诫 jiè、辩 biàn",
+      "sourceNote": "按提供的3页识字表图片顺序查阅。含250个生字和25个蓝色多音字条目，所有汉字均附拼音。",
+      "questions": [],
+      "tableKind": "recognition",
+      "declaredCount": 250,
+      "entryCount": 275,
+      "uniqueCharacterCount": 275,
+      "polyphonicCount": 25,
+      "revision": 2,
+      "groups": [
+        {
+          "heading": "1",
+          "lessonNumber": 1,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "鸳",
+              "pinyin": "yuān",
+              "polyphonic": false,
+              "raw": "鸳 yuān"
+            },
+            {
+              "character": "鸯",
+              "pinyin": "yāng",
+              "polyphonic": false,
+              "raw": "鸯 yāng"
+            },
+            {
+              "character": "惠",
+              "pinyin": "huì",
+              "polyphonic": false,
+              "raw": "惠 huì"
+            },
+            {
+              "character": "崇",
+              "pinyin": "chóng",
+              "polyphonic": false,
+              "raw": "崇 chóng"
+            },
+            {
+              "character": "豚",
+              "pinyin": "tún",
+              "polyphonic": false,
+              "raw": "豚 tún"
+            },
+            {
+              "character": "曾",
+              "pinyin": "zēng",
+              "polyphonic": true,
+              "raw": "曾 zēng"
+            },
+            {
+              "character": "梅",
+              "pinyin": "méi",
+              "polyphonic": false,
+              "raw": "梅 méi"
+            }
+          ]
+        },
+        {
+          "heading": "2",
+          "lessonNumber": 2,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "凑",
+              "pinyin": "còu",
+              "polyphonic": false,
+              "raw": "凑 còu"
+            },
+            {
+              "character": "伶",
+              "pinyin": "líng",
+              "polyphonic": false,
+              "raw": "伶 líng"
+            },
+            {
+              "character": "俐",
+              "pinyin": "lì",
+              "polyphonic": false,
+              "raw": "俐 lì"
+            },
+            {
+              "character": "旷",
+              "pinyin": "kuàng",
+              "polyphonic": false,
+              "raw": "旷 kuàng"
+            },
+            {
+              "character": "横",
+              "pinyin": "héng",
+              "polyphonic": false,
+              "raw": "横 héng"
+            },
+            {
+              "character": "翼",
+              "pinyin": "yì",
+              "polyphonic": false,
+              "raw": "翼 yì"
+            },
+            {
+              "character": "漾",
+              "pinyin": "yàng",
+              "polyphonic": false,
+              "raw": "漾 yàng"
+            },
+            {
+              "character": "倦",
+              "pinyin": "juàn",
+              "polyphonic": false,
+              "raw": "倦 juàn"
+            },
+            {
+              "character": "散",
+              "pinyin": "sǎn",
+              "polyphonic": true,
+              "raw": "散 sǎn"
+            },
+            {
+              "character": "纤",
+              "pinyin": "xiān",
+              "polyphonic": false,
+              "raw": "纤 xiān"
+            },
+            {
+              "character": "杆",
+              "pinyin": "gān",
+              "polyphonic": true,
+              "raw": "杆 gān"
+            },
+            {
+              "character": "痕",
+              "pinyin": "hén",
+              "polyphonic": false,
+              "raw": "痕 hén"
+            }
+          ]
+        },
+        {
+          "heading": "3",
+          "lessonNumber": 3,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "挨",
+              "pinyin": "āi",
+              "polyphonic": true,
+              "raw": "挨 āi"
+            },
+            {
+              "character": "蓬",
+              "pinyin": "péng",
+              "polyphonic": false,
+              "raw": "蓬 péng"
+            },
+            {
+              "character": "胀",
+              "pinyin": "zhàng",
+              "polyphonic": false,
+              "raw": "胀 zhàng"
+            },
+            {
+              "character": "裳",
+              "pinyin": "shang",
+              "polyphonic": false,
+              "raw": "裳 shang"
+            },
+            {
+              "character": "翩",
+              "pinyin": "piān",
+              "polyphonic": false,
+              "raw": "翩 piān"
+            },
+            {
+              "character": "蜻",
+              "pinyin": "qīng",
+              "polyphonic": false,
+              "raw": "蜻 qīng"
+            },
+            {
+              "character": "蜓",
+              "pinyin": "tíng",
+              "polyphonic": false,
+              "raw": "蜓 tíng"
+            }
+          ]
+        },
+        {
+          "heading": "4",
+          "lessonNumber": 4,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "录",
+              "pinyin": "lù",
+              "polyphonic": false,
+              "raw": "录 lù"
+            },
+            {
+              "character": "琢",
+              "pinyin": "zuó",
+              "polyphonic": false,
+              "raw": "琢 zuó"
+            },
+            {
+              "character": "敏",
+              "pinyin": "mǐn",
+              "polyphonic": false,
+              "raw": "敏 mǐn"
+            },
+            {
+              "character": "款",
+              "pinyin": "kuǎn",
+              "polyphonic": false,
+              "raw": "款 kuǎn"
+            },
+            {
+              "character": "膜",
+              "pinyin": "mó",
+              "polyphonic": false,
+              "raw": "膜 mó"
+            },
+            {
+              "character": "瞎",
+              "pinyin": "xiā",
+              "polyphonic": false,
+              "raw": "瞎 xiā"
+            },
+            {
+              "character": "益",
+              "pinyin": "yì",
+              "polyphonic": false,
+              "raw": "益 yì"
+            },
+            {
+              "character": "辆",
+              "pinyin": "liàng",
+              "polyphonic": false,
+              "raw": "辆 liàng"
+            },
+            {
+              "character": "蚂",
+              "pinyin": "mǎ",
+              "polyphonic": true,
+              "raw": "蚂 mǎ"
+            },
+            {
+              "character": "斑",
+              "pinyin": "bān",
+              "polyphonic": false,
+              "raw": "斑 bān"
+            },
+            {
+              "character": "褐",
+              "pinyin": "hè",
+              "polyphonic": false,
+              "raw": "褐 hè"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 1,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "比",
+              "pinyin": "bǐ",
+              "polyphonic": false,
+              "raw": "比 bǐ"
+            },
+            {
+              "character": "忆",
+              "pinyin": "yì",
+              "polyphonic": false,
+              "raw": "忆 yì"
+            },
+            {
+              "character": "艺",
+              "pinyin": "yì",
+              "polyphonic": false,
+              "raw": "艺 yì"
+            },
+            {
+              "character": "乙",
+              "pinyin": "yǐ",
+              "polyphonic": false,
+              "raw": "乙 yǐ"
+            },
+            {
+              "character": "冗",
+              "pinyin": "rǒng",
+              "polyphonic": false,
+              "raw": "冗 rǒng"
+            },
+            {
+              "character": "犬",
+              "pinyin": "quǎn",
+              "polyphonic": false,
+              "raw": "犬 quǎn"
+            },
+            {
+              "character": "税",
+              "pinyin": "shuì",
+              "polyphonic": false,
+              "raw": "税 shuì"
+            },
+            {
+              "character": "兑",
+              "pinyin": "duì",
+              "polyphonic": false,
+              "raw": "兑 duì"
+            },
+            {
+              "character": "执",
+              "pinyin": "zhí",
+              "polyphonic": false,
+              "raw": "执 zhí"
+            }
+          ]
+        },
+        {
+          "heading": "5",
+          "lessonNumber": 5,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "耕",
+              "pinyin": "gēng",
+              "polyphonic": false,
+              "raw": "耕 gēng"
+            },
+            {
+              "character": "释",
+              "pinyin": "shì",
+              "polyphonic": false,
+              "raw": "释 shì"
+            },
+            {
+              "character": "冀",
+              "pinyin": "jì",
+              "polyphonic": false,
+              "raw": "冀 jì"
+            }
+          ]
+        },
+        {
+          "heading": "6",
+          "lessonNumber": 6,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "模",
+              "pinyin": "mú",
+              "polyphonic": true,
+              "raw": "模 mú"
+            },
+            {
+              "character": "驯",
+              "pinyin": "xùn",
+              "polyphonic": false,
+              "raw": "驯 xùn"
+            },
+            {
+              "character": "良",
+              "pinyin": "liáng",
+              "polyphonic": false,
+              "raw": "良 liáng"
+            },
+            {
+              "character": "毫",
+              "pinyin": "háo",
+              "polyphonic": false,
+              "raw": "毫 háo"
+            },
+            {
+              "character": "犹",
+              "pinyin": "yóu",
+              "polyphonic": false,
+              "raw": "犹 yóu"
+            },
+            {
+              "character": "豫",
+              "pinyin": "yù",
+              "polyphonic": false,
+              "raw": "豫 yù"
+            },
+            {
+              "character": "狡",
+              "pinyin": "jiǎo",
+              "polyphonic": false,
+              "raw": "狡 jiǎo"
+            },
+            {
+              "character": "猾",
+              "pinyin": "huá",
+              "polyphonic": false,
+              "raw": "猾 huá"
+            },
+            {
+              "character": "凶",
+              "pinyin": "xiōng",
+              "polyphonic": false,
+              "raw": "凶 xiōng"
+            },
+            {
+              "character": "恶",
+              "pinyin": "è",
+              "polyphonic": false,
+              "raw": "恶 è"
+            },
+            {
+              "character": "相",
+              "pinyin": "xiàng",
+              "polyphonic": true,
+              "raw": "相 xiàng"
+            },
+            {
+              "character": "狠",
+              "pinyin": "hěn",
+              "polyphonic": false,
+              "raw": "狠 hěn"
+            },
+            {
+              "character": "猎",
+              "pinyin": "liè",
+              "polyphonic": false,
+              "raw": "猎 liè"
+            }
+          ]
+        },
+        {
+          "heading": "7",
+          "lessonNumber": 7,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "匀",
+              "pinyin": "yún",
+              "polyphonic": false,
+              "raw": "匀 yún"
+            },
+            {
+              "character": "称",
+              "pinyin": "chèn",
+              "polyphonic": true,
+              "raw": "称 chèn"
+            },
+            {
+              "character": "皱",
+              "pinyin": "zhòu",
+              "polyphonic": false,
+              "raw": "皱 zhòu"
+            },
+            {
+              "character": "配",
+              "pinyin": "pèi",
+              "polyphonic": false,
+              "raw": "配 pèi"
+            },
+            {
+              "character": "撒",
+              "pinyin": "sā",
+              "polyphonic": true,
+              "raw": "撒 sā"
+            },
+            {
+              "character": "扯",
+              "pinyin": "chě",
+              "polyphonic": false,
+              "raw": "扯 chě"
+            }
+          ]
+        },
+        {
+          "heading": "8",
+          "lessonNumber": 8,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "滔",
+              "pinyin": "tāo",
+              "polyphonic": false,
+              "raw": "滔 tāo"
+            },
+            {
+              "character": "贯",
+              "pinyin": "guàn",
+              "polyphonic": false,
+              "raw": "贯 guàn"
+            },
+            {
+              "character": "妇",
+              "pinyin": "fù",
+              "polyphonic": false,
+              "raw": "妇 fù"
+            },
+            {
+              "character": "垫",
+              "pinyin": "diàn",
+              "polyphonic": false,
+              "raw": "垫 diàn"
+            },
+            {
+              "character": "忧",
+              "pinyin": "yōu",
+              "polyphonic": false,
+              "raw": "忧 yōu"
+            },
+            {
+              "character": "虑",
+              "pinyin": "lǜ",
+              "polyphonic": false,
+              "raw": "虑 lǜ"
+            },
+            {
+              "character": "凭",
+              "pinyin": "píng",
+              "polyphonic": false,
+              "raw": "凭 píng"
+            },
+            {
+              "character": "哲",
+              "pinyin": "zhé",
+              "polyphonic": false,
+              "raw": "哲 zhé"
+            },
+            {
+              "character": "遵",
+              "pinyin": "zūn",
+              "polyphonic": false,
+              "raw": "遵 zūn"
+            },
+            {
+              "character": "循",
+              "pinyin": "xún",
+              "polyphonic": false,
+              "raw": "循 xún"
+            },
+            {
+              "character": "逸",
+              "pinyin": "yì",
+              "polyphonic": false,
+              "raw": "逸 yì"
+            },
+            {
+              "character": "尊",
+              "pinyin": "zūn",
+              "polyphonic": false,
+              "raw": "尊 zūn"
+            },
+            {
+              "character": "衰",
+              "pinyin": "shuāi",
+              "polyphonic": false,
+              "raw": "衰 shuāi"
+            }
+          ]
+        },
+        {
+          "heading": "9",
+          "lessonNumber": 9,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "否",
+              "pinyin": "fǒu",
+              "polyphonic": false,
+              "raw": "否 fǒu"
+            },
+            {
+              "character": "窃",
+              "pinyin": "qiè",
+              "polyphonic": false,
+              "raw": "窃 qiè"
+            },
+            {
+              "character": "私",
+              "pinyin": "sī",
+              "polyphonic": false,
+              "raw": "私 sī"
+            },
+            {
+              "character": "肌",
+              "pinyin": "jī",
+              "polyphonic": false,
+              "raw": "肌 jī"
+            },
+            {
+              "character": "缩",
+              "pinyin": "suō",
+              "polyphonic": false,
+              "raw": "缩 suō"
+            },
+            {
+              "character": "免",
+              "pinyin": "miǎn",
+              "polyphonic": false,
+              "raw": "免 miǎn"
+            },
+            {
+              "character": "差",
+              "pinyin": "chā",
+              "polyphonic": true,
+              "raw": "差 chā"
+            },
+            {
+              "character": "藻",
+              "pinyin": "zǎo",
+              "polyphonic": false,
+              "raw": "藻 zǎo"
+            },
+            {
+              "character": "达",
+              "pinyin": "dá",
+              "polyphonic": false,
+              "raw": "达 dá"
+            },
+            {
+              "character": "胞",
+              "pinyin": "bāo",
+              "polyphonic": false,
+              "raw": "胞 bāo"
+            },
+            {
+              "character": "煤",
+              "pinyin": "méi",
+              "polyphonic": false,
+              "raw": "煤 méi"
+            },
+            {
+              "character": "储",
+              "pinyin": "chǔ",
+              "polyphonic": false,
+              "raw": "储 chǔ"
+            },
+            {
+              "character": "属",
+              "pinyin": "shǔ",
+              "polyphonic": false,
+              "raw": "属 shǔ"
+            }
+          ]
+        },
+        {
+          "heading": "10",
+          "lessonNumber": 10,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "证",
+              "pinyin": "zhèng",
+              "polyphonic": false,
+              "raw": "证 zhèng"
+            },
+            {
+              "character": "概",
+              "pinyin": "gài",
+              "polyphonic": false,
+              "raw": "概 gài"
+            },
+            {
+              "character": "阻",
+              "pinyin": "zǔ",
+              "polyphonic": false,
+              "raw": "阻 zǔ"
+            },
+            {
+              "character": "误",
+              "pinyin": "wù",
+              "polyphonic": false,
+              "raw": "误 wù"
+            },
+            {
+              "character": "逆",
+              "pinyin": "nì",
+              "polyphonic": false,
+              "raw": "逆 nì"
+            },
+            {
+              "character": "殊",
+              "pinyin": "shū",
+              "polyphonic": false,
+              "raw": "殊 shū"
+            }
+          ]
+        },
+        {
+          "heading": "11",
+          "lessonNumber": 11,
+          "gardenNumber": null,
+          "sourceImage": 1,
+          "entries": [
+            {
+              "character": "隙",
+              "pinyin": "xì",
+              "polyphonic": false,
+              "raw": "隙 xì"
+            },
+            {
+              "character": "稍",
+              "pinyin": "shāo",
+              "polyphonic": false,
+              "raw": "稍 shāo"
+            },
+            {
+              "character": "逐",
+              "pinyin": "zhú",
+              "polyphonic": false,
+              "raw": "逐 zhú"
+            },
+            {
+              "character": "副",
+              "pinyin": "fù",
+              "polyphonic": false,
+              "raw": "副 fù"
+            },
+            {
+              "character": "钳",
+              "pinyin": "qián",
+              "polyphonic": false,
+              "raw": "钳 qián"
+            },
+            {
+              "character": "翘",
+              "pinyin": "qiào",
+              "polyphonic": false,
+              "raw": "翘 qiào"
+            },
+            {
+              "character": "搏",
+              "pinyin": "bó",
+              "polyphonic": false,
+              "raw": "搏 bó"
+            },
+            {
+              "character": "捡",
+              "pinyin": "jiǎn",
+              "polyphonic": false,
+              "raw": "捡 jiǎn"
+            },
+            {
+              "character": "较",
+              "pinyin": "jiào",
+              "polyphonic": false,
+              "raw": "较 jiào"
+            },
+            {
+              "character": "腹",
+              "pinyin": "fù",
+              "polyphonic": false,
+              "raw": "腹 fù"
+            },
+            {
+              "character": "卵",
+              "pinyin": "luǎn",
+              "polyphonic": false,
+              "raw": "卵 luǎn"
+            }
+          ]
+        },
+        {
+          "heading": "12",
+          "lessonNumber": 12,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "牧",
+              "pinyin": "mù",
+              "polyphonic": false,
+              "raw": "牧 mù"
+            },
+            {
+              "character": "魂",
+              "pinyin": "hún",
+              "polyphonic": false,
+              "raw": "魂 hún"
+            },
+            {
+              "character": "酒",
+              "pinyin": "jiǔ",
+              "polyphonic": false,
+              "raw": "酒 jiǔ"
+            },
+            {
+              "character": "兄",
+              "pinyin": "xiōng",
+              "polyphonic": false,
+              "raw": "兄 xiōng"
+            },
+            {
+              "character": "佳",
+              "pinyin": "jiā",
+              "polyphonic": false,
+              "raw": "佳 jiā"
+            }
+          ]
+        },
+        {
+          "heading": "13",
+          "lessonNumber": 13,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "贡",
+              "pinyin": "gòng",
+              "polyphonic": false,
+              "raw": "贡 gòng"
+            },
+            {
+              "character": "尤",
+              "pinyin": "yóu",
+              "polyphonic": false,
+              "raw": "尤 yóu"
+            },
+            {
+              "character": "笨",
+              "pinyin": "bèn",
+              "polyphonic": false,
+              "raw": "笨 bèn"
+            },
+            {
+              "character": "阅",
+              "pinyin": "yuè",
+              "polyphonic": false,
+              "raw": "阅 yuè"
+            },
+            {
+              "character": "存",
+              "pinyin": "cún",
+              "polyphonic": false,
+              "raw": "存 cún"
+            },
+            {
+              "character": "蔡",
+              "pinyin": "cài",
+              "polyphonic": false,
+              "raw": "蔡 cài"
+            },
+            {
+              "character": "伦",
+              "pinyin": "lún",
+              "polyphonic": false,
+              "raw": "伦 lún"
+            },
+            {
+              "character": "累",
+              "pinyin": "lěi",
+              "polyphonic": true,
+              "raw": "累 lěi"
+            },
+            {
+              "character": "切",
+              "pinyin": "qiē",
+              "polyphonic": true,
+              "raw": "切 qiē"
+            },
+            {
+              "character": "价",
+              "pinyin": "jià",
+              "polyphonic": false,
+              "raw": "价 jià"
+            },
+            {
+              "character": "便",
+              "pinyin": "pián",
+              "polyphonic": true,
+              "raw": "便 pián"
+            },
+            {
+              "character": "鲜",
+              "pinyin": "xiān",
+              "polyphonic": true,
+              "raw": "鲜 xiān"
+            },
+            {
+              "character": "社",
+              "pinyin": "shè",
+              "polyphonic": false,
+              "raw": "社 shè"
+            }
+          ]
+        },
+        {
+          "heading": "14",
+          "lessonNumber": 14,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "县",
+              "pinyin": "xiàn",
+              "polyphonic": false,
+              "raw": "县 xiàn"
+            },
+            {
+              "character": "拱",
+              "pinyin": "gǒng",
+              "polyphonic": false,
+              "raw": "拱 gǒng"
+            },
+            {
+              "character": "济",
+              "pinyin": "jì",
+              "polyphonic": false,
+              "raw": "济 jì"
+            },
+            {
+              "character": "匠",
+              "pinyin": "jiàng",
+              "polyphonic": false,
+              "raw": "匠 jiàng"
+            },
+            {
+              "character": "砌",
+              "pinyin": "qì",
+              "polyphonic": false,
+              "raw": "砌 qì"
+            },
+            {
+              "character": "栏",
+              "pinyin": "lán",
+              "polyphonic": false,
+              "raw": "栏 lán"
+            },
+            {
+              "character": "爪",
+              "pinyin": "zhǎo",
+              "polyphonic": true,
+              "raw": "爪 zhǎo"
+            },
+            {
+              "character": "抵",
+              "pinyin": "dǐ",
+              "polyphonic": false,
+              "raw": "抵 dǐ"
+            },
+            {
+              "character": "智",
+              "pinyin": "zhì",
+              "polyphonic": false,
+              "raw": "智 zhì"
+            },
+            {
+              "character": "慧",
+              "pinyin": "huì",
+              "polyphonic": false,
+              "raw": "慧 huì"
+            },
+            {
+              "character": "历",
+              "pinyin": "lì",
+              "polyphonic": false,
+              "raw": "历 lì"
+            },
+            {
+              "character": "遗",
+              "pinyin": "yí",
+              "polyphonic": false,
+              "raw": "遗 yí"
+            }
+          ]
+        },
+        {
+          "heading": "15",
+          "lessonNumber": 15,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "择",
+              "pinyin": "zé",
+              "polyphonic": false,
+              "raw": "择 zé"
+            },
+            {
+              "character": "摊",
+              "pinyin": "tān",
+              "polyphonic": false,
+              "raw": "摊 tān"
+            },
+            {
+              "character": "贩",
+              "pinyin": "fàn",
+              "polyphonic": false,
+              "raw": "贩 fàn"
+            },
+            {
+              "character": "吏",
+              "pinyin": "lì",
+              "polyphonic": false,
+              "raw": "吏 lì"
+            },
+            {
+              "character": "驴",
+              "pinyin": "lǘ",
+              "polyphonic": false,
+              "raw": "驴 lǘ"
+            },
+            {
+              "character": "乘",
+              "pinyin": "shèng",
+              "polyphonic": true,
+              "raw": "乘 shèng"
+            },
+            {
+              "character": "笼",
+              "pinyin": "lǒng",
+              "polyphonic": true,
+              "raw": "笼 lǒng"
+            },
+            {
+              "character": "拽",
+              "pinyin": "zhuài",
+              "polyphonic": false,
+              "raw": "拽 zhuài"
+            },
+            {
+              "character": "扰",
+              "pinyin": "rǎo",
+              "polyphonic": false,
+              "raw": "扰 rǎo"
+            },
+            {
+              "character": "貌",
+              "pinyin": "mào",
+              "polyphonic": false,
+              "raw": "貌 mào"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 3,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "援",
+              "pinyin": "yuán",
+              "polyphonic": false,
+              "raw": "援 yuán"
+            },
+            {
+              "character": "掷",
+              "pinyin": "zhì",
+              "polyphonic": false,
+              "raw": "掷 zhì"
+            },
+            {
+              "character": "投",
+              "pinyin": "tóu",
+              "polyphonic": false,
+              "raw": "投 tóu"
+            },
+            {
+              "character": "捞",
+              "pinyin": "lāo",
+              "polyphonic": false,
+              "raw": "捞 lāo"
+            },
+            {
+              "character": "拆",
+              "pinyin": "chāi",
+              "polyphonic": false,
+              "raw": "拆 chāi"
+            },
+            {
+              "character": "搅",
+              "pinyin": "jiǎo",
+              "polyphonic": false,
+              "raw": "搅 jiǎo"
+            },
+            {
+              "character": "拓",
+              "pinyin": "tuò",
+              "polyphonic": false,
+              "raw": "拓 tuò"
+            }
+          ]
+        },
+        {
+          "heading": "16",
+          "lessonNumber": 16,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "萝",
+              "pinyin": "luó",
+              "polyphonic": false,
+              "raw": "萝 luó"
+            },
+            {
+              "character": "卜",
+              "pinyin": "bo",
+              "polyphonic": false,
+              "raw": "卜 bo"
+            },
+            {
+              "character": "愁",
+              "pinyin": "chóu",
+              "polyphonic": false,
+              "raw": "愁 chóu"
+            },
+            {
+              "character": "晾",
+              "pinyin": "liàng",
+              "polyphonic": false,
+              "raw": "晾 liàng"
+            },
+            {
+              "character": "尿",
+              "pinyin": "niào",
+              "polyphonic": false,
+              "raw": "尿 niào"
+            },
+            {
+              "character": "肩",
+              "pinyin": "jiān",
+              "polyphonic": false,
+              "raw": "肩 jiān"
+            },
+            {
+              "character": "掏",
+              "pinyin": "tāo",
+              "polyphonic": false,
+              "raw": "掏 tāo"
+            }
+          ]
+        },
+        {
+          "heading": "17",
+          "lessonNumber": 17,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "桑",
+              "pinyin": "sāng",
+              "polyphonic": false,
+              "raw": "桑 sāng"
+            },
+            {
+              "character": "痒",
+              "pinyin": "yǎng",
+              "polyphonic": false,
+              "raw": "痒 yǎng"
+            },
+            {
+              "character": "驼",
+              "pinyin": "tuó",
+              "polyphonic": false,
+              "raw": "驼 tuó"
+            },
+            {
+              "character": "羚",
+              "pinyin": "líng",
+              "polyphonic": false,
+              "raw": "羚 líng"
+            },
+            {
+              "character": "鳄",
+              "pinyin": "è",
+              "polyphonic": false,
+              "raw": "鳄 è"
+            },
+            {
+              "character": "震",
+              "pinyin": "zhèn",
+              "polyphonic": false,
+              "raw": "震 zhèn"
+            },
+            {
+              "character": "零",
+              "pinyin": "líng",
+              "polyphonic": false,
+              "raw": "零 líng"
+            },
+            {
+              "character": "肠",
+              "pinyin": "cháng",
+              "polyphonic": false,
+              "raw": "肠 cháng"
+            },
+            {
+              "character": "啃",
+              "pinyin": "kěn",
+              "polyphonic": false,
+              "raw": "啃 kěn"
+            },
+            {
+              "character": "醋",
+              "pinyin": "cù",
+              "polyphonic": false,
+              "raw": "醋 cù"
+            },
+            {
+              "character": "馋",
+              "pinyin": "chán",
+              "polyphonic": false,
+              "raw": "馋 chán"
+            }
+          ]
+        },
+        {
+          "heading": "18",
+          "lessonNumber": 18,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "墨",
+              "pinyin": "mò",
+              "polyphonic": false,
+              "raw": "墨 mò"
+            },
+            {
+              "character": "染",
+              "pinyin": "rǎn",
+              "polyphonic": false,
+              "raw": "染 rǎn"
+            },
+            {
+              "character": "碎",
+              "pinyin": "suì",
+              "polyphonic": false,
+              "raw": "碎 suì"
+            },
+            {
+              "character": "溅",
+              "pinyin": "jiàn",
+              "polyphonic": false,
+              "raw": "溅 jiàn"
+            }
+          ]
+        },
+        {
+          "heading": "19",
+          "lessonNumber": 19,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "剩",
+              "pinyin": "shèng",
+              "polyphonic": false,
+              "raw": "剩 shèng"
+            },
+            {
+              "character": "和",
+              "pinyin": "huò",
+              "polyphonic": true,
+              "raw": "和 huò"
+            },
+            {
+              "character": "溶",
+              "pinyin": "róng",
+              "polyphonic": false,
+              "raw": "溶 róng"
+            },
+            {
+              "character": "套",
+              "pinyin": "tào",
+              "polyphonic": false,
+              "raw": "套 tào"
+            },
+            {
+              "character": "若",
+              "pinyin": "ruò",
+              "polyphonic": false,
+              "raw": "若 ruò"
+            },
+            {
+              "character": "悬",
+              "pinyin": "xuán",
+              "polyphonic": false,
+              "raw": "悬 xuán"
+            },
+            {
+              "character": "屏",
+              "pinyin": "bǐng",
+              "polyphonic": false,
+              "raw": "屏 bǐng"
+            },
+            {
+              "character": "巅",
+              "pinyin": "diān",
+              "polyphonic": false,
+              "raw": "巅 diān"
+            },
+            {
+              "character": "婴",
+              "pinyin": "yīng",
+              "polyphonic": false,
+              "raw": "婴 yīng"
+            }
+          ]
+        },
+        {
+          "heading": "20",
+          "lessonNumber": 20,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "胸",
+              "pinyin": "xiōng",
+              "polyphonic": false,
+              "raw": "胸 xiōng"
+            },
+            {
+              "character": "脯",
+              "pinyin": "pú",
+              "polyphonic": false,
+              "raw": "脯 pú"
+            },
+            {
+              "character": "婉",
+              "pinyin": "wǎn",
+              "polyphonic": false,
+              "raw": "婉 wǎn"
+            },
+            {
+              "character": "惹",
+              "pinyin": "rě",
+              "polyphonic": false,
+              "raw": "惹 rě"
+            }
+          ]
+        },
+        {
+          "heading": "21",
+          "lessonNumber": 21,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "耀",
+              "pinyin": "yào",
+              "polyphonic": false,
+              "raw": "耀 yào"
+            },
+            {
+              "character": "示",
+              "pinyin": "shì",
+              "polyphonic": false,
+              "raw": "示 shì"
+            },
+            {
+              "character": "歉",
+              "pinyin": "qiàn",
+              "polyphonic": false,
+              "raw": "歉 qiàn"
+            },
+            {
+              "character": "诺",
+              "pinyin": "nuò",
+              "polyphonic": false,
+              "raw": "诺 nuò"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 6,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "旭",
+              "pinyin": "xù",
+              "polyphonic": false,
+              "raw": "旭 xù"
+            },
+            {
+              "character": "屿",
+              "pinyin": "yǔ",
+              "polyphonic": false,
+              "raw": "屿 yǔ"
+            },
+            {
+              "character": "舰",
+              "pinyin": "jiàn",
+              "polyphonic": false,
+              "raw": "舰 jiàn"
+            },
+            {
+              "character": "锚",
+              "pinyin": "máo",
+              "polyphonic": false,
+              "raw": "锚 máo"
+            },
+            {
+              "character": "瞭",
+              "pinyin": "liào",
+              "polyphonic": false,
+              "raw": "瞭 liào"
+            },
+            {
+              "character": "巡",
+              "pinyin": "xún",
+              "polyphonic": false,
+              "raw": "巡 xún"
+            }
+          ]
+        },
+        {
+          "heading": "22",
+          "lessonNumber": 22,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "檀",
+              "pinyin": "tán",
+              "polyphonic": false,
+              "raw": "檀 tán"
+            },
+            {
+              "character": "猪",
+              "pinyin": "zhū",
+              "polyphonic": false,
+              "raw": "猪 zhū"
+            },
+            {
+              "character": "盈",
+              "pinyin": "yíng",
+              "polyphonic": false,
+              "raw": "盈 yíng"
+            },
+            {
+              "character": "彤",
+              "pinyin": "tóng",
+              "polyphonic": false,
+              "raw": "彤 tóng"
+            },
+            {
+              "character": "跪",
+              "pinyin": "guì",
+              "polyphonic": false,
+              "raw": "跪 guì"
+            },
+            {
+              "character": "庙",
+              "pinyin": "miào",
+              "polyphonic": false,
+              "raw": "庙 miào"
+            },
+            {
+              "character": "镇",
+              "pinyin": "zhèn",
+              "polyphonic": false,
+              "raw": "镇 zhèn"
+            },
+            {
+              "character": "揉",
+              "pinyin": "róu",
+              "polyphonic": false,
+              "raw": "揉 róu"
+            },
+            {
+              "character": "偏",
+              "pinyin": "piān",
+              "polyphonic": false,
+              "raw": "偏 piān"
+            }
+          ]
+        },
+        {
+          "heading": "23",
+          "lessonNumber": 23,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "闷",
+              "pinyin": "mèn",
+              "polyphonic": true,
+              "raw": "闷 mèn"
+            },
+            {
+              "character": "蔓",
+              "pinyin": "màn",
+              "polyphonic": false,
+              "raw": "蔓 màn"
+            },
+            {
+              "character": "延",
+              "pinyin": "yán",
+              "polyphonic": false,
+              "raw": "延 yán"
+            },
+            {
+              "character": "昏",
+              "pinyin": "hūn",
+              "polyphonic": false,
+              "raw": "昏 hūn"
+            },
+            {
+              "character": "汹",
+              "pinyin": "xiōng",
+              "polyphonic": false,
+              "raw": "汹 xiōng"
+            },
+            {
+              "character": "况",
+              "pinyin": "kuàng",
+              "polyphonic": false,
+              "raw": "况 kuàng"
+            },
+            {
+              "character": "报",
+              "pinyin": "bào",
+              "polyphonic": false,
+              "raw": "报 bào"
+            },
+            {
+              "character": "隆",
+              "pinyin": "lóng",
+              "polyphonic": false,
+              "raw": "隆 lóng"
+            }
+          ]
+        },
+        {
+          "heading": "24",
+          "lessonNumber": 24,
+          "gardenNumber": null,
+          "sourceImage": 2,
+          "entries": [
+            {
+              "character": "呈",
+              "pinyin": "chéng",
+              "polyphonic": false,
+              "raw": "呈 chéng"
+            },
+            {
+              "character": "蔚",
+              "pinyin": "wèi",
+              "polyphonic": false,
+              "raw": "蔚 wèi"
+            },
+            {
+              "character": "雕",
+              "pinyin": "diāo",
+              "polyphonic": false,
+              "raw": "雕 diāo"
+            },
+            {
+              "character": "洼",
+              "pinyin": "wā",
+              "polyphonic": false,
+              "raw": "洼 wā"
+            },
+            {
+              "character": "烁",
+              "pinyin": "shuò",
+              "polyphonic": false,
+              "raw": "烁 shuò"
+            },
+            {
+              "character": "蜡",
+              "pinyin": "là",
+              "polyphonic": false,
+              "raw": "蜡 là"
+            },
+            {
+              "character": "烛",
+              "pinyin": "zhú",
+              "polyphonic": false,
+              "raw": "烛 zhú"
+            },
+            {
+              "character": "芒",
+              "pinyin": "máng",
+              "polyphonic": false,
+              "raw": "芒 máng"
+            },
+            {
+              "character": "略",
+              "pinyin": "lüè",
+              "polyphonic": false,
+              "raw": "略 lüè"
+            },
+            {
+              "character": "劲",
+              "pinyin": "jìng",
+              "polyphonic": true,
+              "raw": "劲 jìng"
+            },
+            {
+              "character": "柱",
+              "pinyin": "zhù",
+              "polyphonic": false,
+              "raw": "柱 zhù"
+            },
+            {
+              "character": "剑",
+              "pinyin": "jiàn",
+              "polyphonic": false,
+              "raw": "剑 jiàn"
+            }
+          ]
+        },
+        {
+          "heading": "25",
+          "lessonNumber": 25,
+          "gardenNumber": null,
+          "sourceImage": 3,
+          "entries": [
+            {
+              "character": "缝",
+              "pinyin": "féng",
+              "polyphonic": true,
+              "raw": "缝 féng"
+            },
+            {
+              "character": "箱",
+              "pinyin": "xiāng",
+              "polyphonic": false,
+              "raw": "箱 xiāng"
+            },
+            {
+              "character": "夸",
+              "pinyin": "kuā",
+              "polyphonic": false,
+              "raw": "夸 kuā"
+            },
+            {
+              "character": "奖",
+              "pinyin": "jiǎng",
+              "polyphonic": false,
+              "raw": "奖 jiǎng"
+            },
+            {
+              "character": "承",
+              "pinyin": "chéng",
+              "polyphonic": false,
+              "raw": "承 chéng"
+            },
+            {
+              "character": "夹",
+              "pinyin": "jiá",
+              "polyphonic": true,
+              "raw": "夹 jiá"
+            },
+            {
+              "character": "袖",
+              "pinyin": "xiù",
+              "polyphonic": false,
+              "raw": "袖 xiù"
+            },
+            {
+              "character": "衬",
+              "pinyin": "chèn",
+              "polyphonic": false,
+              "raw": "衬 chèn"
+            },
+            {
+              "character": "衫",
+              "pinyin": "shān",
+              "polyphonic": false,
+              "raw": "衫 shān"
+            },
+            {
+              "character": "负",
+              "pinyin": "fù",
+              "polyphonic": false,
+              "raw": "负 fù"
+            },
+            {
+              "character": "责",
+              "pinyin": "zé",
+              "polyphonic": false,
+              "raw": "责 zé"
+            },
+            {
+              "character": "讶",
+              "pinyin": "yà",
+              "polyphonic": false,
+              "raw": "讶 yà"
+            },
+            {
+              "character": "恼",
+              "pinyin": "nǎo",
+              "polyphonic": false,
+              "raw": "恼 nǎo"
+            }
+          ]
+        },
+        {
+          "heading": "26",
+          "lessonNumber": 26,
+          "gardenNumber": null,
+          "sourceImage": 3,
+          "entries": [
+            {
+              "character": "脊",
+              "pinyin": "jǐ",
+              "polyphonic": false,
+              "raw": "脊 jǐ"
+            },
+            {
+              "character": "贼",
+              "pinyin": "zéi",
+              "polyphonic": false,
+              "raw": "贼 zéi"
+            },
+            {
+              "character": "莫",
+              "pinyin": "mò",
+              "polyphonic": false,
+              "raw": "莫 mò"
+            },
+            {
+              "character": "晕",
+              "pinyin": "yūn",
+              "polyphonic": false,
+              "raw": "晕 yūn"
+            },
+            {
+              "character": "颠",
+              "pinyin": "diān",
+              "polyphonic": false,
+              "raw": "颠 diān"
+            },
+            {
+              "character": "歪",
+              "pinyin": "wāi",
+              "polyphonic": false,
+              "raw": "歪 wāi"
+            },
+            {
+              "character": "胶",
+              "pinyin": "jiāo",
+              "polyphonic": false,
+              "raw": "胶 jiāo"
+            },
+            {
+              "character": "旋",
+              "pinyin": "xuàn",
+              "polyphonic": true,
+              "raw": "旋 xuàn"
+            },
+            {
+              "character": "纵",
+              "pinyin": "zòng",
+              "polyphonic": false,
+              "raw": "纵 zòng"
+            },
+            {
+              "character": "嫌",
+              "pinyin": "xián",
+              "polyphonic": false,
+              "raw": "嫌 xián"
+            }
+          ]
+        },
+        {
+          "heading": "27",
+          "lessonNumber": 27,
+          "gardenNumber": null,
+          "sourceImage": 3,
+          "entries": [
+            {
+              "character": "核",
+              "pinyin": "hé",
+              "polyphonic": false,
+              "raw": "核 hé"
+            },
+            {
+              "character": "妻",
+              "pinyin": "qī",
+              "polyphonic": false,
+              "raw": "妻 qī"
+            },
+            {
+              "character": "爹",
+              "pinyin": "diē",
+              "polyphonic": false,
+              "raw": "爹 diē"
+            },
+            {
+              "character": "犁",
+              "pinyin": "lí",
+              "polyphonic": false,
+              "raw": "犁 lí"
+            },
+            {
+              "character": "聪",
+              "pinyin": "cōng",
+              "polyphonic": false,
+              "raw": "聪 cōng"
+            },
+            {
+              "character": "旱",
+              "pinyin": "hàn",
+              "polyphonic": false,
+              "raw": "旱 hàn"
+            },
+            {
+              "character": "纳",
+              "pinyin": "nà",
+              "polyphonic": false,
+              "raw": "纳 nà"
+            },
+            {
+              "character": "搜",
+              "pinyin": "sōu",
+              "polyphonic": false,
+              "raw": "搜 sōu"
+            },
+            {
+              "character": "折",
+              "pinyin": "zhē",
+              "polyphonic": true,
+              "raw": "折 zhē"
+            },
+            {
+              "character": "困",
+              "pinyin": "kùn",
+              "polyphonic": false,
+              "raw": "困 kùn"
+            },
+            {
+              "character": "岂",
+              "pinyin": "qǐ",
+              "polyphonic": false,
+              "raw": "岂 qǐ"
+            },
+            {
+              "character": "涨",
+              "pinyin": "zhàng",
+              "polyphonic": true,
+              "raw": "涨 zhàng"
+            }
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 8,
+          "sourceImage": 3,
+          "entries": [
+            {
+              "character": "咳",
+              "pinyin": "ké",
+              "polyphonic": false,
+              "raw": "咳 ké"
+            },
+            {
+              "character": "嗽",
+              "pinyin": "sòu",
+              "polyphonic": false,
+              "raw": "嗽 sòu"
+            },
+            {
+              "character": "唠",
+              "pinyin": "láo",
+              "polyphonic": false,
+              "raw": "唠 láo"
+            },
+            {
+              "character": "叨",
+              "pinyin": "dāo",
+              "polyphonic": false,
+              "raw": "叨 dāo"
+            },
+            {
+              "character": "吆",
+              "pinyin": "yāo",
+              "polyphonic": false,
+              "raw": "吆 yāo"
+            },
+            {
+              "character": "讽",
+              "pinyin": "fěng",
+              "polyphonic": false,
+              "raw": "讽 fěng"
+            },
+            {
+              "character": "诫",
+              "pinyin": "jiè",
+              "polyphonic": false,
+              "raw": "诫 jiè"
+            },
+            {
+              "character": "辩",
+              "pinyin": "biàn",
+              "polyphonic": false,
+              "raw": "辩 biàn"
+            }
+          ]
+        }
+      ],
+      "sourcePages": [
+        {
+          "number": 1,
+          "title": "识字表原图（附件图1）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-1.png",
+          "sha256": "4fcfe4869c6112d9ee089c2d69f3be4388cf7d8e2c287422c9a3f930477a9341"
+        },
+        {
+          "number": 2,
+          "title": "识字表原图（附件图2）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-2.png",
+          "sha256": "20697a0b3613fab47c0e2e5b4439465fcff9d55d042738faebbff0b15341f107"
+        },
+        {
+          "number": 3,
+          "title": "识字表原图（附件图3）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-3.png",
+          "sha256": "8e6638ad433e95159e9773ad930e6c2aca21984d927f0d9afb3e8d92aa675e27"
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "key": "appendix-writing",
+      "title": "写字表（会写）",
+      "kind": "appendix",
+      "number": null,
+      "optional": false,
+      "originalHeading": "写字表",
+      "importNotes": [],
+      "text": "1：融、燕、鸳、鸯、惠、崇、芽、梅、泛、减\n2：凑、泼、集、偶、尔、沾、闲、纤、杆\n3：荷、紧、挨、莲、胀、裂、势、微、记\n语文园地：比、忆、艺、乙、冗、犬、税、兑、执\n5：守、株、待、宋、耕、折、颈、释、其、复\n6：装、驯、良、善、伸、谢、尘、凶、恶、狼、猎、拾\n7：渴、喝、匀、称、致、束、配、甩、哀、追、扯、叹、逃\n9：官、否、窃、私、汪、危、险、肌、攻、免、费、异、达\n10：验、证、阻、约、括、检、查、迷、误、逆、陌\n12：旧、符、牧、纷、魂、借、酒、遥、兄、逢、佳、倍\n13：伟、贡、献、创、尤、存、累、改、价、促、社\n14：赵、桥、拱、济、设、计、史、坚、固、且、栏、贵、历\n语文园地：援、掷、投、捞、拆、搅、拓\n16：萝、卜、愁、浓、够、确、段、系、姐\n17：希、担、容、易、震、零、肠、麻、烦\n18：垂、染、碎、翅、膀、拨、浪、抖\n19：皂、泡、类、弄、溶、套、悠、若、骄、傲\n20：雀、养、粉、惹、仰、粒、遍、者、惜\n语文园地：旭、屿、舰、锚、瞭、巡\n22：烧、盈、乘、寿、彤、颜、钟、武、镇、偏\n23：临、越、闷、昏、暗、沉、报、梢、隆\n24：呈、幻、李、夏、辉、芒、建、柱、剑\n25：性、顾、夸、奖、承、袖、衬、衫、负、责、泄、恼\n26：漏、胖、驴、爪、莫、厉、害、闯、模、歪、胶、纵\n语文园地：咳、嗽、唠、叨、吆、讽、诫、辩",
+      "sourceNote": "按提供的2页写字表图片顺序查阅，共250字，保留课号、语文园地分组及全部字形。",
+      "questions": [],
+      "tableKind": "writing",
+      "declaredCount": 250,
+      "entryCount": 250,
+      "uniqueCharacterCount": 250,
+      "polyphonicCount": 0,
+      "revision": 2,
+      "groups": [
+        {
+          "heading": "1",
+          "lessonNumber": 1,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "融",
+            "燕",
+            "鸳",
+            "鸯",
+            "惠",
+            "崇",
+            "芽",
+            "梅",
+            "泛",
+            "减"
+          ]
+        },
+        {
+          "heading": "2",
+          "lessonNumber": 2,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "凑",
+            "泼",
+            "集",
+            "偶",
+            "尔",
+            "沾",
+            "闲",
+            "纤",
+            "杆"
+          ]
+        },
+        {
+          "heading": "3",
+          "lessonNumber": 3,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "荷",
+            "紧",
+            "挨",
+            "莲",
+            "胀",
+            "裂",
+            "势",
+            "微",
+            "记"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 1,
+          "sourceImage": 4,
+          "entries": [
+            "比",
+            "忆",
+            "艺",
+            "乙",
+            "冗",
+            "犬",
+            "税",
+            "兑",
+            "执"
+          ]
+        },
+        {
+          "heading": "5",
+          "lessonNumber": 5,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "守",
+            "株",
+            "待",
+            "宋",
+            "耕",
+            "折",
+            "颈",
+            "释",
+            "其",
+            "复"
+          ]
+        },
+        {
+          "heading": "6",
+          "lessonNumber": 6,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "装",
+            "驯",
+            "良",
+            "善",
+            "伸",
+            "谢",
+            "尘",
+            "凶",
+            "恶",
+            "狼",
+            "猎",
+            "拾"
+          ]
+        },
+        {
+          "heading": "7",
+          "lessonNumber": 7,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "渴",
+            "喝",
+            "匀",
+            "称",
+            "致",
+            "束",
+            "配",
+            "甩",
+            "哀",
+            "追",
+            "扯",
+            "叹",
+            "逃"
+          ]
+        },
+        {
+          "heading": "9",
+          "lessonNumber": 9,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "官",
+            "否",
+            "窃",
+            "私",
+            "汪",
+            "危",
+            "险",
+            "肌",
+            "攻",
+            "免",
+            "费",
+            "异",
+            "达"
+          ]
+        },
+        {
+          "heading": "10",
+          "lessonNumber": 10,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "验",
+            "证",
+            "阻",
+            "约",
+            "括",
+            "检",
+            "查",
+            "迷",
+            "误",
+            "逆",
+            "陌"
+          ]
+        },
+        {
+          "heading": "12",
+          "lessonNumber": 12,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "旧",
+            "符",
+            "牧",
+            "纷",
+            "魂",
+            "借",
+            "酒",
+            "遥",
+            "兄",
+            "逢",
+            "佳",
+            "倍"
+          ]
+        },
+        {
+          "heading": "13",
+          "lessonNumber": 13,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "伟",
+            "贡",
+            "献",
+            "创",
+            "尤",
+            "存",
+            "累",
+            "改",
+            "价",
+            "促",
+            "社"
+          ]
+        },
+        {
+          "heading": "14",
+          "lessonNumber": 14,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "赵",
+            "桥",
+            "拱",
+            "济",
+            "设",
+            "计",
+            "史",
+            "坚",
+            "固",
+            "且",
+            "栏",
+            "贵",
+            "历"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 3,
+          "sourceImage": 4,
+          "entries": [
+            "援",
+            "掷",
+            "投",
+            "捞",
+            "拆",
+            "搅",
+            "拓"
+          ]
+        },
+        {
+          "heading": "16",
+          "lessonNumber": 16,
+          "gardenNumber": null,
+          "sourceImage": 4,
+          "entries": [
+            "萝",
+            "卜",
+            "愁",
+            "浓",
+            "够",
+            "确",
+            "段",
+            "系",
+            "姐"
+          ]
+        },
+        {
+          "heading": "17",
+          "lessonNumber": 17,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "希",
+            "担",
+            "容",
+            "易",
+            "震",
+            "零",
+            "肠",
+            "麻",
+            "烦"
+          ]
+        },
+        {
+          "heading": "18",
+          "lessonNumber": 18,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "垂",
+            "染",
+            "碎",
+            "翅",
+            "膀",
+            "拨",
+            "浪",
+            "抖"
+          ]
+        },
+        {
+          "heading": "19",
+          "lessonNumber": 19,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "皂",
+            "泡",
+            "类",
+            "弄",
+            "溶",
+            "套",
+            "悠",
+            "若",
+            "骄",
+            "傲"
+          ]
+        },
+        {
+          "heading": "20",
+          "lessonNumber": 20,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "雀",
+            "养",
+            "粉",
+            "惹",
+            "仰",
+            "粒",
+            "遍",
+            "者",
+            "惜"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 6,
+          "sourceImage": 5,
+          "entries": [
+            "旭",
+            "屿",
+            "舰",
+            "锚",
+            "瞭",
+            "巡"
+          ]
+        },
+        {
+          "heading": "22",
+          "lessonNumber": 22,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "烧",
+            "盈",
+            "乘",
+            "寿",
+            "彤",
+            "颜",
+            "钟",
+            "武",
+            "镇",
+            "偏"
+          ]
+        },
+        {
+          "heading": "23",
+          "lessonNumber": 23,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "临",
+            "越",
+            "闷",
+            "昏",
+            "暗",
+            "沉",
+            "报",
+            "梢",
+            "隆"
+          ]
+        },
+        {
+          "heading": "24",
+          "lessonNumber": 24,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "呈",
+            "幻",
+            "李",
+            "夏",
+            "辉",
+            "芒",
+            "建",
+            "柱",
+            "剑"
+          ]
+        },
+        {
+          "heading": "25",
+          "lessonNumber": 25,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "性",
+            "顾",
+            "夸",
+            "奖",
+            "承",
+            "袖",
+            "衬",
+            "衫",
+            "负",
+            "责",
+            "泄",
+            "恼"
+          ]
+        },
+        {
+          "heading": "26",
+          "lessonNumber": 26,
+          "gardenNumber": null,
+          "sourceImage": 5,
+          "entries": [
+            "漏",
+            "胖",
+            "驴",
+            "爪",
+            "莫",
+            "厉",
+            "害",
+            "闯",
+            "模",
+            "歪",
+            "胶",
+            "纵"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 8,
+          "sourceImage": 5,
+          "entries": [
+            "咳",
+            "嗽",
+            "唠",
+            "叨",
+            "吆",
+            "讽",
+            "诫",
+            "辩"
+          ]
+        }
+      ],
+      "sourcePages": [
+        {
+          "number": 4,
+          "title": "写字表原图（附件图4）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-4.png",
+          "sha256": "710f46079a370b07887659961d96633bc0beb285a855061f8067d7db1968a29c"
+        },
+        {
+          "number": 5,
+          "title": "写字表原图（附件图5）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-5.png",
+          "sha256": "541a2ed2e535e7f22acf55d6a0a73159fe5da2643966d416c25244ed506632fc"
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "key": "appendix-vocabulary",
+      "title": "词语表（按教材图片顺序）",
+      "kind": "appendix",
+      "number": null,
+      "optional": false,
+      "originalHeading": "词语表",
+      "importNotes": [],
+      "text": "2：燕子、乌黑、剪刀、活泼、轻风、洒落、赶集、光彩夺目、春光、偶尔、闲散、纤细、电线\n3：荷花、公园、清香、赶紧、荷叶、莲蓬、破裂、姿势、画家、本领、了不起、微风、停止\n语文园地：匕首、乙方、冗长、军犬、兑换、争执\n6：友情、认识、忠诚、驯良、善良、温和、答谢、花言巧语、着急、相信、尘土、凶恶、恶狠狠、猎人、收拾\n7：痛快、匀称、精美、别致、眉头、没精打采、机灵、灰心丧气、机会、叹气、逃生\n9：宁静、器官、是否、窃窃私语、危险、方法、肌肉、攻击、利用、后退、免费、差异、清楚、奇异\n10：实验、验证、记号、减少、阻力、大约、包括、检查、至少、迷失、无误、逆风、陌生、景物、能力\n13：文明、伟大、贡献、祖先、创造、材料、尤其、保存、吸收、积累、经验、改进、价格、便宜、满足、促进、社会\n14：闻名、设计、创举、减轻、不但、坚固、而且、美观、体现、才干、宝贵、历史、文化\n语文园地：援助、投掷、打捞、拆分、搅动、拓展\n16：胡萝卜、胡子、发愁、浓密、面包、完全、结实、确定、足够、确实\n17：希望、形状、喜欢、担心、容易、丁零、失望、巧克力、香肠、花生、牛奶、互相、想念、饭菜、可能、麻烦、眼睛、秘密\n18：童年、垂柳、平静、翅膀、戏耍、葫芦、松树、清爽、泥土、开放\n19：肥皂泡、种类、其中、溶化、网球、分裂、形式、圆满、夕阳、目送、骄傲\n20：养病、粉红、仰望、或者、严寒、本来、可惜、肯定、微笑、诚实\n语文园地：旭日、岛屿、海岸、浪花、军舰、铁锚、瞭望、巡航\n22：火烧云、笑盈盈、乘凉、高寿、红彤彤、变化、金灿灿、颜色、似乎、威武、镇静、其实、沉静、偏偏、等待、爱好\n23：来临、沉闷、奇形怪状、昏暗、轻微、情况、动静、赶路、抖动、树梢、乱蓬蓬、轰隆隆\n24：奇妙、生命、呈现、变幻、圆润、李子、夏日、感叹、光辉、神奇、光芒、建造、冰柱、锋利、刀剑、融化\n25：性子、顾客、笑话、大方、夸奖、承认、提前、服务、满意、袖子、衬衫、负责、名声、泄气、放心、手艺、感动、恼怒\n26：莫非、厉害、走南闯北、听说、发抖、害怕、松手、骨头、逃命、甘心、逃跑\n语文园地：呼吸、咳嗽、唠叨、吆喝、诉说、讽刺、告诫、辩论",
+      "sourceNote": "按提供的3页词语表图片顺序查阅，共271词，保留课号、语文园地分组及全部词序。",
+      "questions": [],
+      "tableKind": "words",
+      "declaredCount": 271,
+      "entryCount": 271,
+      "uniqueCharacterCount": null,
+      "polyphonicCount": 0,
+      "revision": 2,
+      "groups": [
+        {
+          "heading": "2",
+          "lessonNumber": 2,
+          "gardenNumber": null,
+          "sourceImage": 6,
+          "entries": [
+            "燕子",
+            "乌黑",
+            "剪刀",
+            "活泼",
+            "轻风",
+            "洒落",
+            "赶集",
+            "光彩夺目",
+            "春光",
+            "偶尔",
+            "闲散",
+            "纤细",
+            "电线"
+          ]
+        },
+        {
+          "heading": "3",
+          "lessonNumber": 3,
+          "gardenNumber": null,
+          "sourceImage": 6,
+          "entries": [
+            "荷花",
+            "公园",
+            "清香",
+            "赶紧",
+            "荷叶",
+            "莲蓬",
+            "破裂",
+            "姿势",
+            "画家",
+            "本领",
+            "了不起",
+            "微风",
+            "停止"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 1,
+          "sourceImage": 6,
+          "entries": [
+            "匕首",
+            "乙方",
+            "冗长",
+            "军犬",
+            "兑换",
+            "争执"
+          ]
+        },
+        {
+          "heading": "6",
+          "lessonNumber": 6,
+          "gardenNumber": null,
+          "sourceImage": 6,
+          "entries": [
+            "友情",
+            "认识",
+            "忠诚",
+            "驯良",
+            "善良",
+            "温和",
+            "答谢",
+            "花言巧语",
+            "着急",
+            "相信",
+            "尘土",
+            "凶恶",
+            "恶狠狠",
+            "猎人",
+            "收拾"
+          ]
+        },
+        {
+          "heading": "7",
+          "lessonNumber": 7,
+          "gardenNumber": null,
+          "sourceImage": 6,
+          "entries": [
+            "痛快",
+            "匀称",
+            "精美",
+            "别致",
+            "眉头",
+            "没精打采",
+            "机灵",
+            "灰心丧气",
+            "机会",
+            "叹气",
+            "逃生"
+          ]
+        },
+        {
+          "heading": "9",
+          "lessonNumber": 9,
+          "gardenNumber": null,
+          "sourceImage": 6,
+          "entries": [
+            "宁静",
+            "器官",
+            "是否",
+            "窃窃私语",
+            "危险",
+            "方法",
+            "肌肉",
+            "攻击",
+            "利用",
+            "后退",
+            "免费",
+            "差异",
+            "清楚",
+            "奇异"
+          ]
+        },
+        {
+          "heading": "10",
+          "lessonNumber": 10,
+          "gardenNumber": null,
+          "sourceImage": 6,
+          "entries": [
+            "实验",
+            "验证",
+            "记号",
+            "减少",
+            "阻力",
+            "大约",
+            "包括",
+            "检查",
+            "至少",
+            "迷失",
+            "无误",
+            "逆风",
+            "陌生",
+            "景物",
+            "能力"
+          ]
+        },
+        {
+          "heading": "13",
+          "lessonNumber": 13,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "文明",
+            "伟大",
+            "贡献",
+            "祖先",
+            "创造",
+            "材料",
+            "尤其",
+            "保存",
+            "吸收",
+            "积累",
+            "经验",
+            "改进",
+            "价格",
+            "便宜",
+            "满足",
+            "促进",
+            "社会"
+          ]
+        },
+        {
+          "heading": "14",
+          "lessonNumber": 14,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "闻名",
+            "设计",
+            "创举",
+            "减轻",
+            "不但",
+            "坚固",
+            "而且",
+            "美观",
+            "体现",
+            "才干",
+            "宝贵",
+            "历史",
+            "文化"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 3,
+          "sourceImage": 7,
+          "entries": [
+            "援助",
+            "投掷",
+            "打捞",
+            "拆分",
+            "搅动",
+            "拓展"
+          ]
+        },
+        {
+          "heading": "16",
+          "lessonNumber": 16,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "胡萝卜",
+            "胡子",
+            "发愁",
+            "浓密",
+            "面包",
+            "完全",
+            "结实",
+            "确定",
+            "足够",
+            "确实"
+          ]
+        },
+        {
+          "heading": "17",
+          "lessonNumber": 17,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "希望",
+            "形状",
+            "喜欢",
+            "担心",
+            "容易",
+            "丁零",
+            "失望",
+            "巧克力",
+            "香肠",
+            "花生",
+            "牛奶",
+            "互相",
+            "想念",
+            "饭菜",
+            "可能",
+            "麻烦",
+            "眼睛",
+            "秘密"
+          ]
+        },
+        {
+          "heading": "18",
+          "lessonNumber": 18,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "童年",
+            "垂柳",
+            "平静",
+            "翅膀",
+            "戏耍",
+            "葫芦",
+            "松树",
+            "清爽",
+            "泥土",
+            "开放"
+          ]
+        },
+        {
+          "heading": "19",
+          "lessonNumber": 19,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "肥皂泡",
+            "种类",
+            "其中",
+            "溶化",
+            "网球",
+            "分裂",
+            "形式",
+            "圆满",
+            "夕阳",
+            "目送",
+            "骄傲"
+          ]
+        },
+        {
+          "heading": "20",
+          "lessonNumber": 20,
+          "gardenNumber": null,
+          "sourceImage": 7,
+          "entries": [
+            "养病",
+            "粉红",
+            "仰望",
+            "或者",
+            "严寒",
+            "本来",
+            "可惜",
+            "肯定",
+            "微笑",
+            "诚实"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 6,
+          "sourceImage": 8,
+          "entries": [
+            "旭日",
+            "岛屿",
+            "海岸",
+            "浪花",
+            "军舰",
+            "铁锚",
+            "瞭望",
+            "巡航"
+          ]
+        },
+        {
+          "heading": "22",
+          "lessonNumber": 22,
+          "gardenNumber": null,
+          "sourceImage": 8,
+          "entries": [
+            "火烧云",
+            "笑盈盈",
+            "乘凉",
+            "高寿",
+            "红彤彤",
+            "变化",
+            "金灿灿",
+            "颜色",
+            "似乎",
+            "威武",
+            "镇静",
+            "其实",
+            "沉静",
+            "偏偏",
+            "等待",
+            "爱好"
+          ]
+        },
+        {
+          "heading": "23",
+          "lessonNumber": 23,
+          "gardenNumber": null,
+          "sourceImage": 8,
+          "entries": [
+            "来临",
+            "沉闷",
+            "奇形怪状",
+            "昏暗",
+            "轻微",
+            "情况",
+            "动静",
+            "赶路",
+            "抖动",
+            "树梢",
+            "乱蓬蓬",
+            "轰隆隆"
+          ]
+        },
+        {
+          "heading": "24",
+          "lessonNumber": 24,
+          "gardenNumber": null,
+          "sourceImage": 8,
+          "entries": [
+            "奇妙",
+            "生命",
+            "呈现",
+            "变幻",
+            "圆润",
+            "李子",
+            "夏日",
+            "感叹",
+            "光辉",
+            "神奇",
+            "光芒",
+            "建造",
+            "冰柱",
+            "锋利",
+            "刀剑",
+            "融化"
+          ]
+        },
+        {
+          "heading": "25",
+          "lessonNumber": 25,
+          "gardenNumber": null,
+          "sourceImage": 8,
+          "entries": [
+            "性子",
+            "顾客",
+            "笑话",
+            "大方",
+            "夸奖",
+            "承认",
+            "提前",
+            "服务",
+            "满意",
+            "袖子",
+            "衬衫",
+            "负责",
+            "名声",
+            "泄气",
+            "放心",
+            "手艺",
+            "感动",
+            "恼怒"
+          ]
+        },
+        {
+          "heading": "26",
+          "lessonNumber": 26,
+          "gardenNumber": null,
+          "sourceImage": 8,
+          "entries": [
+            "莫非",
+            "厉害",
+            "走南闯北",
+            "听说",
+            "发抖",
+            "害怕",
+            "松手",
+            "骨头",
+            "逃命",
+            "甘心",
+            "逃跑"
+          ]
+        },
+        {
+          "heading": "语文园地",
+          "lessonNumber": null,
+          "gardenNumber": 8,
+          "sourceImage": 8,
+          "entries": [
+            "呼吸",
+            "咳嗽",
+            "唠叨",
+            "吆喝",
+            "诉说",
+            "讽刺",
+            "告诫",
+            "辩论"
+          ]
+        }
+      ],
+      "sourcePages": [
+        {
+          "number": 6,
+          "title": "词语表原图（附件图6）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-6.png",
+          "sha256": "559edb0f191b0fc09084516180e405af66b0e1d93fcc32017de8d16cb2ec3981"
+        },
+        {
+          "number": 7,
+          "title": "词语表原图（附件图7）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-7.png",
+          "sha256": "480da3d0cfbb10f2d1ba8becbe361a668eaef6e4e7e3ba0bb12e0b70b2c86768"
+        },
+        {
+          "number": 8,
+          "title": "词语表原图（附件图8）",
+          "url": "/curriculum/grade-3/chinese-pep-lower/literacy/source-8.png",
+          "sha256": "e92d10c2583e15b2ee0f68c719044003a7c5caea7bc3832231f3d68101fc090e"
+        }
+      ]
+    }
+  ]
+}

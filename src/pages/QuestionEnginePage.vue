@@ -1,6 +1,13 @@
 <script setup lang="ts">
+import { completeFormalTask } from '@/services/learning-agent/formalAgentLaunchStorage'
+import { syncAccount, accountState } from '@/services/account/accountService'
 import MathQuestVisual from '@/components/knowledge-point/MathQuestVisual.vue'
 import { localQuestionVisuals } from '@/data/curriculum/production/localRelease'
+import {
+  synchronousPracticeFor,
+  synchronousPracticeForLesson,
+  synchronousPracticeNotice,
+} from '@/services/curriculum/synchronousPractice'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -115,7 +122,20 @@ const context = computed<AssessmentLaunchContext | null>(() => {
   return null
 })
 
+const activeSyncPractice = computed(() =>
+  typeof route.query.practiceSetId === 'string'
+    ? synchronousPracticeFor(context.value, route.query.practiceSetId)
+    : null,
+)
+const unitPracticeNotice = computed(() => synchronousPracticeNotice(activeSyncPractice.value))
+const isUnitReview = computed(
+  () =>
+    questionEngineStore.questions.length > 0 &&
+    questionEngineStore.questions.every((q) => q.tags.includes('unit-sync-only')),
+)
+
 const returnPath = computed(() => {
+  if (!context.value) return '/learning-map'
   if (formalAgentLaunch.value) return '/learning-agent'
   if (context.value?.source === 'wrong_book') {
     return isDevRoute.value ? '/dev/wrong-book' : '/wrong-book'
@@ -131,15 +151,17 @@ const returnPath = computed(() => {
   return isDevRoute.value ? '/dev/lesson-player' : '/lesson'
 })
 const returnLabel = computed(() =>
-  formalAgentLaunch.value
-    ? '返回 Agent 学习建议'
-    : context.value?.source === 'wrong_book'
-    ? '返回错题本'
-    : ['/home', '/tasks', '/dev/home'].includes(returnPath.value)
-      ? '返回首页'
-      : returnPath.value.includes('/knowledge-point/')
-        ? '返回知识点详情'
-        : '返回课程',
+  !context.value
+    ? '返回知识地图'
+    : formalAgentLaunch.value
+      ? '返回学习建议'
+      : context.value?.source === 'wrong_book'
+        ? '返回错题本'
+        : ['/home', '/tasks', '/dev/home'].includes(returnPath.value)
+          ? '返回首页'
+          : returnPath.value.includes('/knowledge-point/')
+            ? '返回知识点详情'
+            : '返回课程',
 )
 const lessonReturnPath = computed(() => {
   const requested = route.query.lessonReturnTo
@@ -184,27 +206,46 @@ const demoStateOptions: Array<{ value: QuestionEngineDemoState; label: string }>
 async function loadAssessment() {
   const activeProfile = profileId.value,
     activePath = route.fullPath
-  if (!context.value) return
   masteryProcessingStatus.value = 'idle'
   masteryProcessingMessage.value = null
   rewardMessage.value = null
   formalAgentError.value = null
+  formalAgentLaunch.value = null
+  learningStrategyStore.clear()
+  if (!context.value) {
+    await questionEngineStore.loadAssessment(null)
+    return
+  }
   const launchId = typeof route.query.agentLaunchId === 'string' ? route.query.agentLaunchId : ''
   formalAgentLaunch.value = launchId ? loadFormalAgentLaunch(launchId) : null
   if (launchId && !formalAgentLaunch.value) {
-    formalAgentError.value = '这次 Agent 练习绑定已经失效，请重新从 Agent 学习建议进入。'
+    formalAgentError.value = '这次学习建议练习暂时无法恢复，请重新获取建议。'
     return
   }
-  learningStrategyStore.clear()
+  const requestedPractice = route.query.practiceSetId
+  const synchronousPractice =
+    typeof requestedPractice === 'string'
+      ? synchronousPracticeFor(context.value, requestedPractice)
+      : null
+  if (requestedPractice !== undefined && (!synchronousPractice || launchId)) {
+    await questionEngineStore.loadAssessment(null)
+    formalAgentError.value = '这组同步练习与当前教材或单元不匹配，请从本单元重新进入。'
+    return
+  }
   await questionEngineStore.loadAssessment(context.value, {
+    selectedQuestionIds:
+      synchronousPractice?.fixedQuestionIds ??
+      formalAgentLaunch.value?.decision.recommendedActivity.selectedQuestionIds,
     dataset: dataset.value,
     demoState: demoState.value,
     studentId: profileId.value,
     ...(formalAgentLaunch.value?.id
       ? { sessionScope: formalAgentLaunch.value.id }
-      : sessionScope.value
-        ? { sessionScope: sessionScope.value }
-        : {}),
+      : synchronousPractice
+        ? { sessionScope: `${synchronousPractice.id}:${sessionScope.value ?? 'default'}` }
+        : sessionScope.value
+          ? { sessionScope: sessionScope.value }
+          : {}),
     ...(retryQuestionId.value ? { initialQuestionId: retryQuestionId.value } : {}),
     ...(retryQuestionId.value ? { reviewQuestionId: retryQuestionId.value } : {}),
   })
@@ -222,12 +263,13 @@ async function loadAssessment() {
       new Date().toISOString(),
     )
     if (opened.status === 'BLOCKED') {
-      formalAgentError.value = '正式 Agent 练习校验未通过，已阻止提交。'
+      formalAgentError.value = '学习建议 练习校验未通过，已阻止提交。'
       return
     }
     // The first Question Engine load creates its legacy shell. Reload after
     // binding so the UI observes the runtime-owned session and its identity.
     await questionEngineStore.loadAssessment(context.value, {
+      selectedQuestionIds: launch.decision.recommendedActivity.selectedQuestionIds,
       dataset: 'profile',
       studentId: profileId.value,
       sessionScope: launch.id,
@@ -266,13 +308,17 @@ async function syncFormalAgentCompletion(session: NonNullable<typeof questionEng
     formalAgentError.value = '正式学习记录暂时没有完成保存，请保持当前页面并重试。'
     return false
   }
+  completeFormalTask(launch.id)
+  if (accountState.username) await syncAccount()
   const cloudSync = await syncLearningFactsToCloud(launch.profileId)
   if (cloudSync.kind === 'conflict') {
-    formalAgentError.value = '正式学习记录已保存在本机，但云端档案已被另一台设备更新，请到家庭档案处理冲突。'
+    formalAgentError.value =
+      '正式学习记录已保存在本机，但云端档案已被另一台设备更新，请到家庭档案处理冲突。'
   } else if (cloudSync.kind === 'failed') {
     formalAgentError.value = `正式学习记录已保存在本机，但${cloudSync.message}`
   }
   await questionEngineStore.loadAssessment(context.value!, {
+    selectedQuestionIds: launch.decision.recommendedActivity.selectedQuestionIds,
     dataset: 'profile',
     studentId: profileId.value,
     sessionScope: launch.id,
@@ -285,11 +331,18 @@ async function processCompletedSession(): Promise<void> {
   if (!session) return
   if (formalAgentLaunch.value && session.runtimeAgent) {
     if (!session.runtimeAgent.projectedAt) {
-      formalAgentError.value = '正式 Agent 记录尚未完成保存。'
+      formalAgentError.value = '学习记录尚未完成保存。'
+      return
+    }
+    try {
+      completeFormalTask(formalAgentLaunch.value.id)
+    } catch (caught) {
+      formalAgentError.value =
+        caught instanceof Error ? caught.message : '学习安排尚未完成保存，请重新进入练习。'
       return
     }
     masteryProcessingStatus.value = 'updated'
-    masteryProcessingMessage.value = '正式 Agent 已完成学习记录更新。'
+    masteryProcessingMessage.value = '学习记录已更新。'
     return
   }
   const studentProfileId = profileId.value
@@ -415,7 +468,9 @@ async function processCompletedSession(): Promise<void> {
     masteryProcessingStatus.value = 'updated'
     masteryProcessingMessage.value = result.appendedEvidence.length
       ? `已根据 ${result.appendedEvidence.length} 条作答证据更新知识掌握。`
-      : '这次练习的掌握度记录已经更新过。'
+      : isUnitReview.value
+        ? '单元复习记录已保存。'
+        : '这次练习的掌握度记录已经更新过。'
   } catch (caught) {
     if (!stillActive()) return
     learningStrategyStore.clear()
@@ -438,10 +493,26 @@ function returnToLesson(completed = false) {
     void router.push(isDevRoute.value ? '/dev/review-queue' : '/review-queue')
     return
   }
-  const launchContext = context.value
+  let launchContext = context.value
   if (!launchContext) {
     void router.push(returnPath.value)
     return
+  }
+  if (
+    activeSyncPractice.value &&
+    typeof route.query.syncReturnLessonId === 'string' &&
+    typeof route.query.syncReturnKnowledgePointId === 'string'
+  ) {
+    const original = {
+      ...launchContext,
+      lessonId: route.query.syncReturnLessonId,
+      knowledgePointId: route.query.syncReturnKnowledgePointId,
+    }
+    if (
+      synchronousPracticeForLesson(original)?.id === activeSyncPractice.value.id &&
+      returnPath.value.endsWith(`/knowledge-point/${original.knowledgePointId}`)
+    )
+      launchContext = original
   }
   void router.push({
     path: returnPath.value,
@@ -453,7 +524,9 @@ function returnToLesson(completed = false) {
       ...(dataset.value === 'demo' ? { dataset: 'demo' } : {}),
       ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
       returnTo: lessonReturnPath.value,
-      ...(completed ? { assessmentCompleted: 'true', focusStep: 'summary' } : {}),
+      ...(completed && !activeSyncPractice.value
+        ? { assessmentCompleted: 'true', focusStep: 'summary' }
+        : {}),
     },
   })
 }
@@ -593,8 +666,14 @@ watch(
               {{ returnLabel }}
             </RouterLink>
             <p class="curriculum-eyebrow">动动脑筋 · 练习时间</p>
-            <h1>{{ viewModel ? '本次课后练习' : '准备一组练习' }}</h1>
-            <p v-if="viewModel">完成一次练习，看看自己对这一步的理解。</p>
+            <h1>
+              {{ activeSyncPractice?.title ?? (viewModel ? '本次课后练习' : '准备一组练习') }}
+            </h1>
+            <p v-if="viewModel && activeSyncPractice">
+              按单元复习；开放表达和多解题提交后对照参考答案。
+            </p>
+            <p v-else-if="viewModel">完成一次练习，看看自己对这一步的理解。</p>
+            <p v-if="viewModel && unitPracticeNotice">{{ unitPracticeNotice }}</p>
           </div>
           <div v-if="viewModel" class="question-engine__header-status" aria-label="题目来源状态">
             <span v-if="viewModel.flags.isDemo" class="question-engine__badge">开发样本</span>
@@ -761,7 +840,8 @@ watch(
           >
             <AppIcon name="check-circle" :size="44" color="var(--color-success)" decorative />
             <h2 id="assessment-completion-title">本次练习完成</h2>
-            <p>这次结果描述本组题目的作答情况；掌握度会由作答证据单独计算。</p>
+            <p v-if="isUnitReview">这次结果用于单元复习，开放题可继续对照参考答案检查。</p>
+            <p v-else>这次结果描述本组题目的作答情况；掌握度会由作答证据单独计算。</p>
             <div v-if="rewardMessage" class="question-engine__reward-notice" role="status">
               <AppIcon name="sparkles" :size="20" decorative />
               <span>{{ rewardMessage }}</span>
@@ -797,7 +877,7 @@ watch(
               </div>
               <div class="question-engine__result-item">
                 <strong>{{ viewModel.resultSummary.manualReviewCount }}</strong
-                ><span>待人工判断</span>
+                ><span>开放题 · 对照参考</span>
               </div>
               <div class="question-engine__result-item">
                 <strong>{{

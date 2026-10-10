@@ -323,7 +323,7 @@ describe('PHASE 16 production config and scope', () => {
     const report = validateProductionReadiness(productionCurriculumData, mvpCurriculumScope)
     expect(report.status).toBe('PASS')
     expect(report.issues).toEqual([])
-    expect(report.index.textbooks).toHaveLength(11)
+    expect(report.index.textbooks).toHaveLength(40)
     expect(report.content.passed).toBe(true)
     expect(report.questions.passed).toBe(true)
   })

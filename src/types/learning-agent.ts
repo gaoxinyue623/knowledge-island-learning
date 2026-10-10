@@ -72,7 +72,7 @@ export interface StudentKnowledgeState {
   generatedAt: string
 }
 export interface AgentCurriculumContext {
-  regionId: string
+  regionId?: string
   grade: string
   semester: string
   subject: DomainLearningMapSourceInput['subject']['code']
@@ -82,6 +82,7 @@ export interface AgentCurriculumContext {
 }
 /** Existing facts, supplied by a read-only repository adapter or an isolated simulation. */
 export interface LearningAgentSnapshot {
+  aiSignals?: import('@/services/formal-ai/signals').AiLearningSignal[]
   profile: StudentCurriculumProfile
   curriculum: DomainLearningMapSourceInput
   regionTextbookRelations: RegionTextbookRelation[]
@@ -137,6 +138,9 @@ export type SupplementKind =
   | 'SUMMARY'
   | 'REMEDIATION_EXPLANATION'
 export interface LearningActivityPlan {
+  selectedQuestionIds?: string[]
+  actualDifficulty?: number
+  selectionNote?: string
   activityType: 'LESSON' | 'PRACTICE' | 'REVIEW' | 'REMEDIATION' | 'CHALLENGE'
   knowledgePointIds: string[]
   estimatedQuestionCount: number

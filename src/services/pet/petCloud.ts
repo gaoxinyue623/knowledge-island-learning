@@ -40,7 +40,16 @@ export async function petCloudRequest(
     })
     const data: unknown = await response.json().catch(() => null)
     if (!response.ok) {
-      const error = z.object({ error: z.string(), code: z.string().optional(), details: z.unknown().optional() }).safeParse(data)
+      const error = z
+        .object({ error: z.string(), code: z.string().optional(), details: z.unknown().optional() })
+        .safeParse(data)
+      if (
+        typeof window !== 'undefined' &&
+        path !== 'login' &&
+        path !== 'register' &&
+        (response.status === 401 || (error.success && error.data.code === 'SESSION_CHANGED'))
+      )
+        window.dispatchEvent(new Event('ki-session-expired'))
       throw new PetCloudError(
         response.status,
         error.success ? error.data.error : '云端服务暂时无法连接，本机记录不受影响。',

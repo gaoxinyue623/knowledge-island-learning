@@ -1,0 +1,20 @@
+{
+  "batchId": "CHINESE_READING_ONLY_DRAFT_20261008",
+  "validatedAt": "2026-10-08T06:45:20.452Z",
+  "technicalValidation": "PASSED",
+  "humanReview": "PENDING",
+  "knowledgePoints": 8,
+  "questions": 24,
+  "optionGradingChecks": 72,
+  "standaloneReadingQuestions": 9,
+  "checks": [
+    "题目结构",
+    "教材课次与知识点关联",
+    "映射权重",
+    "正确选项及错误选项的实际判分",
+    "单独作答所需阅读材料",
+    "审核清单与结构化草稿一致",
+    "草稿状态及正式题库隔离"
+  ],
+  "productionPublished": false
+}

@@ -1,0 +1,308 @@
+{
+  "title": "沪教牛津四年级上册配套练习",
+  "sourceSha256": "65fb5fc23053bf727babb020a05af2742dab355b173268beeca4445aa5cfa6d1",
+  "sourceNote": "按用户提供的8组小练习和综合练习整理，共22题；括号选词转单项选择，保留原稿和修改说明。",
+  "notice": "按题核对答案，不折算百分制。Unit 5 地点调整为课文情境，Unit 6 只核对句法；综合练习使用 It lives 回答居住地点，原稿与整理说明均保留。",
+  "papers": [
+    {
+      "topicKey": "1",
+      "title": "Unit 1",
+      "sourceText": "1. I ____ (live/lives) in a flat.\n2. —Where ____ (do/does) you live?\n—I live in the country.\n✅答案：1.live 2.do",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "I ____ in a flat.",
+          "originalStem": "I ____ in a flat.",
+          "originalReference": "live",
+          "kind": "singleChoice",
+          "options": ["live", "lives"],
+          "correctIndex": 0,
+          "reference": "A. live",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "—Where ____ you live?\n—I live in the country.",
+          "originalStem": "—Where ____ you live?\n—I live in the country.",
+          "originalReference": "do",
+          "kind": "singleChoice",
+          "options": ["do", "does"],
+          "correctIndex": 0,
+          "reference": "A. do",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        }
+      ]
+    },
+    {
+      "topicKey": "2",
+      "title": "Unit 2",
+      "sourceText": "1. The owl ____ (live/lives) in the tree.\n2. —Where are the honeybees?\n—____ in the hive. (It’s / They’re)\n✅答案：1.lives 2.They’re",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "The owl ____ in the tree.",
+          "originalStem": "The owl ____ in the tree.",
+          "originalReference": "lives",
+          "kind": "singleChoice",
+          "options": ["live", "lives"],
+          "correctIndex": 1,
+          "reference": "B. lives",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "—Where are the honeybees?\n—____ in the hive.",
+          "originalStem": "—Where are the honeybees?\n—____ in the hive.",
+          "originalReference": "They’re",
+          "kind": "singleChoice",
+          "options": ["It’s", "They’re"],
+          "correctIndex": 1,
+          "reference": "B. They’re",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        }
+      ]
+    },
+    {
+      "topicKey": "3",
+      "title": "Unit 3",
+      "sourceText": "1. Three plus four ____ seven. (equal / equals)\n2. I ____ have any rulers. (don’t / doesn’t)\n✅答案：1.equals 2.don’t",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "Three plus four ____ seven.",
+          "originalStem": "Three plus four ____ seven.",
+          "originalReference": "equals",
+          "kind": "singleChoice",
+          "options": ["equal", "equals"],
+          "correctIndex": 1,
+          "reference": "B. equals",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "I ____ have any rulers.",
+          "originalStem": "I ____ have any rulers.",
+          "originalReference": "don’t",
+          "kind": "singleChoice",
+          "options": ["don’t", "doesn’t"],
+          "correctIndex": 0,
+          "reference": "A. don’t",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        }
+      ]
+    },
+    {
+      "topicKey": "4",
+      "title": "Unit 4",
+      "sourceText": "1. I’d like ____ bottle of juice. (a / an)\n2. —How much ____ the eggs? —They’re 15 yuan. (is / are)\n✅答案：1.a 2.are",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "I’d like ____ bottle of juice.",
+          "originalStem": "I’d like ____ bottle of juice.",
+          "originalReference": "a",
+          "kind": "singleChoice",
+          "options": ["a", "an"],
+          "correctIndex": 0,
+          "reference": "A. a",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "—How much ____ the eggs?\n—They’re 15 yuan.",
+          "originalStem": "—How much ____ the eggs?\n—They’re 15 yuan.",
+          "originalReference": "are",
+          "kind": "singleChoice",
+          "options": ["is", "are"],
+          "correctIndex": 1,
+          "reference": "B. are",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        }
+      ]
+    },
+    {
+      "topicKey": "5",
+      "title": "Unit 5",
+      "sourceText": "1. In spring, it ____ warm. (get / gets)\n2. It ____ snow in Guangdong. (doesn’t / don’t)\n✅答案：1.gets 2.doesn’t",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "In spring, it ____ warm.",
+          "originalStem": "In spring, it ____ warm.",
+          "originalReference": "gets",
+          "kind": "singleChoice",
+          "options": ["get", "gets"],
+          "correctIndex": 1,
+          "reference": "B. gets",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "按课文情境补全句子：It ____ snow here.",
+          "originalStem": "It ____ snow in Guangdong. (doesn’t / don’t)",
+          "originalReference": "doesn’t",
+          "kind": "singleChoice",
+          "options": ["doesn’t", "don’t"],
+          "correctIndex": 0,
+          "reference": "A. doesn’t",
+          "adjustment": "将地区泛化表述改为课文中的 here，只考查第三人称单数否定句，不断言整个地区不下雪。"
+        }
+      ]
+    },
+    {
+      "topicKey": "6",
+      "title": "Unit 6",
+      "sourceText": "1. The plant ____ leaves. (have / has)\n2. It ____ fruit. (doesn’t have / don’t have)\n✅答案：1.has 2.doesn’t have",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "The plant ____ leaves.",
+          "originalStem": "The plant ____ leaves.",
+          "originalReference": "has",
+          "kind": "singleChoice",
+          "options": ["have", "has"],
+          "correctIndex": 1,
+          "reference": "B. has",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "只判断句法，不判断向日葵是否结果：It ____ fruit.",
+          "originalStem": "It ____ fruit. (doesn’t have / don’t have)",
+          "originalReference": "doesn’t have",
+          "kind": "singleChoice",
+          "options": ["doesn’t have", "don’t have"],
+          "correctIndex": 0,
+          "reference": "A. doesn’t have",
+          "adjustment": "保留两个语法选项，明确仅核对 does not have 句法，不能据此断言向日葵没有果实。"
+        }
+      ]
+    },
+    {
+      "topicKey": "7",
+      "title": "Unit 7",
+      "sourceText": "1. ____ (Don’t / Not) run on the road.\n2. ____ (Wait / Waits) for the green light.\n✅答案：1.Don’t 2.Wait",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "____ run on the road.",
+          "originalStem": "____ run on the road.",
+          "originalReference": "Don’t",
+          "kind": "singleChoice",
+          "options": ["Don’t", "Not"],
+          "correctIndex": 0,
+          "reference": "A. Don’t",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "____ for the green light.",
+          "originalStem": "____ for the green light.",
+          "originalReference": "Wait",
+          "kind": "singleChoice",
+          "options": ["Wait", "Waits"],
+          "correctIndex": 0,
+          "reference": "A. Wait",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        }
+      ]
+    },
+    {
+      "topicKey": "8",
+      "title": "Unit 8",
+      "sourceText": "1. My grandpa ____ for a walk. (go / goes)\n2. They ____ housework every day. (do / does)\n✅答案：1.goes 2.do",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "My grandpa ____ for a walk.",
+          "originalStem": "My grandpa ____ for a walk.",
+          "originalReference": "goes",
+          "kind": "singleChoice",
+          "options": ["go", "goes"],
+          "correctIndex": 1,
+          "reference": "B. goes",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        },
+        {
+          "number": 2,
+          "stem": "They ____ housework every day.",
+          "originalStem": "They ____ housework every day.",
+          "originalReference": "do",
+          "kind": "singleChoice",
+          "options": ["do", "does"],
+          "correctIndex": 0,
+          "reference": "A. do",
+          "adjustment": "括号选词题整理为单项选择，候选词与答案保留。"
+        }
+      ]
+    },
+    {
+      "topicKey": "9",
+      "title": "本册综合小练习",
+      "sourceText": "一、选词填空\nlive, has, goes, don’t, wait\n1. I ____ in a house.\n2. The plant ____ a flower.\n3. My grandma ____ shopping every day.\n4. We ____ have any eggs.\n5. ____ for the green light.\n二、单项选择\n1. —Where does the eagle live?\n—____ in the mountains.\nA. It’s B. They’re\n✅答案：一、1.live 2.has 3.goes 4.don’t 5.Wait；二、A",
+      "questions": [
+        {
+          "number": 1,
+          "stem": "选词填空（live, has, goes, don’t, wait）：I ____ in a house.",
+          "originalStem": "I ____ in a house.",
+          "originalReference": "live",
+          "kind": "fillBlank",
+          "reference": "live",
+          "answers": [["live"]],
+          "adjustment": ""
+        },
+        {
+          "number": 2,
+          "stem": "选词填空（live, has, goes, don’t, wait）：The plant ____ a flower.",
+          "originalStem": "The plant ____ a flower.",
+          "originalReference": "has",
+          "kind": "fillBlank",
+          "reference": "has",
+          "answers": [["has"]],
+          "adjustment": ""
+        },
+        {
+          "number": 3,
+          "stem": "选词填空（live, has, goes, don’t, wait）：My grandma ____ shopping every day.",
+          "originalStem": "My grandma ____ shopping every day.",
+          "originalReference": "goes",
+          "kind": "fillBlank",
+          "reference": "goes",
+          "answers": [["goes"]],
+          "adjustment": ""
+        },
+        {
+          "number": 4,
+          "stem": "选词填空（live, has, goes, don’t, wait）：We ____ have any eggs.",
+          "originalStem": "We ____ have any eggs.",
+          "originalReference": "don’t",
+          "kind": "fillBlank",
+          "reference": "don’t",
+          "answers": [["don’t"]],
+          "adjustment": ""
+        },
+        {
+          "number": 5,
+          "stem": "选词填空（live, has, goes, don’t, wait）：____ for the green light.",
+          "originalStem": "____ for the green light.",
+          "originalReference": "Wait",
+          "kind": "fillBlank",
+          "reference": "Wait",
+          "answers": [["Wait"]],
+          "adjustment": ""
+        },
+        {
+          "number": 6,
+          "stem": "—Where does the eagle live?\n—____ in the mountains.",
+          "originalStem": "—Where does the eagle live?\n—____ in the mountains. A. It’s B. They’re",
+          "originalReference": "A. It’s",
+          "kind": "singleChoice",
+          "options": ["It lives", "They live"],
+          "correctIndex": 0,
+          "reference": "A. It lives",
+          "adjustment": "按 Where does … live? 整理为 It lives …，同时保留原题与原答案。"
+        }
+      ]
+    }
+  ]
+}

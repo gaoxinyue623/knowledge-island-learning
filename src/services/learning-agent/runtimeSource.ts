@@ -9,6 +9,7 @@ import { learningHistoryRepository } from '@/services/learning-history/learningH
 import { dailyPlanStorage } from '@/services/home/dailyPlanStorage'
 import { createLearningMapProgressStorage } from '@/services/learning-map/learningMapStorage'
 import { contentExpansionRepository } from '@/services/content-expansion/contentExpansionRepository'
+import { readAiSignals } from '@/services/formal-ai/signals'
 
 export class RuntimeLearningAgentSource implements LearningAgentSource {
   async load(profileId: string, textbookId: string): Promise<LearningAgentSnapshot> {
@@ -40,6 +41,7 @@ export class RuntimeLearningAgentSource implements LearningAgentSource {
     return {
       profile,
       dataset: 'profile',
+      aiSignals: await readAiSignals(profileId, textbookId),
       curriculum: {
         textbook,
         grade,
