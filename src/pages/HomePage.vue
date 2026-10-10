@@ -12,7 +12,6 @@ import SubjectHabitat from '@/components/illustrations/SubjectHabitat.vue'
 import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
 import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import SpacedReviewEntry from '@/components/student-growth/SpacedReviewEntry.vue'
-import WeeklyPlanCard from '@/components/weekly-plan/WeeklyPlanCard.vue'
 import islandAdventure from '@/assets/illustrations/island-adventure.jpg'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
 import { productionConfig } from '@/config/production'
@@ -203,6 +202,10 @@ function openShortcut(path: string): void {
   void router.push(path)
 }
 
+function subjectLabel(subject: SubjectCode): string {
+  return viewModel.value?.subjects.find((item) => item.code === subject)?.label ?? subject
+}
+
 function openSpacedReview(item: SpacedReviewDue): void {
   const attemptId = crypto.randomUUID()
   const href = createReviewLaunchHref(item.courseHref, attemptId)
@@ -240,10 +243,44 @@ function openSubject(subject: SubjectCode): void {
 }
 
 function openContinue(): void {
-  const task = viewModel.value?.today.tasks.find(
-    (candidate) => candidate.type === 'continue_learning' && candidate.status === 'pending',
-  )
-  if (task) openTask(task)
+  const continuation = viewModel.value?.continueLearning
+  if (!continuation || continuation.action.type !== 'lesson') return
+  void router.push({
+    path: isDevRoute.value ? '/dev/lesson-player' : '/lesson',
+    query: {
+      ...continuation.action.launchContext,
+      ...(isDevRoute.value ? { dataset: 'demo' } : {}),
+      returnTo: route.path,
+    },
+  })
+}
+
+function openContinuePractice(): void {
+  const continuation = viewModel.value?.continueAssessment
+  if (!continuation) return
+  void router.push({
+    path: isDevRoute.value ? '/dev/question-engine' : '/assessment',
+    query: {
+      ...continuation.action,
+      ...(continuation.sessionScope ? { sessionScope: continuation.sessionScope } : {}),
+      ...(isDevRoute.value ? { dataset: 'demo' } : {}),
+      returnTo: isDevRoute.value ? '/dev/lesson-player' : '/lesson',
+      lessonReturnTo: route.path,
+    },
+  })
+}
+
+function continueRecentLesson(item: HomeViewModel['recentLearning'][number]): void {
+  const context = item.continueAction
+  if (!context) return
+  void router.push({
+    path: isDevRoute.value ? '/dev/lesson-player' : '/lesson',
+    query: {
+      ...context,
+      ...(isDevRoute.value ? { dataset: 'demo' } : {}),
+      returnTo: route.path,
+    },
+  })
 }
 
 async function loadHome(): Promise<void> {
@@ -421,13 +458,6 @@ watch(
         </section>
 
         <SpacedReviewEntry :items="dueReviews" @launch="openSpacedReview" />
-        <WeeklyPlanCard
-          v-if="!isDevRoute"
-          :profile-id="viewModel.profile.profileId"
-          :daily-plan="viewModel.today"
-          @open-task="openTask"
-          @refresh="loadHome"
-        />
 
         <section
           v-if="viewModel.continueLearning"
@@ -454,6 +484,56 @@ watch(
             </div>
             <AppButton variant="primary" icon-right="arrow-right" @click="openContinue"
               >继续学习</AppButton
+            >
+          </div>
+        </section>
+
+        <section
+          v-if="viewModel.continueAssessment"
+          class="home-page__continue home-page__continue--practice"
+          aria-labelledby="continue-practice-title"
+        >
+          <div class="home-page__section-heading">
+            <div>
+              <p class="curriculum-eyebrow">练习进度已保存</p>
+              <h2 id="continue-practice-title">接着上次练习</h2>
+              <p>可以从刚才停下的题目继续，已经提交的答案会为你保留。</p>
+            </div>
+            <strong>
+              {{ viewModel.continueAssessment.answeredCount }}/{{
+                viewModel.continueAssessment.questionCount
+              }}题
+            </strong>
+          </div>
+          <div class="home-page__continue-body">
+            <div>
+              <span class="home-page__subject-label"
+                >{{ subjectLabel(viewModel.continueAssessment.subject) }} · 课程练习</span
+              >
+              <h3>{{ viewModel.continueAssessment.title }}</h3>
+              <p>
+                上次停在第 {{ viewModel.continueAssessment.currentQuestionNumber }} 题，已提交
+                {{ viewModel.continueAssessment.answeredCount }}/{{
+                  viewModel.continueAssessment.questionCount
+                }}
+                题。
+              </p>
+              <AppProgress
+                :value="
+                  viewModel.continueAssessment.questionCount
+                    ? Math.round(
+                        (viewModel.continueAssessment.answeredCount /
+                          viewModel.continueAssessment.questionCount) *
+                          100,
+                      )
+                    : 0
+                "
+                :show-value="false"
+                label="练习完成度"
+              />
+            </div>
+            <AppButton variant="primary" icon-right="arrow-right" @click="openContinuePractice"
+              >继续练习</AppButton
             >
           </div>
         </section>
@@ -568,6 +648,13 @@ watch(
                       '学习'
                     }}
                     · {{ historySummary(item) }}</span
+                  >
+                  <AppButton
+                    v-if="item.continueAction"
+                    variant="ghost"
+                    size="sm"
+                    @click="continueRecentLesson(item)"
+                    >继续学习</AppButton
                   >
                 </div>
                 <time :datetime="item.occurredAt">{{ item.occurredAt.slice(0, 10) }}</time>

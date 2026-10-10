@@ -41,6 +41,7 @@ import type {
   QuestionAnswerDraft,
   QuestionEngineDataset,
   QuestionEngineDemoState,
+  SubjectCode,
 } from '@/types'
 
 const route = useRoute()
@@ -168,6 +169,12 @@ const lessonReturnPath = computed(() => {
   const allowed = ['/home', '/tasks', '/dev/home', '/learning-map', '/dev/learning-map']
   if (typeof requested === 'string' && allowed.includes(requested)) return requested
   return isDevRoute.value ? '/dev/learning-map' : '/learning-map'
+})
+const mapSubject = computed<SubjectCode | null>(() => {
+  const requested = typeof route.query.subject === 'string' ? route.query.subject.toUpperCase() : ''
+  return requested === 'CHINESE' || requested === 'MATH' || requested === 'ENGLISH'
+    ? requested
+    : null
 })
 const mapNodeId = computed(() =>
   typeof route.query.mapNodeId === 'string' ? route.query.mapNodeId : undefined,
@@ -522,6 +529,7 @@ function returnToLesson(completed = false) {
       lessonId: launchContext.lessonId,
       knowledgePointId: launchContext.knowledgePointId,
       ...(dataset.value === 'demo' ? { dataset: 'demo' } : {}),
+      ...(mapSubject.value ? { subject: mapSubject.value } : {}),
       ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
       returnTo: lessonReturnPath.value,
       ...(completed && !activeSyncPractice.value

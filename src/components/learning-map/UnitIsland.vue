@@ -3,18 +3,29 @@ import { computed } from 'vue'
 
 import AppIcon from '@/components/common/AppIcon.vue'
 import SubjectHabitat from '@/components/illustrations/SubjectHabitat.vue'
+import ComprehensiveAssessments from './ComprehensiveAssessments.vue'
 
 import LessonRegion from './LessonRegion.vue'
 import { LEARNING_MAP_LAYOUT } from '@/services/learning-map/learningMapLayout'
-import type { LearningMapPosition, LearningMapSize, LearningNodeStatus, UnitIsland } from '@/types'
+import type {
+  LearningMapPosition,
+  LearningMapSize,
+  LearningMapViewModel,
+  LearningNodeStatus,
+  UnitIsland,
+} from '@/types'
 
 interface Props {
   island: UnitIsland
   canvasSize: LearningMapSize
+  assessmentModel?: LearningMapViewModel | null
   selectedNodeId?: string | null
 }
 
-const props = withDefaults(defineProps<Props>(), { selectedNodeId: null })
+const props = withDefaults(defineProps<Props>(), {
+  assessmentModel: null,
+  selectedNodeId: null,
+})
 
 const emit = defineEmits<{
   selectNode: [nodeId: string]
@@ -111,6 +122,11 @@ function islandStyle() {
         <strong>{{ props.island.progress }}%</strong>
         <span>{{ props.island.lessons.length }} 个关卡</span>
       </div>
+      <ComprehensiveAssessments
+        v-if="props.assessmentModel"
+        :model="props.assessmentModel"
+        :unit-id="props.island.unitId"
+      />
     </header>
     <div class="unit-island__lessons">
       <LessonRegion

@@ -9,7 +9,6 @@ import AppLoading from '@/components/common/AppLoading.vue'
 import AppToast from '@/components/common/AppToast.vue'
 import ThinkingEntry from '@/components/thinking/ThinkingEntry.vue'
 import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
-import LearningRecommendationCard from '@/components/learning-strategy/LearningRecommendationCard.vue'
 import ComprehensiveAssessments from '@/components/learning-map/ComprehensiveAssessments.vue'
 import KnowledgeIslandMap from '@/components/learning-map/KnowledgeIslandMap.vue'
 import LearningProgressBar from '@/components/learning-map/LearningProgressBar.vue'
@@ -38,19 +37,28 @@ const notice = ref<{
 
 const viewModel = computed(() => learningMapStore.viewModel)
 const isFormalPilot = computed(() => isPilotTextbook(viewModel.value?.textbook.id))
-const strategyRecommendation = computed(() => learningStrategyStore.recommendation)
 const profile = computed(() => curriculumStore.curriculumProfile)
-const requestedSubject = computed<SubjectCode>(() => {
+const subjects: { code: SubjectCode; label: string }[] = [
+  { code: 'CHINESE', label: '语文地图' },
+  { code: 'MATH', label: '数学地图' },
+  { code: 'ENGLISH', label: '英语地图' },
+]
+const explicitSubject = computed<SubjectCode | null>(() => {
   const requested = String(route.query.subject ?? '').toUpperCase()
-  if (requested === 'CHINESE' || requested === 'MATH' || requested === 'ENGLISH') {
-    return requested
-  }
-  if (profile.value?.mathTextbookVersionId) return 'MATH'
+  return requested === 'CHINESE' || requested === 'MATH' || requested === 'ENGLISH'
+    ? requested
+    : null
+})
+const requestedSubject = computed<SubjectCode>(() => {
+  if (explicitSubject.value) return explicitSubject.value
   if (profile.value?.chineseTextbookVersionId) return 'CHINESE'
+  if (profile.value?.mathTextbookVersionId) return 'MATH'
   return 'ENGLISH'
 })
 const selectedTextbookId = computed(() => {
-  if (typeof route.query.textbookId === 'string') return route.query.textbookId
+  if (!explicitSubject.value && typeof route.query.textbookId === 'string') {
+    return route.query.textbookId
+  }
   if (!profile.value) return null
   return {
     CHINESE: profile.value.chineseTextbookVersionId,
@@ -64,6 +72,7 @@ const contextLabel = computed(() => {
     ? `${model.textbook.grade}年级 · ${model.textbook.semester === 1 ? '上册' : '下册'}`
     : '学习地图'
 })
+let mapLoadGeneration = 0
 
 function findCurrentModelNode(model: LearningMapViewModel | null): KnowledgeMapNode | null {
   if (!model?.currentNodeId) return null
@@ -71,16 +80,18 @@ function findCurrentModelNode(model: LearningMapViewModel | null): KnowledgeMapN
 }
 
 async function loadMap() {
+  const generation = ++mapLoadGeneration
   learningStrategyStore.clear()
   const textbookId = selectedTextbookId.value
-  if (!textbookId) return
   await masteryStore.load(profile.value?.studentId ?? 'local-profile')
+  if (generation !== mapLoadGeneration) return
   const loaded = await learningMapStore.loadMap({
     profileId: profile.value?.studentId,
     dataset: 'profile',
-    textbookId,
+    textbookId: textbookId ?? undefined,
     masteryRecords: masteryStore.records,
   })
+  if (generation !== mapLoadGeneration) return
   if (loaded) {
     const resolved = await learningStrategyStore.resolveForMap(loaded, {
       studentProfileId: profile.value?.studentId ?? 'local-profile',
@@ -90,6 +101,7 @@ async function loadMap() {
       currentMapNodeId: loaded.currentNodeId,
       dataset: 'profile',
     })
+    if (generation !== mapLoadGeneration) return
     if (resolved) {
       reviewQueueStore.project(resolved, {
         profileId: profile.value?.studentId ?? 'local-profile',
@@ -101,6 +113,11 @@ async function loadMap() {
   const focusNodeId = typeof route.query.focusNodeId === 'string' ? route.query.focusNodeId : null
   if (loaded && focusNodeId) learningMapStore.focusNode(focusNodeId)
   if (loaded && route.query.open === 'continue') focusCurrentNode()
+}
+
+function selectSubject(subject: SubjectCode) {
+  if (subject === requestedSubject.value) return
+  void router.push({ path: '/learning-map', query: { subject } })
 }
 
 function openNodeDetail(nodeId: Id) {
@@ -116,6 +133,7 @@ function openNodeDetail(nodeId: Id) {
       lessonId: node.lessonId,
       knowledgePointId: node.knowledgePointId,
       dataset: 'profile',
+      subject: model.textbook.subject,
       mapNodeId: node.id,
       nodeStatus: node.status,
       nodeProgress: String(node.progress),
@@ -130,17 +148,6 @@ function focusCurrentNode() {
   if (node.status !== 'locked') openNodeDetail(node.id)
 }
 
-function focusStrategyRecommendation() {
-  const nodeId = strategyRecommendation.value?.nextKnowledgePoint?.mapNodeId
-  if (!nodeId || !learningMapStore.focusNode(nodeId)) return
-  const node = findLearningMapNode(viewModel.value as LearningMapViewModel, nodeId)
-  notice.value = {
-    type: 'info',
-    title: '已经定位到学习建议',
-    message: node?.title,
-  }
-}
-
 onMounted(() => void loadMap())
 watch(
   () => [route.query.subject, profile.value?.studentId, selectedTextbookId.value],
@@ -152,6 +159,18 @@ watch(
   <AppShell :show-bottom-nav="true" :context="contextLabel">
     <div class="learning-map-page content-container">
       <ThinkingEntry compact />
+      <nav class="learning-map-subject-switcher" aria-label="切换学科地图">
+        <AppButton
+          v-for="subject in subjects"
+          :key="subject.code"
+          size="sm"
+          :variant="requestedSubject === subject.code ? 'primary' : 'secondary'"
+          :aria-pressed="requestedSubject === subject.code"
+          @click="selectSubject(subject.code)"
+        >
+          {{ subject.label }}
+        </AppButton>
+      </nav>
       <p v-if="learningMapStore.error && learningMapStore.status !== 'error'" role="alert">
         {{ learningMapStore.error }}
       </p>
@@ -222,23 +241,18 @@ watch(
         >
           未审核数据：当前内容仅用于开发验证，不代表已发布的正式课程。
         </div>
-        <LearningRecommendationCard
-          v-if="strategyRecommendation"
-          :recommendation="strategyRecommendation"
-          compact
-          @action="focusStrategyRecommendation"
-        />
         <ReadingEntry
           v-if="requestedSubject !== 'MATH'"
           compact
           :language="requestedSubject === 'ENGLISH' ? 'english' : 'chinese'"
         />
-        <ComprehensiveAssessments :model="viewModel" />
         <KnowledgeIslandMap
           :view-model="viewModel"
+          show-unit-assessments
           :selected-node-id="learningMapStore.selectedNodeId"
           @select-node="openNodeDetail"
         />
+        <ComprehensiveAssessments :model="viewModel" unit-assessments-on-map />
         <details v-if="viewModel.diagnostics.length" class="learning-map-diagnostics">
           <summary>开发诊断：{{ viewModel.diagnostics.length }} 条提示</summary>
           <p

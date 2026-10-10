@@ -134,6 +134,7 @@ import type {
   LessonContentBlockViewModel,
   LessonLaunchContext,
   LessonPlayerDataset,
+  SubjectCode,
   StructuredContent,
 } from '@/types'
 
@@ -345,6 +346,12 @@ const returnPath = computed(() => {
   }
   return isDevRoute.value ? '/dev/learning-map' : '/learning-map'
 })
+const mapSubject = computed<SubjectCode | null>(() => {
+  const requested = queryString('subject')?.toUpperCase()
+  return requested === 'CHINESE' || requested === 'MATH' || requested === 'ENGLISH'
+    ? requested
+    : null
+})
 
 const returnLabel = computed(() =>
   ['/home', '/tasks', '/dev/home'].includes(returnPath.value) ? '返回首页' : '返回知识地图',
@@ -357,6 +364,13 @@ const detailPath = computed(
 )
 
 const viewModel = computed(() => lessonPlayerStore.viewModel)
+const knowledgePointDescription = computed(() => {
+  const description = viewModel.value?.knowledgePoint.description?.trim()
+  if (!description || isEditorialSourceText(description)) {
+    return '先阅读内容，再用自己的话说出一个发现。'
+  }
+  return description
+})
 const lessonProgress = computed(() => {
   const loaded = viewModel.value?.context
   const matches =
@@ -497,13 +511,20 @@ const masteryStateLabel = computed(() =>
   masteryRecord.value ? MASTERY_STATE_LABELS[masteryRecord.value.state] : '',
 )
 
+function isEditorialSourceText(text: string): boolean {
+  return (
+    /(?:用户.{0,12}(?:提供|附件|标注|确认|上传)|来稿|附件|来源说明|来源\s*[:：])/.test(text) &&
+    /(?:接入|整理|学习|保留|核对|核验|版次|出版社原版|原版)/.test(text)
+  )
+}
+
 function sourceNotice(): string {
   if (viewModel.value?.flags.isDemo)
     return '这是开发样本，用来验证详情页和挑战组件，不代表正式教材内容。'
   if (viewModel.value?.flags.isSample) return '这是示例内容，只用于开发验证。'
   if (isFormalPilot.value) {
     if (context.value?.textbookId === G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID)
-      return '2019版六年级下册已接入本次提供的17篇课文、习作例文、综合性学习材料、古诗词诵读及字词表。内容按来稿展示，未独立核对出版社原版。理解题为项目原创，开放活动不自动判分。'
+      return '下面展示本课原文和配套学习活动，读一读，再完成下面的挑战。'
     if (context.value?.textbookId === G6_PEP_CHINESE_2019_S1_TEXTBOOK_ID)
       return '六年级上册2019版已接入第1—8单元所提供内容及字词表。第六单元已更正为18《古诗三首》、19《只有一个地球》、20《青山不老》、21《三黑和土地》；第17项《盼》引用本版第15课，供习作阅读。理解题为原创配套内容，导语、习作、口语交际、园地和附录不自动判分。'
     if (context.value?.textbookId === G6_PEP_CHINESE_S1_TEXTBOOK_ID)
@@ -644,7 +665,14 @@ function returnToPrevious(): void {
   const shouldFocusMap = ['/learning-map', '/dev/learning-map'].includes(returnPath.value)
   void router.push({
     path: returnPath.value,
-    ...(shouldFocusMap && focus ? { query: { focusNodeId: focus } } : {}),
+    ...(shouldFocusMap
+      ? {
+          query: {
+            ...(mapSubject.value ? { subject: mapSubject.value } : {}),
+            ...(focus ? { focusNodeId: focus } : {}),
+          },
+        }
+      : {}),
   })
 }
 
@@ -655,6 +683,7 @@ function openLesson(): void {
     query: {
       ...context.value,
       ...(isDevRoute.value ? { dataset: dataset.value } : {}),
+      ...(mapSubject.value ? { subject: mapSubject.value } : {}),
       ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
       nodeStatus: nodeStatus.value,
       nodeProgress: String(nodeProgress.value),
@@ -693,6 +722,7 @@ function openAssessment(practiceSetId?: string): void {
           }
         : {}),
       ...(isDevRoute.value ? { dataset: dataset.value } : {}),
+      ...(mapSubject.value ? { subject: mapSubject.value } : {}),
       returnTo: detailPath.value,
       lessonReturnTo: returnPath.value,
       ...(mapNodeId.value && !fixedPractice ? { mapNodeId: mapNodeId.value } : {}),
@@ -807,9 +837,7 @@ watch(
             <div class="knowledge-detail__summary-copy">
               <p class="curriculum-eyebrow">当前知识点</p>
               <h2 id="knowledge-summary-title">{{ viewModel.knowledgePoint.name }}</h2>
-              <p>
-                {{ viewModel.knowledgePoint.description || '先阅读内容，再用挑战检验自己的理解。' }}
-              </p>
+              <p>{{ knowledgePointDescription }}</p>
             </div>
             <div class="knowledge-detail__progress">
               <div class="knowledge-detail__progress-heading">
@@ -940,11 +968,7 @@ watch(
                   这里是全册字词附录，按附件中的标题分组查阅，读一读、写一写，标记还不熟悉的字词。
                 </template>
                 <template v-else>
-                  {{
-                    context?.textbookId === G6_CHINESE_2019_LOWER_S2_TEXTBOOK_ID
-                      ? '这里展示所提供的学习文本，请留意各课的来源说明，再完成配套活动。'
-                      : '这里是已接入的课文原文和配套学习内容，读一读，再完成下面的挑战。'
-                  }}
+                  这里是课文原文和配套学习内容，读一读，再完成下面的挑战。
                 </template>
               </template>
               <template v-else>

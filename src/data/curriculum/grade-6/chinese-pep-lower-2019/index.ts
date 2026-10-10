@@ -173,7 +173,7 @@ for (const d of gradeSixChinese2019LowerDefinitions) {
     .replace(/^#{2,4} /gm, '')
     .split(/\n\n+/)
     .filter(Boolean)
-  const texts = [d.sourceNote, ...paragraphs]
+  const texts = d.text ? paragraphs : [d.sourceNote]
   if (!d.text) texts.push(`项目原创学习提示\n${guidance[d.kind]}`)
   gradeSixChinese2019LowerCurriculum.courseContents.push({
     id: `${d.knowledgePointId}_CONTENT_V${revision}`,

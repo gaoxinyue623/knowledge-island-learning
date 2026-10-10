@@ -132,6 +132,16 @@ export interface ContinueLearningViewModel {
   action: DailyLearningTaskAction
 }
 
+export interface ContinueAssessmentViewModel {
+  subject: SubjectCode
+  title: string
+  answeredCount: number
+  questionCount: number
+  currentQuestionNumber: number
+  action: AssessmentLaunchContext
+  sessionScope?: string
+}
+
 export type SubjectMapStatus = 'available' | 'not_available' | 'sample' | 'unverified'
 
 export interface SubjectHomeSummary {
@@ -161,6 +171,7 @@ export interface RecentLearningItem {
   knowledgePointId: Id
   occurredAt: string
   summary?: LearningHistoryRecord['summary']
+  continueAction?: LessonLaunchContext
   isSample: boolean
 }
 
@@ -245,6 +256,7 @@ export interface HomeViewModel {
   greeting: HomeGreetingViewModel
   today: DailyLearningPlanViewModel
   continueLearning?: ContinueLearningViewModel
+  continueAssessment?: ContinueAssessmentViewModel
   subjects: SubjectHomeSummary[]
   recentLearning: RecentLearningItem[]
   shortcuts: HomeShortcut[]

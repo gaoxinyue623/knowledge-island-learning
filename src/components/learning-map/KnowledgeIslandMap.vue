@@ -9,10 +9,14 @@ import type { KnowledgeMapNode, LearningMapViewModel } from '@/types'
 
 interface Props {
   viewModel: LearningMapViewModel
+  showUnitAssessments?: boolean
   selectedNodeId?: string | null
 }
 
-const props = withDefaults(defineProps<Props>(), { selectedNodeId: null })
+const props = withDefaults(defineProps<Props>(), {
+  showUnitAssessments: false,
+  selectedNodeId: null,
+})
 
 const emit = defineEmits<{
   selectNode: [nodeId: string]
@@ -80,6 +84,7 @@ const renderedConnections = computed(() =>
           :key="island.id"
           :island="island"
           :canvas-size="props.viewModel.canvasSize"
+          :assessment-model="props.showUnitAssessments ? props.viewModel : null"
           :selected-node-id="props.selectedNodeId"
           @select-node="emit('selectNode', $event)"
         />

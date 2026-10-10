@@ -229,6 +229,12 @@
   white-space: pre-wrap;
 }
 
+.lesson-reader[data-subject='chinese']
+  .reading-text-block__body
+  > p:not(.lesson-block__empty-copy) {
+  text-indent: 2em;
+}
+
 .lesson-reader[data-subject='english'] .reading-text-block__body {
   letter-spacing: normal;
 }

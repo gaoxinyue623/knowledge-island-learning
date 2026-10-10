@@ -7,6 +7,8 @@ import {
 import { subjectTheme } from '@/data/subjectTheme'
 import type {
   AchievementEvaluationResult,
+  AssessmentLaunchContext,
+  ContinueAssessmentViewModel,
   DailyLearningPlan,
   GrowthServiceContract,
   HomeDataset,
@@ -21,6 +23,7 @@ import type {
   LearningMapViewModel,
   LessonSession,
   MasteryRecord,
+  QuestionSession,
   ReviewQueueItem,
   StudentCurriculumProfile,
   SubjectCode,
@@ -186,34 +189,77 @@ function historyTitle(type: LearningHistoryRecord['type']): string {
 function mapHistoryRecords(
   records: readonly LearningHistoryRecord[],
   maps: readonly HomeMapSnapshot[],
+  lessonSessions: readonly LessonSession[],
 ): HomeViewModel['recentLearning'] {
-  return [...records]
+  const activeSessions = lessonSessions.filter((session) => session.status === 'in_progress')
+  const representedActiveSessions = new Set<string>()
+  const recentRecords = records.map((record) => {
+    const activeSession =
+      record.type === 'lesson_started'
+        ? activeSessions.find((session) => session.id === record.sourceId)
+        : undefined
+    if (activeSession) representedActiveSessions.add(activeSession.id)
+    const lesson = maps
+      .find((map) => map.textbookId === record.textbookId)
+      ?.source?.lessons.find((item) => item.id === record.lessonId && item.unitId === record.unitId)
+    return {
+      id: record.id,
+      type: record.type,
+      title:
+        lesson && !lesson.isSample && lesson.verificationStatus !== 'REJECTED'
+          ? `《${lesson.title}》 · ${historyTitle(record.type)}`
+          : historyTitle(record.type),
+      subject: subjectForTextbook(record.textbookId, maps),
+      textbookId: record.textbookId,
+      knowledgePointId: record.knowledgePointId,
+      occurredAt: activeSession?.updatedAt ?? record.occurredAt,
+      ...(record.summary ? { summary: { ...record.summary } } : {}),
+      ...(activeSession
+        ? {
+            continueAction: {
+              textbookId: activeSession.textbookId,
+              unitId: activeSession.unitId,
+              lessonId: activeSession.lessonId,
+              knowledgePointId: activeSession.knowledgePointId,
+            },
+          }
+        : {}),
+      isSample: record.provenance.isSampleDerived,
+    }
+  })
+  const unlistedSessions = activeSessions
+    .filter((session) => !representedActiveSessions.has(session.id))
+    .map((session) => {
+      const map = maps.find((candidate) => candidate.textbookId === session.textbookId)
+      const lesson = map?.source?.lessons.find(
+        (candidate) => candidate.id === session.lessonId && candidate.unitId === session.unitId,
+      )
+      return {
+        id: `active-lesson:${session.id}`,
+        type: 'lesson_started' as const,
+        title:
+          lesson && !lesson.isSample && lesson.verificationStatus !== 'REJECTED'
+            ? `《${lesson.title}》 · ${historyTitle('lesson_started')}`
+            : `继续学习：${session.lessonId}`,
+        subject: subjectForTextbook(session.textbookId, maps),
+        textbookId: session.textbookId,
+        knowledgePointId: session.knowledgePointId,
+        occurredAt: session.updatedAt ?? session.startedAt ?? new Date(0).toISOString(),
+        continueAction: {
+          textbookId: session.textbookId,
+          unitId: session.unitId,
+          lessonId: session.lessonId,
+          knowledgePointId: session.knowledgePointId,
+        },
+        isSample: map?.isSample ?? false,
+      }
+    })
+  return [...recentRecords, ...unlistedSessions]
     .sort(
       (left, right) =>
         right.occurredAt.localeCompare(left.occurredAt) || left.id.localeCompare(right.id),
     )
     .slice(0, 6)
-    .map((record) => {
-      const lesson = maps
-        .find((map) => map.textbookId === record.textbookId)
-        ?.source?.lessons.find(
-          (item) => item.id === record.lessonId && item.unitId === record.unitId,
-        )
-      return {
-        id: record.id,
-        type: record.type,
-        title:
-          lesson && !lesson.isSample && lesson.verificationStatus !== 'REJECTED'
-            ? `《${lesson.title}》 · ${historyTitle(record.type)}`
-            : historyTitle(record.type),
-        subject: subjectForTextbook(record.textbookId, maps),
-        textbookId: record.textbookId,
-        knowledgePointId: record.knowledgePointId,
-        occurredAt: record.occurredAt,
-        ...(record.summary ? { summary: { ...record.summary } } : {}),
-        isSample: record.provenance.isSampleDerived,
-      }
-    })
 }
 
 function filterHistory(
@@ -390,37 +436,129 @@ function buildShortcuts(
   ]
 }
 
+function lessonReferenceForSession(
+  session: Pick<LessonSession, 'textbookId' | 'unitId' | 'lessonId' | 'knowledgePointId'>,
+  maps: readonly HomeMapSnapshot[],
+) {
+  const map = maps.find((candidate) => candidate.textbookId === session.textbookId)
+  const lesson = map?.viewModel?.islands
+    .flatMap((island) => island.lessons)
+    .find(
+      (candidate) => candidate.unitId === session.unitId && candidate.lessonId === session.lessonId,
+    )
+  const node = lesson?.nodes.find(
+    (candidate) => candidate.knowledgePointId === session.knowledgePointId,
+  )
+  return { map, lesson, node }
+}
+
+function lessonSessionProgress(session: LessonSession): number {
+  return Math.min(
+    99,
+    Math.round(
+      (session.completedStepIds.length /
+        Math.max(session.completedStepIds.length + 1, session.currentStepIndex + 1)) *
+        100,
+    ),
+  )
+}
+
 function continueViewModel(
   plan: DailyLearningPlan,
   sessions: readonly LessonSession[],
+  maps: readonly HomeMapSnapshot[],
 ): HomeViewModel['continueLearning'] {
   const task = plan.tasks.find(
     (candidate) => candidate.type === 'continue_learning' && candidate.status === 'pending',
   )
-  if (!task || task.action.type !== 'lesson' || !task.knowledgePointId || !task.lessonId)
-    return undefined
-  const session = sessions.find((candidate) => candidate.id === task.sourceId)
-  const currentProgress = session
-    ? session.status === 'completed'
-      ? 100
-      : Math.min(
-          99,
-          Math.round(
-            (session.completedStepIds.length /
-              Math.max(session.completedStepIds.length + 1, session.currentStepIndex + 1)) *
-              100,
-          ),
-        )
-    : 0
-  return {
-    taskId: task.id,
-    subject: task.subject,
-    title: task.title,
-    lessonId: task.lessonId,
-    knowledgePointId: task.knowledgePointId,
-    progress: currentProgress,
-    action: task.action,
+  if (task?.action.type === 'lesson' && task.knowledgePointId && task.lessonId) {
+    const session = sessions.find((candidate) => candidate.id === task.sourceId)
+    return {
+      taskId: task.id,
+      subject: task.subject,
+      title: task.title,
+      lessonId: task.lessonId,
+      knowledgePointId: task.knowledgePointId,
+      progress: session ? lessonSessionProgress(session) : 0,
+      action: task.action,
+    }
   }
+
+  const session = sessions.find((candidate) => candidate.status === 'in_progress')
+  if (!session) return undefined
+  const { lesson, node } = lessonReferenceForSession(session, maps)
+  return {
+    taskId: `continue-session:${session.id}`,
+    subject: subjectForTextbook(session.textbookId, maps),
+    title: `继续学习：${lesson?.title ?? session.lessonId}`,
+    lessonId: session.lessonId,
+    knowledgePointId: session.knowledgePointId,
+    progress: lessonSessionProgress(session),
+    action: {
+      type: 'lesson',
+      launchContext: {
+        textbookId: session.textbookId,
+        unitId: session.unitId,
+        lessonId: session.lessonId,
+        knowledgePointId: node?.knowledgePointId ?? session.knowledgePointId,
+      },
+    },
+  }
+}
+
+function questionSessionScope(session: QuestionSession, profileId: Id): string | null | undefined {
+  const defaultId = [
+    'question-session',
+    profileId,
+    session.assessmentId,
+    session.textbookId,
+    session.unitId,
+    session.lessonId,
+    session.knowledgePointId,
+  ].join(':')
+  if (session.id === defaultId) return undefined
+  const prefix = `${defaultId}:`
+  return session.id.startsWith(prefix) ? session.id.slice(prefix.length) || null : null
+}
+
+function continueAssessmentViewModel(
+  profileId: Id,
+  lessonSessions: readonly LessonSession[],
+  questionSessions: readonly QuestionSession[],
+  maps: readonly HomeMapSnapshot[],
+): ContinueAssessmentViewModel | undefined {
+  for (const session of questionSessions) {
+    if (session.status !== 'in_progress') continue
+    const lessonSession = lessonSessions.find(
+      (candidate) =>
+        candidate.status === 'in_progress' &&
+        candidate.textbookId === session.textbookId &&
+        candidate.unitId === session.unitId &&
+        candidate.lessonId === session.lessonId &&
+        candidate.knowledgePointId === session.knowledgePointId,
+    )
+    if (!lessonSession) continue
+    const sessionScope = questionSessionScope(session, profileId)
+    if (sessionScope === null) continue
+    const { lesson } = lessonReferenceForSession(lessonSession, maps)
+    const answeredCount = session.attempts.filter((attempt) => attempt.submitted).length
+    return {
+      subject: subjectForTextbook(session.textbookId, maps),
+      title: `继续练习：${lesson?.title ?? session.lessonId}`,
+      answeredCount,
+      questionCount: session.questionIds.length,
+      currentQuestionNumber: session.currentQuestionIndex + 1,
+      action: {
+        textbookId: session.textbookId,
+        unitId: session.unitId,
+        lessonId: session.lessonId,
+        knowledgePointId: session.knowledgePointId,
+        source: 'lesson_practice',
+      } satisfies AssessmentLaunchContext,
+      ...(sessionScope ? { sessionScope } : {}),
+    }
+  }
+  return undefined
 }
 
 export class HomeService {
@@ -570,6 +708,9 @@ export class HomeService {
     const lessonSessions = this.dependencies.lessonSessionReader
       .listByProfile(profile.studentId)
       .filter((session) => textbookSet.has(session.textbookId))
+    const questionSessions = this.dependencies.questionSessionReader
+      .listByProfile(profile.studentId)
+      .filter((session) => textbookSet.has(session.textbookId))
     addWarning(warnings, this.dependencies.lessonSessionStorage.getLastWarning())
     addWarning(warnings, this.dependencies.questionSessionStorage.getLastWarning())
 
@@ -694,7 +835,7 @@ export class HomeService {
       }
     })
 
-    const recentLearning = mapHistoryRecords(participationHistory, maps)
+    const recentLearning = mapHistoryRecords(participationHistory, maps, lessonSessions)
     const activeWrongCount = wrongBook.filter((record) => record.status === 'active').length
     const activeReviewCount = reviewQueue.filter((item) => item.status === 'active').length
     const mapSample = maps.some((map) => map.isSample)
@@ -725,11 +866,18 @@ export class HomeService {
       }).format(date),
     }
     const achievement = summaryForAchievement(achievementResult)
+    const continueAssessment = continueAssessmentViewModel(
+      profile.studentId,
+      lessonSessions,
+      questionSessions,
+      maps,
+    )
     return {
       profile: profileView,
       greeting,
       today: dailyPlan,
-      continueLearning: continueViewModel(dailyPlan, lessonSessions),
+      continueLearning: continueViewModel(dailyPlan, lessonSessions, maps),
+      ...(continueAssessment ? { continueAssessment } : {}),
       subjects,
       recentLearning,
       shortcuts: buildShortcuts(

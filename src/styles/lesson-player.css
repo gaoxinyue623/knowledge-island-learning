@@ -344,6 +344,11 @@
   margin: 0;
 }
 
+.lesson-player__content-card--chinese .lesson-block__content,
+.lesson-player__content-card--chinese .lesson-block__paragraph {
+  text-indent: 2em;
+}
+
 .lesson-block__list {
   display: grid;
   gap: var(--space-2);

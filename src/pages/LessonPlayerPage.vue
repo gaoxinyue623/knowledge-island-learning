@@ -31,6 +31,7 @@ import type {
   LessonPlayerDataset,
   LessonPlayerDemoState,
   LessonStepType,
+  SubjectCode,
 } from '@/types'
 import type { ContentExpansionBundle, LessonContentBlockViewModel } from '@/types'
 
@@ -108,6 +109,12 @@ const detailReturnPath = computed(() => {
 const mapNodeId = computed(() =>
   typeof route.query.mapNodeId === 'string' ? route.query.mapNodeId : undefined,
 )
+const mapSubject = computed<SubjectCode | null>(() => {
+  const requested = typeof route.query.subject === 'string' ? route.query.subject.toUpperCase() : ''
+  return requested === 'CHINESE' || requested === 'MATH' || requested === 'ENGLISH'
+    ? requested
+    : null
+})
 const context = computed<LessonLaunchContext | null>(() => {
   const query = route.query
   const values = {
@@ -299,6 +306,7 @@ function returnToMap() {
       query: {
         ...context.value,
         ...(dataset.value !== 'profile' ? { dataset: dataset.value } : {}),
+        ...(mapSubject.value ? { subject: mapSubject.value } : {}),
         ...(focus ? { mapNodeId: focus } : {}),
         ...(typeof route.query.nodeStatus === 'string'
           ? { nodeStatus: route.query.nodeStatus }
@@ -313,7 +321,14 @@ function returnToMap() {
   }
   void router.push({
     path: returnPath.value,
-    ...(focus ? { query: { focusNodeId: focus } } : {}),
+    ...(focus || mapSubject.value
+      ? {
+          query: {
+            ...(mapSubject.value ? { subject: mapSubject.value } : {}),
+            ...(focus ? { focusNodeId: focus } : {}),
+          },
+        }
+      : {}),
   })
 }
 
@@ -327,6 +342,7 @@ function openAfterReading(): void {
     query: {
       ...context.value,
       ...(isDevRoute.value ? { dataset: dataset.value } : {}),
+      ...(mapSubject.value ? { subject: mapSubject.value } : {}),
       ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
       nodeStatus: 'completed',
       returnTo: detailReturnPath.value,
@@ -369,6 +385,7 @@ function startAssessment() {
       knowledgePointId: context.value.knowledgePointId,
       source: isDevRoute.value ? 'dev' : 'lesson_practice',
       ...(isDevRoute.value ? { dataset: 'demo' } : {}),
+      ...(mapSubject.value ? { subject: mapSubject.value } : {}),
       returnTo: isDevRoute.value ? '/dev/lesson-player' : '/lesson',
       lessonReturnTo: returnPath.value,
       ...(mapNodeId.value ? { mapNodeId: mapNodeId.value } : {}),
@@ -608,6 +625,9 @@ watch(
             class="lesson-player__content-card"
             :class="[
               `lesson-player__content-card--${readingSize}`,
+              {
+                'lesson-player__content-card--chinese': currentReadingSubject === 'CHINESE',
+              },
               {
                 'lesson-player__content-card--reviewing-practice':
                   lessonPlayerStore.status === 'completed' && isPracticeStep,

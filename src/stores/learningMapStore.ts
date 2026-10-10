@@ -110,6 +110,9 @@ export const useLearningMapStore = defineStore('learningMap', () => {
       activeTextbookId.value = source?.textbook.id ?? loadOptions.textbookId ?? null
       if (!source) {
         viewModel.value = null
+        activeUnitId.value = null
+        selectedNodeId.value = null
+        focusedNodeId.value = null
         mapProgress.value = []
         status.value = 'not_available'
         return null
