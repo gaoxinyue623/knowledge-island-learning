@@ -1,3 +1,4 @@
+import { createUuid } from '@/utils/uuid'
 import { productionConfig } from '@/config/production'
 import type { Question, QuestionKnowledgePoint } from '@/types'
 import type {
@@ -148,7 +149,7 @@ export class AIQuestionGenerator implements QuestionGeneratorProvider {
         const result = await this.runtime.generateStructured(
           {
             // Opaque transport identity: domain request IDs can contain profile IDs or user seeds.
-            requestId: crypto.randomUUID(),
+            requestId: createUuid(),
             systemPrompt: prompt.systemPrompt,
             userPrompt: prompt.userPrompt,
             schema: generatedQuestionsSchema,

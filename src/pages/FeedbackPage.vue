@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { z } from 'zod'
@@ -33,7 +34,7 @@ const category = ref<keyof typeof feedbackCategories>(
   busy = ref(false),
   error = ref(''),
   notice = ref('')
-let requestId = crypto.randomUUID()
+let requestId = createUuid()
 let pending:
   | {
       id: string
@@ -81,7 +82,7 @@ async function submit() {
     contentId: contentId.value,
   }
   await accountRequest('feedback', 'POST', pending)
-  requestId = crypto.randomUUID()
+  requestId = createUuid()
   pending = undefined
   message.value = ''
   notice.value = '反馈已收到。处理进展和回复会显示在下方，可稍后回来查看。'
@@ -89,7 +90,7 @@ async function submit() {
 }
 function newDraft() {
   pending = undefined
-  requestId = crypto.randomUUID()
+  requestId = createUuid()
   error.value = ''
   notice.value = '已开始新反馈，先前提交是否成功可点击刷新查看。'
 }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -91,7 +92,7 @@ async function openReview(item: ReviewQueueItem) {
         ...context,
         dataset,
         reviewItemId: item.id,
-        sessionScope: `review:${item.id}:${crypto.randomUUID()}`,
+        sessionScope: `review:${item.id}:${createUuid()}`,
         returnTo: isDevRoute.value ? '/dev/review-queue' : '/review-queue',
       },
     })

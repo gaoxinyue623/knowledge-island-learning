@@ -1,3 +1,4 @@
+import { createUuid } from '@/utils/uuid'
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { petService } from '@/services/pet/petService'
@@ -61,7 +62,7 @@ export const usePetStore = defineStore('pet', () => {
       version = generation,
       request = ++latestRequest
     try {
-      const result = await petService.run(id, command, crypto.randomUUID())
+      const result = await petService.run(id, command, createUuid())
       if (generation !== version) return false
       // A later read may have started while this command was committing. Refresh from disk in that case.
       if (latestRequest === request) account.value = result.account

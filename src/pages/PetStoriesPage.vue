@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { onBeforeUnmount, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import AppEmptyState from '@/components/common/AppEmptyState.vue'
@@ -80,7 +81,7 @@ function review(story: PetStory) {
       '故事暂时无法打开，请重试。'
     return
   }
-  const href = createReviewLaunchHref(story.courseHref, crypto.randomUUID())
+  const href = createReviewLaunchHref(story.courseHref, createUuid())
   if (href) void router.push(href)
 }
 

@@ -1,3 +1,4 @@
+import { createUuid } from '@/utils/uuid'
 import { difficultyProfile } from './difficultyProfile'
 import type { Question } from '@/types'
 import type {
@@ -787,7 +788,7 @@ function randomSamples(
         sourceQuestions(observation, 'REAL_LLM_ONLY').map((question) => ({
           observation,
           question,
-          rank: crypto.randomUUID(),
+          rank: createUuid(),
         })),
       )
       .sort((a, b) => a.rank.localeCompare(b.rank))

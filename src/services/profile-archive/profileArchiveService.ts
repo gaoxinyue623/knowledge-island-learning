@@ -1,3 +1,4 @@
+import { createUuid } from '@/utils/uuid'
 import { accountStorage } from '@/services/account/storage'
 import { petRepository, type PetRepository } from '@/services/pet/petDatabase'
 import {
@@ -224,7 +225,7 @@ export function createProfileArchiveService(dependencies: ProfileArchiveServiceD
       ? null
       : ((navigator as Navigator & { locks?: LockManager }).locks ?? null))
   const now = dependencies.now ?? (() => new Date())
-  const uuid = dependencies.uuid ?? (() => globalThis.crypto.randomUUID())
+  const uuid = dependencies.uuid ?? (() => createUuid())
   const family = createLocalFamilyProfileRepository(storage)
 
   function exportSection(kind: ProfileArchiveSectionKind, sourceProfileId: string) {

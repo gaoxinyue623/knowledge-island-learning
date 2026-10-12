@@ -13,6 +13,18 @@ curl -f http://localhost:8081/api/pet/health
 
 访问 http://localhost:8081 。本机配置明确使用 `staging`，只监听回环地址。生产 Compose 默认 `production`，且必须提供允许的来源，防止误用 HTTP 配置发布。
 
+## UCloud IP 预览一键更新
+
+当前预览部署在 `http://117.50.75.85:18081`。代码更新后，在本机项目根目录运行：
+
+```sh
+./deploy/deploy-ucloud.sh
+```
+
+脚本通过 SSH 连接 `/home/ubuntu/knowledge-island-learning`，只提示输入一次 `ubuntu` 密码；密码不会写入脚本或服务器文件。脚本同步当前工作区、在服务器构建前端和 API，并更新固定的 Compose 项目 `ki-learning-preview`，所以该项目的账号数据库卷会保留。同步时会排除 `.env`、本机数据库、`.git`、依赖和构建缓存，并保留服务器上的 `.env.preview`。
+
+UCloud 安全组需要允许 TCP `18081` 入站。此地址使用 HTTP 预览配置，请只用虚构测试数据；正式账号和学生数据需要先配置域名与 HTTPS。
+
 ## 尚未确定域名时
 
 准备 UCloud UHost Linux 云主机、系统盘/数据盘和公网 IP，安装官方 Docker Engine 与 Compose。建议先用 2 核、4 GB 内存做小范围试运行，再按监控扩容。安全组仅向运维来源开放 SSH。代码放在固定目录，例如 `/opt/knowledge-island-learning`，由有 Docker 权限的部署用户操作。

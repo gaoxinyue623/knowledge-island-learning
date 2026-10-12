@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import ContentFeedbackLink from '@/components/account/ContentFeedbackLink.vue'
 import { computed, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
 import { z } from 'zod'
@@ -142,7 +143,7 @@ async function generate() {
   if (!username.value || !enabled.value) return
   await run(async (version, signal) => {
     const activeContext = { ...context.value }
-    requestId.value ??= crypto.randomUUID()
+    requestId.value ??= createUuid()
     const response = await aiRequest('ai/sessions', {
       username: username.value!,
       signal,

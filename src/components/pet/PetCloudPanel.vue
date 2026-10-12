@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { computed, ref, watch } from 'vue'
 import { z } from 'zod'
 import { usePetStore } from '@/stores/petStore'
@@ -93,7 +94,7 @@ async function refresh() {
 async function upload() {
   await run(async (version) => {
     if (!pet.account) return
-    const cloudId = selected.value || (newBackupId ||= crypto.randomUUID())
+    const cloudId = selected.value || (newBackupId ||= createUuid())
     const info = backups.value.find((b) => b.profileId === cloudId)
     const account = { ...pet.account, profileId: cloudId }
     await petCloudRequest(

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -422,7 +423,7 @@ async function completeDemoSession() {
 
 function restartLesson() {
   reviewStepIndex.value = null
-  void router.replace({ query: { ...route.query, sessionScope: crypto.randomUUID() } })
+  void router.replace({ query: { ...route.query, sessionScope: createUuid() } })
 }
 
 function resetDemoSession() {

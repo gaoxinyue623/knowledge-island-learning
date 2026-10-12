@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -79,7 +80,7 @@ async function load(): Promise<void> {
 
 function review(item: AbilityPortfolioItem): void {
   if (!item.courseHref) return
-  const href = createReviewLaunchHref(item.courseHref, crypto.randomUUID())
+  const href = createReviewLaunchHref(item.courseHref, createUuid())
   if (href) void router.push(href)
 }
 

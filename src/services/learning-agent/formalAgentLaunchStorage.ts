@@ -1,3 +1,4 @@
+import { createUuid } from '@/utils/uuid'
 import { accountStorage, accountSessionStorage } from '@/services/account/storage'
 import type { LearningDecision } from '@/types/learning-agent'
 import { z } from 'zod'
@@ -151,7 +152,7 @@ export function startFormalRun(
 ): FormalStudyRun {
   const date = new Date().toISOString()
   const run = runSchema.parse({
-    id: crypto.randomUUID(),
+    id: createUuid(),
     profileId,
     textbookId,
     taskLimit,

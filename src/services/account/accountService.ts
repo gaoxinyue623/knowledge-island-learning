@@ -1,3 +1,5 @@
+import { createUuid } from '@/utils/uuid'
+import { sha256Hex } from '@/utils/sha256'
 import { reactive } from 'vue'
 import { z } from 'zod'
 import { PetCloudError, petCloudRequest } from '../pet/petCloud'
@@ -56,11 +58,13 @@ function remember(username: string, cloud: AccountCloud) {
   accountState.lastSaved = cloud.updatedAt
 }
 async function digest(snapshot: AccountSnapshot) {
-  const bytes = await crypto.subtle.digest(
-    'SHA-256',
-    new TextEncoder().encode(canonicalSnapshot(snapshot)),
-  )
-  return Array.from(new Uint8Array(bytes), (byte) => byte.toString(16).padStart(2, '0')).join('')
+  const bytes = new TextEncoder().encode(canonicalSnapshot(snapshot))
+  const subtle = globalThis.crypto?.subtle
+  if (typeof subtle?.digest === 'function') {
+    const hash = await subtle.digest('SHA-256', bytes)
+    return Array.from(new Uint8Array(hash), (byte) => byte.toString(16).padStart(2, '0')).join('')
+  }
+  return sha256Hex(bytes)
 }
 export async function captureAccountSnapshot(legacy = false): Promise<AccountSnapshot> {
   const storage = legacy ? window.localStorage : accountStorage
@@ -82,7 +86,7 @@ const nonempty = (snapshot: AccountSnapshot) =>
 /** Stage into a fresh namespace, then atomically select it. The old copy stays available. */
 async function installSnapshot(username: string, snapshot: AccountSnapshot, cloud?: AccountCloud) {
   const valid = accountSnapshotSchema.parse(snapshot)
-  const generation = crypto.randomUUID()
+  const generation = createUuid()
   const prefix = dataPrefix(username, generation)
   for (const entry of valid.entries) window.localStorage.setItem(prefix + entry.key, entry.value)
   await accountPets(`${PET_DB}:${username}:${generation}`, valid.pets)
@@ -200,8 +204,9 @@ export async function authenticate(
   password: string,
   migrate: boolean,
 ) {
+  const authChangedValue = createUuid()
   await petCloudRequest(mode, 'POST', { username: username.trim().toLowerCase(), password })
-  window.localStorage.setItem(AUTH_CHANGED_KEY, crypto.randomUUID())
+  window.localStorage.setItem(AUTH_CHANGED_KEY, authChangedValue)
   await initializeAccount(migrate)
   if (!accountState.ready) throw new Error(accountState.error || '账号记录尚未读取，请重试。')
 }
@@ -311,7 +316,7 @@ export async function logoutAccount() {
   await petCloudRequest('logout', 'POST', undefined, username)
   selectAccount(null)
   accountState.username = null
-  window.localStorage.setItem(AUTH_CHANGED_KEY, crypto.randomUUID())
+  window.localStorage.setItem(AUTH_CHANGED_KEY, createUuid())
   navigateAccount('/login')
 }
 export function startAccountSync() {

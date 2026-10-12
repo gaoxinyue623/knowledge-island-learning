@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import FormalAiPractice from '@/components/knowledge-point/FormalAiPractice.vue'
@@ -120,7 +121,7 @@ async function load() {
     const restored = recoverFormalRun(profileId.value, textbookId.value, taskLimit.value)
     run.value = restored.run
     resume.value = restored.launch
-    newTaskId.value = crypto.randomUUID()
+    newTaskId.value = createUuid()
     result.value = await runtimeLearningAgentDecisionService.prepare(
       profileId.value,
       textbookId.value,

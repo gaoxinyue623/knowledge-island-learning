@@ -49,7 +49,7 @@ export const importedGradeOneChineseUpperCourseContents: CourseContent[] = [
       blocks: [
         {
           type: 'TEXT',
-          text: '《我是中国人》\n\n我上学了\n我是中国人\n\n我是中国人。\n我们都是中国人。\n中华民族是一家。',
+          text: '《我是中国人》\n我是中国人。\n我们都是中国人。\n中华民族是一家。',
         },
         {
           type: 'TEXT',

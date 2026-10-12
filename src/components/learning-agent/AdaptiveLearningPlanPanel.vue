@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { computed, onBeforeUnmount, ref, shallowRef, toRaw, triggerRef, watch } from 'vue'
 import AppButton from '@/components/common/AppButton.vue'
 import AdaptivePlanReportPanel from './AdaptivePlanReportPanel.vue'
@@ -150,7 +151,7 @@ async function start() {
     toRaw(props.snapshot),
     taskLimit.value,
     props.mode,
-    crypto.randomUUID(),
+    createUuid(),
   )
   await next()
 }

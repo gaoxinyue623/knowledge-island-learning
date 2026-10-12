@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { completeFormalTask } from '@/services/learning-agent/formalAgentLaunchStorage'
 import { syncAccount, accountState } from '@/services/account/accountService'
 import MathQuestVisual from '@/components/knowledge-point/MathQuestVisual.vue'
@@ -644,7 +645,7 @@ async function clearDemoStorage() {
 
 async function restartAssessment() {
   await router.replace({
-    query: { ...route.query, sessionScope: `attempt:${crypto.randomUUID()}` },
+    query: { ...route.query, sessionScope: `attempt:${createUuid()}` },
   })
 }
 

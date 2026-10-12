@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -207,7 +208,7 @@ function subjectLabel(subject: SubjectCode): string {
 }
 
 function openSpacedReview(item: SpacedReviewDue): void {
-  const attemptId = crypto.randomUUID()
+  const attemptId = createUuid()
   const href = createReviewLaunchHref(item.courseHref, attemptId)
   if (href) void router.push(href)
 }

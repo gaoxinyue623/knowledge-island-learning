@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createUuid } from '@/utils/uuid'
 import ContentFeedbackLink from '@/components/account/ContentFeedbackLink.vue'
 import {
   recordLearningActivity,
@@ -200,7 +201,7 @@ watch(
   () => {
     const result = readQuestProgress(browserQuestStorage(), props.profileId, progressQuest.value)
     const data = result.data
-    attemptId.value = data.attemptId ?? crypto.randomUUID()
+    attemptId.value = data.attemptId ?? createUuid()
     completedAt.value = data.completedAt
     hasExplicitEvidence.value = data.evidenceVersion === 1
     reviewIds.value = data.reviewIds
@@ -492,7 +493,7 @@ function chooseTile(index: number): void {
 }
 
 function restart(onlyMistakes: boolean): void {
-  attemptId.value = crypto.randomUUID()
+  attemptId.value = createUuid()
   completedAt.value = undefined
   hasExplicitEvidence.value = false
   reviewIds.value = onlyMistakes && mistakes.value.length ? [...mistakes.value] : null
