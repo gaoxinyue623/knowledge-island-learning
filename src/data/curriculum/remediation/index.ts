@@ -54,8 +54,8 @@ export const textbookResearch = [
   {
     pointId: 'G5_PEP_CHINESE_S2_KP_INTEGRATED_LOVE',
     status: 'REFERENCE_ONLY',
-    issue: '部分阅读材料及作品图缺失',
-    note: '找到甲骨文发现的背景资料，可作延伸查阅；不代替教材《甲骨文的发现》及书法作品原页。',
+    issue: '阅读材料及作品图已按教材图片补齐',
+    note: '当前V4已按用户提供的第三单元教材图片补入阅读材料、字形演变表、书法作品和研究报告。甲骨文发现的资料仅保留为延伸背景，不替代已接入的教材正文及作品原图。',
     urls: ['https://cpc.people.com.cn/n/2014/0819/c83083-25493198.html'],
     replacements: [],
   },

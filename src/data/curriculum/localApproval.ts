@@ -1,3 +1,4 @@
+import { TASK_PICTURES_APPROVAL } from './generated-pictures'
 import { G4_SHANGHAI_ENGLISH_UPPER_IMPORT_APPROVAL } from './production/gradeFourEnglishUpperApproval'
 import { G5_SHANGHAI_ENGLISH_LOWER_IMPORT_APPROVAL } from './production/gradeFiveEnglishLowerApproval'
 import { G6_SHANGHAI_ENGLISH_LOWER_IMPORT_APPROVAL } from './production/gradeSixEnglishLowerApproval'
@@ -50,6 +51,7 @@ export function approveLocalRecords<T>(input: T): T {
   // A separately reviewed import retains its own date, provenance and scope.
   if (
     [
+      TASK_PICTURES_APPROVAL,
       BNU_MATH_LOWER_IMPORT_APPROVAL,
       G3_BNU_MATH_IMPORT_APPROVAL,
       G4_BNU_MATH_SYNC_APPROVAL,
@@ -106,6 +108,10 @@ export function approveLocalRecords<T>(input: T): T {
     result.verifiedAt = LOCAL_RELEASE_APPROVED_AT
     result.verificationStatus = 'REVIEWED'
   }
+  if (result.id === 'G1_PEP_CHINESE_S1_PERSONAL_PDF_SOURCE') {
+    result.notes =
+      '从本地PDF批量解析，文件路径不写入运行时数据。原始导入记录保留PERSONAL_LOCAL及DRAFT / UNVERIFIED阶段信息；相关正文经项目所有者本地发布确认后已进入productionCurriculumIndex。本地发布确认不代表出版社原书核验或公开再分发授权。PDF页码偏移校验值：+5。'
+  }
   return result as T
 }
 
@@ -117,6 +123,7 @@ export function isLocallyApproved(record: unknown): boolean {
     [
       LOCAL_RELEASE_APPROVAL,
       CHINESE_READING_RELEASE_APPROVAL,
+      TASK_PICTURES_APPROVAL,
       BNU_MATH_LOWER_IMPORT_APPROVAL,
       G3_BNU_MATH_IMPORT_APPROVAL,
       G4_BNU_MATH_SYNC_APPROVAL,

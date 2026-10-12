@@ -67,6 +67,8 @@ export interface LessonContentBlockRecord {
   block: ContentBlock
   stepType: LessonStepType | string
   title?: string
+  isReadingPrompt?: boolean
+  isAuthorNote?: boolean
   paragraphs?: string[]
   bullets?: string[]
   highlights?: string[]
@@ -163,6 +165,8 @@ export interface LessonContentBlockViewModel {
   id: Id
   type: LessonStepType | string
   title?: string
+  isReadingPrompt?: boolean
+  isAuthorNote?: boolean
   content?: string
   paragraphs?: string[]
   bullets?: string[]

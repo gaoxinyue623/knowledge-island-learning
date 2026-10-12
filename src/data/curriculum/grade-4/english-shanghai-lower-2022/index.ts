@@ -1,5 +1,6 @@
 import soundsSupplement from './sounds-supplement.json'
 import supplied from './contents.json'
+import directoryCorrection from './contents-directory-correction.json'
 import { G1_SHANGHAI_ENGLISH_PUBLISHER_ID } from '../../grade-1/english-shanghai-upper'
 import {
   G4_SHANGHAI_ENGLISH_LOWER_IMPORTED_AT as importedAt,
@@ -19,7 +20,12 @@ export const G4_SHANGHAI_ENGLISH_S2_CONTENT_SOURCE_ID = 'G4_SHANGHAI_ENGLISH_S2_
 export const G4_SHANGHAI_ENGLISH_S2_PRACTICE_SOURCE_ID =
   'G4_SHANGHAI_ENGLISH_S2_ORIGINAL_PRACTICE_V1'
 export const G4_SHANGHAI_ENGLISH_S2_SOUNDS_SOURCE_ID = 'G4_SHANGHAI_ENGLISH_S2_SOUNDS_USER_TEXT_V1'
+export const G4_SHANGHAI_ENGLISH_S2_DIRECTORY_SOURCE_ID =
+  'G4_SHANGHAI_ENGLISH_S2_CONTENTS_IMAGES_2026_10_12'
 export const gradeFourEnglishLowerSource = supplied
+export const gradeFourEnglishLowerDirectoryCorrection = directoryCorrection
+const currentSourceNote =
+  '四年级下册8单元、Project 1与Project 2、Unit checklist和Word list目录已按用户提供的两张教材目录图片订正；Get ready、Explore、Communicate、Extend*栏目题目及页码逐项接入。既有双语课文、音标和练习保留原来源；目录图片不提供Communicate与Extend完整正文。12单元Phonics及Intonation仍作为独立补充资料，未与8单元逐单元绑定。基础题和口语提示为项目原创。'
 const reviewed = {
   isSample: false,
   needsVerification: false,
@@ -49,7 +55,7 @@ export const gradeFourEnglishLowerCurriculum: Pick<
       sourceId: G4_SHANGHAI_ENGLISH_S2_CONTENT_SOURCE_ID,
       status: 'ACTIVE',
       createdAt: importedAt,
-      updatedAt: importedAt,
+      updatedAt: directoryCorrection.correctedAt,
       ...reviewed,
     },
   ],
@@ -60,6 +66,19 @@ export const gradeFourEnglishLowerCurriculum: Pick<
   knowledgePrerequisites: [],
   courseContents: [],
   sources: [
+    {
+      id: G4_SHANGHAI_ENGLISH_S2_DIRECTORY_SOURCE_ID,
+      sourceType: 'TEXTBOOK',
+      title: '沪教牛津四年级下册英语2022新版目录（用户提供两张图片）',
+      publisher: directoryCorrection.publisher,
+      edition: directoryCorrection.title,
+      sourceRef: 'user-provided://g4-shanghai-english-lower/contents-images/2026-10-12',
+      sourceVersion: directoryCorrection.images.map((image) => `SHA256:${image.sha256}`).join('|'),
+      copyrightStatus: 'PENDING',
+      notes: directoryCorrection.sourceNote,
+      verifiedAt: directoryCorrection.correctedAt,
+      ...reviewed,
+    },
     {
       id: G4_SHANGHAI_ENGLISH_S2_SOUNDS_SOURCE_ID,
       sourceType: 'TEXTBOOK',
@@ -103,15 +122,69 @@ export const gradeFourEnglishLowerCurriculum: Pick<
 export const gradeFourEnglishLowerQuestions: Question[] = []
 export const gradeFourEnglishLowerMappings: QuestionKnowledgePoint[] = []
 export const gradeFourEnglishLowerBundles: ContentExpansionBundle[] = []
-export const gradeFourEnglishLowerDefinitions = [...supplied.units, ...soundsSupplement.units].map(
-  (unit) => ({
-    ...unit,
-    text: unit.sections.map((section) => `${section.english}\n${section.chinese}`).join('\n\n'),
-    unitId: `G4_SHANGHAI_ENGLISH_S2_UNIT_${String(unit.number).padStart(2, '0')}`,
-    lessonId: `G4_SHANGHAI_ENGLISH_S2_LESSON_${String(unit.number).padStart(2, '0')}`,
-    knowledgePointId: `G4_SHANGHAI_ENGLISH_S2_KP_${String(unit.number).padStart(2, '0')}`,
-  }),
-)
+type SuppliedUnit = (typeof supplied.units)[number]
+const directoryAppendices: SuppliedUnit[] = directoryCorrection.extras
+  .filter((entry) => entry.kind === 'directory')
+  .map((entry) => ({
+    number: entry.number,
+    title: entry.title,
+    page: entry.page,
+    kind: entry.kind,
+    words: [],
+    aliases: [],
+    sounds: '',
+    intonation: '',
+    sections: [
+      { kind: 'directory', title: entry.title, english: entry.title, chinese: entry.chinese },
+    ],
+    sentencePattern: '',
+    sentencePrompt:
+      entry.title === 'Word list' ? '按单元复习本册核心词汇。' : '回顾本册八个单元的学习内容。',
+    sentenceAnswer: '',
+    questions: [],
+  }))
+export const gradeFourEnglishLowerDefinitions = [
+  ...supplied.units,
+  ...directoryAppendices,
+  ...soundsSupplement.units,
+]
+  .map((unit) => {
+    const directory =
+      unit.kind === 'unit'
+        ? directoryCorrection.units.find((entry) => entry.number === unit.number)
+        : undefined
+    const directoryExtra = directoryCorrection.extras.find((entry) => entry.number === unit.number)
+    const directoryOrder =
+      directoryExtra?.kind === 'directory'
+        ? directoryExtra.page === 85
+          ? 11
+          : 12
+        : unit.kind === 'review'
+          ? 13
+          : unit.kind === 'appendix'
+            ? unit.number + 2
+            : unit.number
+    return {
+      ...unit,
+      title: directory?.title ?? directoryExtra?.title ?? unit.title,
+      page: directory?.page ?? directoryExtra?.page ?? unit.page,
+      sounds: directory?.explore.sounds ?? unit.sounds,
+      intonation: directory?.explore.intonation ?? unit.intonation,
+      sentencePattern: directory?.explore.grammar ?? unit.sentencePattern,
+      sections: unit.sections.map((section) => ({
+        ...section,
+        title: directory && section.kind === 'story' ? directory.explore.reading : section.title,
+      })),
+      directory,
+      directoryExtra,
+      directoryOrder,
+      text: unit.sections.map((section) => `${section.english}\n${section.chinese}`).join('\n\n'),
+      unitId: `G4_SHANGHAI_ENGLISH_S2_UNIT_${String(unit.number).padStart(2, '0')}`,
+      lessonId: `G4_SHANGHAI_ENGLISH_S2_LESSON_${String(unit.number).padStart(2, '0')}`,
+      knowledgePointId: `G4_SHANGHAI_ENGLISH_S2_KP_${String(unit.number).padStart(2, '0')}`,
+    }
+  })
+  .sort((left, right) => left.directoryOrder - right.directoryOrder)
 export const gradeFourEnglishLowerProjectIds = gradeFourEnglishLowerDefinitions
   .filter((d) => d.kind !== 'unit')
   .map((d) => d.knowledgePointId)
@@ -120,38 +193,57 @@ const sectionTitles: Record<string, string> = {
   project: '项目活动',
   review: '综合练习',
   appendix: '语音附录',
+  directory: '目录栏目',
 }
 for (const d of gradeFourEnglishLowerDefinitions) {
   const isSoundsSupplement = d.kind === 'appendix'
-  const contentSourceId = isSoundsSupplement
-    ? G4_SHANGHAI_ENGLISH_S2_SOUNDS_SOURCE_ID
-    : G4_SHANGHAI_ENGLISH_S2_CONTENT_SOURCE_ID
-  const contentImportedAt = isSoundsSupplement ? soundsSupplement.updatedAt : importedAt
-  const sourceNote = isSoundsSupplement ? soundsSupplement.sourceNote : supplied.sourceNote
+  const isDirectoryAppendix = d.kind === 'directory'
+  const contentSourceId = isDirectoryAppendix
+    ? G4_SHANGHAI_ENGLISH_S2_DIRECTORY_SOURCE_ID
+    : isSoundsSupplement
+      ? G4_SHANGHAI_ENGLISH_S2_SOUNDS_SOURCE_ID
+      : G4_SHANGHAI_ENGLISH_S2_CONTENT_SOURCE_ID
+  const contentImportedAt =
+    isDirectoryAppendix || d.directory || d.directoryExtra
+      ? directoryCorrection.correctedAt
+      : isSoundsSupplement
+        ? soundsSupplement.updatedAt
+        : importedAt
+  const sourceNote = isDirectoryAppendix
+    ? directoryCorrection.sourceNote
+    : isSoundsSupplement
+      ? soundsSupplement.sourceNote
+      : currentSourceNote
   const pageNote = d.page
-    ? `用户标注第${d.page}页`
+    ? `教材目录第${d.page}页`
     : isSoundsSupplement
       ? '用户补充语音附录'
       : '用户附加综合练习'
   const missingSections: string[] = []
-  const goals = isSoundsSupplement
-    ? ['按来稿分组认读例词、朗读韵文或完整语调示范', '观察字母组合及↗、↘标记，练习朗读']
-    : d.kind === 'review'
-      ? ['复习作息、职业、喜好与现在进行时', '完成配套综合练习并核对答案']
-      : d.kind === 'project'
-        ? ['运用已学英语词句完成作品', '向同伴介绍作品，由老师或家长核对表达']
-        : [
-            `认读本单元${d.words.length}个核心词汇并理解中文释义`,
-            '理解课文信息并用本课句型交流',
-            '听读英文，尝试自然表达',
-          ]
+  const goals = isDirectoryAppendix
+    ? [d.sentencePrompt]
+    : isSoundsSupplement
+      ? ['按来稿分组认读例词、朗读韵文或完整语调示范', '观察字母组合及↗、↘标记，练习朗读']
+      : d.kind === 'review'
+        ? ['复习作息、职业、喜好与现在进行时', '完成配套综合练习并核对答案']
+        : d.kind === 'project'
+          ? ['运用已学英语词句完成作品', '向同伴介绍作品，由老师或家长核对表达']
+          : [
+              `认读本单元${d.words.length}个核心词汇并理解中文释义`,
+              '理解课文信息并用本课句型交流',
+              '听读英文，尝试自然表达',
+            ]
   gradeFourEnglishLowerCurriculum.units.push({
     id: d.unitId,
     textbookVersionId: G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID,
     code: `G4-SHANGHAI-ENGLISH-S2-U${d.number}`,
     title: d.title,
-    subtitle: `${pageNote}；按提供的双语文本学习。`,
-    sortOrder: d.number,
+    subtitle: d.directory
+      ? `${pageNote}；Get ready · Explore · Communicate · Extend*`
+      : isDirectoryAppendix
+        ? `${pageNote}；${d.directoryExtra?.chinese}`
+        : `${pageNote}；按提供的双语文本学习。`,
+    sortOrder: d.directoryOrder,
     sceneKey: `english-lower-unit-${d.number}`,
     sourceId: contentSourceId,
     status: 'ACTIVE',
@@ -199,6 +291,25 @@ for (const d of gradeFourEnglishLowerDefinitions) {
     (section) =>
       `${sectionTitles[section.kind]}${isSoundsSupplement ? ' · ' + section.title : ''}\n${section.kind === 'story' ? 'Story: ' + section.title + '\n' : ''}${section.english}\n\n中文译文\n${section.chinese}`,
   )
+  if (d.directory) {
+    const { getReady, explore, communicate, extend } = d.directory
+    texts.unshift(
+      `目录 · Get ready\nBig Question: ${d.directory.bigQuestion}\nWords: ${getReady.words.join(', ')}`,
+      `目录 · Explore\nReading: ${explore.reading}\n${explore.sounds ? `Sounds: ${explore.sounds}` : explore.intonation}\nGrammar: ${explore.grammar}`,
+      `目录 · Communicate\nListening: ${communicate.listening}\nSpeaking: ${communicate.speaking}\nWriting: ${communicate.writing}`,
+      `目录 · Extend*\nReading: ${extend.reading}`,
+    )
+  }
+  if (d.directoryExtra?.title === 'Word list')
+    texts.push(
+      `核心单词（全册，按单元汇总）\n${supplied.units
+        .filter((unit) => unit.kind === 'unit')
+        .map(
+          (unit) =>
+            `${unit.title}\n${unit.words.map((word) => `${word.english} ${word.phonetic} ${word.chinese}`).join('\n')}`,
+        )
+        .join('\n\n')}`,
+    )
   if ('notes' in d && Array.isArray(d.notes) && d.notes.length)
     texts.unshift(`接入说明\n${d.notes.join('\n')}`)
   if (d.words.length)
@@ -219,7 +330,7 @@ for (const d of gradeFourEnglishLowerDefinitions) {
     )
   texts.push(`来源说明\n${pageNote}。${sourceNote}`)
   const content: CourseContent = {
-    id: `${d.knowledgePointId}_CONTENT_V1`,
+    id: `${d.knowledgePointId}_CONTENT_V${d.directory || d.kind === 'project' ? 2 : 1}`,
     knowledgePointId: d.knowledgePointId,
     title: d.title,
     contentType: 'TEXTBOOK',
@@ -232,6 +343,15 @@ for (const d of gradeFourEnglishLowerDefinitions) {
         ? 'USER_PROVIDED_SOUNDS_SUPPLEMENT'
         : 'USER_PROVIDED_BILINGUAL_TEXT',
       sourceNote,
+      ...(d.directory || d.directoryExtra
+        ? {
+            directory: d.directory ?? d.directoryExtra,
+            directorySourceId: G4_SHANGHAI_ENGLISH_S2_DIRECTORY_SOURCE_ID,
+            directoryScope: 'USER_PROVIDED_CONTENTS_IMAGES',
+            directoryOnlySections: d.directory ? ['Communicate', 'Extend'] : [d.title],
+            directoryImages: directoryCorrection.images,
+          }
+        : {}),
       sectionKinds: d.sections.map((s) => s.kind),
       missingSections,
       vocabularySourceId: contentSourceId,
@@ -244,7 +364,7 @@ for (const d of gradeFourEnglishLowerDefinitions) {
     difficulty: 'FOUNDATION',
     sourceId: contentSourceId,
     status: 'PUBLISHED',
-    currentVersion: 1,
+    currentVersion: d.directory || d.kind === 'project' ? 2 : 1,
     createdAt: contentImportedAt,
     updatedAt: contentImportedAt,
     ...reviewed,
@@ -361,7 +481,7 @@ for (const d of gradeFourEnglishLowerDefinitions) {
     practiceSets: [],
     challenges: [],
     extensionActivities:
-      d.kind === 'review' || isSoundsSupplement
+      d.kind === 'review' || isSoundsSupplement || isDirectoryAppendix
         ? []
         : [
             {

@@ -570,7 +570,7 @@ function sourceNotice(): string {
     if (context.value?.textbookId === G4_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID)
       return isEnglishProject.value
         ? '用学过的词句制作作息或职业海报并交流，作品不自动判分。'
-        : '本册按用户提供的沪教牛津四年级下册2022版文本整理，保留词汇音标、双语课文、句型与语音栏目。用户配套练习在独立入口完成，基础闯关为项目原创。 已新增独立12单元Phonics附录和完整Intonation示范，补充稿目录与当前8单元不同；跟读使用设备语音，语调以↗、↘标记为准。'
+        : '本册目录包含8个Unit、Project 1与Project 2，以及Unit checklist和Word list。单元目录列出Get ready、Explore、Communicate和Extend*，可据此安排学习与复习；语音补充资料独立列在册末。'
     if (context.value?.textbookId === G3_SHANGHAI_ENGLISH_S2_TEXTBOOK_ID)
       return isEnglishProject.value
         ? '运用已学词句制作海报并交流，作品不自动判分。'

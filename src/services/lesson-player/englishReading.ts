@@ -36,6 +36,7 @@ export function buildEnglishReadingSegments(
   const segments: EnglishReadingSegment[] = []
   for (const block of [...blocks].sort((a, b) => a.sort - b.sort || a.id.localeCompare(b.id))) {
     if (!readingTypes.has(block.type)) continue
+    if (/^目录 · /.test(block.content ?? '')) continue
     let section: EnglishReadingSection = 'dialogue'
     const blockStart = segments.length
     const isSuppliedDialogue = /^主课文 Listen and say/m.test(block.content ?? '')

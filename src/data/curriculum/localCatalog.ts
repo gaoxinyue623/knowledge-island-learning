@@ -1,3 +1,4 @@
+import { applyTaskPictures } from './generated-pictures'
 import { readingSignsIllustrationAsset } from './grade-6/english-shanghai-lower/reading-signs-illustration'
 import {
   cuboidIllustrationAsset,
@@ -81,7 +82,7 @@ import { shenzhenEnglishLowerCurriculum } from './grade-2/shenzhen-english-lower
  * The application consumes the owner-approved release projection in production/localRelease.ts.
  * Original verification and source metadata remain unchanged in this catalogue.
  */
-export const localCurriculumData: CurriculumData = {
+export const localCurriculumData: CurriculumData = applyTaskPictures({
   grades: [
     gradeOneChineseUpperCurriculum.grade,
     gradeTwoChineseUpperCurriculum.grade,
@@ -470,4 +471,4 @@ export const localCurriculumData: CurriculumData = {
     ...gradeFiveBnuUnitTestSources,
     ...gradeFourBnuLowerUnitTestSources,
   ],
-}
+})

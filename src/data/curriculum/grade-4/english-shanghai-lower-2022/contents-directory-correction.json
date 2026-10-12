@@ -1,0 +1,257 @@
+{
+  "correctedAt": "2026-10-12T00:00:00.000Z",
+  "title": "沪教牛津英语四年级下册（2022新版）",
+  "publisher": "上海教育出版社",
+  "sourceNote": "按用户提供的两张目录图片逐项订正8个Unit的Get ready、Explore、Communicate、Extend*栏目及Project 1、Project 2、Unit checklist、Word list名称和页码。目录图片提供栏目题目，不提供各栏目的完整课文或原版音频。原有双语文本及项目练习沿用各自来源；12单元Phonics补充稿仍作为独立补充资料。",
+  "images": [
+    {
+      "path": "src/data/curriculum/grade-4/english-shanghai-lower-2022/sources/contents-01.png",
+      "sha256": "b38dcfad8687c56cee4b2aabcbfe45c0d3b326916355962a6b1e0417bdbb8b72"
+    },
+    {
+      "path": "src/data/curriculum/grade-4/english-shanghai-lower-2022/sources/contents-02.png",
+      "sha256": "ece067f259b19a059342ba6b498c76ec5b641c7ea328f3b3b0fbc7dba659b3ee"
+    }
+  ],
+  "units": [
+    {
+      "number": 1,
+      "title": "Unit 1 What is your daily schedule?",
+      "bigQuestion": "What is your daily schedule?",
+      "page": 1,
+      "getReady": {
+        "words": [
+          "get up",
+          "have breakfast",
+          "go to school",
+          "have lunch",
+          "go home",
+          "have dinner",
+          "go to bed"
+        ]
+      },
+      "explore": {
+        "reading": "Li Ming’s and Li Liang’s day",
+        "sounds": "pl, bl",
+        "intonation": "",
+        "grammar": "What time does he / she ...?\nHe / She ... at ..."
+      },
+      "communicate": {
+        "listening": "Uncle Li’s daily schedule",
+        "speaking": "My English teacher’s daily schedule",
+        "writing": "About your English teacher’s daily schedule"
+      },
+      "extend": {
+        "reading": "Jiajia needs a schedule",
+        "optional": true
+      }
+    },
+    {
+      "number": 2,
+      "title": "Unit 2 What do we like about school?",
+      "bigQuestion": "What do we like about school?",
+      "page": 11,
+      "getReady": {
+        "words": ["Chinese", "Maths", "English", "PE", "Music", "Art", "IT", "Science"]
+      },
+      "explore": {
+        "reading": "We all like our school!",
+        "sounds": "fl, cl",
+        "intonation": "",
+        "grammar": "Does he / she have ...?\nDoes he / she like (doing) ...?\nYes, he / she does. / No, he / she doesn’t."
+      },
+      "communicate": {
+        "listening": "A dog at a training school",
+        "speaking": "Students’ favourite days at school",
+        "writing": "An email about your favourite day"
+      },
+      "extend": {
+        "reading": "Come and join us!",
+        "optional": true
+      }
+    },
+    {
+      "number": 3,
+      "title": "Unit 3 What’s great about jobs?",
+      "bigQuestion": "What’s great about jobs?",
+      "page": 21,
+      "getReady": {
+        "words": ["firefighter", "police officer", "farmer", "teacher", "doctor", "bus driver"]
+      },
+      "explore": {
+        "reading": "A dentist comes to school!",
+        "sounds": "br",
+        "intonation": "",
+        "grammar": "What do they do? They are ...\nWhat does he / she do? He / She is a ..."
+      },
+      "communicate": {
+        "listening": "A chat show about jobs",
+        "speaking": "Students’ dream jobs",
+        "writing": "About a family member at work"
+      },
+      "extend": {
+        "reading": "At the fire station",
+        "optional": true
+      }
+    },
+    {
+      "number": 4,
+      "title": "Unit 4 How can we make music?",
+      "bigQuestion": "How can we make music?",
+      "page": 31,
+      "getReady": {
+        "words": ["triangle", "violin", "piano", "guitar", "erhu", "flute", "pipa", "drum"]
+      },
+      "explore": {
+        "reading": "Let’s make music!",
+        "sounds": "cr, gr",
+        "intonation": "",
+        "grammar": "I am (doing) ... We are (doing) ...\nHe / She isn’t (doing) ..."
+      },
+      "communicate": {
+        "listening": "An introduction to a band",
+        "speaking": "Our concerts",
+        "writing": "About a musical instrument"
+      },
+      "extend": {
+        "reading": "Different musical instruments",
+        "optional": true
+      }
+    },
+    {
+      "number": 5,
+      "title": "Unit 5 How do we make art?",
+      "bigQuestion": "How do we make art?",
+      "page": 41,
+      "getReady": {
+        "words": [
+          "photo",
+          "paper-cut",
+          "painting",
+          "circle",
+          "triangle",
+          "square",
+          "rectangle",
+          "star"
+        ]
+      },
+      "explore": {
+        "reading": "Shapes in art",
+        "sounds": "sp, st",
+        "intonation": "",
+        "grammar": "Are you (doing) ...? Yes, I am. / No, I’m not.\nIs he / she (doing) ...?\nYes, he / she is. / No, he / she isn’t."
+      },
+      "communicate": {
+        "listening": "Making art",
+        "speaking": "Making art with shapes",
+        "writing": "A chat about Jim’s artwork"
+      },
+      "extend": {
+        "reading": "The world of paper-cuts",
+        "optional": true
+      }
+    },
+    {
+      "number": 6,
+      "title": "Unit 6 How do we measure time?",
+      "bigQuestion": "How do we measure time?",
+      "page": 51,
+      "getReady": {
+        "words": ["day", "night", "second", "minute", "hour", "month", "year"]
+      },
+      "explore": {
+        "reading": "What time is it?",
+        "sounds": "tr, dr",
+        "intonation": "",
+        "grammar": "What are you doing?\nWhat is he / she doing?"
+      },
+      "communicate": {
+        "listening": "Wu Wei’s online friends",
+        "speaking": "People’s activities",
+        "writing": "About your family’s busy time"
+      },
+      "extend": {
+        "reading": "Keeping up with time",
+        "optional": true
+      }
+    },
+    {
+      "number": 7,
+      "title": "Unit 7 How do things change?",
+      "bigQuestion": "How do things change?",
+      "page": 61,
+      "getReady": {
+        "words": ["liquid", "solid", "gas", "sugar", "salt", "cream", "melt"]
+      },
+      "explore": {
+        "reading": "Let’s make ice cream!",
+        "sounds": "fr",
+        "intonation": "",
+        "grammar": "Shall we ...?\nLet’s ..."
+      },
+      "communicate": {
+        "listening": "Things that change",
+        "speaking": "Making food mixture",
+        "writing": "About your favourite food mixture"
+      },
+      "extend": {
+        "reading": "What is our world made of?",
+        "optional": true
+      }
+    },
+    {
+      "number": 8,
+      "title": "Unit 8 How do people get along with each other?",
+      "bigQuestion": "How do people get along with each other?",
+      "page": 71,
+      "getReady": {
+        "words": ["take turns", "polite", "share", "knock"]
+      },
+      "explore": {
+        "reading": "Poems about being polite",
+        "sounds": "",
+        "intonation": "Intonation",
+        "grammar": "Review"
+      },
+      "communicate": {
+        "listening": "Getting along with family members",
+        "speaking": "Borrowing things",
+        "writing": "About a helpful / polite / ... friend"
+      },
+      "extend": {
+        "reading": "Act like a team!",
+        "optional": true
+      }
+    }
+  ],
+  "extras": [
+    {
+      "number": 9,
+      "title": "Project 1",
+      "chinese": "项目一",
+      "page": 81,
+      "kind": "project"
+    },
+    {
+      "number": 10,
+      "title": "Project 2",
+      "chinese": "项目二",
+      "page": 83,
+      "kind": "project"
+    },
+    {
+      "number": 14,
+      "title": "Unit checklist",
+      "chinese": "单元自查",
+      "page": 85,
+      "kind": "directory"
+    },
+    {
+      "number": 15,
+      "title": "Word list",
+      "chinese": "词汇表",
+      "page": 86,
+      "kind": "directory"
+    }
+  ]
+}

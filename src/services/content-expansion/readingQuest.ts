@@ -96,6 +96,7 @@ import { approveLocalRecords, isLocallyApproved } from '../../data/curriculum/lo
 import { readingQuestionSeeds } from '@/data/content-expansion/reading-quest-seeds'
 import { createMathQuest } from './mathQuest'
 import { createEarlyMathQuest } from './earlyMathQuest'
+import { attachTaskQuestionPictures } from '@/data/curriculum/generated-pictures'
 import { createLowerMathQuest } from './lowerMathQuest'
 import { createShenzhenEnglishLowerQuest } from './shenzhenEnglishLowerQuest'
 import {
@@ -864,6 +865,17 @@ export function createReadingQuest(
   input: Parameters<typeof createReadingQuestDraft>[0],
 ): ReadingQuest | null {
   const quest = createReadingQuestDraft(input)
+  // The on-page quest is built independently of the assessment question catalog.
+  // Apply the same exact question-to-picture mapping before progress IDs are derived.
+  if (quest)
+    for (const stage of quest.stages) {
+      if (stage.kind !== 'question') continue
+      const illustrated = attachTaskQuestionPictures([stage.question])[0]!
+      if (illustrated !== stage.question) {
+        stage.question = illustrated
+        stage.visual = undefined
+      }
+    }
   if (!quest || !isLocallyApproved(input.bundle?.learningContent)) return quest
   return Object.assign(approveLocalRecords(quest), {
     legacyContentRevision: questContentRevision(quest),

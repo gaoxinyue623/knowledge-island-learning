@@ -256,7 +256,7 @@ const allFiles = [
   ...filesIn(resolve('public/curriculum')),
 ]
 const hashToFiles = new Map<string, string[]>()
-for (const path of allFiles.filter((path) => /\.(md|txt|png)$/.test(path))) {
+for (const path of allFiles.filter((path) => /\.(md|txt|png|svg)$/.test(path))) {
   const hash = createHash('sha256').update(readFileSync(path)).digest('hex')
   hashToFiles.set(hash, [...(hashToFiles.get(hash) ?? []), relative(process.cwd(), path)])
 }
@@ -305,7 +305,7 @@ const report = {
   nodes,
   evidenceHashes,
 }
-const destination = resolve('doc/curriculum/TEXTBOOK_CATALOG_AUDIT_2026-10-09.json')
+const destination = resolve('doc/curriculum/TEXTBOOK_CATALOG_AUDIT.json')
 mkdirSync(resolve('doc/curriculum'), { recursive: true })
 writeFileSync(destination, `${JSON.stringify(report, null, 2)}\n`)
 console.log(JSON.stringify(report.totals))

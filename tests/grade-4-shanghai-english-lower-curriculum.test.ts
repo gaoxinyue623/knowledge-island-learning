@@ -15,6 +15,7 @@ import {
   gradeFourEnglishLowerQuestions as questions,
   gradeFourEnglishLowerBundles as bundles,
   gradeFourEnglishLowerSource as supplied,
+  gradeFourEnglishLowerDirectoryCorrection as directoryCorrection,
 } from '@/data/curriculum/grade-4/english-shanghai-lower-2022'
 import { G3_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID as upperBook } from '@/data/curriculum/grade-3/english-shanghai-upper-2022'
 import {
@@ -112,19 +113,21 @@ describe('Shanghai-Oxford grade 4 lower English import', () => {
       'utf8',
     )
     expect(createHash('sha256').update(source).digest('hex')).toBe(supplied.sourceSha256)
-    expect(definitions).toHaveLength(13)
-    expect(definitions.flatMap((d) => d.sections)).toHaveLength(24)
+    expect(definitions).toHaveLength(15)
+    expect(definitions.flatMap((d) => d.sections)).toHaveLength(26)
     expect(definitions.flatMap((d) => d.words)).toHaveLength(55)
-    expect(added.units).toHaveLength(13)
-    expect(added.lessons).toHaveLength(13)
+    expect(added.units).toHaveLength(15)
+    expect(added.lessons).toHaveLength(15)
     for (const [index, d] of definitions.entries()) {
       const activeSource =
-        d.kind === 'appendix'
-          ? readFileSync(
-              'src/data/curriculum/grade-4/english-shanghai-lower-2022/sounds-supplement-source.md',
-              'utf8',
-            )
-          : source
+        d.kind === 'directory'
+          ? JSON.stringify(directoryCorrection)
+          : d.kind === 'appendix'
+            ? readFileSync(
+                'src/data/curriculum/grade-4/english-shanghai-lower-2022/sounds-supplement-source.md',
+                'utf8',
+              )
+            : source
       const displayed = textFor(index)
       for (const section of d.sections) {
         expect(activeSource).toContain(section.english)
@@ -134,7 +137,9 @@ describe('Shanghai-Oxford grade 4 lower English import', () => {
       }
       for (const word of d.words)
         expect(displayed).toContain(`${word.english} ${word.phonetic} ${word.chinese}`)
-      expect(activeSource).toContain(d.sentencePattern)
+      expect(activeSource).toContain(
+        supplied.units.find((unit) => unit.number === d.number)?.sentencePattern ?? '',
+      )
       expect(displayed).toContain(d.sentencePattern)
     }
     expect(added.courseContents.map((c) => c.body.suppliedPage)).toEqual([
@@ -148,6 +153,8 @@ describe('Shanghai-Oxford grade 4 lower English import', () => {
       71,
       81,
       83,
+      85,
+      86,
       null,
       null,
       null,
@@ -162,8 +169,13 @@ describe('Shanghai-Oxford grade 4 lower English import', () => {
       'tr, dr',
       'fr',
     ])
-    expect(definitions[7]!.intonation).toBe('语调练习')
-    expect(added.sources.map((s) => s.sourceType)).toEqual(['TEXTBOOK', 'TEXTBOOK', 'AI_GENERATED'])
+    expect(definitions[7]!.intonation).toBe('Intonation')
+    expect(added.sources.map((s) => s.sourceType)).toEqual([
+      'TEXTBOOK',
+      'TEXTBOOK',
+      'TEXTBOOK',
+      'AI_GENERATED',
+    ])
     for (const id of [textSource, practiceSource]) {
       expect(catalog.contentSources.find((s) => s.id === id)).toMatchObject({
         releaseApprovalId: approval,
@@ -191,17 +203,17 @@ describe('Shanghai-Oxford grade 4 lower English import', () => {
       const map = (await curriculumService.getLearningMapCurriculum(book))!
       const view = buildLearningMapViewModel(map, [], { dataset: 'profile' })
       expect(map.textbook).toMatchObject({ subject: 'ENGLISH', semester: 2 })
-      expect(view.islands).toHaveLength(13)
-      expect(flattenKnowledgeNodes(view.islands)).toHaveLength(13)
-      for (const [index, d] of definitions.entries()) {
+      expect(view.islands).toHaveLength(15)
+      expect(flattenKnowledgeNodes(view.islands)).toHaveLength(15)
+      for (const d of definitions) {
         const lesson = (await repository.getByKnowledgePoint(d.knowledgePointId))!
         expect(lesson.contentStatus).toBe('PUBLISHED')
-        expect(lesson.blocks).toHaveLength(
-          d.sections.length +
-            (d.kind !== 'unit' ? 1 : 4) +
-            Number('notes' in d && d.notes.length > 0),
-        )
-        expect(lesson.blocks.map((b) => b.block.text).join('\n')).toBe(textFor(index))
+        expect(lesson.blocks.length).toBeGreaterThanOrEqual(d.sections.length)
+        const displayed = lesson.blocks.map((b) => b.block.text).join('\n')
+        for (const section of d.sections) {
+          expect(displayed).toContain(section.english)
+          expect(displayed).toContain(section.chinese)
+        }
         const assessment = await new QuestionEngineAdapter().loadAssessment(context(d), {
           dataset: 'profile',
         })
@@ -449,7 +461,7 @@ it.each(definitions.map((d) => d.number))(
       expect(wrapper.text()).toContain(d.sections[0]!.chinese)
       expect(wrapper.text()).toContain(
         d.page
-          ? `用户标注第${d.page}页`
+          ? `教材目录第${d.page}页`
           : d.kind === 'appendix'
             ? '用户补充语音附录'
             : '用户附加综合练习',

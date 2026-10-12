@@ -1,15 +1,15 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { relative, resolve } from 'node:path'
 import { productionCurriculumIndex as catalog } from '../src/data/curriculum/production'
+import { taskPictures } from '../src/data/curriculum/generated-pictures'
+import { localQuestionVisuals } from '../src/data/curriculum/production/localRelease'
 
 // Human-facing completeness review. A valid release is not an original-page certificate.
-const date = '2026-10-10'
+const date = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' })
 const out = resolve('doc/curriculum')
-const structure = JSON.parse(
-  readFileSync(resolve(out, 'TEXTBOOK_CATALOG_AUDIT_2026-10-09.json'), 'utf8'),
-)
+const structure = JSON.parse(readFileSync(resolve(out, 'TEXTBOOK_CATALOG_AUDIT.json'), 'utf8'))
 const curated = JSON.parse(
-  readFileSync(resolve(out, `TEXTBOOK_VERIFICATION_RULES_${date}.json`), 'utf8'),
+  readFileSync(resolve('src/data/curriculum/review/textbookVerificationRules.json'), 'utf8'),
 )
 if (
   structure.totals.books !== catalog.textbooks.length ||
@@ -93,6 +93,8 @@ type Issue = {
   priority: string
   bookId: string
   nodeId: string
+  nodeIds?: string[]
+  previousId?: string
   grade: number
   semester: string
   subject: string
@@ -150,6 +152,40 @@ for (const rule of curated.rules) {
     throw new Error(`Curated title missing: ${rule.bookId} / ${rule.matchTitle}`)
   add({ ...entry, nodeId }, resolved === true)
 }
+for (const nodeId of new Set(taskPictures.map((picture) => picture.nodeId))) {
+  const pictures = taskPictures.filter((picture) => picture.nodeId === nodeId)
+  const node = byId.get(nodeId)
+  if (!node) throw new Error(`Task picture node missing: ${nodeId}`)
+  for (const picture of pictures) {
+    if (!node.media.some((media) => media.id === picture.id))
+      throw new Error(`Task picture not referenced: ${picture.id}`)
+    if (!existsSync(resolve('public', picture.url.slice(1))))
+      throw new Error(`Task picture file missing: ${picture.url}`)
+    for (const questionId of picture.questionIds)
+      if (
+        !node.questions.some(
+          (question) =>
+            question.id === questionId &&
+            question.media.some((media) => media.mediaAssetId === picture.id),
+        )
+      )
+        throw new Error(`Task picture exercise missing: ${questionId}`)
+  }
+  add(
+    {
+      nodeId,
+      category: '任务配图',
+      status: '已按题目补图',
+      issue: '看图任务缺图已补齐',
+      evidence: pictures
+        .map((picture) => `${picture.title}：${picture.constraints.join('；')}`)
+        .join('\n'),
+      action: '用户允许按题目生成配图；已接入课文或对应练习。生成方式、条件和文件哈希见配图清单。',
+      urls: pictures.map((picture) => picture.url),
+    },
+    true,
+  )
+}
 // Generic original-book verification status is excluded at the user's request.
 // Mathematics retains its separate version and knowledge-point coverage review.
 for (const book of sortedBooks.filter((b) => b.subjectId === 'SUBJECT_MATH')) {
@@ -167,7 +203,48 @@ for (const book of sortedBooks.filter((b) => b.subjectId === 'SUBJECT_MATH')) {
     action: '核对教材版本、单元归属、知识点覆盖与练习条件。',
   })
 }
+const phonicsByBook = new Map<string, typeof records>()
+const pictureExclusions = new Map<string, { previousId: string; reason: string }>(
+  curated.pictureReviewExclusions.map(
+    (entry: { nodeId: string; previousId: string; reason: string }) => [entry.nodeId, entry],
+  ),
+)
 for (const node of records) {
+  // A picture elsewhere in the lesson cannot satisfy an independently displayed question.
+  // Runtime visuals count as diagrams even when no separate image file is needed.
+  if (node.book.subjectId === 'SUBJECT_MATH')
+    for (const question of node.questions) {
+      const stem = question.stem.map((block) => block.text ?? '').join('\n')
+      const dependsOnPicture =
+        /看图|下图|如图|图中|图示|这幅图|这张图|按图|阴影部分|沿上述路线/.test(stem)
+      // These questions supply the coordinates or entire grid movement in words.
+      const completeCoordinateConditions = [
+        'G4_BNU_MATH_S1_2022_KP_25_Q3',
+        'G4_BNU_MATH_S1_2022_KP_12_SYNC_V1_04',
+        'G6_BNU_MATH_S1_2022_KP_19_Q2',
+        'G6_BNU_MATH_S1_2022_KP_18_SYNC_V1_06',
+      ].includes(question.id)
+      const questionReferences = flattenStrings([question.stem, question.media, question.options])
+      const hasQuestionImage = questionReferences.some((reference) => {
+        const asset = assets.get(reference)
+        return asset?.mediaType === 'IMAGE' || asset?.mediaType === 'SVG'
+      })
+      if (
+        dependsOnPicture &&
+        !completeCoordinateConditions &&
+        !hasQuestionImage &&
+        !localQuestionVisuals.has(question.id)
+      )
+        add({
+          nodeId: node.point.id,
+          priority: 'P1',
+          category: '数学题图',
+          status: '单题配图待核',
+          issue: '题干依赖图示，但当前单题没有关联图片或动态示意图',
+          evidence: `${question.id}\n${stem}`,
+          action: '按当前题干条件补入随题图片，并核对正式练习与课后闯关均可显示。',
+        })
+    }
   for (const content of node.contents) {
     const body = content.body
     const missing = Array.isArray(body.missingSections) ? body.missingSections : []
@@ -188,28 +265,28 @@ for (const node of records) {
       !body.speechExamples &&
       !(Array.isArray(body.phonicsExamples) && body.phonicsExamples.length)
     ) {
-      add({
-        nodeId: node.point.id,
-        category: '语音栏目',
-        status: '栏目文本范围待核',
-        issue: '语音栏仅列字母组合、例词或名称，完整示范范围未核',
-        evidence: `当前栏目：${String(body.sounds || body.speechFeature || body.intonation)}；未接入独立的该栏完整例句/韵文。`,
-        action:
-          node.book.id === 'G4_SHANGHAI_ENGLISH_S2_2022'
-            ? '核对原8单元语音原页；新增12单元附录已接入但未与此单元建立同版对应。'
-            : '核对该栏原页是否含例句、韵文或语调标记；有则逐项补入，不凭栏目名猜写。',
-      })
+      const group = phonicsByBook.get(node.book.id) ?? []
+      if (!group.some((entry) => entry.point.id === node.point.id)) group.push(node)
+      phonicsByBook.set(node.book.id, group)
     }
   }
-  if (!node.hasImage && node.pictureLines.length)
-    add({
-      nodeId: node.point.id,
-      category: '图文任务',
-      status: '疑似缺图，待原页确认',
-      issue: '文字要求读图，未找到当前课程或关联题的配图引用',
-      evidence: node.pictureLines[0]!.slice(0, 260),
-      action: '核对该任务原页；确认图片是题干必要条件、需学生自画，还是仅属活动提示。',
-    })
+  if (!node.hasImage && node.pictureLines.length) {
+    const exclusion = pictureExclusions.get(node.point.id)
+    add(
+      {
+        nodeId: node.point.id,
+        previousId: exclusion?.previousId,
+        category: exclusion ? '缺图复查排除' : '图文任务',
+        status: exclusion ? '未发现指定图片缺失' : '疑似缺图，待原页确认',
+        issue: exclusion?.reason ?? '文字要求读图，未找到当前课程或关联题的配图引用',
+        evidence: node.pictureLines[0]!.slice(0, 260),
+        action: exclusion
+          ? '保留原文和活动条件，不再由看图、地图或图上等关键词判为缺图。'
+          : '核对该任务原页；确认图片是题干必要条件、需学生自画，还是仅属活动提示。',
+      },
+      Boolean(exclusion),
+    )
+  }
   for (const url of node.localUrls)
     if (!existsSync(resolve('public', url.slice(1))))
       add({
@@ -221,6 +298,36 @@ for (const node of records) {
         evidence: url,
         action: '恢复对应文件并检查页面渲染。',
       })
+}
+for (const [bookId, group] of phonicsByBook) {
+  add({
+    bookId,
+    nodeIds: group.map((node) => node.point.id),
+    sourceIds: [
+      ...new Set(group.flatMap((node) => node.contents.map((content) => content.sourceId))),
+    ],
+    location: group.map((node) => node.point.name.split(' ').slice(0, 2).join(' ')).join('、'),
+    category: '语音栏目文字',
+    status: '栏目文本范围待核',
+    issue: `${group.length}个单元的语音栏目完整文字范围尚未确认（合并核对）`,
+    evidence: group
+      .map(
+        (node) =>
+          `${node.point.name}：${node.contents
+            .map((content) =>
+              String(
+                content.body.sounds || content.body.speechFeature || content.body.intonation || '',
+              ),
+            )
+            .filter(Boolean)
+            .join('；')}`,
+      )
+      .join('\n'),
+    action:
+      bookId === 'G4_SHANGHAI_ENGLISH_S2_2022'
+        ? '核对原8单元语音栏目文字；12单元附录已独立接入，归属差异单列。不要求原版音频。'
+        : '对照该册语音栏目原页确认是否有完整例句、韵文或语调标记；确有漏项再补文字。不要求原版音频。',
+  })
 }
 const resourceRows = [
   ['G3_PEP_CHINESE_S1_KP_WRITING_3', '生日续写三张AI图', '原教材插图未提供；当前已有3张AI素材。'],
@@ -237,43 +344,52 @@ const resourceRows = [
   ],
 ] as const
 for (const [nodeId, title, evidence] of resourceRows)
-  add({
-    nodeId,
-    category: '配图来源',
-    status: '配套已补，原图待核',
-    issue: title,
-    evidence,
-    action: '对照同版原图确认人物、标识、图序及任务条件；AI素材继续按配套图片标注。',
-  })
+  add(
+    {
+      nodeId,
+      category: '配图来源',
+      status: '已有配图，任务条件已核对',
+      issue: title,
+      evidence,
+      action: '用户允许以生成配图支持任务；人物、标识和图序已核对，素材来源保留。',
+    },
+    true,
+  )
 const animal = records.find(
   (x) =>
     x.book.id === 'G3_PEP_CHINESE_S2_USER_IMPORTED' &&
     x.questions.some((q) => flattenStrings(q).some((s) => s.includes('小猴子丢玉米'))),
 )
 if (!animal) throw new Error('Animal picture-story practice not found.')
-add({
-  nodeId: animal.point.id,
-  location: '第二单元同步练习第28题 看图写故事',
-  category: '配图来源',
-  status: '配套已补，原图待核',
-  issue: '四组动物故事AI图不能作为原题配图认证',
-  evidence: '小猴子丢玉米、小熊送小白兔回家、小松鼠种花生、小狗认真练字均已接入，含6行写话区。',
-  action: '核对原题配图、题干及故事结尾要求；区分自拟练习与原题。',
-})
+add(
+  {
+    nodeId: animal.point.id,
+    location: '第二单元同步练习第28题 看图写故事',
+    category: '配图来源',
+    status: '已有配图，任务条件已核对',
+    issue: '四组动物故事配图已接入',
+    evidence: '小猴子丢玉米、小熊送小白兔回家、小松鼠种花生、小狗认真练字均已接入，含6行写话区。',
+    action: '用户允许使用生成配图；四组故事图序与当前看图写话任务一致，原始来稿保留。',
+  },
+  true,
+)
 const cuboid = records.find(
   (x) =>
     x.book.id === 'G3_BNU_MATH_S1_2022_REVISED' && x.media.some((m) => m.id.includes('CUBOID')),
 )
 if (!cuboid) throw new Error('Cuboid practice image not found.')
-add({
-  nodeId: cuboid.point.id,
-  location: '第四单元 我们生活的空间（一）单元自测第4题',
-  category: '配图来源',
-  status: '配套已补，原图待核',
-  issue: '观察长方体AI连线图已接入，原题图仍待核',
-  evidence: '当前用三位观察者与三个视图的AI图，原口述任务留档。',
-  action: '核对观察方位、正侧面宽窄及斜角三面视图与同版原题一致。',
-})
+add(
+  {
+    nodeId: cuboid.point.id,
+    location: '第四单元 我们生活的空间（一）单元自测第4题',
+    category: '配图来源',
+    status: '已有配图，任务条件已核对',
+    issue: '观察长方体连线配图已接入',
+    evidence: '当前用三位观察者与三个视图的AI图，原口述任务留档。',
+    action: '用户允许使用生成配图；已核对正前方、左侧和斜上方对应的视图与当前题干条件。',
+  },
+  true,
+)
 for (const nodeId of [
   'G5_PEP_CHINESE_S2_KP_INTEGRATED_FUN',
   'G5_PEP_CHINESE_S2_KP_INTEGRATED_LOVE',
@@ -390,6 +506,7 @@ const nodeRows = records
     const flags = issues.filter(
       (i) =>
         i.nodeId === node.point.id ||
+        i.nodeIds?.includes(node.point.id) ||
         (!i.nodeId && i.bookId === node.book.id && i.category === '目录与版本'),
     )
     const body = node.contents[0]!.body
@@ -407,7 +524,10 @@ const nodeRows = records
       page: typeof page === 'number' || typeof page === 'string' ? page : null,
       contentVersion: node.contents.map((x) => x.currentVersion).join(' / '),
       sourceScope: String(body.sourceScope ?? '未注明'),
-      imageCount: node.media.filter((x) => x.mediaType === 'IMAGE').length,
+      imageCount: new Set([
+        ...node.media.filter((x) => x.mediaType === 'IMAGE').map((x) => x.url),
+        ...node.localUrls.filter((url) => /\.(png|jpe?g|webp|svg)$/i.test(url)),
+      ]).size,
       status: flags.length
         ? [...new Set(flags.map((x) => x.status))].join('；')
         : node.book.subjectId === 'SUBJECT_MATH'
@@ -443,7 +563,10 @@ const bookRows = sortedBooks.map((book) => {
     specificIssues: rows.filter((x) => x.priority !== 'P3').length,
     possibleMissingPictures: rows.filter((x) => x.status === '疑似缺图，待原页确认').length,
     imageCount: new Set(
-      ns.flatMap((n) => n.media.filter((x) => x.mediaType === 'IMAGE').map((x) => x.id)),
+      ns.flatMap((n) => [
+        ...n.media.filter((asset) => asset.mediaType === 'IMAGE').map((asset) => asset.url),
+        ...n.localUrls.filter((url) => /\.(png|jpe?g|webp|svg)$/i.test(url)),
+      ]),
     ).size,
     audioCount: new Set(
       ns.flatMap((n) => n.media.filter((x) => x.mediaType === 'AUDIO').map((x) => x.id)),
@@ -475,8 +598,7 @@ const report = {
   generatedAt: new Date().toISOString(),
   catalogGeneratedAt: structure.generatedAt,
   scope: curated.scope,
-  boundary:
-    '覆盖当前39册、全部1190节点及已接入同步题。数学按知识点、配套练习及图表检查，不要求接入教材原文；英语原版音频不列为待核问题。语文和英语仍核对文本与栏目范围。检查涉及本地结构、媒体引用、来源记录和内部一致性；疑似缺图不等于已确认原版缺图。',
+  boundary: `覆盖当前${catalog.textbooks.length}册、全部${records.length}节点及已接入同步题。数学按知识点、配套练习及图表检查，不要求接入教材原文；英语原版音频不列为待核问题。语文和英语仍核对文本与栏目范围。自画任务、一般概念说明和课文提到地图的叙述已复查排除；同册重复语音栏目合并。疑似缺图不等于已确认原版缺图。`,
   totals: {
     ...structure.totals,
     issueRows: issues.length,
@@ -517,19 +639,22 @@ const report = {
     {
       title: '人教社语文六年级上册同步字词学习手册',
       url: 'https://www.pep.com.cn/products/zhytu/gjshnj/csxp/tbzc/202306/t20230630_1984178.shtml',
-      checkedAt: date,
-      note: '本次检索可见2022年3月出版信息及目录，用于对照少数课号，不替代用户书的版权页。',
+      checkedAt: '2026-10-10',
+      note: '2026-10-10历史对照记录，用于对照少数课号，不替代用户书的版权页；本轮未重新检索。',
     },
     {
       title: '2022年教育部基础教育精品课名单',
       url: 'https://www.fuzhou.gov.cn/zgfzzt/jy/zdjy/202304/P020230425641760880849.pdf',
-      checkedAt: date,
-      note: '当前可检索到三上第三单元我来编童话、第四单元14小狗学叫及续写故事。仅作为单元归属差异证据。',
+      checkedAt: '2026-10-10',
+      note: '2026-10-10历史对照记录，涉及三上第三单元我来编童话、第四单元14小狗学叫及续写故事。相关单元归属已由用户确认，本轮未重新检索。',
     },
   ],
 }
-if (report.books.length !== 39 || report.nodes.length !== 1190)
-  throw new Error('Coverage changed; review report boundary and workbook before publishing.')
+if (
+  report.books.length !== catalog.textbooks.length ||
+  report.nodes.length !== catalog.knowledgePoints.length
+)
+  throw new Error('Review report does not cover the current catalog.')
 if (report.books.some((x) => /五四/.test(x.version)))
   throw new Error('Excluded five-four book reappeared.')
 mkdirSync(out, { recursive: true })
@@ -568,7 +693,7 @@ const issueRows = (items: Issue[]) =>
     x.evidence,
     x.action,
     x.urls.join('\n'),
-    x.nodeId,
+    x.nodeIds?.join('\n') || x.nodeId,
   ])
 writeFileSync(
   resolve(out, `TEXTBOOK_VERIFICATION_ISSUES_${date}.csv`),

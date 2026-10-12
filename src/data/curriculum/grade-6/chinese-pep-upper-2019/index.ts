@@ -39,10 +39,17 @@ const currentLessons = originalLessons.flatMap((d) =>
   d.key === 'reading-18' ? [unit6Correction.lesson, d] : [d],
 )
 export const gradeSixChinese2019Definitions = currentLessons.map((d) => {
-  return {
+  const current = {
     ...d,
     ...unit6Correction.renumberings.find((entry) => entry.key === d.key),
     ...(d.key === lesson21.key ? lesson21 : {}),
+  }
+  return {
+    ...current,
+    sourceNote: current.sourceNote.replace(
+      '本次接入第1—3单元',
+      '本册已接入第1—8单元及字词附录，本节点来自首批第1—3单元附件',
+    ),
     revision: d.key === lesson21.key ? 2 : 1,
     isRemaining: d.unit >= 4,
     unitId: `G6_PEP_CHINESE_2019_S1_UNIT_${pad(d.unit)}`,

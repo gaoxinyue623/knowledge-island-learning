@@ -130,17 +130,33 @@ export function buildLearningContentFromCourseContent(
   if (!blocks.length) return null
 
   const literacyTable = bodyLiteracyTable(content)
+  const readingPrompt =
+    typeof content.body['readingPrompt'] === 'string'
+      ? content.body['readingPrompt'].trim()
+      : ''
+  const authorNote =
+    typeof content.body['authorNote'] === 'string' ? content.body['authorNote'].trim() : ''
   const occurrenceByFingerprint = new Map<string, number>()
   const blockRecords: LessonContentBlockRecord[] = blocks.map((block, index) => {
     const fingerprint = stableBlockFingerprint(block)
     const occurrence = (occurrenceByFingerprint.get(fingerprint) ?? 0) + 1
     occurrenceByFingerprint.set(fingerprint, occurrence)
     const stableKey = occurrence === 1 ? fingerprint : `${fingerprint}-${occurrence}`
+    const isReadingPrompt =
+      readingPrompt &&
+      block.type === 'TEXT' &&
+      block.text?.replace(/^\s*阅读提示\s*/, '').trim() === readingPrompt
+    const isAuthorNote =
+      authorNote &&
+      block.type === 'TEXT' &&
+      block.text?.replace(/^\s*教材脚注\s*/, '').trim() === authorNote
     return {
       id: `${content.id}:block:${stableKey}`,
       block,
       stepType: block.mediaAssetId ? 'media' : index === 0 ? 'intro' : 'concept',
       title: index === 0 && !literacyTable ? content.title : undefined,
+      ...(isReadingPrompt ? { isReadingPrompt: true } : {}),
+      ...(isAuthorNote ? { isAuthorNote: true } : {}),
       ...(index === 1 && literacyTable ? { literacyTable } : {}),
       mediaAssetIds:
         index === 0 && content.media?.length

@@ -1,3 +1,4 @@
+import { attachTaskQuestionPictures, TASK_PICTURES_APPROVAL } from '../generated-pictures'
 import {
   G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
   gradeFourEnglishUpperQuestions,
@@ -560,7 +561,7 @@ const comprehensiveSupplement = buildComprehensiveSupplement(
 )
 questions.push(...comprehensiveSupplement.questions)
 questionKnowledgePoints.push(...comprehensiveSupplement.mappings)
-export const localReleaseQuestions = questions
+export const localReleaseQuestions = attachTaskQuestionPictures(questions)
 export const localReleaseMappings = questionKnowledgePoints
 const existingSources = new Map(approvedCurriculum.sources.map((source) => [source.id, source]))
 const sourceIds = new Set(
@@ -584,6 +585,7 @@ export const localReleaseSources: ContentSource[] = [...sourceIds].map((id) =>
     : id === chineseReadingSource.id
       ? chineseReadingSource
       : [
+            TASK_PICTURES_APPROVAL,
             BNU_MATH_LOWER_IMPORT_APPROVAL,
             G3_BNU_MATH_IMPORT_APPROVAL,
             G4_BNU_MATH_SYNC_APPROVAL,

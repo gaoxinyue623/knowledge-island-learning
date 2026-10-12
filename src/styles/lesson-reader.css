@@ -190,7 +190,6 @@
 
 .reading-text-block + .reading-text-block {
   padding-top: 28px;
-  border-top: 1px dashed #dcd5bf;
 }
 
 .reading-text-block__title {
@@ -214,6 +213,13 @@
   letter-spacing: 0.015em;
   overflow-wrap: anywhere;
   word-break: normal;
+}
+
+.reading-text-block--prompt .reading-text-block__body,
+.reading-text-block--author-note .reading-text-block__body {
+  color: #697568;
+  font-size: 0.5em;
+  line-height: 1.85;
 }
 
 .lesson-reader[data-subject='chinese'] .reading-text-block--short-lines .reading-text-block__body {

@@ -219,7 +219,6 @@ for (const d of gradeFourChineseLowerDefinitions) {
     d.sourceNote,
     ...(corrected ? [luhuaCorrection.readingPrompt] : []),
     ...paragraphs,
-    ...(corrected ? [luhuaCorrection.authorNote] : []),
   ]
   if (!d.text) texts.push(`项目原创学习提示\n${guidance[d.kind]}`)
   gradeFourChineseLowerCurriculum.courseContents.push({
@@ -240,7 +239,6 @@ for (const d of gradeFourChineseLowerDefinitions) {
         ? {
             sections: luhuaCorrection.sections,
             readingPrompt: luhuaCorrection.readingPrompt,
-            authorNote: luhuaCorrection.authorNote,
             sourceImages: luhuaCorrection.images,
             generatedIllustrations: [luhuaIllustrationAsset.id],
             sourceIds: [contentSourceId, luhuaIllustrationSource.id],
@@ -255,7 +253,7 @@ for (const d of gradeFourChineseLowerDefinitions) {
                 type: 'IMAGE',
                 mediaAssetId: luhuaIllustrationAsset.id,
                 altText: luhuaIllustrationAsset.altText!,
-                text: '冬日芦苇荡中的青铜 · AI生成配套素材',
+                text: '',
               },
             ]
           : []),

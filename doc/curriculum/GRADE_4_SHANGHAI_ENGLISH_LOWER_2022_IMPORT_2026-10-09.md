@@ -13,3 +13,26 @@
 验证覆盖：来源哈希、全部双语正文/词条/语音栏目、两个账号教材可见性、年级与版本边界、11 个详情页、9 组配套练习入口、每个选择项及填空答案、短语排序与拼写训练、triangle 词义隔离、综合测验范围和模拟模型调用契约。未使用真实模型额度进行验证。
 
 验证结果：新增 21 项集成测试和 4 项综合测验覆盖测试通过。全量 137 个文件、1711 项测试首次运行 1710 项通过，唯一失败为旧测试仍期望四下英语未接入；更新该断言后，相关文件 25 项复测全部通过。类型检查、生产构建、ESLint 和本次修改文件格式检查通过。构建仍提示已有的大包体积问题。本地前端（5173）、家庭/宠物 API（8787）和 Agent API（8788）已重新加载并返回 HTTP 200。
+
+## 2026-10-12：按两张目录图片订正
+
+用户指定这两张图为沪教牛津英语四年级下册（2022新版）目录。图片保存于 `src/data/curriculum/grade-4/english-shanghai-lower-2022/sources/contents-01.png` 与 `contents-02.png`；转录、栏目题目、页码及两张图片的 SHA-256 保存在同目录的 `contents-directory-correction.json`。
+
+- 8个Unit的Big Question、Get ready词汇、Explore阅读题目、Sounds/Intonation和Grammar逐项对照图片。
+- 补齐每个Unit的Communicate Listening、Speaking、Writing目录题目及Extend*阅读题目；Extend保留星号。目录题目显示于详情页，不混入课文连续跟读。
+- 正式目录名称为Project 1（81页）、Project 2（83页）、Unit checklist（85页）、Word list（86页）。地图按目录页码排序，现有Unit及Project的内部ID不变；两个新入口使用14、15号ID，避免占用既有综合练习和语音补充ID。
+- Word list以既有55个核心词条按单元汇总，音标与释义沿用原词汇来源。Unit checklist当前接入图片中的栏目名称与页码。
+- 目录图只提供栏目题目，未据此生成Communicate、Extend或Unit checklist的教材正文。既有双语文本与项目练习保留各自来源；12单元Phonics及Intonation补充资料仍独立列在正式目录之后。
+
+| Unit | Explore Reading | Extend* Reading |
+| --- | --- | --- |
+| 1 | Li Ming’s and Li Liang’s day | Jiajia needs a schedule |
+| 2 | We all like our school! | Come and join us! |
+| 3 | A dentist comes to school! | At the fire station |
+| 4 | Let’s make music! | Different musical instruments |
+| 5 | Shapes in art | The world of paper-cuts |
+| 6 | What time is it? | Keeping up with time |
+| 7 | Let’s make ice cream! | What is our world made of? |
+| 8 | Poems about being polite | Act like a team! |
+
+校验：目录订正、课程/地图集成、阅读排版和英语跟读4个测试文件共69项通过；类型检查、生产构建和修改文件ESLint通过。构建保留既有大包体积提示。课程结构审计0错误，图片来源哈希均有匹配文件；核对清单同步反映8单元目录已由用户图片确认，12单元语音补充稿归属仍待核对。

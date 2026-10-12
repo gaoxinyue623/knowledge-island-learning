@@ -1,0 +1,169 @@
+[
+  {
+    "id": "TASK_PICTURE_COUNTERS_V1",
+    "nodeId": "G1_SHENZHEN_MATH_S1_KP_12",
+    "title": "两组圆片",
+    "altText": "左边一组1个红圆片，右边一组3个黄圆片。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/counters.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "1ee91ea8f6c1f28f34b64560c1f351822ba6f71b63deb43caca2e99248843bf2",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：红圆片1个；黄圆片3个；两组之间留空，无总数标签",
+    "constraints": ["红圆片1个", "黄圆片3个", "两组之间留空，无总数标签"],
+    "lesson": true,
+    "questionIds": [
+      "early-math-quest:v1:G1_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE:G1_SHENZHEN_MATH_S1_KP_12:1",
+      "early-math-quest:v1:G1_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE:G1_SHENZHEN_MATH_S1_KP_12:3"
+    ]
+  },
+  {
+    "id": "TASK_PICTURE_DUCKS_V1",
+    "nodeId": "G1_SHENZHEN_MATH_S2_KP_16",
+    "title": "田园里的鸭子",
+    "altText": "上方水里5只鸭子，下方岸上9只鸭子，两处合计14只。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/ducks.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "56b7086181cf8e43870cce11cf95dd8222d9cebcd6bfa13f33ce9d0fa782d187",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：水里5只；岸上9只；不标总数或算式",
+    "constraints": ["水里5只", "岸上9只", "不标总数或算式"],
+    "lesson": true,
+    "questionIds": [
+      "lower-math-quest:v1:G1_SHENZHEN_BNU_MATH_S2_2024_CANDIDATE:G1_SHENZHEN_MATH_S2_KP_16:1"
+    ]
+  },
+  {
+    "id": "TASK_PICTURE_ANIMAL_PARTY_V1",
+    "nodeId": "G2_SHENZHEN_MATH_S1_KP_16",
+    "title": "动物聚会情景",
+    "altText": "4张桌子，每桌2只小动物；下方单独表示后来又来1只。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/animal-party.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "879da01462515d637937184d3fdc1510e46911fb53cf373749761a71c432f74a",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：4张桌子；每桌2只，原来8只；后来1只在独立区域",
+    "constraints": ["4张桌子", "每桌2只，原来8只", "后来1只在独立区域"],
+    "lesson": true,
+    "questionIds": []
+  },
+  {
+    "id": "TASK_PICTURE_DOT_ARRAY_V1",
+    "nodeId": "G2_SHENZHEN_MATH_S1_KP_16",
+    "title": "点阵图",
+    "altText": "4行圆点，每行2个，行距、列距相等。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/dot-array.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "67cd05880d00f11f50f7904daffd0388793846296417a53840be3e0cf037662d",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：4行；每行2个；无额外小动物或答案算式",
+    "constraints": ["4行", "每行2个", "无额外小动物或答案算式"],
+    "lesson": false,
+    "questionIds": [
+      "math-quest:v1:G2_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE:G2_SHENZHEN_MATH_S1_KP_16:1",
+      "math-quest:v1:G2_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE:G2_SHENZHEN_MATH_S1_KP_16:2"
+    ]
+  },
+  {
+    "id": "TASK_PICTURE_SHAPE_MOTION_V1",
+    "nodeId": "G2_SHENZHEN_MATH_S1_KP_33",
+    "title": "图形运动与轴对称",
+    "altText": "三个独立区域：朝向不变的平移、绕固定中心转动的旋转、两侧镜像的轴对称。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/shape-motion.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "e5a80dba79f88c148c742262c0b8ac59a631e363ea4c7637b1226208405ea294",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：平移前后朝向相同；旋转绕明确中心顺时针90度；对称图两侧镜像",
+    "constraints": ["平移前后朝向相同", "旋转绕明确中心顺时针90度", "对称图两侧镜像"],
+    "lesson": true,
+    "questionIds": []
+  },
+  {
+    "id": "TASK_PICTURE_ROTATION_QUESTION_V1",
+    "nodeId": "G2_SHENZHEN_MATH_S1_KP_33",
+    "title": "图形变化示意",
+    "altText": "箭头绕固定点顺时针转过四分之一圈，转动前后的位置和朝向用不同颜色区分。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/rotation-question.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "167cfe998f92e75d0495d516ecd29da053dcc2d7ba026154ea170c9242097920",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：中心位置不变；图形大小不变；顺时针90度；不直接写运动名称",
+    "constraints": ["中心位置不变", "图形大小不变", "顺时针90度", "不直接写运动名称"],
+    "lesson": false,
+    "questionIds": [
+      "math-quest:v1:G2_SHENZHEN_BNU_MATH_S1_2024_CANDIDATE:G2_SHENZHEN_MATH_S1_KP_33:1"
+    ]
+  },
+  {
+    "id": "TASK_PICTURE_BAR_CHART_V1",
+    "nodeId": "G4_BNU_MATH_S1_2022_KP_22",
+    "title": "条形统计图",
+    "altText": "绘画8人、音乐12人、棋类6人，纵轴从0至14，每格2人。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/bar-chart.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "fba24c4503a57b7f03c6671ba3cb76be90b2f48c60c41c9fc88d948438e4a427",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：绘画8人；音乐12人；棋类6人；纵轴从0起每格2人；不在条上标出读取答案",
+    "constraints": ["绘画8人", "音乐12人", "棋类6人", "纵轴从0起每格2人", "不在条上标出读取答案"],
+    "lesson": true,
+    "questionIds": ["G4_BNU_MATH_S1_2022_KP_22_Q1", "G4_BNU_MATH_S1_2022_KP_22_Q2"]
+  },
+  {
+    "id": "TASK_PICTURE_TRIANGLE_TRANSLATION_V1",
+    "nodeId": "G5_BNU_MATH_S1_USER_KP_19",
+    "title": "三角形平移练习",
+    "altText": "三角形A(1,1)、B(1,3)、C(3,1)，列向右、行向上增加；只绘制原图，不给出平移后的答案。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/triangle-translation.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "3edfc01478cbac76328f4a661b44c81906f02330250610bc6b2af5d856e327e2",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：A(1,1)；B(1,3)；C(3,1)；向右4格；只显示原图",
+    "constraints": ["A(1,1)", "B(1,3)", "C(3,1)", "向右4格", "只显示原图"],
+    "lesson": true,
+    "questionIds": ["G5_BNU_MATH_S1_USER_KP_19_SYNC_V1_09"]
+  },
+  {
+    "id": "TASK_PICTURE_CUBE_VIEWS_V1",
+    "nodeId": "G6_BNU_MATH_S1_2022_KP_24",
+    "title": "正面图与摆放区域",
+    "altText": "空的2×2摆放区域，第1行在下方；3个待摆放的同样大小正方体；正面图为并排的2个正方形。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/cube-views.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "88367c8336d1588ed869630519c08da8dd9aeb4abece572284b02335593aa02a",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：2×2空格；第1行靠观察者；每格最多1个，仅一层；3个待摆方块；正面图2个并排正方形；不画任何一种答案摆法",
+    "constraints": [
+      "2×2空格",
+      "第1行靠观察者",
+      "每格最多1个，仅一层",
+      "3个待摆方块",
+      "正面图2个并排正方形",
+      "不画任何一种答案摆法"
+    ],
+    "lesson": true,
+    "questionIds": ["G6_BNU_MATH_S1_2022_KP_24_SYNC_V1_08"]
+  },
+  {
+    "id": "TASK_PICTURE_COMMUNITY_ROUTE_V1",
+    "nodeId": "G4_BNU_MATH_S1_2022_KP_13",
+    "title": "往返路线示意",
+    "altText": "从家先向东200米，再向北300米到图书馆；图右侧标出北向。仅标去程，不画返回答案。",
+    "mode": "deterministic SVG",
+    "url": "/curriculum/generated-pictures/community-route.svg",
+    "width": 1200,
+    "height": 800,
+    "sha256": "37b208e6cb622607e930633a686942483b28ce7dd06f2212fc974d5445f3c8ac",
+    "prompt": "按题干条件使用 scripts/generate-task-diagrams.py 精确绘制：先向东200米；再向北300米；北向朝上；仅标去程，不给出返程答案",
+    "constraints": ["先向东200米", "再向北300米", "北向朝上", "仅标去程，不给出返程答案"],
+    "lesson": true,
+    "questionIds": ["G4_BNU_MATH_S1_2022_KP_13_Q2", "G4_BNU_MATH_S1_2022_KP_13_Q3"]
+  }
+]

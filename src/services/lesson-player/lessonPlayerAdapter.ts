@@ -148,6 +148,8 @@ function blockViewModel(
     id: record.id,
     type: record.stepType,
     ...(record.title ? { title: record.title } : {}),
+    ...(record.isReadingPrompt ? { isReadingPrompt: true } : {}),
+    ...(record.isAuthorNote ? { isAuthorNote: true } : {}),
     ...(blockContent(record.block) ? { content: blockContent(record.block) } : {}),
     ...(record.paragraphs?.length ? { paragraphs: [...record.paragraphs] } : {}),
     ...(record.bullets?.length ? { bullets: [...record.bullets] } : {}),

@@ -1,0 +1,645 @@
+{
+  "scope": "当前本地发布的教材与配套内容；排除英语原版音频、数学原文逐页接入及通用原书核验状态。",
+  "reviewedAt": "2026-10-12",
+  "rules": [
+    {
+      "previousId": "待核001",
+      "priority": "P2",
+      "location": "Unit 6 What’s amazing about plants? / Unit 6 What’s amazing about plants?",
+      "category": "阅读表述",
+      "status": "项目事实校正已生效，原句待核",
+      "issue": "向日葵阅读已修订，仍需确认与教材原句的对应",
+      "evidence": "当前学习正文为What we call sunflower seeds are actually fruits.，原错误表述已退出当前正文。reviewNotes明确标为项目事实校正，未标作出版社原文。",
+      "action": "若需恢复教材原文，对照同版原页确认原句与对象；当前按已标注的项目修订文本学习。",
+      "nodeId": "G4_SHANGHAI_ENGLISH_S1_KP_06",
+      "bookId": "G4_SHANGHAI_ENGLISH_S1_2022",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核003",
+      "priority": "P1",
+      "location": "原Unit 1—8与Phonics附录Unit 1—12",
+      "category": "目录与版本",
+      "status": "8单元目录已确认，语音补充归属待核",
+      "issue": "四下8单元正文与12单元语音来稿目录不同",
+      "evidence": "用户2026-10-12提供的两张目录图片确认本册8个Unit及Project 1/2、Unit checklist和Word list，目录题目与页码已订正。补充语音稿为12个Unit，Unit 1为Touch and feel，仍以独立补充资料展示。",
+      "action": "核对12单元语音补充材料的封面和版权页，确认其版本归属；本册按已提供图片的8单元目录展示。",
+      "nodeId": null,
+      "bookId": "G4_SHANGHAI_ENGLISH_S2_2022",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核004",
+      "priority": "P1",
+      "location": "全册附录：字词表 / 写字表（会写）",
+      "category": "字词表",
+      "status": "已按教材图片补齐",
+      "issue": "旧清单写字表200/219计数已过时",
+      "evidence": "2026-10-10图片第4—5页标注共220个字；当前附录V2录入220项，与原图数量一致。",
+      "action": "该计数问题已闭环，原图片及旧稿保留。",
+      "nodeId": "G5_PEP_CHINESE_S1_KP_LITERACY_WRITING",
+      "bookId": "G5_PEP_CHINESE_S1_USER_IMPORTED",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核005",
+      "priority": "P1",
+      "location": "全册附录：字词表 / 识字表（会认·含拼音）",
+      "category": "字词表",
+      "status": "已按教材图片补齐",
+      "issue": "旧清单识字表250/137计数已过时",
+      "evidence": "当前V2录入209条：200条非蓝色生字及9条原图蓝色多音字，附拼音。原图第3页标注共200个生字；不能把展示条目总数直接当作生字数。",
+      "action": "该旧来稿计数问题已闭环，保持原图课号、词序和多音字标记。",
+      "nodeId": "G5_PEP_CHINESE_S1_KP_LITERACY_RECOGNITION",
+      "bookId": "G5_PEP_CHINESE_S1_USER_IMPORTED",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核006",
+      "priority": "P1",
+      "location": "第六单元 舐犊之情 / 19* 航天员写给孩子的信",
+      "category": "版本",
+      "status": "正文已补，版次待核",
+      "issue": "《航天员写给孩子的信》的教材年份未注明",
+      "evidence": "全文已按三张页面图替换，作者刘洋、署名日期2022年6月1日；书信日期不能作为教材出版年份。",
+      "action": "核对版权页、目录及第19课首页，确认与当前五上其他篇目的版本一致。",
+      "nodeId": "G5_PEP_CHINESE_S1_KP_READING_19",
+      "bookId": "G5_PEP_CHINESE_S1_USER_IMPORTED",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核008",
+      "priority": "P1",
+      "location": "第二单元 / 8* 红楼春趣",
+      "category": "正文",
+      "status": "已按教材图片修正",
+      "issue": "旧稿放飞风筝段落重复已消除",
+      "evidence": "当前《红楼春趣》V7来自四张教材图片，正文五个自然段，黛玉放飞风筝的叙述仅出现一次；导读、注释、会认字及《风筝》阅读链接已接入。",
+      "action": "该重复正文问题已关闭；册次口径差异另行核对。",
+      "nodeId": "G5_PEP_CHINESE_S2_KP_READING_08",
+      "bookId": "G5_PEP_CHINESE_S2_USER_IMPORTED",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核009",
+      "priority": "P2",
+      "location": "Module 1 Changes and differences / Unit 2 Our new home",
+      "category": "对话角色",
+      "status": "项目角色校正已生效，原句待核",
+      "issue": "Our new home原句Sally: Why, Sally?角色称呼错位",
+      "evidence": "当前对话显示Sally: Why?，错误Why, Sally?仅保留在历史source-text.md；researchReview已记录项目校正。",
+      "action": "对照同版原页确认说话人、称呼和项目修订是否对应教材原句。",
+      "nodeId": "G5_SHANGHAI_ENGLISH_S2_KP_02",
+      "bookId": "G5_SHANGHAI_ENGLISH_S2_USER_TEXT",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核010",
+      "priority": "P1",
+      "location": "全册附录：字词表 / 识字表（会认字·带拼音）",
+      "category": "字词表与目录",
+      "status": "附录已补，归属待核",
+      "issue": "新识字表28篇与当前正文26篇目录不同，独立会认表栏目身份未核",
+      "evidence": "来稿识字表按28篇分组；当前正文目录26篇。璀璨保留为双字条目，未按课号绑定。",
+      "action": "核对同版附录原页、栏目名称、完整目录以及多音字读音，确认是否为教材附录或配套学习表。",
+      "nodeId": "G6_PEP_CHINESE_S1_KP_LITERACY_RECOGNITION",
+      "bookId": "G6_PEP_CHINESE_S1_USER_IMPORTED",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核011",
+      "priority": "P1",
+      "location": "第二、五、七单元及全册目录",
+      "category": "目录与版本",
+      "status": "待同版原页核对",
+      "issue": "六上标注2022版的正文目录与人教社公开配套目录不同",
+      "evidence": "当前第9课宇宙生命之谜、第16课只有一个地球、第22课他们那时候多有趣啊；人教社2022年配套目录对应我的战友邱少云、夏天里的成长、文言文二则。",
+      "action": "以本册版权页和完整目录确认版次；配套目录仅作差异证据，不自动替换正文。",
+      "nodeId": null,
+      "bookId": "G6_PEP_CHINESE_S1_USER_IMPORTED",
+      "urls": [
+        "https://www.pep.com.cn/products/zhytu/gjshnj/csxp/tbzc/202306/t20230630_1984178.shtml"
+      ],
+      "resolved": false
+    },
+    {
+      "previousId": "待核013",
+      "priority": "P2",
+      "location": "Unit 3 How should we protect ourselves? 我们应该如何保护自己？ / Unit 3 How should we protect ourselves? 我们应该如何保护自己？",
+      "category": "阅读内容核验",
+      "status": "项目修订已生效，教材原文待核",
+      "issue": "Extend已用项目修订文本替换，仍缺同版教材原文对应",
+      "evidence": "当前reviewNotes明确该短文为依据既有健康指南整理的项目修订内容，未标作出版社原文，也不用于自动操作判分；旧清单“原句仍展示”的状态已过时。",
+      "action": "对照同版Extend原页核对栏目内容，明确项目修订与教材原文的对应。此项核教材文本，不要求音频。",
+      "nodeId": "G6_SHANGHAI_ENGLISH_S1_KP_03",
+      "bookId": "G6_SHANGHAI_ENGLISH_S1_2022",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核014",
+      "priority": "P2",
+      "location": "Things we do / Unit 9 Reusing things",
+      "category": "正文",
+      "status": "项目段落校正已生效，原文待核",
+      "issue": "Trees串段及指代已修订，教材原文对应尚待核",
+      "evidence": "当前Trees段已移除花瓶对白并统一trees/wood指代。Then it’ll be a vase!保留在独立瓶子对话中，notes明确木材阅读为项目整理文本。",
+      "action": "核对Look and read同版原页，确认项目重组文本与出版社阅读段的对应。",
+      "nodeId": "G6_SHANGHAI_ENGLISH_S2_KP_09",
+      "bookId": "G6_SHANGHAI_ENGLISH_S2_USER_TEXT",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核015",
+      "priority": "P2",
+      "location": "本地PDF来源记录",
+      "category": "来源说明",
+      "status": "当前投影说明已更新",
+      "issue": "来源说明已区分初始导入与当前本地发布",
+      "evidence": "原始PDF导入档案保留DRAFT/UNVERIFIED阶段说明；本地发布投影的来源notes现已注明正文接入productionCurriculumIndex。",
+      "action": "历史导入状态与当前发布状态分别记录。",
+      "nodeId": null,
+      "bookId": "G1_PEP_CHINESE_S1_2024_CANDIDATE",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核031",
+      "priority": "P2",
+      "location": "Unit 2 How can we keep clean? 我们怎样保持干净？ / Unit 2 How can we keep clean? 我们怎样保持干净？",
+      "category": "语音",
+      "status": "已分类校正，原页待核",
+      "issue": "ar例词曾混列hot、pot",
+      "evidence": "当前已分组part、art为ar例词，hot、pot为其他例词，不再把它们当作ar组合。",
+      "action": "核对原页字母组合与例词及目标口音。",
+      "nodeId": "G2_SHENZHEN_ENGLISH_S2_KP_02",
+      "bookId": "G2_SHENZHEN_SHANGHAI_ENGLISH_S2_2024",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核032",
+      "priority": "P2",
+      "location": "第三单元（阅读策略单元） / 10* 小狗学叫",
+      "category": "字词要求",
+      "status": "待同版原页核对",
+      "issue": "会认字、会写字要求尚未有原页依据",
+      "evidence": "用户补充稿为星号课文，另列会认字12项及会写字10项；正文已照稿保留。",
+      "action": "核对该课生字栏和册末写字表，确认吗、讨、厌等是否属于本课会写要求。",
+      "nodeId": "G3_PEP_CHINESE_S1_KP_READING_10",
+      "bookId": "G3_PEP_CHINESE_S1_2022_USER_IMPORTED",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核047",
+      "priority": "P2",
+      "location": "全册附录：字词表 / 识字表（带拼音）",
+      "category": "字词表",
+      "status": "已知拼音错误已修正",
+      "issue": "两处已知拼音错误已修正",
+      "evidence": "当前为biàn 辫、jué 崛；旧bàn、qǐ只留在历史来稿。其余整表未逐项认证是通用核验状态。",
+      "action": "具体两处错误已关闭，不将整表尚未认证重复列为具体缺失。",
+      "nodeId": "G4_PEP_CHINESE_S1_KP_LITERACY_RECOGNITION",
+      "bookId": "G4_PEP_CHINESE_S1_USER_IMPORTED",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核068",
+      "priority": "P2",
+      "location": "原Unit 1—8来源说明",
+      "category": "说明过时",
+      "status": "当前课程说明已更新",
+      "issue": "早期说明未反映新增语音附录（已修正）",
+      "evidence": "当前8单元来源说明已明确另有12单元Phonics及Intonation附录，目录归属疑点继续单列。",
+      "action": "原始来稿说明保留供追溯，当前页面展示当前接入范围。",
+      "nodeId": null,
+      "bookId": "G4_SHANGHAI_ENGLISH_S2_2022",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核077",
+      "priority": "P2",
+      "location": "全册附录：字词表 / 词语表（五年级下册）",
+      "category": "字词表",
+      "status": "栏目是否应有待核",
+      "issue": "词语表未提供第三单元分组",
+      "evidence": "当前提供第一、二、四、五、六、七、八单元词语；第三单元为综合性学习。",
+      "action": "核对该版册末词语表是否本来不列第三单元，避免将正常省略误报为漏录。",
+      "nodeId": "G5_PEP_CHINESE_S2_KP_LITERACY_WORDS",
+      "bookId": "G5_PEP_CHINESE_S2_USER_IMPORTED",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核092",
+      "priority": "P2",
+      "location": "Module 3 Things we do / Unit 7 Open Day",
+      "category": "句型与正文",
+      "status": "待同版原页核对",
+      "issue": "Open Day句型首项与正文活动顺序不同",
+      "evidence": "Key patterns为First, they’ll visit our classroom.；正文先到school gate见面，再参观教室。",
+      "action": "核对句型框原页，确认是否为独立示例或错位摘录。",
+      "nodeId": "G5_SHANGHAI_ENGLISH_S2_KP_07",
+      "bookId": "G5_SHANGHAI_ENGLISH_S2_USER_TEXT",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核096",
+      "priority": "P2",
+      "location": "Revision 1—3",
+      "category": "复习栏目",
+      "status": "已接入提要，原页待核",
+      "issue": "复习栏目当前为提要与任务，尚无逐页原稿比对",
+      "evidence": "三组复习已接入用户补充稿；来源明确称复习为提要和任务。",
+      "action": "如需教材原文，核对三组复习完整页面、配图和每道题，不能把提要标成全页原文。",
+      "nodeId": null,
+      "bookId": "G5_SHANGHAI_ENGLISH_S2_USER_TEXT",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核097",
+      "priority": "P2",
+      "location": "第一至第三单元来源说明",
+      "category": "说明过时",
+      "status": "当前课程说明已更新",
+      "issue": "早期说明未反映全册第1—8单元接入（已修正）",
+      "evidence": "首批节点说明已注明全册第1—8单元及字词附录已接入，首批第1—3单元仅指来源批次。",
+      "action": "原始来稿说明保留供追溯，当前页面展示当前接入范围。",
+      "nodeId": null,
+      "bookId": "G6_PEP_CHINESE_2019_S1_USER_IMPORTED",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核100",
+      "priority": "P2",
+      "location": "5个册末节点来源说明",
+      "category": "说明过时",
+      "status": "当前课程说明已更新",
+      "issue": "早期册末说明未反映Communicate文字补充（已修正）",
+      "evidence": "5个册末节点来源说明已采用当前Communicate补充状态，Unit 1—6文字及4—6修订稿已接入。",
+      "action": "原始来稿说明保留供追溯，当前页面展示当前接入范围。",
+      "nodeId": null,
+      "bookId": "G6_SHANGHAI_ENGLISH_S1_2022",
+      "urls": [],
+      "resolved": true
+    },
+    {
+      "previousId": "待核101",
+      "priority": "P2",
+      "location": "Unit 1 Why do people move to new places? 人们为什么搬到新地方？ / Unit 1 Why do people move to new places? 人们为什么搬到新地方？",
+      "category": "阅读内部一致性",
+      "status": "待同版原页核对",
+      "issue": "Extend列举原因数量与开头不一致",
+      "evidence": "开头three important reasons，后文另加了解另一个国家文化的原因。",
+      "action": "核对过渡语和整段，确认是否第四项、总结或转录重复。",
+      "nodeId": "G6_SHANGHAI_ENGLISH_S1_KP_01",
+      "bookId": "G6_SHANGHAI_ENGLISH_S1_2022",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核102",
+      "priority": "P2",
+      "location": "Unit 5 How do inventions change our lives? 发明如何改变我们的生活？ / Unit 5 How do inventions change our lives? 发明如何改变我们的生活？",
+      "category": "故事与史实",
+      "status": "待同版原页核对",
+      "issue": "Extend世界第一把锯的绝对表述缺少证据",
+      "evidence": "当前以故事表述保留，未将世界第一作为已证实史实评分。",
+      "action": "核对教材原句和故事文体，明确属于传说还是史实说明。",
+      "nodeId": "G6_SHANGHAI_ENGLISH_S1_KP_05",
+      "bookId": "G6_SHANGHAI_ENGLISH_S1_2022",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核108",
+      "priority": "P2",
+      "location": "Things we enjoy / Unit 10 Great storybooks",
+      "category": "语法",
+      "status": "项目语法校正已生效，原句待核",
+      "issue": "Fox对话You have beautiful voice.缺冠词",
+      "evidence": "当前正文已为You have a beautiful voice.；缺冠词句仅保留在历史来稿。notes及项目参考表达记录了语法修订。",
+      "action": "对照同版原页确认出版社原句；当前正文的冠词问题已修正。",
+      "nodeId": "G6_SHANGHAI_ENGLISH_S2_KP_10",
+      "bookId": "G6_SHANGHAI_ENGLISH_S2_USER_TEXT",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "previousId": "待核109",
+      "priority": "P2",
+      "location": "册末附录 / Word list 2 单词表二",
+      "category": "词表",
+      "status": "配套释义未完整接入",
+      "issue": "Word list 2仅有英文词条",
+      "evidence": "当前提供27个英文词条，未提供音标与中文释义；不等同于英文词条缺失。",
+      "action": "核对原表本来的栏目要求；如需双语辅助，另外补充并标明项目整理来源。",
+      "nodeId": "G6_SHANGHAI_ENGLISH_S2_KP_18",
+      "bookId": "G6_SHANGHAI_ENGLISH_S2_USER_TEXT",
+      "urls": [],
+      "resolved": false
+    },
+    {
+      "bookId": "G3_PEP_CHINESE_S1_2022_USER_IMPORTED",
+      "nodeId": "G3_PEP_CHINESE_S1_KP_READING_10",
+      "priority": "P1",
+      "location": "第三单元（阅读策略单元） / 10* 小狗学叫",
+      "category": "目录与版本",
+      "status": "单元归属已由用户确认",
+      "issue": "《小狗学叫》按现有第三单元第10课保留",
+      "evidence": "用户明确确认语文单元归属没有问题；当前课文及三个结局已接入。",
+      "action": "已解除单元归属存疑，不调整现有目录。字词要求等其他具体问题单独保留。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕001"
+    },
+    {
+      "bookId": "G3_PEP_CHINESE_S1_2022_USER_IMPORTED",
+      "nodeId": "G3_PEP_CHINESE_S1_KP_WRITING_3",
+      "priority": "P1",
+      "location": "第三单元（阅读策略单元） / 习作：续写故事",
+      "category": "目录与版本",
+      "status": "单元归属已由用户确认",
+      "issue": "习作《续写故事》按现有第三单元保留",
+      "evidence": "用户明确确认语文单元归属没有问题；三张生日情境AI图已接入。",
+      "action": "已解除单元归属存疑，不调整现有目录。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕002"
+    },
+    {
+      "bookId": "G3_PEP_CHINESE_S1_2022_USER_IMPORTED",
+      "nodeId": "G3_PEP_CHINESE_S1_KP_WRITING_4",
+      "priority": "P1",
+      "location": "第四单元 / 习作：我来编童话",
+      "category": "目录与版本",
+      "status": "单元归属已由用户确认",
+      "issue": "习作《我来编童话》按现有第四单元保留",
+      "evidence": "用户明确确认语文单元归属没有问题。",
+      "action": "已解除单元归属存疑，不调整现有目录。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕003"
+    },
+    {
+      "bookId": "G3_PEP_CHINESE_S2_USER_IMPORTED",
+      "nodeId": "G3_PEP_CHINESE_S2_KP_APPENDIX_RECOGNITION",
+      "priority": "P1",
+      "location": "第八单元 / 识字表（会认·含拼音）",
+      "category": "字词表",
+      "status": "已按教材图片补齐",
+      "issue": "识字表已按3页教材图片补齐拼音和蓝色多音字",
+      "evidence": "31组共275个展示条目：250个生字及25个原图蓝色多音字。所有字形、拼音、原课号和四个语文园地分组均逐行核对。",
+      "action": "当前附录V2展示完整条目和拼音，蓝色仅用于原图标蓝的25项；原始图片可展开对照，旧来稿留档。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕004"
+    },
+    {
+      "bookId": "G3_PEP_CHINESE_S2_USER_IMPORTED",
+      "nodeId": "G3_PEP_CHINESE_S2_KP_APPENDIX_WRITING",
+      "priority": "P1",
+      "location": "第八单元 / 写字表（会写）",
+      "category": "字词表",
+      "status": "已按教材图片补齐",
+      "issue": "写字表已按2页教材图片补齐250字",
+      "evidence": "25组共250字，含四个语文园地；课号、字形和顺序与图片逐行一致，图片未标拼音的内容按原样展示。",
+      "action": "当前附录V2已替换旧269条来稿，原始图片可展开对照，旧来稿留档。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕005"
+    },
+    {
+      "bookId": "G3_PEP_CHINESE_S2_USER_IMPORTED",
+      "nodeId": "G3_PEP_CHINESE_S2_KP_APPENDIX_VOCABULARY",
+      "priority": "P2",
+      "location": "第八单元 / 词语表（按教材图片顺序）",
+      "category": "字词表",
+      "status": "已按教材图片补齐",
+      "issue": "词语表已按3页教材图片补齐271词",
+      "evidence": "22组共271词，保留原课号、四个语文园地和全部词序；丁零、溶化、瞭望等按图保留。",
+      "action": "当前附录V2已替换旧255词来稿，原始图片可展开对照，旧来稿留档。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕006"
+    },
+    {
+      "bookId": "G4_PEP_CHINESE_S1_USER_IMPORTED",
+      "nodeId": "G4_PEP_CHINESE_S1_KP_READING_04",
+      "priority": "P1",
+      "location": "第二单元 / 4 一个豆荚里的五粒豆",
+      "category": "正文",
+      "status": "已按用户教材图片校正",
+      "issue": "《一个豆荚里的五粒豆》数量表述不一致",
+      "evidence": "2026年10月10日五张教材图片已逐段接入：第一粒、第二粒、接下来的两粒、最后一粒的叙述一致；补全水沟中豌豆自述及小女孩感激的结尾。",
+      "action": "当前课程已替换全文并补入阅读提示、两条脚注、12个会认字及11个会写字；历史来稿保留用于追溯。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕007"
+    },
+    {
+      "bookId": "G4_PEP_CHINESE_S1_USER_IMPORTED",
+      "nodeId": "G4_PEP_CHINESE_S1_KP_READING_22",
+      "priority": "P1",
+      "location": "第七单元 / 22* 陀螺",
+      "category": "正文",
+      "status": "已按教材图片补齐",
+      "issue": "《陀螺》已按4页教材图片更新完整正文",
+      "evidence": "当前V2完整接续13段正文，补入默读提示、作者脚注和12个注音生字；姜辣手等旧来稿错误已从当前正文移除。",
+      "action": "原课文、知识点及三道理解题ID保留，原题依据与新正文一致；旧文本及其来源哈希保留用于追溯。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕008"
+    },
+    {
+      "bookId": "G2_SHENZHEN_SHANGHAI_ENGLISH_S2_2024",
+      "nodeId": "G2_SHENZHEN_ENGLISH_S2_KP_05",
+      "priority": "P1",
+      "location": "Unit 5 Who is your hero? 谁是你心中的英雄？ / Unit 5 Who is your hero? 谁是你心中的英雄？",
+      "category": "栏目归属",
+      "status": "已按用户目录修正",
+      "issue": "Unit 5 Extend主题已调整为身边的英雄",
+      "evidence": "用户确认广东省2025复审版·深圳2026春目录；当前为Many heroes help others.和Who is a hero around you?，不再显示食物主题补充。",
+      "action": "两处补充内容已更新至V3，旧稿仅留档；不再列为当前主题错配。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕009"
+    },
+    {
+      "bookId": "G2_SHENZHEN_SHANGHAI_ENGLISH_S2_2024",
+      "nodeId": "G2_SHENZHEN_ENGLISH_S2_KP_06",
+      "priority": "P1",
+      "location": "Unit 6 Why should we be honest? 我们为什么要诚实？ / Unit 6 Why should we be honest? 我们为什么要诚实？",
+      "category": "栏目归属",
+      "status": "已按用户目录修正",
+      "issue": "Unit 6 Chant已调整为农场与狼的歌谣",
+      "evidence": "当前歌谣为Wolf, wolf, on the farm. / Farmer, farmer, keep warm. / Boy, boy, don’t sleep.，另含C Guess and tick提示；不再显示长颈鹿、蛇、斑马和大象歌谣。",
+      "action": "三行歌谣单独跟读，结尾猜想提示保留为活动；不再列为当前主题错配。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕010"
+    },
+    {
+      "bookId": "G4_BNU_MATH_S1_2022_REVISED",
+      "nodeId": "G4_BNU_MATH_S1_2022_KP_17",
+      "priority": "P1",
+      "location": "数学好玩：数图形的学问 / 有序数图形",
+      "category": "图片接入",
+      "status": "已接入对应看图题",
+      "issue": "数图形的学问两张AI图只保存了素材",
+      "evidence": "两张PNG已登记为正式媒体资源并被有序数图形节点引用；鼹鼠图对应四洞口向右进出的6种走法，菜地图对应五站点向右单程的10种车票。四点线段自测题同时引用鼹鼠图下方示意。",
+      "action": "按用户最新要求已接入对应题目和学习内容，核对四点/五点数量及向右方向；图片来源继续标为AI配套图。",
+      "urls": [],
+      "resolved": true,
+      "previousId": "留痕011"
+    },
+    {
+      "bookId": "G6_SHANGHAI_ENGLISH_S1_2022",
+      "category": "来源追溯",
+      "status": "已修复",
+      "location": "Unit 4—6 Communicate修订稿",
+      "issue": "来源哈希与当前修订原稿不一致",
+      "evidence": "修订原稿communicate-correction-source.md的当前SHA-256为999e6e2141137b0be36b8601fe6b058f872e280adcb1d151ee6a866d7d5fd07c，课程JSON和导入说明已同步。",
+      "action": "已重新审计来源哈希，全部162项匹配。",
+      "resolved": true
+    },
+    {
+      "bookId": "G5_PEP_CHINESE_S2_USER_IMPORTED",
+      "nodeId": "G5_PEP_CHINESE_S2_KP_READING_08",
+      "priority": "P1",
+      "category": "册次归属",
+      "status": "正文已校正，册次口径待确认",
+      "issue": "最新图片来稿称五年级上册，当前条目为五年级下册",
+      "evidence": "当前V7导入说明记录：用户本次称五年级上册；项目现有条目为五年级下册。图片未提供封面或版权页，仍按标题更新原第二单元第8课条目。",
+      "action": "核对该批图片对应教材封面、版权页及目录，确认册次；正文重复问题已关闭，不再混作同一缺项。",
+      "resolved": false
+    }
+  ],
+  "pictureReviewExclusions": [
+    {
+      "nodeId": "G1_SHENZHEN_MATH_S1_KP_13",
+      "previousId": "待核020",
+      "reason": "观察真实教室的方位活动，不依赖指定课程插图。"
+    },
+    {
+      "nodeId": "G2_SHENZHEN_MATH_S1_KP_47",
+      "previousId": "待核024",
+      "reason": "图形与测量的复习原则，未给出需要读取的具体图表。"
+    },
+    {
+      "nodeId": "G2_SHENZHEN_MATH_S1_KP_14",
+      "previousId": "待核025",
+      "reason": "要求学生自行摆出两幅图，图是活动产物。"
+    },
+    {
+      "nodeId": "G2_SHENZHEN_MATH_S1_KP_23",
+      "previousId": "待核028",
+      "reason": "要求学生绘制校园路线图，图是活动产物。"
+    },
+    {
+      "nodeId": "G2_BNU_MATH_S2_2013_KP_16",
+      "previousId": "待核029",
+      "reason": "使用家长陪同观察的现实地图，未引用一张课程内指定地图。"
+    },
+    {
+      "nodeId": "G2_BNU_MATH_S2_2024_KP_05",
+      "previousId": "待核030",
+      "reason": "说明观察位置与视图的概念，未指定一个待识别的图像。"
+    },
+    {
+      "nodeId": "G3_PEP_CHINESE_S1_KP_GARDEN_2",
+      "previousId": "待核034",
+      "reason": "“看图”是理解难词的一种方法，不是待完成图题。"
+    },
+    {
+      "nodeId": "G3_BNU_MATH_S1_2022_KP_14",
+      "previousId": "待核035",
+      "reason": "题目要求学生画连线图，且两种主食与三种饮品的条件完整。"
+    },
+    {
+      "nodeId": "G3_PEP_CHINESE_S2_KP_READING_08",
+      "previousId": "待核037",
+      "reason": "“我没有出现在地图上”是诗句，不是看图任务。"
+    },
+    {
+      "nodeId": "G4_BNU_MATH_S1_2022_KP_13",
+      "previousId": "待核049",
+      "reason": "方位图约定与方向描述的概念说明，未引用一个指定方位图。"
+    },
+    {
+      "nodeId": "G4_BNU_MATH_S2_USER_KP_12",
+      "previousId": "待核059",
+      "reason": "观察物体的视图与遮挡概念说明，未引用一个指定搭建图。"
+    },
+    {
+      "nodeId": "G5_PEP_CHINESE_S2_KP_READING_04",
+      "previousId": "待核078",
+      "reason": "“地图上像一只金鸡”是课文人物对祖国的描述，不是图题。"
+    },
+    {
+      "nodeId": "G5_PEP_CHINESE_S2_KP_READING_23",
+      "previousId": "待核080",
+      "reason": "“这就跟画地图差不多”是人物推想的叙述，不是图题。"
+    },
+    {
+      "nodeId": "G5_BNU_MATH_S2_2013_KP_20",
+      "previousId": "待核081",
+      "reason": "说明展开图的判断规则，未给出需要判断的具体展开图。"
+    },
+    {
+      "nodeId": "G5_BNU_MATH_S2_2013_KP_23",
+      "previousId": "待核082",
+      "reason": "说明复式折线图的读图方法，未给出需要读取的具体图表。"
+    },
+    {
+      "nodeId": "G5_BNU_MATH_S2_2013_KP_16",
+      "previousId": "待核083",
+      "reason": "要求按方向、比例尺绘图，图是活动产物。"
+    },
+    {
+      "nodeId": "G6_BNU_MATH_S1_2022_KP_27",
+      "previousId": "待核098",
+      "reason": "说明统计图的适用场景与数据口径，未指定待读取图表。"
+    },
+    {
+      "nodeId": "G6_BNU_MATH_S1_2022_KP_28",
+      "previousId": "待核099",
+      "reason": "说明统计图的适用场景与数据口径，未指定待读取图表。"
+    },
+    {
+      "nodeId": "G6_BNU_MATH_S2_2013_KP_13",
+      "previousId": "待核103",
+      "reason": "要求绘制校园平面图，80米、50米及1:1000的文字条件完整。"
+    },
+    {
+      "nodeId": "G6_BNU_MATH_S2_2013_KP_07",
+      "previousId": "待核104",
+      "reason": "比例与缩放的概念说明，没有指定待读取图形。"
+    },
+    {
+      "nodeId": "G6_BNU_MATH_S2_2013_KP_05",
+      "previousId": "待核105",
+      "reason": "比例与解比例的概念说明，没有指定待读取图形。"
+    },
+    {
+      "nodeId": "G6_BNU_MATH_S2_2013_KP_06",
+      "previousId": "待核106",
+      "reason": "比例尺计算的概念说明，没有指定待读取地图。"
+    }
+  ]
+}

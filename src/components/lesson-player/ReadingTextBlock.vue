@@ -24,7 +24,14 @@ const hasShortLines = computed(() => {
 </script>
 
 <template>
-  <article class="reading-text-block" :class="{ 'reading-text-block--short-lines': hasShortLines }">
+  <article
+    class="reading-text-block"
+    :class="{
+      'reading-text-block--short-lines': hasShortLines,
+      'reading-text-block--prompt': props.block.isReadingPrompt,
+      'reading-text-block--author-note': props.block.isAuthorNote,
+    }"
+  >
     <h3 v-if="props.block.title" class="reading-text-block__title">{{ props.block.title }}</h3>
     <div class="reading-text-block__body">
       <p v-for="(paragraph, index) in paragraphs" :key="index">{{ paragraph }}</p>

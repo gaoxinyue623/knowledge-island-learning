@@ -8,7 +8,7 @@
 
 此次修正替换之前主题不对应的Healthy living、Animals in danger、E-friends，旧材料仅作历史来源保存，不再展示或跟读。Unit 1—3保持上次补充稿；原11个节点、教材年份2022、目录、主阅读与拓展阅读、18道基础题及126道综合题保持不变，原开放口语/写作活动ID也保留，内容和来源更新。Unit 4—6正文版本为V3，Unit 1—3仍V2，基础训练V1不变。3处正文缺项移除，教材原版录音仍未提供。用户称按图片整理，系统按提供文本接入，未独立认证出版社原页。
 
-修正来源独立归档为`communicate-correction-source.md`和`communicate-correction.json`，来源ID为`G6_SHANGHAI_ENGLISH_S1_COMMUNICATE_CORRECTION_2026_10_10`，SHA-256为`9d9e9c066c31d558737775460f314cd6fc080998b0c38af9c8a4f032bc5824a9`。初次正文与上次六份补充稿仍按各自原始哈希保留。
+修正来源独立归档为`communicate-correction-source.md`和`communicate-correction.json`，来源ID为`G6_SHANGHAI_ENGLISH_S1_COMMUNICATE_CORRECTION_2026_10_10`，SHA-256为`999e6e2141137b0be36b8601fe6b058f872e280adcb1d151ee6a866d7d5fd07c`。初次正文与上次六份补充稿仍按各自原始哈希保留。
 
 相关6个测试文件62项检查通过，涵盖11个节点实际页面、修正主题、听力及答案、角色跟读与模板过滤、旧三份材料退出、来源、原节点/题目身份与考试范围。生产构建、类型检查和修改文件ESLint通过。全库审计40册、361个分组、1246个节点、8225道题，60个本地来源哈希匹配，结构错误0；当前登记正文缺项0册0节点，资源与原文疑点继续独立记录。
 

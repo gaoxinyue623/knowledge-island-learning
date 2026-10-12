@@ -34,6 +34,8 @@ function readableBlocks(
     id: record.id,
     type: record.stepType,
     title: record.title,
+    isReadingPrompt: record.isReadingPrompt,
+    isAuthorNote: record.isAuthorNote,
     content: record.block.type === 'TEXT' ? record.block.text : undefined,
     paragraphs: record.paragraphs,
     bullets: record.bullets,

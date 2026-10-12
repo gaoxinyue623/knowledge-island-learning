@@ -164,7 +164,7 @@ const sectionTitles: Record<string, string> = {
 for (const d of gradeSixEnglishUpperDefinitions) {
   const missingSections = d.missingSections
   const material = d.communicateSupplement
-  const sourceNote = material ? updatedSourceNote : supplied.sourceNote
+  const sourceNote = updatedSourceNote
   const goals =
     d.kind === 'appendix'
       ? ['阅读完整册末材料', '按单词、句型和自查目标整理学习收获']
