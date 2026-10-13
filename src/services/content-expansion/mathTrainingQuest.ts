@@ -1,3 +1,5 @@
+import { extendEarlyMathTraining } from './math-practice/earlyExtension'
+import { createMathConsolidationQuest } from './math-practice/quest'
 import { G6_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-6/math-bnu-lower-2013'
 import { G6_BNU_MATH_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-6/math-bnu-upper-2022'
 import { G5_BNU_MATH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-5/math-bnu-lower-2013'
@@ -15,6 +17,8 @@ import { createTrainingBuilder } from './trainingQuestBuilder'
 import { isBnuLowerMathTextbook, createBnuLowerMathReview } from './bnuLowerMathQuest'
 
 export function createMathTrainingQuest(base: ReadingQuest, variant: number): ReadingQuest | null {
+  const consolidation = createMathConsolidationQuest(base, variant)
+  if (consolidation) return consolidation
   if (
     base.textbookId === G3_BNU_MATH_S1_TEXTBOOK_ID ||
     base.textbookId === G4_BNU_MATH_S2_TEXTBOOK_ID ||
@@ -232,7 +236,7 @@ export function createMathTrainingQuest(base: ReadingQuest, variant: number): Re
         '分别从左右两端逐个数，比较同一位朋友的位置。',
       )
     }
-    return b.finish()
+    return extendEarlyMathTraining(b.finish(), family, 10, early?.total)
   }
   const arithmetic = [
     'add',
@@ -759,5 +763,16 @@ export function createMathTrainingQuest(base: ReadingQuest, variant: number): Re
     b.calc(`秘密数再减少${gap}，变成几？`, start, `${middle}－${gap}＝${start}。`)
     b.last(undefined, scene)
   }
-  return b.finish()
+  return extendEarlyMathTraining(
+    b.finish(),
+    family,
+    early
+      ? early.unitIndex === 2
+        ? 5
+        : 10
+      : lower?.unitIndex === 0 || lower?.unitIndex === 2
+        ? 20
+        : 100,
+    upper?.a ?? early?.total ?? lower?.a,
+  )
 }

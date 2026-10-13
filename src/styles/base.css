@@ -1,3 +1,8 @@
+/* Reserve scrollbar space so navigation does not move the content sideways. */
+html {
+  scrollbar-gutter: stable;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

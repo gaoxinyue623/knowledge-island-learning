@@ -1,3 +1,4 @@
+import { legacyMathQuestionVisuals } from '../../../services/content-expansion/math-practice/legacyDiagrams'
 import { attachTaskQuestionPictures, TASK_PICTURES_APPROVAL } from '../generated-pictures'
 import {
   G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
@@ -383,6 +384,7 @@ export const localQuestionVisuals = new Map<
   string,
   import('@/types/reading-quest').MathQuestVisual
 >()
+for (const [id, visual] of legacyMathQuestionVisuals) localQuestionVisuals.set(id, visual)
 const questions: Question[] = []
 const questionKnowledgePoints: QuestionKnowledgePoint[] = []
 for (const bundle of approvedLocalBundles) {

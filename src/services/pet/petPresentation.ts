@@ -1,4 +1,5 @@
 import {
+  decorationSlotName,
   petCompanions,
   petDecorations,
   petFoods,
@@ -21,7 +22,7 @@ export function describePetEvent(event: PetEvent): string {
   if (event.kind === 'rename' || event.kind === 'name-pet') return `改名为${event.name}`
   if (event.kind === 'select')
     return `切换到${petCompanions.find((p) => p.id === event.petId)!.name}`
-  if (event.kind === 'decorate-clear') return `收起${event.slot === 'landscape' ? '背景' : '摆件'}`
+  if (event.kind === 'decorate-clear') return `收起${decorationSlotName(event.slot)}`
   if ('decorationId' in event)
     return `${event.kind === 'decorate-buy' ? '兑换' : '布置'}${petDecorations.find((d) => d.id === event.decorationId)!.name}`
   return `${event.kind === 'buy' ? '兑换' : '喂食'}${petFoods.find((f) => f.id === event.foodId)!.name}${'petId' in event ? ` · ${petCompanions.find((p) => p.id === event.petId)!.name}` : ''}`

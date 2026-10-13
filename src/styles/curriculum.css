@@ -81,7 +81,7 @@
   grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1.4fr);
   align-items: center;
   gap: var(--space-8);
-  width: min(100%, 880px);
+  width: 100%;
 }
 
 .onboarding-welcome__copy,

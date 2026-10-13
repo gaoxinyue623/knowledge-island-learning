@@ -54,7 +54,7 @@ async function retry() {
 }
 </script>
 <template>
-  <main class="auth-page">
+  <main class="auth-page content-container">
     <section class="auth-story" aria-label="欢迎来到知识岛">
       <a href="/" class="auth-brand">✦ 知识岛 <span>KNOWLEDGE ISLAND</span></a>
       <div class="auth-story__body">
@@ -176,7 +176,7 @@ async function retry() {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   color: #233e32;
-  padding: 32px;
+  padding-block: 32px;
   gap: clamp(24px, 5vw, 88px);
   align-items: center;
 }
@@ -381,7 +381,7 @@ async function retry() {
 @media (max-width: 760px) {
   .auth-page {
     display: block;
-    padding: 20px;
+    padding-block: 20px;
   }
   .auth-story {
     padding: 23px;

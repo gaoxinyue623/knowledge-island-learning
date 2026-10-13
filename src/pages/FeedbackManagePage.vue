@@ -58,7 +58,7 @@ onMounted(() => run(() => refresh()))
 </script>
 <template>
   <AppShell context="反馈处理">
-    <div class="account-tools">
+    <div class="account-tools content-container">
       <RouterLink to="/feedback">← 我的反馈</RouterLink>
       <h1>反馈处理</h1>
       <p>仅开放给已配置的管理账号。处理回复会展示给提交者。</p>

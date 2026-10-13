@@ -123,7 +123,7 @@ describe('grade four BNU mathematics upper 2022 supplied outline', () => {
       for (const variant of [0, 1, 2]) {
         const quest = createTrainingQuest({ ...input, variant })!
         expect(quest.subject).toBe('MATH')
-        expect(quest.stages).toHaveLength(3)
+        expect(quest.stages).toHaveLength(9)
         for (const stage of quest.stages) {
           if (stage.kind !== 'question') throw new Error('Expected question')
           expect(checkQuestAnswer(stage.question, correctAnswerDraft(stage.question))).toBe(

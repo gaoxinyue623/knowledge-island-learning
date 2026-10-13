@@ -75,7 +75,7 @@ onBeforeUnmount(() => {
     </div>
     <slot />
   </div>
-  <main v-else class="account-tools">
+  <main v-else class="account-tools content-container">
     <RouterLink to="/profile">← 返回我的知识岛</RouterLink>
     <section>
       <h1>请家长确认一下</h1>

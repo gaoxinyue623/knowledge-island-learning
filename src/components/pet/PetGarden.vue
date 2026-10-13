@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import PetCompanion from './PetCompanion.vue'
+import PetGrowthMark from './PetGrowthMark.vue'
+import { usePreferencesStore } from '@/stores/preferencesStore'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { usePetStore } from '@/stores/petStore'
 import {
@@ -11,6 +13,8 @@ import {
   petStages,
   petCompanions,
   petDecorations,
+  petFoodCategories,
+  type PetFoodCategory,
   type PetFoodId,
 } from '@/services/pet/petPolicy'
 import PetCollection from './PetCollection.vue'
@@ -18,15 +22,53 @@ import PetCloudPanel from './PetCloudPanel.vue'
 import { describePetEvent, petEventAmount } from '@/services/pet/petPresentation'
 import '@/styles/pet.css'
 const pet = usePetStore()
+const preferences = usePreferencesStore()
 const { profileId } = useLearningProfile()
 const name = ref('团团'),
   renameOpen = ref(false),
   historyLimit = ref(8)
 const companion = ref<InstanceType<typeof PetCompanion> | null>(null)
+const homeScene = ref<HTMLElement | null>(null)
 const characterId = computed(
   () => petCompanions.find((p) => p.id === pet.summary.activePetId)?.characterId,
 )
-const ornament = computed(() => petDecorations.find((d) => d.id === pet.summary.equipped.ornament))
+const sceneItems = computed(() =>
+  petDecorations.filter(
+    (item) => item.slot !== 'landscape' && pet.summary.equipped[item.slot] === item.id,
+  ),
+)
+const landscape = computed(() =>
+  petDecorations.find((d) => d.id === pet.summary.equipped.landscape),
+)
+const foodCategory = ref<'all' | PetFoodCategory>('all')
+const foodView = ref<'shop' | 'backpack'>('shop')
+const foodLimit = ref(6)
+const affordableFoodOnly = ref(false)
+const filteredFoods = computed(() =>
+  petFoods.filter(
+    (food) =>
+      (foodCategory.value === 'all' || food.category === foodCategory.value) &&
+      (foodView.value !== 'backpack' || pet.summary.inventory[food.id] > 0) &&
+      (!affordableFoodOnly.value || food.cost <= pet.summary.balance),
+  ),
+)
+const visibleFoods = computed(() => filteredFoods.value.slice(0, foodLimit.value))
+const foodPortions = computed(() =>
+  Object.values(pet.summary.inventory).reduce((total, count) => total + count, 0),
+)
+watch([foodCategory, foodView, affordableFoodOnly], () => {
+  foodLimit.value = 6
+})
+watch(foodView, () => {
+  affordableFoodOnly.value = false
+})
+function showHome() {
+  homeScene.value?.scrollIntoView({
+    behavior: preferences.preferences.reducedMotion ? 'auto' : 'smooth',
+    block: 'center',
+  })
+  homeScene.value?.focus({ preventScroll: true })
+}
 watch(
   () => pet.summary.activePetId,
   () => {
@@ -48,6 +90,10 @@ watch(
     name.value = '团团'
     renameOpen.value = false
     historyLimit.value = 8
+    foodCategory.value = 'all'
+    foodView.value = 'shop'
+    affordableFoodOnly.value = false
+    foodLimit.value = 6
     void pet.sync(id)
   },
   { immediate: true },
@@ -64,7 +110,7 @@ async function feed(foodId: PetFoodId) {
     petId === pet.summary.activePetId &&
     currentCompanion === companion.value
   )
-    companion.value?.interact('feed', petFoods.find((food) => food.id === foodId)?.symbol)
+    companion.value?.interact('feed', petFoods.find((food) => food.id === foodId)?.image)
 }
 async function saveName() {
   if (!name.value.trim() || name.value.trim().length > 12) return
@@ -137,25 +183,43 @@ function dateLabel(at: string) {
       </div>
       <div class="pet-home-layout">
         <div
+          ref="homeScene"
           class="pet-home-scene"
+          role="region"
+          aria-label="宠物小屋预览"
+          tabindex="-1"
           :class="[
             `pet-home-scene--${pet.summary.stageIndex}`,
             `pet-landscape--${pet.summary.equipped.landscape ?? 'default'}`,
           ]"
         >
-          <span class="pet-scene-cloud pet-scene-cloud--one" aria-hidden="true">☁</span
-          ><span class="pet-scene-cloud pet-scene-cloud--two" aria-hidden="true">☁</span>
+          <img
+            v-if="landscape"
+            :key="landscape.id"
+            class="pet-scene-background"
+            :src="landscape.image"
+            :alt="landscape.name"
+          />
+          <template v-else>
+            <span class="pet-scene-cloud pet-scene-cloud--one" aria-hidden="true" />
+            <span class="pet-scene-cloud pet-scene-cloud--two" aria-hidden="true" />
+          </template>
           <PetCompanion
             :key="`${profileId}:${pet.summary.activePetId ?? 'new'}`"
             ref="companion"
             :character-id="characterId"
             :name="pet.summary.name ?? '等待领养的团子'"
-            :crown="pet.summary.name ? stage.symbol : '🌱'"
+            :stage-index="pet.summary.name ? pet.summary.stageIndex : 0"
             :disabled="disabled || !pet.summary.name"
           />
-          <span v-if="ornament" class="pet-scene-ornament" :aria-label="ornament.name">{{
-            ornament.symbol
-          }}</span>
+          <img
+            v-for="item in sceneItems"
+            :key="item.id"
+            class="pet-scene-item"
+            :class="`pet-scene-item--${item.slot}`"
+            :src="item.image"
+            :alt="item.name"
+          />
           <div class="pet-scene-caption">
             <strong>{{ pet.summary.name ?? '你好，我是团子' }}</strong
             ><span>{{ pet.summary.name ? stage.title : '想和你一起探索知识岛' }}</span>
@@ -237,12 +301,52 @@ function dateLabel(at: string) {
       <section class="pet-food-section" aria-labelledby="pet-food-title">
         <div class="pet-section-heading">
           <h3 id="pet-food-title">食物小铺与背包</h3>
-          <p>兑换后放进背包，再选择喂给伙伴。</p>
+          <p>{{ petFoods.length }} 种食物，兑换后放进背包，再选择喂给伙伴。</p>
         </div>
+        <div class="pet-catalog-tabs" aria-label="食物查看方式">
+          <button type="button" :aria-pressed="foodView === 'shop'" @click="foodView = 'shop'">
+            食物小铺
+          </button>
+          <button
+            type="button"
+            :aria-pressed="foodView === 'backpack'"
+            @click="foodView = 'backpack'"
+          >
+            我的背包 · {{ foodPortions }} 份
+          </button>
+        </div>
+        <div class="pet-catalog-filters" aria-label="食物分类">
+          <button
+            type="button"
+            :aria-pressed="foodCategory === 'all'"
+            @click="foodCategory = 'all'"
+          >
+            全部
+          </button>
+          <button
+            v-for="category in petFoodCategories"
+            :key="category.id"
+            type="button"
+            :aria-pressed="foodCategory === category.id"
+            @click="foodCategory = category.id"
+          >
+            {{ category.name }}
+          </button>
+        </div>
+        <label v-if="foodView === 'shop'" class="pet-catalog-toggle"
+          ><input v-model="affordableFoodOnly" type="checkbox" />只看积分够兑换的</label
+        >
         <p v-if="!pet.summary.name" class="pet-muted">先完成免费领养，就能兑换和喂养啦。</p>
+        <p v-if="!filteredFoods.length" class="pet-catalog-empty">
+          {{
+            foodView === 'backpack'
+              ? '背包里还没有这类食物，去食物小铺选一份吧。'
+              : '当前积分还不够兑换这类食物，完成学习就能攒积分。'
+          }}
+        </p>
         <div class="pet-food-grid">
-          <article v-for="food in petFoods" :key="food.id" class="pet-food-card">
-            <span class="pet-food-symbol" aria-hidden="true">{{ food.symbol }}</span>
+          <article v-for="food in visibleFoods" :key="food.id" class="pet-food-card">
+            <img class="pet-item-art" :src="food.image" alt="" loading="lazy" decoding="async" />
             <h4>{{ food.name }}</h4>
             <p>{{ food.description }}</p>
             <p>
@@ -259,7 +363,13 @@ function dateLabel(at: string) {
                 :disabled="disabled || !pet.summary.name || pet.summary.balance < food.cost"
                 @click="pet.act({ kind: 'buy', foodId: food.id })"
               >
-                {{ pet.summary.balance < food.cost ? '积分不足' : '兑换一份' }}</button
+                {{
+                  !pet.summary.name
+                    ? '先领养伙伴'
+                    : pet.summary.balance < food.cost
+                      ? `还差 ${food.cost - pet.summary.balance} 积分`
+                      : '兑换一份'
+                }}</button
               ><button
                 class="pet-button"
                 type="button"
@@ -277,8 +387,19 @@ function dateLabel(at: string) {
             </div>
           </article>
         </div>
+        <div v-if="filteredFoods.length" class="pet-catalog-footer">
+          <span>已展示 {{ visibleFoods.length }} / {{ filteredFoods.length }} 种</span>
+          <button
+            v-if="visibleFoods.length < filteredFoods.length"
+            type="button"
+            class="pet-button pet-button--light"
+            @click="foodLimit += 6"
+          >
+            查看更多食物
+          </button>
+        </div>
       </section>
-      <PetCollection />
+      <PetCollection @show-home="showHome" />
       <section aria-labelledby="pet-album-title">
         <div class="pet-section-heading">
           <h3 id="pet-album-title">成长相册</h3>
@@ -290,8 +411,8 @@ function dateLabel(at: string) {
             :key="item.title"
             :class="{ 'is-unlocked': pet.summary.stageReachedAt[i] }"
           >
-            <span aria-hidden="true">{{ item.symbol }}</span
-            ><strong>{{ item.title }}</strong
+            <span aria-hidden="true"><PetGrowthMark :stage-index="i" /></span>
+            <strong>{{ item.title }}</strong
             ><small>{{
               pet.summary.stageReachedAt[i]
                 ? `已解锁 · ${dateLabel(pet.summary.stageReachedAt[i]!)}`

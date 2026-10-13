@@ -6,7 +6,8 @@
 .question-engine {
   display: grid;
   gap: var(--space-5);
-  width: min(100%, 1040px);
+  width: 100%;
+  min-width: 0;
   margin-inline: auto;
 }
 

@@ -195,7 +195,9 @@ describe('grade 5 BNU mathematics lower 2013 unit tests', () => {
       ['学校在小明', ['南', '西']],
       ['5x－2x＝18', ['6']],
     ] as const) {
-      const q = questions.find((q) => q.stem[0]!.text!.includes(fragment))!
+      const q = questions.find((q) =>
+        q.stem[0]!.text!.replace(/[()（）\s]/g, '').includes(fragment),
+      )!
       expect(
         validateQuestionAnswer(q, { type: 'fillBlank', values: [...values] }).status,
         fragment,
@@ -216,7 +218,9 @@ describe('grade 5 BNU mathematics lower 2013 unit tests', () => {
       ['水箱内部', 120],
       ['5名同学', 90],
     ] as const) {
-      const q = questions.find((q) => q.stem[0]!.text!.includes(fragment))!
+      const q = questions.find((q) =>
+        q.stem[0]!.text!.replace(/[()（）\s]/g, '').includes(fragment),
+      )!
       expect(validateQuestionAnswer(q, { type: 'calculation', value: String(value) }).status).toBe(
         'correct',
       )

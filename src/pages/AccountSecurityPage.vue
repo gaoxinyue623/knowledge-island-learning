@@ -76,7 +76,7 @@ onMounted(() => run(refresh))
 </script>
 <template>
   <AppShell context="账号安全">
-    <div class="account-tools">
+    <div class="account-tools content-container">
       <RouterLink to="/account">← 账号与同步</RouterLink>
       <h1>账号安全</h1>
       <p v-if="error" role="alert">{{ error }}</p>

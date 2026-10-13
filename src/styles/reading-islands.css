@@ -326,9 +326,6 @@
 .reading-library-note {
   margin-top: 28px;
 }
-.reading-story-page {
-  max-width: 1120px;
-}
 .reading-story-heading {
   padding: clamp(22px, 4vw, 36px);
   border: 2px solid #d4dec7;

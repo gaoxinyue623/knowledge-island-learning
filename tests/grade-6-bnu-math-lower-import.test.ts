@@ -115,7 +115,7 @@ describe('grade six BNU mathematics lower 2013 supplied outline', () => {
       for (const variant of [0, 1, 2]) {
         const quest = createTrainingQuest({ ...input, variant })!
         expect(quest.subject).toBe('MATH')
-        expect(quest.stages).toHaveLength(3)
+        expect(quest.stages).toHaveLength(9)
         for (const stage of quest.stages) {
           if (stage.kind !== 'question') throw new Error('Expected question')
           expect(checkQuestAnswer(stage.question, correctAnswerDraft(stage.question))).toBe(
@@ -228,8 +228,8 @@ describe('grade six BNU mathematics lower 2013 supplied outline', () => {
         .find((c) => c.props('subjectCode') === 'MATH')!
       expect(card.props('candidateCount')).toBe(1)
       expect(store.mathTextbookVersionId).toBe(book)
-      // Chinese has two editions; choosing the only math book must not pick one implicitly.
-      expect(store.chineseTextbookVersionId).toBeNull()
+      // The current lower-term catalogue has one Chinese edition; retain its automatic selection.
+      expect(store.chineseTextbookVersionId).toBe('G6_PEP_CHINESE_2019_S2_USER_IMPORTED')
       expect(store.selectTextbook('CHINESE', 'G6_PEP_CHINESE_2019_S2_USER_IMPORTED')).toBe(true)
       await store.confirmCurriculum('grade-six-child')
       expect(curriculumProfileRepository.load()?.mathTextbookVersionId).toBe(book)

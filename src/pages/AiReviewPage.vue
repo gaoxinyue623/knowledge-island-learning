@@ -61,7 +61,6 @@ async function refreshEvidence() {
 </template>
 <style scoped>
 .ai-review-page {
-  max-width: 720px;
-  padding: 24px 20px;
+  padding-block: 24px;
 }
 </style>

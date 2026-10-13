@@ -1,7 +1,6 @@
 .parent-report-page {
   display: grid;
   gap: var(--space-5);
-  max-width: 1180px;
   padding-block: var(--space-6) var(--space-12);
 }
 

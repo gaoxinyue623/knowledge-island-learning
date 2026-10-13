@@ -35,7 +35,7 @@ async function submit() {
 }
 </script>
 <template>
-  <main class="account-tools">
+  <main class="account-tools content-container">
     <RouterLink to="/login">← 返回登录</RouterLink>
     <section>
       <h1>找回账号密码</h1>

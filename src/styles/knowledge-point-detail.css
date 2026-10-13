@@ -6,7 +6,8 @@
 .knowledge-detail {
   display: grid;
   gap: var(--space-6);
-  width: min(100%, 1040px);
+  width: 100%;
+  min-width: 0;
   margin-inline: auto;
 }
 

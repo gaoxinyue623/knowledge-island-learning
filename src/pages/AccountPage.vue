@@ -176,7 +176,6 @@ const labels = {
 </template>
 <style scoped>
 .account-page {
-  max-width: 850px;
   padding-top: 35px;
   padding-bottom: 65px;
   color: #294b39;

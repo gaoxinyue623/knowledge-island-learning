@@ -85,25 +85,24 @@ describe('Strengthened training projection', () => {
           base.textbookId === 'G6_BNU_MATH_S1_2022_USER_OUTLINE' ||
           base.textbookId === 'G5_BNU_MATH_S1_USER_OUTLINE' ||
           base.textbookId === 'G4_BNU_MATH_S2_USER_OUTLINE'
-        expect(quest.stages, quest.id).toHaveLength(importedMath ? 3 : 9)
+        expect(quest.stages, quest.id).toHaveLength(
+          base.subject === 'MATH' && !importedMath ? 12 : 9,
+        )
         expect(quest.sourceId).toBe(base.sourceId)
         expect(quest.isSample).toBe(base.isSample)
         expect(quest.verificationStatus).toBe(base.verificationStatus)
-        expect(quest.stages.map((s) => s.trainingBand)).toEqual(
-          importedMath
-            ? ['foundation', 'reasoning', 'transfer']
-            : [
-                'foundation',
-                'foundation',
-                'foundation',
-                'reasoning',
-                'reasoning',
-                'reasoning',
-                'transfer',
-                'transfer',
-                'transfer',
-              ],
-        )
+        expect(quest.stages.map((s) => s.trainingBand)).toEqual([
+          'foundation',
+          'foundation',
+          'foundation',
+          'reasoning',
+          'reasoning',
+          'reasoning',
+          'transfer',
+          'transfer',
+          'transfer',
+          ...(base.subject === 'MATH' && !importedMath ? ['transfer', 'transfer', 'transfer'] : []),
+        ])
         for (const stage of quest.stages) {
           expect(ids.has(stage.id), stage.id).toBe(false)
           ids.add(stage.id)
@@ -124,9 +123,10 @@ describe('Strengthened training projection', () => {
             )
             if (stage.question.answerRule.ruleType === 'NUMERIC') {
               expect(stage.question.answerRule.value).toBeGreaterThanOrEqual(0)
-              expect(stage.question.answerRule.value).toBeLessThanOrEqual(
-                base.textbookId.includes('G1_SHENZHEN_BNU_MATH_S1') ? 10 : 100,
-              )
+              if (!importedMath)
+                expect(stage.question.answerRule.value).toBeLessThanOrEqual(
+                  base.textbookId.includes('G1_SHENZHEN_BNU_MATH_S1') ? 10 : 100,
+                )
             }
             if (stage.tiles && stage.question.answerRule.ruleType === 'TEXT_BLANKS') {
               const answer = stage.question.answerRule.blanks[0]!.acceptedAnswers[0]!
@@ -160,10 +160,10 @@ describe('Strengthened training projection', () => {
         }
       }
     }
-    expect(Object.keys(coverage)).toHaveLength(40)
+    expect(Object.keys(coverage)).toHaveLength(39)
     expect(coverage['G1_SHENZHEN_BNU_MATH_S2_2024_CANDIDATE']).toBe(40)
     expect(missing).toEqual([])
-    expect(Object.values(coverage).reduce((total, count) => total + count, 0)).toBe(957)
+    expect(Object.values(coverage).reduce((total, count) => total + count, 0)).toBe(935)
     expect(JSON.stringify(bundles)).toBe(before)
     console.info('Strengthened training coverage', coverage, 'warmup-only', missing)
   }, 15000)
@@ -223,7 +223,7 @@ describe('Strengthened training projection', () => {
       expect((q.stages[8] as QuestQuestionStage).question.answerRule).toMatchObject({
         value: a + b - 1,
       })
-      expect(q.stages.slice(6).every((s) => s.context === q.stages[6]!.context)).toBe(true)
+      expect(q.stages.slice(6, 9).every((s) => s.context === q.stages[6]!.context)).toBe(true)
       expect(first.visual).toBeUndefined()
       expect(first.hints?.[0]).not.toContain(String(a + b))
     },
@@ -332,9 +332,7 @@ describe('Training interaction', () => {
     expect(wrapper.find('[aria-label="强化训练三个阶段"]').exists()).toBe(true)
     const first = questionAt(0)
     if (first.question.answerRule.ruleType !== 'NUMERIC') throw new Error('Expected calculation')
-    await wrapper
-      .find('input[inputmode="numeric"]')
-      .setValue(String(first.question.answerRule.value))
+    await wrapper.find('input#math-number-answer').setValue(String(first.question.answerRule.value))
     await button(wrapper, '检查答案').trigger('click')
     expect(wrapper.find('[role="progressbar"]').attributes('aria-valuenow')).toBe('1')
     await wrapper.findAll('.quest-training__modes button')[0]!.trigger('click')

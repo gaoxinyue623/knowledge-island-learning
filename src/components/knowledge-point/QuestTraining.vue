@@ -56,6 +56,17 @@ const current = computed(() =>
   mode.value === 'training' ? (training.value ?? props.quest) : props.quest,
 )
 const isTraining = computed(() => Boolean(current.value.training))
+const addedMathPracticeCount = computed(() =>
+  training.value?.stages.some(
+    (stage) => stage.kind === 'question' && stage.question.tags.includes('math-consolidation-v1'),
+  )
+    ? 9
+    : training.value?.stages.some(
+          (stage) => stage.kind === 'question' && stage.question.tags.includes('quest-training-v2'),
+        )
+      ? 3
+      : 0,
+)
 const tenFrame = computed(() => {
   const visual = props.quest.stages.find(
     (s) => s.visual?.type === 'ten-bridge' && s.visual.operation === 'add',
@@ -95,6 +106,11 @@ const evidencePractice = computed(() =>
         </button>
       </div>
       <p class="quest-training__help">
+        <template v-if="addedMathPracticeCount"
+          >本课补充 {{ addedMathPracticeCount }} 道练习，每组强化训练共
+          {{ training?.stages.length }} 关，支持切换
+          {{ training?.training?.variantCount }} 组练习。数字题会变换条件，概念题可以反复巩固。
+        </template>
         先热身，再选强化。每组进度分别保存，换组后也可以回来接着练；不改变教材掌握度。
       </p>
       <p v-if="!choiceWritable" class="quest-training__help" role="status">

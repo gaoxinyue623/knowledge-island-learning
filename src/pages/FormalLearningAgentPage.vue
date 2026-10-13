@@ -369,8 +369,7 @@ onMounted(() => {
 
 <style scoped>
 .formal-agent-page {
-  max-width: 720px;
-  padding: 32px 20px 56px;
+  padding-block: 32px 56px;
   overflow-wrap: anywhere;
 }
 .formal-agent-page__header {

@@ -3,6 +3,7 @@ import { onBeforeUnmount, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { usePetStore } from '@/stores/petStore'
+import PetGrowthMark from './PetGrowthMark.vue'
 import { PET_ACCOUNT_CHANGED, PET_LEARNING_CHANGED } from '@/services/pet/petNotifications'
 const route = useRoute(),
   pet = usePetStore()
@@ -67,8 +68,8 @@ onBeforeUnmount(() => {
       pet.error ? '宠物记录待重试，打开成长页' : `我的宠物，可用积分${pet.summary.balance}`
     "
   >
-    <span aria-hidden="true">🌱</span
-    ><span>{{ pet.error ? '待重试' : pet.account ? `${pet.summary.balance} 积分` : '宠物' }}</span>
+    <PetGrowthMark :stage-index="0" :size="18" />
+    <span>{{ pet.error ? '待重试' : pet.account ? `${pet.summary.balance} 积分` : '宠物' }}</span>
   </RouterLink>
 </template>
 <style scoped>

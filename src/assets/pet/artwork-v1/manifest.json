@@ -1,0 +1,69 @@
+{
+  "mode": "built-in image_gen",
+  "generatedAt": "2026-10-12",
+  "assets": [
+    {
+      "id": "apple",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. One plump rosy-red apple with a small leaf and short stem, tiny soft white highlight, isolated object, generous transparent padding on every side. Do not give it a face. Square icon composition.",
+      "url": "/pets/artwork-v1/apple.png",
+      "transparent": true,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "eeeed9573f42ee6b85fd165e29a26b80ea0f9ac715907b573dbdb7a5e2ca7e17"
+    },
+    {
+      "id": "bread",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. One fluffy cloud-shaped golden milk bread bun on its own, pillowy scalloped silhouette with a pale cream middle and softly toasted golden edges. Tiny baked scoring marks, no wrapper or plate, no face. Isolated object with generous transparent padding. Square icon composition.",
+      "url": "/pets/artwork-v1/bread.png",
+      "transparent": true,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "2c02018d8db4396d660dfefb724edcdb2a3b7fccb3b6726d4d43ad9e081a616a"
+    },
+    {
+      "id": "bento",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. One small open mint-green lunch box with rounded corners, showing white rice with a tiny carrot flower, green broccoli, yellow egg roll and two small peach-colored fruit pieces in separate neat compartments. Warm colorful balanced meal, no utensils, no lid, no face. Isolated object with generous transparent padding. Square icon composition.",
+      "url": "/pets/artwork-v1/bento.png",
+      "transparent": true,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "f37425b9ac1d4e61c34f9561bdded936b980c4dce9c2747b486079d6b4167bd0"
+    },
+    {
+      "id": "flowers",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. A charming small window-garden ornament: a low rounded terracotta planter holding three pink and peach tulip-like flowers and soft sage leaves, sitting below a tiny ivory wooden window frame with pale blue panes. The entire miniature window and planter are one freestanding scene ornament, no walls or room around it. Clear recognizable flowers. Isolated object with transparent padding on all sides. Square composition.",
+      "url": "/pets/artwork-v1/flowers.png",
+      "transparent": true,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "27a207bed94ea13376c5e911cf6d40ffe231a24d28c6faf1856377ceb44ddb66"
+    },
+    {
+      "id": "books",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. A charming small stack of three thick storybooks with rounded corners in dusty mint, peach and honey yellow, a tiny bookmark ribbon hanging over the front edge, top book gently open. No writing or letters on spines or pages, no other props, no face. A low freestanding decoration, three-quarter view. Isolated object with generous transparent padding. Square composition.",
+      "url": "/pets/artwork-v1/books.png",
+      "transparent": true,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "7ba33a37fc4de039a91e484ec35b91db5aef4da85a39268d0ee0d8e8eae366ca"
+    },
+    {
+      "id": "meadow",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. Full landscape background for a pet habitat, aspect ratio 3:2. Quiet sunny meadow with soft mint-blue sky in upper two thirds, two small fluffy painted clouds, pale warm sun at upper left, distant sage hills, fresh green grass in lower third and a few small white daisies at far bottom corners. Keep center and foreground broadly open and uncluttered to place a mascot and garden ornaments later. No pets, no people, no buildings, no objects in center, no words. Edge-to-edge illustration, opaque background.",
+      "url": "/pets/artwork-v1/meadow.png",
+      "transparent": false,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "c2315424fe8284b760a08cee76c9701b0f4f9f87d8182c1d584a4d6b951ed4d9"
+    },
+    {
+      "id": "night",
+      "prompt": "Use case: stylized-concept. Production artwork for a gentle Chinese primary-school learning pet garden, matching a round mint-green dumpling mascot. Style: cute hand-painted gouache storybook game asset, soft rounded shapes, subtle paper texture, warm creamy highlights, muted mint and sage green with peach and honey accents, neat silhouette readable at small size. No lettering, no labels, no watermark, no emojis, no branded characters. Full landscape background for a pet habitat, aspect ratio 3:2. Cozy dreamy night meadow, soft muted indigo sky in upper two thirds, pale warm crescent moon in upper right and a sparse scattering of tiny glowing stars, gentle lavender hills, sage-green grassy lower third with tiny flowers at far corners. Keep center and foreground broadly open and uncluttered for placing a mint mascot and ornaments later. Calm inviting bedtime atmosphere, not dark or scary. No pets, no people, no buildings, no objects in center, no words. Edge-to-edge illustration, opaque background.",
+      "url": "/pets/artwork-v1/night.png",
+      "transparent": false,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "b431ced1a39e48a58ec44d9b7636176a3a38320b58c56912abecbdc0cb51b669"
+    }
+  ]
+}

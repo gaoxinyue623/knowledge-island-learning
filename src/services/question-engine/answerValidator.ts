@@ -60,6 +60,16 @@ export function normalizeCalculationInput(value: string): string {
     .replace(/[０-９]/g, (digit) => String.fromCharCode(digit.charCodeAt(0) - 0xfee0))
     .replace(/[．。]/g, '.')
     .replace(/[－﹣−]/g, '-')
+    .replace(/[／⁄]/g, '/')
+}
+
+function calculationNumber(value: string): number {
+  const fraction = value.match(/^([+-]?\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/)
+  if (fraction) {
+    const denominator = Number(fraction[2])
+    return denominator === 0 ? NaN : Number(fraction[1]) / denominator
+  }
+  return Number(value)
 }
 
 function textFromBlocks(blocks: Question['stem']): string {
@@ -195,8 +205,8 @@ export function validateQuestionAnswer(
       if (question.answerRule.ruleType !== 'NUMERIC') return result('incorrect', 0, 1)
       const actualText = normalizeCalculationInput(draft.value)
       const expectedText = normalizeCalculationInput(String(question.answerRule.value))
-      const actual = Number(actualText)
-      const expected = Number(expectedText)
+      const actual = calculationNumber(actualText)
+      const expected = calculationNumber(expectedText)
       const numericMatch = Number.isFinite(actual) && Number.isFinite(expected)
       const correct = numericMatch
         ? question.answerRule.tolerance !== undefined

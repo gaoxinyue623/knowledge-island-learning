@@ -5,6 +5,7 @@ import type {
   LowerMathQuestVisual,
   MathQuestVisual,
 } from '@/types/reading-quest'
+import MathPracticeDiagram from './MathPracticeDiagram.vue'
 import EarlyMathVisual from './EarlyMathVisual.vue'
 import LowerMathVisual from './LowerMathVisual.vue'
 const props = defineProps<{ visual: MathQuestVisual }>()
@@ -36,7 +37,8 @@ const lowerVisual = computed((): LowerMathQuestVisual | null => {
 
 <template>
   <figure class="math-visual">
-    <EarlyMathVisual v-if="earlyVisual" :visual="earlyVisual" />
+    <MathPracticeDiagram v-if="visual.type === 'practice-diagram'" :diagram="visual.diagram" />
+    <EarlyMathVisual v-else-if="earlyVisual" :visual="earlyVisual" />
     <LowerMathVisual v-else-if="lowerVisual" :visual="lowerVisual" />
     <template v-else-if="visual.type === 'array'">
       <div class="math-visual__tools" aria-label="切换方阵观察方向">

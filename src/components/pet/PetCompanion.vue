@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { Heart, Sparkles } from 'lucide-vue-next'
+import PetGrowthMark from './PetGrowthMark.vue'
 import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlaceholder.vue'
 
 defineProps<{
   characterId?: string
   name: string
-  crown: string
+  stageIndex: number
   disabled: boolean
 }>()
 
@@ -29,12 +31,12 @@ function rest() {
   food.value = ''
   lookX.value = lookY.value = 0
 }
-function interact(kind: Reaction, symbol = '') {
+function interact(kind: Reaction, image = '') {
   // Let a gesture settle before accepting another; a saved feeding takes priority.
   if (hidden.value || (reaction.value !== 'idle' && kind !== 'feed')) return
   rest()
   reaction.value = kind
-  food.value = symbol
+  food.value = image
   if (kind === 'pet') {
     const replies = ['嗯～再靠近你一点。', '嘿嘿，有一点痒！', '喜欢这样轻轻摸摸。']
     message.value = replies[patCount++ % replies.length]!
@@ -97,16 +99,16 @@ defineExpose({ interact, reaction })
       @pointerleave="resetLook"
       @blur="resetLook"
     >
-      <span class="pet-companion-crown" aria-hidden="true">{{ crown }}</span>
+      <span class="pet-companion-crown" aria-hidden="true"
+        ><PetGrowthMark :stage-index="stageIndex" :size="44"
+      /></span>
       <KnowledgeDangoPlaceholder size="lg" :character-id="characterId" :label="name" />
       <span v-if="reaction !== 'idle'" class="pet-companion-effects" aria-hidden="true">
-        <span v-for="i in 3" :key="i" class="pet-companion-spark" :style="{ '--i': i }">{{
-          reaction === 'pet' ? '♥' : '✦'
-        }}</span>
+        <span v-for="i in 3" :key="i" class="pet-companion-spark" :style="{ '--i': i }">
+          <component :is="reaction === 'pet' ? Heart : Sparkles" :size="18 + i * 3" />
+        </span>
       </span>
-      <span v-if="reaction === 'feed'" class="pet-companion-food" aria-hidden="true">{{
-        food
-      }}</span>
+      <img v-if="reaction === 'feed' && food" class="pet-companion-food" :src="food" alt="" />
     </button>
   </div>
 </template>
@@ -174,7 +176,6 @@ defineExpose({ interact, reaction })
   top: -22px;
   left: calc(50% - 22px);
   width: 44px;
-  font-size: 2.6rem;
   z-index: 1;
   transform-origin: center bottom;
   animation: crown-sway 6.8s ease-in-out infinite;
@@ -251,9 +252,11 @@ defineExpose({ interact, reaction })
 }
 .pet-companion-food {
   position: absolute;
-  left: calc(50% - 20px);
+  left: calc(50% - 26px);
   top: 47%;
-  font-size: 2.2rem;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
   pointer-events: none;
   animation: companion-food 2800ms ease-in-out both;
 }

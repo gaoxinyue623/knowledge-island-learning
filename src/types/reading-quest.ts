@@ -1,3 +1,4 @@
+import type { MathPracticeDiagram } from './math-practice'
 import type { InteractiveActivity, Question, VerificationStatus } from '@/types'
 
 interface QuestStageBase {
@@ -32,6 +33,7 @@ export type EarlyMathQuestVisual =
   | { type: 'solids'; shapes: SolidShape[] }
 
 export type MathQuestVisual =
+  | { type: 'practice-diagram'; diagram: MathPracticeDiagram }
   | EarlyMathQuestVisual
   | LowerMathQuestVisual
   | { type: 'place-value'; value: number }

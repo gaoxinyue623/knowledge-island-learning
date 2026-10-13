@@ -37,6 +37,6 @@ function updateValue(nextValue: string) {
         @input="updateValue(($event.target as HTMLInputElement).value)"
       />
     </label>
-    <p class="question-answer-group__instruction">可以输入负号或小数点，请直接填写计算结果。</p>
+    <p class="question-answer-group__instruction">只填数值，可输入负号、小数或分数（如 1/2）。</p>
   </fieldset>
 </template>

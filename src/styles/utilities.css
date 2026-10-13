@@ -11,8 +11,15 @@
   min-height: var(--touch-target-min, 44px);
 }
 
+:root {
+  --page-content-max-width: 1200px;
+  --page-content-gutter: 48px;
+}
+
+/* Shared by page content and the app header at every viewport size. */
 .content-container {
-  width: min(calc(100% - 96px), 1200px);
+  width: min(calc(100% - var(--page-content-gutter) * 2), var(--page-content-max-width));
+  min-width: 0;
   margin-inline: auto;
 }
 
@@ -29,13 +36,14 @@
 }
 
 @media (max-width: 1199px) {
-  .content-container {
-    width: min(calc(100% - 64px), 960px);
+  :root {
+    --page-content-max-width: 960px;
+    --page-content-gutter: 32px;
   }
 }
 
 @media (max-width: 767px) {
-  .content-container {
-    width: calc(100% - 32px);
+  :root {
+    --page-content-gutter: 16px;
   }
 }

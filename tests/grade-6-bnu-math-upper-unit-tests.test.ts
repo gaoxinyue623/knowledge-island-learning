@@ -192,13 +192,17 @@ describe('grade 6 BNU mathematics upper 2022 unit tests', () => {
       ['出勤48人', ['96']],
       ['碳水化合物质量占60%', ['300']],
     ] as const) {
-      const q = questions.find((q) => q.stem[0]!.text!.includes(fragment))!
+      const q = questions.find((q) =>
+        q.stem[0]!.text!.replace(/[()（）\s]/g, '').includes(fragment),
+      )!
       expect(
         validateQuestionAnswer(q, { type: 'fillBlank', values: [...values] }).status,
         fragment,
       ).toBe('correct')
     }
-    const fraction = questions.find((q) => q.stem[0]!.text!.includes('3/4÷6/7'))!
+    const fraction = questions.find((q) =>
+      q.stem[0]!.text!.replace(/[()（）\s]/g, '').includes('3/4÷6/7'),
+    )!
     expect(validateQuestionAnswer(fraction, { type: 'fillBlank', values: ['14/16'] }).status).toBe(
       'incorrect',
     )
@@ -212,7 +216,9 @@ describe('grade 6 BNU mathematics upper 2022 unit tests', () => {
       ['全班50人', 84],
       ['共有图书', 80],
     ] as const) {
-      const q = questions.find((q) => q.stem[0]!.text!.includes(fragment))!
+      const q = questions.find((q) =>
+        q.stem[0]!.text!.replace(/[()（）\s]/g, '').includes(fragment),
+      )!
       expect(validateQuestionAnswer(q, { type: 'calculation', value: String(value) }).status).toBe(
         'correct',
       )

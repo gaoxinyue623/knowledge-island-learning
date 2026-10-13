@@ -98,7 +98,7 @@ onMounted(() => run(refresh))
 </script>
 <template>
   <AppShell context="问题与建议" show-bottom-nav>
-    <div class="account-tools">
+    <div class="account-tools content-container">
       <RouterLink to="/profile">← 我的知识岛</RouterLink>
       <h1>问题与建议</h1>
       <p>遇到题目、教材或使用问题，可以告诉我们。反馈记录跟随当前账号保存。</p>

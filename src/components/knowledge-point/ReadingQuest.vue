@@ -461,7 +461,10 @@ function chooseBoolean(value: boolean): void {
 
 function numberAnswer(value: string): void {
   if (isPassed.value || question.value?.questionType !== 'calculation') return
-  draft.value = { type: 'calculation', value: value.replace(/[^0-9０-９]/g, '').slice(0, 3) }
+  draft.value = {
+    type: 'calculation',
+    value: value.replace(/[^0-9０-９.．。/／⁄＋+－﹣−\s-]/g, '').slice(0, 32),
+  }
   feedback.value = ''
 }
 
@@ -736,23 +739,49 @@ function restart(onlyMistakes: boolean): void {
           </div>
 
           <div v-else-if="question.questionType === 'calculation'" class="math-number-pad">
-            <label for="math-number-answer">数字答案 <small>只填数字，单位看题目</small></label>
+            <label for="math-number-answer">数字答案 <small>只填数值，分数可写成 1/2</small></label>
             <input
               id="math-number-answer"
               type="text"
-              inputmode="numeric"
+              inputmode="decimal"
               autocomplete="off"
-              maxlength="3"
+              maxlength="32"
               :value="draft.type === 'calculation' ? draft.value : ''"
               @input="numberAnswer(($event.target as HTMLInputElement).value)"
               @keydown.enter.prevent="check"
             />
             <div aria-label="数字键盘">
               <button
-                v-for="key in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '清空', '0', '退一格']"
+                v-for="key in [
+                  '1',
+                  '2',
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                  '7',
+                  '8',
+                  '9',
+                  '.',
+                  '/',
+                  '-',
+                  '清空',
+                  '0',
+                  '退一格',
+                ]"
                 :key="key"
                 type="button"
-                :aria-label="/^\d$/.test(key) ? '数字' + key : key"
+                :aria-label="
+                  /^\d$/.test(key)
+                    ? '数字' + key
+                    : key === '.'
+                      ? '小数点'
+                      : key === '/'
+                        ? '分数斜线'
+                        : key === '-'
+                          ? '负号'
+                          : key
+                "
                 @click="pressNumber(key)"
               >
                 {{ key }}

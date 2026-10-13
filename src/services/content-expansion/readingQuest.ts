@@ -1,3 +1,4 @@
+import { legacyMathQuestionVisuals } from './math-practice/legacyDiagrams'
 import {
   G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
   gradeFourEnglishUpperDefinitions,
@@ -875,6 +876,8 @@ export function createReadingQuest(
         stage.question = illustrated
         stage.visual = undefined
       }
+      if (!stage.question.media.length && legacyMathQuestionVisuals.has(stage.question.id))
+        stage.visual = structuredClone(legacyMathQuestionVisuals.get(stage.question.id)!)
     }
   if (!quest || !isLocallyApproved(input.bundle?.learningContent)) return quest
   return Object.assign(approveLocalRecords(quest), {

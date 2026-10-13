@@ -1,5 +1,24 @@
 import { z } from 'zod'
 import { DEFAULT_REWARD_POLICY } from '../../types/reward'
+import {
+  petFoods,
+  petDecorations,
+  petDecorationSlots,
+  type PetFoodId,
+  type DecorationId,
+  type DecorationSlot,
+} from './petCatalog'
+export {
+  petFoods,
+  petDecorations,
+  petFoodCategories,
+  petDecorationSlots,
+  decorationSlotName,
+  type PetFoodId,
+  type PetFoodCategory,
+  type DecorationId,
+  type DecorationSlot,
+} from './petCatalog'
 
 export const PET_DAILY_LIMIT = 60
 export const PET_THINKING_POINTS = 3
@@ -14,53 +33,18 @@ export const petEarningRules = [
   { title: '首次完成整组课后闯关或阅读练习', points: PET_QUEST_POINTS },
 ] as const
 export const PET_POLICY_VERSION = 'PET_V1' as const
-export const petFoods = [
-  {
-    id: 'apple',
-    name: '脆甜苹果',
-    symbol: '🍎',
-    cost: 5,
-    experience: 5,
-    description: '清脆的一口，给团子一点小能量。',
-  },
-  {
-    id: 'bread',
-    name: '云朵面包',
-    symbol: '🍞',
-    cost: 10,
-    experience: 10,
-    description: '软软的面包，一起分享学习的收获。',
-  },
-  {
-    id: 'bento',
-    name: '彩虹便当',
-    symbol: '🍱',
-    cost: 15,
-    experience: 15,
-    description: '装满好心情，陪团子慢慢长大。',
-  },
-] as const
-export type PetFoodId = (typeof petFoods)[number]['id']
 export const petCompanions = [
   { id: 'mint', name: '薄荷团子', characterId: 'default-character', cost: 0 },
   { id: 'sunshine', name: '阳光团子', characterId: 'sunshine-character', cost: 30 },
   { id: 'berry', name: '莓果团子', characterId: 'berry-character', cost: 50 },
 ] as const
 export type PetId = (typeof petCompanions)[number]['id']
-export const petDecorations = [
-  { id: 'meadow', name: '晴日草地', symbol: '🌼', slot: 'landscape', cost: 20 },
-  { id: 'night', name: '星星夜空', symbol: '🌙', slot: 'landscape', cost: 30 },
-  { id: 'flowers', name: '窗前花园', symbol: '🌷', slot: 'ornament', cost: 10 },
-  { id: 'books', name: '故事书堆', symbol: '📚', slot: 'ornament', cost: 15 },
-] as const
-export type DecorationId = (typeof petDecorations)[number]['id']
-export type DecorationSlot = (typeof petDecorations)[number]['slot']
 export const petStages = [
-  { threshold: 0, title: '初见团子', description: '我们成为学习伙伴啦。', symbol: '🌱' },
-  { threshold: 20, title: '嫩芽团子', description: '头顶冒出了好奇的小芽。', symbol: '🌿' },
-  { threshold: 60, title: '花苞团子', description: '一起积攒的收获开出了花苞。', symbol: '🌷' },
-  { threshold: 120, title: '繁花团子', description: '每一次努力，都让花朵更灿烂。', symbol: '🌸' },
-  { threshold: 240, title: '星光团子', description: '带着我们的学习故事继续探索。', symbol: '⭐' },
+  { threshold: 0, title: '初见团子', description: '我们成为学习伙伴啦。' },
+  { threshold: 20, title: '嫩芽团子', description: '头顶冒出了好奇的小芽。' },
+  { threshold: 60, title: '花苞团子', description: '一起积攒的收获开出了花苞。' },
+  { threshold: 120, title: '繁花团子', description: '每一次努力，都让花朵更灿烂。' },
+  { threshold: 240, title: '星光团子', description: '带着我们的学习故事继续探索。' },
 ] as const
 export const petSourceKindSchema = z.enum([
   'lesson',
@@ -82,9 +66,14 @@ export interface PetLearningSource {
 }
 const id = z.string().min(1).max(1500)
 const at = z.string().datetime()
-const foodId = z.enum(['apple', 'bread', 'bento'])
+const foodId = z.enum(petFoods.map((food) => food.id) as [PetFoodId, ...PetFoodId[]])
 const petId = z.enum(['mint', 'sunshine', 'berry'])
-const decorationId = z.enum(['meadow', 'night', 'flowers', 'books'])
+const decorationId = z.enum(
+  petDecorations.map((item) => item.id) as [DecorationId, ...DecorationId[]],
+)
+const decorationSlot = z.enum(
+  petDecorationSlots.map((slot) => slot.id) as [DecorationSlot, ...DecorationSlot[]],
+)
 const base = { id, at }
 export const petEventSchema = z.discriminatedUnion('kind', [
   z
@@ -113,9 +102,7 @@ export const petEventSchema = z.discriminatedUnion('kind', [
   z.object({ ...base, kind: z.literal('feed-pet'), petId, foodId }).strict(),
   z.object({ ...base, kind: z.literal('decorate-buy'), decorationId }).strict(),
   z.object({ ...base, kind: z.literal('decorate-equip'), decorationId }).strict(),
-  z
-    .object({ ...base, kind: z.literal('decorate-clear'), slot: z.enum(['landscape', 'ornament']) })
-    .strict(),
+  z.object({ ...base, kind: z.literal('decorate-clear'), slot: decorationSlot }).strict(),
 ])
 export const petAccountSchema = z
   .object({
@@ -183,7 +170,10 @@ export function summarizePet(account: PetAccount): PetSummary {
     feedCount: 0,
     name: null,
     adoptedAt: null,
-    inventory: { apple: 0, bread: 0, bento: 0 },
+    inventory: Object.fromEntries(petFoods.map((food) => [food.id, 0])) as Record<
+      PetFoodId,
+      number
+    >,
     dailyEarned: {},
     stageIndex: 0,
     progress: 0,
