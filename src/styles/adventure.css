@@ -1166,3 +1166,20 @@ h3 {
     transform: none;
   }
 }
+
+@media (max-width: 640px) {
+  .home-page__hero-copy {
+    padding: 18px 20px;
+    gap: 8px;
+  }
+  .home-page__hero h1 {
+    font-size: 26px;
+    margin-block: 8px;
+  }
+  .home-page__hero-copy > p:not(.curriculum-eyebrow) {
+    margin-block: 8px;
+  }
+  .home-page__subject-card > .subject-habitat {
+    display: none;
+  }
+}

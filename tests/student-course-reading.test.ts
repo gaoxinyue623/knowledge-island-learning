@@ -207,7 +207,7 @@ describe('student course reading controls', () => {
     await flushPromises()
     const finishButton = wrapper
       .findAll('button')
-      .find((button) => button.text().includes('完成这次学习'))
+      .find((button) => button.text().includes('我读完了'))
     expect(finishButton).toBeDefined()
     await finishButton!.trigger('click')
     await vi.waitFor(() => expect(lessonStore.status).toBe('completed'))
@@ -238,7 +238,7 @@ describe('student course reading controls', () => {
     await flushPromises()
     const finishButton = wrapper
       .findAll('button')
-      .find((button) => button.text().includes('完成这次学习'))
+      .find((button) => button.text().includes('我读完了'))
     await finishButton!.trigger('click')
     await vi.waitFor(() => expect(lessonStore.status).toBe('completed'))
 

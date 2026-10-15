@@ -282,7 +282,7 @@ describe('independent 2019 grade six lower Chinese', () => {
           .replace(/^#{2,4} /gm, '')
           .split(/\n\n+/))
           expect(wrapper.text()).toContain(paragraph)
-        expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+        expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
           Boolean(d.questions.length),
         )
         if (d.kind === 'appendix') {

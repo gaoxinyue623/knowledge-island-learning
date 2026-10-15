@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import ExpressionSubmission from '@/components/student-growth/ExpressionSubmission.vue'
 import { computed, ref, watch } from 'vue'
 import AppIcon from '@/components/common/AppIcon.vue'
 import LessonReadingPanel from '@/components/lesson-player/LessonReadingPanel.vue'
 import ReadingQuest from '@/components/knowledge-point/ReadingQuest.vue'
 import EvidenceWorkshop from '@/components/hands-on/EvidenceWorkshop.vue'
 import ListenPlaceWorkshop from '@/components/hands-on/ListenPlaceWorkshop.vue'
-import { storyEvidencePractice } from '@/services/content-expansion/evidencePractice'
+import { storyEvidencePractice } from '@/services/reading-islands/storyEvidencePractice'
 import {
   createStoryPractice,
   readingStoryBlocks,
@@ -166,6 +167,12 @@ watch(
       >
         {{ showSample ? '收起表达示例' : '看一个表达示例' }}
       </button>
+      <ExpressionSubmission
+        :profile-id="profileId"
+        :content-id="'story-expression:' + story.id"
+        :title="story.title"
+        :prompt="story.expression.prompt"
+      />
       <div v-if="showSample" id="reading-expression-sample" class="reading-sample">
         <p :lang="story.language === 'english' ? 'en' : 'zh-CN'">{{ story.expression.sample }}</p>
         <small>这只是一个例子，你可以有不同的想法。</small>

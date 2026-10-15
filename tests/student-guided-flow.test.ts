@@ -66,7 +66,7 @@ async function completeLessonViaUi(
   await flushPromises()
   const completeButton = wrapper
     .findAll('button')
-    .find((button) => button.text().includes('完成这次学习'))
+    .find((button) => button.text().includes('我读完了'))
   expect(completeButton).toBeDefined()
   await completeButton!.trigger('click')
   await vi.waitFor(() => expect(store.status).toBe('completed'))

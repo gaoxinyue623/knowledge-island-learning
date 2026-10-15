@@ -89,6 +89,7 @@ function sourceFromLearningContent(
         : knowledgePoint.description
           ? [knowledgePoint.description]
           : [],
+    sourceNotes: content.sourceNotes ? [...content.sourceNotes] : [],
     steps,
     blocks,
     mediaAssets,

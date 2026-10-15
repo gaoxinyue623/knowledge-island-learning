@@ -466,7 +466,7 @@ it.each(definitions.map((d) => d.number))(
             ? '用户补充语音附录'
             : '用户附加综合练习',
       )
-      expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+      expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
         d.kind === 'unit',
       )
       const sync = wrapper.findAll('button').find((b) => b.text() === '开始单元同步练习')

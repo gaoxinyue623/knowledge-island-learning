@@ -238,10 +238,10 @@ watch(
     <AppButton
       size="sm"
       variant="secondary"
-      :disabled="!unitScope?.complete || model.flags.isReadOnly || !profileId"
+      :disabled="model.flags.isReadOnly || !profileId"
       @click="openUnitAssessment"
     >
-      {{ unitScope?.complete ? '测测自己' : '学完后开启' }}
+      {{ unitScope?.complete ? '测测自己' : '学校已学过，先测一测' }}
     </AppButton>
   </div>
   <component :is="assessmentContainer" v-bind="modalProps" @close="closeUnitAssessment">
@@ -255,8 +255,8 @@ watch(
         <p>
           {{
             finalOnly
-              ? '单元测评已放在地图对应单元旁；整本教材学完后可参加期末综合测验，支持中途保存。'
-              : '每个单元学完后可选综合试卷；整本教材学完后可参加期末测验。每次测验均可自行选择，支持中途保存。'
+              ? '单元测评已放在地图对应单元旁；可自行选择综合测验，支持中途保存，不会直接完成课程节点。'
+              : '已在学校学过的内容，可以直接检查理解；试卷结果独立保存，不会直接完成课程节点。'
           }}
         </p>
       </template>
@@ -265,10 +265,10 @@ watch(
           <strong>{{ scope.title }}</strong>
           <AppButton
             variant="secondary"
-            :disabled="!scope.complete || model.flags.isReadOnly || !profileId"
+            :disabled="model.flags.isReadOnly || !profileId"
             @click="selectScope(scope)"
           >
-            {{ scope.complete ? '选择试卷' : '学完后开启' }}
+            {{ scope.complete ? '选择试卷' : '提前检查理解' }}
           </AppButton>
         </div>
       </div>

@@ -401,7 +401,7 @@ it.each(definitions.map((d) => d.number))(
       expect(wrapper.text()).toContain(d.sections[0]!.english)
       expect(wrapper.text()).toContain(d.sections[0]!.chinese)
       expect(wrapper.text()).toContain(d.page ? `用户标注第${d.page}页` : '用户附加综合练习')
-      expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+      expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
         d.kind === 'unit',
       )
       const sync = wrapper.findAll('button').find((b) => b.text() === '开始单元同步练习')

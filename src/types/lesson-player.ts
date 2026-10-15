@@ -86,6 +86,7 @@ export interface LearningContent {
   knowledgePointId: Id
   title: string
   learningGoals: string[]
+  sourceNotes?: string[]
   steps: LessonStep[]
   blocks: LessonContentBlockRecord[]
   sourceId: Id
@@ -123,6 +124,7 @@ export interface LessonPlayerSource {
     knowledgePointId: Id
   }
   learningGoals: string[]
+  sourceNotes?: string[]
   steps: LessonStep[]
   blocks: LessonContentBlockRecord[]
   mediaAssets: LessonMediaAsset[]
@@ -204,6 +206,7 @@ export interface LessonPlayerViewModel {
   lesson: { id: Id; title: string }
   knowledgePoint: { id: Id; name: string; description?: string }
   learningGoals: string[]
+  sourceNotes?: string[]
   steps: LessonStepViewModel[]
   currentStepIndex: number
   currentStep?: LessonStepViewModel

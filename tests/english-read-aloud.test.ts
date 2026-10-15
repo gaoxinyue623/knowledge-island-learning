@@ -406,7 +406,9 @@ describe('English read-aloud UI', () => {
     expect(wrapper.get('[role="status"]').text()).toContain('已静音')
     expect(wrapper.get('a').attributes('href')).toBe('/settings')
     expect(
-      wrapper.findAll('button').every((button) => button.attributes('disabled') !== undefined),
+      wrapper
+        .findAll('.english-listener__controls button')
+        .every((button) => button.attributes('disabled') !== undefined),
     ).toBe(true)
     expect(engine.speak).not.toHaveBeenCalled()
   })

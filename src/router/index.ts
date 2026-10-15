@@ -2,17 +2,16 @@ import { accountState } from '@/services/account/accountService'
 import { safeAccountReturn } from '@/services/account/contract'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-import CharacterSetupPage from '@/pages/onboarding/CharacterSetupPage.vue'
-import GradeSelectPage from '@/pages/onboarding/GradeSelectPage.vue'
-import OnboardingWelcomePage from '@/pages/onboarding/OnboardingWelcomePage.vue'
-import TextbookConfirmPage from '@/pages/onboarding/TextbookConfirmPage.vue'
 import { productionConfig } from '@/config/production'
-import { useCurriculumStore } from '@/stores/curriculumStore'
 import { pinia } from '@/stores/pinia'
 import { getOnboardingDraftRedirect, getOnboardingRedirect } from './guard'
 
-// Keep the onboarding shell eager, but load product and developer surfaces on
-// demand so the first route does not pay for every feature bundle.
+// Login and recovery do not need textbooks. Load the catalog and onboarding
+// screens only after the account guard has resolved a private route.
+const CharacterSetupPage = () => import('@/pages/onboarding/CharacterSetupPage.vue')
+const GradeSelectPage = () => import('@/pages/onboarding/GradeSelectPage.vue')
+const OnboardingWelcomePage = () => import('@/pages/onboarding/OnboardingWelcomePage.vue')
+const TextbookConfirmPage = () => import('@/pages/onboarding/TextbookConfirmPage.vue')
 const HomePage = () => import('@/pages/HomePage.vue')
 const LearningMapPage = () => import('@/pages/LearningMapPage.vue')
 const ThinkingIslandsPage = () => import('@/pages/ThinkingIslandsPage.vue')
@@ -401,7 +400,7 @@ const router = createRouter({
   },
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   if (to.meta.devOnly && !productionConfig.devRoutes) {
     return { path: '/' }
   }
@@ -419,6 +418,7 @@ router.beforeEach((to) => {
   }
   if (to.meta.public) return true
 
+  const { useCurriculumStore } = await import('@/stores/curriculumStore')
   const curriculumStore = useCurriculumStore(pinia)
   const draftRedirect = getOnboardingDraftRedirect(to.path, curriculumStore)
   if (draftRedirect) return { path: draftRedirect, query: to.query, replace: true }

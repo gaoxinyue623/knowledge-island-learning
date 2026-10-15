@@ -1,3 +1,4 @@
+import basicAudio from '@/data/basic-english-audio.json'
 import { productionConfig } from '@/config/production'
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch, type Ref } from 'vue'
 
@@ -15,18 +16,28 @@ export function useEnglishReadAloud(
   const state = ref<ReadingState>('idle')
   const mode = ref<'sentence' | 'continuous'>('sentence')
   const rate = ref(0.85)
-  const provider = ref<'browser' | 'doubao'>('browser')
+  const provider = ref<'browser' | 'bundled' | 'doubao'>('browser')
   const index = ref(0)
   const error = ref('')
   const current = computed(() => segments.value[index.value])
   const busy = computed(() => state.value === 'speaking' || state.value === 'starting')
+  const bundledAudio = computed(() =>
+    current.value ? (basicAudio as Record<string, string>)[current.value.text] : undefined,
+  )
+  const usingBundledAudio = computed(
+    () =>
+      (provider.value === 'bundled' || (provider.value === 'browser' && !voice.value)) &&
+      Boolean(bundledAudio.value),
+  )
   const unavailable = computed(() => {
     if (muted.value) return '应用已静音，请先在设置中关闭静音，再来听读。'
+    if (provider.value === 'bundled' && !bundledAudio.value)
+      return '这一句暂未配套基础音频，可以切换设备声音，或先看文字。'
     if (provider.value === 'doubao' && !import.meta.env.DEV)
-      return '豆包语音目前仅在本机 npm run dev 服务中可用，请使用浏览器语音。'
-    if (provider.value === 'browser' && !supported.value)
+      return '当前版本暂不提供联网合成，请切换基础音频与设备声音。'
+    if (provider.value === 'browser' && !supported.value && !bundledAudio.value)
       return '这个浏览器暂不支持朗读，可以换一个支持语音朗读的浏览器试试。'
-    if (provider.value === 'browser' && !voice.value)
+    if (provider.value === 'browser' && !voice.value && !bundledAudio.value)
       return '暂未找到英语声音。可以重试检测，或在设备设置中添加英语语音。'
     if (!segments.value.length) return '这部分暂时没有可朗读的英文，仍可阅读下面的原文。'
     return ''
@@ -114,6 +125,10 @@ export function useEnglishReadAloud(
       void speakDoubao(single)
       return
     }
+    if ((provider.value === 'bundled' || !voice.value) && bundledAudio.value) {
+      void speakBundled(single)
+      return
+    }
     if (!synth || !voice.value) return
     if (activeReader && activeReader !== stop) activeReader()
     cancel()
@@ -160,6 +175,46 @@ export function useEnglishReadAloud(
       synth.speak(next)
     } catch {
       fail('暂时没能朗读，请重试。下面的课文仍然可以阅读。')
+    }
+  }
+
+  async function speakBundled(single: boolean) {
+    const source = bundledAudio.value
+    if (!source) return
+    if (activeReader && activeReader !== stop) activeReader()
+    cancel()
+    activeReader = stop
+    const token = generation
+    state.value = 'starting'
+    error.value = ''
+    const player = new Audio(source)
+    audio = player
+    player.playbackRate = rate.value / 0.85
+    player.preservesPitch = true
+    player.onended = () => {
+      if (token !== generation) return
+      cancel()
+      if (single || mode.value === 'sentence') state.value = 'waiting'
+      else if (index.value + 1 < segments.value.length) {
+        index.value += 1
+        speakCurrent()
+      } else state.value = 'finished'
+    }
+    player.onerror = () => {
+      if (token === generation) fail('基础音频暂时无法播放，可以重试，或先看文字练习。')
+    }
+    timeout = setTimeout(() => {
+      if (token === generation) fail('基础音频等待过久，请重试。')
+    }, 15000)
+    try {
+      await player.play()
+      if (token === generation) {
+        clearTimer()
+        state.value = 'speaking'
+        timeout = setTimeout(() => fail('播放中断，请重听这句。'), 60000)
+      }
+    } catch {
+      if (token === generation) fail('基础音频未能播放，请点重听或先看文字练习。')
     }
   }
 
@@ -280,6 +335,7 @@ export function useEnglishReadAloud(
 
   return {
     supported,
+    usingBundledAudio,
     voice,
     state,
     mode,

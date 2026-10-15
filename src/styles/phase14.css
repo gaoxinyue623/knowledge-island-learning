@@ -571,3 +571,28 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+@media (max-width: 640px) {
+  .home-page__hero {
+    min-height: 0;
+    padding: 20px;
+  }
+  .home-page__hero-scene {
+    display: none;
+  }
+  .home-page__hero h1 {
+    font-size: 28px;
+  }
+  .home-page__hero-copy > p {
+    margin-block: 10px;
+  }
+  .home-page__subject-card {
+    padding: 16px;
+  }
+  .home-page__subject-card .subject-habitat {
+    display: none;
+  }
+  .home-page__subjects .home-page__subject-grid {
+    gap: 12px;
+  }
+}

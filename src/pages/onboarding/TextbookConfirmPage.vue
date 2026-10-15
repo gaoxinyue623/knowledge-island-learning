@@ -292,7 +292,15 @@ onMounted(() => void loadTextbooks())
       @close="helpOpen = false"
       @primary="helpOpen = false"
     >
-      <p>可以请家长查看课本封面上的出版社、年级和上册/下册信息，再回到这里选择完整版本。</p>
+      <ol>
+        <li>看封面：确认学科、年级、上册或下册，以及出版社。</li>
+        <li>看版权页：找到版本或版次信息。印刷年份可能与版次年份不同。</li>
+        <li>看目录：展开候选教材的目录预览，核对开头的单元和课文。</li>
+      </ol>
+      <p>
+        仍然不确定时，可以先选择确认过的学科，其他学科稍后添加。也可以通过问题反馈告诉我们课本的版本信息。
+      </p>
+      <RouterLink to="/feedback?category=textbook">教材不匹配？告诉我们</RouterLink>
     </AppBottomSheet>
   </CurriculumPageFrame>
 </template>

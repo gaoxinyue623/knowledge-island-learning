@@ -134,7 +134,7 @@ watch(() => [profileId.value, isDevRoute.value], loadData, { immediate: true })
         <section class="reward-page__growth-card" aria-labelledby="growth-card-title">
           <div class="reward-page__growth-heading">
             <div>
-              <p class="curriculum-eyebrow">KnowledgeEnergy</p>
+              <p class="curriculum-eyebrow">成长能量</p>
               <h2 id="growth-card-title">教材成长能量</h2>
             </div>
             <AppIcon name="sparkles" :size="28" color="var(--color-primary)" decorative />
@@ -161,7 +161,7 @@ watch(() => [profileId.value, isDevRoute.value], loadData, { immediate: true })
         <section class="reward-page__achievements" aria-labelledby="achievement-title">
           <div class="reward-page__section-heading">
             <div>
-              <p class="curriculum-eyebrow">Milestones</p>
+              <p class="curriculum-eyebrow">学习里程碑</p>
               <h2 id="achievement-title">教材学习里程碑</h2>
             </div>
             <strong>{{ achievementStore.unlockedCount }} / {{ progress.length }} 已达成</strong>
@@ -209,7 +209,7 @@ watch(() => [profileId.value, isDevRoute.value], loadData, { immediate: true })
         <section class="reward-page__history" aria-labelledby="reward-history-title">
           <div class="reward-page__section-heading">
             <div>
-              <p class="curriculum-eyebrow">Reward history</p>
+              <p class="curriculum-eyebrow">成长记录</p>
               <h2 id="reward-history-title">教材成长记录</h2>
             </div>
             <strong>{{ events.length }} 条</strong>

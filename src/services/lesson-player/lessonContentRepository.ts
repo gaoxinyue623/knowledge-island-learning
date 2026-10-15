@@ -37,10 +37,29 @@ function bodyStrings(content: CourseContent, key: string): string[] {
 
 function isEditorialSourceNote(text: string): boolean {
   return (
-    /(?:用户.{0,12}(?:提供|附件|标注|确认|上传)|来稿|附件|来源说明|来源\s*[:：])/.test(
-      text,
-    ) && /(?:接入|整理|学习|保留|核对|核验|版次|出版社原版|原版|不自动判分)/.test(text)
+    /(?:用户.{0,12}(?:提供|附件|标注|确认|上传)|来稿|附件|来源说明|来源\s*[:：])/.test(text) &&
+    /(?:接入|整理|学习|保留|核对|核验|版次|出版社原版|原版|不自动判分)/.test(text)
   )
+}
+
+function sourceNotesFor(content: CourseContent, blocks: ContentBlock[]): string[] {
+  const body = content.body
+  const summary = typeof body.summary === 'string' ? body.summary : ''
+  const notes = [
+    body.sourceNote,
+    body.editionNote,
+    ...(isEditorialSourceNote(summary) ? [summary] : []),
+    ...bodyStrings(content, 'importNotes'),
+    ...blocks.flatMap((block) =>
+      block.type === 'TEXT'
+        ? (block.text ?? '').split(/\n\s*\n+/).filter(isEditorialSourceNote)
+        : [],
+    ),
+  ]
+    .filter((note): note is string => typeof note === 'string')
+    .map((note) => note.trim())
+    .filter(Boolean)
+  return [...new Set(notes)]
 }
 
 function displayedContentBlocks(content: CourseContent, blocks: ContentBlock[]): ContentBlock[] {
@@ -130,10 +149,11 @@ export function buildLearningContentFromCourseContent(
   if (!blocks.length) return null
 
   const literacyTable = bodyLiteracyTable(content)
+  // Source notes can disappear from the displayed blocks. Anchor the table to
+  // its surviving text rather than the old positional index after those notes.
+  const literacyBlockIndex = literacyTable ? blocks.findIndex((block) => block.type === 'TEXT') : -1
   const readingPrompt =
-    typeof content.body['readingPrompt'] === 'string'
-      ? content.body['readingPrompt'].trim()
-      : ''
+    typeof content.body['readingPrompt'] === 'string' ? content.body['readingPrompt'].trim() : ''
   const authorNote =
     typeof content.body['authorNote'] === 'string' ? content.body['authorNote'].trim() : ''
   const occurrenceByFingerprint = new Map<string, number>()
@@ -154,10 +174,17 @@ export function buildLearningContentFromCourseContent(
       id: `${content.id}:block:${stableKey}`,
       block,
       stepType: block.mediaAssetId ? 'media' : index === 0 ? 'intro' : 'concept',
-      title: index === 0 && !literacyTable ? content.title : undefined,
+      title:
+        index === 0 && !literacyTable
+          ? content.title
+          : content.knowledgePointId.includes('MATH') &&
+              block.type === 'TEXT' &&
+              /^(学习目标|知识讲解|原创例子与解法|动手探究|回顾与检查)\n/.test(block.text ?? '')
+            ? block.text?.split('\n')[0]
+            : undefined,
       ...(isReadingPrompt ? { isReadingPrompt: true } : {}),
       ...(isAuthorNote ? { isAuthorNote: true } : {}),
-      ...(index === 1 && literacyTable ? { literacyTable } : {}),
+      ...(index === literacyBlockIndex && literacyTable ? { literacyTable } : {}),
       mediaAssetIds:
         index === 0 && content.media?.length
           ? content.media
@@ -185,6 +212,7 @@ export function buildLearningContentFromCourseContent(
     knowledgePointId: content.knowledgePointId,
     title: content.title,
     learningGoals,
+    sourceNotes: sourceNotesFor(content, sourceBlocks),
     steps,
     blocks: blockRecords,
     sourceId: content.sourceId,

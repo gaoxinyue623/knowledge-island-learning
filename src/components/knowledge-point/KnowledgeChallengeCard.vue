@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import {
+  readExpressionReviews,
+  saveExpression,
+  type ExpressionReview,
+} from '@/services/student-growth/expressionReviews'
+import { computed, ref, watch } from 'vue'
 
 import AppButton from '@/components/common/AppButton.vue'
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { Id } from '@/types'
 
 interface Props {
+  profileId?: string
   challengeId: Id
   title: string
   prompt: string
@@ -16,6 +22,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  profileId: undefined,
   hint: '先说出你看到的对象，再说出你的理由。',
   referenceAnswer: '',
   eyebrow: '知识挑战',
@@ -25,6 +32,53 @@ const props = withDefaults(defineProps<Props>(), {
 const response = ref('')
 const submitted = ref(false)
 const hintVisible = ref(false)
+const savedRecord = ref<ExpressionReview | null>(null)
+const saveMessage = ref('')
+const writable = ref(true)
+watch(
+  () => [props.profileId, props.challengeId],
+  () => {
+    savedRecord.value = null
+    response.value = ''
+    submitted.value = false
+    writable.value = true
+    if (!props.profileId) return
+    try {
+      savedRecord.value =
+        readExpressionReviews(props.profileId).find(
+          (entry) => entry.contentId === props.challengeId,
+        ) ?? null
+      response.value = savedRecord.value?.response ?? ''
+      submitted.value = Boolean(savedRecord.value?.submitted)
+    } catch {
+      writable.value = false
+      saveMessage.value = '原表达记录暂时无法读取，请保留自己的文字。'
+    }
+  },
+  { immediate: true },
+)
+function persistResponse(done: boolean): boolean {
+  if (!props.profileId) return true
+  if (!writable.value) return false
+  try {
+    saveExpression(props.profileId, {
+      contentId: props.challengeId,
+      title: props.title,
+      prompt: props.prompt,
+      response: response.value,
+      submitted: done,
+    })
+    savedRecord.value =
+      readExpressionReviews(props.profileId).find(
+        (entry) => entry.contentId === props.challengeId,
+      ) ?? null
+    saveMessage.value = done ? '表达已保存，家长可以在学习报告中点评。' : '想法草稿已保存。'
+    return true
+  } catch {
+    saveMessage.value = '表达暂时未能保存，请保留文字后重试。'
+    return false
+  }
+}
 
 const safeId = computed(() => {
   const normalized = props.challengeId.replace(/[^a-zA-Z0-9_-]/g, '-')
@@ -34,7 +88,7 @@ const safeId = computed(() => {
 function submitResponse(): void {
   if (!response.value.trim()) return
   response.value = response.value.trim()
-  submitted.value = true
+  submitted.value = persistResponse(true)
 }
 
 function retryChallenge(): void {
@@ -79,6 +133,13 @@ function retryChallenge(): void {
       >
         提交我的想法
       </AppButton>
+      <AppButton
+        v-if="profileId"
+        variant="secondary"
+        :disabled="!writable || submitted"
+        @click="persistResponse(false)"
+        >保存想法草稿</AppButton
+      >
       <AppButton variant="soft" icon-left="lightbulb" @click="hintVisible = !hintVisible">
         {{ hintVisible ? '收起提示' : '查看提示' }}
       </AppButton>
@@ -95,7 +156,15 @@ function retryChallenge(): void {
     </p>
     <p v-if="submitted" class="knowledge-challenge-card__feedback" role="status">
       <AppIcon name="check" :size="18" decorative />
-      挑战完成！这次只记录在本页，不改变掌握度。
+      {{
+        profileId
+          ? '表达已保存，等待家长点评；不自动评分。'
+          : '挑战完成！这次只记录在本页，不改变掌握度。'
+      }}
+    </p>
+    <p v-if="saveMessage" role="status">{{ saveMessage }}</p>
+    <p v-if="savedRecord?.comment && submitted && savedRecord.response === response">
+      <strong>家长的话：</strong>{{ savedRecord.comment }}
     </p>
     <p v-if="submitted && props.referenceAnswer" class="knowledge-challenge-card__answer">
       <strong>参考思路：</strong>{{ props.referenceAnswer }}

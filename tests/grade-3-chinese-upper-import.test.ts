@@ -477,8 +477,8 @@ describe('owner supplied grade 3 upper Chinese import', () => {
           expect(wrapper.text()).toContain(excerpt[d.key]!)
           expect(wrapper.text()).not.toContain('本次仅提供栏目标题')
           expect(wrapper.text()).toContain('项目原创开放活动')
-          expect(wrapper.text()).not.toContain('开始正式练习')
-        } else expect(wrapper.text()).toContain('开始正式练习')
+          expect(wrapper.text()).not.toContain('开始教材练习')
+        } else expect(wrapper.text()).toContain('开始教材练习')
         if (number === 'writing-3') {
           const images = wrapper
             .findAll('img')

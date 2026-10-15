@@ -10,6 +10,7 @@ import {
   listWeeklyPlanCarryOvers,
   resolveWeeklyPlan,
   sameWeeklyTask,
+  taskReferenceFrom,
   updateWeeklyPlanDay,
   weekDateKey,
   weeklyPlanStorage,
@@ -18,10 +19,14 @@ import {
   type WeeklyTaskReference,
 } from '@/services/weekly-plan'
 
-const props = defineProps<{
-  profileId: string
-  dailyPlan: DailyLearningPlan | null
-}>()
+const props = withDefaults(
+  defineProps<{
+    profileId: string
+    dailyPlan: DailyLearningPlan | null
+    additionalTasks?: DailyLearningTask[]
+  }>(),
+  { additionalTasks: () => [] },
+)
 
 const emit = defineEmits<{
   refresh: []
@@ -67,9 +72,24 @@ const activeDay = computed(() =>
   viewModel.value?.days.find((day) => day.weekday === selectedDay.value),
 )
 const isToday = computed(() => activeDay.value?.dateKey === props.dailyPlan?.dateKey)
-const availableTasks = computed(() =>
-  isToday.value ? (props.dailyPlan?.tasks.filter((task) => task.status === 'pending') ?? []) : [],
-)
+const availableTasks = computed(() => {
+  if (!isToday.value) return []
+  const today = props.dailyPlan?.tasks.filter((task) => task.status === 'pending') ?? []
+  return [
+    ...today,
+    ...props.additionalTasks.filter(
+      (task) =>
+        task.profileId === props.profileId &&
+        task.status === 'pending' &&
+        !today.some((existing) =>
+          sameWeeklyTask(
+            taskReferenceFrom(task, props.dailyPlan?.generatedAt ?? new Date().toISOString()),
+            existing,
+          ),
+        ),
+    ),
+  ]
+})
 const selectedTaskIds = computed(
   () =>
     new Set(
@@ -222,9 +242,9 @@ const carryOver = computed(() =>
       </fieldset>
 
       <div v-if="isToday && targetCount" class="weekly-plan-card__choices">
-        <h4>从今天真实可用的任务中选择</h4>
+        <h4>选择今天的学科与内容</h4>
         <p v-if="!availableTasks.length">
-          今天暂时没有可选任务；你仍可保留目标，稍后刷新首页再选。
+          今天暂时没有可选任务；先在学习设置确认教材，再回来安排。
         </p>
         <label v-for="task in availableTasks" :key="task.id" class="weekly-plan-card__task-choice">
           <input

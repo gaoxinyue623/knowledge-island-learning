@@ -10,7 +10,9 @@ describe('textbook availability overview', () => {
       props: { gradeId: 'GRADE_1', semesterId: 'SEMESTER_UPPER' },
     })
     await flushPromises()
-    expect(wrapper.findAll('.textbook-coverage__row')).toHaveLength(6)
+    await vi.waitFor(() => expect(wrapper.findAll('.textbook-coverage__row')).toHaveLength(6), {
+      timeout: 5000,
+    })
     const grade2lower = wrapper
       .findAll('button')
       .find((button) => button.attributes('aria-label')?.startsWith('二年级下册'))!

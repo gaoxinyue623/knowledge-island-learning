@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LessonSourceNotes from '@/components/lesson-player/LessonSourceNotes.vue'
 import {
   G4_SHANGHAI_ENGLISH_S1_TEXTBOOK_ID,
   gradeFourEnglishUpperDefinitions,
@@ -88,9 +89,11 @@ import {
 } from '@/data/curriculum/grade-3/chinese-pep-lower'
 import { G3_PEP_CHINESE_S1_TEXTBOOK_ID } from '@/data/curriculum/grade-3/chinese-pep-upper'
 import { useLearningProfile } from '@/composables/useLearningProfile'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import PoetryLearningGuide from '@/components/lesson-player/PoetryLearningGuide.vue'
+import LearningPath from '@/components/student-growth/LearningPath.vue'
 import FormalAiPractice from '@/components/knowledge-point/FormalAiPractice.vue'
 import { englishSyncSourceSheet } from '@/data/curriculum/grade-2/shenzhen-english-lower/synchronousExercises'
 import { G2_SHENZHEN_ENGLISH_S2_TEXTBOOK_ID } from '@/data/curriculum/grade-2/shenzhen-english-lower'
@@ -177,6 +180,9 @@ const masteryStore = useMasteryStore()
 const studentStore = useStudentStore()
 const preferencesStore = usePreferencesStore()
 
+const primaryActionsVisible = ref(true)
+let actionObserver: IntersectionObserver | undefined
+onBeforeUnmount(() => actionObserver?.disconnect())
 const invalidContextMessage = ref<string | null>(null)
 const detailError = ref<string | null>(null)
 const detailLoading = ref(false)
@@ -502,9 +508,9 @@ const selectedActivity = computed(
 
 const lessonActionLabel = computed(() => {
   const status = viewModel.value?.session.status
-  if (status === 'completed') return '再次进入完整学习'
-  if (status === 'in_progress') return '继续完整学习'
-  return '开始完整学习'
+  if (status === 'completed') return '回看课程'
+  if (status === 'in_progress') return '继续学习'
+  return '先学一学'
 })
 
 const masteryStateLabel = computed(() =>
@@ -587,7 +593,7 @@ function sourceNotice(): string {
         ? '三张字词表已按8页教材图片补齐，保留原图课号、语文园地分组和条目顺序。识字表逐字标注拼音，蓝色为图片中的多音字；写字表250字，词语表271词。可展开原图对照。'
         : '本册按附件提供的单元顺序与文本学习，标题调整已有说明。阅读练习为原创配套内容，开放表达不自动判分。'
     if (context.value?.textbookId === G3_PEP_CHINESE_S1_TEXTBOOK_ID)
-      return '本册按已导入的目录和文本学习，口语交际、习作、语文园地及快乐读书吧已补入用户提供内容；《小狗学叫》保留原概要并追加三个结局。阅读练习为原创配套内容，开放表达不自动判分。'
+      return '本册按已导入的目录和文本学习，口语交际、习作、语文园地及快乐读书吧已补入用户提供内容；《小狗学叫》按最新来稿展示全文和三个结局。阅读练习为原创配套内容，开放表达不自动判分。'
     return '已接入人教版语文课文与配套拓展练习。拓展练习用于帮助理解，不会直接修改掌握度。'
   }
   if (viewModel.value?.flags.isUnverified) {
@@ -754,6 +760,22 @@ watch(
   () => [route.fullPath, profileId.value],
   () => void loadDetail(),
 )
+watch(
+  () => [canShowDetail.value, viewModel.value?.knowledgePoint.id],
+  async () => {
+    actionObserver?.disconnect()
+    primaryActionsVisible.value = true
+    await nextTick()
+    if (typeof IntersectionObserver === 'undefined') return
+    const element = document.getElementById('knowledge-primary-actions')
+    if (!element) return
+    actionObserver = new IntersectionObserver(([entry]) => {
+      primaryActionsVisible.value = entry?.isIntersecting ?? true
+    })
+    actionObserver.observe(element)
+  },
+  { flush: 'post' },
+)
 </script>
 
 <template>
@@ -821,6 +843,55 @@ watch(
         />
 
         <template v-else-if="canShowDetail && viewModel">
+          <LearningPath
+            :read="viewModel.session.status === 'completed'"
+            :checked="Boolean(masteryRecord?.evidenceCount)"
+            :practice-available="practiceAvailable"
+            :has-challenge="Boolean(readingQuest)"
+          />
+          <section
+            id="knowledge-primary-actions"
+            class="knowledge-detail__actions knowledge-detail__actions--primary"
+            aria-label="知识点操作"
+          >
+            <AppButton
+              :disabled="nodeStatus === 'locked'"
+              icon-right="arrow-right"
+              @click="
+                viewModel.session.status === 'completed' && practiceAvailable
+                  ? openAssessment()
+                  : openLesson()
+              "
+            >
+              {{
+                viewModel.session.status === 'completed' && practiceAvailable
+                  ? '检查理解'
+                  : lessonActionLabel
+              }}
+            </AppButton>
+            <a v-if="readingQuest" href="#knowledge-challenges" class="reading-quest__entry"
+              >巩固与拓展</a
+            >
+            <details v-if="practiceAvailable" class="learning-options">
+              <summary>已经学过？直接检查理解</summary>
+              <p>做几道教材练习，看看哪些地方还需要帮助。答题后会更新掌握记录和错题本。</p>
+              <AppButton variant="secondary" @click="openAssessment()">开始教材练习</AppButton>
+            </details>
+            <p
+              v-if="practiceAvailable === false && !readingQuest"
+              class="knowledge-detail__practice-note"
+            >
+              {{
+                isImportedOpenActivity
+                  ? '本栏目供阅读、交流和写作，可按提示完成开放活动。'
+                  : isLiteracyAppendix
+                    ? '这是全册字词附录，可按表认读、书写和复习。'
+                    : '教材练习正在准备中，可以先完成下方开放活动。'
+              }}
+            </p>
+            <p v-if="nodeStatus === 'locked'" role="status">先完成前置知识，再进入完整学习。</p>
+          </section>
+
           <div
             class="knowledge-detail__source-notice"
             :class="{
@@ -832,6 +903,7 @@ watch(
             <AppIcon name="info" :size="20" decorative />
             <p>{{ sourceNotice() }}</p>
           </div>
+          <LessonSourceNotes :key="knowledgePointId" :notes="viewModel.sourceNotes" />
 
           <section class="knowledge-detail__summary" aria-labelledby="knowledge-summary-title">
             <div class="knowledge-detail__summary-copy">
@@ -875,42 +947,6 @@ watch(
             </div>
             <strong>{{ Math.round(masteryRecord.masteryScore) }}%</strong>
             <small>查看详情不会改变掌握度。</small>
-          </section>
-
-          <section class="knowledge-detail__actions" aria-label="知识点操作">
-            <AppButton
-              :disabled="nodeStatus === 'locked'"
-              icon-right="arrow-right"
-              @click="openLesson"
-            >
-              {{ lessonActionLabel }}
-            </AppButton>
-            <AppButton
-              v-if="practiceAvailable === true"
-              variant="secondary"
-              icon-left="check-circle"
-              @click="openAssessment"
-            >
-              开始正式练习
-            </AppButton>
-            <a v-if="readingQuest" href="#knowledge-challenges" class="reading-quest__entry">
-              <AppIcon name="route" :size="18" decorative />开始课后闯关 · 基础 / 强化
-            </a>
-            <p
-              v-if="practiceAvailable === false && !readingQuest"
-              class="knowledge-detail__practice-note"
-            >
-              {{
-                isImportedOpenActivity
-                  ? '本栏目供阅读、交流和写作，可按提示完成开放活动。'
-                  : isLiteracyAppendix
-                    ? '这是全册字词附录，可按表认读、书写和复习。'
-                    : '正式练习题正在准备中，可以先完成下面的知识挑战。'
-              }}
-            </p>
-            <p v-if="nodeStatus === 'locked'" class="knowledge-detail__locked-note" role="status">
-              先完成前置知识，就能解锁完整学习。当前页面可以先阅读，不会自动改变地图进度。
-            </p>
           </section>
 
           <section
@@ -976,11 +1012,20 @@ watch(
               </template>
             </template>
           </LessonReadingPanel>
-          <FormalAiPractice
-            v-if="!isDevRoute && context"
-            :textbook-id="context.textbookId"
-            :knowledge-point-id="context.knowledgePointId"
+          <PoetryLearningGuide
+            v-if="
+              context?.textbookId === 'G2_PEP_CHINESE_S2_2024_CANDIDATE' &&
+              knowledgePointId === 'G2_PEP_CHINESE_S2_KP_01'
+            "
           />
+          <details v-if="!isDevRoute && context" class="learning-options knowledge-detail__panel">
+            <summary>想再练一组？让 AI 帮你安排</summary>
+            <p>这是额外练习，答题结果辅助学习建议；课程掌握记录以教材练习为准。</p>
+            <FormalAiPractice
+              :textbook-id="context.textbookId"
+              :knowledge-point-id="context.knowledgePointId"
+            />
+          </details>
 
           <section
             id="knowledge-challenges"
@@ -1085,6 +1130,7 @@ watch(
                 <KnowledgeChallengeCard
                   v-for="challenge in challengeCards"
                   :key="profileId + challenge.id"
+                  :profile-id="isDevRoute ? undefined : profileId"
                   :challenge-id="challenge.id"
                   :title="challenge.title"
                   :prompt="challenge.prompt"
@@ -1098,6 +1144,7 @@ watch(
               <KnowledgeChallengeCard
                 v-for="challenge in challengeCards"
                 :key="challenge.id"
+                :profile-id="isDevRoute ? undefined : profileId"
                 :challenge-id="challenge.id"
                 :title="challenge.title"
                 :prompt="challenge.prompt"
@@ -1169,6 +1216,25 @@ watch(
           </RouterLink>
         </template>
       </div>
+    </div>
+    <div
+      v-if="canShowDetail && viewModel && !primaryActionsVisible"
+      class="knowledge-detail__floating-action"
+    >
+      <AppButton
+        :disabled="nodeStatus === 'locked'"
+        full-width
+        @click="
+          viewModel.session.status === 'completed' && practiceAvailable
+            ? openAssessment()
+            : openLesson()
+        "
+        >{{
+          viewModel.session.status === 'completed' && practiceAvailable
+            ? '检查理解'
+            : lessonActionLabel
+        }}</AppButton
+      >
     </div>
   </AppShell>
 </template>

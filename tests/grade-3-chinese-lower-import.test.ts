@@ -357,7 +357,7 @@ describe('attachment supplied grade 3 lower Chinese', () => {
         await vi.waitFor(() => expect(wrapper.text()).toContain(d.sourceNote))
         expect(wrapper.text()).toContain(d.title)
         expect(wrapper.text()).toContain('本册按附件提供的单元顺序与文本学习')
-        expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(true)
+        expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(true)
         expect(wrapper.text()).not.toContain('标题已导入，正文待补充')
       } finally {
         wrapper.unmount()

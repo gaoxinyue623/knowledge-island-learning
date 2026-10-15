@@ -742,7 +742,7 @@ describe('grade 5 lower Chinese eight units and literacy appendices', () => {
         .split(/\n\n+/))
         expect(wrapper.text()).toContain(paragraph)
       await vi.waitFor(() =>
-        expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+        expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
           Boolean(d.questions.length),
         ),
       )

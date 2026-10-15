@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { courseLabel, knowledgeLabel } from '@/services/student-growth/learningLabels'
 import AiWrongBook from '@/components/knowledge-point/AiWrongBook.vue'
 import LearningActivityHistory from '@/components/common/LearningActivityHistory.vue'
 import { useLearningProfile } from '@/composables/useLearningProfile'
@@ -27,6 +28,7 @@ const refreshAi = ref(0)
 const actionMessage = ref<string | null>(null)
 const questionTitles = ref<Record<Id, string>>({})
 const questionLoading = ref(false)
+const explanations = ref<Record<Id, string>>({})
 const isDevRoute = computed(() => route.path.startsWith('/dev/wrong-book'))
 const { profileId } = useLearningProfile()
 const records = computed(() => wrongBookStore.records)
@@ -91,6 +93,7 @@ async function loadQuestionTitles() {
   questionTitles.value = {}
   questionLoading.value = true
   const nextTitles: Record<Id, string> = {}
+  const nextExplanations: Record<Id, string> = {}
   try {
     for (const record of requestedRecords) {
       const question = await questionRepository.getQuestionById(
@@ -99,8 +102,16 @@ async function loadQuestionTitles() {
       )
       const title = question ? textFromQuestion(question) : ''
       if (title) nextTitles[record.questionId] = title
+      if (question)
+        nextExplanations[record.questionId] = question.explanation?.summary
+          .map((block) => block.text ?? '')
+          .filter(Boolean)
+          .join(' ')
     }
-    if (version === titleVersion) questionTitles.value = nextTitles
+    if (version === titleVersion) {
+      questionTitles.value = nextTitles
+      explanations.value = nextExplanations
+    }
   } catch {
     if (version === titleVersion) actionMessage.value = '题目标题暂时无法读取，可刷新重试。'
   } finally {
@@ -245,7 +256,7 @@ watch(profileId, loadWrongBook, { immediate: true })
       <section v-else class="wrong-book-page__list" aria-labelledby="wrong-book-list-title">
         <div class="phase12-page__section-heading">
           <div>
-            <p class="curriculum-eyebrow">Question review</p>
+            <p class="curriculum-eyebrow">回看方法，再试一次</p>
             <h2 id="wrong-book-list-title">{{ includeResolved ? '错题记录' : '待巩固错题' }}</h2>
           </div>
           <strong>{{ records.length }} 道</strong>
@@ -278,9 +289,17 @@ watch(profileId, loadWrongBook, { immediate: true })
                 </span>
                 <strong>错过 {{ record.wrongCount }} 次</strong>
               </div>
-              <h3>{{ questionTitles[record.questionId] || `题目 ${record.questionId}` }}</h3>
-              <p>知识点：{{ record.knowledgePointIds.join('、') }}</p>
-              <small>题目 ID：{{ record.questionId }}</small>
+              <h3>{{ questionTitles[record.questionId] || '正在读取原题' }}</h3>
+              <p>{{ courseLabel(record) }}</p>
+              <p>知识点：{{ record.knowledgePointIds.map(knowledgeLabel).join('、') }}</p>
+              <details v-if="explanations[record.questionId]">
+                <summary>回看解题方法</summary>
+                <p>{{ explanations[record.questionId] }}</p>
+              </details>
+              <details>
+                <summary>查看关联信息</summary>
+                <small>题目编号：{{ record.questionId }}</small>
+              </details>
             </div>
             <div class="wrong-book-page__record-actions">
               <AppButton

@@ -610,7 +610,7 @@ describe('grade 6 2019 upper Chinese all supplied 2019 units alongside the 2022 
         .split(/\n\n+/))
         expect(wrapper.text()).toContain(paragraph)
       await vi.waitFor(() =>
-        expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+        expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
           Boolean(d.questions.length),
         ),
       )

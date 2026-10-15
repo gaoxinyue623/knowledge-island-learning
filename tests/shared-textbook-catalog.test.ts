@@ -151,6 +151,7 @@ describe('shared imported textbooks across authenticated accounts', () => {
       })
       try {
         await flushPromises()
+        await vi.waitFor(() => expect(store.availableTextbooks).not.toBeNull(), { timeout: 5000 })
         expect(wrapper.text()).not.toContain('教材暂时打不开')
         const expected = localCurriculumData.textbooks.filter(
           (book) => book.gradeId === gradeId && book.semesterId === semesterId,

@@ -1,9 +1,51 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, useId, watch } from 'vue'
 
-import type { LiteracyTablePresentation } from '@/types'
+import type { LiteracyTableGroup, LiteracyTablePresentation } from '@/types'
 
 const props = defineProps<{ table: LiteracyTablePresentation }>()
+const search = ref('')
+const selectedGroup = ref('')
+const controlId = useId()
+watch(
+  () => props.table,
+  () => {
+    search.value = ''
+    selectedGroup.value = ''
+  },
+)
+
+function searchable(value: string): string {
+  return value.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase().trim()
+}
+const filteredGroups = computed(() => {
+  const query = searchable(search.value)
+  return props.table.groups.flatMap((group, index) => {
+    if (selectedGroup.value && selectedGroup.value !== String(index)) return []
+    const entries = query
+      ? group.entries.filter((entry) =>
+          searchable(
+            typeof entry === 'string' ? entry : `${entry.character} ${entry.pinyin}`,
+          ).includes(query),
+        )
+      : group.entries
+    return entries.length ? [{ ...group, entries }] : []
+  })
+})
+const isFiltered = computed(() => Boolean(search.value.trim() || selectedGroup.value))
+const visibleEntryCount = computed(() =>
+  filteredGroups.value.reduce((total, group) => total + group.entries.length, 0),
+)
+function resetFilters() {
+  search.value = ''
+  selectedGroup.value = ''
+}
+function groupLabel(group: LiteracyTableGroup): string {
+  if (/^\d+$/.test(group.heading)) return `第${group.heading}课`
+  if (group.heading === '语文园地' && group.gardenNumber !== null)
+    return `语文园地${group.gardenNumber}`
+  return group.heading
+}
 
 const countDescription = computed(() => {
   if (props.table.tableKind === 'recognition') {
@@ -26,9 +68,38 @@ const countDescription = computed(() => {
       <p class="literacy-table__count">{{ countDescription }}</p>
     </header>
 
+    <div class="literacy-table__filters">
+      <label :for="`${controlId}-search`">
+        查找字词或拼音
+        <input
+          :id="`${controlId}-search`"
+          v-model="search"
+          type="search"
+          placeholder="输入生字、拼音或词语"
+          autocomplete="off"
+          :spellcheck="false"
+        />
+      </label>
+      <label :for="`${controlId}-group`">
+        按课号查看
+        <select :id="`${controlId}-group`" v-model="selectedGroup">
+          <option value="">全部课号</option>
+          <option v-for="(group, index) in props.table.groups" :key="index" :value="String(index)">
+            {{ groupLabel(group) }}
+          </option>
+        </select>
+      </label>
+      <button v-if="isFiltered" type="button" @click="resetFilters">显示全部</button>
+    </div>
+    <p v-if="isFiltered" class="literacy-table__filter-result" role="status">
+      找到 {{ visibleEntryCount }} 条，分布在 {{ filteredGroups.length }} 组。
+    </p>
+    <p v-if="!filteredGroups.length" class="literacy-table__empty">
+      没有找到对应内容。可以换个字词或拼音，或选择“显示全部”。
+    </p>
     <dl class="literacy-table__groups">
       <div
-        v-for="(group, groupIndex) in props.table.groups"
+        v-for="(group, groupIndex) in filteredGroups"
         :key="`${group.sourceImage}-${groupIndex}`"
         class="literacy-table__group"
       >
@@ -114,6 +185,50 @@ const countDescription = computed(() => {
 
 .literacy-table__groups {
   margin: 0;
+}
+
+.literacy-table__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin-bottom: 1em;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+}
+
+.literacy-table__filters label {
+  display: grid;
+  flex: 1 1 160px;
+  gap: 6px;
+  min-width: 0;
+}
+
+.literacy-table__filters input,
+.literacy-table__filters select,
+.literacy-table__filters button {
+  min-width: 0;
+  min-height: 44px;
+  max-width: 100%;
+  border: 1px solid var(--literacy-table-line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  color: #263742;
+  font-size: 16px;
+}
+
+.literacy-table__filters :is(input, select, button):focus-visible {
+  outline: 2px solid var(--literacy-table-accent);
+  outline-offset: 2px;
+}
+
+.literacy-table__filter-result,
+.literacy-table__empty {
+  margin: 0 0 1em;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .literacy-table__group {
@@ -265,6 +380,10 @@ const countDescription = computed(() => {
   }
 
   .literacy-table__sources {
+    display: none;
+  }
+
+  .literacy-table__filters {
     display: none;
   }
 }

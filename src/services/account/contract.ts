@@ -26,6 +26,9 @@ const fixedKeys = new Set([
   'learning-map-progress',
 ])
 const prefixes = [
+  'continuations.v1:',
+  'parent-comments.v1:',
+  'school-progress.v1:',
   'ai-signals.v1:',
   'student.v1:',
   'curriculum-profile:',

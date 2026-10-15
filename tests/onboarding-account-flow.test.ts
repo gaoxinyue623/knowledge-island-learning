@@ -54,11 +54,15 @@ describe('account onboarding with the real runtime curriculum', () => {
       })
       await flushPromises()
       expect(wrapper.text()).not.toContain('教材暂时打不开')
-      expect(
-        wrapper
-          .findAllComponents(TextbookCard)
-          .reduce((sum, card) => sum + card.props('candidateCount'), 0),
-      ).toBe(count)
+      await vi.waitFor(
+        () =>
+          expect(
+            wrapper
+              .findAllComponents(TextbookCard)
+              .reduce((sum, card) => sum + card.props('candidateCount'), 0),
+          ).toBe(count),
+        { timeout: 5000 },
+      )
       wrapper.unmount()
     },
   )

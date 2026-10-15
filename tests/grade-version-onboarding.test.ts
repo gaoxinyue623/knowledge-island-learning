@@ -72,6 +72,10 @@ describe('grade and version selection without regions', () => {
 
     const grade = await open('/onboarding/grade', GradeSelectPage)
     expect(grade.wrapper.text()).not.toContain('地区')
+    await vi.waitFor(
+      () => expect(grade.wrapper.find('button[aria-label^="一年级上册"]').exists()).toBe(true),
+      { timeout: 5000 },
+    )
     await grade.wrapper.get('button[aria-label^="一年级上册"]').trigger('click')
     await grade.wrapper
       .findAll('button')
@@ -86,7 +90,9 @@ describe('grade and version selection without regions', () => {
     const books = await open('/onboarding/textbooks', TextbookConfirmPage)
     const store = useCurriculumStore()
     expect(books.wrapper.text()).not.toContain('地区')
-    expect(books.wrapper.findAllComponents(TextbookCard)).toHaveLength(3)
+    await vi.waitFor(() => expect(books.wrapper.findAllComponents(TextbookCard)).toHaveLength(3), {
+      timeout: 5000,
+    })
     expect(Object.values(store.selectedTextbooks).every(Boolean)).toBe(true)
     await books.wrapper
       .findAll('button')

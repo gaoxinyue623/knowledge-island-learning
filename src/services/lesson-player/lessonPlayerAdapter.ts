@@ -216,6 +216,7 @@ export function buildLessonPlayerViewModel(
     lesson: source.lesson,
     knowledgePoint: source.knowledgePoint,
     learningGoals: [...source.learningGoals],
+    sourceNotes: [...(source.sourceNotes ?? [])],
     steps,
     currentStepIndex,
     currentStep: steps[currentStepIndex],

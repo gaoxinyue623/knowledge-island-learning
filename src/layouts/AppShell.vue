@@ -30,12 +30,12 @@ const navigationItems: Array<{ label: string; path: string; icon: IconName }> = 
   <div class="app-shell">
     <header v-if="showHeader" class="app-shell__header safe-area-top">
       <div class="app-shell__header-inner content-container">
-        <a class="app-shell__brand" href="/" aria-label="知识岛首页">
+        <RouterLink class="app-shell__brand" to="/home" aria-label="知识岛首页">
           <span class="app-shell__brand-mark" aria-hidden="true">
             <KnowledgeDangoPlaceholder size="avatar" state="happy" />
           </span>
           <span class="app-shell__brand-copy">知识岛<small>让好奇心，带你出发</small></span>
-        </a>
+        </RouterLink>
         <div class="app-shell__header-context" aria-label="当前学习上下文">{{ props.context }}</div>
         <div class="app-shell__header-actions">
           <PetStatusLink />

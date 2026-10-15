@@ -244,10 +244,14 @@
 }
 .reading-quest__stage-heading {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   margin-bottom: 24px;
+}
+.reading-quest__stage-heading > div {
+  min-width: 0;
 }
 .reading-quest__stage-heading h3 {
   margin: 5px 0 0;
@@ -260,7 +264,10 @@
   min-height: 44px;
   color: var(--quest-green);
   font-size: 13px;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 .reading-quest__prompt {
   margin: 0 0 22px;

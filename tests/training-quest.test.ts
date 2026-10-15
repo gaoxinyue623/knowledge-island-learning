@@ -345,7 +345,10 @@ describe('Training interaction', () => {
     expect(write).toHaveBeenCalled()
     expect(
       write.mock.calls.every(
-        ([key]) => key.startsWith(QUEST_PROGRESS_PREFIX) || key.startsWith(QUEST_CHOICE_PREFIX),
+        ([key]) =>
+          key.startsWith(QUEST_PROGRESS_PREFIX) ||
+          key.startsWith(QUEST_CHOICE_PREFIX) ||
+          key.startsWith('knowledge-island.continuations.v1:'),
       ),
     ).toBe(true)
     wrapper.unmount()

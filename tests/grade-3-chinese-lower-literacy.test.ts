@@ -289,7 +289,7 @@ describe('grade 3 lower Chinese supplied literacy appendices', () => {
         }
         expect(wrapper.text()).not.toContain('表中课号、部分篇目与本册已导入目录不同')
         expect(wrapper.text()).not.toContain('正式练习题正在准备中')
-        expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(false)
+        expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(false)
         expect(wrapper.find('[href="#knowledge-challenges"]').exists()).toBe(false)
       } finally {
         wrapper.unmount()

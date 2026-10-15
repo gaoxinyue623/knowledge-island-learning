@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { textbookDirectoryPreview } from '@/services/curriculum/textbookPreview'
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { IconName } from '@/types'
 import type { SubjectCode, TextbookDisplay, TextbookResolutionStatus } from '@/types'
@@ -34,6 +35,13 @@ const emit = defineEmits<{ change: []; clear: [] }>()
       <p class="textbook-card__label"><AppIcon name="book-marked" :size="16" decorative /> 版本</p>
       <p class="textbook-card__value">{{ props.textbook.textbook.versionName }}</p>
       <p class="textbook-card__meta">{{ props.gradeName }} · {{ props.semesterName }}</p>
+      <details>
+        <summary>核对版次和目录</summary>
+        <p>版次标识：{{ props.textbook.textbook.editionYear || '查看课本版权页' }}</p>
+        <p v-for="line in textbookDirectoryPreview(props.textbook.textbook.id)" :key="line">
+          {{ line }}
+        </p>
+      </details>
     </template>
     <p v-else class="textbook-card__pending">暂时没有找到匹配课本</p>
     <p v-if="props.candidateCount === 1" class="textbook-card__notice">

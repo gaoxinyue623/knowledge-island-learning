@@ -31,11 +31,26 @@ const app = createApp(App)
 
 async function start() {
   const root = document.querySelector('#app')
-  if (root) root.textContent = '正在连接你的小岛…'
-  await initializeAccount()
-  app.use(pinia)
-  app.use(router)
-  app.mount('#app')
-  startAccountSync()
+  try {
+    await initializeAccount()
+    app.use(pinia)
+    app.use(router)
+    await router.isReady()
+    app.mount('#app')
+    startAccountSync()
+  } catch {
+    if (!root) return
+    const message = document.createElement('p')
+    message.setAttribute('role', 'alert')
+    message.textContent = '小岛暂时没有打开。请检查网络后重试，已保存的学习记录仍会保留。'
+    const retry = document.createElement('button')
+    retry.type = 'button'
+    retry.textContent = '重新打开小岛'
+    retry.addEventListener('click', () => window.location.reload())
+    const panel = document.createElement('div')
+    panel.className = 'startup-panel'
+    panel.append(message, retry)
+    root.replaceChildren(panel)
+  }
 }
 void start()

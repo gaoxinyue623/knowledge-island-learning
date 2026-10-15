@@ -472,7 +472,7 @@ async function processCompletedSession(): Promise<void> {
       (total, event) => total + event.reward.knowledgeEnergy,
       0,
     )
-    rewardMessage.value = energy > 0 ? `本次完成获得 ${energy} 点 KnowledgeEnergy。` : null
+    rewardMessage.value = energy > 0 ? `本次完成获得 ${energy} 点成长能量。` : null
     masteryProcessingStatus.value = 'updated'
     masteryProcessingMessage.value = result.appendedEvidence.length
       ? `已根据 ${result.appendedEvidence.length} 条作答证据更新知识掌握。`

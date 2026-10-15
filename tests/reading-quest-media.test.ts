@@ -5,24 +5,26 @@ import type { QuestionMedia } from '@/types'
 import type { QuestQuestionStage, ReadingPracticeQuest } from '@/types/reading-quest'
 import { memoryQuestStorage } from './helpers/questStorage'
 
-vi.mock('@/data/curriculum/production', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@/data/curriculum/production')>()
+vi.mock('@/services/curriculum/loadedCatalog', () => {
   return {
-    ...actual,
-    productionCurriculumIndex: {
-      ...actual.productionCurriculumIndex,
-      mediaAssets: [
-        { id: 'mole', mediaType: 'IMAGE', url: '/mole.png', altText: '一条有四个点的鼹鼠隧道' },
-        {
-          id: 'garden',
-          mediaType: 'IMAGE',
-          url: '/garden.png',
-          altText: '标有起点和终点的菜地路线',
-        },
-        { id: 'diagram', mediaType: 'SVG', url: '/diagram.svg', altText: null },
-        { id: 'solution', mediaType: 'IMAGE', url: '/solution.png', altText: '已标出答案的图' },
-        { id: 'audio', mediaType: 'AUDIO', url: '/audio.mp3', altText: '讲解' },
-      ],
+    loadedCurriculumCatalog: {
+      value: {
+        lessons: [],
+        textbooks: [],
+        subjects: [],
+        mediaAssets: [
+          { id: 'mole', mediaType: 'IMAGE', url: '/mole.png', altText: '一条有四个点的鼹鼠隧道' },
+          {
+            id: 'garden',
+            mediaType: 'IMAGE',
+            url: '/garden.png',
+            altText: '标有起点和终点的菜地路线',
+          },
+          { id: 'diagram', mediaType: 'SVG', url: '/diagram.svg', altText: null },
+          { id: 'solution', mediaType: 'IMAGE', url: '/solution.png', altText: '已标出答案的图' },
+          { id: 'audio', mediaType: 'AUDIO', url: '/audio.mp3', altText: '讲解' },
+        ],
+      },
     },
   }
 })

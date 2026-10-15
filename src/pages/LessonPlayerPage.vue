@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import LessonSourceNotes from '@/components/lesson-player/LessonSourceNotes.vue'
+import PoetryLearningGuide from '@/components/lesson-player/PoetryLearningGuide.vue'
+import LearningPath from '@/components/student-growth/LearningPath.vue'
 import { createUuid } from '@/utils/uuid'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -260,11 +263,7 @@ async function loadGuidedPractice(
 }
 
 async function checkPracticeAvailability() {
-  if (lessonPlayerStore.status === 'completed') {
-    practiceAvailable.value = false
-    return
-  }
-  if (!context.value || !isPracticeStep.value) {
+  if (!context.value) {
     practiceAvailable.value = null
     return
   }
@@ -370,13 +369,7 @@ function nextStep() {
 }
 
 function startAssessment() {
-  if (
-    lessonPlayerStore.status === 'completed' ||
-    !context.value ||
-    !isPracticeStep.value ||
-    practiceAvailable.value !== true
-  )
-    return
+  if (!context.value || practiceAvailable.value !== true) return
   void router.push({
     path: isDevRoute.value ? '/dev/question-engine' : '/assessment',
     query: {
@@ -401,8 +394,10 @@ async function finishLesson() {
     (await lessonPlayerStore.completeLesson()) &&
     profileId.value === activeProfile &&
     route.fullPath === activePath
-  )
+  ) {
+    await checkPracticeAvailability()
     await loadGuidedPractice(activeProfile, activePath)
+  }
 }
 
 function selectDemoState(nextState: LessonPlayerDemoState) {
@@ -662,8 +657,17 @@ watch(
             <LessonContentRenderer
               :blocks="currentStep?.contentBlocks || []"
               :show-diagnostics="isDevRoute"
-              :practice-available="practiceAvailable"
+              :practice-available="
+                lessonPlayerStore.status === 'completed' ? false : practiceAvailable
+              "
               @start-assessment="startAssessment"
+            />
+            <PoetryLearningGuide
+              v-if="
+                context?.textbookId === 'G2_PEP_CHINESE_S2_2024_CANDIDATE' &&
+                context?.knowledgePointId === 'G2_PEP_CHINESE_S2_KP_01' &&
+                displayedStepIndex === 0
+              "
             />
           </section>
 
@@ -679,11 +683,15 @@ watch(
             aria-labelledby="lesson-completion-title"
           >
             <AppIcon name="check-circle" :size="42" color="var(--color-success)" decorative />
-            <h2 id="lesson-completion-title">这一节学习完成了</h2>
+            <h2 id="lesson-completion-title">课程读完了，接下来检查理解</h2>
+            <LearningPath read />
+            <AppButton v-if="practiceAvailable" size="lg" @click="startAssessment"
+              >检查理解</AppButton
+            >
             <p>
               {{
                 isFormalPilot
-                  ? '读完了，现在就在这里先练一关课后练习吧！也可以回到地图继续探索。'
+                  ? '先用教材练习检查理解；想多练一点时，再选择下方闯关。课程读完不代表已经掌握。'
                   : '你已经走完本次学习步骤。完成学习不等于掌握度，下一步可以回到地图继续探索。'
               }}
             </p>
@@ -698,16 +706,22 @@ watch(
                 知识能量。</span
               >
             </div>
-            <LessonGuidedPractice
+            <details
               v-if="isFormalPilot"
-              :key="`${profileId}:${context?.knowledgePointId ?? ''}`"
-              :quest="guidedPracticeQuest"
-              :title="viewModel.lesson.title"
-              :profile-id="profileId"
-              :state="guidedPracticeState"
-              @open-details="openAfterReading"
-              @retry="loadGuidedPractice"
-            />
+              class="learning-options"
+              :open="!practiceAvailable || $route.query.resumeQuest === 'true'"
+            >
+              <summary>巩固与拓展 · 接着完成课后闯关</summary>
+              <LessonGuidedPractice
+                :key="`${profileId}:${context?.knowledgePointId ?? ''}`"
+                :quest="guidedPracticeQuest"
+                :title="viewModel.lesson.title"
+                :profile-id="profileId"
+                :state="guidedPracticeState"
+                @open-details="openAfterReading"
+                @retry="loadGuidedPractice"
+              />
+            </details>
             <div class="lesson-player__completion-actions">
               <AppButton variant="secondary" @click="restartLesson()">重新学习</AppButton>
               <AppButton
@@ -740,10 +754,14 @@ watch(
               上一步
             </AppButton>
             <AppButton icon-right="arrow-right" @click="nextStep">
-              {{ lessonPlayerStore.isLastStep ? '完成这次学习' : '下一步' }}
+              {{ lessonPlayerStore.isLastStep ? '我读完了' : '下一步' }}
             </AppButton>
           </footer>
 
+          <LessonSourceNotes
+            :key="viewModel.context.knowledgePointId"
+            :notes="viewModel.sourceNotes"
+          />
           <details
             v-if="isDevRoute && (viewModel.diagnostics.length || lessonPlayerStore.warning)"
             class="lesson-player__diagnostics"

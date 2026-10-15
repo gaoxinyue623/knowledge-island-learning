@@ -1,5 +1,6 @@
 import type { ProductionReadinessDataset } from '@/types'
 import { buildProductionIndex } from '../../../services/production-readiness/productionIndex'
+import { registerLoadedCurriculumCatalog } from '@/services/curriculum/loadedCatalog'
 import {
   approvedCurriculum,
   localReleaseQuestions,
@@ -23,3 +24,4 @@ export const productionCurriculumIndex = buildProductionIndex(
   productionCurriculumData,
   mvpCurriculumScope,
 )
+registerLoadedCurriculumCatalog(productionCurriculumIndex)

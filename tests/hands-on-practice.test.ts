@@ -290,8 +290,8 @@ describe('Listen, place, then say', () => {
   }
   it('has usable text fallback and lets children correct placements, then self-check each spoken sentence', async () => {
     const wrapper = english()
-    expect(button(wrapper, '听这一句指令').attributes('disabled')).toBeDefined()
-    expect(wrapper.text()).toContain('由家人读指令')
+    expect(button(wrapper, '听这一句指令').attributes('disabled')).toBeUndefined()
+    expect(wrapper.text()).toContain('基础英语音频')
     expect(wrapper.find('.hands-on__hint').exists()).toBe(false)
     await click(wrapper, '需要文字帮助')
     expect(wrapper.get('.hands-on__hint').text()).toContain('Put the ball under the desk.')

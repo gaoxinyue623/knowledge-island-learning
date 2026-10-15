@@ -329,7 +329,7 @@ describe('grade four BNU mathematics upper 2022 supplied outline', () => {
       expect(wrapper.text()).toContain('2022新课标修订知识点整理')
       expect(wrapper.text()).toContain(String(d.content.body.suppliedOutline))
       expect(wrapper.text()).toContain(String(d.content.body.summary))
-      expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(true)
+      expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(true)
       expect(wrapper.text()).not.toContain('完整教材原文将在获得授权并完成审核后接入')
     } finally {
       wrapper.unmount()

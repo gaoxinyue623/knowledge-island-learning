@@ -1,7 +1,7 @@
 import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
-import { curriculumService } from '@/services'
+import { curriculumService } from '@/services/runtime'
 import type { CurriculumService } from '@/services/contracts'
 import { curriculumProfileRepository } from '@/services/storage/curriculumProfileRepository'
 import { curriculumDraftRepository } from '@/services/storage/curriculumDraftRepository'

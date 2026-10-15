@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { requestedPracticeChoice } from '@/services/student-growth/practiceResume'
+import { routeLocationKey, routerKey } from 'vue-router'
+import { computed, inject, ref, watch } from 'vue'
 import ReadingQuest from './ReadingQuest.vue'
 import TenFrameWorkshop from '@/components/hands-on/TenFrameWorkshop.vue'
 import EvidenceWorkshop from '@/components/hands-on/EvidenceWorkshop.vue'
@@ -19,15 +21,23 @@ const props = defineProps<{
   profileId: string
   muted?: boolean
 }>()
+const currentRoute = inject(routeLocationKey, null)
+const router = inject(routerKey, null)
 const mode = ref<'foundation' | 'training'>('foundation')
 const variant = ref(0)
 const choiceWritable = ref(true)
 watch(
-  () => [props.profileId, props.quest.id],
+  () => [
+    props.profileId,
+    props.quest.id,
+    currentRoute?.query.practiceMode,
+    currentRoute?.query.practiceVariant,
+  ],
   () => {
     const choice = readQuestChoice(props.profileId, props.quest.id)
-    mode.value = choice.data.mode
-    variant.value = choice.data.variant
+    const requested = requestedPracticeChoice(currentRoute?.query ?? {})
+    mode.value = requested?.mode ?? choice.data.mode
+    variant.value = requested?.variant ?? choice.data.variant
     choiceWritable.value = choice.writable
   },
   { immediate: true, flush: 'sync' },
@@ -35,6 +45,15 @@ watch(
 function choose(modeValue: 'foundation' | 'training', nextVariant = variant.value) {
   mode.value = modeValue
   variant.value = nextVariant
+  if (router && currentRoute?.query.practiceMode)
+    void router.replace({
+      query: {
+        ...currentRoute.query,
+        practiceMode: modeValue,
+        practiceVariant: modeValue === 'training' ? String(nextVariant) : undefined,
+      },
+      hash: currentRoute.hash,
+    })
   if (choiceWritable.value)
     choiceWritable.value = saveQuestChoice({
       schemaVersion: 1,
@@ -124,7 +143,12 @@ const evidencePractice = computed(() =>
       :b="tenFrame.b"
     />
     <KeepAlive :max="2">
-      <ReadingQuest :key="profileId + ':' + current.id" :quest="current" :profile-id="profileId" />
+      <ReadingQuest
+        :key="profileId + ':' + current.id"
+        :quest="current"
+        :profile-id="profileId"
+        :reading-label="title"
+      />
     </KeepAlive>
     <EvidenceWorkshop
       v-if="evidencePractice"

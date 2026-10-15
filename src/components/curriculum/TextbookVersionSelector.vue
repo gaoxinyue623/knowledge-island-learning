@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { textbookDirectoryPreview } from '@/services/curriculum/textbookPreview'
 import AppIcon from '@/components/common/AppIcon.vue'
 import type { TextbookDisplay } from '@/types'
 
@@ -18,6 +19,7 @@ const emit = defineEmits<{ select: [textbookId: string] }>()
 
 <template>
   <div class="textbook-selector-list">
+    <p>先核对课本封面和版权页，再比较下面的目录。名称相近时，以实际课本目录为准。</p>
     <button
       v-for="option in props.options"
       :key="option.textbook.id"
@@ -31,6 +33,13 @@ const emit = defineEmits<{ select: [textbookId: string] }>()
         <strong>{{ option.textbook.versionName }}</strong>
         <small
           >{{ option.publisher.name }} · {{ props.gradeName }} · {{ props.semesterName }}</small
+        >
+        <small>版次标识：{{ option.textbook.editionYear || '请核对完整版本名称' }}</small>
+        <small
+          v-for="line in textbookDirectoryPreview(option.textbook.id)"
+          :key="line"
+          style="display: block; white-space: normal; line-height: 1.7"
+          >{{ line }}</small
         >
       </span>
       <AppIcon

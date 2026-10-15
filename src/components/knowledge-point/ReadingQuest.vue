@@ -5,9 +5,11 @@ import {
   recordLearningActivity,
   type LearningActivity,
 } from '@/services/learning-activity/activityHistory'
+import { practiceResumeHref } from '@/services/student-growth/practiceResume'
+import { saveLearningContinuation } from '@/services/student-growth/learningContinuations'
 import { spacedReviewService } from '@/services/student-growth/spacedReview'
 import { readingStories } from '@/data/reading-islands'
-import { productionCurriculumIndex } from '@/data/curriculum/production'
+import { loadedCurriculumCatalog } from '@/services/curriculum/loadedCatalog'
 import { settleQuestPetReward } from '@/services/pet/petQuestRewards'
 import {
   computed,
@@ -26,7 +28,7 @@ import StudentReadAloud from '@/components/common/StudentReadAloud.vue'
 import DragMatchActivity from '@/components/interactive-activity/DragMatchActivity.vue'
 import SortOrderActivity from '@/components/interactive-activity/SortOrderActivity.vue'
 import MathQuestVisual from './MathQuestVisual.vue'
-import { checkQuestAnswer, emptyQuestDraft } from '@/services/content-expansion/readingQuest'
+import { checkQuestAnswer, emptyQuestDraft } from '@/services/content-expansion/questAnswers'
 import {
   browserQuestStorage,
   freshQuestProgress,
@@ -143,7 +145,7 @@ const questionImages = computed(() =>
         left.order - right.order || left.mediaAssetId.localeCompare(right.mediaAssetId),
     )
     .flatMap((media) => {
-      const asset = productionCurriculumIndex.mediaAssets.find(
+      const asset = loadedCurriculumCatalog.value?.mediaAssets.find(
         (item) => item.id === media.mediaAssetId,
       )
       if (!asset?.url || (asset.mediaType !== 'IMAGE' && asset.mediaType !== 'SVG')) return []
@@ -265,7 +267,9 @@ function persist(): void {
           knowledgePointId?: string
           lessonId?: string
         }
-        const lesson = productionCurriculumIndex.lessons.find((item) => item.id === quest.lessonId)
+        const lesson = loadedCurriculumCatalog.value?.lessons.find(
+          (item) => item.id === quest.lessonId,
+        )
         const story = readingStories.find((item) =>
           window.location.pathname.endsWith('/' + item.id),
         )
@@ -299,6 +303,34 @@ function persist(): void {
         storageWarning.value = '闯关进度已保存，活动记录暂未更新；重新打开本组练习会重试。'
       }
     }
+    if (
+      !isReviewAttempt.value &&
+      (passed.value.length || mistakes.value.length || helped.value.length || completedAt.value) &&
+      !window.location.pathname.startsWith('/dev/')
+    ) {
+      const href =
+        props.activityContext?.href ??
+        reviewCourseHref() ??
+        (window.location.pathname.startsWith('/reading-islands/')
+          ? window.location.pathname + '#reading-challenges'
+          : null)
+      if (href) {
+        try {
+          saveLearningContinuation(props.profileId, {
+            questId: props.quest.id,
+            title: props.activityContext?.title ?? props.readingLabel ?? '课后闯关',
+            href: practiceResumeHref(href, props.quest),
+            contentRevision: revision.value,
+            completed: passed.value.length,
+            finished: summaryVisible.value,
+            total: stages.value.length,
+            updatedAt: new Date().toISOString(),
+          })
+        } catch {
+          storageWarning.value = '闯关进度已保存，首页继续入口暂未更新。'
+        }
+      }
+    }
     if (hasExplicitEvidence.value) recordSpacedReviewEvidence()
   }
 }
@@ -309,7 +341,7 @@ function reviewCourseHref(): string | null {
     knowledgePointId?: string
     lessonId?: string
   }
-  const lesson = productionCurriculumIndex.lessons.find((item) => item.id === quest.lessonId)
+  const lesson = loadedCurriculumCatalog.value?.lessons.find((item) => item.id === quest.lessonId)
   if (!quest.textbookId || !quest.knowledgePointId || !lesson?.unitId) return null
   const query = new URLSearchParams({
     textbookId: quest.textbookId,
@@ -325,11 +357,11 @@ function recordSpacedReviewEvidence(): void {
   const courseHref = reviewCourseHref()
   if (!courseHref) return
   const questContext = props.quest as ReadingPracticeQuest & { textbookId?: string }
-  const textbook = productionCurriculumIndex.textbooks.find(
+  const textbook = loadedCurriculumCatalog.value?.textbooks.find(
     (item) => item.id === questContext.textbookId,
   )
   const subject = textbook
-    ? productionCurriculumIndex.subjects.find((item) => item.id === textbook.subjectId)?.code
+    ? loadedCurriculumCatalog.value?.subjects.find((item) => item.id === textbook.subjectId)?.code
     : undefined
   if (!subject) return
   const attemptIdForEvidence = isReviewAttempt.value

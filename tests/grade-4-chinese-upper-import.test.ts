@@ -511,7 +511,7 @@ describe('grade 4 upper Chinese eight units and literacy appendices', () => {
           paragraph.replaceAll('bàn 辫', 'biàn 辫').replaceAll('qǐ 崛', 'jué 崛'),
         )
       await vi.waitFor(() =>
-        expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+        expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
           Boolean(d.questions.length),
         ),
       )

@@ -15,7 +15,6 @@ import ReadingEntry from '@/components/reading-islands/ReadingEntry.vue'
 import SpacedReviewEntry from '@/components/student-growth/SpacedReviewEntry.vue'
 import islandAdventure from '@/assets/illustrations/island-adventure.jpg'
 import { isPilotTextbook } from '@/data/curriculum/pilot'
-import { productionConfig } from '@/config/production'
 import AppShell from '@/layouts/AppShell.vue'
 import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useHomeStore } from '@/stores/homeStore'
@@ -25,7 +24,13 @@ import {
   spacedReviewService,
   type SpacedReviewDue,
 } from '@/services/student-growth/spacedReview'
-import { resolveCurrentQuestRevision } from '@/services/student-growth/currentQuestResolver'
+import { weeklyCourseChoices } from '@/services/weekly-plan/weeklyCourseChoices'
+import WeeklyPlanCard from '@/components/weekly-plan/WeeklyPlanCard.vue'
+import { type LearningContinuation } from '@/services/student-growth/learningContinuations'
+import {
+  listResumablePractice,
+  resolveCurrentQuestRevision,
+} from '@/services/student-growth/currentQuestResolver'
 import type { DailyLearningTask, HomeViewModel, IconName, SubjectCode } from '@/types'
 
 const router = useRouter()
@@ -33,13 +38,44 @@ const route = useRoute()
 const curriculumStore = useCurriculumStore()
 const homeStore = useHomeStore()
 const studentStore = useStudentStore()
-const showAgentEntry = productionConfig.devRoutes
 const dueReviews = ref<SpacedReviewDue[]>([])
 let spacedReviewRequest = 0
+const unfinishedPractice = ref<LearningContinuation[]>([])
+const continuationWarning = ref('')
+const showAllContinuations = ref(false)
+let continuationRequest = 0
+async function loadContinuations() {
+  const request = ++continuationRequest
+  const id = studentStore.profile?.id
+  unfinishedPractice.value = []
+  continuationWarning.value = ''
+  if (!id || isDevRoute.value) return
+  try {
+    const ids =
+      viewModel.value?.subjects.flatMap((subject) =>
+        subject.textbookId ? [subject.textbookId] : [],
+      ) ?? []
+    const entries = await listResumablePractice(id, ids)
+    if (request === continuationRequest && studentStore.profile?.id === id)
+      unfinishedPractice.value = entries
+  } catch {
+    if (request === continuationRequest)
+      continuationWarning.value = '上次闯关的继续入口暂时无法读取，可以从地图进入，原进度仍保留。'
+  }
+}
 
 const isDevRoute = computed(() => route.path === '/dev/home')
 const isTasksRoute = computed(() => route.path === '/tasks')
 const viewModel = computed(() => homeStore.viewModel)
+const weeklyChoices = computed(() =>
+  studentStore.profile && viewModel.value && !isDevRoute.value
+    ? weeklyCourseChoices(
+        studentStore.profile.id,
+        viewModel.value.today.dateKey,
+        viewModel.value.subjects,
+      )
+    : [],
+)
 const primaryTask = computed(
   () =>
     viewModel.value?.today.tasks.find(
@@ -52,13 +88,19 @@ const primarySubject = computed(() =>
   ),
 )
 const primaryLabel = computed(() =>
-  primaryTask.value
-    ? taskActionLabel(primaryTask.value)
-    : primarySubject.value
-      ? `从${primarySubject.value.label}岛出发`
-      : '选一本教材，开始学习',
+  unfinishedPractice.value.length
+    ? '继续上次闯关'
+    : primaryTask.value
+      ? taskActionLabel(primaryTask.value)
+      : primarySubject.value
+        ? `从${primarySubject.value.label}岛出发`
+        : '选一本教材，开始学习',
 )
 function openPrimary(): void {
+  if (unfinishedPractice.value[0]) {
+    void router.push(unfinishedPractice.value[0].href)
+    return
+  }
   if (primaryTask.value) return openTask(primaryTask.value)
   if (primarySubject.value) {
     void router.push({
@@ -295,6 +337,7 @@ async function loadHome(): Promise<void> {
       ? { displayName: studentStore.profile?.displayName }
       : {}),
   })
+  await loadContinuations()
 }
 
 function progressLabel(progress: HomeViewModel['today']['progress']): string {
@@ -338,7 +381,11 @@ watch(
           <span>{{ viewModel.warnings[0] }}</span>
         </div>
 
-        <section class="home-page__hero" aria-labelledby="home-title">
+        <header v-if="isTasksRoute">
+          <h1>今日学习</h1>
+          <p>接着未完成的内容，再按自己的节奏选择学科和学习量。</p>
+        </header>
+        <section v-if="!isTasksRoute" class="home-page__hero" aria-labelledby="home-title">
           <div class="home-page__hero-copy">
             <p class="curriculum-eyebrow">
               {{ isDevRoute ? 'DEVELOPMENT SAMPLE' : viewModel.greeting.title }}
@@ -358,17 +405,9 @@ watch(
               >
                 重置今日样本
               </AppButton>
-              <AppButton
-                v-if="showAgentEntry && !isDevRoute"
-                size="sm"
-                variant="secondary"
-                icon-left="sparkles"
-                @click="openShortcut('/agent')"
-              >
-                Agent 实验室
-              </AppButton>
             </div>
-            <p v-if="primaryTask">接着学习：{{ primaryTask.title }}</p>
+            <p v-if="unfinishedPractice.length">接着练习：{{ unfinishedPractice[0]?.title }}</p>
+            <p v-else-if="primaryTask">接着学习：{{ primaryTask.title }}</p>
             <p v-else>先完成一小段阅读，再选几关练习。也可以在下方换一科出发。</p>
             <span class="home-page__date"
               >{{ viewModel.greeting.dateLabel }} · 每一步，都是新发现</span
@@ -402,13 +441,13 @@ watch(
             <div>
               <p class="curriculum-eyebrow">一步一步，慢慢变厉害</p>
               <h2 id="today-title">今天学什么</h2>
-              <p>今天的小目标，等你来探索。</p>
+              <p>完成任务表示留下学习记录；闯关进度和掌握情况分别查看。</p>
             </div>
             <strong>{{ taskCountLabel }}</strong>
           </div>
           <div v-if="viewModel.today.progress.total" class="home-page__daily-progress">
             <div class="home-page__progress-meta">
-              <span>今日进度</span>
+              <span>今日课程与教材练习</span>
               <strong>{{ progressLabel(viewModel.today.progress) }}</strong>
             </div>
             <AppProgress
@@ -458,6 +497,58 @@ watch(
           </ol>
         </section>
 
+        <section
+          v-if="unfinishedPractice.length || continuationWarning"
+          class="home-page__continue"
+          aria-labelledby="unfinished-practice-title"
+        >
+          <h2 id="unfinished-practice-title">接着完成上次闯关</h2>
+          <p>课程读完和闯关完成分别记录。下方练习还没有结束，随时可以接着做。</p>
+          <p v-if="continuationWarning" role="status">{{ continuationWarning }}</p>
+          <ul class="home-page__recent-list">
+            <li
+              v-for="item in unfinishedPractice.slice(
+                0,
+                showAllContinuations ? unfinishedPractice.length : 3,
+              )"
+              :key="item.questId"
+            >
+              <div>
+                <strong>{{ item.title }}</strong>
+                <p>
+                  已通过 {{ item.completed }} / {{ item.total }} 关{{
+                    item.completed === item.total
+                      ? '，查看完成反馈'
+                      : `，还剩 ${item.total - item.completed} 关`
+                  }}
+                </p>
+              </div>
+              <AppButton @click="router.push(item.href)">继续闯关</AppButton>
+            </li>
+          </ul>
+          <AppButton
+            v-if="unfinishedPractice.length > 3"
+            variant="ghost"
+            @click="showAllContinuations = !showAllContinuations"
+            >{{
+              showAllContinuations ? '收起' : `查看全部 ${unfinishedPractice.length} 项未完成练习`
+            }}</AppButton
+          >
+        </section>
+        <details
+          v-if="!isDevRoute && studentStore.profile"
+          class="home-page__panel learning-options"
+          :open="isTasksRoute"
+        >
+          <summary>安排本周学习 · 也可以选择休息日</summary>
+          <WeeklyPlanCard
+            :profile-id="studentStore.profile.id"
+            :daily-plan="viewModel.today"
+            :additional-tasks="weeklyChoices"
+            @refresh="loadHome"
+            @open-task="openTask"
+          />
+        </details>
         <SpacedReviewEntry :items="dueReviews" @launch="openSpacedReview" />
 
         <section
@@ -539,7 +630,7 @@ watch(
           </div>
         </section>
 
-        <section class="home-page__subjects" aria-labelledby="subjects-title">
+        <section v-if="!isTasksRoute" class="home-page__subjects" aria-labelledby="subjects-title">
           <div class="home-page__section-heading">
             <div>
               <p class="curriculum-eyebrow">每座小岛，都藏着新发现</p>
@@ -609,7 +700,7 @@ watch(
         <ThinkingEntry v-if="!isDevRoute && !isTasksRoute" />
         <ReadingEntry v-if="!isDevRoute && !isTasksRoute" />
 
-        <div class="home-page__lower-grid">
+        <div v-if="!isTasksRoute" class="home-page__lower-grid">
           <section class="home-page__panel" aria-labelledby="recent-title">
             <div class="home-page__panel-heading">
               <div>
@@ -691,7 +782,11 @@ watch(
           </section>
         </div>
 
-        <section class="home-page__shortcuts" aria-labelledby="shortcuts-title">
+        <section
+          v-if="!isTasksRoute"
+          class="home-page__shortcuts"
+          aria-labelledby="shortcuts-title"
+        >
           <div class="home-page__section-heading">
             <div>
               <p class="curriculum-eyebrow">整理好装备，继续出发</p>

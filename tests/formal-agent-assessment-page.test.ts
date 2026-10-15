@@ -103,7 +103,13 @@ it('submits answers, advances to the next question and returns to the selected s
   })
   try {
     await flushPromises()
-    expect(open).toHaveBeenCalledTimes(1)
+    await vi.waitFor(
+      () => {
+        expect(open).toHaveBeenCalledTimes(1)
+        expect(useQuestionEngineStore().currentQuestion).toBeTruthy()
+      },
+      { timeout: 5000 },
+    )
     const store = useQuestionEngineStore()
     expect(store.currentQuestion).toBeTruthy()
     await store.setAnswerDraft(

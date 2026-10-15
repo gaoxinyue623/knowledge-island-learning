@@ -118,7 +118,11 @@ watch(() => [props.profileId, props.contextId], reset)
     </div>
     <p class="hands-on__note">
       {{
-        reader.provider.value === 'browser' ? '设备合成语音' : '豆包 AI 合成语音'
+        reader.provider.value !== 'doubao'
+          ? reader.usingBundledAudio.value
+            ? '基础英语音频'
+            : '设备合成语音'
+          : '豆包 AI 合成语音'
       }}，不是教材原声。{{
         reader.provider.value === 'browser' &&
         reader.voice.value &&

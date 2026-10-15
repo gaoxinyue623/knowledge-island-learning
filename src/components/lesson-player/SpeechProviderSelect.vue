@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { productionConfig } from '@/config/production'
 import { useId } from 'vue'
-defineProps<{ modelValue: 'browser' | 'doubao' }>()
-const emit = defineEmits<{ 'update:modelValue': [value: 'browser' | 'doubao'] }>()
+defineProps<{ modelValue: 'browser' | 'bundled' | 'doubao' }>()
+const emit = defineEmits<{ 'update:modelValue': [value: 'browser' | 'bundled' | 'doubao'] }>()
 const id = useId()
 </script>
 <template>
@@ -15,16 +15,24 @@ const id = useId()
         @change="
           emit(
             'update:modelValue',
-            ($event.target as HTMLSelectElement).value === 'doubao' ? 'doubao' : 'browser',
+            ($event.target as HTMLSelectElement).value === 'doubao'
+              ? 'doubao'
+              : ($event.target as HTMLSelectElement).value === 'bundled'
+                ? 'bundled'
+                : 'browser',
           )
         "
       >
-        <option value="browser">浏览器语音（默认）</option>
+        <option value="browser">基础音频与设备声音（默认）</option>
+        <option value="bundled">基础英语音频</option>
         <option v-if="!productionConfig.isProduction" value="doubao">豆包语音（联网合成）</option>
       </select>
     </label>
     <p v-if="modelValue === 'browser'">
-      先用设备声音听一听，不满意可以切换豆包。切换本身不发起合成。
+      优先使用设备声音。设备没有英语声音时，已配套的基础内容可以直接播放音频。
+    </p>
+    <p v-else-if="modelValue === 'bundled'">
+      播放随应用提供的基础英语音频，不需要设备安装英语声音。未配套的句子仍可以使用设备声音或文字辅助。
     </p>
     <p v-else role="status">
       AI

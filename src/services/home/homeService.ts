@@ -429,7 +429,7 @@ function buildShortcuts(
     {
       id: 'curriculum_settings' as const,
       label: '学习设置',
-      description: '查看地区、年级和教材',
+      description: '查看年级、册次和教材',
       icon: 'settings',
       path: shortcutPath('curriculum_settings', dataset),
     },

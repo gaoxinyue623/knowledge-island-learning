@@ -725,3 +725,23 @@
     flex: 1;
   }
 }
+
+.learning-options {
+  width: 100%;
+  text-align: left;
+}
+.learning-options > summary {
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 44px;
+}
+@media (max-width: 640px) {
+  .lesson-player__goals {
+    padding: 12px;
+    font-size: 13px;
+  }
+  .lesson-player__progress-card {
+    padding: 12px;
+  }
+}

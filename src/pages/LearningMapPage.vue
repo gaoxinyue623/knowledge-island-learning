@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { readSchoolProgress, saveSchoolProgress } from '@/services/student-growth/schoolProgress'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -72,6 +73,32 @@ const contextLabel = computed(() => {
     ? `${model.textbook.grade}年级 · ${model.textbook.semester === 1 ? '上册' : '下册'}`
     : '学习地图'
 })
+const schoolNodeId = ref<string | null>(null)
+const schoolNotice = ref('')
+const recommendedNode = computed(() =>
+  schoolNodeId.value && viewModel.value
+    ? findLearningMapNode(viewModel.value, schoolNodeId.value)
+    : learningMapStore.currentNode,
+)
+const schoolNodes = computed(
+  () =>
+    viewModel.value?.islands.flatMap((island) =>
+      island.lessons.flatMap((lesson) => lesson.nodes),
+    ) ?? [],
+)
+function updateSchoolProgress(event: Event) {
+  const id = (event.target as HTMLSelectElement).value
+  const studentId = profile.value?.studentId
+  if (!studentId || !viewModel.value) return
+  if (id && !schoolNodes.value.some((node) => node.id === id)) return
+  try {
+    saveSchoolProgress(studentId, viewModel.value.textbook.id, id)
+    schoolNodeId.value = id || null
+    schoolNotice.value = '学校进度已记住。这里只定位课程，不会标记已完成或已掌握。'
+  } catch {
+    schoolNotice.value = '学校进度暂时无法保存，原学习记录保留。'
+  }
+}
 let mapLoadGeneration = 0
 
 function findCurrentModelNode(model: LearningMapViewModel | null): KnowledgeMapNode | null {
@@ -93,6 +120,13 @@ async function loadMap() {
   })
   if (generation !== mapLoadGeneration) return
   if (loaded) {
+    try {
+      const id = readSchoolProgress(profile.value?.studentId ?? 'local-profile', loaded.textbook.id)
+      schoolNodeId.value = id && findLearningMapNode(loaded, id) ? id : null
+    } catch {
+      schoolNodeId.value = null
+      schoolNotice.value = '以前的学校进度暂时无法读取，可以重新选择。'
+    }
     const resolved = await learningStrategyStore.resolveForMap(loaded, {
       studentProfileId: profile.value?.studentId ?? 'local-profile',
       masteryRecords: masteryStore.records,
@@ -143,7 +177,10 @@ function openNodeDetail(nodeId: Id) {
 }
 
 function focusCurrentNode() {
-  const node = findCurrentModelNode(viewModel.value)
+  const node =
+    schoolNodeId.value && viewModel.value
+      ? findLearningMapNode(viewModel.value, schoolNodeId.value)
+      : findCurrentModelNode(viewModel.value)
   if (!node) return
   if (node.status !== 'locked') openNodeDetail(node.id)
 }
@@ -158,7 +195,6 @@ watch(
 <template>
   <AppShell :show-bottom-nav="true" :context="contextLabel">
     <div class="learning-map-page content-container">
-      <ThinkingEntry compact />
       <nav class="learning-map-subject-switcher" aria-label="切换学科地图">
         <AppButton
           v-for="subject in subjects"
@@ -217,10 +253,10 @@ watch(
             class="learning-map-overview__cta"
             size="lg"
             icon-right="navigation"
-            :disabled="!learningMapStore.currentNode"
+            :disabled="!recommendedNode"
             @click="focusCurrentNode"
           >
-            继续探索
+            {{ schoolNodeId ? '接着学校进度' : '继续探索' }}
           </AppButton>
           <AppButton
             class="learning-map-overview__growth-cta"
@@ -246,13 +282,32 @@ watch(
           compact
           :language="requestedSubject === 'ENGLISH' ? 'english' : 'chinese'"
         />
+        <section class="learning-map-overview" aria-label="学校学习进度">
+          <label
+            >学校正在学哪一课？<select
+              :value="schoolNodeId ?? ''"
+              style="max-width: 100%; min-height: 44px; width: 100%"
+              @change="updateSchoolProgress"
+            >
+              <option value="">暂不标记</option>
+              <option v-for="node in schoolNodes" :key="node.id" :value="node.id">
+                {{ node.title }}
+              </option>
+            </select></label
+          >
+          <p>按学校进度定位课程。已学过的单元可直接测一测，不需要重复完成所有节点。</p>
+          <p v-if="schoolNotice" role="status">{{ schoolNotice }}</p>
+        </section>
         <KnowledgeIslandMap
           :view-model="viewModel"
+          compact
+          :school-node-id="schoolNodeId"
           show-unit-assessments
           :selected-node-id="learningMapStore.selectedNodeId"
           @select-node="openNodeDetail"
         />
         <ComprehensiveAssessments :model="viewModel" unit-assessments-on-map />
+        <ThinkingEntry compact />
         <details v-if="viewModel.diagnostics.length" class="learning-map-diagnostics">
           <summary>开发诊断：{{ viewModel.diagnostics.length }} 条提示</summary>
           <p

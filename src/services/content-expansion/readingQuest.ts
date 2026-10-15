@@ -118,16 +118,8 @@ import {
   gradeTwoShenzhenEnglishUpperKnowledgePoints,
   gradeTwoShenzhenEnglishUpperLessonPracticeDefinitions,
 } from '@/data/curriculum/grade-2/english-shanghai-upper'
-import {
-  isQuestionAnswerComplete,
-  validateQuestionAnswer,
-} from '@/services/question-engine/answerValidator'
-import type {
-  ContentExpansionBundle,
-  LessonContentBlockViewModel,
-  Question,
-  QuestionAnswerDraft,
-} from '@/types'
+export { emptyQuestDraft, checkQuestAnswer } from './questAnswers'
+import type { ContentExpansionBundle, LessonContentBlockViewModel, Question } from '@/types'
 import type { QuestActivityStage, QuestQuestionStage, ReadingQuest } from '@/types/reading-quest'
 
 interface EnglishPracticeDefinition {
@@ -294,33 +286,6 @@ function phraseToken(phrase: string): string {
   return (
     vocabulary.find((word) => phrase.includes(word)) ?? phrase.match(/[\u4e00-\u9fff]/)?.[0] ?? ''
   )
-}
-
-export function emptyQuestDraft(question: Question): QuestionAnswerDraft {
-  if (question.questionType === 'calculation') return { type: 'calculation', value: '' }
-  if (question.questionType === 'multipleChoice') return { type: 'multipleChoice', optionIds: [] }
-  if (question.questionType === 'trueFalse') return { type: 'trueFalse' }
-  if (question.questionType === 'fillBlank') return { type: 'fillBlank', values: [''] }
-  return { type: 'singleChoice' }
-}
-
-export function checkQuestAnswer(
-  question: Question,
-  draft: QuestionAnswerDraft,
-): 'incomplete' | 'correct' | 'incorrect' | 'manual_review_required' {
-  if (!isQuestionAnswerComplete(question, draft)) return 'incomplete'
-  const ids =
-    draft.type === 'multipleChoice'
-      ? draft.optionIds
-      : draft.type === 'singleChoice'
-        ? [draft.optionId]
-        : []
-  if (
-    new Set(ids).size !== ids.length ||
-    ids.some((id) => !question.options?.some((option) => option.id === id))
-  )
-    return 'incorrect'
-  return validateQuestionAnswer(question, draft).status
 }
 
 function createReadingQuestDraft(input: {
@@ -634,6 +599,66 @@ function createReadingQuestDraft(input: {
         config: { items: shuffled(items, base.id), correctOrder: items.map((item) => item.id) },
       },
     })
+  }
+
+  if (
+    !english &&
+    bundle.textbookId === 'G2_PEP_CHINESE_S2_2024_CANDIDATE' &&
+    text.includes('忙趁东风放纸鸢') &&
+    text.includes('二月春风似剪刀')
+  ) {
+    choice(
+      '找动作与证据',
+      '《村居》中，孩子们放学后急着做什么？哪一句告诉了你？',
+      ['放风筝，“忙趁东风放纸鸢”告诉了我'],
+      ['去采莲，“碧玉妆成一树高”告诉了我', '堆雪人，“草长莺飞二月天”告诉了我'],
+      '纸鸢就是风筝。“忙趁东风”写出孩子们趁着春风赶忙放风筝的快乐心情。',
+      '找“儿童”后面的动作，再想想纸鸢是什么。',
+    )
+    matching(
+      [
+        ['纸鸢', '风筝'],
+        ['散学', '放学'],
+        ['绿丝绦', '像绿色丝带一样的柳条'],
+      ],
+      '诗中词语',
+      '词语意思',
+      '把诗中的词语和意思连起来。',
+      '读懂词语',
+    )
+    choice(
+      '想象春天的画面',
+      '“草长莺飞二月天”描写了怎样的画面？',
+      ['小草生长，鸟儿飞翔的春天'],
+      ['落叶纷飞的深秋', '大雪覆盖的冬天'],
+      '“草长”和“莺飞”写出了春天的生机。不能只看到“二月”，还要把景物和动作一起读懂。',
+      '注意“草长”和“莺飞”两个画面。',
+    )
+    choice(
+      '看懂比喻',
+      '《咏柳》中的“绿丝绦”是在形容什么？',
+      ['细长的柳条'],
+      ['孩子的风筝线', '树下的石头'],
+      '“万条垂下绿丝绦”把垂下来的柳条比作绿色丝带，写出柳条的颜色和形状。',
+      '想一想：什么从柳树上垂下来，像绿色的丝带？',
+    )
+    choice(
+      '问一句，答一句',
+      '“不知细叶谁裁出”的下一句怎样回答？',
+      ['二月春风似剪刀'],
+      ['儿童散学归来早', '草长莺飞二月天'],
+      '诗人先问细细的柳叶是谁裁出来的，再把春风想象成剪刀来回答，表达了对春天的赞美。',
+      '回看《咏柳》的最后两句，找到诗人的回答。',
+    )
+    choice(
+      '把方法用起来',
+      '读完这两首诗，哪一种介绍最能说明你读懂了？',
+      ['我从“忙趁东风”看出孩子们急着放风筝，觉得他们很快乐'],
+      ['我记住了作者名字，所以所有句子都懂了', '我看到“剪刀”，所以春风真的是一把剪刀'],
+      '读懂诗句要联系词语、画面和心情，并用原句说明自己的发现。背出名字或把比喻当成实物都不能替代理解。',
+      '选择既说明自己的发现，又能找出诗句依据的介绍。',
+    )
+    return quest
   }
 
   if (english) {

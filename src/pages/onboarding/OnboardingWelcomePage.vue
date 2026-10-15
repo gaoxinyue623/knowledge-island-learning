@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import AppBottomSheet from '@/components/common/AppBottomSheet.vue'
 import { useRouter } from 'vue-router'
 
 import AppButton from '@/components/common/AppButton.vue'
@@ -8,6 +10,7 @@ import KnowledgeDangoPlaceholder from '@/components/character/KnowledgeDangoPlac
 import CurriculumPageFrame from '@/pages/curriculum/CurriculumPageFrame.vue'
 
 const router = useRouter()
+const parentHelp = ref(false)
 
 function startOnboarding() {
   router.push('/onboarding/grade')
@@ -33,11 +36,25 @@ function startOnboarding() {
           <AppButton size="lg" icon-right="arrow-right" @click="startOnboarding">
             开始设置
           </AppButton>
-          <button class="curriculum-text-button" type="button" @click="startOnboarding">
+          <button class="curriculum-text-button" type="button" @click="parentHelp = true">
             请家长帮我设置
           </button>
         </div>
       </AppCard>
     </section>
+    <AppBottomSheet
+      :open="parentHelp"
+      title="家长准备这三样就可以"
+      primary-label="准备好了，开始设置"
+      @close="parentHelp = false"
+      @primary="startOnboarding"
+    >
+      <ol>
+        <li>确认孩子的年级，以及现在使用上册还是下册。</li>
+        <li>准备课本，核对封面、版权页和目录；有多个版本时再逐科选择。</li>
+        <li>为孩子使用昵称，设置后到账号安全保存一次性恢复码。</li>
+      </ol>
+      <p>可以先设置一科，其他科目以后补充。每个孩子都能建立自己的学习档案。</p>
+    </AppBottomSheet>
   </CurriculumPageFrame>
 </template>

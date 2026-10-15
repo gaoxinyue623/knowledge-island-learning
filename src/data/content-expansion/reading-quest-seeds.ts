@@ -14,6 +14,19 @@ export interface ReadingQuestionSeed {
 export const readingQuestionSeeds: ReadingQuestionSeed[] = [
   ...revisedChineseReadingSeeds,
   {
+    title: '古诗二首',
+    evidence: '忙趁东风放纸鸢',
+    prompt: '《村居》中，孩子们放学后急着做什么？哪一句告诉了你？',
+    answer: '放风筝，“忙趁东风放纸鸢”告诉了我',
+    distractors: ['去采莲，“碧玉妆成一树高”告诉了我', '堆雪人，“草长莺飞二月天”告诉了我'],
+    explanation: '纸鸢就是风筝。“忙趁东风”写出孩子们趁着春风赶忙放风筝的快乐心情。',
+    wordPairs: [
+      ['纸鸢', '风筝'],
+      ['散学', '放学'],
+      ['绿丝绦', '像绿色丝带一样的柳条'],
+    ],
+  },
+  {
     title: '静夜思',
     evidence: '低头思故乡',
     prompt: '诗人望着月亮，想起了什么？',

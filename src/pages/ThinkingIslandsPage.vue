@@ -123,7 +123,7 @@ const islandDone = (id: string) =>
           </ol>
         </template>
         <p class="thinking-note">
-          每个学习档案的小脚印分别保存在这个浏览器，与课本练习分开记录。这不是智力测评。
+          每个学习档案的小脚印独立保存并同步到账号，与课本练习分开记录。这不是智力测评。
         </p>
       </template>
       <section v-else class="thinking-empty">

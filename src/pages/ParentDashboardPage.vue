@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { questionRepository } from '@/services/question-engine'
+import { knowledgeLabel } from '@/services/student-growth/learningLabels'
+import { listResumablePractice } from '@/services/student-growth/currentQuestResolver'
+import type { LearningContinuation } from '@/services/student-growth/learningContinuations'
+import ParentExpressionReviews from '@/components/student-growth/ParentExpressionReviews.vue'
 import LearningActivityHistory from '@/components/common/LearningActivityHistory.vue'
 import { useLearningProfile } from '@/composables/useLearningProfile'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -36,6 +41,14 @@ const curriculumStore = useCurriculumStore()
 const reportStore = useParentReportStore()
 const studentStore = useStudentStore()
 const presentation = ref<CurriculumPresentation | null>(null)
+const expressionRefresh = ref(0)
+const questionDetails = ref<Record<string, { title: string; explanation: string }>>({})
+const unfinishedPractice = ref<LearningContinuation[]>([])
+const supportQuestions = computed(
+  () =>
+    report.value?.wrongBook.recentItems.filter((item) => item.status === 'active').slice(0, 3) ??
+    [],
+)
 
 const demoScenario = ref<ParentReportDemoScenario>('full')
 const demoScenarios: Array<{ value: ParentReportDemoScenario; label: string }> = [
@@ -174,7 +187,9 @@ function returnToChild(): void {
   void router.push(isDevRoute.value ? '/dev/home' : '/home')
 }
 
+let reportLoadGeneration = 0
 async function loadReport(): Promise<void> {
+  const generation = ++reportLoadGeneration
   const profileId = currentProfileId.value
   const profile = currentProfile.value
   presentation.value = null
@@ -194,6 +209,39 @@ async function loadReport(): Promise<void> {
     ...(isDevRoute.value ? { demoScenario: demoScenario.value } : {}),
     ...(isDevRoute.value ? { demoFacts: createParentReportDemoFacts(profileId) } : {}),
   })
+  if (generation !== reportLoadGeneration || profileId !== currentProfileId.value) return
+  questionDetails.value = {}
+  unfinishedPractice.value = []
+  const items = await Promise.all(
+    (report.value?.wrongBook.recentItems ?? []).map(async (item) => {
+      const question = await questionRepository.getQuestionById(
+        item.questionId,
+        isDevRoute.value ? 'demo' : 'profile',
+      )
+      return [
+        item.questionId,
+        {
+          title:
+            question?.stem.map((block) => block.text ?? '').join(' ') || '原题内容暂时无法读取',
+          explanation:
+            question?.explanation?.summary.map((block) => block.text ?? '').join(' ') ?? '',
+        },
+      ] as const
+    }),
+  ).catch(() => [])
+  if (generation !== reportLoadGeneration || profileId !== currentProfileId.value) return
+  questionDetails.value = Object.fromEntries(items)
+  expressionRefresh.value += 1
+  if (!isDevRoute.value && profile) {
+    const ids = [
+      profile.chineseTextbookVersionId,
+      profile.mathTextbookVersionId,
+      profile.englishTextbookVersionId,
+    ].filter((id): id is string => Boolean(id))
+    const pending = await listResumablePractice(profileId, ids).catch(() => [])
+    if (generation === reportLoadGeneration && profileId === currentProfileId.value)
+      unfinishedPractice.value = pending
+  }
 }
 
 async function changeRange(): Promise<void> {
@@ -217,13 +265,6 @@ watch(
 
 <template>
   <AppShell :show-bottom-nav="false" :context="pageContext">
-    <LearningActivityHistory
-      v-if="!isDevRoute"
-      :profile-id="currentProfileId"
-      :start-date="report?.range.startDate"
-      :end-date="report?.range.endDate"
-      :subject="reportStore.selectedSubject"
-    />
     <div class="parent-report-page content-container">
       <RouterLink v-if="!isDevRoute" class="personal-back" to="/profile"
         >← 返回我的学习空间</RouterLink
@@ -257,7 +298,6 @@ watch(
           </AppButton>
         </div>
       </header>
-      <PetParentReport v-if="!isDevRoute" />
 
       <section class="parent-report-page__controls" aria-labelledby="report-controls-title">
         <div>
@@ -338,6 +378,80 @@ watch(
       />
 
       <template v-else-if="report">
+        <section class="parent-report-page__section" aria-label="家长学习摘要">
+          <h2>先看这三件事</h2>
+          <div class="parent-report-page__metric-grid">
+            <article class="parent-report-page__metric-card">
+              <strong>{{ report.participation.completedLessons }}</strong
+              ><span>读完的课程 · 不等于掌握</span>
+            </article>
+            <article class="parent-report-page__metric-card">
+              <strong>{{ report.mastery.mastered }}</strong
+              ><span>答题证据支持已掌握的知识点</span>
+            </article>
+            <article class="parent-report-page__metric-card">
+              <strong>{{ report.wrongBook.activeCount }}</strong
+              ><span>待订正错题 · {{ report.weakKnowledge.totalCount }} 个知识点值得回看</span>
+            </article>
+          </div>
+          <p v-if="report.mastery.learning">
+            另有 {{ report.mastery.learning }} 个知识点正在学习，仍需更多独立作答证据。
+          </p>
+        </section>
+        <section
+          v-if="supportQuestions.length"
+          class="parent-report-page__section"
+          aria-label="具体陪学建议"
+        >
+          <h2>这次可以具体帮什么？</h2>
+          <article
+            v-for="item in supportQuestions"
+            :key="item.questionId"
+            class="parent-report-page__list-item"
+          >
+            <div>
+              <strong>{{
+                item.knowledgePointId ? knowledgeLabel(item.knowledgePointId) : '本次练习'
+              }}</strong>
+              <p>{{ questionDetails[item.questionId]?.title }}</p>
+              <p>先请孩子讲自己的解法和依据，找出从哪一步开始不确定，再一起对照下面的方法。</p>
+              <details>
+                <summary>家长参考方法</summary>
+                <p>
+                  {{
+                    questionDetails[item.questionId]?.explanation ||
+                    '可以一起返回课程，回看对应例子。'
+                  }}
+                </p>
+              </details>
+              <AppButton
+                variant="secondary"
+                @click="
+                  router.push({
+                    path: childPath('/wrong-book'),
+                    query: { questionId: item.questionId },
+                  })
+                "
+                >一起订正这道题</AppButton
+              >
+            </div>
+          </article>
+        </section>
+        <section
+          v-if="unfinishedPractice.length"
+          class="parent-report-page__section"
+          aria-label="还在进行的闯关"
+        >
+          <h2>当前档案仍在进行的闯关</h2>
+          <p>按当前档案全部显示尚未完成的探索，不计作已掌握。</p>
+          <ul class="parent-report-page__item-list">
+            <li v-for="item in unfinishedPractice.slice(0, 3)" :key="item.questId">
+              <RouterLink :to="item.href">{{ item.title }}</RouterLink> · 已通过
+              {{ item.completed }} / {{ item.total }} 关
+            </li>
+          </ul>
+        </section>
+
         <section class="parent-report-page__section" aria-labelledby="participation-title">
           <div class="parent-report-page__section-heading">
             <div>
@@ -385,6 +499,13 @@ watch(
             这个范围内还没有教材完成记录，可以换个时间范围，或一起开始一小段学习。
           </p>
         </section>
+        <LearningActivityHistory
+          v-if="!isDevRoute"
+          :profile-id="currentProfileId"
+          :start-date="report?.range.startDate"
+          :end-date="report?.range.endDate"
+          :subject="reportStore.selectedSubject"
+        />
         <section class="parent-report-page__section" aria-labelledby="companion-title">
           <h2 id="companion-title">今天可以怎样陪一陪？</h2>
           <p>{{ companionTip }}</p>
@@ -394,7 +515,7 @@ watch(
             >{{ report.wrongBook.activeCount ? '一起回看错题' : '一起回到知识岛' }}</AppButton
           >
         </section>
-        <details class="parent-report-page__formal-details">
+        <details class="parent-report-page__formal-details" open>
           <summary>查看已核验内容的学习统计与巩固建议</summary>
           <p>这里仅展示符合来源规则的数据。没有记录不等于没有学习，也不等于已经全部掌握。</p>
           <section
@@ -670,7 +791,7 @@ watch(
                     <AppIcon name="circle-help" :size="18" decorative />
                   </div>
                   <div>
-                    <strong>题目 {{ item.questionId }}</strong>
+                    <strong>{{ questionDetails[item.questionId]?.title || '正在读取原题' }}</strong>
                     <span
                       >{{ subjectLabel(item.subject) }} · 错过 {{ item.wrongCount }} 次 ·
                       {{ item.status === 'active' ? '待巩固' : '已解决' }}</span
@@ -725,6 +846,15 @@ watch(
         </details>
 
         <div class="parent-report-page__two-column">
+          <ParentExpressionReviews
+            v-if="!isDevRoute"
+            :key="currentProfileId + ':' + expressionRefresh"
+            :profile-id="currentProfileId"
+          />
+          <details v-if="!isDevRoute" class="parent-report-page__section learning-options">
+            <summary>查看学习积分来源</summary>
+            <PetParentReport />
+          </details>
           <section class="parent-report-page__section" aria-labelledby="growth-title">
             <div class="parent-report-page__section-heading">
               <div>

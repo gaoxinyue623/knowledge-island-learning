@@ -371,7 +371,7 @@ it.each(definitions.map((d) => d.number))(
       expect(wrapper.text()).toContain(d.sections[0]!.english)
       expect(wrapper.text()).toContain(d.sections[0]!.chinese)
       expect(wrapper.text()).toContain(`用户标注第${d.page}页`)
-      expect(wrapper.findAll('button').some((b) => b.text().includes('开始正式练习'))).toBe(
+      expect(wrapper.findAll('button').some((b) => b.text().includes('开始教材练习'))).toBe(
         d.kind !== 'project',
       )
       if (d.kind === 'project') {

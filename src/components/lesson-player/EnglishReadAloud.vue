@@ -44,6 +44,7 @@ const segments = computed(() =>
 )
 const {
   supported,
+  usingBundledAudio,
   voice,
   state,
   mode,
@@ -134,7 +135,7 @@ const status = computed(() => {
           variant="ghost"
           size="sm"
           icon-left="chevron-left"
-          :disabled="index === 0 || !!unavailable"
+          :disabled="index === 0"
           @click="move(-1)"
           >上一句</AppButton
         >
@@ -154,7 +155,7 @@ const status = computed(() => {
           variant="ghost"
           size="sm"
           icon-right="chevron-right"
-          :disabled="index === segments.length - 1 || !!unavailable"
+          :disabled="index === segments.length - 1"
           @click="move(1)"
           >下一句</AppButton
         >
@@ -172,6 +173,9 @@ const status = computed(() => {
         <Square :size="16" aria-hidden="true" />停止
       </AppButton>
     </div>
+    <p v-if="usingBundledAudio && provider === 'browser'" class="english-listener__status">
+      设备英语声音不可用，已准备基础英语音频，可以直接点听读。
+    </p>
     <p class="english-listener__status" role="status" aria-live="polite">{{ status }}</p>
     <a v-if="props.muted" class="english-listener__settings" href="/settings">前往声音设置</a>
     <AppButton
@@ -182,7 +186,11 @@ const status = computed(() => {
     >
     <p class="english-listener__source">
       {{
-        provider === 'browser' ? '设备合成朗读' : '豆包 AI 合成朗读'
+        provider !== 'doubao'
+          ? usingBundledAudio
+            ? '基础英语音频'
+            : '设备合成朗读'
+          : '豆包 AI 合成朗读'
       }}，不是教材原声；歌谣按文字朗读，不演唱。不录音、不评分。
       <span v-if="provider === 'browser' && voice"
         >当前声音：{{ voice.name }}<span v-if="!voice.localService">（可能需要联网）</span>。</span

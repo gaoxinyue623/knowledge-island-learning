@@ -226,7 +226,9 @@ describe('Reading quest content projection', () => {
         }
       }
     }
-    expect(coverage.size).toBe(40)
+    // The five-four-system grade-six book was retired from the catalog.
+    expect(coverage.has('G6_PEP_54_CHINESE_2024_S2_USER_IMPORTED')).toBe(false)
+    expect(coverage.size).toBe(39)
     expect([...coverage.values()].every((item) => item.lessons >= 6)).toBe(true)
     console.info('Reading quest coverage', Object.fromEntries(coverage))
   })
@@ -344,7 +346,8 @@ describe('Reading quest interaction', () => {
         ([key]) =>
           key.startsWith(QUEST_PROGRESS_PREFIX) ||
           key.startsWith('knowledge-island.activities.v1:') ||
-          key.startsWith('knowledge-island.spaced-review.v1:'),
+          key.startsWith('knowledge-island.spaced-review.v1:') ||
+          key.startsWith('knowledge-island.continuations.v1:'),
       ),
     ).toBe(true)
   })
